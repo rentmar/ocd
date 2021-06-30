@@ -93,70 +93,54 @@
 			<br>
 			<div id="esquinas_redondeadas">		
 				<div id="Caja_de_orden" class="Caja_de_datos">
-					<h3 id="Título_central"> Crear Nuevo Usuario </h3>
+					<h3 id="Título_central"> Editar Datos de  Usuario: <?php echo $usuario->username; ?> </h3>
 					<p></p>
 				</div>
 				<div id="Caja_de_datos" class="Caja_de_datos">
-					<?php echo form_open('usuarios/procesarCrear')?>
-						<label for="usuario" class="form-group"> Nombre de usuario </label>
-						<span class="red"> * </span>
-						<br>
-						<input type="text" id="cuadro" name="usuario">
-						<br><br>
+					<?php echo form_open('usuarios/procesarEditar')?>
+                        <input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>" >
+
                       <label for="nombre" class="form-group"> Nombre </label>
                         <span class="red"> * </span>
                         <br>
-                        <input type="text" id="cuadro" name="nombre" >
+                        <input type="text" id="cuadro" name="nombre" value="<?php echo $usuario->first_name; ?>" >
                         <br><br>
                         <label for="apellido" class="form-group"> Apellido </label>
                         <span class="red"> * </span>
                         <br>
-                        <input type="text" id="cuadro" name="apellido" >
+                        <input type="text" id="cuadro" name="apellido" value="<?php echo $usuario->last_name; ?>" >
                         <br><br>
 						<label for="carnet" class="form-group"> Carnet de identidad </label>
 						<span class="red"> * </span>
 						<br>
-						<input type="text" id="cuadro" name="carnet" >
+						<input type="text" id="cuadro" name="carnet" value="<?php echo $usuario->carnet_identidad;?>" >
 						<br><br>
-						<label for="email" class="form-group"> Correo electrónico </label>
-						<span class="red"> * </span>
-						<br>
-						<input type="text" id="cuadro" name="email" >
-						<br><br>
-						<label for="password" class="form-group"> Contraseña </label>
-						<span class="red"> * </span>
-						<br>
-						<input type="password" id="cuadro" name="password" >
-                        <br><br>
-                        <label for="password1" class="form-group">Comprobar Contraseña </label>
-                        <span class="red"> * </span>
-                        <input type="password" id="cuadro" name="password1" >
-						<br><br>
-                        <label for="grupo" class="form-group">Tipo de Usuario</label>
-                        <select id="grupo" name="grupo">
-                            <?php foreach ($grupos as $g): ?>
-                            <option value="<?php echo $g->id ?>"  >
-                                <?php echo $g->name; ?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                        <br><br>
-                        <label for="departamento" class="form-group">Tipo de Usuario</label>
+
+                        <label for="departamento" class="form-group">Departamento</label>
                         <select id="departamento" name="departamento">
                             <?php foreach ($departamentos as $d): ?>
-                            <option value="<?php echo  $d->iddepartamento;?>"  >
-                                <?php echo $d->nombre_departamento;  ?>
-                            </option>
+                                <?php if($d->iddepartamento == $usuario->departamento): ?>
+                                    <option value="<?php echo  $d->iddepartamento;?>" selected  >
+                                        <?php echo $d->nombre_departamento;  ?>
+                                    </option>
+                                <?php else: ?>
+                                    <option value="<?php echo  $d->iddepartamento;?>"  >
+                                        <?php echo $d->nombre_departamento;  ?>
+                                    </option>
+                                <?php endif; ?>
+
                             <?php  endforeach;  ?>
                         </select>
                         <br><br>
                         <label for="ubicacion" class="form-group">Ubicacion </label>
                         <span class="red">  </span>
-                        <input type="text" id="latitud" name="latitud"  placeholder="latitud"  >
-                        <input type="text" id="longitud" name="longitud" placeholder="longitud" >
+                        <input type="text" id="latitud" name="latitud"  placeholder="latitud"
+                               value="<?php echo $usuario->latitud; ?>"  >
+                        <input type="text" id="longitud" name="longitud" placeholder="longitud"
+                               value="<?php echo $usuario->longitud; ?>" >
                         <br><br>
 
-						<input type="submit" id="BOTON" value="CREAR USUARIO">
+						<input type="submit" id="BOTON" value="EDITAR USUARIO">
 						<input type="submit" id="BOTON" value="CANCELAR">
 					<?php echo form_close()?>
 				</div>
