@@ -6,18 +6,18 @@ DROP DATABASE ocdmonitor;
 CREATE DATABASE ocdmonitor;
 USE ocdmonitor;
 -- creacion tablas 1
-CREATE TABLE encuesta (idencuesta SMALLINT(2) UNSIGNED NOT NULL AUTO_INCREMENT,
-						nombre_encuesta VARCHAR(50) NOT NULL,
-						PRIMARY KEY (idencuesta)
+CREATE TABLE cuestionario (idcuestionario SMALLINT(2) UNSIGNED NOT NULL AUTO_INCREMENT,
+						nombre_cuestionario VARCHAR(50) NOT NULL,
+						PRIMARY KEY (idcuestionario)
 						);
 CREATE TABLE tipo_medio (idtipomedio SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
 			 nombre_tipo VARCHAR(40) NOT NULL,
 			 PRIMARY KEY (idtipomedio));
 CREATE TABLE tema (idtema SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
 			nombre_tema VARCHAR(150) NOT NULL,
-			rel_idencuesta SMALLINT(2) UNSIGNED NOT NULL,
+			rel_idcuestionario SMALLINT(2) UNSIGNED NOT NULL,
 			PRIMARY KEY (idtema),
-			CONSTRAINT fk_enuestatema FOREIGN KEY (rel_idencuesta) REFERENCES encuesta(idencuesta));
+			CONSTRAINT fk_cuestionariotema FOREIGN KEY (rel_idcuestionario) REFERENCES cuestionario(idcuestionario));
 CREATE TABLE actor (idactor SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
 			nombre_actor VARCHAR(150) NOT NULL,
 			PRIMARY KEY(idactor));
@@ -159,7 +159,7 @@ CREATE TABLE usuario_noticia (idusuarionoticia INT(11) UNSIGNED NOT NULL AUTO_IN
 			CONSTRAINT FK_usrnoticia FOREIGN KEY(rel_idusr) REFERENCES users(id),
 			CONSTRAINT FK_noticiausuario FOREIGN KEY(rel_idnoticia) REFERENCES noticia(idnoticia));
 -- insercion datos 
-INSERT INTO encuesta (nombre_encuesta) VALUES ('Reforma Electoral'),
+INSERT INTO cuestionario (nombre_cuestionario) VALUES ('Reforma Electoral'),
 											  ('Institucionalidad Democratica');
 INSERT INTO tipo_medio (nombre_tipo) VALUES ('Pagina de Red Social'),
 											('Canal de Television'),
@@ -187,7 +187,7 @@ INSERT INTO actor (nombre_actor) VALUES ('Pertenece al Organo Legislativo'),
 									    ('Pertenece al Organo Ejecutivo Municipal'),
 									    ('Pertenece al Organo Legislativo Municipal');
 --
-INSERT INTO tema (nombre_tema,rel_idencuesta) VALUES ('Presentacion de Estatutos de organizaciones politicas',1),
+INSERT INTO tema (nombre_tema,rel_idcuestionario) VALUES ('Presentacion de Estatutos de organizaciones politicas',1),
 									  ('Competencias Jurisdicionales del TSE',1),
 									  ('Redistribuicion de Escaños',1),
 									  ('Circuncipciones uninominales',1),
@@ -204,7 +204,7 @@ SELECT * FROM actor;
 SELECT * FROM tema;
 SELECT * FROM departamento;
 SELECT username,first_name,company FROM users;
-SELECT * FROM encuesta;
+SELECT * FROM cuestionario;
 COMMIT;
 
 
