@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-06-2021 a las 15:41:37
+-- Tiempo de generación: 30-06-2021 a las 16:23:12
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -66,7 +66,12 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('4f2e9141a034e3c56a1d6e6fbf9f7f077149202e', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632343637333838333b5f63695f70726576696f75735f75726c7c733a34363a22687474703a2f2f6c6f63616c686f73742f70726f796563746f2f696e6465782e7068702f4c6f67696e2f636f6465223b6e616d657c733a343a226a75616e223b656d61696c7c733a31343a226a75616e406c6f63616c2e636f6d223b6c6f676765645f696e7c623a313b);
+('271a3f2b9457c6abb80db1d011219231a347bc3e', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036323732323b),
+('304c64be0f27d5c288529f33696f6f4410faca02', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036313438303b),
+('390661c5e4e22584cc45af4a8ee48752dc47f5f9', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036313134333b),
+('3b039fb1c6f2e2766021aa1d09bd762af63d7460', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036323732323b),
+('4f2e9141a034e3c56a1d6e6fbf9f7f077149202e', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632343637333838333b5f63695f70726576696f75735f75726c7c733a34363a22687474703a2f2f6c6f63616c686f73742f70726f796563746f2f696e6465782e7068702f4c6f67696e2f636f6465223b6e616d657c733a343a226a75616e223b656d61696c7c733a31343a226a75616e406c6f63616c2e636f6d223b6c6f676765645f696e7c623a313b),
+('61234e29564a0ccc05494c9babc21ae7650e10ca', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036313932353b);
 
 -- --------------------------------------------------------
 
@@ -131,7 +136,7 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
-(2, 'miembros', 'Usuarios generales, docentes'),
+(2, 'docentes', 'Usuarios generales, docentes'),
 (3, 'monitores', 'Alumnos registrados');
 
 -- --------------------------------------------------------
@@ -289,15 +294,18 @@ CREATE TABLE `users` (
   `phone` varchar(20) DEFAULT NULL,
   `carnet_identidad` varchar(20) DEFAULT NULL,
   `geolocalizacion` varchar(250) DEFAULT NULL,
-  `rel_iddepartamento` smallint(3) UNSIGNED NOT NULL
+  `rel_iddepartamento` smallint(3) UNSIGNED NOT NULL,
+  `direccion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$08$200Z6ZZbp3RAEXoaWcMA6uJOFicwNZaqk4oDhqTUiFXFe63MG.Daa', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1);
+INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`, `direccion`) VALUES
+(1, '127.0.0.1', 'administrator', '$2y$08$200Z6ZZbp3RAEXoaWcMA6uJOFicwNZaqk4oDhqTUiFXFe63MG.Daa', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL),
+(2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, NULL, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', NULL, 5, 'Mariano Colodro #1447'),
+(3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, NULL, 1, 'Albert', 'Cruz', NULL, NULL, '4343434343', '54654545454564544', 5, 'Calle Montes #1433');
 
 -- --------------------------------------------------------
 
@@ -318,7 +326,9 @@ CREATE TABLE `users_groups` (
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 1, 3);
+(3, 1, 3),
+(4, 2, 2),
+(5, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -531,13 +541,13 @@ ALTER TABLE `tipo_medio`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_noticia`

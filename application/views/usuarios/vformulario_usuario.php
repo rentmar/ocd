@@ -141,7 +141,7 @@
                             <?php endforeach; ?>
                         </select>
                         <br><br>
-                        <label for="departamento" class="form-group">Tipo de Usuario</label>
+                        <label for="departamento" class="form-group">Departamento</label>
                         <select id="departamento" name="departamento">
                             <?php foreach ($departamentos as $d): ?>
                             <option value="<?php echo  $d->iddepartamento;?>"  >
@@ -150,10 +150,15 @@
                             <?php  endforeach;  ?>
                         </select>
                         <br><br>
+
+						<label for="direccion" class="form-group">Direccion </label>
+						<span class="red">  </span>
+						<input type="text" id="direccion" name="direccion"  placeholder=""  >
+						<br><br>
+
                         <label for="ubicacion" class="form-group">Ubicacion </label>
                         <span class="red">  </span>
-                        <input type="text" id="latitud" name="latitud"  placeholder="latitud"  >
-                        <input type="text" id="longitud" name="longitud" placeholder="longitud" >
+                        <input type="text" id="ubicacion" name="ubicacion"  placeholder="ubicacion"  >
                         <br><br>
 
 						<input type="submit" id="BOTON" value="CREAR USUARIO">

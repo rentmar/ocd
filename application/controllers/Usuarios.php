@@ -32,8 +32,8 @@ class Usuarios extends CI_Controller
 		$this->form_validation->set_rules('apellido', 'Apellido', 'required');
 		$this->form_validation->set_rules('carnet', 'Carnet de Identidad', 'required|numeric');
 		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
-		$this->form_validation->set_rules('passwd', 'Password', 'required');
-		$this->form_validation->set_rules('passwdc', 'Confirmar Password', 'required|matches[passwd]');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('password1', 'Confirmar Password', 'required|matches[password]');
 
 		if($this->form_validation->run()==false)
 		{
@@ -41,7 +41,25 @@ class Usuarios extends CI_Controller
 			$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
 			$this->load->view('usuarios/vformulario_usuario', $data);
 		}else{
-			echo "Valido";
+			//echo "Valido";
+			$usuario = $this->input->post('usuario');
+			$password = $this->input->post('password');
+			$email = $this->input->post('email');
+			$datos_extra = [
+				'first_name' => $this->input->post('nombre'),
+				'last_name' => $this->input->post('apellido'),
+				'carnet_identidad' => $this->input->post('carnet'),
+				'geolocalizacion' => $this->input->post('ubicacion'),
+				'rel_iddepartamento' => $this->input->post('departamento'),
+				'direccion' => $this->input->post('direccion'),
+			];
+			$grupo = [$this->input->post('grupo'),];
+
+			if(!$this->ion_auth->register($usuario, $password, $email, $datos_extra, $grupo)){
+				echo "Error de creacion";
+			}else{
+				echo "Usuario Creado";
+			}
 		}
 
 	}
