@@ -119,7 +119,7 @@
                         <label for="departamento" class="form-group">Departamento</label>
                         <select id="departamento" name="departamento">
                             <?php foreach ($departamentos as $d): ?>
-                                <?php if($d->iddepartamento == $usuario->departamento): ?>
+                                <?php if($d->iddepartamento == $usuario->rel_iddepartamento): ?>
                                     <option value="<?php echo  $d->iddepartamento;?>" selected  >
                                         <?php echo $d->nombre_departamento;  ?>
                                     </option>
@@ -132,15 +132,20 @@
                             <?php  endforeach;  ?>
                         </select>
                         <br><br>
-                        <label for="ubicacion" class="form-group">Ubicacion </label>
-                        <span class="red">  </span>
-                        <input type="text" id="latitud" name="latitud"  placeholder="latitud"
-                               value="<?php echo $usuario->latitud; ?>"  >
-                        <input type="text" id="longitud" name="longitud" placeholder="longitud"
-                               value="<?php echo $usuario->longitud; ?>" >
-                        <br><br>
 
-						<input type="submit" id="BOTON" value="EDITAR USUARIO">
+						<label for="direccion" class="form-group">Direccion </label>
+						<span class="red">  </span>
+						<input type="text" id="direccion" name="direccion" value="<?php echo $usuario->direccion; ?>"  >
+						<br><br>
+
+						<label for="ubicacion" class="form-group">Ubicacion </label>
+						<span class="red">  </span>
+						<input type="text" id="ubicacion" name="ubicacion"  value="<?php echo $usuario->geolocalizacion; ?>"  >
+						<br><br>
+
+
+
+					<input type="submit" id="BOTON" value="EDITAR USUARIO">
 						<input type="submit" id="BOTON" value="CANCELAR">
 					<?php echo form_close()?>
 				</div>
