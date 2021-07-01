@@ -11,8 +11,10 @@
 <h1>Formulario REFORMA ELECTORAL</h1>
 
 <div class="container">
-	<?php $atributos = array('id' => 'reforma', 'name' => 'reforma', 'onsubmit'=>'return checkSubmit();', );?>
-	<?php echo form_open('reformaelectoral/preenvio/', $atributos)?>
+
+    <?php echo validation_errors(); ?>
+	<?php echo form_open('Noticia/IngresarDatosAtNoticia');?>
+
 		<label for="fecha">Introduzca la fecha de publicación/difusión de la noticia:</label><br>
 		<input type="date" id="fecha" name="fecha" required ><br><br>
 
@@ -89,7 +91,9 @@
 		<br><br>
 
 
-		<input id="enviar" name="enviar" type="submit" value="Enviar">
+
+		<input type="submit" value="Enviar">
+
 	<?php echo form_close(); ?>
 
 </div>
