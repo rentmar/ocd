@@ -9,11 +9,23 @@ jQuery(document).on('change', 'select#tema', function (e) {
 	e.preventDefault();
 	var temaID = jQuery(this).val();
 
-	if(temaID == 0 ){
+	if(temaID == ' ' ){
+		$('#subtemacard').empty();
+		$('#otrotemacard').empty();
+		$('#cajatexto').empty();
+
+	}
+	else if (temaID == 0){
+		//Agregar contenido a #cajatexto
+		var textot = '';
+		textot += '<label>Especifique  otra :</label><br>';
+		textot += '<input type="text" id="otrotema" name="otrotema" placeholder="Otro tema" >';
+		$('#cajatexto').html(textot);
 		$('#subtemacard').empty();
 	}else{
 		var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
 		$('#cajatexto').empty();
+		$('#otrotemacard').empty();
 		getSubtemaList(temaID, temaTitulo);
 	}
 });
@@ -35,6 +47,8 @@ $('#subtemacard').click(function () {
 });
 
 
+
+
 function getMediosList(tipomedioID) {
 	//alert(tipomedioID + ' ' + baseurl);
 	$.ajax({
@@ -50,7 +64,7 @@ function getMediosList(tipomedioID) {
 		},
 		success: function (json) {
 			var options = '';
-			options +='<option value="">Seleccionar Medio</option>';
+			options +='<option value=" ">Seleccionar Medio</option>';
 			for (var i = 0; i < json.length; i++) {
 				options += '<option value="' + json[i].medio_id + '">' + json[i].medio_name + '</option>';
 			}

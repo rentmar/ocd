@@ -61,16 +61,22 @@
 		<br><br>
 
 
-		<label>Escoja el tipo de actor que es la fuente de la noticia:</label><br>
+		<label>Escoge el tema al que está referido la nota :</label><br>
 		<select id="tema" name="tema" >
-			<option value="0" >Seleccione Tema</option>
+			<option value=" " >Seleccione Tema</option>
 			<?php foreach ( $tema as $key => $element): ?>
 				<option value="<?php echo $element['idtema']; ?>" >
 					<?php echo $element['nombre_tema']; ?>
 				</option>
 			<?php endforeach; ?>
+				<option value="0" >Otro</option>
 		</select>
+		<br>
+		<div id="otrotemacard">
+
+		</div>
 		<br><br>
+
 
 
 		<div id="subtemacard" >

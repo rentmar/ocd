@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-06-2021 a las 16:23:12
+-- Tiempo de generación: 01-07-2021 a las 05:37:17
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -66,12 +66,16 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('25fe8bc55ec34d977e86436448e372a571005ebb', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036343534313b),
 ('271a3f2b9457c6abb80db1d011219231a347bc3e', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036323732323b),
 ('304c64be0f27d5c288529f33696f6f4410faca02', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036313438303b),
 ('390661c5e4e22584cc45af4a8ee48752dc47f5f9', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036313134333b),
-('3b039fb1c6f2e2766021aa1d09bd762af63d7460', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036323732323b),
+('3b039fb1c6f2e2766021aa1d09bd762af63d7460', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036333236353b),
 ('4f2e9141a034e3c56a1d6e6fbf9f7f077149202e', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632343637333838333b5f63695f70726576696f75735f75726c7c733a34363a22687474703a2f2f6c6f63616c686f73742f70726f796563746f2f696e6465782e7068702f4c6f67696e2f636f6465223b6e616d657c733a343a226a75616e223b656d61696c7c733a31343a226a75616e406c6f63616c2e636f6d223b6c6f676765645f696e7c623a313b),
-('61234e29564a0ccc05494c9babc21ae7650e10ca', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036313932353b);
+('61234e29564a0ccc05494c9babc21ae7650e10ca', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036313932353b),
+('b4e9339b9e3d2f6c10a4b3cebd1c1c8ae3f8166a', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036363233333b),
+('b6a195fa49c6cb5198e98bffd9ae47d81525ed7c', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036333635373b),
+('cf6cc469737ddf366c0de33355139291a4b1e112', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353036363233333b);
 
 -- --------------------------------------------------------
 
@@ -116,7 +120,9 @@ INSERT INTO `departamento` (`iddepartamento`, `nombre_departamento`) VALUES
 (6, 'Tarija'),
 (7, 'Beni'),
 (8, 'Pando'),
-(9, 'Potosi');
+(9, 'Potosi'),
+(12, 'Epc'),
+(13, 'Epa');
 
 -- --------------------------------------------------------
 
@@ -164,6 +170,23 @@ CREATE TABLE `medio_comunicacion` (
   `rel_idtipomedio` smallint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `medio_comunicacion`
+--
+
+INSERT INTO `medio_comunicacion` (`idmedio`, `nombre_medio`, `rel_idtipomedio`) VALUES
+(1, 'Red UNITEL', 2),
+(2, 'Red UNO', 2),
+(3, 'Red ATB', 2),
+(4, 'Red TVB', 2),
+(5, 'La Razón', 4),
+(6, 'Pagina Siete', 4),
+(7, 'Panamericana', 3),
+(8, 'Fides', 3),
+(9, 'ERBOL', 3),
+(10, 'Facebook', 1),
+(11, 'Twitter', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +198,19 @@ CREATE TABLE `medio_departamento` (
   `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
   `rel_iddepartamento` smallint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `medio_departamento`
+--
+
+INSERT INTO `medio_departamento` (`idmediodepartamento`, `rel_idmedio`, `rel_iddepartamento`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 4),
+(4, 5, 1),
+(5, 6, 1),
+(6, 2, 1),
+(7, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -217,6 +253,36 @@ CREATE TABLE `subtema` (
   `rel_idtema` smallint(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `subtema`
+--
+
+INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
+(1, 'Estatutos de organizaciones políticas – Ley 1096', 1),
+(2, 'Competencias del TSE', 2),
+(3, 'Tutela de derechos políticos', 2),
+(4, 'Juzgamiento de faltas y delitos electorales', 2),
+(5, 'Redistribución de escaños a nivel nacional', 3),
+(6, 'Redistribución de escaños a nivel departamental', 3),
+(7, 'Redistribución del número de concejales del municipio', 3),
+(8, 'Irregularidades del padrón', 8),
+(9, 'Plataforma tecnológica del padrón', 8),
+(10, 'Inclusión de poblaciones indígenas', 8),
+(11, 'Intercambio de información con el SEGIP', 8),
+(12, 'Cartografía electoral', 4),
+(13, 'Delimitación de circunscripciones', 4),
+(14, 'Selección y capacitación de notarios', 9),
+(15, 'Capacitación de jurados electorales', 9),
+(16, 'Estrategia de educación cívica y ciudadana', 9),
+(17, 'Papel de los medios de comunicación en campaña electoral', 9),
+(18, 'Financiamiento en etapas electorales y no electorales', 10),
+(19, 'Procedimientos para el traslado de actas', 7),
+(20, 'Procedimientos para el juzgamiento de actas', 7),
+(21, 'Plazos para entrega de resultados', 7),
+(22, 'Fechas de presentación de candidaturas e inhabilitaciones', 6),
+(23, 'Sanciones por la difusión de encuestas electorales', 5),
+(24, 'Requisitos de habilitación de empresas encuestadoras', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -237,7 +303,7 @@ INSERT INTO `tema` (`idtema`, `nombre_tema`, `rel_idcuestionario`) VALUES
 (1, 'Presentacion de Estatutos de organizaciones politicas', 1),
 (2, 'Competencias Jurisdicionales del TSE', 1),
 (3, 'Redistribuicion de Escaños', 1),
-(4, 'Circuncipciones uninominales', 1),
+(4, 'Circunscripciones uninominales', 1),
 (5, 'Difusion de encuestas', 1),
 (6, 'Inhabilitacion de candidatos', 1),
 (7, 'Computo departamental', 1),
@@ -305,7 +371,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`, `direccion`) VALUES
 (1, '127.0.0.1', 'administrator', '$2y$08$200Z6ZZbp3RAEXoaWcMA6uJOFicwNZaqk4oDhqTUiFXFe63MG.Daa', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL),
 (2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, NULL, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', NULL, 5, 'Mariano Colodro #1447'),
-(3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, NULL, 1, 'Albert', 'Cruz', NULL, NULL, '4343434343', '54654545454564544', 5, 'Calle Montes #1433');
+(3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, NULL, 1, 'Alberto', 'Cruzo', NULL, NULL, '4444444', '4.5', 7, 'Calle Montes #5555');
 
 -- --------------------------------------------------------
 
@@ -481,7 +547,7 @@ ALTER TABLE `cuestionario`
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `iddepartamento` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `iddepartamento` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `groups`
@@ -499,13 +565,13 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT de la tabla `medio_comunicacion`
 --
 ALTER TABLE `medio_comunicacion`
-  MODIFY `idmedio` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idmedio` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `medio_departamento`
 --
 ALTER TABLE `medio_departamento`
-  MODIFY `idmediodepartamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idmediodepartamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
@@ -523,7 +589,7 @@ ALTER TABLE `noticia_medio`
 -- AUTO_INCREMENT de la tabla `subtema`
 --
 ALTER TABLE `subtema`
-  MODIFY `idsubtema` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idsubtema` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
@@ -535,7 +601,7 @@ ALTER TABLE `tema`
 -- AUTO_INCREMENT de la tabla `tipo_medio`
 --
 ALTER TABLE `tipo_medio`
-  MODIFY `idtipomedio` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idtipomedio` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
