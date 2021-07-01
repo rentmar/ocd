@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ocdmonitor`
 --
-
+CREATE DATABASE ocdmonitor;
+USE DATABASE ocdmonitor;
 -- --------------------------------------------------------
 
 --
