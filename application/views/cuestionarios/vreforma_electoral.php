@@ -27,7 +27,7 @@
 
 		<label>Escoja el medio al cual hizo el seguimiento:</label><br>
 		<select id="medio" name="medio" >
-			<option value="" >Seleccione medio</option>
+			<option value="0" >Seleccione medio</option>
 		</select>
 		<br><br>
 
@@ -63,7 +63,7 @@
 
 		<label>Escoja el tipo de actor que es la fuente de la noticia:</label><br>
 		<select id="tema" name="tema" >
-			<option value="" >Seleccione Tema</option>
+			<option value="0" >Seleccione Tema</option>
 			<?php foreach ( $tema as $key => $element): ?>
 				<option value="<?php echo $element['idtema']; ?>" >
 					<?php echo $element['nombre_tema']; ?>
@@ -74,6 +74,10 @@
 
 
 		<div id="subtemacard" >
+
+
+		</div>
+		<div id="cajatexto" >
 
 		</div>
 		<br><br>

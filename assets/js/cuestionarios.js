@@ -8,13 +8,30 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
 jQuery(document).on('change', 'select#tema', function (e) {
 	e.preventDefault();
 	var temaID = jQuery(this).val();
-	var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
-	getSubtemaList(temaID, temaTitulo);
+
+	if(temaID == 0 ){
+		$('#subtemacard').empty();
+	}else{
+		var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
+		$('#cajatexto').empty();
+		getSubtemaList(temaID, temaTitulo);
+	}
 });
 
-jQuery(document).on('change', '#subtemacard#radiootro', function (e) {
-	e.preventDefault();
-
+$('#subtemacard').click(function () {
+	var valor;
+	var texto='';
+	valor = $('input[name=idsubtema]:checked').val();
+	if(valor==0)
+	{
+		//Agregar contenido a #cajatexto
+		texto += '<label>Especifique otra :</label><br>';
+		texto += '<input type="text" id="otrosubtema" name="otrosubtema" >';
+		$('#cajatexto').html(texto);
+	}else {
+		//Vaciar contenido de #cajatexto
+		$('#cajatexto').empty();
+	}
 });
 
 
