@@ -11,8 +11,8 @@
 <h1>Formulario REFORMA ELECTORAL</h1>
 
 <div class="container">
-
-	<form action="<>">
+    <?php echo validation_errors(); ?>
+	<?php echo form_open('Noticia/IngresarDatosAtNoticia');?>
 		<label for="fecha">Introduzca la fecha de publicación/difusión de la noticia:</label><br>
 		<input type="date" id="fecha" name="fecha" required ><br><br>
 
@@ -90,7 +90,7 @@
 
 
 		<input type="submit" value="Enviar">
-	</form>
+	<?php echo form_close(); ?>
 
 </div>
 
