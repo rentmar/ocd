@@ -44,6 +44,12 @@ class Reformaelectoral extends CI_Controller
 		echo json_encode($json);
 	}
 
+	public function preenvio()
+	{
+		echo "preenvio";
+
+	}
+
 
 
 

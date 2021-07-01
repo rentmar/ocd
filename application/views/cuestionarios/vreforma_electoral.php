@@ -11,14 +11,14 @@
 <h1>Formulario REFORMA ELECTORAL</h1>
 
 <div class="container">
-
-	<form action="<>">
+	<?php $atributos = array('id' => 'reforma', 'name' => 'reforma', 'onsubmit'=>'return checkSubmit();', );?>
+	<?php echo form_open('reformaelectoral/preenvio/', $atributos)?>
 		<label for="fecha">Introduzca la fecha de publicación/difusión de la noticia:</label><br>
 		<input type="date" id="fecha" name="fecha" required ><br><br>
 
 		<label for="tipo-medio">Tipo de Medio:</label><br>
 		<select id="tipo-medio" name="tipo-medio">
-			<option value="" >Seleccione el Tipo de Medio</option>
+			<option value=" " >Seleccione el Tipo de Medio</option>
 			<?php foreach ($tipo_medio as $key=>$element): ?>
 				<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
 			<?php endforeach; ?>
@@ -27,21 +27,21 @@
 
 		<label>Escoja el medio al cual hizo el seguimiento:</label><br>
 		<select id="medio" name="medio" >
-			<option value="0" >Seleccione medio</option>
+			<option value=" " >Seleccione medio</option>
 		</select>
 		<br><br>
 
 
 		<label>Escriba el titular de la noticia:</label><br>
-		<input type="text" id="titular" name="titular" >
+		<input type="text" id="titular" name="titular" required >
 		<br><br>
 
 		<label>Escriba un pequeño párrafo que resuma la noticia:</label><br>
-		<input type="text" id="resumen" name="resumen" >
+		<input type="text" id="resumen" name="resumen" required >
 		<br><br>
 
 		<label>Pegue el link donde se encuentra la noticia:</label><br>
-		<input type="text" id="url" name="url" >
+		<input type="text" id="url" name="url" required >
 		<br><br>
 
 
@@ -89,8 +89,8 @@
 		<br><br>
 
 
-		<input type="submit" value="Enviar">
-	</form>
+		<input id="enviar" name="enviar" type="submit" value="Enviar">
+	<?php echo form_close(); ?>
 
 </div>
 

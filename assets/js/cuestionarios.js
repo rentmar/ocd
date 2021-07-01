@@ -46,6 +46,11 @@ $('#subtemacard').click(function () {
 	}
 });
 
+//Validar los combobox antes de enviar
+function checkSubmit() {
+	$('#enviar').
+}
+
 
 
 
