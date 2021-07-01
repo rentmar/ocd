@@ -73,6 +73,41 @@ class Usuarios extends CI_Controller
 		$this->load->view('usuarios/vformulario_usuario_editar', $data);
 	}
 
+	public function procesarEditar()
+	{
+		$idusuario = $this->input->post('idusuario');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('nombre', 'Nombre', 'required');
+		$this->form_validation->set_rules('apellido', 'Apellido', 'required');
+		$this->form_validation->set_rules('carnet', 'Carnet de Identidad', 'required|numeric');
+
+		if($this->form_validation->run()==false)
+		{
+			$usuario = $this->ion_auth->user($idusuario)->row();
+			$data['usuario'] = $usuario;
+			$data['grupos'] = $this->ion_auth->groups()->result();
+			$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
+			$this->load->view('usuarios/vformulario_usuario_editar', $data);
+		}else{
+			$datos_extra = [
+				'first_name' => $this->input->post('nombre'),
+				'last_name' => $this->input->post('apellido'),
+				'carnet_identidad' => $this->input->post('carnet'),
+				'geolocalizacion' => $this->input->post('ubicacion'),
+				'rel_iddepartamento' => $this->input->post('departamento'),
+				'direccion' => $this->input->post('direccion'),
+			];
+
+			if($this->ion_auth->update($idusuario, $datos_extra)){
+				echo "Usuario modificado";
+			}else{
+				echo "Usuario no modificado";
+			}
+		}
+
+
+	}
+
 
 
 
