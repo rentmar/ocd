@@ -20,8 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ocdmonitor`
 --
-CREATE DATABASE ocdmonitor;
-USE DATABASE ocdmonitor;
+
 -- --------------------------------------------------------
 
 --
@@ -121,9 +120,7 @@ INSERT INTO `departamento` (`iddepartamento`, `nombre_departamento`) VALUES
 (6, 'Tarija'),
 (7, 'Beni'),
 (8, 'Pando'),
-(9, 'Potosi'),
-(12, 'Epc'),
-(13, 'Epa');
+(9, 'Potosi');
 
 -- --------------------------------------------------------
 
@@ -227,6 +224,7 @@ CREATE TABLE `noticia` (
   `resumen` text NOT NULL,
   `url_noticia` varchar(150) DEFAULT NULL,
   `rel_idactor` smallint(4) UNSIGNED NOT NULL,
+  `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
   `rel_idsubtema` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -236,11 +234,11 @@ CREATE TABLE `noticia` (
 -- Estructura de tabla para la tabla `noticia_medio`
 --
 
-CREATE TABLE `noticia_medio` (
-  `idnoticiamedio` int(11) NOT NULL,
-  `rel_idnoticia` int(11) UNSIGNED NOT NULL,
-  `rel_idmedio` smallint(5) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--CREATE TABLE `noticia_medio` (
+  --`idnoticiamedio` int(11) NOT NULL,
+  --`rel_idnoticia` int(11) UNSIGNED NOT NULL,
+  --`rel_idmedio` smallint(5) UNSIGNED NOT NULL
+--) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -293,24 +291,25 @@ INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
 CREATE TABLE `tema` (
   `idtema` smallint(4) UNSIGNED NOT NULL,
   `nombre_tema` varchar(150) NOT NULL,
-  `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL,
+   rel_idusuario INT(11) UNSIGNED
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tema`
 --
 
-INSERT INTO `tema` (`idtema`, `nombre_tema`, `rel_idcuestionario`) VALUES
-(1, 'Presentacion de Estatutos de organizaciones politicas', 1),
-(2, 'Competencias Jurisdicionales del TSE', 1),
-(3, 'Redistribuicion de Escaños', 1),
-(4, 'Circunscripciones uninominales', 1),
-(5, 'Difusion de encuestas', 1),
-(6, 'Inhabilitacion de candidatos', 1),
-(7, 'Computo departamental', 1),
-(8, 'Padron Electoral', 1),
-(9, 'Procedimientos Tecnico Electorales', 1),
-(10, 'Financiamiento politico y partidario', 1);
+INSERT INTO `tema` (`idtema`, `nombre_tema`, `rel_idcuestionario`,rel_idusuario) VALUES
+(1, 'Presentacion de Estatutos de organizaciones politicas', 1,1),
+(2, 'Competencias Jurisdicionales del TSE', 1,1),
+(3, 'Redistribuicion de Escaños', 1,1),
+(4, 'Circunscripciones uninominales', 1,1),
+(5, 'Difusion de encuestas', 1,1),
+(6, 'Inhabilitacion de candidatos', 1,1),
+(7, 'Computo departamental', 1,1),
+(8, 'Padron Electoral', 1,1),
+(9, 'Procedimientos Tecnico Electorales', 1,1),
+(10, 'Financiamiento politico y partidario', 1,1);
 
 -- --------------------------------------------------------
 
@@ -471,15 +470,16 @@ ALTER TABLE `medio_departamento`
 ALTER TABLE `noticia`
   ADD PRIMARY KEY (`idnoticia`),
   ADD KEY `FK_actornoticia` (`rel_idactor`),
+  ADD KEY `FK_medionoticia` (`rel_idmedio`),
   ADD KEY `FK_subtemanoticia` (`rel_idsubtema`);
 
 --
 -- Indices de la tabla `noticia_medio`
 --
-ALTER TABLE `noticia_medio`
-  ADD PRIMARY KEY (`idnoticiamedio`),
-  ADD KEY `FK_noticiamedio` (`rel_idnoticia`),
-  ADD KEY `FK_medionoticia` (`rel_idmedio`);
+--ALTER TABLE `noticia_medio`
+  --ADD PRIMARY KEY (`idnoticiamedio`),
+  --ADD KEY `FK_noticiamedio` (`rel_idnoticia`),
+  --ADD KEY `FK_medionoticia` (`rel_idmedio`);
 
 --
 -- Indices de la tabla `subtema`
@@ -493,7 +493,8 @@ ALTER TABLE `subtema`
 --
 ALTER TABLE `tema`
   ADD PRIMARY KEY (`idtema`),
-  ADD KEY `fk_cuestionariotema` (`rel_idcuestionario`);
+  ADD KEY `fk_cuestionariotema` (`rel_idcuestionario`),
+  ADD KEY fk_usuariotema(rel_idusuario);
 
 --
 -- Indices de la tabla `tipo_medio`
@@ -583,8 +584,8 @@ ALTER TABLE `noticia`
 --
 -- AUTO_INCREMENT de la tabla `noticia_medio`
 --
-ALTER TABLE `noticia_medio`
-  MODIFY `idnoticiamedio` int(11) NOT NULL AUTO_INCREMENT;
+--ALTER TABLE `noticia_medio`
+  --MODIFY `idnoticiamedio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `subtema`
@@ -644,14 +645,15 @@ ALTER TABLE `medio_departamento`
 --
 ALTER TABLE `noticia`
   ADD CONSTRAINT `FK_actornoticia` FOREIGN KEY (`rel_idactor`) REFERENCES `actor` (`idactor`),
+  ADD CONSTRAINT `FK_medionoticia` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
   ADD CONSTRAINT `FK_subtemanoticia` FOREIGN KEY (`rel_idsubtema`) REFERENCES `subtema` (`idsubtema`);
 
 --
 -- Filtros para la tabla `noticia_medio`
 --
-ALTER TABLE `noticia_medio`
-  ADD CONSTRAINT `FK_medionoticia` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
-  ADD CONSTRAINT `FK_noticiamedio` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
+--ALTER TABLE `noticia_medio`
+  --ADD CONSTRAINT `FK_medionoticia` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
+  --ADD CONSTRAINT `FK_noticiamedio` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
 
 --
 -- Filtros para la tabla `subtema`
@@ -663,7 +665,8 @@ ALTER TABLE `subtema`
 -- Filtros para la tabla `tema`
 --
 ALTER TABLE `tema`
-  ADD CONSTRAINT `fk_cuestionariotema` FOREIGN KEY (`rel_idcuestionario`) REFERENCES `cuestionario` (`idcuestionario`);
+  ADD CONSTRAINT `fk_cuestionariotema` FOREIGN KEY (`rel_idcuestionario`) REFERENCES `cuestionario` (`idcuestionario`),
+   ADD CONSTRAINT `fk_deltemausuario` FOREIGN KEY (`rel_idusuario`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `users_groups`

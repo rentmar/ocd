@@ -1,6 +1,6 @@
 <html>
 	Medio:
-	<?php $opciones = 0;$ver=base_url()."MedioComunicacion/agregarMedioComunicacion";?>
+	<?php $opciones = 0;$ver=base_url()."index.php/MedioComunicacion/agregarMedioComunicacion";?>
 	<?php //$ida=2;$ver=base_url()."MedioComunicacion/modificarMedioComunicacion/".$ida;?>
 	<?php echo $ver;?>
 	<form action="<?php echo $ver;?>" method='POST'>

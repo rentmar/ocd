@@ -16,12 +16,13 @@ class MedioComunicacion extends CI_Controller{
 	{
 		$dt['departamentos']=$this->MedioComunicacion_model->leerDepartamento();
 		$dt['tipos']=$this->MedioComunicacion_model->leerTipoMedio();
+		//$this->load->view('medio_comunicacion/vagregarmedio',$dt);
 		// para el edit
-		$idm=4;
+		$idm=12;
 		$dt['medio']=$this->MedioComunicacion_model->leerMedioPorId($idm);
 		$dt['medio_departamento']=$this->MedioComunicacion_model->leerDepartamentoMedioId($idm);
 		//echo var_dump($dt['medio_departamento']);
-	    $this->load->view('medio_comunicacion/veditarmedio',$dt);		
+	    $this->load->view('medio_comunicacion/veditarmedio',$dt);
 	}
 	public function agregarMedioComunicacion()
 	{
