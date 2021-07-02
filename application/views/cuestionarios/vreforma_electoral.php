@@ -222,7 +222,7 @@
 <header>
 	<div id="header">
 		<img src="<?php echo base_url('assets/img/logo/logo-sin-fondo.png')?>" alt="Logo CD">
-		<h4 id="Título_cabecera"> Elecciones subnacionales 2021 - Bolivia </h4>
+		<h4 id="Título_cabecera"></h4>
 	</div>
 	<div id="barra">
 		<div class="visible-xs">
@@ -254,6 +254,7 @@
 		</div>
 		<br>
 		<main>
+			<form action="<?php echo base_url().'index.php/Noticia/IngresardatosAtNoticia'; ?>" method="post">
 			<div class="contenedores_divididos">
 				<div class="contenedor_superior" id="contenedor_pequeño">
 				</div>
@@ -348,9 +349,11 @@
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
 			</div>
-	</div>
+	
+	
 	</main>
-
+	</form>
+</div>
 	<script>var baseurl = "<?php echo site_url(); ?>";</script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

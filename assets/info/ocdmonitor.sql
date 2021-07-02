@@ -225,6 +225,7 @@ CREATE TABLE `noticia` (
   `url_noticia` varchar(150) DEFAULT NULL,
   `rel_idactor` smallint(4) UNSIGNED NOT NULL,
   `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
+  `rel_idusr` int(11) UNSIGNED NOT NULL,
   `rel_idsubtema` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -369,7 +370,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`, `direccion`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$08$200Z6ZZbp3RAEXoaWcMA6uJOFicwNZaqk4oDhqTUiFXFe63MG.Daa', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL),
+(1, '127.0.0.1', 'admin', '$2y$08$200Z6ZZbp3RAEXoaWcMA6uJOFicwNZaqk4oDhqTUiFXFe63MG.Daa', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1268889823, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL),
 (2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, NULL, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', NULL, 5, 'Mariano Colodro #1447'),
 (3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, NULL, 1, 'Alberto', 'Cruzo', NULL, NULL, '4444444', '4.5', 7, 'Calle Montes #5555');
 
@@ -471,6 +472,7 @@ ALTER TABLE `noticia`
   ADD PRIMARY KEY (`idnoticia`),
   ADD KEY `FK_actornoticia` (`rel_idactor`),
   ADD KEY `FK_medionoticia` (`rel_idmedio`),
+  ADD KEY `FK_usersnoticia` (`rel_iduser`),
   ADD KEY `FK_subtemanoticia` (`rel_idsubtema`);
 
 --
@@ -578,8 +580,8 @@ ALTER TABLE `medio_departamento`
 --
 -- AUTO_INCREMENT de la tabla `noticia`
 --
-ALTER TABLE `noticia`
-  MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--ALTER TABLE `noticia`
+ -- MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_medio`
@@ -646,6 +648,7 @@ ALTER TABLE `medio_departamento`
 ALTER TABLE `noticia`
   ADD CONSTRAINT `FK_actornoticia` FOREIGN KEY (`rel_idactor`) REFERENCES `actor` (`idactor`),
   ADD CONSTRAINT `FK_medionoticia` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
+  ADD CONSTRAINT `FK_usersnoticia`` FOREIGN KEY (`rel_idusr`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `FK_subtemanoticia` FOREIGN KEY (`rel_idsubtema`) REFERENCES `subtema` (`idsubtema`);
 
 --

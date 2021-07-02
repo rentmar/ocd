@@ -4,7 +4,7 @@ class Noticia_model extends CI_Model{
         parent::__construct();
         $this->load->database();
     }
-    public function escribirFila($DatosNoticia,$idmedio,$idusr)
+    public function escribirNoticia($DatosNoticia,$idmedio)
     {
 		$this->db->trans_start();
 			$this->db->insert('noticia',$DatosNoticia);
@@ -13,16 +13,7 @@ class Noticia_model extends CI_Model{
 			   'rel_idnoticia'=>$idnoticia,
 			   'rel_idmedio'=>$idmedio];
 			$this->db->insert('noticia_medio',$DatosNoticiaMedio);
-			$datosUsuarioNoticia=[
-				'rel_idusr'=>$idusr,
-			   'rel_idnoticia'=>$idnoticia];
-			 $this->db->insert('usuario_noticia',$datosUsuarioNoticia);
 		$this->db->trans_complete();
-    }
-    public function escribirFila1($DatosNoticiaMedio)
-    {
-        $this->db->insert('noticia_medio',$DatosNoticiaMedio);
-        return $this->db->insert_id();
     }
 	public function insertarOtroSubTema($dtot,$ost)
 	{
