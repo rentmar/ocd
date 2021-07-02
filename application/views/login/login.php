@@ -83,15 +83,58 @@
 		.red {
 			color:#ff0000;
 		}
+
+
+
+
+		#header{
+			background:#662d91;
+			text-align:center;
+			padding-bottom:10px;
+			width:100%;
+
+		}
+		#barra{
+			background-color:#343a40;
+			padding:30px 15px 10px 15px;
+			text-align:right;
+		}
+		.text-info h2{
+			color: #ffffff;
+			font-size:13pt;
+		}
+		#header img{
+			max-width:280px;
+			display: block;
+			padding:20px 10px 0px 10px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#Título_cabecera{
+			font-family: Verdana;
+			line-height:140%;
+			color:#ffffff;
+			font-size:14pt;
+			text-align:center;
+		}
+
+
 	</style>
 </head>
 <body>
 <div>
-	<div id="Cabecera">
-		<img src="<?php echo base_url().'/assets/img/logo/LogoCD.jpg';?>" alt="Logo CD">
 
-		<h3 id="Título_cabecera"> Elecciones subnacionales 2021 - Bolivia </h3>
+
+	<div>
+		<div>
+			<div id="header">
+				<img src="<?php echo base_url('assets/img/logo/logo-sin-fondo.png')?>  " alt="Logo CD">
+				<h4 id="Título_cabecera"> </h4>
+			</div>
+		<div>
 	</div>
+
+
 	<div id="contenedor_vacío">	</div>
 	<div>
 		<br>
@@ -105,7 +148,7 @@
 
 			<div id="Caja_secundaria" class="contenedor">
 				<h3 id="Título_secundario"> Inicio de sesión </h3>
-				<!--					<form>-->
+
 				<?php echo form_open('login/validar'); ?>
 				<label for="identidad" class="form-group"> Nombre de usuario </label>
 				<span class="red"> * </span>

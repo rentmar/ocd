@@ -22,20 +22,16 @@ class Login extends CI_Controller{
 		else
 		{
 			//Sesion iniciada
-			echo "Sesion iniciada";
-			//redirect('dashboard', 'refresh');
+			redirect('reformaelectoral/', 'refresh');
 		}
 	}
 
 	public function validar(){
 		if($this->ion_auth->login($this->input->post('identidad'), $this->input->post('password'), false ))
 		{
-			//$log_user = $this->ion_auth->user()->row();
-			//$empresa = $this->Empresa_model->leerEmpresaPorIdentificador($log_user->rel_empresa);
-			//$this->session->set_userdata('sucursal', [ ]);
-			//$this->session->set_userdata('sucursal', $empresa);
-			//$this->session->set_userdata('sesion_activa', true);
-			redirect('inicio/', 'refresh');
+			$log_user = $this->ion_auth->user()->row();
+			$this->session->set_userdata('sesion_activa', true);
+			redirect('reformaelectoral/', 'refresh');
 		}
 		else
 		{
