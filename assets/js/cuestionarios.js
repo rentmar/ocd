@@ -8,12 +8,21 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
 jQuery(document).on('change', 'select#tema', function (e) {
 	e.preventDefault();
 	var temaID = jQuery(this).val();
+	var color ;
+	if($('#idformulario').val()==1){
+		color = '8cc63f';
+
+	}else if($('#idformulario').val()==2){
+		color = 'EF9600';
+	}
 
 	if(temaID == ' ' ){
 		$("#otrotemac").removeClass("contenedores");
 		$('#otrotemac').empty();
 		$('#subtemac').removeClass('contenedores');
 		$('#subtemac').empty();
+		$('#otrosubtema').removeClass('contenedores');
+		$('#otrosubtema').empty();
 		//$('#subtemacard').empty();
 		//$('#otrotemacard').empty();
 		//$('#cajatexto').empty();
@@ -29,15 +38,19 @@ jQuery(document).on('change', 'select#tema', function (e) {
 		$('#otrotemac').html(textot);
 		$('#subtemac').removeClass('contenedores');
 		$('#subtemac').empty();
+		$('#otrosubtema').removeClass('contenedores');
+		$('#otrosubtema').empty();
 
 
 
 	}else{
 		$("#otrotemac").removeClass("contenedores");
 		$('#otrotemac').empty();
+		$('#otrosubtema').removeClass('contenedores');
+		$('#otrosubtema').empty();
 		var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
 		$('#subtemac').addClass('contenedores');
-		getSubtemaList(temaID, temaTitulo);
+		getSubtemaList(temaID, temaTitulo, color);
 	}
 });
 
@@ -93,7 +106,7 @@ function getMediosList(tipomedioID) {
 }
 
 
-function getSubtemaList(temaID, temaTitulo) {
+function getSubtemaList(temaID, temaTitulo, color) {
 	$.ajax({
 		url: baseurl + "/reformaelectoral/getsubtema",
 		type: 'post',
@@ -109,7 +122,7 @@ function getSubtemaList(temaID, temaTitulo) {
 
 			var contador = 0;
 			var tarjeta = '';
-			tarjeta += '<div class="card-header  text-white" style="background-color:#8cc63f;" >';
+			tarjeta += '<div class="card-header  text-white" style="background-color:#'+ color +';" >';
 			tarjeta += '<h4>' + temaTitulo + '<h4>';
 			tarjeta += '</div>';
 			tarjeta += '<div class="card-body">';
