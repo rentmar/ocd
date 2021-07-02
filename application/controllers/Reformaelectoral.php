@@ -52,7 +52,9 @@ class Reformaelectoral extends CI_Controller
 
 	public function preenvio()
 	{
-		echo "preenvio";
+		echo "Tipo de medio: ".$this->input->post('tipo-medio');
+		echo "<br>";
+		echo "Medio: ".$this->input->post('medio');
 
 	}
 

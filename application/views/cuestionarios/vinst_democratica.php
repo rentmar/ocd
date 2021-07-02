@@ -5,9 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 	<title> Institucionalidad democrática </title>
 	<style>
 		body {
@@ -248,8 +246,8 @@
 <div>
 	<div>
 		<div id="header">
-			<img src="/img/logo-sin-fondo.png" alt="Logo CD">
-			<h4 id="Título_cabecera"> Elecciones subnacionales 2021 - Bolivia </h4>
+			<img src="<?php echo base_url('assets/img/logo/logo-sin-fondo.png');?>" alt="Logo CD">
+			<h4 id="Título_cabecera"> Monitoreo de Medios </h4>
 		</div>
 		<div>
 		</div>
@@ -264,97 +262,105 @@
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Introduzca la fecha de publicación/difusión de la noticia </h4>
-				<p> Fecha </p>
-				<input type="date">
+				<label for="fecha">Introduzca la fecha de publicación/difusión de la noticia:</label><br>
+				<input type="date" id="fecha" name="fecha" required >
+				<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Tipo de medio </h4>
-				<form>
-					<select name="medio" value="Seleccionar el Tipo de Medio">
-						<option>Seleccione el Tipo de medio</option>
-						<option>Página de Red Social</option>
-						<option>Canal de televisión</option>
-					</select>
-				</form>
+				<label for="tipo-medio">Tipo de Medio:</label><br>
+				<select id="tipo-medio" name="tipo-medio" class="form-control">
+					<option value=" " >Seleccione el Tipo de Medio</option>
+					<?php foreach ($tipo_medio as $key=>$element): ?>
+						<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
+					<?php endforeach; ?>
+				</select>
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Escoja el medio al cual hizo el seguimiento </h4>
-				<form>
-					<select name="medio" value="Seleccionar canal">
-						<option>Seleccione el medio</option>
-						<option>Red UNITEL</option>
-						<option>Red UNO</option>
+				<label>Escoja el medio al cual hizo el seguimiento:</label><br>
+				<select id="medio" name="medio" class="form-control" >
+					<option value=" " >Seleccione medio</option>
+				</select>
 
-					</select>
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Escriba el titular de la noticia </h4>
-				<input type="text" class="texto" value="Tu respuesta">
+
+				<label for="titular">Escriba el titular de la noticia:</label><br>
+				<input type="text" id="titular" name="titular" required class="form-control" >
+
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Escriba un pequeño párrafo que resuma la noticia </h4>
-				<textarea id="Párrafo_pequeño">Tu respuesta</textarea>
+				<label>Escriba un pequeño párrafo que resuma la noticia:</label><br>
+				<input type="text" id="resumen" name="resumen" required  class="form-control" >
+
+
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Pegue el link donde se encuentra la noticia </h4>
-				<input type="text" class="texto" value="Tu respuesta">
+				<label>Pegue el link donde se encuentra la noticia:</label><br>
+				<input type="text" id="url" name="url" required class="form-control" >
+
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Escoja el tipo de actor que es la fuente de la noticia </h4>
-				<form>
-					<input type="radio" id="opción_1" name="actor">
-					<label for="opción_1" class="form-group">Pertenece al Órgano Legislativo</label><br>
-					<input type="radio" id="opción_2" name="actor">
-					<label for="opción_2" class="form-group">Pertenece al Órgano Ejecutivo</label><br>
-				</form>
+				<label>Escoja el tipo de actor que es la fuente de la noticia:</label><br>
+				<?php $contador = 0; ?>
+				<?php foreach ($actor as $key => $element): ?>
+					<?php if($contador == 0): ?>
+						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>"  checked >
+						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
+						<?php $contador++; ?>
+					<?php else: ?>
+						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>" >
+						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
+					<?php endif; ?>
+				<?php endforeach; ?>
+
 			</div>
 			<br>
 			<div class="contenedores">
-				<h4> Escoge el tema al que está referido la nota </h4>
-				<form>
-					<input type="radio" id="opción_1" name="tema">
-					<label for="opción_1" class="form-group">Presentación de estatutos de organizaciones políticas</label><br>
-					<input type="radio" id="opción_2" name="tema">
-					<label for="opción_2" class="form-group">Competencias jurisdiccionales del TSE</label><br>
-				</form>
+
+				<label>Escoge el tema al que está referido la nota :</label><br>
+				<select id="tema" name="tema" class="form-control" >
+					<option value=" " >Seleccione Tema</option>
+					<?php foreach ( $tema as $key => $element): ?>
+						<option value="<?php echo $element['idtema']; ?>" >
+							<?php echo $element['nombre_tema']; ?>
+						</option>
+					<?php endforeach; ?>
+					<option value="0" >Otro</option>
+				</select>
+
 			</div>
 			<br>
-			<div class="contenedores">
-				<h4> Especifique otra </h4>
-				<input type="text" class="texto" value="Tu respuesta">
+			<div id="otrotemac"  >
+
+			</div>
+			<br><br>
+			<div id="subtemac" >
+
 			</div>
 			<br>
-			<div class="contenedores_divididos">
-				<div class="contenedor_superior" id="contenedor_mediano">
-					<h4 id="Subtemas"> Subtemas - Presentación de estatutos de organizaciones políticas </h4>
-				</div>
-				<div class="contenedor_inferior">
-					<h4> Sobre qué versa la noticia </h4>
-					<form>
-						<input type="radio" id="opción_1" name="noticia">
-						<label for="opción_1" class="form-group">Estatutos de organizaciones políticas - Ley 1096</label><br>
-						<input type="radio" id="opción_2" name="noticia">
-						<label for="opción_2" class="form-group">Otra</label><br>
-					</form>
-				</div>
+			<div id="otrosubtema">
+
 			</div>
-			<br>
-			<div class="contenedores">
-				<h4> Especifique otra </h4>
-				<input type="text" class="texto" value="Tu respuesta">
-			</div>
-			<br>
+
+			<br><br>
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
 			</div>
 	</div>
 	</main>
+
+<script>var baseurl = "<?php echo site_url(); ?>";</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+<script src="<?php echo base_url('assets/js')?>/offcanvas.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/cuestionarios.js"></script>
+
 </body>
 </html>

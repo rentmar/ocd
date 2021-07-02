@@ -222,18 +222,19 @@
 <header>
 	<div id="header">
 		<img src="<?php echo base_url('assets/img/logo/logo-sin-fondo.png')?>" alt="Logo CD">
-		<h4 id="Título_cabecera"></h4>
+
+		<h4 id="Título_cabecera"> Monitoreo de medios </h4>
 	</div>
 	<div id="barra">
 		<div class="visible-xs">
 			<a href="">
-				<span id="Label" class="text-info"><h2> Bienvenido, <b>Alejandro</b><h2></span>
+				<span id="Label" class="text-info"><h2>usuario<h2></span>
 			</a>
 		</div>
 	</div>
 	<div>
 		<input type="checkbox" id="btn-menu">
-		<label for="btn-menu"><img src="/img/icono-menu.png" alt=""width="35px"></label>
+		<label for="btn-menu"><img src="/img/icono-menu.png" alt="" width="35px"></label>
 		<nav class="menu">
 			<ul>
 				<li><a href="">Inicio</a></li>
@@ -254,7 +255,9 @@
 		</div>
 		<br>
 		<main>
+
 			<form action="<?php echo base_url().'index.php/Noticia/IngresardatosAtNoticia'; ?>" method="post">
+
 			<div class="contenedores_divididos">
 				<div class="contenedor_superior" id="contenedor_pequeño">
 				</div>
@@ -349,8 +352,6 @@
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
 			</div>
-	
-	
 	</main>
 	</form>
 </div>
