@@ -10,27 +10,38 @@ jQuery(document).on('change', 'select#tema', function (e) {
 	var temaID = jQuery(this).val();
 
 	if(temaID == ' ' ){
-		$('#subtemacard').empty();
-		$('#otrotemacard').empty();
-		$('#cajatexto').empty();
+		$("#otrotemac").removeClass("contenedores");
+		$('#otrotemac').empty();
+		$('#subtemac').removeClass('contenedores');
+		$('#subtemac').empty();
+		//$('#subtemacard').empty();
+		//$('#otrotemacard').empty();
+		//$('#cajatexto').empty();
 
 	}
 	else if (temaID == 0){
-		//Agregar contenido a #cajatexto
-		var textot = '';
-		textot += '<label>Especifique  otra :</label><br>';
-		textot += '<input type="text" id="otrotema" name="otrotema" placeholder="Otro tema" >';
-		$('#cajatexto').html(textot);
-		$('#subtemacard').empty();
+
+		$('#otrotemac').addClass("contenedores");
+		//Agregar el contenido
+		var textot = ' ';
+		textot += '<label for="otrotema" >Especifique  otra :</label><br>';
+		textot += '<input type="text" id="otrotema" name="otrotema" placeholder="Otro tema" class="form-control" >';
+		$('#otrotemac').html(textot);
+		$('#subtemac').removeClass('contenedores');
+		$('#subtemac').empty();
+
+
+
 	}else{
+		$("#otrotemac").removeClass("contenedores");
+		$('#otrotemac').empty();
 		var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
-		$('#cajatexto').empty();
-		$('#otrotemacard').empty();
+		$('#subtemac').addClass('contenedores');
 		getSubtemaList(temaID, temaTitulo);
 	}
 });
 
-$('#subtemacard').click(function () {
+$('#subtemac').click(function () {
 	var valor;
 	var texto='';
 	valor = $('input[name=idsubtema]:checked').val();
@@ -38,14 +49,17 @@ $('#subtemacard').click(function () {
 	{
 		//Agregar contenido a #cajatexto
 		texto += '<label>Especifique otra :</label><br>';
-		texto += '<input type="text" id="otrosubtema" name="otrosubtema" >';
-		$('#cajatexto').html(texto);
+		texto += '<input type="text" id="otrosubtema" name="otrosubtema" placeholder="Otro Subtema" >';
+		$('#otrosubtema').addClass('contenedores');
+		$('#otrosubtema').html(texto);
 	}else {
 		//Vaciar contenido de #cajatexto
-		$('#cajatexto').empty();
+		$('#otrosubtema').removeClass('contenedores');
+		$('#otrosubtema').empty();
 	}
 });
 
+//Validar los combobox antes de enviar
 
 
 
@@ -92,49 +106,48 @@ function getSubtemaList(temaID, temaTitulo) {
 			// code
 		},
 		success: function (json) {
-			if(temaID != 11) {
-				var contador = 0;
-				var tarjeta = '';
-				tarjeta += '<div class="card-header bg-info text-white">';
-				tarjeta += '<h4>' + temaTitulo + '<h4>';
-				tarjeta += '</div>';
-				tarjeta += '<div class="card-body">';
-				tarjeta += '<div class="form-check">';
-				for (var i = 0; i < json.length; i++) {
-					if (contador == 0) {
-						tarjeta += '<div class="form-check">';
-						tarjeta += '  <label class="form-check-label" for="radio1">';
-						tarjeta += '      <input type="radio" class="form-check-input" id="radio' + json[i].stema_id + '" name="idsubtema" value="' + json[i].stema_id + '" checked>';
-						tarjeta += '      ' + json[i].stema_name;
-						tarjeta += '  </label>';
-						tarjeta += '</div>';
-						contador++
 
-					} else {
-						tarjeta += '<div class="form-check">';
-						tarjeta += '  <label class="form-check-label" for="radio1">';
-						tarjeta += '      <input type="radio" class="form-check-input" id="radio' + json[i].stema_id + '" name="idsubtema" value="' + json[i].stema_id + '">';
-						tarjeta += '      ' + json[i].stema_name;
-						tarjeta += '  </label>';
-						tarjeta += '</div>';
-					}
-				}
-				if (temaID != 11) {
+			var contador = 0;
+			var tarjeta = '';
+			tarjeta += '<div class="card-header  text-white" style="background-color:#8cc63f;" >';
+			tarjeta += '<h4>' + temaTitulo + '<h4>';
+			tarjeta += '</div>';
+			tarjeta += '<div class="card-body">';
+			tarjeta += '<div class="form-check">';
+			for (var i = 0; i < json.length; i++) {
+				if (contador == 0) {
 					tarjeta += '<div class="form-check">';
-					tarjeta += '  <label class="form-check-label" for="radiootro">';
-					tarjeta += '      <input type="radio" class="form-check-input" id="radiootro" name="idsubtema" value="0">';
-					tarjeta += '       Otro';
+					tarjeta += '  <label class="form-check-label" for="radio1">';
+					tarjeta += '      <input type="radio" class="form-check-input" id="radio' + json[i].stema_id + '" name="idsubtema" value="' + json[i].stema_id + '" checked>';
+					tarjeta += '      ' + json[i].stema_name;
 					tarjeta += '  </label>';
 					tarjeta += '</div>';
-					tarjeta += '</div>';
+					contador++
+
+				} else {
+					tarjeta += '<div class="form-check">';
+					tarjeta += '  <label class="form-check-label" for="radio1">';
+					tarjeta += '      <input type="radio" class="form-check-input" id="radio' + json[i].stema_id + '" name="idsubtema" value="' + json[i].stema_id + '">';
+					tarjeta += '      ' + json[i].stema_name;
+					tarjeta += '  </label>';
 					tarjeta += '</div>';
 				}
 			}
-			else{
-				tarjeta = '';
-			}
 
-			jQuery("#subtemacard").html(tarjeta);
+			tarjeta += '<div class="form-check">';
+			tarjeta += '  <label class="form-check-label" for="radiootro">';
+			tarjeta += '      <input type="radio" class="form-check-input" id="radiootro" name="idsubtema" value="0">';
+			tarjeta += '       Otro';
+			tarjeta += '  </label>';
+			tarjeta += '</div>';
+			tarjeta += '</div>';
+			tarjeta += '</div>';
+
+
+
+
+
+			jQuery("#subtemac").html(tarjeta);
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {

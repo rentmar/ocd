@@ -15,13 +15,19 @@ class Reformaelectoral extends CI_Controller
 	{
 		//Extraer de la session
 		$iddepartamento = 1;
+		$idformulario = 1;
 
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
 
 		$data['tipo_medio'] = $tipo_medio;
 		$data['actor'] = $this->Cuestionario_model->leerActor();
 		$data['tema'] = $this->Cuestionario_model->leerTema();
+		$data['idformulario'] = $idformulario;
+
+		//$this->load->view('html/encabezado');
+		//$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_electoral', $data);
+		//$this->load->view('html/pie');
 	}
 
 	public function getMedios()
@@ -42,6 +48,12 @@ class Reformaelectoral extends CI_Controller
 		$json = $this->Cuestionario_model->leerSubtema();
 		header('Content-Type: application/json');
 		echo json_encode($json);
+	}
+
+	public function preenvio()
+	{
+		echo "preenvio";
+
 	}
 
 
