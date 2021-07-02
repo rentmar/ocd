@@ -234,11 +234,11 @@ CREATE TABLE `noticia` (
 -- Estructura de tabla para la tabla `noticia_medio`
 --
 
---CREATE TABLE `noticia_medio` (
-  --`idnoticiamedio` int(11) NOT NULL,
-  --`rel_idnoticia` int(11) UNSIGNED NOT NULL,
-  --`rel_idmedio` smallint(5) UNSIGNED NOT NULL
---) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `noticia_medio` (
+  `idnoticiamedio` int(11) NOT NULL,
+  `rel_idnoticia` int(11) UNSIGNED NOT NULL,
+  `rel_idmedio` smallint(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -402,11 +402,11 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 -- Estructura de tabla para la tabla `usuario_noticia`
 --
 
-CREATE TABLE `usuario_noticia` (
-  `idusuarionoticia` int(11) UNSIGNED NOT NULL,
-  `rel_idusr` int(11) UNSIGNED NOT NULL,
-  `rel_idnoticia` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--CREATE TABLE `usuario_noticia` (
+  --`idusuarionoticia` int(11) UNSIGNED NOT NULL,
+  --`rel_idusr` int(11) UNSIGNED NOT NULL,
+  --`rel_idnoticia` int(11) UNSIGNED NOT NULL
+--) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -476,10 +476,10 @@ ALTER TABLE `noticia`
 --
 -- Indices de la tabla `noticia_medio`
 --
---ALTER TABLE `noticia_medio`
-  --ADD PRIMARY KEY (`idnoticiamedio`),
-  --ADD KEY `FK_noticiamedio` (`rel_idnoticia`),
-  --ADD KEY `FK_medionoticia` (`rel_idmedio`);
+ALTER TABLE `noticia_medio`
+  ADD PRIMARY KEY (`idnoticiamedio`),
+  ADD KEY `FK_noticiamedio` (`rel_idnoticia`),
+  ADD KEY `FK_medionoticia` (`rel_idmedio`);
 
 --
 -- Indices de la tabla `subtema`
@@ -524,10 +524,10 @@ ALTER TABLE `users_groups`
 --
 -- Indices de la tabla `usuario_noticia`
 --
-ALTER TABLE `usuario_noticia`
-  ADD PRIMARY KEY (`idusuarionoticia`),
-  ADD KEY `FK_usrnoticia` (`rel_idusr`),
-  ADD KEY `FK_noticiausuario` (`rel_idnoticia`);
+--ALTER TABLE `usuario_noticia`
+  --ADD PRIMARY KEY (`idusuarionoticia`),
+  --ADD KEY `FK_usrnoticia` (`rel_idusr`),
+  --ADD KEY `FK_noticiausuario` (`rel_idnoticia`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -584,8 +584,8 @@ ALTER TABLE `noticia`
 --
 -- AUTO_INCREMENT de la tabla `noticia_medio`
 --
---ALTER TABLE `noticia_medio`
-  --MODIFY `idnoticiamedio` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `noticia_medio`
+  MODIFY `idnoticiamedio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `subtema`
@@ -620,8 +620,8 @@ ALTER TABLE `users_groups`
 --
 -- AUTO_INCREMENT de la tabla `usuario_noticia`
 --
-ALTER TABLE `usuario_noticia`
-  MODIFY `idusuarionoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--ALTER TABLE `usuario_noticia`
+  --MODIFY `idusuarionoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -651,9 +651,9 @@ ALTER TABLE `noticia`
 --
 -- Filtros para la tabla `noticia_medio`
 --
---ALTER TABLE `noticia_medio`
-  --ADD CONSTRAINT `FK_medionoticia` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
-  --ADD CONSTRAINT `FK_noticiamedio` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
+ALTER TABLE `noticia_medio`
+  ADD CONSTRAINT `FK_medionoticia` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
+  ADD CONSTRAINT `FK_noticiamedio` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
 
 --
 -- Filtros para la tabla `subtema`
@@ -678,9 +678,9 @@ ALTER TABLE `users_groups`
 --
 -- Filtros para la tabla `usuario_noticia`
 --
-ALTER TABLE `usuario_noticia`
-  ADD CONSTRAINT `FK_noticiausuario` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`),
-  ADD CONSTRAINT `FK_usrnoticia` FOREIGN KEY (`rel_idusr`) REFERENCES `users` (`id`);
+--ALTER TABLE `usuario_noticia`
+  --ADD CONSTRAINT `FK_noticiausuario` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`),
+  --ADD CONSTRAINT `FK_usrnoticia` FOREIGN KEY (`rel_idusr`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
