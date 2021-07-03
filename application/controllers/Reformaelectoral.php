@@ -24,10 +24,10 @@ class Reformaelectoral extends CI_Controller
 		$data['tema'] = $this->Cuestionario_model->leerTema();
 		$data['idformulario'] = $idformulario;
 
-		//$this->load->view('html/encabezado');
-		//$this->load->view('html/navbar');
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_electoral', $data);
-		//$this->load->view('html/pie');
+		$this->load->view('html/pie');
 	}
 
 	public function getMedios()
