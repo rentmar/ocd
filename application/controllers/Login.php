@@ -22,7 +22,7 @@ class Login extends CI_Controller{
 		else
 		{
 			//Sesion iniciada
-			redirect('reformaelectoral/', 'refresh');
+			redirect('inicio/', 'refresh');
 		}
 	}
 
@@ -30,8 +30,8 @@ class Login extends CI_Controller{
 		if($this->ion_auth->login($this->input->post('identidad'), $this->input->post('password'), false ))
 		{
 			$log_user = $this->ion_auth->user()->row();
-			$this->session->set_userdata('sesion_activa', true);
-			redirect('reformaelectoral/', 'refresh');
+			$this->session->set_userdata($log_user);
+			redirect('inicio/', 'refresh');
 		}
 		else
 		{
