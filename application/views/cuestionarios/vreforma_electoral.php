@@ -2,6 +2,7 @@
 		<main>
 			<br><br>
 			<?php echo form_open('reformaelectoral/preenvio');?>
+
 			<div class="contenedores_divididos">
 				<div class="contenedor_superior" id="contenedor_pequeño">
 				</div>
@@ -96,7 +97,5 @@
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
 			</div>
-	</div>
-			<?php echo form_close(); ?>
 	</main>
 

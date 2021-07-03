@@ -18,43 +18,46 @@ class Noticia extends CI_Controller
     {
 		$idusr=1;
         $idtipomedio=$this->input->post('tipo-medio');
-        $idmedio=$this->input->post('medio');
+		echo $idtipomedio;
+        echo $idmedio=$this->input->post('medio');
 		//  otro tema 
 		$tema=$this->input->post('tema');
 		if ($tema=0)
 		{
 			$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
 						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
-						  'rel_idusuario'=>$idusr;
+						  'rel_idusuario'=>$idusr
 							);
 			$ost=$this->input->post('otrosubtema');
 			$idotrosubtema=$this->Noticia_model->insertarOtroSubTema($dtot,$ost);
 			$DatosNoticia=[
-            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
-            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
+            'fecha_registro'=>271537213517,//$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>271537213517,//$this->fecha_unix($this->input->post('fecha')),
             'titular'=>$this->input->post('titular'),
             'resumen'=>$this->input->post('resumen'),
             'url_noticia'=>$this->input->post('url'),
             'rel_idactor'=>$this->input->post('actor_nombre'),
+			'rel_idmedio'=>$idmedio,
+			'rel_idusr'=>$idusr,
             'rel_idsubtema'=>$idotrosubtema
             ];
 		}
 		else
 		{
-			 $DatosNoticia=[
-            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
-            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
+			$DatosNoticia=[
+            'fecha_registro'=>271537213517,//$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>271537213517,//$this->fecha_unix($this->input->post('fecha')),
             'titular'=>$this->input->post('titular'),
             'resumen'=>$this->input->post('resumen'),
             'url_noticia'=>$this->input->post('url'),
             'rel_idactor'=>$this->input->post('actor_nombre'),
+			'rel_idmedio'=>$idmedio,
+			'rel_idusr'=>$idusr,
             'rel_idsubtema'=>$this->input->post('idsubtema')
             ];
 		}
        
         var_dump($DatosNoticia);
-//      $this->form_validation->set_rules('fechaR', 'FechaRegistro', 'required');
-//      $this->form_validation->set_rules('fechaP', 'FechaNoticia', 'required');
 		$this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         //$this->form_validation->set_rules('url', 'urlNoticia', 'required');
@@ -72,7 +75,7 @@ class Noticia extends CI_Controller
         else
         {
             //echo "Validacion correcta";
-            $idnoticia=$this->Noticia_model->escribirFila($DatosNoticia,$idmedio,$idusr);
+            $idnoticia=$this->Noticia_model->escribirNoticia($DatosNoticia,$idmedio);
        }
     }
 	public function editarNoticia($idn)
