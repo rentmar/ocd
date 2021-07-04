@@ -13,6 +13,11 @@ class Instdemocratica extends CI_Controller
 		$this->load->library('ion_auth');
 
 		$this->_idformulario = 2;
+		//Comprobacion de session
+		/*if($this->session->sesion_activa ===  null){
+			$this->session->sess_destroy();
+			redirect('/');
+		}*/
 	}
 
 	public function index()

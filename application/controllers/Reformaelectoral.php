@@ -12,6 +12,11 @@ class Reformaelectoral extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library('ion_auth');
 		$this->_idformulario = 1;
+		//Comprobacion de session
+		/*if($this->session->sesion_activa ===  null){
+			$this->session->sess_destroy();
+			redirect('/');
+		}*/
 	}
 
 	public function index()
@@ -20,6 +25,7 @@ class Reformaelectoral extends CI_Controller
 
 
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
+
 
 		$data['idusuario'] = $usuario->id;
 		$data['tipo_medio'] = $tipo_medio;

@@ -32,6 +32,7 @@ class Login extends CI_Controller{
 			$log_user = $this->ion_auth->user()->row();
 			//$this->session->set_userdata('usuario', []);
 			//$this->session->set_userdata('usuario', $log_user);
+			$this->session->set_userdata('sesion_activa', true);
 			redirect('inicio/', 'refresh');
 
 		}
