@@ -1,7 +1,7 @@
 		<main>
 			<br><br>
 			<div class="contenedores_divididos">
-				<div class="contenedor_superior" id="contenedor_pequeño">
+				<div class="contenedor_superior2" id="contenedor_pequeño">
 				</div>
 				<div class="contenedor_inferior">
 					<h3 id="Título_formulario"> Institucionalidad democrática </h3>
@@ -12,6 +12,7 @@
 				<label for="fecha">Introduzca la fecha de publicación/difusión de la noticia:</label><br>
 				<input type="date" id="fecha" name="fecha" required >
 				<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
+				<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
 			</div>
 			<br>
 			<div class="contenedores">

@@ -2,6 +2,7 @@
 
 class Reformaelectoral extends CI_Controller
 {
+	protected $_idformulario;
 	public function __construct()
 	{
 		parent::__construct();
@@ -9,20 +10,22 @@ class Reformaelectoral extends CI_Controller
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
+		$this->load->library('ion_auth');
+		$this->_idformulario = 1;
 	}
 
 	public function index()
 	{
-		//Extraer de la session
-		$iddepartamento = 1;
-		$idformulario = 1;
+		$usuario = $this->ion_auth->user()->row();
+
 
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
 
+		$data['idusuario'] = $usuario->id;
 		$data['tipo_medio'] = $tipo_medio;
 		$data['actor'] = $this->Cuestionario_model->leerActor();
 		$data['tema'] = $this->Cuestionario_model->leerTema();
-		$data['idformulario'] = $idformulario;
+		$data['idformulario'] = $this->_idformulario;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -52,10 +55,19 @@ class Reformaelectoral extends CI_Controller
 
 	public function preenvio()
 	{
-		echo "Tipo de medio: ".$this->input->post('tipo-medio');
-		echo "<br>";
-		echo "Medio: ".$this->input->post('medio');
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vreforma_preenvio');
+		$this->load->view('html/pie');
 
+	}
+
+	public function editar()
+	{
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vreforma_lista_noticias');
+		$this->load->view('html/pie');
 	}
 
 
