@@ -52,12 +52,30 @@ class Reformaelectoral extends CI_Controller
 
 	public function preenvio()
 	{
-		echo "Tipo de medio: ".$this->input->post('tipo-medio');
-		echo "<br>";
-		echo "Medio: ".$this->input->post('medio');
+		$idusr=1;
+		$DatosNoticia=[
+            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
+            'titular'=>$this->input->post('titular'),
+            'resumen'=>$this->input->post('resumen'),
+            'url_noticia'=>$this->input->post('url'),
+            'rel_idactor'=>$this->input->post('actor_nombre'),
+			'rel_idmedio'=>$this->input->post('medio'),
+			'idtema'=>$this->input->post('tema'),
+			'idsubtema'=>$this->input->post('subtema'),
+			'rel_idcuestionario'=>$this->input->post('idformulario'),
+			'otrotema'=>$this->input->post('otrotema'),
+			'otrosubtema'=>$this->input->post('otrosubtema'),
+			'rel_idusr'=>$idusr
+            ];
+		echo var_dump($DatosNoticia);
 
 	}
-
+	 private function fecha_unix($fecha) {
+        list($anio, $mes, $dia) = explode('-', $fecha);
+        $fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+        return $fecha_unix;
+    }
 
 
 

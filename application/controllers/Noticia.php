@@ -13,7 +13,7 @@ class Noticia extends CI_Controller
     }
     public function index()
     {
-        $this->load->view('cuestionarios/vprueba.php');
+		$this->load->view('cuestionarios/vprueba.php');
     }
     public function registrarNoticia()
     {
@@ -25,12 +25,14 @@ class Noticia extends CI_Controller
             'resumen'=>$this->input->post('resumen'),
             'url_noticia'=>$this->input->post('url'),
             'rel_idactor'=>$this->input->post('idactor'),
-			'rel_idmedio'=>$idmedio=$this->input->post('idmedio'),
-			'rel_idusr'=>$idusr
+			'rel_idmedio'=>$this->input->post('idmedio'),
+			'rel_idusuario'=>$idusr
             ];
 		//  otro tema 
-		if ($this->input->post('idtema')==0)
+		$idtema=$this->input->post('idtema');
+		if ($idtema==0)
 		{
+			echo "otro tema";
 			$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
 						  'rel_idcuestionario'=>$this->input->post('idformulario'),
 						  'rel_idusuario'=>$idusr
@@ -40,11 +42,13 @@ class Noticia extends CI_Controller
 		}
 		else
 		{
+			echo "normal";
 			$DatosNoticia['rel_idsubtema']=$this->input->post('idsubtema');
 		}
 		//otro subtema
 		if ($this->input->post('idsubtema')==0)
 		{
+			echo "otro Subtema";
 			$dtot= array ('nombre_tema'=>$idtema,
 						  'rel_idcuestionario'=>$this->input->post('idformulario'),
 						  'rel_idusuario'=>$idusr
@@ -52,12 +56,12 @@ class Noticia extends CI_Controller
 			$ost=$this->input->post('otrosubtema');
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
-        var_dump($DatosNoticia);
-		$this->form_validation->set_rules('titular', 'Titular', 'required');
+       $this->Noticia_model->insertarNoticia($DatosNoticia);
+		/*$this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         //$this->form_validation->set_rules('url', 'urlNoticia', 'required');
-        $this->form_validation->set_rules('actor_nombre', 'relIdActor', 'required');
-        $this->form_validation->set_rules('tema', 'relIdSubtema', 'required');
+        $this->form_validation->set_rules('idactor', 'relIdActor', 'required');
+        $this->form_validation->set_rules('isdubtema', 'relIdSubtema', 'required');
         $this->form_validation->set_message('required','El campo %s es obligatorio');
         $this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
         $this->form_validation->set_message('min_length[3]','El campo %s debe tener mas de 3 caracteres');
@@ -65,13 +69,13 @@ class Noticia extends CI_Controller
         if ($this->form_validation->run() == FALSE)
         {
             //echo "Validacion incorrecta";
-            $this->load->view('cuestionarios/vreforma_electoral.php');
+            $this->load->view('cuestionarios/vprueba.php');
         }
         else
         {
             //echo "Validacion correcta";
             $idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
-       }
+		}*/
     }
 	public function editarNoticia($idn)
 	{

@@ -273,11 +273,6 @@ CREATE TABLE `noticia` (
 --
 -- Volcado de datos para la tabla `noticia`
 --
-
-INSERT INTO `noticia` (`idnoticia`, `fecha_registro`, `fecha_noticia`, `titular`, `resumen`, `url_noticia`, `rel_idactor`, `rel_idsubtema`, `rel_idmedio`, `rel_idusuario`) VALUES
-(1, 15212156, 151213254, 'desadasdas', 'fdfsdf', 'dasdsadasdsad', 1, 6, 0, 0),
-(2, 3213, 321312, 'fff', 'ggg', 'gtgt', 6, 10, 0, 0);
-
 -- --------------------------------------------------------
 
 --
