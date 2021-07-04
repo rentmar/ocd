@@ -57,9 +57,12 @@ class Instdemocratica extends CI_Controller
 		//echo $usuario->id;
 		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
 		//var_dump($noticias);
+		$data['noticias'] = $noticias;
+		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_lista_noticias', $noticias);
+		$this->load->view('cuestionarios/vreforma_lista_noticias', $data);
 		$this->load->view('html/pie');
 	}
 

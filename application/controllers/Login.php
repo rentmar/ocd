@@ -37,6 +37,7 @@ class Login extends CI_Controller{
 			$this->session->set_userdata('sesion_activa', true);
 			$this->session->set_userdata('iddepartamento', $departamento->iddepartamento );
 			$this->session->set_userdata('departamento', $departamento->nombre_departamento);
+			$this->session->set_userdata('edicion_activa', false);
 			redirect('inicio/', 'refresh');
 
 		}

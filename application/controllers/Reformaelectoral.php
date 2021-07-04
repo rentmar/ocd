@@ -3,6 +3,7 @@
 class Reformaelectoral extends CI_Controller
 {
 	protected $_idformulario;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -63,29 +64,32 @@ class Reformaelectoral extends CI_Controller
 		header('Content-Type: application/json');
 		echo json_encode($json);
 	}
-	private function fecha_unix($fecha) {
-        list($anio, $mes, $dia) = explode('-', $fecha);
-        $fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
-        return $fecha_unix;
-    }
+
+	private function fecha_unix($fecha)
+	{
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
+	}
+
 	public function preenvio()
-	{	
-		$idusr=$this->input->post('idusuario');
-		$DatosNoticia=[
-            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
-            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
-            'titular'=>$this->input->post('titular'),
-            'resumen'=>$this->input->post('resumen'),
-            'url_noticia'=>$this->input->post('url'),
-            'rel_idactor'=>$this->input->post('idactor'),
-			'rel_idmedio'=>$this->input->post('idmedio'),
-			'idtema'=>$this->input->post('idtema'),
-			'idsubtema'=>$this->input->post('subtema'),
-			'rel_idcuestionario'=>$this->input->post('idformulario'),
-			'otrotema'=>$this->input->post('otrotema'),
-			'otrosubtema'=>$this->input->post('otrosubtema'),
-			'rel_idusr'=>$idusr
-            ];
+	{
+		$idusr = $this->input->post('idusuario');
+		$DatosNoticia = [
+			'fecha_registro' => $this->fecha_unix(date("Y-m-d")),
+			'fecha_noticia' => $this->fecha_unix($this->input->post('fecha')),
+			'titular' => $this->input->post('titular'),
+			'resumen' => $this->input->post('resumen'),
+			'url_noticia' => $this->input->post('url'),
+			'rel_idactor' => $this->input->post('idactor'),
+			'rel_idmedio' => $this->input->post('idmedio'),
+			'idtema' => $this->input->post('idtema'),
+			'idsubtema' => $this->input->post('subtema'),
+			'rel_idcuestionario' => $this->input->post('idformulario'),
+			'otrotema' => $this->input->post('otrotema'),
+			'otrosubtema' => $this->input->post('otrossubtema'),
+			'rel_idusr' => $idusr
+		];
 		echo var_dump($DatosNoticia);
 		/*	
 		$this->load->view('html/encabezado');
@@ -103,6 +107,7 @@ class Reformaelectoral extends CI_Controller
 		//var_dump($noticias);
 
 		$data['noticias'] = $noticias;
+		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -113,10 +118,14 @@ class Reformaelectoral extends CI_Controller
 
 	public function editarNoticia($idnoticia)
 	{
+		$idnoticia = $idnoticia;
+		$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
+		var_dump($noticia);
+
 
 	}
 
-
+}
 
 
 

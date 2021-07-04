@@ -108,5 +108,11 @@ class Cuestionario_model extends CI_Model
 		return $qry->row();
 	}
 
+	public function leerCuestionario($idcuestionario)
+	{
+		$qry = $this->db->get_where('cuestionario', [ 'idcuestionario' => $idcuestionario ]);
+		return $qry->row();
+	}
+
 
 }

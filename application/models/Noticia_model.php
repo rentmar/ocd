@@ -88,6 +88,14 @@ class Noticia_model extends CI_Model{
 		return $qry->result();
 	}
 
+	public function leerNoticiaID($idnoticia){
+		$sql = "SELECT * "
+			."FROM noticia AS n  "
+			."WHERE n.idnoticia = ?  ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->row();
+	}
+
 
     
 }
