@@ -17,13 +17,13 @@ class Noticia extends CI_Controller
     }
     public function registrarNoticia()
     {
-		$idusr=1;
+		$idusr=$this->input->post("idusr");
         $DatosNoticia=[
-            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
-            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
+            'fecha_registro'=>$this->input->post("fecha_registro"),
+            'fecha_noticia'=>$this->input->post('fecha_noticia'),
             'titular'=>$this->input->post('titular'),
             'resumen'=>$this->input->post('resumen'),
-            'url_noticia'=>$this->input->post('url'),
+            'url_noticia'=>$this->input->post('url_noticia'),
             'rel_idactor'=>$this->input->post('idactor'),
 			'rel_idmedio'=>$this->input->post('idmedio'),
 			'rel_idusuario'=>$idusr
@@ -32,9 +32,8 @@ class Noticia extends CI_Controller
 		$idtema=$this->input->post('idtema');
 		if ($idtema==0)
 		{
-			echo "otro tema";
 			$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
-						  'rel_idcuestionario'=>$this->input->post('idformulario'),
+						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
 						  'rel_idusuario'=>$idusr
 							);
 			$ost='Nodef usr '.$idusr;
@@ -42,21 +41,20 @@ class Noticia extends CI_Controller
 		}
 		else
 		{
-			echo "normal";
 			$DatosNoticia['rel_idsubtema']=$this->input->post('idsubtema');
 		}
 		//otro subtema
 		if ($this->input->post('idsubtema')==0)
 		{
-			echo "otro Subtema";
 			$dtot= array ('nombre_tema'=>$idtema,
-						  'rel_idcuestionario'=>$this->input->post('idformulario'),
+						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
 						  'rel_idusuario'=>$idusr
 							);
 			$ost=$this->input->post('otrosubtema');
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
-       $this->Noticia_model->insertarNoticia($DatosNoticia);
+		
+	   $this->Noticia_model->insertarNoticia($DatosNoticia);
 		/*$this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         //$this->form_validation->set_rules('url', 'urlNoticia', 'required');

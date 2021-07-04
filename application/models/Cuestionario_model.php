@@ -107,6 +107,29 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql, [$iddep,  ]);
 		return $qry->row();
 	}
-
-
+	
+	public function leerTemaPorId($idt)
+	{
+		$this->db->where('idtema',$idt);
+		$q= $this->db->get('tema');
+		return $q->row();
+	}
+	public function leerSubTemaPorId($id)
+	{
+		$this->db->where('idsubtema',$id);
+		$q= $this->db->get('subtema');
+		return $q->row();
+	}
+	public function leerActorPorId($id)
+	{
+		$this->db->where('idactor',$id);
+		$q= $this->db->get('actor');
+		return $q->row();
+	}
+	public function leerMedioPorId($id)
+	{
+		$this->db->where('idmedio',$id);
+		$q= $this->db->get('medio_comunicacion');
+		return $q->row();
+	}
 }
