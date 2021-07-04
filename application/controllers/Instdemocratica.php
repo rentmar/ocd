@@ -26,10 +26,13 @@ class Instdemocratica extends CI_Controller
 
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
 
+		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+		$tema = $this->Cuestionario_model->leerTema();
+
 		$data['idusuario'] = $usuario->id;
 		$data['tipo_medio'] = $tipo_medio;
 		$data['actor'] = $this->Cuestionario_model->leerActor();
-		$data['tema'] = $this->Cuestionario_model->leerTema();
+		$data['tema'] = $tema;
 		$data['idformulario'] = $this->_idformulario;
 
 		$this->load->view('html/encabezado');

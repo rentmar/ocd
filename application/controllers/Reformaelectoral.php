@@ -26,11 +26,14 @@ class Reformaelectoral extends CI_Controller
 
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
 
+		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+		$tema = $this->Cuestionario_model->leerTema();
 
 		$data['idusuario'] = $usuario->id;
+		$data['iddepartamento'] = $usuario->rel_iddepartamento;
 		$data['tipo_medio'] = $tipo_medio;
 		$data['actor'] = $this->Cuestionario_model->leerActor();
-		$data['tema'] = $this->Cuestionario_model->leerTema();
+		$data['tema'] = $tema;
 		$data['idformulario'] = $this->_idformulario;
 
 		$this->load->view('html/encabezado');
@@ -43,7 +46,7 @@ class Reformaelectoral extends CI_Controller
 	{
 		$json = array();
 		$this->Cuestionario_model->setTipoMedioID($this->input->post('tipomedioID'));
-		$this->Cuestionario_model->setDepartamentoID(1);
+		$this->Cuestionario_model->setDepartamentoID($this->session->iddepartamento);
 		$json = $this->Cuestionario_model->leerMedios();
 		header('Content-Type: application/json');
 		echo json_encode($json);

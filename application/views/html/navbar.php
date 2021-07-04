@@ -1,4 +1,9 @@
 <?php $usuario_activo = $this->ion_auth->user()->row(); ?>
+<?php
+	$grupo = $this->ion_auth->get_users_groups()->result();
+	//var_dump($grupo);
+	$dep = $this->session->departamento;
+?>
 
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -34,7 +39,7 @@
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<?php echo "Bienvenido: ".$usuario_activo->username;?>
+					<?php echo "Bienvenido: ".$usuario_activo->username."/".$grupo[0]->name."/".$dep;?>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown02">
 <!--					<a class="dropdown-item" href="#">Action</a>-->

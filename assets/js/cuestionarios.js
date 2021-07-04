@@ -15,6 +15,12 @@ jQuery(document).on('change', 'select#tema', function (e) {
 	}else if($('#idformulario').val()==2){
 		color = 'EF9600';
 	}
+	$("#otrotemac").removeClass("contenedores");
+	$('#otrotemac').empty();
+	$('#subtemac').removeClass('contenedores');
+	$('#subtemac').empty();
+	$('#otrosubtema').removeClass('contenedores');
+	$('#otrosubtema').empty();
 
 	if(temaID == ' ' ){
 		$("#otrotemac").removeClass("contenedores");

@@ -16,6 +16,7 @@
 				<input type="date" id="fecha" name="fecha" required >
 				<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
 				<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
+				<input type="hidden" id="iddepartamento" name="iddepartamento" value="" >
 			</div>
 			<br>
 			<div class="contenedores">

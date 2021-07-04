@@ -5,6 +5,7 @@ class Cuestionario_model extends CI_Model
 	private $_tipomedioID;
 	private $_temaID;
 	private $_departamentoID;
+	private $_cuestionarioID;
 
 	public function __construct()
 	{
@@ -33,6 +34,11 @@ class Cuestionario_model extends CI_Model
 	public function setDepartamentoID($depID)
 	{
 		$this->_departamentoID = $depID;
+	}
+
+	public function setCuestionarioID($cuestID)
+	{
+		$this->_cuestionarioID = $cuestID;
 	}
 
 	//Leer todos los tipos de medios
@@ -70,17 +76,36 @@ class Cuestionario_model extends CI_Model
 
 	public function leerTema()
 	{
-		$query = $this->db->get('tema');
-		return $query->result_array();
+		$sql = "SELECT tema.idtema, tema.nombre_tema "
+			."FROM tema "
+			."WHERE tema.rel_idcuestionario = ?  ";
+		$qry = $this->db->query($sql, [$this->_cuestionarioID,  ]);
+		return $qry->result_array();
+		/*$query = $this->db->get('tema');
+		return $query->result_array();*/
 	}
 
 	public function leerSubtema()
 	{
-		$this->db->select(array('s.idsubtema as stema_id', 's.rel_idtema', 's.nombre_subtema as stema_name'));
+		$sql = "SELECT s.idsubtema AS stema_id, s.nombre_subtema AS stema_name "
+			."FROM subtema as s "
+			."WHERE s.rel_idtema = ?  ";
+		$qry = $this->db->query($sql, [$this->_temaID,  ]);
+		return $qry->result_array();
+		/*$this->db->select(array('s.idsubtema as stema_id', 's.rel_idtema', 's.nombre_subtema as stema_name'));
 		$this->db->from('subtema as s');
 		$this->db->where('s.rel_idtema', $this->_temaID);
 		$query = $this->db->get();
-		return $query->result_array();
+		return $query->result_array();*/
+	}
+
+	public function leerDepartamento($iddep)
+	{
+		$sql = "SELECT d.iddepartamento, d.nombre_departamento "
+			."FROM departamento AS d  "
+			."WHERE d.iddepartamento = ?  ";
+		$qry = $this->db->query($sql, [$iddep,  ]);
+		return $qry->row();
 	}
 
 
