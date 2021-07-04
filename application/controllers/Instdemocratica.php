@@ -23,7 +23,11 @@ class Instdemocratica extends CI_Controller
 		$data['tema'] = $this->Cuestionario_model->leerTema();
 		$data['idformulario'] = $idformulario;
 
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vinst_democratica', $data);
+		$this->load->view('html/pie');
+
 	}
 
 }

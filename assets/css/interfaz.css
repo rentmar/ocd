@@ -1,6 +1,19 @@
+.cuest1{
+	background-color: #93C90F;
+}
+.cuest2{
+	background-color: #EF9600;
+}
+
+
+main{
+	background-color:  #d3d3d3;
+}
+
 body {
 	background-color:#d3d3d3;
 	margin:0;
+
 }
 .text-info{
 	color:#ffffff;
