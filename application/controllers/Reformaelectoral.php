@@ -63,13 +63,35 @@ class Reformaelectoral extends CI_Controller
 		header('Content-Type: application/json');
 		echo json_encode($json);
 	}
-
+	private function fecha_unix($fecha) {
+        list($anio, $mes, $dia) = explode('-', $fecha);
+        $fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+        return $fecha_unix;
+    }
 	public function preenvio()
-	{
+	{	
+		$idusr=$this->input->post('idusuario');
+		$DatosNoticia=[
+            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
+            'titular'=>$this->input->post('titular'),
+            'resumen'=>$this->input->post('resumen'),
+            'url_noticia'=>$this->input->post('url'),
+            'rel_idactor'=>$this->input->post('idactor'),
+			'rel_idmedio'=>$this->input->post('idmedio'),
+			'idtema'=>$this->input->post('idtema'),
+			'idsubtema'=>$this->input->post('subtema'),
+			'rel_idcuestionario'=>$this->input->post('idformulario'),
+			'otrotema'=>$this->input->post('otrotema'),
+			'otrosubtema'=>$this->input->post('otrosubtema'),
+			'rel_idusr'=>$idusr
+            ];
+		echo var_dump($DatosNoticia);
+		/*	
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_preenvio');
-		$this->load->view('html/pie');
+		//$this->load->view('cuestionarios/vreforma_preenvio');
+		$this->load->view('html/pie');*/
 
 	}
 
@@ -88,6 +110,7 @@ class Reformaelectoral extends CI_Controller
 		$this->load->view('html/pie');
 	}
 
+
 	public function editarNoticia($idnoticia)
 	{
 
@@ -98,5 +121,3 @@ class Reformaelectoral extends CI_Controller
 
 
 
-
-}

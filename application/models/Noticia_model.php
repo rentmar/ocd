@@ -4,18 +4,11 @@ class Noticia_model extends CI_Model{
         parent::__construct();
         $this->load->database();
     }
-    public function escribirNoticia($DatosNoticia,$idmedio)
+    public function insertarNoticia($DatosNoticia)
     {
-		$this->db->trans_start();
-			$this->db->insert('noticia',$DatosNoticia);
-			$idnoticia=$this->db->insert_id();
-			$DatosNoticiaMedio=[
-			   'rel_idnoticia'=>$idnoticia,
-			   'rel_idmedio'=>$idmedio];
-			$this->db->insert('noticia_medio',$DatosNoticiaMedio);
-		$this->db->trans_complete();
+		$this->db->insert('noticia',$DatosNoticia);
     }
-	public function insertarOtroSubTema($dtot,$ost)
+	public function insertarOtroTema($dtot,$ost)
 	{
 		$this->db->trans_start();
 			$this->db->insert('tema',$dtot);
@@ -56,6 +49,7 @@ class Noticia_model extends CI_Model{
 	{
 		
 	}
+
 	public function leerNoticiasUsuario($idusr)
 	{
 		$sql = "SELECT ent_registro_compra.idregcompra,
