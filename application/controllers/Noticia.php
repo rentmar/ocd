@@ -36,7 +36,7 @@ class Noticia extends CI_Controller
 						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
 						  'rel_idusuario'=>$idusr
 							);
-			$ost='Nodef usr '.$idusr;
+			$ost='No definido '.$idusr;
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
 		else
