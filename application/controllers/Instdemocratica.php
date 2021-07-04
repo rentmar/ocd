@@ -10,6 +10,7 @@ class Instdemocratica extends CI_Controller
 		$this->load->helper('html');
 		$this->load->helper('url');
 		$this->load->model('Cuestionario_model');
+		$this->load->model('Noticia_model');
 		$this->load->library('ion_auth');
 
 		$this->_idformulario = 2;
@@ -47,6 +48,18 @@ class Instdemocratica extends CI_Controller
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vinst_preenvio');
+		$this->load->view('html/pie');
+	}
+
+	public function editar()
+	{
+		$usuario = $this->ion_auth->user()->row();
+		//echo $usuario->id;
+		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
+		//var_dump($noticias);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vreforma_lista_noticias', $noticias);
 		$this->load->view('html/pie');
 	}
 

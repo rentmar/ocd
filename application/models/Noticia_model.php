@@ -79,5 +79,21 @@ class Noticia_model extends CI_Model{
         $qry = $this->db->query($sql);
         return $qry->result();
 	}
+
+	public function leerTodasNoticiasUsuario($idusuario, $idcuestionario)
+	{
+		$sql = "SELECT * "
+			."FROM noticia AS n  "
+			."LEFT JOIN actor ON actor.idactor = n.rel_idactor  "
+			."LEFT JOIN subtema ON subtema.idsubtema = n.rel_idsubtema  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio  "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = tema.rel_idcuestionario  "
+			."WHERE n.rel_idusuario = ? AND cuestionario.idcuestionario = ?  ";
+		$qry = $this->db->query($sql, [$idusuario, $idcuestionario,  ]);
+		return $qry->result();
+	}
+
+
     
 }
