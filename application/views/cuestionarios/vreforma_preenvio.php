@@ -20,7 +20,6 @@
 						actor:<?php echo $actor;?><br></br>
 						tema:<?php echo $tema;?><br></br>
 						subtema:<?php echo $subtema;?><br></br>
-						
 					</div>
 					<div class="card-footer" >
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Enviar</button>
