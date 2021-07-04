@@ -77,12 +77,19 @@ class Cuestionario_model extends CI_Model
 	public function leerTema()
 	{
 		$sql = "SELECT tema.idtema, tema.nombre_tema "
+			."FROM groups AS g "
+			."LEFT JOIN users_groups ON users_groups.group_id = g.id  "
+			."LEFT JOIN users ON users.id = users_groups.user_id "
+			."LEFT JOIN tema ON tema.rel_idusuario = users.id "
+			."WHERE g.id = 1 AND tema.rel_idcuestionario = ?  ";
+		$qry = $this->db->query($sql, [$this->_cuestionarioID,  ]);
+		return $qry->result_array();
+
+		/*$sql = "SELECT tema.idtema, tema.nombre_tema "
 			."FROM tema "
 			."WHERE tema.rel_idcuestionario = ?  ";
 		$qry = $this->db->query($sql, [$this->_cuestionarioID,  ]);
-		return $qry->result_array();
-		/*$query = $this->db->get('tema');
-		return $query->result_array();*/
+		return $qry->result_array();*/
 	}
 
 	public function leerSubtema()
@@ -107,7 +114,14 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql, [$iddep,  ]);
 		return $qry->row();
 	}
-	
+
+
+	public function leerCuestionario($idcuestionario)
+	{
+		$qry = $this->db->get_where('cuestionario', [ 'idcuestionario' => $idcuestionario ]);
+		return $qry->row();
+	}
+
 	public function leerTemaPorId($idt)
 	{
 		$this->db->where('idtema',$idt);
@@ -132,4 +146,5 @@ class Cuestionario_model extends CI_Model
 		$q= $this->db->get('medio_comunicacion');
 		return $q->row();
 	}
+
 }

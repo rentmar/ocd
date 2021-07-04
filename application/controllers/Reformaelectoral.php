@@ -3,13 +3,16 @@
 class Reformaelectoral extends CI_Controller
 {
 	protected $_idformulario;
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Cuestionario_model');
+		$this->load->model('Noticia_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
+		$this->load->helper('date');
 		$this->load->library('ion_auth');
 		$this->_idformulario = 1;
 		//Comprobacion de session
@@ -61,13 +64,16 @@ class Reformaelectoral extends CI_Controller
 		header('Content-Type: application/json');
 		echo json_encode($json);
 	}
-	private function fecha_unix($fecha) {
-        list($anio, $mes, $dia) = explode('-', $fecha);
-        $fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
-        return $fecha_unix;
-    }
+
+	private function fecha_unix($fecha)
+	{
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
+	}
+
 	public function preenvio()
-	{	
+	{
 		$idusr=$this->input->post('idusuario');
 		$actor=$this->Cuestionario_model->leerActorPorId($this->input->post('idactor'));
 		$medio=$this->Cuestionario_model->leerMedioPorId($this->input->post('idmedio'));
@@ -101,6 +107,7 @@ class Reformaelectoral extends CI_Controller
 			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('idtema'))->nombre_tema;
 			$DatosNoticia['subtema']=$this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'))->nombre_subtema;
 		}
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
@@ -110,10 +117,32 @@ class Reformaelectoral extends CI_Controller
 
 	public function editar()
 	{
+		$usuario = $this->ion_auth->user()->row();
+		//echo $usuario->id;
+		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
+		//var_dump($noticias);
+
+		$data['noticias'] = $noticias;
+		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_lista_noticias');
+		$this->load->view('cuestionarios/vreforma_lista_noticias', $data);
 		$this->load->view('html/pie');
 	}
 
+
+	public function editarNoticia($idnoticia)
+	{
+		$idnoticia = $idnoticia;
+		$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
+		var_dump($noticia);
+
+
+	}
+
 }
+
+
+
+

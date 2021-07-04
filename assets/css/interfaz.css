@@ -12,6 +12,11 @@ html, body{
 }
 
 
+.color-contenedores{
+	background-color:#ffffff;
+	border-radius:10px;
+}
+
 main{
 	background-color:  #d3d3d3;
 	height: 200%;

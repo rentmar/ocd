@@ -11,7 +11,7 @@
 					</div>
 					<div class="card-body">
 						<a href="<?php echo site_url('reformaelectoral');?>" class="btn btn-info" role="button">Nuevo</a>
-						<a href="<?php echo site_url('reformaelectoral/editar') ?>" class="btn btn-info" role="button">Editar</a>
+						<a href="<?php echo site_url('reformaelectoral/editar/') ?>" class="btn btn-info" role="button">Editar</a>
 					</div>
 				</div>
 			</div>
@@ -23,7 +23,7 @@
 					</div>
 					<div class="card-body">
 						<a href="<?php echo site_url('instdemocratica/');?>" class="btn btn-info" role="button">Nuevo</a>
-						<a href="<?php echo site_url('instdemocratica/editar');?>" class="btn btn-info" role="button">Editar</a>
+						<a href="<?php echo site_url('instdemocratica/editar/');?>" class="btn btn-info" role="button">Editar</a>
 					</div>
 
 				</div>
