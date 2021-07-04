@@ -6,57 +6,52 @@ class Noticia extends CI_Controller
         parent::__construct();
         $this->load->helper('html');
         $this->load->helper('form');
-	$this->load->model('Noticia_model');
+		$this->load->model('Noticia_model');
         $this->load->helper('date');        
         $this->load->library('form_validation');
+		$this->load->helper('url');
     }
     public function index()
     {
-        $this->load->view('cuestionarios/vreforma_electoral.php');
+        $this->load->view('cuestionarios/vprueba.php');
     }
-    public function IngresarDatosAtNoticia()
+    public function registrarNoticia()
     {
 		$idusr=1;
-        $idtipomedio=$this->input->post('tipo-medio');
-		echo $idtipomedio;
-        echo $idmedio=$this->input->post('medio');
-		//  otro tema 
-		$tema=$this->input->post('tema');
-		if ($tema=0)
-		{
-			$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
-						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
-						  'rel_idusuario'=>$idusr
-							);
-			$ost=$this->input->post('otrosubtema');
-			$idotrosubtema=$this->Noticia_model->insertarOtroSubTema($dtot,$ost);
-			$DatosNoticia=[
-            'fecha_registro'=>271537213517,//$this->fecha_unix(date("Y-m-d")),
-            'fecha_noticia'=>271537213517,//$this->fecha_unix($this->input->post('fecha')),
+        $DatosNoticia=[
+            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
             'titular'=>$this->input->post('titular'),
             'resumen'=>$this->input->post('resumen'),
             'url_noticia'=>$this->input->post('url'),
-            'rel_idactor'=>$this->input->post('actor_nombre'),
-			'rel_idmedio'=>$idmedio,
-			'rel_idusr'=>$idusr,
-            'rel_idsubtema'=>$idotrosubtema
+            'rel_idactor'=>$this->input->post('idactor'),
+			'rel_idmedio'=>$idmedio=$this->input->post('idmedio'),
+			'rel_idusr'=>$idusr
             ];
+		//  otro tema 
+		if ($this->input->post('idtema')==0)
+		{
+			$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
+						  'rel_idcuestionario'=>$this->input->post('idformulario'),
+						  'rel_idusuario'=>$idusr
+							);
+			$ost='Nodef usr '.$idusr;
+			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
 		else
 		{
-			$DatosNoticia=[
-            'fecha_registro'=>271537213517,//$this->fecha_unix(date("Y-m-d")),
-            'fecha_noticia'=>271537213517,//$this->fecha_unix($this->input->post('fecha')),
-            'titular'=>$this->input->post('titular'),
-            'resumen'=>$this->input->post('resumen'),
-            'url_noticia'=>$this->input->post('url'),
-            'rel_idactor'=>$this->input->post('actor_nombre'),
-			'rel_idmedio'=>$idmedio,
-			'rel_idusr'=>$idusr,
-            'rel_idsubtema'=>$this->input->post('idsubtema')
-            ];
+			$DatosNoticia['rel_idsubtema']=$this->input->post('idsubtema');
 		}
-       
+		//otro subtema
+		if ($this->input->post('idsubtema')==0)
+		{
+			$dtot= array ('nombre_tema'=>$idtema,
+						  'rel_idcuestionario'=>$this->input->post('idformulario'),
+						  'rel_idusuario'=>$idusr
+							);
+			$ost=$this->input->post('otrosubtema');
+			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
+		}
         var_dump($DatosNoticia);
 		$this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
@@ -75,7 +70,7 @@ class Noticia extends CI_Controller
         else
         {
             //echo "Validacion correcta";
-            $idnoticia=$this->Noticia_model->escribirNoticia($DatosNoticia,$idmedio);
+            $idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
        }
     }
 	public function editarNoticia($idn)
