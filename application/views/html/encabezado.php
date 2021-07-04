@@ -31,4 +31,4 @@
 	<link href="<?php echo base_url('assets/css/offcanvas.css');?>" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/interfaz.css');?>">
 </head>
-<body class="bg-light">
+<body class="bg-light" >

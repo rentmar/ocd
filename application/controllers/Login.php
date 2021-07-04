@@ -9,6 +9,7 @@ class Login extends CI_Controller{
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
+		$this->load->model('Cuestionario_model');
 
 	}
 	public function index(){
@@ -30,12 +31,19 @@ class Login extends CI_Controller{
 		if($this->ion_auth->login($this->input->post('identidad'), $this->input->post('password'), false ))
 		{
 			$log_user = $this->ion_auth->user()->row();
-			$this->session->set_userdata($log_user);
+			$departamento = $this->Cuestionario_model->leerDepartamento($log_user->rel_iddepartamento);
+			//$this->session->set_userdata('usuario', []);
+			//$this->session->set_userdata('usuario', $log_user);
+			$this->session->set_userdata('sesion_activa', true);
+			$this->session->set_userdata('iddepartamento', $departamento->iddepartamento );
+			$this->session->set_userdata('departamento', $departamento->nombre_departamento);
 			redirect('inicio/', 'refresh');
+
 		}
 		else
 		{
 			$this->session->set_flashdata('log_mensaje', $this->ion_auth->errors());
+			$this->session->sess_destroy();
 			redirect('login/', 'refresh');
 		}
 	}

@@ -1,3 +1,9 @@
+html, body{
+	background-color:  #d3d3d3;
+
+}
+
+
 .cuest1{
 	background-color: #93C90F;
 }
@@ -8,11 +14,13 @@
 
 main{
 	background-color:  #d3d3d3;
+	height: 200%;
 }
 
 body {
 	background-color:#d3d3d3;
 	margin:0;
+	height: 100%;
 
 }
 .text-info{
@@ -112,12 +120,21 @@ select {
 	border-radius:6px;
 	background-color:#d3d3d3;
 }
-.contenedor_superior{
+.contenedor_superior2{
 	background-color:#f7941d;
 	border-top-left-radius:10px;
 	border-top-right-radius: 10px;
 	padding:20px 30px 10px 30px;
 }
+.contenedor_superior1{
+	background-color:#93C90F;
+	border-top-left-radius:10px;
+	border-top-right-radius: 10px;
+	padding:20px 30px 10px 30px;
+}
+
+
+
 
 #contenedor_pequeño {
 	height:25px;
