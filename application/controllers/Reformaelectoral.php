@@ -74,28 +74,44 @@ class Reformaelectoral extends CI_Controller
 
 	public function preenvio()
 	{
-		$idusr = $this->input->post('idusuario');
-		$DatosNoticia = [
-			'fecha_registro' => $this->fecha_unix(date("Y-m-d")),
-			'fecha_noticia' => $this->fecha_unix($this->input->post('fecha')),
-			'titular' => $this->input->post('titular'),
-			'resumen' => $this->input->post('resumen'),
-			'url_noticia' => $this->input->post('url'),
-			'rel_idactor' => $this->input->post('idactor'),
-			'rel_idmedio' => $this->input->post('idmedio'),
-			'idtema' => $this->input->post('idtema'),
-			'idsubtema' => $this->input->post('subtema'),
-			'rel_idcuestionario' => $this->input->post('idformulario'),
-			'otrotema' => $this->input->post('otrotema'),
-			'otrosubtema' => $this->input->post('otrossubtema'),
-			'rel_idusr' => $idusr
-		];
-		echo var_dump($DatosNoticia);
-		/*	
+		$idusr=$this->input->post('idusuario');
+		$actor=$this->Cuestionario_model->leerActorPorId($this->input->post('idactor'));
+		$medio=$this->Cuestionario_model->leerMedioPorId($this->input->post('idmedio'));
+		$DatosNoticia=[
+            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
+            'titular'=>$this->input->post('titular'),
+            'resumen'=>$this->input->post('resumen'),
+            'url_noticia'=>$this->input->post('url'),
+            'idactor'=>$this->input->post('idactor'),
+			'idmedio'=>$this->input->post('idmedio'),
+			'idtema'=>$this->input->post('idtema'),
+			'idsubtema'=>$this->input->post('idsubtema'),
+			'idcuestionario'=>$this->input->post('idformulario'),
+			'idusr'=>$idusr,
+			'actor'=>$actor->nombre_actor,
+			'medio'=>$medio->nombre_medio
+            ];
+		if ($this->input->post('idtema')==0)
+		{
+			$DatosNoticia['tema']=$this->input->post('otrotema');
+			$DatosNoticia['subtema']="sin subtema definido";
+		}
+		elseif  ($this->input->post('idsubtema')==0)
+		{
+			$DatosNoticia['tema']='sin tema definido';
+			$DatosNoticia['subtema']=$this->input->post('otrosubtema');
+		}
+		else
+		{
+			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('idtema'))->nombre_tema;
+			$DatosNoticia['subtema']=$this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'))->nombre_subtema;
+		}
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		//$this->load->view('cuestionarios/vreforma_preenvio');
-		$this->load->view('html/pie');*/
+		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
+		$this->load->view('html/pie');
 
 	}
 

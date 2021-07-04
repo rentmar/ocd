@@ -7,7 +7,11 @@
 					<div class="card-header cuest2" >
 						Institucionalidad democrática
 					</div>
-					<div class="card-body" >Contenido</div>
+					<div class="card-body" >
+					
+					
+					
+					</div>
 					<div class="card-footer" >
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Enviar</button>
 						<a href="#" class="btn btn-info" role="button">Cancelar</a>
