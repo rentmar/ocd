@@ -17,7 +17,7 @@
 			<br>
 			<div class="contenedores">
 				<label for="tipo-medio">Tipo de Medio:</label><br>
-				<select id="tipo-medio" name="tipo-medio" class="form-control">
+				<select id="tipo-medio" name="idtipomedio" class="form-control">
 					<option value=" " >Seleccione el Tipo de Medio</option>
 					<?php foreach ($tipo_medio as $key=>$element): ?>
 						<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
@@ -27,7 +27,7 @@
 			<br>
 			<div class="contenedores">
 				<label>Escoja el medio al cual hizo el seguimiento:</label><br>
-				<select id="medio" name="medio" class="form-control" >
+				<select id="medio" name="idmedio" class="form-control" >
 					<option value=" " >Seleccione medio</option>
 				</select>
 
@@ -58,11 +58,11 @@
 				<?php $contador = 0; ?>
 				<?php foreach ($actor as $key => $element): ?>
 					<?php if($contador == 0): ?>
-						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>"  checked >
+						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>"  checked >
 						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
 						<?php $contador++; ?>
 					<?php else: ?>
-						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>" >
+						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>" >
 						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
 					<?php endif; ?>
 				<?php endforeach; ?>

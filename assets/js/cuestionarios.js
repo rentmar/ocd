@@ -68,7 +68,7 @@ $('#subtemac').click(function () {
 	{
 		//Agregar contenido a #cajatexto
 		texto += '<label>Especifique otra :</label><br>';
-		texto += '<input type="text" id="otrosubtema" name="otrosubtema" placeholder="Otro Subtema" >';
+		texto += '<input type="text" id="otrosubtema" name="otrossubtema" placeholder="Otro Subtema" >';
 		$('#otrosubtema').addClass('contenedores');
 		$('#otrosubtema').html(texto);
 	}else {

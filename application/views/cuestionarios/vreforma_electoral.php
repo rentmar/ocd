@@ -16,13 +16,13 @@
 				<input type="date" id="fecha" name="fecha" required >
 				<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
 				<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
-				<input type="hidden" id="iddepartamento" name="iddepartamento" value="" >
+
 			</div>
 			<br>
 			<div class="contenedores">
 
 				<label for="tipo-medio">Tipo de Medio:</label><br>
-				<select id="tipo-medio" name="tipo-medio" class="form-control">
+				<select id="tipo-medio" name="idtipomedio" class="form-control">
 					<option value=" " >Seleccione el Tipo de Medio</option>
 					<?php foreach ($tipo_medio as $key=>$element): ?>
 						<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
@@ -34,7 +34,7 @@
 			<div class="contenedores">
 
 				<label>Escoja el medio al cual hizo el seguimiento:</label><br>
-				<select id="medio" name="medio" class="form-control" >
+				<select id="medio" name="idmedio" class="form-control" >
 					<option value=" " >Seleccione medio</option>
 				</select>
 			</div>
@@ -61,11 +61,11 @@
 				<?php $contador = 0; ?>
 				<?php foreach ($actor as $key => $element): ?>
 					<?php if($contador == 0): ?>
-						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>"  checked >
+						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>"  checked >
 						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
 						<?php $contador++; ?>
 					<?php else: ?>
-						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="actor_nombre" value="<?php echo $element['idactor']; ?>" >
+						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>" >
 						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
 					<?php endif; ?>
 				<?php endforeach; ?>
@@ -73,7 +73,7 @@
 			<br>
 			<div class="contenedores">
 				<label>Escoge el tema al que está referido la nota :</label><br>
-				<select id="tema" name="tema" class="form-control" >
+				<select id="tema" name="idtema" class="form-control" >
 					<option value=" " >Seleccione Tema</option>
 					<?php foreach ( $tema as $key => $element): ?>
 						<option value="<?php echo $element['idtema']; ?>" >

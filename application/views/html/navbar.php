@@ -12,7 +12,7 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<div id="barra" class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+	<div id="barra" class="navbar-collapse offcanvas-collapse" >
 		<ul class="navbar-nav mr-auto">
 			<!--<li class="nav-item active">
 				<a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
