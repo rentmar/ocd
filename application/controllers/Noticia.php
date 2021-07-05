@@ -33,16 +33,13 @@ class Noticia extends CI_Controller
 						  'rel_idusuario'=>$idusr
 							);
 		//  otro tema 
-		$idtema=$this->input->post('idtema');
-		if ($idtema==0)
+		if ($this->input->post('idtema')==0)
 		{
-			
 			$ost=$this->input->post('otrosubtema');
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
 		elseif ($this->input->post('idsubtema')==0)
 		{
-			
 			$ost=$this->input->post('otrosubtema');
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
@@ -70,7 +67,7 @@ class Noticia extends CI_Controller
             $idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
 	}*/
     }
-	public function editarNoticia($idn)
+	public function editarNoticia()
 	{
 		$dts['noticia']=$this->Noticia_model->leerNoticiaPorId($idn);
 		$dts['noticia_medio']=$this->Noticia_model->leerNoticiaMedioPorId($idn);
