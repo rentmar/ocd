@@ -95,12 +95,12 @@ class Reformaelectoral extends CI_Controller
 		if ($this->input->post('idtema')==0)
 		{
 			$DatosNoticia['tema']=$this->input->post('otrotema');
-			$DatosNoticia['subtema']="sin subtema definido";
+			$DatosNoticia['subtema']=" sin subtema definido";
 		}
 		elseif  ($this->input->post('idsubtema')==0)
 		{
-			$DatosNoticia['tema']='sin tema definido';
-			$DatosNoticia['subtema']=$this->input->post('otrosubtema');
+			$DatosNoticia['tema']=' pertenece al tema '.$this->input->post('idtema');
+			$DatosNoticia['subtema']=$this->input->post('otrossubtema');
 		}
 		else
 		{

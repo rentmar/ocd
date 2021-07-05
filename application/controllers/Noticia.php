@@ -36,7 +36,16 @@ class Noticia extends CI_Controller
 						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
 						  'rel_idusuario'=>$idusr
 							);
-			$ost='No definido '.$idusr;
+			$ost=$this->input->post('otrosubtema');
+			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
+		}
+		elseif ($this->input->post('idsubtema')==0)
+		{
+			$dtot= array ('nombre_subtema'=>$this->input->post('otrotema'),
+						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
+						  'rel_idusuario'=>$idusr
+							);
+			$ost=$this->input->post('otrosubtema');
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
 		else
@@ -44,17 +53,7 @@ class Noticia extends CI_Controller
 			$DatosNoticia['rel_idsubtema']=$this->input->post('idsubtema');
 		}
 		//otro subtema
-		if ($this->input->post('idsubtema')==0)
-		{
-			$dtot= array ('nombre_tema'=>$idtema,
-						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
-						  'rel_idusuario'=>$idusr
-							);
-			$ost=$this->input->post('otrosubtema');
-			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
-		}
-		
-	   $this->Noticia_model->insertarNoticia($DatosNoticia);
+		$this->Noticia_model->insertarNoticia($DatosNoticia);
 		/*$this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         //$this->form_validation->set_rules('url', 'urlNoticia', 'required');

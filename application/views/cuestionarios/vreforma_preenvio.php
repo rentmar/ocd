@@ -8,9 +8,6 @@
 						Reforma Electoral
 					</div>
 					<div class="card-body" >
-						idtema <?php echo $idtema;?><br></br>
-						idsubtema <?php echo $idsubtema;?><br></br>
-						<br></br>
 						fecha:<?php echo $fecha_noticia;?><br></br>
 						fecha registro:<?php echo $fecha_registro;?><br></br>
 						titular:<?php echo $titular;?><br></br>
@@ -53,7 +50,8 @@
 			<div class="modal-body">
 				<form action="<?php echo base_url().'index.php/Noticia/registrarNoticia'; ?>" method="post">
 				Enviar Informacion
-				
+				<?php echo $tema;?>
+				<?php echo $subtema;?>
 				<input type="hidden" id="idcuestionario" name="idcuestionario" value="<?php echo $idcuestionario; ?>" >
 				<input type="hidden" id="fecha_registro" name="fecha_registro" value="<?php echo $fecha_registro; ?>" >
 				<input type="hidden" id="fecha_noticia" name="fecha_noticia" value="<?php echo $fecha_noticia;?>" >
@@ -64,8 +62,8 @@
 				<input type="hidden" id="idmedio" name="idmedio" value="<?php echo $idmedio;?>" >
 				<input type="hidden" id="idtema" name="idtema" value="<?php echo $idtema;?>" >
 				<input type="hidden" id="idsubtema" name="idsubtema" value="<?php echo $idsubtema;?>" >
-				<input type="hidden" id="otrotema" name="otrotema" value="<?php echo $otrotema;?>" >
-				<input type="hidden" id="otrosubtema" name="otrosubtema" value="<?php echo $otrosubtema;?>" >
+				<input type="hidden" id="otrotema" name="otrotema" value="<?php echo $tema;?>" >
+				<input type="hidden" id="otrosubtema" name="otrosubtema" value="<?php echo $subtema;?>" >
 				<input type="hidden" id="idusr" name="idusr" value="<?php echo $idusr;?>" >
 				
 				<input type="submit" id="BOTON" value="ENVIAR">
