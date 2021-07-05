@@ -15,6 +15,7 @@ class Reformaelectoral extends CI_Controller
 		$this->load->helper('date');
 		$this->load->library('ion_auth');
 		$this->_idformulario = 1;
+                $this->load->library('form_validation');
 		//Comprobacion de session
 		/*if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -107,7 +108,20 @@ class Reformaelectoral extends CI_Controller
 			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('idtema'))->nombre_tema;
 			$DatosNoticia['subtema']=$this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'))->nombre_subtema;
 		}
-
+        $this->form_validation->set_rules('titular', 'Titular', 'required');
+        $this->form_validation->set_rules('resumen', 'Resumen', 'required');
+        $this->form_validation->set_rules('url', 'urlNoticia', '');
+        if ($this->form_validation->run() == FALSE)
+        {
+            //echo "Validacion incorrecta";
+            redirect('Reformaelectoral');
+        }
+        else
+        {
+            //echo "Validacion correcta";
+            //$idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
+	}
+                
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);

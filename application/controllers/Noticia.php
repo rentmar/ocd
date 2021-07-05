@@ -52,25 +52,23 @@ class Noticia extends CI_Controller
 		}
 		//otro subtema
 		$this->Noticia_model->insertarNoticia($DatosNoticia);
-		/*$this->form_validation->set_rules('titular', 'Titular', 'required');
+                
+                
+/*        $this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
-        //$this->form_validation->set_rules('url', 'urlNoticia', 'required');
+        $this->form_validation->set_rules('url', 'urlNoticia', 'required');
         $this->form_validation->set_rules('idactor', 'relIdActor', 'required');
         $this->form_validation->set_rules('isdubtema', 'relIdSubtema', 'required');
-        $this->form_validation->set_message('required','El campo %s es obligatorio');
-        $this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
-        $this->form_validation->set_message('min_length[3]','El campo %s debe tener mas de 3 caracteres');
-        $this->form_validation->set_message('valid_email','El campo %s debe ser un email correcto');
         if ($this->form_validation->run() == FALSE)
         {
             //echo "Validacion incorrecta";
-            $this->load->view('cuestionarios/vprueba.php');
+            $this->load->view('ReformaElectoral');
         }
         else
         {
             //echo "Validacion correcta";
             $idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
-		}*/
+	}*/
     }
 	public function editarNoticia($idn)
 	{
