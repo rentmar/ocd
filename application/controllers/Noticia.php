@@ -13,7 +13,7 @@ class Noticia extends CI_Controller
     }
     public function index()
     {
-		$this->load->view('cuestionarios/vprueba.php');
+		$this->load->view('inicio/vinicio_index.php');
     }
     public function registrarNoticia()
     {
@@ -71,13 +71,25 @@ class Noticia extends CI_Controller
     }
 	public function editarNoticia()
 	{
-		$dts['noticia']=$this->Noticia_model->leerNoticiaPorId($idn);
-		$dts['noticia_medio']=$this->Noticia_model->leerNoticiaMedioPorId($idn);
-		$dts['tema']=$this->Noticia_model->leerTemaPorSubtema($dts['noticia']->rel_idsubtema);
-		echo var_dump($dts);
+		$idn=5;
+		$idtema=1;
+		$idusr=1;
+		$DatosNoticia=[
+            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>$this->fecha_unix(date("Y-m-d")),
+            'titular'=>'EL BUEN TITULAR',
+            'resumen'=>'EL BUEN RESUMEN',
+            'url_noticia'=>'LA URL NOTICIA',
+            'rel_idactor'=>1,
+			'rel_idmedio'=>1,
+			'rel_idsubtema'=>1,
+			'rel_idusuario'=>$idusr
+            ];
+		$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
 	}
     //Cambiar el formato MM/DD/YY a unix timestamp
-    private function fecha_unix($fecha) {
+    private function fecha_unix($fecha) 
+	{
         list($anio, $mes, $dia) = explode('-', $fecha);
         $fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
         return $fecha_unix;
