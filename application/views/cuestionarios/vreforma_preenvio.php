@@ -8,9 +8,6 @@
 						Reforma Electoral
 					</div>
 					<div class="card-body" >
-						idtema <?php echo $idtema;?><br></br>
-						idsubtema <?php echo $idsubtema;?><br></br>
-						<br></br>
 						fecha:<?php echo $fecha_noticia;?><br></br>
 						fecha registro:<?php echo $fecha_registro;?><br></br>
 						titular:<?php echo $titular;?><br></br>
@@ -53,7 +50,8 @@
 			<div class="modal-body">
 				<form action="<?php echo base_url().'index.php/Noticia/registrarNoticia'; ?>" method="post">
 				Enviar Informacion
-				
+				<?php echo $tema;?>
+				<?php echo $subtema;?>
 				<input type="hidden" id="idcuestionario" name="idcuestionario" value="<?php echo $idcuestionario; ?>" >
 				<input type="hidden" id="fecha_registro" name="fecha_registro" value="<?php echo $fecha_registro; ?>" >
 				<input type="hidden" id="fecha_noticia" name="fecha_noticia" value="<?php echo $fecha_noticia;?>" >
@@ -74,6 +72,7 @@
 				<?php if(isset($otrosubtema)): ?>
 				<input type="hidden" id="otrosubtema" name="otrosubtema" value="<?php echo $otrosubtema;?>" >
 				<?php endif; ?>
+
 				<input type="hidden" id="idusr" name="idusr" value="<?php echo $idusr;?>" >
 				
 				<input type="submit" id="BOTON" value="ENVIAR">
