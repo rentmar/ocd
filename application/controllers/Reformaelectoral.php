@@ -15,6 +15,7 @@ class Reformaelectoral extends CI_Controller
 		$this->load->helper('date');
 		$this->load->library('ion_auth');
 		$this->_idformulario = 1;
+                $this->load->library('form_validation');
 		//Comprobacion de session
 		/*if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -107,7 +108,20 @@ class Reformaelectoral extends CI_Controller
 			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('idtema'))->nombre_tema;
 			$DatosNoticia['subtema']=$this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'))->nombre_subtema;
 		}
-
+        $this->form_validation->set_rules('titular', 'Titular', 'required');
+        $this->form_validation->set_rules('resumen', 'Resumen', 'required');
+        $this->form_validation->set_rules('url', 'urlNoticia', '');
+        if ($this->form_validation->run() == FALSE)
+        {
+            //echo "Validacion incorrecta";
+            redirect('Reformaelectoral');
+        }
+        else
+        {
+            //echo "Validacion correcta";
+            //$idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
+	}
+                
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
@@ -118,7 +132,9 @@ class Reformaelectoral extends CI_Controller
 	public function editar()
 	{
 		$usuario = $this->ion_auth->user()->row();
+		$cantidad_noticia = $this->session->noticia_editable;
 		//echo $usuario->id;
+		//echo $cantidad_noticia;
 		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
 		//var_dump($noticias);
 
@@ -135,20 +151,52 @@ class Reformaelectoral extends CI_Controller
 	public function editarNoticia($idnoticia)
 	{
 		$idnoticia = $idnoticia;
-		$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
+		//Comprobar si la edicion esta activa
+		//$all = $this->session->userdata();
+		//var_dump($all);
+		//echo "<br>";
+		//echo "<br>";
 
-		
+		/*$ed = $this->session->edicion_activa;
+		var_dump($ed);*/
 
-		$data['noticia'] = $noticia;
+		//Comprobar si hay edicion activa
+		if(!$this->session->edicion_activa)
+		{
+			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
+			//Limpiar la variable de edicion_activa
+			$this->session->set_userdata('edicion_activa', true);
+			//Cargar la noticia a la session
+			$this->session->set_userdata('noticia', []);
+			$this->session->set_userdata('noticia', $noticia);
+			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
+		}
 
+		/*$all = $this->session->userdata();
+		var_dump($all);
+		echo "<br>";
+		echo "<br>";*/
+		$data['idnoticia'] = $idnoticia;
+		if($this->session->edicion_activa)
+		{
+			$noticia_edicion = $this->session->noticia;
+			$data['noticia'] = $noticia_edicion;
+			$data['idcuestionario'] = $this->_idformulario;
+			//var_dump($noticia_edicion);
+		}
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vnoticia_editar');
+		$this->load->view('cuestionarios/vnoticia_editar', $data);
 		$this->load->view('html/pie');
 	}
 
-}
+	//Actualizar los valores del titular, resumen y url
+	private function updateDatosGenerales()
+	{
 
+	}
+
+}
 
 
 

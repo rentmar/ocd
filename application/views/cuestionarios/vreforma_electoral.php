@@ -1,6 +1,7 @@
 
 		<main>
 			<br><br>
+                        <?php echo validation_errors(); ?>
 			<?php echo form_open('reformaelectoral/preenvio');?>
 
 			<div class="contenedores_divididos">
@@ -53,7 +54,7 @@
 			<br>
 			<div class="contenedores">
 				<label>Pegue el link donde se encuentra la noticia:</label><br>
-				<input type="text" id="url" name="url" required class="form-control" >
+				<input type="text" id="url" name="url" class="form-control" >
 			</div>
 			<br>
 			<div class="contenedores">

@@ -10,6 +10,7 @@ class Noticia extends CI_Controller
         $this->load->helper('date');        
         $this->load->library('form_validation');
 		$this->load->helper('url');
+		$this->load->library('session');
     }
     public function index()
     {
@@ -49,44 +50,80 @@ class Noticia extends CI_Controller
 		}
 		//otro subtema
 		$this->Noticia_model->insertarNoticia($DatosNoticia);
-		/*$this->form_validation->set_rules('titular', 'Titular', 'required');
+                
+                
+/*        $this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
-        //$this->form_validation->set_rules('url', 'urlNoticia', 'required');
+        $this->form_validation->set_rules('url', 'urlNoticia', 'required');
         $this->form_validation->set_rules('idactor', 'relIdActor', 'required');
         $this->form_validation->set_rules('isdubtema', 'relIdSubtema', 'required');
-        $this->form_validation->set_message('required','El campo %s es obligatorio');
-        $this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
-        $this->form_validation->set_message('min_length[3]','El campo %s debe tener mas de 3 caracteres');
-        $this->form_validation->set_message('valid_email','El campo %s debe ser un email correcto');
         if ($this->form_validation->run() == FALSE)
         {
             //echo "Validacion incorrecta";
-            $this->load->view('cuestionarios/vprueba.php');
+            $this->load->view('ReformaElectoral');
         }
         else
         {
             //echo "Validacion correcta";
             $idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
-		}*/
+	}*/
     }
 	public function editarNoticia()
 	{
-		$idn=5;
-		$idtema=1;
-		$idusr=1;
-		$DatosNoticia=[
-            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
-            'fecha_noticia'=>$this->fecha_unix(date("Y-m-d")),
-            'titular'=>'EL BUEN TITULAR',
-            'resumen'=>'EL BUEN RESUMEN',
-            'url_noticia'=>'LA URL NOTICIA',
-            'rel_idactor'=>1,
-			'rel_idmedio'=>1,
-			'rel_idsubtema'=>1,
-			'rel_idusuario'=>$idusr
-            ];
-		$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
+		$accion = $this->input->post('accion');
+		if($accion == 2)
+		{
+			//Datos generales Cuestionario 1
+			$noticia_edicion = $this->session->noticia;
+			$noticia_edicion->titular = $this->input->post('titular');
+			$noticia_edicion->resumen = $this->input->post('resumen');
+			$noticia_edicion->url_noticia = $this->input->post('url');
+			$this->session->set_userdata('noticia', []);
+			$this->session->set_userdata('noticia', $noticia_edicion);
+			if($this->input->post('idcuestionario')==1)
+			{
+				redirect('reformaelectoral/editarNoticia/'.$noticia_edicion->idnoticia);
+			}
+			elseif ($this->input->post('idcuestionario')==2)
+			{
+				redirect('instdemocratica/editarNoticia/'.$noticia_edicion->idnoticia);
+			}
+
+		}
+		elseif ($accion=='cambiar')
+		{
+			echo "Recibir todo";
+			//Extraer la noticia
+			$noticia_edicion = $this->session->noticia;
+			//Desactivar la edicion
+			$this->session->set_userdata('edicion_activa', false);
+			//Limpiar la variable de session
+			$this->session->set_userdata('noticia', []);
+			//Array resultado
+			//Rutina de insercion aqui
+			$idn= $noticia_edicion->idnoticia;
+			$idusr=1;
+			$DatosNoticia=[
+				'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+				'fecha_noticia'=>$noticia_edicion->fecha_noticia,
+				'titular'=> $noticia_edicion->titular,
+				'resumen'=> $noticia_edicion->resumen,
+				'url_noticia'=> $noticia_edicion->url_noticia,
+				'rel_idactor'=>$noticia_edicion->idactor,
+				'rel_idmedio'=> $noticia_edicion->idmedio,
+				'rel_idsubtema'=> $noticia_edicion->idsubtema,
+				'rel_idusuario'=>$idusr
+				];
+			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
+		}
+
+		/*$dts['noticia']=$this->Noticia_model->leerNoticiaPorId($idn);
+		$dts['noticia_medio']=$this->Noticia_model->leerNoticiaMedioPorId($idn);
+		$dts['tema']=$this->Noticia_model->leerTemaPorSubtema($dts['noticia']->rel_idsubtema);
+		echo var_dump($dts);*/
 	}
+
+
     //Cambiar el formato MM/DD/YY a unix timestamp
     private function fecha_unix($fecha) 
 	{
