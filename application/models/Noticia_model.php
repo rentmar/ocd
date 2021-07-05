@@ -70,6 +70,8 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN actor ON actor.idactor = n.rel_idactor "
 			."LEFT JOIN subtema ON subtema.idsubtema = n.rel_idsubtema "
 			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio "
 			."WHERE n.idnoticia = ?  ";
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
 		return $qry->row();

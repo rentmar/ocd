@@ -16,7 +16,6 @@
 							<th>Fecha de la noticia</th>
 							<th>Titular</th>
 							<th>Medio</th>
-							<th>Cuestionario</th>
 							<th>Accion</th>
 						</tr>
 					</thead>
@@ -28,7 +27,6 @@
 							<td><?php echo mdate('%m-%d-%Y', $n->fecha_noticia); ?></td>
 							<td><?php echo $n->titular; ?></td>
 							<td><?php echo $n->nombre_medio; ?></td>
-							<td><?php echo $n->nombre_cuestionario; ?></td>
 							<td>
 								<a href="<?php echo site_url('reformaelectoral/editarNoticia/'.$n->idnoticia) ?>">
 									Editar
