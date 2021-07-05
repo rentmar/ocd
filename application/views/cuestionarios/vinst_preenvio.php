@@ -8,19 +8,52 @@
 						Institucionalidad democrática
 					</div>
 					<div class="card-body" >
-						fecha:<?php echo $fecha_noticia;?><br></br>
-						fecha registro:<?php echo $fecha_registro;?><br></br>
-						titular:<?php echo $titular;?><br></br>
-						resumen:<?php echo $resumen;?><br></br>
-						url:<?php echo $url_noticia;?><br></br>
-						medio:<?php echo $medio;?><br></br>
-						actor:<?php echo $actor;?><br></br>
-						tema:<?php echo $tema;?><br></br>
-						subtema:<?php echo $subtema;?><br></br>
+						<div class="list-group">
+							<a href="#" class="list-group-item disabled">
+								Fecha Registro:
+								<?php echo ' '.$fecha_registro; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Fecha:
+								<?php echo ' '.$fecha_noticia; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Titular:
+								<?php echo ' '.$titular; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Resumen:
+								<?php echo ' '.$resumen; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								URL:
+								<?php echo ' '.$url_noticia; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Medio:
+								<?php echo ' '.$medio; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Actor:
+								<?php echo ' '.$actor; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Tema:
+								<?php echo ' '.$tema; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Subtema:
+								<?php
+								echo ' '.$subtema;
+								?>
+							</a>
+						</div>
+
 					</div>
 					<div class="card-footer" >
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Enviar</button>
-						<a href="#" class="btn btn-info" role="button">Cancelar</a>
+						<a href="<?php echo site_url('inicio') ?>" class="btn btn-danger" role="button">Cancelar</a>
+
 					</div>
 
 				</div>
@@ -49,7 +82,9 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<form action="<?php echo base_url().'index.php/Noticia/registrarNoticia'; ?>" method="post">
-				Enviar Informacion
+					<p>
+						Registrar la noticia?
+					</p>
 				<input type="hidden" id="idcuestionario" name="idcuestionario" value="<?php echo $idcuestionario; ?>" >
 				<input type="hidden" id="fecha_registro" name="fecha_registro" value="<?php echo $fecha_registro; ?>" >
 				<input type="hidden" id="fecha_noticia" name="fecha_noticia" value="<?php echo $fecha_noticia;?>" >
@@ -63,15 +98,17 @@
 				<input type="hidden" id="otrotema" name="otrotema" value="<?php echo $tema;?>" >
 				<input type="hidden" id="otrosubtema" name="otrosubtema" value="<?php echo $subtema;?>" >
 				<input type="hidden" id="idusr" name="idusr" value="<?php echo $idusr;?>" >
-				<input type="submit" id="BOTON" value="Si">
-				</form>
+
 			</div>
 
 			<!-- Modal footer -->
 			<div class="modal-footer">
 				<!-- Al metodo de insercion -->
-				<a href="#" class="btn btn-info" role="button">No</a>
+				<button type="submit" class="btn btn-primary">Si</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+
 			</div>
+			<?php echo form_close(); ?>
 
 		</div>
 	</div>

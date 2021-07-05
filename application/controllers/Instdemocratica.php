@@ -9,9 +9,11 @@ class Instdemocratica extends CI_Controller
 		$this->load->helper('form');
 		$this->load->helper('html');
 		$this->load->helper('url');
+		$this->load->helper('date');
 		$this->load->model('Cuestionario_model');
 		$this->load->model('Noticia_model');
 		$this->load->library('ion_auth');
+
 
 		$this->_idformulario = 2;
 		//Comprobacion de session
@@ -105,6 +107,54 @@ class Instdemocratica extends CI_Controller
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_lista_noticias', $data);
+		$this->load->view('html/pie');
+	}
+
+	public function editarNoticia($idnoticia)
+	{
+		$idnoticia = $idnoticia;
+		//Comprobar si la edicion esta activa
+		//$all = $this->session->userdata();
+		//var_dump($all);
+		//echo "<br>";
+		//echo "<br>";
+
+		/*$ed = $this->session->edicion_activa;
+		var_dump($ed);*/
+
+		//Comprobar si hay edicion activa
+		if(!$this->session->edicion_activa)
+		{
+			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
+			//Limpiar la variable de edicion_activa
+			$this->session->set_userdata('edicion_activa', true);
+			$this->session->set_userdata('edicion_cuestionario', $this->_idformulario);
+			//Cargar la noticia a la session
+			$this->session->set_userdata('noticia', []);
+			$this->session->set_userdata('noticia', $noticia);
+			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
+		}
+
+		/*$all = $this->session->userdata();
+		var_dump($all);
+		echo "<br>";
+		echo "<br>";*/
+		$data['idnoticia'] = $idnoticia;
+		if($this->session->edicion_activa)
+		{
+			$noticia_edicion = $this->session->noticia;
+			$data['noticia'] = $noticia_edicion;
+			$data['idcuestionario'] = $this->_idformulario;
+			$data['actor'] = $this->Cuestionario_model->leerActor();
+			$data['tipo_medio'] = $this->Cuestionario_model->leerTodosTiposMedio();
+			$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+			$tema = $this->Cuestionario_model->leerTema();
+			$data['tema']=$tema;
+
+		}
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vnoticia_editar', $data);
 		$this->load->view('html/pie');
 	}
 

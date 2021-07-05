@@ -166,6 +166,7 @@ class Reformaelectoral extends CI_Controller
 			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
 			//Limpiar la variable de edicion_activa
 			$this->session->set_userdata('edicion_activa', true);
+			$this->session->set_userdata('edicion_cuestionario', $this->_idformulario);
 			//Cargar la noticia a la session
 			$this->session->set_userdata('noticia', []);
 			$this->session->set_userdata('noticia', $noticia);

@@ -52,6 +52,8 @@ class Noticia extends CI_Controller
 		}
 		//otro subtema
 		$this->Noticia_model->insertarNoticia($DatosNoticia);
+
+		redirect('inicio/');
                 
                 
 /*        $this->form_validation->set_rules('titular', 'Titular', 'required');
@@ -213,8 +215,7 @@ class Noticia extends CI_Controller
 				'url_noticia'=> $noticia_edicion->url_noticia,
 				'rel_idactor'=>$noticia_edicion->idactor,
 				'rel_idmedio'=> $noticia_edicion->idmedio,
-				'rel_idsubtema'=> $noticia_edicion->idsubtema,
-				'rel_idusuario'=>$idusr
+				'rel_idsubtema'=> $noticia_edicion->idsubtema
 				];
 			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
 		}
