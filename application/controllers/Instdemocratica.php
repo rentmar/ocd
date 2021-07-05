@@ -42,13 +42,55 @@ class Instdemocratica extends CI_Controller
 		$this->load->view('html/pie');
 
 	}
+	
+	private function fecha_unix($fecha)
+	{
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
+	}
 
 	public function preenvio()
 	{
+		$idusr=$this->input->post('idusuario');
+		$actor=$this->Cuestionario_model->leerActorPorId($this->input->post('idactor'));
+		$medio=$this->Cuestionario_model->leerMedioPorId($this->input->post('idmedio'));
+		$DatosNoticia=[
+            'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+            'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
+            'titular'=>$this->input->post('titular'),
+            'resumen'=>$this->input->post('resumen'),
+            'url_noticia'=>$this->input->post('url'),
+            'idactor'=>$this->input->post('idactor'),
+			'idmedio'=>$this->input->post('idmedio'),
+			'idtema'=>$this->input->post('tema'),
+			'idsubtema'=>$this->input->post('idsubtema'),
+			'idcuestionario'=>$this->input->post('idformulario'),
+			'idusr'=>$idusr,
+			'actor'=>$actor->nombre_actor,
+			'medio'=>$medio->nombre_medio
+            ];
+		if ($this->input->post('tema')==0)
+		{
+			$DatosNoticia['tema']=$this->input->post('otrotema');
+			$DatosNoticia['subtema']="Subtema no definido";
+		}
+		elseif  ($this->input->post('idsubtema')==0)
+		{
+			$DatosNoticia['tema']='Pertenece al tema '.$this->input->post('idtema');
+			$DatosNoticia['subtema']=$this->input->post('otrossubtema');
+		}
+		else
+		{
+			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('tema'))->nombre_tema;
+			$DatosNoticia['subtema']=$this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'))->nombre_subtema;
+		}
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vinst_preenvio');
+		$this->load->view('cuestionarios/vinst_preenvio',$DatosNoticia);
 		$this->load->view('html/pie');
+
 	}
 
 	public function editar()

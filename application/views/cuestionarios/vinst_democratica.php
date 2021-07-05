@@ -1,5 +1,6 @@
 		<main>
 			<br><br>
+			<?php echo form_open('instdemocratica/preenvio');?>
 			<div class="contenedores_divididos">
 				<div class="contenedor_superior2" id="contenedor_pequeño">
 				</div>

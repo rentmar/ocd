@@ -16,7 +16,7 @@ class Noticia extends CI_Controller
     }
     public function index()
     {
-		$this->load->view('cuestionarios/vprueba.php');
+		$this->load->view('inicio/vinicio_index.php');
     }
     public function registrarNoticia()
     {
@@ -202,30 +202,34 @@ class Noticia extends CI_Controller
 			//Limpiar la variable de session
 			$this->session->set_userdata('noticia', []);
 			//Array resultado
-			$datos_noticia = [
-				'idnoticia' => $noticia_edicion->idnoticia,
-				'fecha_noticia' => $noticia_edicion->fecha_noticia,
-				'titular' => $noticia_edicion->titular,
-				'resumen' => $noticia_edicion->resumen,
-				'url_noticia' => $noticia_edicion->url_noticia,
-				'rel_idactor' => $noticia_edicion->idactor,
-				'rel_idsubtema' => $noticia_edicion->idsubtema,
-				'rel_idmedio' => $noticia_edicion->idmedio,
-				];
-
-			var_dump($datos_noticia);
-
 			//Rutina de insercion aqui
+			$idn= $noticia_edicion->idnoticia;
+			$idusr=1;
+			$DatosNoticia=[
+				'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
+				'fecha_noticia'=>$noticia_edicion->fecha_noticia,
+				'titular'=> $noticia_edicion->titular,
+				'resumen'=> $noticia_edicion->resumen,
+				'url_noticia'=> $noticia_edicion->url_noticia,
+				'rel_idactor'=>$noticia_edicion->idactor,
+				'rel_idmedio'=> $noticia_edicion->idmedio,
+				'rel_idsubtema'=> $noticia_edicion->idsubtema,
+				'rel_idusuario'=>$idusr
+				];
+			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
 		}
+
 		/*$dts['noticia']=$this->Noticia_model->leerNoticiaPorId($idn);
 		$dts['noticia_medio']=$this->Noticia_model->leerNoticiaMedioPorId($idn);
 		$dts['tema']=$this->Noticia_model->leerTemaPorSubtema($dts['noticia']->rel_idsubtema);
 		echo var_dump($dts);*/
+		redirect('inicio/');
 	}
 
 
     //Cambiar el formato MM/DD/YY a unix timestamp
-    private function fecha_unix($fecha) {
+    private function fecha_unix($fecha) 
+	{
         list($anio, $mes, $dia) = explode('-', $fecha);
         $fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
         return $fecha_unix;
