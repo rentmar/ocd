@@ -182,7 +182,12 @@ class Reformaelectoral extends CI_Controller
 			$noticia_edicion = $this->session->noticia;
 			$data['noticia'] = $noticia_edicion;
 			$data['idcuestionario'] = $this->_idformulario;
-			//var_dump($noticia_edicion);
+			$data['actor'] = $this->Cuestionario_model->leerActor();
+			$data['tipo_medio'] = $this->Cuestionario_model->leerTodosTiposMedio();
+			$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+			$tema = $this->Cuestionario_model->leerTema();
+			$data['tema']=$tema;
+
 		}
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
