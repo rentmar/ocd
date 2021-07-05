@@ -62,10 +62,18 @@
 				<input type="hidden" id="url_noticia" name="url_noticia" value="<?php echo $url_noticia;?>" >
 				<input type="hidden" id="idactor" name="idactor" value="<?php echo $idactor;?>" >
 				<input type="hidden" id="idmedio" name="idmedio" value="<?php echo $idmedio;?>" >
+				<?php if(isset($idtema)): ?>
 				<input type="hidden" id="idtema" name="idtema" value="<?php echo $idtema;?>" >
+				<?php endif; ?>
+				<?php if(isset($idsubtema)): ?>
 				<input type="hidden" id="idsubtema" name="idsubtema" value="<?php echo $idsubtema;?>" >
+				<?php endif; ?>
+				<?php if(isset($otrotema)): ?>
 				<input type="hidden" id="otrotema" name="otrotema" value="<?php echo $otrotema;?>" >
+				<?php endif; ?>
+				<?php if(isset($otrosubtema)): ?>
 				<input type="hidden" id="otrosubtema" name="otrosubtema" value="<?php echo $otrosubtema;?>" >
+				<?php endif; ?>
 				<input type="hidden" id="idusr" name="idusr" value="<?php echo $idusr;?>" >
 				
 				<input type="submit" id="BOTON" value="ENVIAR">

@@ -88,9 +88,13 @@ class Noticia_model extends CI_Model{
 		return $qry->result();
 	}
 
+	//Extrae una noticia por su identificador
 	public function leerNoticiaID($idnoticia){
 		$sql = "SELECT * "
 			."FROM noticia AS n  "
+			."LEFT JOIN actor ON actor.idactor = n.rel_idactor "
+			."LEFT JOIN subtema ON subtema.idsubtema = n.rel_idsubtema "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
 			."WHERE n.idnoticia = ?  ";
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
 		return $qry->row();
