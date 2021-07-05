@@ -26,14 +26,31 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">Switch account</a>
 			</li>-->
-			<!--<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Usuarios
+				</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<a class="dropdown-item" href="#">Something else here</a>
+					<a class="dropdown-item" href="#">Administradores</a>
+					<a class="dropdown-item" href="#">Docentes</a>
+					<a class="dropdown-item" href="#">Monitores</a>
 				</div>
-			</li>-->
+			</li>
+
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Datos Formulario
+				</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown02">
+					<a class="dropdown-item" href="#">Formularios</a>
+					<a class="dropdown-item" href="#">Actores</a>
+					<a class="dropdown-item" href="#">Departamentos</a>
+					<a class="dropdown-item" href="#">Tipo de Medio</a>
+					<a class="dropdown-item" href="#">Medio de Comunicacion</a>
+					<a class="dropdown-item" href="#">Tema</a>
+					<a class="dropdown-item" href="#">Subtema</a>
+				</div>
+			</li>
 
 		</ul>
 		<ul class="navbar-nav ml-auto">
@@ -43,7 +60,9 @@
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown02">
 <!--					<a class="dropdown-item" href="#">Action</a>-->
-<!--					<a class="dropdown-item" href="#">Another action</a>-->
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/editarUsrLog/'); ?>">
+						Usuario
+					</a>
 					<a class="dropdown-item" href="<?php echo site_url('login/logout');?>">
 						Salir
 					</a>
@@ -62,14 +81,13 @@
 <div class="nav-scroller ">
 	<nav class="nav nav-underline">
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
-		<?php if(isset($idformulario)): ?>
-		<a class="nav-link" href="#">Informacion</a>
-<!--		<a class="nav-link" href="#">Suggestions</a>-->
+		<a class="nav-link" href="#">Base de Datos</a>
+		<a class="nav-link" href="#">Analisis</a>
+		<a class="nav-link" href="#">Seguimiento-Monitores</a>
 <!--		<a class="nav-link" href="#">Link</a>-->
 <!--		<a class="nav-link" href="#">Link</a>-->
 <!--		<a class="nav-link" href="#">Link</a>-->
 <!--		<a class="nav-link" href="#">Link</a>-->
-<!--		<a class="nav-link" href="#">Link</a>-->
-		<?php endif; ?>
+
 	</nav>
 </div>
