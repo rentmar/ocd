@@ -28,23 +28,21 @@ class Noticia extends CI_Controller
 			'rel_idmedio'=>$this->input->post('idmedio'),
 			'rel_idusuario'=>$idusr
             ];
+		$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
+						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
+						  'rel_idusuario'=>$idusr
+							);
 		//  otro tema 
 		$idtema=$this->input->post('idtema');
 		if ($idtema==0)
 		{
-			$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
-						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
-						  'rel_idusuario'=>$idusr
-							);
+			
 			$ost=$this->input->post('otrosubtema');
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
 		elseif ($this->input->post('idsubtema')==0)
 		{
-			$dtot= array ('nombre_subtema'=>$this->input->post('otrotema'),
-						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
-						  'rel_idusuario'=>$idusr
-							);
+			
 			$ost=$this->input->post('otrosubtema');
 			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
 		}
