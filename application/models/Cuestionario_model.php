@@ -115,6 +115,16 @@ class Cuestionario_model extends CI_Model
 		return $qry->row();
 	}
 
+	public function leerTipoMedio($iddep)
+	{
+		$sql = "SELECT * "
+			."FROM tipo_medio AS t   "
+			."WHERE t.idtipomedio = ?  ";
+		$qry = $this->db->query($sql, [$iddep,  ]);
+		return $qry->row();
+	}
+
+
 
 	public function leerCuestionario($idcuestionario)
 	{
