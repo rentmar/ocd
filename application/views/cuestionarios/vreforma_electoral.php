@@ -85,11 +85,11 @@
 				</select>
 			</div>
 			<br>
-			<div id="otrotemac"  >
+			<div id="otrotemac"   >
 
 			</div>
 			<br><br>
-			<div id="subtemac" >
+			<div id="subtemac" class="text-body" >
 
 			</div>
 			<br>
