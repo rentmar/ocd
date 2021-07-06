@@ -42,13 +42,13 @@
 					Datos Formulario
 				</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown02">
-					<a class="dropdown-item" href="#">Formularios</a>
-					<a class="dropdown-item" href="#">Actores</a>
-					<a class="dropdown-item" href="#">Departamentos</a>
-					<a class="dropdown-item" href="#">Tipo de Medio</a>
-					<a class="dropdown-item" href="#">Medio de Comunicacion</a>
-					<a class="dropdown-item" href="#">Tema</a>
-					<a class="dropdown-item" href="#">Subtema</a>
+					<a class="dropdown-item" href="<?php echo site_url('formulario/');?>">Formularios</a>
+					<a class="dropdown-item" href="<?php echo site_url('actor/');?>">Actores</a>
+					<a class="dropdown-item" href="<?php echo site_url('departamento/');?>">Departamentos</a>
+					<a class="dropdown-item" href="<?php echo site_url('tipomedio/');?>">Tipo de Medio</a>
+					<a class="dropdown-item" href="<?php echo site_url('mediocomunicacion/');?>">Medio de Comunicacion</a>
+					<a class="dropdown-item" href="<?php echo site_url('tema/');?>">Tema</a>
+					<a class="dropdown-item" href="<?php echo site_url('subtema/');?>">Subtema</a>
 				</div>
 			</li>
 

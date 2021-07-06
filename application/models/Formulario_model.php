@@ -1,6 +1,6 @@
 <?php
 
-class Actor_model extends CI_Model
+class Formulario_model extends CI_Model
 {
 	public function __construct()
 	{
@@ -25,9 +25,9 @@ class Actor_model extends CI_Model
 		$qry = $this->db->query($sql, [$idactor,  ]);
 		return $qry->row();
 	}
-	public function leerActores()
+	public function leerCuestionarios()
 	{
-		$q=$this->db->get('actor');
+		$q=$this->db->get('cuestionario');
 		return $q->result();
 	}
 	

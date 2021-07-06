@@ -12,13 +12,15 @@
 		<table>
 			<tr id="datos">	
 			<th>Nro</th>	
-			<th>Actor</th>
+			<th>SubTema</th>
+			<th>Tema</th>
 			<th>Accion</th>
 			</tr>
-			<?php foreach ($actores as $a) {?>
+			<?php foreach ($subtemas as $st) {?>
 			<tr>
-				<td><?php echo $a->idactor;?></td>
-				<td><?php echo $a->nombre_actor;?></td>
+				<td><?php echo $st->idsubtema;?></td>
+				<td><?php echo $st->nombre_subtema;?></td>
+				<td><?php echo $st->rel_idtema;?></td>
 				<td><a href="#">editar</a></td>
 			</tr>
 			<?php } ?>

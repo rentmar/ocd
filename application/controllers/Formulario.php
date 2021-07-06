@@ -1,6 +1,6 @@
 <?php
 
-class Actor extends CI_Controller{
+class Formulario extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
@@ -9,14 +9,15 @@ class Actor extends CI_Controller{
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
-		$this->load->model('Actor_model');
+		$this->load->model('Formulario_model');
 
 	}
 	public function index()
-	{	$dts['actores']=$this->Actor_model->leerActores();
+	{	
+		$dt['formularios']=$this->Formulario_model->leerCuestionarios();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-	    $this->load->view('actor/vactor',$dts);
+	    $this->load->view('formularios/vcuestionario',$dt);
 		$this->load->view('html/pie');
 	}
 	public function agregarActor()

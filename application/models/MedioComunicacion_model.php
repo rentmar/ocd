@@ -50,4 +50,9 @@ class MedioComunicacion_model extends CI_Model
 		$q = $this->db->get('medio_departamento');
 		return $q->result();
 	}
+	public function leerMedioComunicacion()
+	{
+		$q = $this->db->get('medio_comunicacion');
+		return $q->result();
+	}
 }

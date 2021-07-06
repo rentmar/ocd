@@ -24,6 +24,42 @@
 				font-size: 3.5rem;
 			}
 		}
+		#table{
+			overflow-x:auto;
+		}
+		table {
+			border-collapse: separate;
+			width: 100%;
+		}
+		#datos {
+			background-color:#702082;
+			color: white;
+		}
+		th, td {
+			text-align: left;
+			padding: 10px;
+			border-radius:4px;
+		}
+		tr:nth-child(odd) {
+			background-color: #f1f1f1;
+		}
+		tr:nth-child(even) {
+			background-color: #ffffff;
+		}
+		#caja_boton{
+			display:flex;
+			justify-content:left;
+			margin-top:10px;
+		}
+		.BOTON{
+			background-color:#474142;
+			color:#ffffff;
+			font-family: Verdana;
+			width:110px;
+			border-radius:10px;
+			padding:10px 25px 10px 10px;
+			margin-right:10px;
+		}
 	</style>
 
 
