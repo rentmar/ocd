@@ -1,6 +1,6 @@
 <?php
 
-class MedioComunicacion extends CI_Controller{
+class TipoMedio extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
@@ -14,18 +14,10 @@ class MedioComunicacion extends CI_Controller{
 	}
 	public function index()
 	{
-		/*$dt['departamentos']=$this->MedioComunicacion_model->leerDepartamento();
-		$dt['tipos']=$this->MedioComunicacion_model->leerTipoMedio();
-		//$this->load->view('medio_comunicacion/vagregarmedio',$dt);
-		// para el edit
-		$idm=12;
-		$dt['medio']=$this->MedioComunicacion_model->leerMedioPorId($idm);
-		$dt['medio_departamento']=$this->MedioComunicacion_model->leerDepartamentoMedioId($idm);
-		//echo var_dump($dt['medio_departamento']);*/
-		$dt['medios']=$this->MedioComunicacion_model->leerMedioComunicacion();
+		$dt['tipomedio']=$this->MedioComunicacion_model->leerTipoMedio();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-	    $this->load->view('medio_comunicacion/vmediocomunicacion',$dt);
+	    $this->load->view('medio_comunicacion/vtipomedio',$dt);
 		$this->load->view('html/pie');
 	}
 	public function agregarMedioComunicacion()

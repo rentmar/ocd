@@ -1,11 +1,14 @@
+
 		<main>
 			<br><br>
-			<?php echo form_open('instdemocratica/preenvio');?>
+            <?php echo validation_errors(); ?>
+			<?php echo form_open('formulario3/preenvio');?>
+
 			<div class="contenedores_divididos">
-				<div class="contenedor_superior2" id="contenedor_pequeño">
+				<div class="contenedor_superior3" id="contenedor_pequeño">
 				</div>
 				<div class="contenedor_inferior">
-					<h3 id="Título_formulario"> Institucionalidad democrática </h3>
+					<h3 id="Título_formulario">Formulario3 </h3>
 				</div>
 			</div>
 			<br>
@@ -14,9 +17,11 @@
 				<input type="date" id="fecha" name="fecha" required >
 				<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
 				<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
+
 			</div>
 			<br>
 			<div class="contenedores">
+
 				<label for="tipo-medio">Tipo de Medio:</label><br>
 				<select id="tipo-medio" name="idtipomedio" class="form-control">
 					<option value=" " >Seleccione el Tipo de Medio</option>
@@ -24,18 +29,18 @@
 						<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
 					<?php endforeach; ?>
 				</select>
+
 			</div>
 			<br>
 			<div class="contenedores">
+
 				<label>Escoja el medio al cual hizo el seguimiento:</label><br>
 				<select id="medio" name="idmedio" class="form-control" >
 					<option value=" " >Seleccione medio</option>
 				</select>
-
 			</div>
 			<br>
 			<div class="contenedores">
-
 				<label for="titular">Escriba el titular de la noticia:</label><br>
 				<input type="text" id="titular" name="titular" required class="form-control" >
 
@@ -45,13 +50,11 @@
 				<label>Escriba un pequeño párrafo que resuma la noticia:</label><br>
 				<input type="text" id="resumen" name="resumen" required  class="form-control" >
 
-
 			</div>
 			<br>
 			<div class="contenedores">
 				<label>Pegue el link donde se encuentra la noticia:</label><br>
-				<input type="text" id="url" name="url" required class="form-control" >
-
+				<input type="text" id="url" name="url" class="form-control" >
 			</div>
 			<br>
 			<div class="contenedores">
@@ -67,13 +70,11 @@
 						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
 					<?php endif; ?>
 				<?php endforeach; ?>
-
 			</div>
 			<br>
 			<div class="contenedores">
-
 				<label>Escoge el tema al que está referido la nota :</label><br>
-				<select id="tema" name="tema" class="form-control" >
+				<select id="tema" name="idtema" class="form-control" >
 					<option value=" " >Seleccione Tema</option>
 					<?php foreach ( $tema as $key => $element): ?>
 						<option value="<?php echo $element['idtema']; ?>" >
@@ -82,7 +83,6 @@
 					<?php endforeach; ?>
 					<option value="0" >Otro</option>
 				</select>
-
 			</div>
 			<br>
 			<div id="otrotemac"  >
@@ -96,11 +96,9 @@
 			<div id="otrosubtema">
 
 			</div>
-
 			<br><br>
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
 			</div>
-	</div>
 	</main>
 

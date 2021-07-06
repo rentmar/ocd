@@ -12,13 +12,15 @@
 		<table>
 			<tr id="datos">	
 			<th>Nro</th>	
-			<th>Actor</th>
+			<th>Medio Comunicacion</th>
+			<th>Tipo Medio</th>
 			<th>Accion</th>
 			</tr>
-			<?php foreach ($actores as $a) {?>
+			<?php foreach ($medios as $m) {?>
 			<tr>
-				<td><?php echo $a->idactor;?></td>
-				<td><?php echo $a->nombre_actor;?></td>
+				<td><?php echo $m->idmedio;?></td>
+				<td><?php echo $m->nombre_medio;?></td>
+				<td><?php echo $m->rel_idtipomedio;?></td>
 				<td><a href="#">editar</a></td>
 			</tr>
 			<?php } ?>

@@ -73,6 +73,21 @@ class Usuarios extends CI_Controller
 		$this->load->view('usuarios/vformulario_usuario_editar', $data);
 	}
 
+	public function editarUsrLog()
+	{
+		//echo "editar usuario logeado";
+		//echo "<br><br>";
+		$usuario = $this->ion_auth->user()->row();
+		$data['usuario'] = $usuario;
+		$data['grupos'] = $this->ion_auth->groups()->result();
+		$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('usuarios/vformulario_monitor_editar', $data);
+		$this->load->view('html/pie');
+	}
+
 	public function procesarEditar()
 	{
 		$idusuario = $this->input->post('idusuario');

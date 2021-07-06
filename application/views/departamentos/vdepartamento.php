@@ -1,5 +1,4 @@
-<html>
-	
+<html>	
 	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 		<div id="caja_boton">
 			<div id="contenedor-submit">
@@ -12,13 +11,13 @@
 		<table>
 			<tr id="datos">	
 			<th>Nro</th>	
-			<th>Actor</th>
+			<th>Departamento</th>
 			<th>Accion</th>
 			</tr>
-			<?php foreach ($actores as $a) {?>
+			<?php foreach ($departamentos as $d) {?>
 			<tr>
-				<td><?php echo $a->idactor;?></td>
-				<td><?php echo $a->nombre_actor;?></td>
+				<td><?php echo $d->iddepartamento;?></td>
+				<td><?php echo $d->nombre_departamento;?></td>
 				<td><a href="#">editar</a></td>
 			</tr>
 			<?php } ?>

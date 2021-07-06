@@ -15,7 +15,8 @@
 								<label for="fecha" >
 									Fecha:
 								</label>
-								<input type="date" id="fecha" name="fecha" >
+								<input type="date" id="fecha" name="fecha" class="form-control"
+									   value="<?php echo mdate('%Y-%m-%d', $noticia->fecha_noticia);?>" >
 								<input type="hidden" id="idnoticia" name="idnoticia"
 									   value="<?php echo $noticia->idnoticia; ?>">
 								<input type="hidden" id="idcuestionario" name="idcuestionario"
@@ -23,7 +24,9 @@
 
 							</div>
 							<div class="col-2">
-								<a href="#" class="btn btn-primary" >Cambiar</a>
+								<button type="submit" name="accion" value="1" class="btn btn-primary">
+									Cambiar Fecha
+								</button>
 							</div>
 						</div>
 
@@ -46,7 +49,7 @@
 							<div class="col-2">
 								<div class="form-group">
 									<button type="submit" name="accion" value="2" class="btn btn-primary">
-										Cambiar
+										Cambiar Datos
 									</button>
 								</div>
 							</div>
@@ -93,7 +96,9 @@
 							</div>
 							<div class="col-2">
 								<div class="form-group">
-									<a href=""class="btn btn-primary" >Cambiar</a>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#actormodal">
+										Cambiar Actor
+									</button>
 								</div>
 							</div>
 						</div>
@@ -118,7 +123,9 @@
 							</div>
 							<div class="col-2">
 								<div class="form-group">
-									<a href=""class="btn btn-primary" >Cambiar</a>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mediomodal"">
+										Cambiar Medio
+									</button>
 								</div>
 							</div>
 						</div>
@@ -156,7 +163,9 @@
 							</div>
 							<div class="col-2">
 								<div class="form-group">
-									<a href=""class="btn btn-primary" >Cambiar</a>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temamodal"">
+											Cambiar Tema
+									</button>
 								</div>
 							</div>
 						</div>
@@ -184,8 +193,9 @@
 						<button type="submit" name="accion" value="cambiar" class="btn btn-primary">
 							Confirmar Edicion
 						</button>
-
-						<a href="#" class="btn btn-info" role="button">Cancelar Edicion</a>
+						<button type="submit" name="accion" value="cancelar" class="btn btn-danger">
+							Cancelar edicion
+						</button>
 					</div>
 				</div>
 				<br>
@@ -197,3 +207,171 @@
 	</div>
 
 </main>
+
+
+<!-- Modal Edicion de Actor -->
+<div class="modal" id="actormodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h1 class="modal-title">Editar Actor</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('noticia/editarNoticia');?>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="hidden" id="idnoticia" name="idnoticia"
+						   value="<?php echo $noticia->idnoticia; ?>">
+					<input type="hidden" id="idcuestionario" name="idcuestionario"
+						   value="<?php echo $idcuestionario; ?>" >
+				</div>
+				<div class="form-group">
+					<label>Escoja el tipo de actor que es la fuente de la noticia:</label><br>
+					<?php $contador = 0; ?>
+					<?php foreach ($actor as $key => $element): ?>
+						<?php if($contador == 0): ?>
+							<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>"  checked >
+							<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
+							<?php $contador++; ?>
+						<?php else: ?>
+							<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>" >
+							<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
+
+
+
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="3" class="btn btn-primary" >Editar</button>
+			<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Modal Edicion de Medio -->
+<div class="modal" id="mediomodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h1 class="modal-title">Editar Medio</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('noticia/editarNoticia');?>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="hidden" id="idnoticia" name="idnoticia"
+						   value="<?php echo $noticia->idnoticia; ?>">
+					<input type="hidden" id="idcuestionario" name="idcuestionario"
+						   value="<?php echo $idcuestionario; ?>" >
+				</div>
+				<div class="form-group">
+					<label for="tipo-medio">Tipo de Medio:</label><br>
+					<select id="tipo-medio" name="idtipomedio" class="form-control">
+						<option value=" " >Seleccione el Tipo de Medio</option>
+						<?php foreach ($tipo_medio as $key=>$element): ?>
+							<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Escoja el medio al cual hizo el seguimiento:</label><br>
+					<select id="medio" name="idmedio" class="form-control" >
+						<option value=" " >Seleccione medio</option>
+					</select>
+				</div>
+
+
+
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="4" class="btn btn-primary" >Editar</button>
+				<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- Modal Edicion de Tema/Subtema -->
+<div class="modal" id="temamodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h1 class="modal-title">Editar Tema</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('noticia/editarNoticia');?>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="hidden" id="idnoticia" name="idnoticia"
+						   value="<?php echo $noticia->idnoticia; ?>">
+					<input type="hidden" id="idcuestionario" name="idcuestionario"
+						   value="<?php echo $idcuestionario; ?>" >
+				</div>
+				<div class="form-group">
+					<label>Escoge el tema al que está referido la nota :</label><br>
+					<select id="tema" name="idtema" class="form-control" >
+						<option value=" " >Seleccione Tema</option>
+						<?php foreach ( $tema as $key => $element): ?>
+							<option value="<?php echo $element['idtema']; ?>" >
+								<?php echo $element['nombre_tema']; ?>
+							</option>
+						<?php endforeach; ?>
+						<option value="0" >Otro</option>
+					</select>
+				</div>
+				<div class="form-group ">
+					<div id="otrotemac"  >
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div id="subtemac" >
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div id="otrosubtema">
+
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="5" class="btn btn-primary" >Editar</button>
+				<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

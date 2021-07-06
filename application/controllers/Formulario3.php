@@ -1,9 +1,8 @@
 <?php
 
-class Reformaelectoral extends CI_Controller
+class Formulario3 extends CI_Controller
 {
 	protected $_idformulario;
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -14,13 +13,14 @@ class Reformaelectoral extends CI_Controller
 		$this->load->helper('form');
 		$this->load->helper('date');
 		$this->load->library('ion_auth');
-		$this->_idformulario = 1;
-                $this->load->library('form_validation');
+		$this->_idformulario = 3;
+        $this->load->library('form_validation');
 		//Comprobacion de session
 		/*if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
 			redirect('/');
 		}*/
+
 	}
 
 	public function index()
@@ -42,30 +42,11 @@ class Reformaelectoral extends CI_Controller
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_electoral', $data);
+		$this->load->view('cuestionarios/vformulario3', $data);
 		$this->load->view('html/pie');
-	}
 
-	public function getMedios()
-	{
-		$json = array();
-		$this->Cuestionario_model->setTipoMedioID($this->input->post('tipomedioID'));
-		$this->Cuestionario_model->setDepartamentoID($this->session->iddepartamento);
-		$json = $this->Cuestionario_model->leerMedios();
-		header('Content-Type: application/json');
-		echo json_encode($json);
 	}
-
-	public function getsubtema()
-	{
-		$json = array();
-		$this->Cuestionario_model->setTemaID($this->input->post('temaID'));
-		$this->Cuestionario_model->setDepartamentoID(1);
-		$json = $this->Cuestionario_model->leerSubtema();
-		header('Content-Type: application/json');
-		echo json_encode($json);
-	}
-
+	
 	private function fecha_unix($fecha)
 	{
 		list($anio, $mes, $dia) = explode('-', $fecha);
@@ -86,14 +67,14 @@ class Reformaelectoral extends CI_Controller
             'url_noticia'=>$this->input->post('url'),
             'idactor'=>$this->input->post('idactor'),
 			'idmedio'=>$this->input->post('idmedio'),
-			'idtema'=>$this->input->post('idtema'),
+			'idtema'=>$this->input->post('tema'),
 			'idsubtema'=>$this->input->post('idsubtema'),
 			'idcuestionario'=>$this->input->post('idformulario'),
 			'idusr'=>$idusr,
 			'actor'=>$actor->nombre_actor,
 			'medio'=>$medio->nombre_medio
             ];
-		if ($this->input->post('idtema')==0)
+		if ($this->input->post('tema')==0)
 		{
 			$DatosNoticia['tema']=$this->input->post('otrotema');
 			$DatosNoticia['subtema']="Subtema no definido";
@@ -105,37 +86,23 @@ class Reformaelectoral extends CI_Controller
 		}
 		else
 		{
-			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('idtema'))->nombre_tema;
+			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('tema'))->nombre_tema;
 			$DatosNoticia['subtema']=$this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'))->nombre_subtema;
 		}
-        $this->form_validation->set_rules('titular', 'Titular', 'required');
-        $this->form_validation->set_rules('resumen', 'Resumen', 'required');
-        $this->form_validation->set_rules('url', 'urlNoticia', 'valid_url');
-        if ($this->form_validation->run() == FALSE)
-        {
-            //echo "Validacion incorrecta";
-            redirect('Reformaelectoral');
-        }
-        else
-        {
-            //echo "Validacion correcta";
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
+		$this->load->view('cuestionarios/vformulario3_preenvio',$DatosNoticia);
 		$this->load->view('html/pie');
-	}
 
 	}
 
 	public function editar()
 	{
 		$usuario = $this->ion_auth->user()->row();
-		$cantidad_noticia = $this->session->noticia_editable;
 		//echo $usuario->id;
-		//echo $cantidad_noticia;
 		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
 		//var_dump($noticias);
-
 		$data['noticias'] = $noticias;
 		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 
@@ -145,19 +112,9 @@ class Reformaelectoral extends CI_Controller
 		$this->load->view('html/pie');
 	}
 
-
 	public function editarNoticia($idnoticia)
 	{
 		$idnoticia = $idnoticia;
-		//Comprobar si la edicion esta activa
-		//$all = $this->session->userdata();
-		//var_dump($all);
-		//echo "<br>";
-		//echo "<br>";
-
-		/*$ed = $this->session->edicion_activa;
-		var_dump($ed);*/
-
 		//Comprobar si hay edicion activa
 		if(!$this->session->edicion_activa)
 		{
@@ -171,10 +128,6 @@ class Reformaelectoral extends CI_Controller
 			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
 		}
 
-		/*$all = $this->session->userdata();
-		var_dump($all);
-		echo "<br>";
-		echo "<br>";*/
 		$data['idnoticia'] = $idnoticia;
 		if($this->session->edicion_activa)
 		{
@@ -194,13 +147,4 @@ class Reformaelectoral extends CI_Controller
 		$this->load->view('html/pie');
 	}
 
-	//Actualizar los valores del titular, resumen y url
-	private function updateDatosGenerales()
-	{
-
-	}
-
 }
-
-
-

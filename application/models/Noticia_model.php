@@ -76,7 +76,11 @@ class Noticia_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
 		return $qry->row();
 	}
-
+	public function modificarNoticia($idn,$dts)
+	{
+		$this->db->where('idnoticia', $idn);
+		$this->db->update('noticia', $dts);
+	}
 
     
 }
