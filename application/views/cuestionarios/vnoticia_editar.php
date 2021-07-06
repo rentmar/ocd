@@ -1,4 +1,5 @@
 <main role="main" >
+	<?php $otrotema=1; ?>
 	<br><br>
 	<div class="container">
 		<div class="row">
@@ -148,7 +149,7 @@
 								<hr>
 							</div>
 						</div>
-
+						
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
@@ -163,9 +164,16 @@
 							</div>
 							<div class="col-2">
 								<div class="form-group">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temamodal"">
+									<?php if ($otrotema!=0) { ?>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temamodal">
 											Cambiar Tema
 									</button>
+									<?php } ?>
+									<?php if ($otrotema==0) { ?>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#otrotemamodal">
+											Cambiar Otro Tema
+									</button>
+									<?php } ?>
 								</div>
 							</div>
 						</div>
@@ -182,12 +190,7 @@
 								</div>
 							</div>
 						</div>
-
-
-
-
-
-
+				
 					</div>
 					<div class="card-footer">
 						<button type="submit" name="accion" value="cambiar" class="btn btn-primary">
@@ -370,6 +373,71 @@
 	</div>
 </div>
 
+<!-- Modal Edicion de OTRO Tema/Subtema -->
+<div class="modal" id="otrotemamodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h1 class="modal-title">Editar Tema</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('noticia/editarNoticia');?>
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="hidden" id="idnoticia" name="idnoticia"
+						   value="<?php echo $noticia->idnoticia; ?>">
+					<input type="hidden" id="idcuestionario" name="idcuestionario"
+						   value="<?php echo $idcuestionario; ?>" >
+				</div>
+				<div class="form-group">
+					<label>Ingresa el tema al que está referido la nota :</label><br>
+					<?php if ($otrotema!=0) {?>
+					<select id="tema" name="idtema" class="form-control" >
+						<option value=" " >Seleccione Tema</option>
+						<?php foreach ( $tema as $key => $element): ?>
+							<option value="<?php echo $element['idtema']; ?>" >
+								<?php echo $element['nombre_tema']; ?>
+							</option>
+						<?php endforeach; ?>
+						<option value="0" >Otro</option>
+					</select>
+					<?php } ?>
+					<?php if ($otrotema==0) { ?>
+						<input type="text" id="idotrotema" name="idotrotema"
+						   value="<?php echo $noticia->nombre_tema; ?>" >
+					<?php } ?>
+				</div>
+				<div class="form-group ">
+					<div id="otrotemac"  >
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div id="subtemac" >
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div id="otrosubtema">
+
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="5" class="btn btn-primary" >Editar</button>
+				<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 
 
 

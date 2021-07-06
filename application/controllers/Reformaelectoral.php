@@ -151,15 +151,6 @@ class Reformaelectoral extends CI_Controller
 	public function editarNoticia($idnoticia)
 	{
 		$idnoticia = $idnoticia;
-		//Comprobar si la edicion esta activa
-		//$all = $this->session->userdata();
-		//var_dump($all);
-		//echo "<br>";
-		//echo "<br>";
-
-		/*$ed = $this->session->edicion_activa;
-		var_dump($ed);*/
-
 		//Comprobar si hay edicion activa
 		if(!$this->session->edicion_activa)
 		{
@@ -173,10 +164,6 @@ class Reformaelectoral extends CI_Controller
 			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
 		}
 
-		/*$all = $this->session->userdata();
-		var_dump($all);
-		echo "<br>";
-		echo "<br>";*/
 		$data['idnoticia'] = $idnoticia;
 		if($this->session->edicion_activa)
 		{
