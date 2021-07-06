@@ -110,7 +110,7 @@ class Reformaelectoral extends CI_Controller
 		}
         $this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
-        $this->form_validation->set_rules('url', 'urlNoticia', '');
+        $this->form_validation->set_rules('url', 'urlNoticia', 'valid_url');
         if ($this->form_validation->run() == FALSE)
         {
             //echo "Validacion incorrecta";
@@ -119,13 +119,11 @@ class Reformaelectoral extends CI_Controller
         else
         {
             //echo "Validacion correcta";
-            //$idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
-	}
-                
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
 		$this->load->view('html/pie');
+	}
 
 	}
 
