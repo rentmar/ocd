@@ -128,7 +128,7 @@ function getSubtemaList(temaID, temaTitulo, color) {
 
 			var contador = 0;
 			var tarjeta = '';
-			tarjeta += '<div class="card-header  text-white" style="background-color:#'+ color +';" >';
+			tarjeta += '<div  class="card-header  " style="background-color:#'+ color +';" >';
 			tarjeta += '<h4>' + temaTitulo + '<h4>';
 			tarjeta += '</div>';
 			tarjeta += '<div class="card-body">';
