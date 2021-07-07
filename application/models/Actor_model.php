@@ -25,6 +25,12 @@ class Actor_model extends CI_Model
 		$qry = $this->db->query($sql, [$idactor,  ]);
 		return $qry->row();
 	}
+	public function leerActorPorId($ida)
+	{
+		$this->db->where('idactor',$ida);
+		$q=$this->db->get('actor');
+		return $q->row();
+	}
 	public function leerActores()
 	{
 		$q=$this->db->get('actor');

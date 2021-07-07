@@ -7,33 +7,29 @@ class Tema_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
-	public function agregarActor($dt)
+	public function agregarTema($dt)
 	{
-		$this->db->insert('actor', $dt);
+		$this->db->insert('tema', $dt);
 	}
-	public function modificarActor($dt,$ida)
+	public function leerCustionarios()
 	{
-		$this->db->where('idactor',$ida);
-		$this->db->update('actor',$dt);
+		$q=$this->db->get('cuestionario');
+		return $q->result();
 	}
-
-	public function leerActorID($idactor)
+	public function modificarTema($dt,$idt)
 	{
-		$sql = "SELECT * "
-			."FROM actor AS a  "
-			."WHERE a.idactor = ?  ";
-		$qry = $this->db->query($sql, [$idactor,  ]);
-		return $qry->row();
+		$this->db->where('idtema',$idt);
+		$this->db->update('tema',$dt);
 	}
 	public function leerTemas()
 	{
 		$q=$this->db->get('tema');
 		return $q->result();
 	}
-	public function leerSubTemas()
+	public function leerTemaPorId($idt)
 	{
-		$q=$this->db->get('subtema');
-		return $q->result();
+		$this->db->where('idtema',$idt);
+		$q=$this->db->get ('tema');
+		return $q->row();
 	}
-	
 }

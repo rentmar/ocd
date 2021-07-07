@@ -20,17 +20,33 @@ class Formulario extends CI_Controller{
 	    $this->load->view('formularios/vcuestionario',$dt);
 		$this->load->view('html/pie');
 	}
-	public function agregarActor()
+	public function crearFormulario()
 	{
-		$dts = array(
-				'nombre_actor' => $this->input->post('nombre_actor'));
-		$this->Actor_model->agregarActor($dts);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('formularios/vcrearcuestionario');
+		$this->load->view('html/pie');
 	}
-	public function modificarActor($ida)
+	public function editarFormulario($idf)
+	{
+		$dt['editform']=$this->Formulario_model->leerCuestionarioPorId($idf);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('formularios/veditarcuestionario',$dt);
+		$this->load->view('html/pie');
+	}
+	public function agregarFormulario()
 	{
 		$dts = array(
-				'nombre_actor' => $this->input->post('nombre_actor'));
-		$this->Actor_model->modificarActor($dts,$ida);
-		
+				'nombre_cuestionario'=>$this->input->post('nombre_cuestionario'));
+		$this->Formulario_model->agregarFormulario($dts);
+		redirect ('formulario');
+	}
+	public function modificarFormulario($idf)
+	{
+		$dts = array(
+				'nombre_cuestionario'=>$this->input->post('nombre_cuestionario'));
+		$this->Formulario_model->modificarFormulario($dts,$idf);
+		redirect ('formulario');
 	}
 }

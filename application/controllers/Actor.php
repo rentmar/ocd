@@ -13,10 +13,26 @@ class Actor extends CI_Controller{
 
 	}
 	public function index()
-	{	$dts['actores']=$this->Actor_model->leerActores();
+	{	
+		$dts['actores']=$this->Actor_model->leerActores();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('actor/vactor',$dts);
+		$this->load->view('html/pie');
+	}
+	public function crearActor()
+	{
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('actor/vcrearactor');
+		$this->load->view('html/pie');
+	}
+	public function editarActor($ida)
+	{
+		$dt['a']=$this->Actor_model->leerActorPorId($ida);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('actor/veditaractor',$dt);
 		$this->load->view('html/pie');
 	}
 	public function agregarActor()
@@ -24,12 +40,14 @@ class Actor extends CI_Controller{
 		$dts = array(
 				'nombre_actor' => $this->input->post('nombre_actor'));
 		$this->Actor_model->agregarActor($dts);
+		redirect ('actor');
 	}
 	public function modificarActor($ida)
 	{
 		$dts = array(
 				'nombre_actor' => $this->input->post('nombre_actor'));
 		$this->Actor_model->modificarActor($dts,$ida);
+		redirect ('actor');
 		
 	}
 }

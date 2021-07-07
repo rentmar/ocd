@@ -14,15 +14,14 @@ class Departamento_model extends CI_Model
 		$qry = $this->db->get('departamento');
 		return $qry->result();
 	}
-
+	
 	//Leer un solo departamento
 	public function leerDepartamento($identificador)
 	{
-		$idcliente = $identificador;
 		$sql = "SELECT * "
 			."FROM departamento "
 			."WHERE iddepartamento = ?";
-		$qry = $this->db->query($sql, $idcliente);
+		$qry = $this->db->query($sql,$identificador);
 		return $qry->row();
 	}
 

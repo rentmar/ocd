@@ -148,7 +148,7 @@
 								<hr>
 							</div>
 						</div>
-
+						
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
@@ -163,7 +163,7 @@
 							</div>
 							<div class="col-2">
 								<div class="form-group">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temamodal"">
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temamodal">
 											Cambiar Tema
 									</button>
 								</div>
@@ -182,12 +182,7 @@
 								</div>
 							</div>
 						</div>
-
-
-
-
-
-
+				
 					</div>
 					<div class="card-footer">
 						<button type="submit" name="accion" value="cambiar" class="btn btn-primary">
