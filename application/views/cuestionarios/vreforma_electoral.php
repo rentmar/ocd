@@ -36,7 +36,7 @@
 
 				<label>Escoja el medio al cual hizo el seguimiento:</label><br>
 				<select id="medio" name="idmedio" class="form-control" required >
-					<option value="" >Seleccione medio</option>
+					<option value="" selected >Seleccione medio</option>
 				</select>
 			</div>
 			<br>
@@ -96,7 +96,7 @@
 			<div id="otrosubtema">
 
 			</div>
-			<br><br>
+			<br>
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
 			</div>

@@ -97,7 +97,7 @@ function getMediosList(tipomedioID) {
 		},
 		success: function (json) {
 			var options = '';
-			options +='<option value=" ">Seleccionar Medio</option>';
+			options +='<option value="" selected >Seleccionar Medio</option>';
 			for (var i = 0; i < json.length; i++) {
 				options += '<option value="' + json[i].medio_id + '">' + json[i].medio_name + '</option>';
 			}

@@ -50,7 +50,7 @@
 			<br>
 			<div class="contenedores">
 				<label>Pegue el link donde se encuentra la noticia:</label><br>
-				<input type="text" id="url" name="url" required class="form-control" >
+				<input type="text" id="url" name="url"  class="form-control" >
 
 			</div>
 			<br>
@@ -97,7 +97,7 @@
 
 			</div>
 
-			<br><br>
+			<br>
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
 			</div>

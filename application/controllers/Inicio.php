@@ -12,20 +12,18 @@ class Inicio extends CI_Controller
 
 	public function index()
 	{
-		/*$usuario = $this->ion_auth->user()->row();
-		echo $usuario->first_name;
-		echo "<br>";
-		echo $usuario->last_name;
-		echo "<br>";
-		echo $usuario->email;
-		echo "<br>";
-		echo $usuario->carnet_identidad;
-		echo "<br>";
-		echo $usuario->geolocalizacion ;
-		echo "<br>";
-		echo $usuario->rel_iddepartamento;
-		echo "<br>";
-		echo $usuario->direccion;*/
+
+		if($this->session->edicion_activa)
+		{
+
+			//Limpiar la variable de edicion_activa
+			$this->session->set_userdata('edicion_activa', false);
+			$this->session->set_userdata('edicion_cuestionario', 0);
+			//Cargar la noticia y la noticia original a la session
+			$this->session->set_userdata('noticia', []);
+			$this->session->set_userdata('noticia_original', []);
+			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
+		}
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
