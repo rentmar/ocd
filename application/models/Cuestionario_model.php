@@ -91,7 +91,24 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql, [$this->_cuestionarioID,  ]);
 		return $qry->result_array();*/
 	}
-
+	public function leerGrupoPorIdTema($idt)
+	{
+		$sql = "SELECT users_groups.group_id "
+			."FROM tema "
+			."LEFT JOIN users_groups ON tema.rel_idusuario = users_groups.user_id  "
+			."WHERE tema.idtema =".$idt;
+		$qry = $this->db->query($sql);
+		return $qry->row();
+	}
+	public function leerGrupoPorSubTema($idt)
+	{
+		$sql = "SELECT users_groups.group_id "
+			."FROM tema "
+			."LEFT JOIN users_groups ON tema.rel_idusuario = user_groups.user_id  "
+			."WHERE tema.idtema =".$idt;
+		$qry = $this->db->query($sql);
+		return $qry;
+	}
 	public function leerSubtema()
 	{
 		$sql = "SELECT s.idsubtema AS stema_id, s.nombre_subtema AS stema_name "

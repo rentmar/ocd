@@ -190,13 +190,17 @@ class Noticia extends CI_Controller
 			redirect('inicio/');
 		}
 		elseif ($accion=='cambiar')
-		{
-			//echo "Recibir todo";
+		{	
+			
+			//var_dump($this->Cuestionario_model->leerGrupoPorIdTema(1));
+			//echo $noticia_edicion->rel_idtema;
 			//Extraer la noticia
 			$noticia_edicion = $this->session->noticia;
 			//Extraer la noticia original
 			$noticia_original = $this->session->noticia_original;
-
+			
+			//var_dump($this->Cuestionario_model->leerGrupoPorIdTema($noticia_original->rel_idtema));
+			//var_dump($this->Cuestionario_model->leerGrupoPorIdTema($noticia_edicion->rel_idtema));
 			//Desactivar la edicion
 			$this->session->set_userdata('edicion_activa', false);
 			//Limpiar la variable de session
@@ -205,7 +209,7 @@ class Noticia extends CI_Controller
 			//Array resultado
 			//Rutina de insercion aqui
 			$idn= $noticia_edicion->idnoticia;
-			$idusr=1;
+			//$idusr=1;
 			$DatosNoticia=[
 				'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
 				'fecha_noticia'=>$noticia_edicion->fecha_noticia,
@@ -216,7 +220,7 @@ class Noticia extends CI_Controller
 				'rel_idmedio'=> $noticia_edicion->idmedio,
 				'rel_idsubtema'=> $noticia_edicion->idsubtema
 				];
-			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
+			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);*/
 		}
 
 		//redirect('inicio/');
