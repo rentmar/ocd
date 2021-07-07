@@ -223,7 +223,7 @@ class Noticia extends CI_Controller
 			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
 		}
 
-		//redirect('inicio/');
+		redirect('inicio/');
 	}
 
 

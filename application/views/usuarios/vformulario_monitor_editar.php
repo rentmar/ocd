@@ -48,7 +48,7 @@
 								   value="<?php echo $usuario->geolocalizacion; ?>"  >
 						</div>
 						<div class="form-group">
-							<button type="submit" class="boton btn btn-primary">Editar</button>
+							<button type="submit" class="boton btn btn-primary">Modificar</button>
 							<a href="<?php echo site_url('/')?>" class="btn btn-danger botonsimple " role="button" >Cancelar</a>
 						</div>
 						<?php echo form_close(); ?>

@@ -148,9 +148,11 @@ class Usuarios extends CI_Controller
 			];
 
 			if($this->ion_auth->update($idusuario, $datos_extra)){
-				echo "Usuario modificado";
+				//echo "Usuario modificado";
+				redirect('inicio');
 			}else{
-				echo "Usuario no modificado";
+				//echo "Usuario no modificado";
+				redirect('inicio');
 			}
 		}
 
@@ -196,6 +198,7 @@ class Usuarios extends CI_Controller
 				redirect('inicio');
 			}else{
 				//echo "Contraseña no modificado";
+				redirect('inicio');
 			}
 		}
 
