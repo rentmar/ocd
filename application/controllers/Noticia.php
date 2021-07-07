@@ -220,10 +220,10 @@ class Noticia extends CI_Controller
 				'rel_idmedio'=> $noticia_edicion->idmedio,
 				'rel_idsubtema'=> $noticia_edicion->idsubtema
 				];
-			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);*/
+			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
 		}
 
-		//redirect('inicio/');
+		redirect('inicio/');
 	}
 
 
