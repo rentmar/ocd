@@ -63,6 +63,9 @@
 					<a class="dropdown-item" href="<?php echo site_url('usuarios/editarUsrLog/'); ?>">
 						Usuario
 					</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/editarPwd/'); ?>">
+						Contraseña
+					</a>
 					<a class="dropdown-item" href="<?php echo site_url('login/logout');?>">
 						Salir
 					</a>

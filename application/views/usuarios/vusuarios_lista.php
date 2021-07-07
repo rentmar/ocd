@@ -1,4 +1,3 @@
-
 <main role="main">
 	<br>
 	<div class="container">
@@ -10,6 +9,13 @@
 						<a href=""><input type="submit" class="BOTON" value="CANCELAR"></a>
 					</div>
 				</div>
+			</div>
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
+				<h4></h4>
+			</div>
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
+				<table>
+				</table>
 			</div>
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<table>
@@ -27,11 +33,7 @@
 					<?php } ?>
 				</table>
 			</div>
-
-
 		</div>
 	</div>
-
-
+	<br>
 </main>
-
