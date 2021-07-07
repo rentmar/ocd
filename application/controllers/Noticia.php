@@ -192,6 +192,7 @@ class Noticia extends CI_Controller
 			$this->session->set_userdata('edicion_activa', false);
 			//Limpiar la variable de session
 			$this->session->set_userdata('noticia', []);
+			$this->session->set_userdata('noticia_original', []);
 			redirect('inicio/');
 		}
 		elseif ($accion=='cambiar')
@@ -199,10 +200,14 @@ class Noticia extends CI_Controller
 			echo "Recibir todo";
 			//Extraer la noticia
 			$noticia_edicion = $this->session->noticia;
+			//Extraer la noticia original
+			$noticia_original = $this->session->noticia_original;
+
 			//Desactivar la edicion
 			$this->session->set_userdata('edicion_activa', false);
 			//Limpiar la variable de session
 			$this->session->set_userdata('noticia', []);
+			$this->session->set_userdata('noticia_original', []);
 			//Array resultado
 			//Rutina de insercion aqui
 			$idn= $noticia_edicion->idnoticia;

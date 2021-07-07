@@ -202,6 +202,23 @@ class Usuarios extends CI_Controller
 	}
 
 
+	public function administradores()
+	{
+		$data['titulo'] = 'Administradores';
+
+		//Solo administradores
+		$usuarios = $this->ion_auth->users('admin')->result();
+		var_dump($usuarios);
+
+
+		/*$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('usuarios/vusuarios_lista', $data);
+		$this->load->view('html/pie');*/
+
+	}
+
+
 
 
 

@@ -31,9 +31,9 @@
 					Usuarios
 				</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					<a class="dropdown-item" href="#">Administradores</a>
-					<a class="dropdown-item" href="#">Docentes</a>
-					<a class="dropdown-item" href="#">Monitores</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/administradores');?>">Administradores</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/docentes');?>">Docentes</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/monitores');?>">Monitores</a>
 				</div>
 			</li>
 

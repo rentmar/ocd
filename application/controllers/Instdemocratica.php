@@ -126,13 +126,17 @@ class Instdemocratica extends CI_Controller
 		if(!$this->session->edicion_activa)
 		{
 			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
+			//Noticia original
+			$noticia_original = $this->Noticia_model->leerNoticiaID($idnoticia);
 			//Limpiar la variable de edicion_activa
 			$this->session->set_userdata('edicion_activa', true);
 			$this->session->set_userdata('edicion_cuestionario', $this->_idformulario);
 			//Cargar la noticia a la session
-			$this->session->set_userdata('noticia', []);
+			$this->session->set_userdata('noticia', [ ]);
 			$this->session->set_userdata('noticia', $noticia);
 			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
+			$this->session->set_userdata('noticia_original', [ ]);
+			$this->session->set_userdata('noticia_original', $noticia_original);
 		}
 
 		/*$all = $this->session->userdata();
@@ -142,7 +146,14 @@ class Instdemocratica extends CI_Controller
 		$data['idnoticia'] = $idnoticia;
 		if($this->session->edicion_activa)
 		{
+			//Noticia editada
 			$noticia_edicion = $this->session->noticia;
+			//Noticia original
+			$noticia_original = $this->session->noticia_original;
+
+			var_dump($noticia_edicion);
+
+
 			$data['noticia'] = $noticia_edicion;
 			$data['idcuestionario'] = $this->_idformulario;
 			$data['actor'] = $this->Cuestionario_model->leerActor();

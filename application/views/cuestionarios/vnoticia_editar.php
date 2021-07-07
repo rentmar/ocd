@@ -281,8 +281,8 @@
 				</div>
 				<div class="form-group">
 					<label for="tipo-medio">Tipo de Medio:</label><br>
-					<select id="tipo-medio" name="idtipomedio" class="form-control">
-						<option value=" " >Seleccione el Tipo de Medio</option>
+					<select id="tipo-medio" name="idtipomedio" class="form-control" required>
+						<option value="" >Seleccione el Tipo de Medio</option>
 						<?php foreach ($tipo_medio as $key=>$element): ?>
 							<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
 						<?php endforeach; ?>
@@ -290,8 +290,8 @@
 				</div>
 				<div class="form-group">
 					<label>Escoja el medio al cual hizo el seguimiento:</label><br>
-					<select id="medio" name="idmedio" class="form-control" >
-						<option value=" " >Seleccione medio</option>
+					<select id="medio" name="idmedio" class="form-control" required >
+						<option value="" >Seleccione medio</option>
 					</select>
 				</div>
 
@@ -331,8 +331,8 @@
 				</div>
 				<div class="form-group">
 					<label>Escoge el tema al que está referido la nota :</label><br>
-					<select id="tema" name="idtema" class="form-control" >
-						<option value=" " >Seleccione Tema</option>
+					<select id="tema" name="idtema" class="form-control" required >
+						<option value="" >Seleccione Tema</option>
 						<?php foreach ( $tema as $key => $element): ?>
 							<option value="<?php echo $element['idtema']; ?>" >
 								<?php echo $element['nombre_tema']; ?>
