@@ -9,7 +9,7 @@
 					<div class="card-header cuest1">
 						Reforma Electoral
 					</div>
-					<img class="card-img-top" src="<?php echo base_url().'assets/img/urna_electoral.png'; ?>" alt="Card image">
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/democracia.svg'; ?>" alt="Card image">
 					<div class="card-body">
 
 						<a href="<?php echo site_url('reformaelectoral');?>" class="btn btn-info" role="button" style="background-color:#93C90F;">Nuevo</a>
@@ -23,7 +23,7 @@
 					<div class="card-header cuest2 ">
 						Institucionalidad Democrática
 					</div>
-					<img class="card-img-top" src="<?php echo base_url().'assets/img/inst.png'; ?>" alt="Card image">
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/institucionalidad.svg'; ?>" alt="Card image">
 					<div class="card-body">
 						<a href="<?php echo site_url('instdemocratica/');?>" class="btn btn-info" role="button" style="background-color:#EF9600;">Nuevo</a>
 						<a href="<?php echo site_url('instdemocratica/editar/');?>" class="btn btn-info" role="button" style="background-color:#EF9600;">Editar</a>
