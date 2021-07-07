@@ -60,6 +60,65 @@
 			padding:10px 25px 10px 10px;
 			margin-right:10px;
 		}
+		#header {
+					background:#662d91;
+					padding:1px;
+					width:100%;
+				}
+				
+				div #contenedor_vacío{
+					background-color:#7f182b;
+					color:#ffffff;
+					max-width:100%;
+					height:40px;
+					margin:0;
+				}
+				
+				div #Caja_de_orden {
+					padding-top:5px;
+					padding-bottom:50px;
+				}
+				
+				div .Caja_de_datos {
+					background-color:#ffffff;
+					margin-top:1px;
+					max-width:750px;
+					margin-left:auto;
+					margin-right:auto;
+					padding-right:40px; 
+					padding-left:20px;
+				}
+				div #Caja_de_datos{	
+					border-radius:5px;
+					margin-top:1px;
+					padding-top:40px;
+					padding-bottom:20px;
+				}
+				
+				#Título_cabecera {
+					color:#ffffff;
+				}
+				input {
+					padding:10px;
+				}
+				.form-group{
+					font-family: Verdana;
+					font-weight: Bold;
+					font-size:12px;
+				}
+				#cuadro {
+					width:100%;
+					background-color:#e6edf7;
+				}
+				#BOTON {
+					background-color:#474142;
+					color:#ffffff;
+					font-family: Verdana;
+					border-radius:10px;
+				}
+				.rojo {
+					color:#ff0000;
+				}
 	</style>
 
 

@@ -17,33 +17,36 @@ class TipoMedio extends CI_Controller{
 		$dt['tipomedio']=$this->MedioComunicacion_model->leerTipoMedio();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-	    $this->load->view('medio_comunicacion/vtipomedio',$dt);
+	    $this->load->view('tipomedio/vtipomedio',$dt);
 		$this->load->view('html/pie');
 	}
-	public function agregarMedioComunicacion()
+	public function crearTipoMedio()
 	{
-		$dtchkbox=array();
-		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
-		$dts = array(
-				'nombre_medio' => $this->input->post('nombre_medio'),
-				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
-		foreach ($departamentos as $d)
-		{
-			if ($this->input->post('d'.$d->iddepartamento) != NULL)
-			{
-				array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
-			}
-		}
-		$this->MedioComunicacion_model->agregarMedioComunicacion($dts,$dtchkbox);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('tipomedio/vcreartipomedio');
+		$this->load->view('html/pie');
 	}
-	public function modificarMedioComunicacion($idm)
+	public function editarTipoMedio($idtm)
 	{
-		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
-		echo count($departamentos);
+		$dt['tm']=$this->MedioComunicacion_model->leerTipoMedioPorId($idtm);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('tipomedio/veditartipomedio',$dt);
+		$this->load->view('html/pie');
+	}
+	public function agregarTipoMedio()
+	{
 		$dts = array(
-				'nombre_medio' => $this->input->post('nombre_medio'),
-				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
-		$iddpto=$this->input->post('rel_iddepartamento');
-		$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$iddpto,$idm);
+				'nombre_tipo' => $this->input->post('nombre_tipomedio'));
+		$this->MedioComunicacion_model->agregarTipoMedio($dts);
+		redirect ('tipomedio');
+	}
+	public function modificarTipoMedio($idtm)
+	{
+		$dts = array(
+				'nombre_tipo' => $this->input->post('nombre_tipomedio'));
+		$this->MedioComunicacion_model->modificarTipoMedio($dts,$idtm);
+		redirect ('tipomedio');
 	}
 }

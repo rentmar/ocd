@@ -9,41 +9,48 @@ class SubTema extends CI_Controller{
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
-		$this->load->model('Tema_model');
+		$this->load->model('SubTema_model');
 
 	}
 	public function index()
 	{
-		$dt['subtemas']=$this->Tema_model->leerSubTemas();
+		$dt['subtemas']=$this->SubTema_model->leerSubTemas();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-	    $this->load->view('tema/vsubtema',$dt);
+	    $this->load->view('subtema/vsubtema',$dt);
 		$this->load->view('html/pie');
 	}
-	public function agregarMedioComunicacion()
+	public function crearSubTema()
 	{
-		$dtchkbox=array();
-		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
-		$dts = array(
-				'nombre_medio' => $this->input->post('nombre_medio'),
-				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
-		foreach ($departamentos as $d)
-		{
-			if ($this->input->post('d'.$d->iddepartamento) != NULL)
-			{
-				array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
-			}
-		}
-		$this->MedioComunicacion_model->agregarMedioComunicacion($dts,$dtchkbox);
+		$dts['temas']=$this->SubTema_model->leerTemas();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('subtema/vcrearsubtema',$dts);
+		$this->load->view('html/pie');
 	}
-	public function modificarMedioComunicacion($idm)
+	public function agregarSubTema()
 	{
-		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
-		echo count($departamentos);
 		$dts = array(
-				'nombre_medio' => $this->input->post('nombre_medio'),
-				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
-		$iddpto=$this->input->post('rel_iddepartamento');
-		$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$iddpto,$idm);
+				'nombre_subtema' => $this->input->post('nombre_subtema'),
+				'rel_idtema' => $this->input->post('idtema'));
+		$this->SubTema_model->agregarSubTema($dts);
+		redirect ('subtema');
+	}
+	public function editarSubTema($idt)
+	{
+		$dt['subtema']=$this->SubTema_model->leerSubTemaPorId($idt);
+		$dt['temas']=$this->SubTema_model->leerTemas();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('subtema/veditarsubtema',$dt);
+		$this->load->view('html/pie');
+	}
+	public function modificarSubTema($idt)
+	{
+		$dts = array(
+				'nombre_subtema' => $this->input->post('nombre_subtema'),
+				'rel_idtema' => $this->input->post('idtema'));
+		$this->SubTema_model->modificarSubTema($dts,$idt);
+		redirect ('subtema');
 	}
 }

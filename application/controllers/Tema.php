@@ -20,30 +20,41 @@ class Tema extends CI_Controller{
 	    $this->load->view('tema/vtema',$dt);
 		$this->load->view('html/pie');
 	}
-	public function agregarMedioComunicacion()
+	public function crearTema()
 	{
-		$dtchkbox=array();
-		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
-		$dts = array(
-				'nombre_medio' => $this->input->post('nombre_medio'),
-				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
-		foreach ($departamentos as $d)
-		{
-			if ($this->input->post('d'.$d->iddepartamento) != NULL)
-			{
-				array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
-			}
-		}
-		$this->MedioComunicacion_model->agregarMedioComunicacion($dts,$dtchkbox);
+		$dts['cuestionarios']=$this->Tema_model->leerCustionarios();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('tema/vcreartema',$dts);
+		$this->load->view('html/pie');
 	}
-	public function modificarMedioComunicacion($idm)
+	public function agregarTema()
 	{
-		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
-		echo count($departamentos);
+		$idusr=1;
 		$dts = array(
-				'nombre_medio' => $this->input->post('nombre_medio'),
-				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
-		$iddpto=$this->input->post('rel_iddepartamento');
-		$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$iddpto,$idm);
+				'nombre_tema' => $this->input->post('nombre_tema'),
+				'rel_idcuestionario' => $this->input->post('idcuestionario'),
+				'rel_idusuario' => $idusr);
+		$this->Tema_model->agregarTema($dts);
+		redirect ('tema');
+	}
+	public function editarTema($idt)
+	{
+		$dt['tema']=$this->Tema_model->leerTemaPorId($idt);
+		$dt['cuestionarios']=$this->Tema_model->leerCustionarios();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('tema/veditartema',$dt);
+		$this->load->view('html/pie');
+	}
+	public function modificarTema($idt)
+	{
+		$idusr=1;
+		$dts = array(
+				'nombre_tema' => $this->input->post('nombre_tema'),
+				'rel_idcuestionario' => $this->input->post('idcuestionario'),
+				'rel_idusuario' => $idusr);
+		$this->Tema_model->modificarTema($dts,$idt);
+		redirect ('tema');
 	}
 }

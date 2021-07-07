@@ -161,11 +161,6 @@ class Noticia extends CI_Controller
 			$noticia_edicion = $this->session->noticia;
 			$tema_nuevo = $this->Cuestionario_model->leerTemaPorId($this->input->post('idtema'));
 			$subtema_nuevo = $this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'));
-
-			/*var_dump($tema_nuevo);
-			echo "<br><br><br><br><br>";
-			var_dump($subtema_nuevo);*/
-
 			$noticia_edicion->idtema = $tema_nuevo->idtema;
 			$noticia_edicion->nombre_tema = $tema_nuevo->nombre_tema;
 
@@ -183,7 +178,6 @@ class Noticia extends CI_Controller
 			{
 				redirect('instdemocratica/editarNoticia/'.$noticia_edicion->idnoticia);
 			}
-
 		}
 		elseif ($accion == 'cancelar')
 		{
@@ -196,7 +190,7 @@ class Noticia extends CI_Controller
 		}
 		elseif ($accion=='cambiar')
 		{
-			echo "Recibir todo";
+			//echo "Recibir todo";
 			//Extraer la noticia
 			$noticia_edicion = $this->session->noticia;
 			//Desactivar la edicion
@@ -220,11 +214,7 @@ class Noticia extends CI_Controller
 			$this->Noticia_model->modificarNoticia($idn,$DatosNoticia);
 		}
 
-		/*$dts['noticia']=$this->Noticia_model->leerNoticiaPorId($idn);
-		$dts['noticia_medio']=$this->Noticia_model->leerNoticiaMedioPorId($idn);
-		$dts['tema']=$this->Noticia_model->leerTemaPorSubtema($dts['noticia']->rel_idsubtema);
-		echo var_dump($dts);*/
-		redirect('inicio/');
+		//redirect('inicio/');
 	}
 
 

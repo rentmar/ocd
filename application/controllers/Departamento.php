@@ -1,6 +1,4 @@
 <?php
-
-
 class Departamento extends CI_Controller
 {
 	public function __construct()
@@ -25,12 +23,23 @@ class Departamento extends CI_Controller
 
 	public function crearDepartamento()
 	{
-		$this->load->view('departamentos/vformulario_departamento');
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('departamentos/vcreardepartamento');
+		$this->load->view('html/pie');
+	}
+	public function editarDepartamento($idd)
+	{
+		$dt['d']=$this->Departamento_model->leerDepartamento($idd);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('departamentos/veditardepartamento',$dt);
+		$this->load->view('html/pie');
 	}
 
-	public function procesarCrear()
+	public function agregarDepartamento()
 	{
-		$this->load->library('form_validation');
+		/*$this->load->library('form_validation');
 		$this->form_validation->set_rules('departamento', 'Departamento', 'required|is_unique[departamento.nombre_departamento]');
 		if($this->form_validation->run()==false){
 			$this->load->view('departamentos/vformulario_departamento');
@@ -42,19 +51,15 @@ class Departamento extends CI_Controller
 			}else{
 				echo "dep no crado";
 			}
-		}
+		}*/
+		$dts = array(
+				'nombre_departamento' => $this->input->post('nombre_departamento'));
+		$this->Departamento_model->crearDepartamento($dts);
+		redirect ('departamento');
 	}
-
-	public function editarDepartamento($identificador)
+	public function modificarDepartamento($idd)
 	{
-		$data['dep'] = $this->Departamento_model->leerDepartamento($identificador);
-		$this->load->view('departamentos/vformulario_departamento_edit', $data);
-
-	}
-
-	public function procesarEditar()
-	{
-		$dep = $this->capturarDatos();
+		/*$dep = $this->capturarDatos();
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('departamento', 'Departamento', 'required|is_unique[departamento.nombre_departamento]');
 		if($this->form_validation->run()==false){
@@ -68,14 +73,10 @@ class Departamento extends CI_Controller
 			}else{
 				echo "dep no modificado";
 			}
-		}
-	}
-
-	private function capturarDatos(){
-		$datos = [
-			'iddepartamento' => $this->input->post('identificador'),
-			'nombre_departamento' => $this->input->post('departamento'),
-		];
-		return $datos;
+		}*/
+		$dts = array(
+				'nombre_departamento' => $this->input->post('nombre_departamento'));
+		$this->Departamento_model->updateDepartamento($idd,$dts);
+		redirect ('departamento');
 	}
 }

@@ -7,28 +7,24 @@ class Formulario_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
-	public function agregarActor($dt)
+	public function agregarFormulario($dt)
 	{
-		$this->db->insert('actor', $dt);
+		$this->db->insert('cuestionario', $dt);
 	}
-	public function modificarActor($dt,$ida)
+	public function modificarFormulario($dt,$idf)
 	{
-		$this->db->where('idactor',$ida);
-		$this->db->update('actor',$dt);
-	}
-
-	public function leerActorID($idactor)
-	{
-		$sql = "SELECT * "
-			."FROM actor AS a  "
-			."WHERE a.idactor = ?  ";
-		$qry = $this->db->query($sql, [$idactor,  ]);
-		return $qry->row();
+		$this->db->where('idcuestionario',$idf);
+		$this->db->update('cuestionario',$dt);
 	}
 	public function leerCuestionarios()
 	{
 		$q=$this->db->get('cuestionario');
 		return $q->result();
 	}
-	
+	public function leerCuestionarioPorId($idf)
+	{
+		$this->db->where('idcuestionario',$idf);
+		$q=$this->db->get('cuestionario');
+		return $q->row();
+	}
 }

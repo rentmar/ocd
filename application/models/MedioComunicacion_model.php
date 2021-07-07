@@ -55,4 +55,19 @@ class MedioComunicacion_model extends CI_Model
 		$q = $this->db->get('medio_comunicacion');
 		return $q->result();
 	}
+	public function agregarTipoMedio($dt)
+	{
+		$this->db->insert('tipo_medio', $dt);
+	}
+	public function modificarTipoMedio($dt,$idtm)
+	{
+		$this->db->where('idtipomedio',$idtm);
+		$this->db->update('tipo_medio',$dt);
+	}
+	public function leerTipoMedioPorId($idtm)
+	{
+		$this->db->where('idtipomedio',$idtm);
+		$q=$this->db->get('tipo_medio');
+		return $q->row();
+	}
 }
