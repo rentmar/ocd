@@ -17,10 +17,10 @@ class Reformaelectoral extends CI_Controller
 		$this->_idformulario = 1;
                 $this->load->library('form_validation');
 		//Comprobacion de session
-		/*if($this->session->sesion_activa ===  null){
+		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
 			redirect('/');
-		}*/
+		}
 	}
 
 	public function index()

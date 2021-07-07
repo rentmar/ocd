@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-07-2021 a las 22:32:22
+-- Tiempo de generación: 08-07-2021 a las 00:23:09
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -60,6 +60,16 @@ CREATE TABLE `ci_sessions` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('3f53595f48eb10ce1fc705f0ec37c03d2f767072', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639353837363b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363935373636223b6c6173745f636865636b7c693a313632353639353837363b),
+('d4dbc415d44ca396338d0c4cc393b376dcdd0b68', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639353736363b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363831393935223b6c6173745f636865636b7c693a313632353639353736363b),
+('dff8cf1d4a77863b1e237f45c82ab7d3c97ede77', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639363238313b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363936313538223b6c6173745f636865636b7c693a313632353639363238313b),
+('fc8983cea9ecfa71754ad922aec78cd83310c585', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639363135383b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363935383736223b6c6173745f636865636b7c693a313632353639363135383b);
 
 -- --------------------------------------------------------
 
@@ -157,27 +167,52 @@ CREATE TABLE `medio_comunicacion` (
 --
 
 INSERT INTO `medio_comunicacion` (`idmedio`, `nombre_medio`, `rel_idtipomedio`) VALUES
-(1, 'Red UNITEL', 2),
-(2, 'Red UNO', 2),
-(3, 'Red ATB', 2),
-(4, 'Red TVB', 2),
-(5, 'La Razón', 4),
-(6, 'Pagina Siete', 4),
-(7, 'Panamericana', 3),
-(8, 'Fides', 3),
-(9, 'ERBOL', 3),
-(10, 'Facebook', 1),
-(11, 'Twitter', 1),
-(12, 'Los Tiempos', 4),
-(13, 'Opinión', 4),
-(14, 'El Deber', 4),
-(15, 'El Mundo', 4),
-(16, 'Red ADVenir - Alfa television', 2),
-(17, 'Cristal TV', 2),
-(18, 'Valle Alto Television Canal', 2),
-(19, 'TV Air', 2),
-(20, 'Sistema Cristiano de Comunicaciones', 2),
-(21, 'TV Norte', 2);
+(1, 'LA PALABRA DEL BENI', 4),
+(2, 'CORREO DEL SUR', 4),
+(3, 'LOS TIEMPOS', 4),
+(4, 'OPINIÓN', 4),
+(5, 'PAGINA 7 ', 4),
+(6, 'BOLIVIA', 4),
+(7, 'LA PATRIA', 4),
+(8, 'PERLA DEL ACRE', 4),
+(9, 'EL POTOSÍ', 4),
+(10, 'EL DEBER ', 4),
+(11, 'EL PAÍS', 4),
+(12, 'PERIODICO DIGITAL', 4),
+(13, 'BTV', 2),
+(14, 'TVU', 2),
+(15, 'UNITEL', 2),
+(16, 'BOLIVISIÓN', 2),
+(17, 'ATB', 2),
+(18, 'RED UNO', 2),
+(19, 'CEACOM 51', 2),
+(20, 'PANDO VISIÓN', 2),
+(21, 'SITEL', 2),
+(22, 'TV DEL SUR', 2),
+(23, 'REITEL TV', 5),
+(24, 'BTV - Rural', 5),
+(25, 'COTEVI TV', 5),
+(26, 'PLUS TLT', 5),
+(27, 'GIGAVISIÓN', 2),
+(28, 'FIDES', 3),
+(29, 'GLOBAL', 3),
+(30, 'KANCHA PARLASPA', 3),
+(32, 'PANAMERICANA', 3),
+(33, 'LA CRUZ DEL SUR', 3),
+(34, 'UNIVERSITARIA', 3),
+(35, 'PANDO', 3),
+(36, 'KOLLASUYO', 3),
+(37, 'RADIO SC', 3),
+(38, 'ACTIVA', 3),
+(39, 'SAN MIGUEL ', 6),
+(40, 'ACLO', 6),
+(41, 'SOBERANÍA', 6),
+(42, 'ILLIMANI', 6),
+(43, 'ERBOL', 6),
+(44, 'PIO XII', 6),
+(45, 'FIDES - Rural', 6),
+(46, 'PANAMERICANA - Rural', 6),
+(47, 'TURBO', 6);
 
 -- --------------------------------------------------------
 
@@ -196,23 +231,66 @@ CREATE TABLE `medio_departamento` (
 --
 
 INSERT INTO `medio_departamento` (`idmediodepartamento`, `rel_idmedio`, `rel_iddepartamento`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 4),
-(4, 5, 1),
-(5, 6, 1),
-(6, 2, 1),
-(7, 4, 1),
-(8, 12, 4),
-(9, 13, 4),
-(10, 14, 2),
-(11, 15, 2),
-(12, 16, 2),
-(13, 17, 2),
-(14, 18, 4),
-(15, 19, 4),
-(16, 20, 1),
-(17, 21, 1);
+(1, 1, 7),
+(2, 13, 7),
+(3, 23, 7),
+(4, 28, 7),
+(5, 39, 7),
+(6, 2, 5),
+(7, 14, 5),
+(8, 24, 5),
+(9, 29, 5),
+(10, 40, 5),
+(11, 3, 4),
+(12, 4, 4),
+(13, 15, 4),
+(14, 16, 4),
+(15, 24, 4),
+(16, 30, 4),
+(17, 28, 4),
+(18, 41, 4),
+(19, 42, 4),
+(20, 5, 1),
+(21, 6, 1),
+(22, 17, 1),
+(23, 18, 1),
+(24, 24, 1),
+(25, 28, 1),
+(26, 32, 1),
+(27, 42, 1),
+(28, 43, 1),
+(29, 7, 3),
+(30, 19, 3),
+(31, 16, 3),
+(32, 24, 3),
+(33, 28, 3),
+(34, 33, 3),
+(35, 42, 3),
+(36, 44, 3),
+(37, 8, 8),
+(38, 15, 8),
+(39, 20, 8),
+(40, 24, 8),
+(41, 34, 8),
+(42, 35, 8),
+(43, 42, 8),
+(44, 44, 8),
+(45, 9, 9),
+(46, 21, 9),
+(47, 22, 9),
+(48, 25, 9),
+(49, 36, 9),
+(50, 28, 9),
+(51, 45, 9),
+(52, 46, 9),
+(53, 11, 6),
+(54, 12, 6),
+(55, 15, 6),
+(56, 27, 6),
+(57, 26, 6),
+(58, 24, 6),
+(59, 28, 6),
+(60, 40, 6);
 
 -- --------------------------------------------------------
 
@@ -232,22 +310,6 @@ CREATE TABLE `noticia` (
   `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
   `rel_idusuario` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `noticia`
---
-
-INSERT INTO `noticia` (`idnoticia`, `fecha_registro`, `fecha_noticia`, `titular`, `resumen`, `url_noticia`, `rel_idactor`, `rel_idsubtema`, `rel_idmedio`, `rel_idusuario`) VALUES
-(3, 1625436000, 1625418143, 'MAS gana seis gobernaciones en Bolivia y se disputará otras dos', 'El Movimiento al Socialismo - Instrumento Político por la Soberanía de los Pueblos (MAS-IPSP) se perfila para ganar seis gobernaciones en Bolivia y disputarse otras dos en una segunda vuelta prevista para el 11 de abril, de acuerdo con resultados no oficiales a boca de urna, autorizados por el Tribunal  Supremo Electoral.', NULL, 4, 1, 1, 5),
-(4, 1625436000, 1624831200, 'Titular Noticia', 'Parrafo de resumen																		', 'URL', 7, 20, 5, 5),
-(5, 1625436000, 1625608800, 'Titular de la noticia', 'Resumen del titular de la noticia', 'https://noticia/titular', 6, 10, 2, 5),
-(6, 1625436000, 1625522400, 'Titulo de la Noticia por Sistema', 'Resumen del titulo de la noticia por sistema', 'http://noticia-por-sistema', 5, 10, 20, 5),
-(7, 1625436000, 1625522400, 'Titular Cuestionario 2', 'Parrafo de resumen del Cuestionario 2', 'http://cuestionario2/', 6, 42, 21, 5),
-(8, 1625436000, 1625608800, 'Titular prensa', 'Resumen del titular de prensa', 'https://pagina-siete.com/titular-de-prensa', 7, 18, 6, 5),
-(9, 1625436000, 1626213600, 'La Razon titular de prensa', 'Resumen de la razon titular de prensa', 'https://larazon.com/titular-de-prensa', 4, 36, 5, 5),
-(10, 1625436000, 1626127200, 'La Razon titular de prensa', 'Resumen de la razon titular de prensa', 'http://url/mas', 5, 33, 2, 5),
-(11, 1625608800, 1625608800, 'La Razon titular de prensa', 'Resumen de la razon titular de prensa', 'http://url', 1, 19, 1, 5),
-(12, 1625608800, 1626213600, 'ddd', 'ssss', '', 1, 18, 2, 51);
 
 -- --------------------------------------------------------
 
@@ -366,9 +428,11 @@ CREATE TABLE `tipo_medio` (
 
 INSERT INTO `tipo_medio` (`idtipomedio`, `nombre_tipo`) VALUES
 (1, 'Pagina de Red Social'),
-(2, 'Canal de Television'),
-(3, 'Emisora Radial'),
-(4, 'Prensa Escrita');
+(2, 'Canal de Televisión'),
+(3, 'Emisora radial'),
+(4, 'Prensa Escrita'),
+(5, 'TV Rural'),
+(6, 'Radio Rural');
 
 -- --------------------------------------------------------
 
@@ -411,7 +475,7 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 (2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, 1625414827, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', 'GEOLOCALIZACION', 1, 'Mariano Colodro #1447'),
 (3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, 1625414291, 1, 'Alberto', 'Cruzo', NULL, NULL, '4444444', '4.5', 7, 'Calle Montes #5555'),
 (4, '127.0.0.1', 'jcarlos', '$2y$10$xj7vhmTVFZOMLHbKfrhz.O2l37pN7cssOOBM0mGsXZ1A9B4S3se.W', 'almeyda@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625358200, NULL, 1, 'Juan Carlos', 'Almeyda', NULL, NULL, '48693587', '45465456456456454', 4, 'Calle Alberto #4323'),
-(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1625681995, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL),
+(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1625696281, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL),
 (6, '127.0.0.1', 'mon-claudia', '$2y$10$oq9duUb2wp.cOrNj0h.oouNPk7redo3vaUlwpKEsrfT.Q4nN7.A9C', 'claudia@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415426, 1625420030, 1, 'Claudia', 'Arteaga', NULL, NULL, '49512234654', '546545456456454654', 4, 'Av. Sucre #4452'),
 (7, '127.0.0.1', 'mon-carlos', '$2y$10$qzJf1mPzU1NH0EJ6YIwZ.uL2P18cx3OaAkYjIy.F5En57hbNrWJBe', 'carlos@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415550, 1625419998, 1, 'Carlos', 'Olivera', NULL, NULL, '495452121', '94945454654654', 2, 'Av. Circunvalacion #476'),
 (8, '127.0.0.1', 'mon-adriana', '$2y$10$kVDfs/u3izDKtmAJCieTb.PJNrV6SYQv3vazv3fV4kXw1.aJ3ZCHG', 'adrianitajus98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674404, NULL, 1, 'Adriana', 'Mier Justiniano', NULL, NULL, '6787516', '', 1, ''),
@@ -672,19 +736,19 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT de la tabla `medio_comunicacion`
 --
 ALTER TABLE `medio_comunicacion`
-  MODIFY `idmedio` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idmedio` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `medio_departamento`
 --
 ALTER TABLE `medio_departamento`
-  MODIFY `idmediodepartamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idmediodepartamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `subtema`
@@ -702,7 +766,7 @@ ALTER TABLE `tema`
 -- AUTO_INCREMENT de la tabla `tipo_medio`
 --
 ALTER TABLE `tipo_medio`
-  MODIFY `idtipomedio` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idtipomedio` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

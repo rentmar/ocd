@@ -10,6 +10,11 @@ class Usuarios extends CI_Controller
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
+
+		if($this->session->sesion_activa ===  null){
+			$this->session->sess_destroy();
+			redirect('/');
+		}
 	}
 
 	public function index()

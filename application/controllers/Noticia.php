@@ -13,6 +13,11 @@ class Noticia extends CI_Controller
         $this->load->library('form_validation');
 		$this->load->helper('url');
 		$this->load->library('session');
+
+		if($this->session->sesion_activa ===  null){
+			$this->session->sess_destroy();
+			redirect('/');
+		}
     }
     public function index()
     {
