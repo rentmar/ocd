@@ -12,8 +12,8 @@
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/democracia.svg'; ?>" alt="Card image">
 					<div class="card-body">
 
-						<a href="<?php echo site_url('reformaelectoral');?>" class="btn btn-info" role="button" style="background-color:#93C90F;">Nuevo</a>
-						<a href="<?php echo site_url('reformaelectoral/editar/') ?>" class="btn btn-info" role="button" style="background-color:#93C90F;">Editar</a>
+						<a href="<?php echo site_url('reformaelectoral');?>" class="btn btn-info" role="button" style="background-color:#93C90F; color:black;" >Nuevo</a>
+						<a href="<?php echo site_url('reformaelectoral/editar/') ?>" class="btn btn-info" role="button" style="background-color:#93C90F;color:black;">Editar</a>
 					</div>
 				</div>
 			</div>
@@ -25,8 +25,8 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/institucionalidad.svg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('instdemocratica/');?>" class="btn btn-info" role="button" style="background-color:#EF9600;">Nuevo</a>
-						<a href="<?php echo site_url('instdemocratica/editar/');?>" class="btn btn-info" role="button" style="background-color:#EF9600;">Editar</a>
+						<a href="<?php echo site_url('instdemocratica/');?>" class="btn btn-info" role="button" style="background-color:#EF9600; color:black;">Nuevo</a>
+						<a href="<?php echo site_url('instdemocratica/editar/');?>" class="btn btn-info" role="button" style="background-color:#EF9600; color:black;">Editar</a>
 
 					</div>
 
