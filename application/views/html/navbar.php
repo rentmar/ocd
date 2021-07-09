@@ -92,6 +92,9 @@
 		<a class="nav-link" href="#">Base de Datos</a>
 		<a class="nav-link" href="#">Analisis</a>
 		<a class="nav-link" href="#">Seguimiento-Monitores</a>
+<<<<<<< HEAD
+>>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
+=======
 >>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
 <!--		<a class="nav-link" href="#">Link</a>-->
 <!--		<a class="nav-link" href="#">Link</a>-->
