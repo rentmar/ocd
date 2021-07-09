@@ -93,6 +93,9 @@
 		<a class="nav-link" href="#">Analisis</a>
 		<a class="nav-link" href="#">Seguimiento-Monitores</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
+=======
 >>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
 =======
 >>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
