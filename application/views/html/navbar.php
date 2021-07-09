@@ -84,28 +84,10 @@
 <div class="nav-scroller ">
 	<nav class="nav nav-underline">
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
-<<<<<<< HEAD
+
 <!--		<a class="nav-link" href="#">Base de Datos</a>-->
 <!--		<a class="nav-link" href="#">Analisis</a>-->
 <!--		<a class="nav-link" href="--><?php //echo site_url('seguimientoMonitores')?><!--">Seguimiento-Monitores</a>-->
-=======
-		<a class="nav-link" href="#">Base de Datos</a>
-		<a class="nav-link" href="#">Analisis</a>
-		<a class="nav-link" href="#">Seguimiento-Monitores</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
-=======
->>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
-=======
->>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
-=======
->>>>>>> parent of 84cfba9... tarjetas seguimientoMonitores
-<!--		<a class="nav-link" href="#">Link</a>-->
-<!--		<a class="nav-link" href="#">Link</a>-->
-<!--		<a class="nav-link" href="#">Link</a>-->
-<!--		<a class="nav-link" href="#">Link</a>-->
 
 	</nav>
 </div>
