@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-07-2021 a las 00:23:09
+-- Tiempo de generación: 09-07-2021 a las 15:11:20
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -67,6 +67,8 @@ CREATE TABLE `ci_sessions` (
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('3f53595f48eb10ce1fc705f0ec37c03d2f767072', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639353837363b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363935373636223b6c6173745f636865636b7c693a313632353639353837363b),
+('550fe8aed3dc534f02a04fc0f466ec980341c443', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639363637303b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363936323831223b6c6173745f636865636b7c693a313632353639363637303b),
+('bdfc837fa031ec7dabfac74f173a63ca62776382', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353730323030363b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363936363730223b6c6173745f636865636b7c693a313632353730323030363b),
 ('d4dbc415d44ca396338d0c4cc393b376dcdd0b68', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639353736363b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363831393935223b6c6173745f636865636b7c693a313632353639353736363b),
 ('dff8cf1d4a77863b1e237f45c82ab7d3c97ede77', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639363238313b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363936313538223b6c6173745f636865636b7c693a313632353639363238313b),
 ('fc8983cea9ecfa71754ad922aec78cd83310c585', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313632353639363135383b6964656e746974797c733a31313a226d6f6e2d616c667265646f223b757365726e616d657c733a31313a226d6f6e2d616c667265646f223b656d61696c7c733a31373a22616c667265646f40676d61696c2e636f6d223b757365725f69647c733a313a2235223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363235363935383736223b6c6173745f636865636b7c693a313632353639363135383b);
@@ -305,10 +307,82 @@ CREATE TABLE `noticia` (
   `titular` varchar(200) NOT NULL,
   `resumen` text NOT NULL,
   `url_noticia` varchar(150) DEFAULT NULL,
-  `rel_idactor` smallint(4) UNSIGNED NOT NULL,
   `rel_idsubtema` smallint(5) UNSIGNED NOT NULL,
   `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
   `rel_idusuario` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `noticia_actor`
+--
+
+CREATE TABLE `noticia_actor` (
+  `idnotactor` int(11) NOT NULL,
+  `rel_idnoticia` int(11) UNSIGNED NOT NULL,
+  `rel_idactor` smallint(4) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `noticia_otrosubtema`
+--
+
+CREATE TABLE `noticia_otrosubtema` (
+  `idnototrosubtema` int(11) UNSIGNED NOT NULL,
+  `rel_idnoticia` int(11) UNSIGNED NOT NULL,
+  `rel_idotrosubtema` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `noticia_otrotema`
+--
+
+CREATE TABLE `noticia_otrotema` (
+  `idnototrotema` int(11) UNSIGNED NOT NULL,
+  `rel_idnoticia` int(11) UNSIGNED NOT NULL,
+  `rel_idotrotema` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `noticia_subtema`
+--
+
+CREATE TABLE `noticia_subtema` (
+  `idnotsubtema` int(10) UNSIGNED NOT NULL,
+  `rel_idnoticia` int(10) UNSIGNED NOT NULL,
+  `rel_idsubtema` smallint(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `otrosubtema`
+--
+
+CREATE TABLE `otrosubtema` (
+  `idotrosubtema` int(11) UNSIGNED NOT NULL,
+  `nombre_otrosubtema` varchar(150) NOT NULL,
+  `rel_idtema` smallint(4) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `otrotema`
+--
+
+CREATE TABLE `otrotema` (
+  `idotrotema` int(10) UNSIGNED NOT NULL,
+  `nombre_otrotema` varchar(150) NOT NULL,
+  `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL,
+  `rel_idusuario` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -475,7 +549,7 @@ INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activ
 (2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, 1625414827, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', 'GEOLOCALIZACION', 1, 'Mariano Colodro #1447'),
 (3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, 1625414291, 1, 'Alberto', 'Cruzo', NULL, NULL, '4444444', '4.5', 7, 'Calle Montes #5555'),
 (4, '127.0.0.1', 'jcarlos', '$2y$10$xj7vhmTVFZOMLHbKfrhz.O2l37pN7cssOOBM0mGsXZ1A9B4S3se.W', 'almeyda@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625358200, NULL, 1, 'Juan Carlos', 'Almeyda', NULL, NULL, '48693587', '45465456456456454', 4, 'Calle Alberto #4323'),
-(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1625696281, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL),
+(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1625702006, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL),
 (6, '127.0.0.1', 'mon-claudia', '$2y$10$oq9duUb2wp.cOrNj0h.oouNPk7redo3vaUlwpKEsrfT.Q4nN7.A9C', 'claudia@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415426, 1625420030, 1, 'Claudia', 'Arteaga', NULL, NULL, '49512234654', '546545456456454654', 4, 'Av. Sucre #4452'),
 (7, '127.0.0.1', 'mon-carlos', '$2y$10$qzJf1mPzU1NH0EJ6YIwZ.uL2P18cx3OaAkYjIy.F5En57hbNrWJBe', 'carlos@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415550, 1625419998, 1, 'Carlos', 'Olivera', NULL, NULL, '495452121', '94945454654654', 2, 'Av. Circunvalacion #476'),
 (8, '127.0.0.1', 'mon-adriana', '$2y$10$kVDfs/u3izDKtmAJCieTb.PJNrV6SYQv3vazv3fV4kXw1.aJ3ZCHG', 'adrianitajus98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674404, NULL, 1, 'Adriana', 'Mier Justiniano', NULL, NULL, '6787516', '', 1, ''),
@@ -655,8 +729,52 @@ ALTER TABLE `medio_departamento`
 --
 ALTER TABLE `noticia`
   ADD PRIMARY KEY (`idnoticia`),
-  ADD KEY `FK_actornoticia` (`rel_idactor`),
   ADD KEY `FK_subtemanoticia` (`rel_idsubtema`);
+
+--
+-- Indices de la tabla `noticia_actor`
+--
+ALTER TABLE `noticia_actor`
+  ADD PRIMARY KEY (`idnotactor`),
+  ADD KEY `fk_actor` (`rel_idactor`),
+  ADD KEY `fk_noticia` (`rel_idnoticia`);
+
+--
+-- Indices de la tabla `noticia_otrosubtema`
+--
+ALTER TABLE `noticia_otrosubtema`
+  ADD PRIMARY KEY (`idnototrosubtema`),
+  ADD KEY `fk_otrosubtema` (`rel_idotrosubtema`),
+  ADD KEY `fk_rel_noticia` (`rel_idnoticia`);
+
+--
+-- Indices de la tabla `noticia_otrotema`
+--
+ALTER TABLE `noticia_otrotema`
+  ADD PRIMARY KEY (`idnototrotema`),
+  ADD KEY `fk_rel_otro_tema` (`rel_idotrotema`),
+  ADD KEY `fk_rel_noticia_otr` (`rel_idnoticia`);
+
+--
+-- Indices de la tabla `noticia_subtema`
+--
+ALTER TABLE `noticia_subtema`
+  ADD PRIMARY KEY (`idnotsubtema`),
+  ADD KEY `fk_noticia_subtema` (`rel_idnoticia`),
+  ADD KEY `fk_not_subtema` (`rel_idsubtema`);
+
+--
+-- Indices de la tabla `otrosubtema`
+--
+ALTER TABLE `otrosubtema`
+  ADD PRIMARY KEY (`idotrosubtema`),
+  ADD KEY `fk_tema_otrosubtema` (`rel_idtema`);
+
+--
+-- Indices de la tabla `otrotema`
+--
+ALTER TABLE `otrotema`
+  ADD PRIMARY KEY (`idotrotema`);
 
 --
 -- Indices de la tabla `subtema`
@@ -751,6 +869,42 @@ ALTER TABLE `noticia`
   MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `noticia_actor`
+--
+ALTER TABLE `noticia_actor`
+  MODIFY `idnotactor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `noticia_otrosubtema`
+--
+ALTER TABLE `noticia_otrosubtema`
+  MODIFY `idnototrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `noticia_otrotema`
+--
+ALTER TABLE `noticia_otrotema`
+  MODIFY `idnototrotema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `noticia_subtema`
+--
+ALTER TABLE `noticia_subtema`
+  MODIFY `idnotsubtema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `otrosubtema`
+--
+ALTER TABLE `otrosubtema`
+  MODIFY `idotrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `otrotema`
+--
+ALTER TABLE `otrotema`
+  MODIFY `idotrotema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `subtema`
 --
 ALTER TABLE `subtema`
@@ -801,8 +955,41 @@ ALTER TABLE `medio_departamento`
 -- Filtros para la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  ADD CONSTRAINT `FK_actornoticia` FOREIGN KEY (`rel_idactor`) REFERENCES `actor` (`idactor`),
   ADD CONSTRAINT `FK_subtemanoticia` FOREIGN KEY (`rel_idsubtema`) REFERENCES `subtema` (`idsubtema`);
+
+--
+-- Filtros para la tabla `noticia_actor`
+--
+ALTER TABLE `noticia_actor`
+  ADD CONSTRAINT `fk_actor` FOREIGN KEY (`rel_idactor`) REFERENCES `actor` (`idactor`),
+  ADD CONSTRAINT `fk_noticia` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
+
+--
+-- Filtros para la tabla `noticia_otrosubtema`
+--
+ALTER TABLE `noticia_otrosubtema`
+  ADD CONSTRAINT `fk_otrosubtema` FOREIGN KEY (`rel_idotrosubtema`) REFERENCES `otrosubtema` (`idotrosubtema`),
+  ADD CONSTRAINT `fk_rel_noticia` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
+
+--
+-- Filtros para la tabla `noticia_otrotema`
+--
+ALTER TABLE `noticia_otrotema`
+  ADD CONSTRAINT `fk_rel_noticia_otr` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`),
+  ADD CONSTRAINT `fk_rel_otro_tema` FOREIGN KEY (`rel_idotrotema`) REFERENCES `otrotema` (`idotrotema`);
+
+--
+-- Filtros para la tabla `noticia_subtema`
+--
+ALTER TABLE `noticia_subtema`
+  ADD CONSTRAINT `fk_not_subtema` FOREIGN KEY (`rel_idsubtema`) REFERENCES `subtema` (`idsubtema`),
+  ADD CONSTRAINT `fk_noticia_subtema` FOREIGN KEY (`rel_idnoticia`) REFERENCES `noticia` (`idnoticia`);
+
+--
+-- Filtros para la tabla `otrosubtema`
+--
+ALTER TABLE `otrosubtema`
+  ADD CONSTRAINT `fk_tema_otrosubtema` FOREIGN KEY (`rel_idtema`) REFERENCES `tema` (`idtema`);
 
 --
 -- Filtros para la tabla `subtema`
