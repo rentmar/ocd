@@ -7,7 +7,7 @@ class Inicio extends CI_Controller
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->library('ion_auth');
-		
+
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
 			redirect('/');
