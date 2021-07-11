@@ -135,8 +135,13 @@ function getMediosList(tipomedioID) {
 }
 
 function getSubtema(temaID) {
+	var identificadores = temaID;
+	var texto_otro = '';
 	var temaHtml = '';
 	var subtema = '';
+	//Limpiar Otro tema
+	$("#otrotemac").removeClass("contenedores");
+	$('#otrotemac').empty();
 	$.ajax({
 		url: baseurl + "/reformaelectoral/getprueba",
 		type: 'post',
@@ -147,6 +152,23 @@ function getSubtema(temaID) {
 		} ,
 		success: function (json) {
 			console.log(json);
+			$
+			for (var i = 0; i < identificadores.length; i++) {
+				if(identificadores[i] == 0)
+				{
+					texto_otro += '<label for="otrotema" >Especifique  otra :</label><br>';
+					texto_otro += '<input type="text" id="otrotema" name="otrotema" placeholder="Otro tema" class="form-control" >';
+					$('#otrotemac').html(texto_otro);
+					$('#otrotemac').addClass('contenedores');
+					console.log('Identificador 0: ' + identificadores[i]);
+
+				}else {
+					console.log('Identificador distinto de cero; ' + identificadores[i]);
+					//Imprimir una tarjeta de tema
+				}
+
+			}
+
 
 		}
 	});

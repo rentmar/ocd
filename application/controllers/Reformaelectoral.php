@@ -70,12 +70,13 @@ class Reformaelectoral extends CI_Controller
 	public function getprueba()
 	{
 		$json = array();
-		$a= json_decode($this->input->post('temaID'));
-		var_dump($a);
-		$this->load->view('welcome');
-
+		$usuario = $this->ion_auth->user()->row();
+		$this->Cuestionario_model->setUsuarioID($usuario->id);
+		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+		$this->Cuestionario_model->setTemaIDs(json_decode($this->input->post('temaID')));
+		$json = $this->Cuestionario_model->leerSubtemasPorIDs();
 		header('Content-Type: application/json');
-		//echo json_encode($json);
+		echo json_encode($json);
 	}
 
 	private function fecha_unix($fecha)
