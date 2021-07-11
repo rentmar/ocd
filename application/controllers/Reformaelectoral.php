@@ -74,6 +74,8 @@ class Reformaelectoral extends CI_Controller
 		$this->Cuestionario_model->setUsuarioID($usuario->id);
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$this->Cuestionario_model->setTemaIDs(json_decode($this->input->post('temaID')));
+		$this->session->set_userdata('nueva_noticia_ids', []);
+		$this->session->set_userdata('nueva_noticia_ids', json_decode($this->input->post('temaID')) );
 		$json = $this->Cuestionario_model->leerSubtemasPorIDs();
 		header('Content-Type: application/json');
 		echo json_encode($json);

@@ -196,7 +196,8 @@ function getSubtema(temaID) {
 								tema += '<div class="card-body">';
 								tema += '<div class="form-check">';
 								tema += '  <label class="form-check-label" for="radio1">';
-								tema += '      <input type="radio" class="form-check-input" id="radio' + json[j].idsubtema + '" name="idsubtema" value="' + json[j].idsubtema + '" checked>';
+								tema += '      <input type="radio" class="form-check-input" id="tema'+ temaID[i] +  '" name="tema' + temaID[i] +'idsubtema"' + json[j].idsubtema + ' value="' + json[j].idsubtema + '" checked >';
+								//tema += '      <input type="radio" class="form-check-input" id="radio' + json[j].idsubtema + '" name="idsubtema" value="' + json[j].idsubtema + '" checked>';
 								tema += '      ' + json[j].nombre_subtema;
 								tema += '  </label>';
 								tema += '</div>';
@@ -206,7 +207,7 @@ function getSubtema(temaID) {
 							}else {
 								tema += '<div class="form-check">';
 								tema += '  <label class="form-check-label" for="radio1">';
-								tema += '      <input type="radio" class="form-check-input" id="radio' + json[j].idsubtema + '" name="idsubtema" value="' + json[j].idsubtema + '">';
+								tema += '      <input type="radio" class="form-check-input" id="tema'+ temaID[i] + '" name="tema' + temaID[i] +'idsubtema"  value="' + json[j].idsubtema + '">';
 								tema += '      ' + json[j].nombre_subtema;
 								tema += '  </label>';
 								tema += '</div>';
@@ -216,9 +217,10 @@ function getSubtema(temaID) {
 
 					}
 
+
 					tema += '<div class="form-check">';
-					tema += '  <label class="form-check-label" for="radiootro">';
-					tema += '      <input type="radio" class="form-check-input" id="radiootro" name="idsubtema" value="0">';
+					tema += '  <label class="form-check-label" for="radio">';
+					tema += '      <input type="radio" class="form-check-input" id="tema'+ temaID[i] + ' " name="tema' + temaID[i] +'idsubtema"  value="0">';
 					tema += '       Otro';
 					tema += '  </label>';
 					tema += '</div>';
