@@ -197,25 +197,13 @@ class Cuestionario_model extends CI_Model
 
 		foreach ($this->_temaIDs as $i=>$id)
 		{
-			if($id == 0)
+			if($id != 0)
 			{
-				/** @noinspection PhpLanguageLevelInspection */
-				$registro = [
-					'idtema' => 0,
-					'nombre_tema' => ' ',
-					'rel_idcuestionario' => $this->_cuestionarioID,
-					'rel_idusuario' => $this->_usuarioID,
-					'idsubtema' => 0,
-					'nombre_subtema' =>' ',
-					'rel_idtema'=> ' ',
-				];
-
-			}else{
 				$qry = $this->db->query($sql, [$id,  ]);
 				$registro = $qry->result_array();
-			}
-			$tema_subtema = array_merge($tema_subtema, $registro);
 
+				$tema_subtema = array_merge($tema_subtema, $registro);
+			}
 		}
 		return $tema_subtema;
 	}
