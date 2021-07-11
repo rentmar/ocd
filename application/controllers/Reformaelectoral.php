@@ -30,6 +30,7 @@ class Reformaelectoral extends CI_Controller
 
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
 
+		//Todos los temas referidos al formulario
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
@@ -64,6 +65,17 @@ class Reformaelectoral extends CI_Controller
 		$json = $this->Cuestionario_model->leerSubtema();
 		header('Content-Type: application/json');
 		echo json_encode($json);
+	}
+
+	public function getprueba()
+	{
+		$json = array();
+		$a= json_decode($this->input->post('temaID'));
+		var_dump($a);
+		$this->load->view('welcome');
+
+		header('Content-Type: application/json');
+		//echo json_encode($json);
 	}
 
 	private function fecha_unix($fecha)
@@ -193,6 +205,31 @@ class Reformaelectoral extends CI_Controller
 	//Actualizar los valores del titular, resumen y url
 	private function updateDatosGenerales()
 	{
+
+	}
+
+	public function capturarDatos()
+	{
+		echo "Capturar la informacion del Formulario";
+		echo "Reforma electoral";
+		echo "<br><br><br><br>";
+		echo "";
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_cuestionario = [
+
+		];
+
+		$actores = $this->input->post('idactor[]');
+
+		var_dump($actores);
+
+		echo "<br><br><br><br>";
+
+		$temas = $this->input->post('idtema[]');
+
+		var_dump($temas);
+
+
 
 	}
 

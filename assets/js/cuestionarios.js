@@ -1,12 +1,34 @@
 
+/*Funcion para la carga de medios de comunicacion segun al tipo de medio seleccionado*/
 jQuery(document).on('change', 'select#tipo-medio', function (e) {
 	e.preventDefault();
 	var tipomedioID = jQuery(this).val();
 	getMediosList(tipomedioID);
 });
 
+//Funcion para desplegar
 jQuery(document).on('change', 'select#tema', function (e) {
 	e.preventDefault();
+	var idtemas = [];
+	var titulo;
+	var color;
+	var subtemas = '';
+	var subtema = '';
+
+	//Capturar valores del select
+	idtemas = $('select#tema').val();
+	titulo = 'Titulo';
+	getSubtema(idtemas);
+
+
+
+	/*
+	* Rutina de prueba
+	**/
+	/*var valores = $('select#tema').val();
+	alert('identificadores: '+ valores);
+	alert('longitud del array: '+ valores.length);*/
+	/*e.preventDefault();
 	var temaID = jQuery(this).val();
 	var color ;
 	if($('#idformulario').val()==1){
@@ -57,7 +79,7 @@ jQuery(document).on('change', 'select#tema', function (e) {
 		var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
 		$('#subtemac').addClass('contenedores');
 		getSubtemaList(temaID, temaTitulo, color);
-	}
+	}*/
 });
 
 $('#subtemac').click(function () {
@@ -78,10 +100,11 @@ $('#subtemac').click(function () {
 	}
 });
 
-//Validar los combobox antes de enviar
 
 
-
+/*
+Funcion para extraer la lista de medios segun su tipo
+ */
 function getMediosList(tipomedioID) {
 	//alert(tipomedioID + ' ' + baseurl);
 	$.ajax({
@@ -109,6 +132,24 @@ function getMediosList(tipomedioID) {
 		}
 	});
 
+}
+
+function getSubtema(temaID) {
+	var temaHtml = '';
+	var subtema = '';
+	$.ajax({
+		url: baseurl + "/reformaelectoral/getprueba",
+		type: 'post',
+		data: {temaID: JSON.stringify(temaID) },
+		dataType: 'json',
+		beforeSend: function () {
+			console.log("Antes de la peticion");
+		} ,
+		success: function (json) {
+			console.log(json);
+
+		}
+	});
 }
 
 
@@ -162,11 +203,8 @@ function getSubtemaList(temaID, temaTitulo, color) {
 			tarjeta += '</div>';
 			tarjeta += '</div>';
 
-
-
-
-
-			jQuery("#subtemac").html(tarjeta);
+			//jQuery("#subtemac").html(tarjeta);
+			return "Hola ";
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
@@ -174,5 +212,11 @@ function getSubtemaList(temaID, temaTitulo, color) {
 		}
 	});
 }
+
+$(document).ready(function() {
+	$('.selector-multiple').select2({
+		placeholder: "Seleccione un tema"
+	});
+});
 
 

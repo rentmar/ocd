@@ -6,6 +6,7 @@ class Cuestionario_model extends CI_Model
 	private $_temaID;
 	private $_departamentoID;
 	private $_cuestionarioID;
+	private $_temaIDs = array();
 
 	public function __construct()
 	{
@@ -39,6 +40,11 @@ class Cuestionario_model extends CI_Model
 	public function setCuestionarioID($cuestID)
 	{
 		$this->_cuestionarioID = $cuestID;
+	}
+
+	public function setTemaIDs($temas)
+	{
+		$this->_temaIDs = $temas;
 	}
 
 	//Leer todos los tipos de medios
@@ -172,6 +178,11 @@ class Cuestionario_model extends CI_Model
 		$this->db->where('idmedio',$id);
 		$q= $this->db->get('medio_comunicacion');
 		return $q->row();
+	}
+
+	public function leerSubtemaspoIDs($temaIDs)
+	{
+
 	}
 
 }
