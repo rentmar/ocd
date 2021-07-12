@@ -27,6 +27,9 @@ class Inicio extends CI_Controller
 			//Cargar la noticia y la noticia original a la session
 			$this->session->set_userdata('noticia', []);
 			$this->session->set_userdata('noticia_original', []);
+			//nueva noticia
+			$this->session->set_userdata('nueva_noticia', false);
+			$this->session->set_userdata('nueva_noticia_ids', []);
 			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
 		}
 

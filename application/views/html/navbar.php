@@ -86,8 +86,12 @@
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
 
 <!--		<a class="nav-link" href="#">Base de Datos</a>-->
+
 		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis</a>
 <!--		<a class="nav-link" href="--><?php //echo site_url('seguimientoMonitores')?><!--">Seguimiento-Monitores</a>-->
+
+<!--		<a class="nav-link" href="#">Analisis</a>-->
+		<a class="nav-link" href="<?php echo site_url('seguimientoMonitores')?>">Seguimiento-Monitores</a>
 
 	</nav>
 </div>

@@ -59,22 +59,28 @@
 				<?php $contador = 0; ?>
 				<?php foreach ($actor as $key => $element): ?>
 					<?php if($contador == 0): ?>
-						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>"  checked >
-						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input id="check<?php echo $element['idactor']; ?>" name="idactor[]" type="checkbox" class="form-check-input" value="<?php echo $element['idactor']; ?>" checked  >
+								<?php echo $element['nombre_actor']; ?>
+							</label>
+						</div>
 						<?php $contador++; ?>
 					<?php else: ?>
-						<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>" >
-						<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input id="check<?php echo $element['idactor']; ?>" name="idactor[]" type="checkbox" class="form-check-input" value="<?php echo $element['idactor']; ?>"   >
+								<?php echo $element['nombre_actor']; ?>
+							</label>
+						</div>
 					<?php endif; ?>
 				<?php endforeach; ?>
-
 			</div>
 			<br>
 			<div class="contenedores">
-
 				<label>Escoge el tema al que está referido la nota :</label><br>
-				<select id="tema" name="tema" class="form-control" required >
-					<option value="" >Seleccione Tema</option>
+				<select id="tema" name="idtema[]" class="form-control selector-multiple" multiple="multiple" required >
+					<!--					<option value="" >Seleccione Tema</option>-->
 					<?php foreach ( $tema as $key => $element): ?>
 						<option value="<?php echo $element['idtema']; ?>" >
 							<?php echo $element['nombre_tema']; ?>
@@ -82,7 +88,6 @@
 					<?php endforeach; ?>
 					<option value="0" >Otro</option>
 				</select>
-
 			</div>
 			<br>
 			<div id="otrotemac"  >

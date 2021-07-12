@@ -30,6 +30,7 @@ class Reformaelectoral extends CI_Controller
 
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
 
+		//Todos los temas referidos al formulario
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
@@ -62,6 +63,20 @@ class Reformaelectoral extends CI_Controller
 		$this->Cuestionario_model->setTemaID($this->input->post('temaID'));
 		$this->Cuestionario_model->setDepartamentoID(1);
 		$json = $this->Cuestionario_model->leerSubtema();
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	}
+
+	public function getprueba()
+	{
+		$json = array();
+		$usuario = $this->ion_auth->user()->row();
+		$this->Cuestionario_model->setUsuarioID($usuario->id);
+		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+		$this->Cuestionario_model->setTemaIDs(json_decode($this->input->post('temaID')));
+		$this->session->set_userdata('nueva_noticia_ids', []);
+		$this->session->set_userdata('nueva_noticia_ids', json_decode($this->input->post('temaID')) );
+		$json = $this->Cuestionario_model->leerSubtemasPorIDs();
 		header('Content-Type: application/json');
 		echo json_encode($json);
 	}
@@ -193,6 +208,31 @@ class Reformaelectoral extends CI_Controller
 	//Actualizar los valores del titular, resumen y url
 	private function updateDatosGenerales()
 	{
+
+	}
+
+	public function capturarDatos()
+	{
+		echo "Capturar la informacion del Formulario";
+		echo "Reforma electoral";
+		echo "<br><br><br><br>";
+		echo "";
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_cuestionario = [
+
+		];
+
+		$actores = $this->input->post('idactor[]');
+
+		var_dump($actores);
+
+		echo "<br><br><br><br>";
+
+		$temas = $this->input->post('idtema[]');
+
+		var_dump($temas);
+
+
 
 	}
 

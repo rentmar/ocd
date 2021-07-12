@@ -6,6 +6,8 @@ class Cuestionario_model extends CI_Model
 	private $_temaID;
 	private $_departamentoID;
 	private $_cuestionarioID;
+	private $_usuarioID;
+	private $_temaIDs = array();
 
 	public function __construct()
 	{
@@ -39,6 +41,16 @@ class Cuestionario_model extends CI_Model
 	public function setCuestionarioID($cuestID)
 	{
 		$this->_cuestionarioID = $cuestID;
+	}
+
+	public function setTemaIDs($temas)
+	{
+		$this->_temaIDs = $temas;
+	}
+
+	public function setUsuarioID($usuarioID)
+	{
+		$this->_usuarioID = $usuarioID;
 	}
 
 	//Leer todos los tipos de medios
@@ -172,6 +184,28 @@ class Cuestionario_model extends CI_Model
 		$this->db->where('idmedio',$id);
 		$q= $this->db->get('medio_comunicacion');
 		return $q->row();
+	}
+
+	public function leerSubtemasPorIDs()
+	{
+		$sql = "SELECT * "
+		."FROM tema as t  "
+		."LEFT JOIN subtema ON subtema.rel_idtema = t.idtema  "
+		."WHERE t.idtema = ?  ";
+		$tema_subtema = array();
+
+
+		foreach ($this->_temaIDs as $i=>$id)
+		{
+			if($id != 0)
+			{
+				$qry = $this->db->query($sql, [$id,  ]);
+				$registro = $qry->result_array();
+
+				$tema_subtema = array_merge($tema_subtema, $registro);
+			}
+		}
+		return $tema_subtema;
 	}
 
 }
