@@ -26,31 +26,31 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">Switch account</a>
 			</li>-->
-			<!--<li class="nav-item dropdown">
+			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Usuarios
 				</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown01">
-					<a class="dropdown-item" href="<?php /*//echo site_url('usuarios/administradores');*/?>">Administradores</a>
-					<a class="dropdown-item" href="<?php /*//echo site_url('usuarios/docentes');*/?>">Docentes</a>
-					<a class="dropdown-item" href="<?php /*//echo site_url('usuarios/monitores');*/?>">Monitores</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/1');?>">Administradores</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/2');?>">Docentes</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/3');?>">Monitores</a>
 				</div>
-			</li>-->
+			</li>
 
-			<!--<li class="nav-item dropdown">
+			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Datos Formulario
 				</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown02">
-					<a class="dropdown-item" href="<?php /*echo site_url('formulario/');*/?>">Formularios</a>
-					<a class="dropdown-item" href="<?php /*echo site_url('actor/');*/?>">Actores</a>
-					<a class="dropdown-item" href="<?php /*echo site_url('departamento/');*/?>">Departamentos</a>
-					<a class="dropdown-item" href="<?php /*echo site_url('tipomedio/');*/?>">Tipo de Medio</a>
-					<a class="dropdown-item" href="<?php /*echo site_url('mediocomunicacion/');*/?>">Medio de Comunicacion</a>
-					<a class="dropdown-item" href="<?php /*echo site_url('tema/');*/?>">Tema</a>
-					<a class="dropdown-item" href="<?php /*echo site_url('subtema/');*/?>">Subtema</a>
+					<a class="dropdown-item" href="<?php echo site_url('formulario/');?>">Formularios</a>
+					<a class="dropdown-item" href="<?php echo site_url('actor/');?>">Actores</a>
+					<a class="dropdown-item" href="<?php echo site_url('departamento/');?>">Departamentos</a>
+					<a class="dropdown-item" href="<?php echo site_url('tipomedio/');?>">Tipo de Medio</a>
+					<a class="dropdown-item" href="<?php echo site_url('mediocomunicacion/');?>">Medio de Comunicacion</a>
+					<a class="dropdown-item" href="<?php echo site_url('tema/');?>">Tema</a>
+					<a class="dropdown-item" href="<?php echo site_url('subtema/');?>">Subtema</a>
 				</div>
-			</li>-->
+			</li>
 
 		</ul>
 		<ul class="navbar-nav ml-auto">
@@ -86,7 +86,7 @@
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
 
 <!--		<a class="nav-link" href="#">Base de Datos</a>-->
-<!--		<a class="nav-link" href="#">Analisis</a>-->
+		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis</a>
 <!--		<a class="nav-link" href="--><?php //echo site_url('seguimientoMonitores')?><!--">Seguimiento-Monitores</a>-->
 
 	</nav>

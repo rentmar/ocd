@@ -22,11 +22,15 @@ class Usuarios extends CI_Controller
 		echo "Lista de Usuarios";
 	}
 
-	public function crearUsuario()
+	public function crearUsuario($g)
 	{
+		$data['grupo']=$g;
 		$data['grupos'] = $this->ion_auth->groups()->result();
 		$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
-		$this->load->view('usuarios/vformulario_usuario', $data);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('usuarios/vformulario_usuario', $data);
+		$this->load->view('html/pie');
 	}
 
 	public function procesarCrear()
@@ -71,11 +75,15 @@ class Usuarios extends CI_Controller
 
 	public function editarUsuario($idusuario)
 	{
+		$data['grupo']=$this->Departamento_model->leerGrupoPorIdUser($idusuario);
 		$usuario = $this->ion_auth->user($idusuario)->row();
 		$data['usuario'] = $usuario;
 		$data['grupos'] = $this->ion_auth->groups()->result();
 		$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
 		$this->load->view('usuarios/vformulario_usuario_editar', $data);
+		$this->load->view('html/pie');
 	}
 
 	public function editarUsrLog()
@@ -210,24 +218,28 @@ class Usuarios extends CI_Controller
 	}
 
 
-	public function administradores()
+	public function listar($g)
 	{
-		$data['titulo'] = 'Administradores';
-
+		if ($g==1)
+		{
+			$data['titulo'] = 'Administradores';
+		}
+		elseif ($g==2)
+		{
+			$data['titulo'] = 'Docentes';
+		}
+		else
+		{
+			$data['titulo'] = 'Monitores';
+		}
+		$data['grupo']=$g;
 		//Solo administradores
-		$usuarios = $this->ion_auth->users('admin')->result();
-		var_dump($usuarios);
-
-
-		/*$this->load->view('html/encabezado');
+		//$data['usuarios']= $this->ion_auth->users('admin')->result();
+		$data['usuarios']= $this->Departamento_model->leerUsuarioPorIdGrupo($g);
+		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('usuarios/vusuarios_lista', $data);
-		$this->load->view('html/pie');*/
-
+		$this->load->view('html/pie');
 	}
-
-
-
-
-
+	
 }

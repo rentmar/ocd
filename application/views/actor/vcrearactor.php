@@ -1,4 +1,4 @@
-	<br>
+
 	<div id="esquinas_redondeadas">		
 		<div id="Caja_de_orden" class="Caja_de_datos">
 			<h3 id="Título_central"> Crear Nuevo Actor</h3>

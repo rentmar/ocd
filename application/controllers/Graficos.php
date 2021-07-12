@@ -14,6 +14,13 @@ class Graficos extends CI_Controller{
 	}
 	public function index()
 	{
-	    $this->load->view('graficos/vgrafico');
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('graficos/vgraficosinicio');
+		$this->load->view('html/pie');
+	}
+	public function graficouno()
+	{
+		echo "primer grafico";
 	}
 }
