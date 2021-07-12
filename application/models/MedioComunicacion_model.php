@@ -38,7 +38,6 @@ class MedioComunicacion_model extends CI_Model
 	}
 	public function leerMedioPorId($idm)
 	{
-		$this->db->select('nombre_medio,rel_idtipomedio');
 		$this->db->where('idmedio',$idm);
 		$q = $this->db->get('medio_comunicacion');
 		return $q->row();
@@ -52,7 +51,9 @@ class MedioComunicacion_model extends CI_Model
 	}
 	public function leerMedioComunicacion()
 	{
-		$q = $this->db->get('medio_comunicacion');
+		$sql="SELECT idmedio,nombre_medio,nombre_tipo FROM medio_comunicacion "
+		."LEFT JOIN tipo_medio ON medio_comunicacion.rel_idtipomedio=tipo_medio.idtipomedio ";
+		$q = $this->db->query($sql);
 		return $q->result();
 	}
 	public function agregarTipoMedio($dt)

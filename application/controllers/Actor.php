@@ -37,10 +37,10 @@ class Actor extends CI_Controller{
 	}
 	public function agregarActor()
 	{
-		$dts = array(
+		/*$dts = array(
 				'nombre_actor' => $this->input->post('nombre_actor'));
-		$this->Actor_model->agregarActor($dts);
-		redirect ('actor');
+		$this->Actor_model->agregarActor($dts);*/
+	    $this->load->view('mensajes/vde_confirmacion');
 	}
 	public function modificarActor($ida)
 	{

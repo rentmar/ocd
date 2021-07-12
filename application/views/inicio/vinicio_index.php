@@ -7,7 +7,7 @@
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest1">
-						Reforma Electoral
+						Reforma<br>Electoral
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/democracia.svg'; ?>" alt="Card image">
 					<div class="card-body">
@@ -21,7 +21,7 @@
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest2 ">
-						Institucionalidad Democrática
+						Institucionalidad<br>Democrática
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/institucionalidad.svg'; ?>" alt="Card image">
 					<div class="card-body">

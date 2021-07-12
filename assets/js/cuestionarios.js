@@ -135,8 +135,18 @@ function getMediosList(tipomedioID) {
 }
 
 function getSubtema(temaID) {
-	var temaHtml = '';
+	var identificadores = [];
+	var texto_otro = '';
+	var color = '';
+	var tema = ' ';
 	var subtema = '';
+
+	identificadores = temaID;
+	//Limpiar Otro tema
+	$("#otrotemac").removeClass("contenedores");
+	$('#otrotemac').empty();
+	$("#subtemac").empty();
+
 	$.ajax({
 		url: baseurl + "/reformaelectoral/getprueba",
 		type: 'post',
@@ -146,8 +156,83 @@ function getSubtema(temaID) {
 			console.log("Antes de la peticion");
 		} ,
 		success: function (json) {
-			console.log(json);
+			var identificadores = JSON.stringify(temaID);
+			var contador = 0;
 
+			for(var i = 0; i < temaID.length; i++)
+			{
+				//console.log(identificadores[i]);
+				if(temaID[i] == 0){
+					console.log("identificador 0");
+					texto_otro += '<label for="otrotema" >Especifique  otra :</label><br>';
+					texto_otro += '<input type="text" id="otrotema" name="otrotema" placeholder="Otro tema" class="form-control" >';
+					$('#otrotemac').html(texto_otro);
+					$('#otrotemac').addClass('contenedores');
+				}else if(temaID != 0){
+					//console.log("ide distinto de 0; " + temaID[i]);
+					contador = 0
+					//Color
+
+
+					for(var j=0; j < json.length; j++ )
+					{
+						//definir el color
+						if (json[i].rel_idcuestionario == 1)
+						{
+							color = '8cc63f';
+						}else if (json[i].rel_idcuestionario == 2){
+							color = 'EF9600';
+						}
+
+						if(temaID[i] == json[j].rel_idtema )
+						{
+							if(contador == 0)
+							{
+								tema += '<div class="contenedores">';
+								tema += '<div class="card" >';
+								tema += '<div  class="card-header  " style="background-color:#'+ color +';" >';
+								tema += '<h4>' + json[j].nombre_tema + '<h4>';
+								tema += '</div>';
+								tema += '<div class="card-body">';
+								tema += '<div class="form-check">';
+								tema += '  <label class="form-check-label" for="radio1">';
+								tema += '      <input type="radio" class="form-check-input" id="tema'+ temaID[i] +  '" name="tema' + temaID[i] +'idsubtema"' + json[j].idsubtema + ' value="' + json[j].idsubtema + '" checked >';
+								//tema += '      <input type="radio" class="form-check-input" id="radio' + json[j].idsubtema + '" name="idsubtema" value="' + json[j].idsubtema + '" checked>';
+								tema += '      ' + json[j].nombre_subtema;
+								tema += '  </label>';
+								tema += '</div>';
+								console.log(json[j].nombre_subtema + " encabezado ");
+								contador++;
+
+							}else {
+								tema += '<div class="form-check">';
+								tema += '  <label class="form-check-label" for="radio1">';
+								tema += '      <input type="radio" class="form-check-input" id="tema'+ temaID[i] + '" name="tema' + temaID[i] +'idsubtema"  value="' + json[j].idsubtema + '">';
+								tema += '      ' + json[j].nombre_subtema;
+								tema += '  </label>';
+								tema += '</div>';
+								console.log(json[j].nombre_subtema);
+							}
+						}
+
+					}
+
+
+					tema += '<div class="form-check">';
+					tema += '  <label class="form-check-label" for="radio">';
+					tema += '      <input type="radio" class="form-check-input" id="tema'+ temaID[i] + ' " name="tema' + temaID[i] +'idsubtema"  value="0">';
+					tema += '       Otro';
+					tema += '  </label>';
+					tema += '</div>';
+
+					tema += '</div>';
+					tema += '</div>';
+					tema += '</div>';
+					tema += '<br>';
+
+				}
+			}
+			$('#subtemac').html(tema);
 		}
 	});
 }
