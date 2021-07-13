@@ -10,7 +10,7 @@
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/gomonitor.jpg'; ?>" alt="Card image">
 					<div class="card-body">
 
-						<a href="<?php echo site_url('reformaelectoral');?>" class="btn btn-info" role="button" style="background-color:#93C90F;">Ver</a>
+						<a href="<?php echo site_url('Seguimientomonitores/EstadoObservacionElectoral');?>" class="btn btn-info" role="button" style="background-color:#93C90F;">Ver</a>
 					</div>
 				</div>
 			</div>
