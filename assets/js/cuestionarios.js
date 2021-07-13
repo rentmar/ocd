@@ -285,6 +285,10 @@ function getSubtemaList(temaID, temaTitulo, color) {
 			tarjeta += '       Otro';
 			tarjeta += '  </label>';
 			tarjeta += '</div>';
+
+			tarjeta += '<div id="" class="form-check">';
+			tarjeta += '</div>';
+
 			tarjeta += '</div>';
 			tarjeta += '</div>';
 
