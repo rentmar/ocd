@@ -6,14 +6,15 @@ class SeguimientoMonitores_model extends CI_Model{
     }
     public function leerSeguimientoMonitores()
     {
-        $qry=$this->db->query("SELECT first_name, last_name, nombre_departamento, COUNT(DISTINCT nombre_cuestionario) AS nombre_cuestionario "
+        $qry=$this->db->query("SELECT first_name, last_name, nombre_departamento, nombre_cuestionario,COUNT(nombre_cuestionario) nombre_cuestionario1 "
                 . "FROM cuestionario A "
-                . "INNER JOIN tema B "
+                . "JOIN tema B "
                 . "ON A.idcuestionario = B.rel_idcuestionario "
-                . "LEFT JOIN users C "
+                . "JOIN users C "
                 . "ON C.id = B.rel_idusuario "
-                . "LEFT JOIN departamento D "
-                . "ON D.iddepartamento = C.rel_iddepartamento ");
+                . "JOIN departamento D "
+                . "ON D.iddepartamento = C.rel_iddepartamento "
+                . "GROUP BY nombre_cuestionario ");
         return $qry->result();
     }
 }
