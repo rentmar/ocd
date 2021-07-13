@@ -14,18 +14,19 @@ class MedioComunicacion extends CI_Controller{
 	}
 	public function index()
 	{
-		/*$dt['departamentos']=$this->MedioComunicacion_model->leerDepartamento();
-		$dt['tipos']=$this->MedioComunicacion_model->leerTipoMedio();
-		//$this->load->view('medio_comunicacion/vagregarmedio',$dt);
-		// para el edit
-		$idm=12;
-		$dt['medio']=$this->MedioComunicacion_model->leerMedioPorId($idm);
-		$dt['medio_departamento']=$this->MedioComunicacion_model->leerDepartamentoMedioId($idm);
-		//echo var_dump($dt['medio_departamento']);*/
 		$dt['medios']=$this->MedioComunicacion_model->leerMedioComunicacion();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('medio_comunicacion/vmediocomunicacion',$dt);
+		$this->load->view('html/pie');
+	}
+	public function crearMedioComunicacion()
+	{
+		$dt['departamentos']=$this->MedioComunicacion_model->leerDepartamento();
+		$dt['tipos']=$this->MedioComunicacion_model->leerTipoMedio();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('medio_comunicacion/vcrearmedio',$dt);
 		$this->load->view('html/pie');
 	}
 	public function agregarMedioComunicacion()
@@ -34,7 +35,44 @@ class MedioComunicacion extends CI_Controller{
 		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
 		$dts = array(
 				'nombre_medio' => $this->input->post('nombre_medio'),
+				'rel_idtipomedio'=> $this->input->post('idtipomedio'));
+		if ($this->input->post('d0') == NULL) {
+			foreach ($departamentos as $d)
+			{
+				if ($this->input->post('d'.$d->iddepartamento) != NULL)
+				{
+					array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
+				}
+			}
+		}
+		if ($this->input->post('d0') != NULL)
+		{
+			foreach ($departamentos as $d)
+			{
+				array_push($dtchkbox,$d->iddepartamento);
+			}
+		}
+		$this->MedioComunicacion_model->agregarMedioComunicacion($dts,$dtchkbox);
+		redirect ('mediocomunicacion');
+	}
+	public function editarMedioComunicacion($idm)
+	{
+		$dt['medio']=$this->MedioComunicacion_model->leerMedioPorId($idm);
+		$dt['departamentos']=$this->MedioComunicacion_model->leerDepartamento();
+		$dt['tipos']=$this->MedioComunicacion_model->leerTipoMedio();
+		$dt['medio_departamento']=$this->MedioComunicacion_model->leerDepartamentoMedioId($idm);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('medio_comunicacion/veditarmedio',$dt);
+		$this->load->view('html/pie');
+	}
+	public function modificarMedioComunicacion($idm)
+	{
+		$dts = array(
+				'nombre_medio' => $this->input->post('nombre_medio'),
 				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
+		$dtchkbox=array();
+		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
 		foreach ($departamentos as $d)
 		{
 			if ($this->input->post('d'.$d->iddepartamento) != NULL)
@@ -42,16 +80,8 @@ class MedioComunicacion extends CI_Controller{
 				array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
 			}
 		}
-		$this->MedioComunicacion_model->agregarMedioComunicacion($dts,$dtchkbox);
-	}
-	public function modificarMedioComunicacion($idm)
-	{
-		$departamentos=$this->MedioComunicacion_model->leerDepartamento();
-		echo count($departamentos);
-		$dts = array(
-				'nombre_medio' => $this->input->post('nombre_medio'),
-				'rel_idtipomedio'=> $this->input->post('rel_idtipomedio'));
-		$iddpto=$this->input->post('rel_iddepartamento');
-		$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$iddpto,$idm);
+		var_dump($dtchkbox);
+		//$iddpto=$this->input->post('rel_iddepartamento');
+		//$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$iddpto,$idm);
 	}
 }

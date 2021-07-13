@@ -40,6 +40,21 @@ class Departamento_model extends CI_Model
 		$sql = $this->db->update('departamento', $departamento );
 		return $sql;
 	}
-
+	public function leerUsuarioPorIdGrupo($idgrupo)
+	{
+		$sql="SELECT * FROM users "
+		."LEFT JOIN users_groups ON users.id=users_groups.user_id "
+		."LEFT JOIN groups ON users_groups.group_id=groups.id "
+		."WHERE groups.id =".$idgrupo;
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+	public function leerGrupoPorIdUser($idu)
+	{
+		$this->db->where('user_id',$idu);
+		$this->db->select('group_id');
+		$q=$this->db->get('users_groups');
+		return $q->row();
+	}
 
 }

@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
-						<a href=""><input type="submit" class="BOTON" value="CREAR"></a>
+						<a href="<?php echo site_url('usuarios/crearusuario/'.$grupo);?>"><input type="submit" class="BOTON" value="CREAR"></a>
 						<a href=""><input type="submit" class="BOTON" value="CANCELAR"></a>
 					</div>
 				</div>
@@ -16,41 +16,25 @@
 				</h3>
 			</div>
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-				<table >
-					<thead>
-						<tr>
-							<th>Usuario</th>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>Departamento</th>
-							<th>Accion</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<table>
 					<tr id="datos">
 						<th>Nro</th>
+						<th>Usuario</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
 						<th>Departamento</th>
 						<th>Accion</th>
 					</tr>
-					<?php //foreach (//$departamentos as $d) {?>
+					<?php foreach ($usuarios as $u) {?>
 						<tr>
-							<td><?php// echo $d->iddepartamento;?></td>
-							<td><?php //echo $d->nombre_departamento;?></td>
-							<td><a href="#">editar</a></td>
+							<td><?php echo $u->id;?></td>
+							<td><?php echo $u->username;?></td>
+							<td><?php echo $u->first_name;?></td>
+							<td><?php echo $u->last_name;?></td>
+							<td><?php echo $u->rel_iddepartamento;?></td>
+							<td><a href="<?php echo site_url('usuarios/editarusuario/'.$u->id);?>">editar</a></td>
 						</tr>
-					<?php// } ?>
+					<?php } ?>
 				</table>
 			</div>
 		</div>
