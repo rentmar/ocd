@@ -1,13 +1,13 @@
 <html>
 	
-	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
+<!--	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 		<div id="caja_boton">
 			<div id="contenedor-submit">
-				<a href="<?php echo site_url('formulario/crearformulario');?>"><input type="submit" class="BOTON" value="CREAR"></a>
+				<a href="<?php //echo site_url('formulario/crearformulario');?>"><input type="submit" class="BOTON" value="CREAR"></a>
 				<a href=""><input type="button" class="BOTON" value="CANCELAR"></a>
 			</div>
 		</div>
-	</div>
+	</div>-->
 	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 		<table>
 			<tr id="datos">	

@@ -19,6 +19,7 @@ class Seguimientomonitores extends CI_Controller
     public function EstadoObservacionElectoral()
     {
         $DatosSeguimientoM['SeguimientoMonitores']=$this->SeguimientoMonitores_model->leerSeguimientoMonitores();
+        $DatosSeguimientoM['NumeroDeCuestionarios']=$this->SeguimientoMonitores_model->leerCuestionarios();
         //var_dump($DatosSeguimientoM);
         $this->load->view('html/encabezado');
         $this->load->view('html/navbar');

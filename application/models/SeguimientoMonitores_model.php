@@ -17,4 +17,10 @@ class SeguimientoMonitores_model extends CI_Model{
                 . "GROUP BY nombre_cuestionario ");
         return $qry->result();
     }
+    public function leerCuestionarios()
+    {
+        $qry=$this->db->query("SELECT * "
+                . "FROM cuestionario ");
+        return $qry->result();
+    }
 }
