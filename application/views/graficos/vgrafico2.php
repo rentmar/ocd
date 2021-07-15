@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 	<html lang="es">
 		<head>
 			<meta charset="UTF-8">
@@ -119,16 +119,20 @@
 				</nav>
 				<br>
 				<div class="contenedor_gráficas">
-					<div class="contenedor_superior" id="reforma">
-						<h5><b> Grafico de Cuerdas </b></h5>
+					<div class="contenedor_superior" id="institucional">
+						<h5><b> Grafico Barras Jerarquia </b></h5>
 					</div>
 					<div class="gráfico">
-						<p> Haga click en una de las barras de color para ver los resultados.</p>
+						<div>
+							<a href="<?php //echo site_url('formulario3/');?>" class="btn btn-info" role="button" style="background-color:#474142;">Opcion</a>
+							<a href="<?php //echo site_url('formulario3/');?>" class="btn btn-info" role="button" style="background-color:#474142;">Opcion</a>
+							<a href="<?php //echo site_url('formulario3/');?>" class="btn btn-info" role="button" style="background-color:#474142;">Opcion</a>
+						</div>
 						<div id="table">
-							<img src="<?php echo base_url().'assets/img/cuerdas.png'; ?>" alt="Gráfico de barras">
+							<img src="<?php echo base_url().'assets/img/Grafica_dep.jpg'; ?>">
 						</div>
 						<br>
-						<h6> Descripción de gráfica</h6>
+						<h6> Descripción de gráfica </h6>
 						<p> Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, aptent sapien a vivamus consequat fames.</p>
 					</div>
 					<br>
