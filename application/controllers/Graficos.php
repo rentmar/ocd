@@ -21,6 +21,6 @@ class Graficos extends CI_Controller{
 	}
 	public function graficouno()
 	{
-		echo "primer grafico";
+		 $this->load->view('graficos/vgrafico');
 	}
 }

@@ -10,21 +10,32 @@ class MedioComunicacion_model extends CI_Model
 	public function agregarMedioComunicacion($dt,$dtchkbox)
 	{
 		$this->db->trans_start();
-		$this->db->insert('medio_comunicacion', $dt);
-		$idmc=$this->db->insert_id();
-		foreach ($dtchkbox as $iddpto)
-		{
-			$dtm=array('rel_idmedio'=>$idmc,
-					'rel_iddepartamento'=>$iddpto
-					);
-			$this->db->insert('medio_departamento', $dtm);
-		}
+			$this->db->insert('medio_comunicacion', $dt);
+			$idmc=$this->db->insert_id();
+			foreach ($dtchkbox as $iddpto)
+			{
+				$dtm=array('rel_idmedio'=>$idmc,
+						'rel_iddepartamento'=>$iddpto
+						);
+				$this->db->insert('medio_departamento', $dtm);
+			}
 		$this->db->trans_complete();
 	}
-	public function modificarMedioComunicacion($dt,$idm)
+	public function modificarMedioComunicacion($dt,$dtchkbox,$idm)
 	{
-		$this->db->where('idmedio',$idm);
-		$this->db->update('medio_comunicacion',$dt);
+		$this->db->trans_start();
+			$this->db->where('idmedio',$idm);
+			$this->db->update('medio_comunicacion',$dt);
+			$this->db->where('rel_idmedio',$idm);
+			$this->db->delete('medio_departamento');
+			foreach ($dtchkbox as $iddpto)
+			{
+				$dtm=array('rel_idmedio'=>$idm,
+						'rel_iddepartamento'=>$iddpto
+						);
+				$this->db->insert('medio_departamento', $dtm);
+			}
+		$this->db->trans_complete();
 	}
 	public function leerDepartamento()
 	{

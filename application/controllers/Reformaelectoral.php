@@ -91,7 +91,7 @@ class Reformaelectoral extends CI_Controller
 	public function preenvio()
 	{
 		$idusr=$this->input->post('idusuario');
-		$actor=$this->Cuestionario_model->leerActorPorId($this->input->post('idactor'));
+		//$actor=$this->Cuestionario_model->leerActorPorId($this->input->post('idactor[]'));
 		$medio=$this->Cuestionario_model->leerMedioPorId($this->input->post('idmedio'));
 		$DatosNoticia=[
             'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
@@ -99,16 +99,16 @@ class Reformaelectoral extends CI_Controller
             'titular'=>$this->input->post('titular'),
             'resumen'=>$this->input->post('resumen'),
             'url_noticia'=>$this->input->post('url'),
-            'idactor'=>$this->input->post('idactor'),
+            //'idactor'=>$this->input->post('idactor'),
 			'idmedio'=>$this->input->post('idmedio'),
-			'idtema'=>$this->input->post('idtema'),
-			'idsubtema'=>$this->input->post('idsubtema'),
+			//'idtema'=>$this->input->post('idtema'),
+			//'idsubtema'=>$this->input->post('idsubtema'),
 			'idcuestionario'=>$this->input->post('idformulario'),
-			'idusr'=>$idusr,
-			'actor'=>$actor->nombre_actor,
+			'idusuario'=>$idusr,
+			'actor'=>$this->input->post('idactor[]'),
 			'medio'=>$medio->nombre_medio
             ];
-		if ($this->input->post('idtema')==0)
+		/*if ($this->input->post('idtema')==0)
 		{
 			$DatosNoticia['tema']=$this->input->post('otrotema');
 			$DatosNoticia['subtema']="Subtema no definido";
@@ -122,7 +122,7 @@ class Reformaelectoral extends CI_Controller
 		{
 			$DatosNoticia['tema']=$this->Cuestionario_model->leerTemaPorId($this->input->post('idtema'))->nombre_tema;
 			$DatosNoticia['subtema']=$this->Cuestionario_model->leerSubTemaPorId($this->input->post('idsubtema'))->nombre_subtema;
-		}
+		}*/
         $this->form_validation->set_rules('titular', 'Titular', 'required');
         $this->form_validation->set_rules('resumen', 'Resumen', 'required');
         $this->form_validation->set_rules('url', 'urlNoticia', 'valid_url');
@@ -134,12 +134,11 @@ class Reformaelectoral extends CI_Controller
         else
         {
             //echo "Validacion correcta";
-		$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
-		$this->load->view('html/pie');
-	}
-
+			$this->load->view('html/encabezado');
+			$this->load->view('html/navbar');
+			$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
+			$this->load->view('html/pie');
+		}
 	}
 
 	public function editar()
