@@ -3,7 +3,7 @@
 			<br><br>
 			<?php echo validation_errors(); ?>
 			<?php // echo form_open('reformaelectoral/preenvio');?>
-			<?php echo form_open('reformaelectoral/capturarDatos');?>
+			<?php echo form_open('reformaelectoral/preenvio');?>
 
 			<div class="contenedores_divididos">
 				<div class="contenedor_superior1" id="contenedor_pequeño">

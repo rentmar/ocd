@@ -5,17 +5,17 @@
 		<script type="text/javascript" src="<?php echo base_url().'/assets/d3/tsiyur.js';?>"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url().'/assets/d3/gestilo.css';?>">
 	</head>
-	<body >
-		<h2 class = "miclase">Message</h2>
-		<div class="miclase">
-			Hola Oscar
-		</div>
+	<body>
+		<svg>
+			
+		</svg>
 		<script>
-			d3.selectAll(".miclase").style("color","blue");
+			var a = 600;
+			var h = 600;
+			const svg = d3.select("svg")
+					.attr("width",a)
+					.attr("height",h)
+					.attr("viewBox",[-a/2,-h/2,a,h]);
 		</script>
-		<!--<div class="barras"></div>
-		<!--<script>
-			d3.select('body').append('h1').text('Oscar Apaza Rocha');
-		</script>-->
 	</body>
 </html>

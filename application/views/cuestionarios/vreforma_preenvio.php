@@ -35,16 +35,16 @@
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Actor:
-								<?php echo ' '.$actor; ?>
+								<?php echo var_dump($actor); ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Tema:
-								<?php echo ' '.$tema; ?>
+								<?php //echo ' '.$tema; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Subtema:
 								<?php
-								echo ' '.$subtema;
+								//echo ' '.$subtema;
 								?>
 							</a>
 						</div>

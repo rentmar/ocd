@@ -60,22 +60,6 @@ class Noticia extends CI_Controller
 
 		redirect('inicio/');
                 
-                
-/*        $this->form_validation->set_rules('titular', 'Titular', 'required');
-        $this->form_validation->set_rules('resumen', 'Resumen', 'required');
-        $this->form_validation->set_rules('url', 'urlNoticia', 'required');
-        $this->form_validation->set_rules('idactor', 'relIdActor', 'required');
-        $this->form_validation->set_rules('isdubtema', 'relIdSubtema', 'required');
-        if ($this->form_validation->run() == FALSE)
-        {
-            //echo "Validacion incorrecta";
-            $this->load->view('ReformaElectoral');
-        }
-        else
-        {
-            //echo "Validacion correcta";
-            $idnoticia=$this->Noticia_model->insertarNoticia($DatosNoticia);
-	}*/
     }
 	public function editarNoticia()
 	{
