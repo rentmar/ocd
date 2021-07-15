@@ -10,13 +10,19 @@
 	</div>-->
 	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 		<table>
-			<tr id="datos">	
+			<tr id="datos">
 			<th>Nombre</th>	
 			<th>Apellido</th>
 			<th>Departamento</th>
-                        <th>Formulario</th>
+                         <th>Cuestionario</th>
+                         <th>Numero de Cuestionarios</th>
+ <!--                       <?php //foreach ($NumeroDeCuestionarios as $nC) {?>
+                        <th><?php //echo $nC->nombre_cuestionario;?></th>
+                        <?php //} ?> -->
+                        
+                        <!--<th>Formulario</th>-->
                         <!--<th>NoticiasID</th>-->
-                        <th>Formularios Realizados</th>
+                        <!--<th>Formularios Realizados</th>-->
 			</tr>
 			<?php foreach ($SeguimientoMonitores as $f) {?>
 			<tr>
