@@ -8,7 +8,7 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-			<title> Reformas electorales </title>
+			<title> Formularios </title>
 			<style>
 				body {
 					background-color:#d3d3d3;
@@ -22,6 +22,30 @@
 				}
 				.navbar-brand {
 					color:#ffffff;
+				}
+				.contenedor_superior{
+					background-color:#66cc00;
+					border-top-left-radius:10px;
+					border-top-right-radius: 10px;
+					padding:20px 30px 10px 30px;
+				}
+				#header{
+					background:#662d91;
+					text-align:center;
+					padding-bottom:10px;
+					width:100%;
+				}
+				#header img{
+					max-width:280px;
+					display: block;
+					padding:20px 10px 0px 10px;
+					margin:10px auto;
+				}	
+				h5 {
+					font-family: Verdana;
+					color:#ffffff;
+					line-height:140%;
+					text-align:center;
 				}
 				#Título_cabecera{
 					font-family: Verdana;
@@ -40,6 +64,7 @@
 					padding:0;
 					display:flex;
 				}
+
 				.menu li :hover{
 					background:rgba(0,0,0,0.2);
 				}
@@ -48,52 +73,32 @@
 					padding: 15px 20px;
 					color: #ffffff;
 					text-decoration:none;
-				}
+				}				
 				main {	
 					padding:0;
 					width:100%;
 					margin-top:30px;
 				}
-				.contenedor_gráficas {
-					max-width:900px;
+				.contenedores_divididos {
+					max-width:570px;
 					margin-left:auto;
 					margin-right:auto;
 				}
-				.contenedor_superior{
-					border-top-left-radius:10px;
-					border-top-right-radius: 10px;
-					padding:20px 25px 15px 25px;
-				}
-				#reforma {
-					background-color:#8cc63f;
-				}
-				#institucional {
-					background-color:#ef9600;
-				}				
-				.gráfico{
+				.contenedor_inferior{
 					background-color:#ffffff;
 					padding:20px 30px 25px 30px;
 					border-bottom-left-radius:10px;
 					border-bottom-right-radius: 10px;
+					display:flex;
+					justify-content:center;
 				}
-				.gráfico img{
-					width:700px;
+				.contenedor_inferior img{
+					width:200px;
+					padding-right:30px;
+					display:flex;
 				}
-				#table{
-					overflow-x:auto;
-
-				}
-				h5 {
-					color:#ffffff;
-					font-family:Helvetica;
-				}
-				p {
-					text-align:left;
-				}
-				@media (max-width:768px) {
-					.contenedor_gráficas{
-						column-count:1;
-					}
+				.text{
+					font-size:13pt;
 				}
 			</style>
 		</head>
@@ -105,33 +110,36 @@
 						  <a class="navbar-brand" href="#">OCD</a>
 						</div>
 						<div class="visible-xs">
-							<a href="">	<span id="label" class="text-info">Analisis Graficos <b></b></span></a>
+							<a href="">	<span id="label" class="text-info">Bienvenido, <b>Alejandro</b></span></a>
 						</div>
 					</div>
 				</nav>
 			</header>
 			<br>
 			<main>
+				<div id="header">
+					<img src="/img/OCD-bolivia-2.svg" alt="Logo CD">
+					<h4 id="Título_cabecera"> <b>Monitor de Medios</b> </h4>
+				</div>
 				<nav class="menu">
 					<ul>
-						<li><a href="<?php echo site_url('graficos'); ?>">Volver</a></li>
+						<li><a href="">Inicio</a></li>
 					</ul>
 				</nav>
 				<br>
-				<div class="contenedor_gráficas">
-					<div class="contenedor_superior" id="reforma">
-						<h5><b> Grafico de Cuerdas </b></h5>
+				<div class="contenedores_divididos">
+					<div class="contenedor_superior" id="contenedor_pequeño">
+						<h5 id="Título_mensaje"> <b> Envío con éxito</b> </h5>
 					</div>
-					<div class="gráfico">
-						<p> Haga click en una de las barras de color para ver los resultados.</p>
-						<div id="table">
-							<img src="<?php echo base_url().'assets/img/cuerdas.png'; ?>" alt="Gráfico de barras">
+					<div class="contenedor_inferior">
+						<img src="" alt="">
+						<div class="text">
+							<p>¡Gracias! Los datos han sido enviados con éxito. </p>
+							<br>
+							<br>
+							<a href=""> Enviar otra respuesta </a>
 						</div>
-						<br>
-						<h6> Descripción de gráfica</h6>
-						<p> Lorem ipsum dolor sit amet consectetur adipiscing elit scelerisque, aptent sapien a vivamus consequat fames.</p>
 					</div>
-					<br>
 				</div>
 			</main>
 		</body>

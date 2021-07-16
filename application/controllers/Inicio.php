@@ -29,7 +29,7 @@ class Inicio extends CI_Controller
 			$this->session->set_userdata('noticia_original', []);
 			//nueva noticia
 			$this->session->set_userdata('nueva_noticia', false);
-			$this->session->set_userdata('nueva_noticia_ids', []);
+			$this->session->set_userdata('nueva_noticia_ids', [ ]);
 			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
 		}
 
@@ -37,5 +37,21 @@ class Inicio extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('inicio/vinicio_index');
 		$this->load->view('html/pie');
+	}
+
+	public function exito()
+	{
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('mensajes/vde_confirmacion');
+		$this->load->view('html/pie');
+	}
+
+	public function fracaso()
+	{
+		//$this->load->view('html/encabezado');
+		//$this->load->view('html/navbar');
+		$this->load->view('mensajes/vde_error');
+		//$this->load->view('html/pie');
 	}
 }

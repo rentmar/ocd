@@ -271,7 +271,7 @@ class CI_Security {
 		{
 			return FALSE;
 		}
-
+/*
 		setcookie(
 			$this->_csrf_cookie_name,
 			$this->_csrf_hash,
@@ -280,7 +280,11 @@ class CI_Security {
 			config_item('cookie_domain'),
 			$secure_cookie,
 			config_item('cookie_httponly')
-		);
+		);*/
+
+		setcookie($this->_csrf_cookie_name, $this->_csrf_hash, ['samesite' => 'None', 'secure' => true,'expires' => $expire, 'path' => config_item('cookie_path'), 'domain' => config_item('cookie_domain'), 'httponly' => config_item('cookie_httponly')]);
+
+
 		log_message('info', 'CSRF cookie sent');
 
 		return $this;

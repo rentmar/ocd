@@ -7,7 +7,9 @@
 
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-	<a class="navbar-brand mr-auto mr-lg-0" href="#">OCD</a>
+	<a class="navbar-brand mr-auto mr-lg-0" href="<?php echo site_url('/');?>">
+		OCD
+	</a>
 	<button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -85,9 +87,9 @@
 	<nav class="nav nav-underline">
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
 
-<!--		<a class="nav-link" href="#">Base de Datos</a>-->
+		<a class="nav-link" href="<?php echo site_url('manejodb')?>">Base de Datos</a>
 
-		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis</a>
+		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis Grafico</a>
 <!--		<a class="nav-link" href="--><?php //echo site_url('seguimientoMonitores')?><!--">Seguimiento-Monitores</a>-->
 
 <!--		<a class="nav-link" href="#">Analisis</a>-->

@@ -208,4 +208,25 @@ class Cuestionario_model extends CI_Model
 		return $tema_subtema;
 	}
 
+	public function leerTemasPorIDs()
+	{
+		$sql = "SELECT * "
+			."FROM tema as t  "
+			."WHERE t.idtema = ?  ";
+		$tema_subtema = array();
+
+
+		foreach ($this->_temaIDs as $i=>$id)
+		{
+			if($id != 0)
+			{
+				$qry = $this->db->query($sql, [$id,  ]);
+				$registro = $qry->result_array();
+
+				$tema_subtema = array_merge($tema_subtema, $registro);
+			}
+		}
+		return $tema_subtema;
+	}
+
 }
