@@ -80,8 +80,7 @@ class MedioComunicacion extends CI_Controller{
 				array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
 			}
 		}
-		var_dump($dtchkbox);
-		//$iddpto=$this->input->post('rel_iddepartamento');
-		//$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$iddpto,$idm);
+		$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$dtchkbox,$idm);
+		redirect ('mediocomunicacion');
 	}
 }
