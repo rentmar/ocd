@@ -9,96 +9,142 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
 //Funcion para desplegar
 jQuery(document).on('change', 'select#tema', function (e) {
 	e.preventDefault();
-	var idtemas = [];
-	var titulo;
-	var color;
-	var subtemas = '';
-	var subtema = '';
+	var fecha = $('#fecha').val();
+	var titular = $('#titular').val();
+	var resumen = $('#resumen').val();
+	var url = $('#url').val();
+	var formulario = $('#idformulario').val();
+	var usuario = $('#idusuario').val();
 
-	//Capturar valores del select
-	idtemas = $('select#tema').val();
-	titulo = 'Titulo';
-	getSubtema(idtemas);
+	var noticia = new Noticia();
+	noticia.fecha_noticia = fecha;
+	noticia.titular = titular;
+	noticia.resumen = resumen;
+	noticia.url_noticia = url;
+	noticia.idformulario = formulario;
+	noticia.rel_idusuario = usuario;
 
+	//Recolectar el Tipo de medio
+	var id = $('select#tipo-medio').val();
+	var tipo = $('select#tipo-medio option:selected').text();
+	var tipomedio = new Tipomedio(id, tipo);
 
+	noticia.tipo_medio = tipomedio;
 
-	/*
-	* Rutina de prueba
-	**/
-	/*var valores = $('select#tema').val();
-	alert('identificadores: '+ valores);
-	alert('longitud del array: '+ valores.length);*/
-	/*e.preventDefault();
-	var temaID = jQuery(this).val();
-	var color ;
-	if($('#idformulario').val()==1){
-		color = '8cc63f';
+	//Recolectar el medio de comunicacion
+	var idmedio = $('select#medio').val();
+	var medioname = $('select#medio option:selected').text();
+	var medio = new Medio(idmedio, medioname, id);
 
-	}else if($('#idformulario').val()==2){
-		color = 'EF9600';
-	}
-	$("#otrotemac").removeClass("contenedores");
-	$('#otrotemac').empty();
-	$('#subtemac').removeClass('contenedores');
-	$('#subtemac').empty();
-	$('#otrosubtema').removeClass('contenedores');
-	$('#otrosubtema').empty();
+	noticia.medio_comunicacion = medio;
 
-	if(temaID == ' ' ){
-		$("#otrotemac").removeClass("contenedores");
-		$('#otrotemac').empty();
-		$('#subtemac').removeClass('contenedores');
-		$('#subtemac').empty();
-		$('#otrosubtema').removeClass('contenedores');
-		$('#otrosubtema').empty();
-		//$('#subtemacard').empty();
-		//$('#otrotemacard').empty();
-		//$('#cajatexto').empty();
+	//Recolectar a los actores de la noticia
+	var actores = [];
+	$('input[name="idactor[]"]:checked').each(function () {
+		actores.push(this.value);
+	});
 
-	}
-	else if (temaID == 0){
+	noticia.actores = actores;
 
-		$('#otrotemac').addClass("contenedores");
-		//Agregar el contenido
-		var textot = ' ';
-		textot += '<label for="otrotema" >Especifique  otra :</label><br>';
-		textot += '<input type="text" id="otrotema" name="otrotema" placeholder="Otro tema" class="form-control" >';
-		$('#otrotemac').html(textot);
-		$('#subtemac').removeClass('contenedores');
-		$('#subtemac').empty();
-		$('#otrosubtema').removeClass('contenedores');
-		$('#otrosubtema').empty();
+	//Capturar los temas de la noticia
+	var temas = [];
+	$('#tema option:selected').each(function () {
+		temas.push(this.value);
+	});
+
+	noticia.temas = temas;
 
 
+	console.log(noticia);
 
-	}else{
-		$("#otrotemac").removeClass("contenedores");
-		$('#otrotemac').empty();
-		$('#otrosubtema').removeClass('contenedores');
-		$('#otrosubtema').empty();
-		var temaTitulo = 'Subtema - ' + $('#tema option:selected').html();
-		$('#subtemac').addClass('contenedores');
-		getSubtemaList(temaID, temaTitulo, color);
-	}*/
+	setNoticia(noticia);
 });
 
-$('#subtemac').click(function () {
-	var valor;
-	var texto='';
-	valor = $('input[name=idsubtema]:checked').val();
-	if(valor==0)
-	{
-		//Agregar contenido a #cajatexto
-		texto += '<label>Especifique otra :</label><br>';
-		texto += '<input type="text" id="otrosubtema" name="otrossubtema" placeholder="Otro Subtema" >';
-		$('#otrosubtema').addClass('contenedores');
-		$('#otrosubtema').html(texto);
-	}else {
-		//Vaciar contenido de #cajatexto
-		$('#otrosubtema').removeClass('contenedores');
-		$('#otrosubtema').empty();
-	}
-});
+//Definimos el objeto  noticia
+function Noticia() {
+	this.fecha_noticia = "";
+	this.titular = "";
+	this.resumen = "";
+	this.url_noticia = "";
+	this.rel_idusuario = "";
+	this.idformulario = "" ;
+	this.actores = [];
+	this.temas = [];
+	this.subtemas = [];
+}
+
+//Definimos el obj tipo de medio
+function Tipomedio(identificador, nombre) {
+	this.idtipomedio = identificador;
+	this.nombre_tipo = nombre;
+}
+
+
+//DEfinimos el obj medio
+function Medio(identificador, nombre, idtipo) {
+	this.idmedio = identificador;
+	this.nombre_medio = nombre;
+	this.rel_idtipomedio = idtipo;
+}
+
+//Definimos el objeto tema
+function Tema(idtema, nombre, idcuestionario, idusuario) {
+	this.idtema = idtema; //Identificador del tema
+	this.nombre_tema = nombre; //Nombre del tema
+	this.rel_idcuestionario = idcuestionario; //Identificador del cuestionario al q el tema pertenece
+	this.rel_usuario = idusuario; //Identificador del usuario  q creo el tema
+}
+
+//Definimos el objeto subtema
+function Subtemas(idsubtema, nombre, idtema) {
+	this.idsubtema = idsubtema; //identificador del subtema
+	this.nombre_subtema = nombre; //Nombre del subtema
+	this.rel_idtema = idtema; //Identificador del tema al que pertenece el subtema
+}
+
+//Obj Otro tema
+function Otrotema(nombre, idcuestionario, idusuario) {
+	this.nombre_otrotema = nombre; //Nombre del otro tema
+	this.rel_idcuestionario = idcuestionario; //Cuestionario al que pertenece
+	this.rel_idusuario = idusuario //Usuario que crea el otro tema
+}
+
+//Obf Otro subtema
+function Otrosubtema(nombre, idtema) {
+	this.nombre_otrosubtema = nombre; //Nombre del otro subtema definido
+	this.rel_idtema = idtema; //Identificador del tema al que pertence
+}
+
+function setNoticia(noticia) {
+	//alert(noticia.temas);
+	$.ajax({
+		url: baseurl + "/reformaelectoral/actualizar",
+		type: 'post',
+		data: {noticia: JSON.stringify(noticia) },
+		dataType: 'html',
+		beforeSend: function () {
+		},
+		complete: function () {
+
+		},
+		success: function (html) {
+			console.log('RECIBIDO');
+			console.log(html);
+			location.reload();
+			$('#tipo-medio option[value=" "]').attr('selected', true);
+			$('#tipo-medio option:first').attr('selected','selected');
+			$('#tipo-medio option:first').prop('selected', true);
+
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+	
+}
+
+
 
 
 
@@ -220,9 +266,12 @@ function getSubtema(temaID) {
 
 					tema += '<div class="form-check">';
 					tema += '  <label class="form-check-label" for="radio">';
-					tema += '      <input type="radio" class="form-check-input" id="tema'+ temaID[i] + ' " name="tema' + temaID[i] +'idsubtema"  value="0">';
+					tema += '      <input type="radio" class="form-check-input" id="otrosubtema'+ temaID[i] +'" name="tema' + temaID[i] +'idsubtema"  value="0">';
 					tema += '       Otro';
 					tema += '  </label>';
+					tema += '</div>';
+
+					tema += '<div id="otro'+ temaID[i] +'" class="form-check">';
 					tema += '</div>';
 
 					tema += '</div>';
@@ -292,8 +341,8 @@ function getSubtemaList(temaID, temaTitulo, color) {
 			tarjeta += '</div>';
 			tarjeta += '</div>';
 
-			//jQuery("#subtemac").html(tarjeta);
-			return "Hola ";
+			jQuery("#subtemac").html(tarjeta);
+
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
@@ -302,10 +351,46 @@ function getSubtemaList(temaID, temaTitulo, color) {
 	});
 }
 
+
+
+
 $(document).ready(function() {
 	$('.selector-multiple').select2({
 		placeholder: "Seleccione un tema"
 	});
+});
+
+$('#subtemac').click(function () {
+
+
+	/*var nombre;
+	var texto = '';
+	alert("Hola");
+	nombre = $('input:radio:checked').attr("name");
+	alert("nombre: " + nombre);
+	valor = $('input:radio:checked').val();
+	alert("Valor: " + valor);
+	if(valor==0)
+	{
+		texto += '<label>Especifique otra :</label><br>';
+		texto += '<input type="text" id="otrosubtema" name="otrossubtema" placeholder="Otro Subtema" >';
+		console.log("Activar otro tema");
+	}*/
+	/*var valor;
+	var texto='';
+	valor = $('input[name=idsubtema]:checked').val();
+	if(valor==0)
+	{
+		//Agregar contenido a #cajatexto
+		texto += '<label>Especifique otra :</label><br>';
+		texto += '<input type="text" id="otrosubtema" name="otrossubtema" placeholder="Otro Subtema" >';
+		$('#otrosubtema').addClass('contenedores');
+		$('#otrosubtema').html(texto);
+	}else {
+		//Vaciar contenido de #cajatexto
+		$('#otrosubtema').removeClass('contenedores');
+		$('#otrosubtema').empty();
+	}*/
 });
 
 

@@ -2,8 +2,8 @@
 		<main>
 			<br><br>
 			<?php echo validation_errors(); ?>
-			<?php // echo form_open('reformaelectoral/preenvio');?>
-			<?php echo form_open('reformaelectoral/capturarDatos');?>
+			<?php echo form_open('reformaelectoral/preenvio');?>
+			<?php //echo form_open('reformaelectoral/capturarDatos');?>
 
 			<div class="contenedores_divididos">
 				<div class="contenedor_superior1" id="contenedor_pequeño">
@@ -15,7 +15,13 @@
 			<br>
 			<div class="contenedores">
 				<label for="fecha">Introduzca la fecha de publicación/difusión de la noticia:</label><br>
-				<input type="date" id="fecha" name="fecha" required >
+				<input type="date" id="fecha" name="fecha"
+					   value="<?php
+					   if(isset($fecha))
+					   {
+					   	 echo $fecha;
+					   };
+					   ?>" required >
 				<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
 				<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
 
@@ -43,21 +49,44 @@
 			<br>
 			<div class="contenedores">
 				<label for="titular">Escriba el titular de la noticia:</label><br>
-				<input type="text" id="titular" name="titular" required class="form-control" >
+				<input type="text" id="titular" name="titular" required class="form-control"
+					   value="<?php
+					   if(isset($titular)){
+					   		echo $titular;
+					   }
+
+					   ?>"
+				>
 
 			</div>
 			<br>
 			<div class="contenedores">
 				<label>Escriba un pequeño párrafo que resuma la noticia:</label><br>
-				<input type="text" id="resumen" name="resumen" required  class="form-control" >
+				<input type="text" id="resumen" name="resumen" required  class="form-control"
+					   value="<?php
+					   if(isset($resumen)){
+					   		echo $resumen;
+					   }
+					   ?>"
+				>
 
 			</div>
 			<br>
 			<div class="contenedores">
 				<label>Pegue el link donde se encuentra la noticia:</label><br>
-				<input type="text" id="url" name="url" class="form-control" >
+				<input type="text" id="url" name="url" class="form-control"
+					   value="<?php
+					   if(isset($url))
+					   {
+					   		echo $url;
+					   }
+					   ?>"
+				>
 			</div>
 			<br>
+
+
+
 			<div class="contenedores">
 				<label>Escoja el tipo de actor que es la fuente de la noticia:</label><br>
 				<?php $contador = 0; ?>
@@ -94,23 +123,77 @@
 				</select>
 			</div>
 			<br>
-			<div id="otrotemac"   >
 
-			</div>
-			<br><br>
+				<?php if(isset($idtemas)): ?>
+
+					<?php foreach ($idtemas as $index=>$t): ?>
+						<?php if($t==0): ?>
+							<div id="otrotemac" class="contenedores" >
+								<label for="otrotema" >Especifique  otra :</label><br>
+								<input type="text" id="otrotema" name="tema0" placeholder="Otro tema" class="form-control" >
+							</div>
+						<?php endif; ?>
+					<?php endforeach;?>
+
+				<br>
+				<?php endif; ?>
+
+
+			<br>
 			<div id="">
 
 			</div>
 			<div id="subtemac" class="text-body" >
-
+			<?php if(isset($temas_sel)): ?>
+				<?php foreach ($temas_sel as $index=>$t): ?>
+					<div class="contenedores">
+						<div class="card" >
+							<div  class="card-header  " style="background-color: #8cc63f" >
+								<h4><?php echo $t['nombre_tema']; ?></h4>
+							</div>
+							<div class="card-body">
+								<?php foreach ($subtemas_sel as $index=>$s): ?>
+									<?php if($s['rel_idtema'] == $t['idtema'] ): ?>
+									<div class="form-check">
+										<label class="form-check-label" for="check1">
+											<input type="checkbox" class="form-check-input" id="check1" name="<?php echo 'tema'.$t['idtema'].'[]';?>" value="<?php echo $s['idsubtema'];?>">
+											<?php echo $s['nombre_subtema']; ?>
+										</label>
+									</div>
+									<?php endif; ?>
+								<?php endforeach; ?>
+									<div class="form-check">
+										<label class="form-check-label" for="check1">
+											<input type="checkbox" class="form-check-input" id="check1" name="<?php echo 'tema'.$t['idtema'].'[]';?>" value="0">
+											Otro Subtema
+										</label>
+									</div>
+									<br><br>
+									<div class="form-group">
+										<label for="<?php echo 'otrosubtema'.$t['idtema'];?>"  >
+											Especifique otro:
+										</label>
+										<input type="text" class="form-control" id="<?php echo 'otrosubtema'.$t['idtema'];?>" name="<?php echo 'otrosubtema'.$t['idtema'];?>" placeholder="Otro Subtema">
+									</div>
+							</div>
+						</div>
+					</div>
+					<br>
+				<?php endforeach; ?>
+			<?php endif; ?>
 			</div>
 			<br>
+
 			<div id="otrosubtema">
+
 
 			</div>
 			<br>
 			<div id="contenedor-submit">
 				<input type="submit" id="BOTON" value="ENVIAR">
+				<a href="<?php echo site_url('reformaelectoral/cancelarNuevo/');?>">
+					<input type="button" class="BOTON" value="CANCELAR">
+				</a>
 			</div>
 	</main>
 

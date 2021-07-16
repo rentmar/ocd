@@ -25,6 +25,7 @@ class Reformaelectoral extends CI_Controller
 
 	public function index()
 	{
+
 		$usuario = $this->ion_auth->user()->row();
 
 
@@ -33,6 +34,30 @@ class Reformaelectoral extends CI_Controller
 		//Todos los temas referidos al formulario
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
+
+
+		//Si existen variables de session
+		if($this->session->nuevo_c1)
+		{
+			//Existe variable de session";
+			$reforma = $this->session->reforma;
+			//var_dump($reforma);
+			//echo "<br><br>";
+			$data['fecha'] = $reforma->fecha_noticia;
+			$data['titular'] = $reforma->titular;
+			$data['resumen'] = $reforma->resumen;
+			$data['url'] = $reforma->url_noticia;
+			$data['actores'] = $reforma->actores;
+			$this->Cuestionario_model->setTemaIDs($reforma->temas);
+			$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+			$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+			//var_dump($temas_sel);
+			//echo "<br><br>";
+			//var_dump($subtemas_sel);
+			$data['temas_sel'] = $temas_sel;
+			$data['subtemas_sel'] = $subtemas_sel;
+			$data['idtemas'] = $reforma->temas;
+		}
 
 		$data['idusuario'] = $usuario->id;
 		$data['iddepartamento'] = $usuario->rel_iddepartamento;
@@ -45,6 +70,11 @@ class Reformaelectoral extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_electoral', $data);
 		$this->load->view('html/pie');
+	}
+
+	public function valores()
+	{
+		var_dump($this->session->userdata());
 	}
 
 	public function getMedios()
@@ -67,9 +97,52 @@ class Reformaelectoral extends CI_Controller
 		echo json_encode($json);
 	}
 
+	public function actualizar()
+	{
+		$html = array();
+		$not = $this->input->post('noticia');
+		$noticia = json_decode($not) ;
+		if(!$this->session->nuevo_c1)
+		{
+			//echo "Nueva noticia no activada";
+			//Activar la bandera nueva noticia
+			$this->session->set_userdata("nuevo_c1", true);
+			//Actualizar la variable de session
+			$this->session->set_userdata("reforma", []);
+			$this->session->set_userdata("reforma", $noticia);
+		}
+		else{
+			//echo "Nueva noticia activada";
+			//Actualizar la variable de session
+			$this->session->set_userdata("reforma", []);
+			$this->session->set_userdata("reforma", $noticia);
+		}
+
+		if($noticia->idformulario == 1)
+		{
+			$html = "reformaelectoral";
+		}elseif ($noticia->idformulario == 2){
+			$html = "instdemocratica";
+		}
+
+		echo $html;
+
+
+	}
+
 	public function getprueba()
 	{
 		$json = array();
+		$not = $this->input->post('noticia');
+		$noticia = json_decode($not);
+		var_dump($noticia);
+		echo "<br><br>";
+		echo $noticia->titular;
+
+
+		//$this->load->view('welcome');
+
+		/*$json = array();
 		$usuario = $this->ion_auth->user()->row();
 		$this->Cuestionario_model->setUsuarioID($usuario->id);
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
@@ -78,7 +151,7 @@ class Reformaelectoral extends CI_Controller
 		$this->session->set_userdata('nueva_noticia_ids', json_decode($this->input->post('temaID')) );
 		$json = $this->Cuestionario_model->leerSubtemasPorIDs();
 		header('Content-Type: application/json');
-		echo json_encode($json);
+		echo json_encode($json);*/
 	}
 
 	private function fecha_unix($fecha)
@@ -90,10 +163,76 @@ class Reformaelectoral extends CI_Controller
 
 	public function preenvio()
 	{
-		$idusr=$this->input->post('idusuario');
+		//Capturar la noticia
+		$noticia = $this->session->reforma;
+		$noticia->fecha_registro = now();
+		$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha'));
+		$noticia->titular = $this->input->post('titular');
+		$noticia->resumen = $this->input->post('resumen');
+		$noticia->url_noticia = $this->input->post('url');
+		$noticia->rel_idusuario = $this->input->post('idusuario');
+		$noticia->idformulario = $this->input->post('idformulario');
+		$noticia->rel_idmedio = $this->input->post('idmedio');
+
+
+		//Capturar los actores
+		$actores = $this->input->post('idactor[]');
+		$noticia->actores = $actores;
+
+		//Capturar los temas
+		$temas = $this->input->post('idtema[]');
+
+		//Capturar otro tema
+		$otro_tema = $this->input->post('tema0');
+		$noticia->otro_tema = $otro_tema;
+
+
+		//Capturar subtemas
+		$subtemas = [];
+		foreach ($temas as $t)
+		{
+			$subtemas[$t] = $this->input->post('tema'.$t);
+		}
+
+		$noticia->subtemas = $subtemas;
+
+
+		//Capturar otros subtemas
+		$otros_subtemas = [];
+		foreach ($temas as $t)
+		{
+			$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+		}
+
+		$noticia->otros_subtemas = $otros_subtemas;
+
+		//var_dump($noticia);
+
+		$this->session->set_userdata('noticia_insert', []);
+		$this->session->set_userdata('noticia_insert', $noticia);
+
+
+		$datos['noticia'] = $noticia;
+
+
+
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vreforma_preenvio',$datos);
+		$this->load->view('html/pie');
+
+
+
+
+
+
+		/*$idusr=$this->input->post('idusuario');
 		$actor=$this->Cuestionario_model->leerActorPorId($this->input->post('idactor'));
 		$medio=$this->Cuestionario_model->leerMedioPorId($this->input->post('idmedio'));
-		$DatosNoticia=[
+		/** @noinspection PhpLanguageLevelInspection */
+		/*$DatosNoticia=[
             'fecha_registro'=>$this->fecha_unix(date("Y-m-d")),
             'fecha_noticia'=>$this->fecha_unix($this->input->post('fecha')),
             'titular'=>$this->input->post('titular'),
@@ -138,7 +277,7 @@ class Reformaelectoral extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_preenvio',$DatosNoticia);
 		$this->load->view('html/pie');
-	}
+		}*/
 
 	}
 
@@ -222,18 +361,51 @@ class Reformaelectoral extends CI_Controller
 
 		];
 
+		echo "Noticia: "."<br>";
+		$noticia = $this->session->reforma;
+		var_dump($noticia);
+		echo "<br><br><br><br>";
+
+
+
+		echo "Actores: "."<br>";
 		$actores = $this->input->post('idactor[]');
 
 		var_dump($actores);
-
 		echo "<br><br><br><br>";
+
+		echo "Temas: "."<br>";
+
 
 		$temas = $this->input->post('idtema[]');
 
 		var_dump($temas);
+		echo "<br><br><br><br>";
 
+		$subtemas = [];
+		echo "Capturar Temas"."<br>";
+		foreach ($temas as $t)
+		{
+			$subtemas[$t] = $this->input->post('tema'.$t);
+		}
 
+		var_dump($subtemas);
+		echo "<br><br><br><br>";
+		$otros_subtemas = [];
+		foreach ($temas as $t)
+		{
+			$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+		}
+		var_dump($otros_subtemas);
+	}
 
+	public function cancelarNuevo()
+	{
+		//Limpiar las variables de session y colocar la bandera en su estado original
+		$this->session->set_userdata('nuevo_c1', false);
+		$this->session->set_userdata('reforma', []);
+		//Redireccionar al inicio
+		redirect('inicio/');
 	}
 
 }

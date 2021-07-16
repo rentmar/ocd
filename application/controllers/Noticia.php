@@ -25,7 +25,23 @@ class Noticia extends CI_Controller
     }
     public function registrarNoticia()
     {
-		$idusr=$this->input->post("idusr");
+    	$noticia = $this->session->noticia_insert;
+		//$this->Noticia_model->crearNoticia($noticia);
+		if($this->Noticia_model->crearNoticia($noticia))
+		{
+			$this->session->set_userdata('nuevo_c1', false);
+			$this->session->set_userdata('reforma', []);
+			$this->session->set_userdata('nuevo_c2', false);
+			$this->session->set_userdata('inst', []);
+			$this->session->set_userdata('noticia_insert', []);
+			redirect('/');
+		}else{
+			echo "Error";
+		}
+
+
+
+		/*$idusr=$this->input->post("idusr");
         $DatosNoticia=[
             'fecha_registro'=>$this->input->post("fecha_registro"),
             'fecha_noticia'=>$this->input->post('fecha_noticia'),
@@ -40,7 +56,7 @@ class Noticia extends CI_Controller
 						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
 						  'rel_idusuario'=>$idusr
 							);
-		//  otro tema 
+		//  otro tema
 		if ($this->input->post('idtema')==0)
 		{
 			$ost=$this->input->post('otrosubtema');
@@ -58,7 +74,7 @@ class Noticia extends CI_Controller
 		//otro subtema
 		$this->Noticia_model->insertarNoticia($DatosNoticia);
 
-		redirect('inicio/');
+		redirect('inicio/');*/
                 
                 
 /*        $this->form_validation->set_rules('titular', 'Titular', 'required');
