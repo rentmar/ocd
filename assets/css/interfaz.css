@@ -18,6 +18,41 @@ div #Caja_de_datos{
 	padding-bottom:20px;
 }
 
+h5 {
+	font-family: Verdana;
+	color:#ffffff;
+	line-height:140%;
+	text-align:center;
+}
+.contenedores_divididos {
+	max-width:570px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.contenedor_superior{
+	background-color:#66cc00;
+	border-top-left-radius:10px;
+	border-top-right-radius: 10px;
+	padding:20px 30px 10px 30px;
+}
+
+.contenedor_inferior{
+	background-color:#ffffff;
+	padding:20px 30px 25px 30px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius: 10px;
+	display:flex;
+	justify-content:center;
+}
+.contenedor_inferior img{
+	width:200px;
+	padding-right:30px;
+	display:flex;
+}
+
+
+
+
 
 
 .cuadro {
@@ -39,12 +74,28 @@ div #Caja_de_datos{
 	background-color:#ffffff;
 	border-radius:10px;
 }
-.boton {
+
+
+.BOTON{
 	background-color:#474142;
 	color:#ffffff;
 	font-family: Verdana;
+	width:110px;
 	border-radius:10px;
+	padding:10px 25px 10px 10px;
+	/*margin-right:10px;*/
 }
+
+.BOTONROJO{
+	background-color:#7f182b;
+	color:#ffffff;
+	font-family: Verdana;
+	width:110px;
+	border-radius:10px;
+	padding:10px 25px 10px 10px;
+	/*margin-right:10px;*/
+}
+
 .botonsimple {
 	font-family: Verdana;
 	border-radius:10px;

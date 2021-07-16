@@ -1,4 +1,4 @@
-<main>
+<main role="main">
 	<br><br>
 	<div class="container">
 		<div class="row">
@@ -11,40 +11,52 @@
 						<div class="list-group">
 							<a href="#" class="list-group-item disabled">
 								Fecha Registro:
-								<?php echo ' '.$fecha_registro; ?>
+								<?php echo ' '.$noticia->fecha_registro; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Fecha:
-								<?php echo ' '.$fecha_noticia; ?>
+								<?php echo ' '.$noticia->fecha_noticia; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Titular:
-								<?php echo ' '.$titular; ?>
+								<?php echo ' '.$noticia->titular; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Resumen:
-								<?php echo ' '.$resumen; ?>
+								<?php echo ' '.$noticia->resumen; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								URL:
-								<?php echo ' '.$url_noticia; ?>
+								<?php echo ' '.$noticia->url_noticia; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Medio:
-								<?php echo ' '.$medio; ?>
+								<?php echo ' ' ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Actor:
+<<<<<<< HEAD
+								<?php echo ' '; ?>
+							</a>
+							<a href="#" class="list-group-item disabled">
+								Tema:
+								<?php echo ' '; ?>
+=======
 								<?php echo var_dump($actor); ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Tema:
 								<?php //echo ' '.$tema; ?>
+>>>>>>> 054448b47c62dd02b005e8fa65dad02ecce393ba
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Subtema:
 								<?php
+<<<<<<< HEAD
+								echo ' ';
+=======
 								//echo ' '.$subtema;
+>>>>>>> 054448b47c62dd02b005e8fa65dad02ecce393ba
 								?>
 							</a>
 						</div>
@@ -84,19 +96,19 @@
 				<p>
 					Registrar la noticia?
 				</p>
-				<input type="hidden" id="idcuestionario" name="idcuestionario" value="<?php echo $idcuestionario; ?>" >
-				<input type="hidden" id="fecha_registro" name="fecha_registro" value="<?php echo $fecha_registro; ?>" >
-				<input type="hidden" id="fecha_noticia" name="fecha_noticia" value="<?php echo $fecha_noticia;?>" >
-				<input type="hidden" id="titular" name="titular" value="<?php echo $titular; ?>" >
-				<input type="hidden" id="resumen" name="resumen" value="<?php echo $resumen;?>" >
-				<input type="hidden" id="url_noticia" name="url_noticia" value="<?php echo $url_noticia;?>" >
-				<input type="hidden" id="idactor" name="idactor" value="<?php echo $idactor;?>" >
-				<input type="hidden" id="idmedio" name="idmedio" value="<?php echo $idmedio;?>" >
-				<input type="hidden" id="idtema" name="idtema" value="<?php echo $idtema;?>" >
-				<input type="hidden" id="idsubtema" name="idsubtema" value="<?php echo $idsubtema;?>" >
-				<input type="hidden" id="otrotema" name="otrotema" value="<?php echo $tema;?>" >
-				<input type="hidden" id="otrosubtema" name="otrosubtema" value="<?php echo $subtema;?>" >
-				<input type="hidden" id="idusr" name="idusr" value="<?php echo $idusr;?>" >
+				<input type="hidden" id="idcuestionario" name="idcuestionario" value="<?php //echo $idcuestionario; ?>" >
+				<input type="hidden" id="fecha_registro" name="fecha_registro" value="<?php //echo $fecha_registro; ?>" >
+				<input type="hidden" id="fecha_noticia" name="fecha_noticia" value="<?php //echo $fecha_noticia;?>" >
+				<input type="hidden" id="titular" name="titular" value="<?php //echo //$titular; ?>" >
+				<input type="hidden" id="resumen" name="resumen" value="<?php //echo //$resumen;?>" >
+				<input type="hidden" id="url_noticia" name="url_noticia" value="<?php //echo //$url_noticia;?>" >
+				<input type="hidden" id="idactor" name="idactor" value="<?php //echo $idactor;?>" >
+				<input type="hidden" id="idmedio" name="idmedio" value="<?php //echo $idmedio;?>" >
+				<input type="hidden" id="idtema" name="idtema" value="<?php //echo $idtema;?>" >
+				<input type="hidden" id="idsubtema" name="idsubtema" value="<?php //echo $idsubtema;?>" >
+				<input type="hidden" id="otrotema" name="otrotema" value="<?php //echo $tema;?>" >
+				<input type="hidden" id="otrosubtema" name="otrosubtema" value="<?php //echo $subtema;?>" >
+				<input type="hidden" id="idusr" name="idusr" value="<?php //echo $idusr;?>" >
 <!--				<input type="submit" id="BOTON" value="ENVIAR">-->
 
 			</div>

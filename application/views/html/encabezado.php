@@ -52,15 +52,7 @@
 			justify-content:left;
 			margin-top:10px;
 		}
-		.BOTON{
-			background-color:#474142;
-			color:#ffffff;
-			font-family: Verdana;
-			width:110px;
-			border-radius:10px;
-			padding:10px 25px 10px 10px;
-			margin-right:10px;
-		}
+
 		#header {
 					background:#662d91;
 					padding:1px;

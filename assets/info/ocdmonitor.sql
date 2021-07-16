@@ -307,7 +307,6 @@ CREATE TABLE `noticia` (
   `titular` varchar(200) NOT NULL,
   `resumen` text NOT NULL,
   `url_noticia` varchar(150) DEFAULT NULL,
-  `rel_idsubtema` smallint(5) UNSIGNED NOT NULL,
   `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
   `rel_idusuario` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -728,8 +727,7 @@ ALTER TABLE `medio_departamento`
 -- Indices de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  ADD PRIMARY KEY (`idnoticia`),
-  ADD KEY `FK_subtemanoticia` (`rel_idsubtema`);
+  ADD PRIMARY KEY (`idnoticia`);
 
 --
 -- Indices de la tabla `noticia_actor`
@@ -954,8 +952,6 @@ ALTER TABLE `medio_departamento`
 --
 -- Filtros para la tabla `noticia`
 --
-ALTER TABLE `noticia`
-  ADD CONSTRAINT `FK_subtemanoticia` FOREIGN KEY (`rel_idsubtema`) REFERENCES `subtema` (`idsubtema`);
 
 --
 -- Filtros para la tabla `noticia_actor`
