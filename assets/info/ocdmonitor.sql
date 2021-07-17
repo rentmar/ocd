@@ -308,6 +308,7 @@ CREATE TABLE `noticia` (
   `resumen` text NOT NULL,
   `url_noticia` varchar(150) DEFAULT NULL,
   `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
+   `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL,
   `rel_idusuario` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -727,8 +728,10 @@ ALTER TABLE `medio_departamento`
 -- Indices de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  ADD PRIMARY KEY (`idnoticia`);
-
+  ADD PRIMARY KEY (`idnoticia`),
+  ADD KEY `fk_medio` (`rel_idmedio`),
+  ADD KEY `fk_usuario` (`rel_idusuario`),
+  ADD KEY `fk_cuestionario` (`rel_idcuestionario`);
 --
 -- Indices de la tabla `noticia_actor`
 --
@@ -952,6 +955,10 @@ ALTER TABLE `medio_departamento`
 --
 -- Filtros para la tabla `noticia`
 --
+ALTER TABLE `noticia`
+  ADD CONSTRAINT `fk_noticiamedio` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`),
+  ADD CONSTRAINT `fk_noticiausuario` FOREIGN KEY (`rel_idusuario`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `fk_noticiacuestionario` FOREIGN KEY (`rel_idcuestionario`) REFERENCES `cuestionario` (`idcuestionario`);
 
 --
 -- Filtros para la tabla `noticia_actor`
