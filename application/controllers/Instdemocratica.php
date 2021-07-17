@@ -26,17 +26,24 @@ class Instdemocratica extends CI_Controller
 	public function index()
 	{
 		$usuario = $this->ion_auth->user()->row();
-
 		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
-
 		//Todos los temas referidos al formulario
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
-		//Si existen variables de session
-		if($this->session->nuevo_c1)
+
+		//Inicializar las variables de session
+		if(!$this->session->nuevo_c1)
 		{
-			//Existe variable de session";
+			//echo "Nueva noticia no activada";
+			//Activar la bandera nueva noticia
+			$this->session->set_userdata("nuevo_c1", true);
+			//Actualizar la variable de session
+			$noticia = new stdClass();
+			$this->session->set_userdata("reforma", []);
+			$this->session->set_userdata("reforma", $noticia);
+		}
+		else{
 			$reforma = $this->session->reforma;
 			//var_dump($reforma);
 			//echo "<br><br>";
@@ -44,18 +51,26 @@ class Instdemocratica extends CI_Controller
 			$data['titular'] = $reforma->titular;
 			$data['resumen'] = $reforma->resumen;
 			$data['url'] = $reforma->url_noticia;
-			$data['actores'] = $reforma->actores;
+			$data['idactores'] = $reforma->actores;
+			$data['idtemas'] = $reforma->temas;
+			//Extraer los temas seleccionados
 			$this->Cuestionario_model->setTemaIDs($reforma->temas);
 			$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
 			$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
 			//var_dump($temas_sel);
 			//echo "<br><br>";
 			//var_dump($subtemas_sel);
+			//echo "<br><br>";
+			//var_dump($reforma->actores);
 			$data['temas_sel'] = $temas_sel;
 			$data['subtemas_sel'] = $subtemas_sel;
-			$data['idtemas'] = $reforma->temas;
-		}
 
+			//echo "Nueva noticia activada";
+			//Actualizar la variable de session
+
+			//$this->session->set_userdata("reforma", []);
+			//$this->session->set_userdata("reforma", $noticia);*/
+		}
 		$data['idusuario'] = $usuario->id;
 		$data['iddepartamento'] = $usuario->rel_iddepartamento;
 		$data['tipo_medio'] = $tipo_medio;
@@ -79,8 +94,104 @@ class Instdemocratica extends CI_Controller
 
 	public function preenvio()
 	{
+
+		$accion = $this->input->post('action');
+		if($accion == 1){
+			//Procesar formulario
+			//echo "Procesar formulario";
+			$noticia = $this->session->reforma;
+			$noticia->fecha_registro = now();
+			$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha'));
+			$noticia->titular = $this->input->post('titular');
+			$noticia->resumen = $this->input->post('resumen');
+			$noticia->url_noticia = $this->input->post('url');
+			$noticia->rel_idusuario = $this->input->post('idusuario');
+			$noticia->idformulario = $this->input->post('idformulario');
+			$noticia->rel_idmedio = $this->input->post('idmedio');
+
+
+			//Capturar los actores
+			$actores = $this->input->post('idactor[]');
+			$noticia->actores = $actores;
+
+			//Capturar los temas
+			$temas = $this->input->post('idtema[]');
+
+			//Capturar otro tema
+			$otro_tema = $this->input->post('tema0');
+			$noticia->otro_tema = $otro_tema;
+
+
+			//Capturar subtemas
+			$subtemas = [];
+			foreach ($temas as $t)
+			{
+				$subtemas[$t] = $this->input->post('tema'.$t);
+			}
+
+			$noticia->subtemas = $subtemas;
+
+
+			//Capturar otros subtemas
+			$otros_subtemas = [];
+			foreach ($temas as $t)
+			{
+				$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+			}
+
+			$noticia->otros_subtemas = $otros_subtemas;
+
+			//var_dump($noticia);
+
+			$this->session->set_userdata('noticia_insert', []);
+			$this->session->set_userdata('noticia_insert', $noticia);
+
+
+			$datos['noticia'] = $noticia;
+
+			$this->load->view('html/encabezado');
+			$this->load->view('html/navbar');
+			$this->load->view('cuestionarios/vinst_preenvio',$datos);
+			$this->load->view('html/pie');
+
+		}elseif ($accion == 0){
+			//Seleccionar temas
+			//echo "Seleccionar temas"."<br>";
+			$noticia = $this->session->reforma;
+			$noticia->fecha_registro = now();
+			$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha'));
+			$noticia->titular = $this->input->post('titular');
+			$noticia->resumen = $this->input->post('resumen');
+			$noticia->url_noticia = $this->input->post('url');
+			$noticia->rel_idusuario = $this->input->post('idusuario');
+			$noticia->idformulario = $this->input->post('idformulario');
+			$noticia->rel_idmedio = $this->input->post('idmedio');
+
+			//Capturar los actores
+			$actores = $this->input->post('idactor[]');
+			$noticia->actores = $actores;
+
+			//Capturar los temas
+			$temas = $this->input->post('idtema[]');
+			$noticia->temas = $temas;
+
+			//var_dump($noticia);
+
+			$this->session->set_userdata('reforma', []);
+			$this->session->set_userdata('reforma', $noticia);
+
+			redirect('instdemocratica/');
+
+
+		}else{
+
+		}
+
+
+
+
 		//Capturar la noticia
-		$noticia = $this->session->reforma;
+		/*$noticia = $this->session->reforma;
 		$noticia->fecha_registro = now();
 		$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha'));
 		$noticia->titular = $this->input->post('titular');

@@ -89,7 +89,7 @@ class Noticia_model extends CI_Model{
 			'titular' => $noticia->titular,
 			'resumen' => $noticia->resumen,
 			'url_noticia' => $noticia->url_noticia,
-			'rel_idsubtema' => 1, //Campo de compatibilidad
+			//'rel_idsubtema' => 1, //Campo de compatibilidad
 			'rel_idmedio' => $noticia->rel_idmedio,
 			'rel_idusuario' => $noticia->rel_idusuario,
 			'rel_idcuestionario' => $noticia->idformulario,
