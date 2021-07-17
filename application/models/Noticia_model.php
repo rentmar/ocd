@@ -13,7 +13,8 @@ class Noticia_model extends CI_Model{
 		$this->db->trans_start();
 			$this->db->insert('tema',$dtot);
 			$idtema=$this->db->insert_id();
-			$datoOtroSubTema=[
+		/** @noinspection PhpLanguageLevelInspection */
+		$datoOtroSubTema=[
 			   'nombre_subtema'=>$ost,
 			   'rel_idtema'=>$idtema];
 			$this->db->insert('subtema',$datoOtroSubTema);
@@ -49,15 +50,14 @@ class Noticia_model extends CI_Model{
 	{
 		
 	}
-	public function leerTodasNoticiasUsuario($idusuario, $idcuestionario)
+	public function leerNoticiasUsuarioCuestionario($idusuario)
 	{
-		$sql = "SELECT * "
-			."FROM noticia AS nt  "
-			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = nt.rel_idcuestionario  "
-			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = nt.rel_idmedio   "
-			."WHERE nt.rel_idusuario = ? AND cuestionario.idcuestionario = ?  ";
-		$qry = $this->db->query($sql, [$idusuario, $idcuestionario,  ]);
-		return $qry->result();
+		$sql = "SELECT idnoticia,fecha_registro,fecha_noticia,titular,nombre_medio "
+			."FROM noticia "
+			."LEFT JOIN medio_comunicacion ON noticia.rel_idmedio=medio_comunicacion.idmedio "
+			."WHERE noticia.rel_idusuario = ".$idusuario;
+		$qry = $this->db->query($sql);
+		return $qry->row();
 	}
 
 	//Extrae una noticia por su identificador
