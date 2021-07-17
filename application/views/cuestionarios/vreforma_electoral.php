@@ -111,18 +111,61 @@
 				<?php endforeach; ?>
 			</div>
 			<br>
-			<div class="contenedores">
+
+			<div id="#temas" class="contenedores">
+				<label  >Escoge el tema al que está referido la nota :</label>
+				<?php $contador = 0; ?>
+				<?php foreach ($tema as $key => $element): ?>
+					<?php if($contador == 0): ?>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input id="checktema<?php //echo $element['idtema']; ?>" name="idtema[]" type="checkbox" class="form-check-input" value="<?php echo $element['idtema']; ?>" >
+								<?php echo $element['nombre_tema']; ?>
+							</label>
+						</div>
+						<?php $contador++; ?>
+					<?php else: ?>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input id="checktema<?php //echo $element['idtema']; ?>" name="idtema[]" type="checkbox" class="form-check-input" value="<?php echo $element['idtema']; ?>"   >
+								<?php echo $element['nombre_tema']; ?>
+							</label>
+						</div>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				<div class="form-check">
+					<label class="form-check-label" >
+						<input id="checktema" name="idtema[]" type="checkbox"  class="form-check-input" value="0" >
+						Otro
+					</label>
+				</div>
+				<div class="form-group">
+					<button id="BOTON" type="submit" name="action" value="0" >
+						SELECCIONAR TEMAS
+					</button>
+
+
+				</div>
+			</div>
+
+
+
+
+			<!--<div class="contenedores">
 				<label>Escoge el tema al que está referido la nota :</label><br>
 				<select id="tema" name="idtema[]" class="form-control selector-multiple" multiple="multiple" required >
-<!--					<option value="" >Seleccione Tema</option>-->
-					<?php foreach ( $tema as $key => $element): ?>
-						<option value="<?php echo $element['idtema']; ?>" >
-							<?php echo $element['nombre_tema']; ?>
+
+					<?php /*foreach ( $tema as $key => $element): */?>
+						<option value="<?php /*echo $element['idtema']; */?>" >
+							<?php /*echo $element['nombre_tema']; */?>
 						</option>
-					<?php endforeach; ?>
+					<?php /*endforeach; */?>
 					<option value="0" >Otro</option>
 				</select>
-			</div>
+			</div>-->
+
+
+
 			<br>
 
 				<?php if(isset($idtemas)): ?>
@@ -191,7 +234,10 @@
 			</div>
 			<br>
 			<div id="contenedor-submit">
-				<input type="submit" id="BOTON" value="ENVIAR">
+<!--				<input type="submit" id="BOTON" value="ENVIAR">-->
+				<button id="BOTON" type="button" name="action" value="1" >
+					ENVIAR
+				</button>
 				<a href="<?php echo site_url('reformaelectoral/cancelarNuevo/');?>">
 					<input type="button" class="BOTON" value="CANCELAR">
 				</a>

@@ -16,7 +16,7 @@
 									Fecha:
 								</label>
 								<input type="date" id="fecha" name="fecha" class="form-control"
-									   value="<?php echo mdate('%Y-%m-%d', $noticia->fecha_noticia);?>" >
+									   value="<?php echo mdate('%Y-%m-%d', $noticia->fecha_registro);?>" >
 								<input type="hidden" id="idnoticia" name="idnoticia"
 									   value="<?php echo $noticia->idnoticia; ?>">
 								<input type="hidden" id="idcuestionario" name="idcuestionario"

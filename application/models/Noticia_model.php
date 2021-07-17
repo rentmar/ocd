@@ -64,11 +64,6 @@ class Noticia_model extends CI_Model{
 	public function leerNoticiaID($idnoticia){
 		$sql = "SELECT * "
 			."FROM noticia AS n  "
-			."LEFT JOIN actor ON actor.idactor = n.rel_idactor "
-			."LEFT JOIN subtema ON subtema.idsubtema = n.rel_idsubtema "
-			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
-			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio "
-			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio "
 			."WHERE n.idnoticia = ?  ";
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
 		return $qry->row();
@@ -197,5 +192,66 @@ class Noticia_model extends CI_Model{
 
 	}
 
+
+	//Extraer actores de una noticia
+	public function leerActores($idnoticia)
+	{
+		$sql = "SELECT * "
+			."FROM noticia AS n  "
+			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
+			."WHERE n.idnoticia = ?   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->result();
+	}
+
+	//Extraer temas de una noticia
+	public function leerTemas($idnoticia)
+	{
+		$sql = "SELECT DISTINCT tema.idtema, tema.nombre_tema "
+			."FROM noticia AS n  "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema  "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
+			."WHERE n.idnoticia = ?   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->result();
+	}
+
+	//Extraer los subtemas de la noticia
+	public function leerSubtemas($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia   "
+			."LEFT JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema  "
+			."WHERE n.idnoticia = ?   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->result();
+	}
+
+	//Extraer los otrostemas de la noticia
+	public function leerOtrotema($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia   "
+			."LEFT JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema  "
+			."WHERE n.idnoticia = ?   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->row();
+	}
+
+	//Extraer lo otros subtemas de la noticia
+	public function leerOtrosubtemas($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_otrosubtema ON noticia_otrosubtema.rel_idnoticia = n.idnoticia   "
+			."LEFT JOIN otrosubtema ON otrosubtema.idotrosubtema = noticia_otrosubtema.rel_idotrosubtema  "
+			."WHERE n.idnoticia = ?   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->row();
+	}
     
 }
