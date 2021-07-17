@@ -27,6 +27,31 @@ class Noticia_model extends CI_Model{
 		$q= $this->db->get('noticia');
 		return $q->row();
 	}
+	public function leerActores()
+	{
+		$q= $this->db->get('actor');
+		return $q->result();
+	}
+	public function leerTipos()
+	{
+		$q= $this->db->get('tipo_medio');
+		return $q->result();
+	}
+	public function leerMedioPorId($idm)
+	{
+		$this->db->where('idmedio',$idm);
+		$q= $this->db->get('medio_comunicacion');
+		return $q->row();
+	}
+	public function leerMediosPorDepartamento($idd)
+	{
+		$sql = "SELECT medio_comunicacion.idmedio,medio_comunicacion.nombre_medio "
+			."FROM medio_departamento "
+			."LEFT JOIN medio_comunicacion ON medio_departamento.rel_idmedio=medio_comunicacion.idmedio "
+			."WHERE medio_departamento.rel_iddepartamento = ".$idd;
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
 	public function leerNoticiaMedioPorId($idnoticia)
 	{
 		$this->db->where('rel_idnoticia',$idnoticia);
@@ -45,20 +70,21 @@ class Noticia_model extends CI_Model{
 		$q= $this->db->get('tema');
 		return $q->row();
 	}
-	public function editarNoticia($idnoticia)
+	public function leerNoticiaActores($idn)
 	{
-		
+		$this->db->where('rel_idnoticia',$idn);
+		$q= $this->db->get('noticia_actor');
+		return $q->result();
 	}
-	public function leerNoticiasUsuarioCuestionario($idusuario)
+	public function leerNoticiasUsuario($idusuario,$idcuestionario)
 	{
 		$sql = "SELECT idnoticia,fecha_registro,fecha_noticia,titular,nombre_medio "
 			."FROM noticia "
 			."LEFT JOIN medio_comunicacion ON noticia.rel_idmedio=medio_comunicacion.idmedio "
-			."WHERE noticia.rel_idusuario = ".$idusuario;
+			."WHERE noticia.rel_idusuario = ".$idusuario." AND noticia.rel_idcuestionario=".$idcuestionario;
 		$qry = $this->db->query($sql);
-		return $qry->row();
+		return $qry->result();
 	}
-
 	//Extrae una noticia por su identificador
 	public function leerNoticiaID($idnoticia){
 		$sql = "SELECT * "

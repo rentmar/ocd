@@ -291,24 +291,29 @@ class Reformaelectoral extends CI_Controller
 		$cantidad_noticia = $this->session->noticia_editable;
 		//echo $usuario->id;
 		//echo $cantidad_noticia;
-		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
 		//var_dump($noticias);
-
-		$data['noticias'] = $noticias;
-		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
-
+		$dt['noticias'] =$this->Noticia_model->leerNoticiasUsuario($usuario->id,$this->_idformulario);
+		$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_lista_noticias', $data);
+		$this->load->view('cuestionarios/vreforma_lista_noticias', $dt);
 		$this->load->view('html/pie');
 	}
 
 
 	public function editarNoticia($idnoticia)
 	{
-		$idnoticia = $idnoticia;
+		$usuario = $this->ion_auth->user()->row();
+		$n=$this->Noticia_model->leerNoticiaPorId($idnoticia);
+		$dt['actores']=$this->Noticia_model->leerActores();
+		$dt['medios']=$this->Noticia_model->leerMediosPorDepartamento($usuario->rel_iddepartamento);
+		$dt['tipos']=$this->Noticia_model->leerTipos();
+		$dt['noticia']= $n;
+		$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
+		$dt['medio']=$this->Noticia_model->leerMedioPorId($n->rel_idmedio);
+		
 		//Comprobar si hay edicion activa
-		if(!$this->session->edicion_activa)
+		/*if(!$this->session->edicion_activa)
 		{
 			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
 			//Noticia original
@@ -341,19 +346,22 @@ class Reformaelectoral extends CI_Controller
 			$tema = $this->Cuestionario_model->leerTema();
 			$data['tema']=$tema;
 
-		}
+		}*/
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vnoticia_editar', $data);
+		$this->load->view('cuestionarios/vnoticia_editar', $dt);
 		$this->load->view('html/pie');
 	}
-
-	//Actualizar los valores del titular, resumen y url
-	private function updateDatosGenerales()
+	public function editarSiguiente()
 	{
-
+		echo 'siguiente';
+		echo $this->input->post("fecha");
+		echo $this->input->post("idnoticia");
+		echo $this->input->post("idcuestionario");
+		echo $this->input->post("titular");
+		echo $this->input->post("resumen");
+		echo $this->input->post("url");
 	}
-
 	public function capturarDatos()
 	{
 		echo "Capturar la informacion del Formulario";
