@@ -20,7 +20,7 @@
 								<input type="hidden" id="idnoticia" name="idnoticia"
 									   value="<?php echo $noticia->idnoticia; ?>">
 								<input type="hidden" id="idcuestionario" name="idcuestionario"
-									   value="<?php echo $idcuestionario; ?>" >
+									   value="<?php echo $noticia->rel_idcuestionario; ?>" >
 
 							</div>
 							<div class="col-2">
@@ -88,10 +88,14 @@
 									<label for="nombre_actor" >
 										Actor:
 									</label>
-									<input type="text" id="nombre_actor" name="nombre_actor" class="form-control"
-										   value="<?php echo $noticia->nombre_actor; ?>" readonly>
-									<input type="hidden" id="idactor" name="idactor"
-										   value="<?php echo $noticia->idactor; ?>" >
+									<br>
+									<p>
+									<?php foreach ($actores as $a): ?>
+										<?php echo $a->nombre_actor; ?>
+										<?php echo "<br>"; ?>
+									<?php endforeach; ?>
+									</p>
+
 								</div>
 							</div>
 							<div class="col-2">
@@ -116,9 +120,9 @@
 										Tipo de Medio:
 									</label>
 									<input type="text" id="nombre_tipo" name="nombre_tipo" class="form-control"
-										   value="<?php echo $noticia->nombre_tipo; ?>" readonly>
+										   value="<?php echo $noticia->nombre_medio; ?>" readonly>
 									<input type="hidden" id="idtipomedio" name="idtipomedio"
-										   value="<?php echo $noticia->idtipomedio; ?>" >
+										   value="<?php echo $noticia->idmedio; ?>" >
 								</div>
 							</div>
 							<div class="col-2">
@@ -155,10 +159,11 @@
 									<label for="nombre_tema" >
 										Tema:
 									</label>
-									<input type="text" id="nombre_tema" name="nombre_tema" class="form-control"
-										   value="<?php echo $noticia->nombre_tema; ?>" readonly>
-									<input type="hidden" id="idtema" name="idtema"
-										   value="<?php echo $noticia->idtema; ?>" >
+									<br>
+									<?php foreach ($temas as $t): ?>
+										<?php echo $t->nombre_tema;?>
+										<?php echo "<br>";?>
+									<?php endforeach; ?>
 								</div>
 							</div>
 							<div class="col-2">
@@ -175,20 +180,25 @@
 									<label for="nombre_subtema" >
 										Subtema:
 									</label>
-									<input type="text" id="nombre_subtema" name="nombre_subtema" class="form-control"
-										   value="<?php echo $noticia->nombre_subtema; ?>" readonly>
-									<input type="hidden" id="idsubtema" name="idsubtema"
-										   value="<?php echo $noticia->idsubtema; ?>" >
+									<br>
+									<?php foreach ($subtemas as $st): ?>
+									<?php echo $st->nombre_subtema;?>
+									<?php echo "<br>"; ?>
+									<?php endforeach; ?>
 								</div>
 							</div>
 						</div>
+
+
+
+
 				
 					</div>
 					<div class="card-footer">
-						<button type="submit" name="accion" value="cambiar" class="btn btn-primary">
+						<button type="" name="accion" value="cambiar" class="btn btn-primary">
 							Confirmar Edicion
 						</button>
-						<button type="submit" name="accion" value="cancelar" class="btn btn-danger">
+						<button type="" name="accion" value="cancelar" class="btn btn-danger">
 							Cancelar edicion
 						</button>
 					</div>

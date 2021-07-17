@@ -344,7 +344,9 @@ class Reformaelectoral extends CI_Controller
 		$cantidad_noticia = $this->session->noticia_editable;
 		//echo $usuario->id;
 		//echo $cantidad_noticia;
-		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
+		//$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
+		$noticias = $this->Noticia_model->leerTodasNoticiasCuestionarioUsuario($this->_idformulario, $usuario->id);
+
 		//var_dump($noticias);
 
 		$data['noticias'] = $noticias;
@@ -367,13 +369,13 @@ class Reformaelectoral extends CI_Controller
 			//Actores
 			$actores = $this->Noticia_model->leerActores($idnoticia);
 			//Temas
-			$temas = $this->Noticia_model->leerTemas($idnoticia);
+			//$temas = $this->Noticia_model->leerTemas($idnoticia);
 			//Subtemas
-			$subtemas = $this->Noticia_model->leerSubtemas($idnoticia);
+			//$subtemas = $this->Noticia_model->leerSubtemas($idnoticia);
 			//Otro tema
-			$otrotema = $this->Noticia_model->leerOtrotema($idnoticia);
+			//$otrotema = $this->Noticia_model->leerOtrotema($idnoticia);
 			//Otros subtemas
-			$otrosubtemas = $this->Noticia_model->leerOtrosubtemas($idnoticia);
+			//$otrosubtemas = $this->Noticia_model->leerOtrosubtemas($idnoticia);
 
 			//Limpiar la variable de edicion_activa
 			$this->session->set_userdata('edicion_activa', true);
@@ -390,6 +392,15 @@ class Reformaelectoral extends CI_Controller
 
 
 		}
+		$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
+		$actores = $this->Noticia_model->leerActores($idnoticia);
+		$temas = $this->Noticia_model->leerTemas($idnoticia);
+		$subtemas = $this->Noticia_model->leerSubtemas($idnoticia);
+		//Otro tema
+		$otrotema = $this->Noticia_model->leerOtrotema($idnoticia);
+		//Otros subtemas
+		$otrosubtemas = $this->Noticia_model->leerOtrosubtemas($idnoticia);
+
 
 		$data['noticia'] = $noticia ;
 		$data['actores'] = $actores;

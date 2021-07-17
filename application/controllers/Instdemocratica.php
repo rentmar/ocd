@@ -295,8 +295,9 @@ class Instdemocratica extends CI_Controller
 	{
 		$usuario = $this->ion_auth->user()->row();
 		//echo $usuario->id;
-		$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
+		//$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
 		//var_dump($noticias);
+		$noticias = $this->Noticia_model->leerTodasNoticiasCuestionarioUsuario($this->_idformulario, $usuario->id);
 		$data['noticias'] = $noticias;
 		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 

@@ -80,7 +80,7 @@ class Noticia extends CI_Controller
     }
 	public function editarNoticia()
 	{
-		
+		redirect('inicio');
 
 		
 	}

@@ -64,6 +64,7 @@ class Noticia_model extends CI_Model{
 	public function leerNoticiaID($idnoticia){
 		$sql = "SELECT * "
 			."FROM noticia AS n  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio  "
 			."WHERE n.idnoticia = ?  ";
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
 		return $qry->row();
@@ -251,7 +252,17 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN otrosubtema ON otrosubtema.idotrosubtema = noticia_otrosubtema.rel_idotrosubtema  "
 			."WHERE n.idnoticia = ?   ";
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
-		return $qry->row();
+		return $qry->result();
+	}
+
+
+	public function leerTodasNoticiasCuestionarioUsuario($idcuestionario, $idusuario){
+		$sql = "SELECT * "
+			."FROM noticia  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = noticia.rel_idmedio  "
+			."WHERE noticia.rel_idusuario = ? AND noticia.rel_idcuestionario = ? ";
+		$qry = $this->db->query($sql, [$idusuario, $idcuestionario ]);
+		return $qry->result();
 	}
     
 }
