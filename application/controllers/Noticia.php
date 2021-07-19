@@ -78,14 +78,55 @@ class Noticia extends CI_Controller
 		redirect('inicio/');*/
                 
     }
-	public function editarNoticia()
+	public function modificarNoticia($idn)
 	{
-		
-
-		
+		$accion=$this->input->post('accion');
+		if ($accion==1)
+		{
+			$fecha=$this->fecha_unix($this->input->post('fecha'));
+			$this->Noticia_model->modificarFechaNoticia($idn,$fecha);
+		}
+		elseif ($accion==2)
+		{	
+			$this->Noticia_model->modificarMedioNoticia($idn,$this->input->post('idmedio'));
+		}
+		elseif ($accion==3)
+		{	
+			$dts = array(
+						'titular'=>$this->input->post('titular'),
+						'resumen'=>$this->input->post('resumen'),
+						'url_noticia'=>$this->input->post('url')
+						);
+			$this->Noticia_model->modificarDatosNoticia($idn,$dts);
+		}
+		elseif ($accion==4)
+		{	
+			$dtchkbox=array();
+			$actores=$this->Noticia_model->leerTodoActores();
+			foreach ($actores as $a)
+			{	
+				if ($this->input->post('a'.$a->idactor)!=null)
+				{
+					array_push($dtchkbox,$this->input->post('a'.$a->idactor));
+				}
+			}
+			$this->Noticia_model->modificarActoresNoticia($idn,$dtchkbox);
+		}
+		elseif ($accion==5)
+		{	
+			$dtchkboxst=array();
+			$subtemas=$this->Noticia_model->leerTodoSubTemas();
+			foreach ($subtemas as $st)
+			{	
+				if ($this->input->post('st'.$st->idsubtema)!=null)
+				{
+					array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
+				}
+			}
+			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
+		}
+		redirect('Reformaelectoral/editar');
 	}
-
-
     //Cambiar el formato MM/DD/YY a unix timestamp
     private function fecha_unix($fecha) 
 	{

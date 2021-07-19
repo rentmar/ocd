@@ -35,28 +35,18 @@
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Actor:
-<<<<<<< HEAD
+
 								<?php echo ' '; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Tema:
 								<?php echo ' '; ?>
-=======
-								<?php echo var_dump($actor); ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Tema:
-								<?php //echo ' '.$tema; ?>
->>>>>>> 054448b47c62dd02b005e8fa65dad02ecce393ba
+
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Subtema:
 								<?php
-<<<<<<< HEAD
 								echo ' ';
-=======
-								//echo ' '.$subtema;
->>>>>>> 054448b47c62dd02b005e8fa65dad02ecce393ba
 								?>
 							</a>
 						</div>
