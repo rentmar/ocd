@@ -14,23 +14,23 @@
 			<th>Nombre</th>	
 			<th>Apellido</th>
 			<th>Departamento</th>
-                         <th>Cuestionario</th>
-                         <th>Numero de Cuestionarios</th>
- <!--                       <?php //foreach ($NumeroDeCuestionarios as $nC) {?>
-                        <th><?php //echo $nC->nombre_cuestionario;?></th>
-                        <?php //} ?> -->
+<!--                         <th>Cuestionario</th>
+                         <th>Numero de Cuestionarios</th>-->
+                        <?php foreach ($NumeroDeCuestionarios as $nC) {?>
+                        <th><?php echo $nC->nombre_cuestionario;?></th>
+                        <?php } ?>
                         
-                        <!--<th>Formulario</th>-->
-                        <!--<th>NoticiasID</th>-->
-                        <!--<th>Formularios Realizados</th>-->
+
 			</tr>
-			<?php foreach ($SeguimientoMonitores as $f) {?>
+			<?php foreach ($SeguimientoM1 as $f) {?>
 			<tr>
-				<td><?php echo $f->first_name;?></td>
-				<td><?php echo $f->last_name;?></td>
-				<td><?php echo $f->nombre_departamento;?></td>
-                                <td><?php echo $f->nombre_cuestionario;?></td>
-				<td><?php echo $f->nombre_cuestionario1;?></td>
+				<td><?php echo $f->nombre;?></td>
+				<td><?php echo $f->apellido;?></td>
+				<td><?php echo $f->departamento;?></td>
+                                <?php foreach ($NumeroDeCuestionarios as $NDC) {?>
+                                <?php $cuestionarios=$NDC->nombre_cuestionario; ?>
+                                <td><?php echo $f->$cuestionarios; ?></td>
+                                <?php } ?>
 			</tr>
 			<?php } ?>
 		</table>
