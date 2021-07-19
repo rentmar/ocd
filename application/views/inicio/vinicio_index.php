@@ -3,6 +3,7 @@
 	<div class="container">
 
 		<div class="row">
+
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest1">
@@ -10,8 +11,11 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/democracia.svg'; ?>" alt="Card image">
 					<div class="card-body">
+
+
 						<a href="<?php echo site_url('reformaelectoral');?>" class="btn btn-info" role="button" style="background-color:#93C90F; color:black;" >Nuevo</a>
-						<a href="<?php echo site_url('reformaelectoral/editar/'); ?>" class="btn btn-info" role="button" style="background-color:#93C90F;color:black;">Editar</a>
+						<a href="<?php echo site_url('reformaelectoral/editar/') ?>" class="btn btn-info" role="button" style="background-color:#93C90F;color:black;">Editar</a>
+
 					</div>
 				</div>
 			</div>
@@ -25,6 +29,7 @@
 					<div class="card-body">
 						<a href="<?php echo site_url('instdemocratica/');?>" class="btn btn-info" role="button" style="background-color:#EF9600; color:black;">Nuevo</a>
 						<a href="<?php echo site_url('instdemocratica/editar/');?>" class="btn btn-info" role="button" style="background-color:#EF9600; color:black;">Editar</a>
+
 					</div>
 
 				</div>

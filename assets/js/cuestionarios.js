@@ -7,7 +7,7 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
 });
 
 //Funcion para desplegar
-jQuery(document).on('change', 'select#tema', function (e) {
+jQuery(document).on('change', '#checktema-desactivado', function (e) {
 	e.preventDefault();
 	var fecha = $('#fecha').val();
 	var titular = $('#titular').val();
@@ -48,11 +48,16 @@ jQuery(document).on('change', 'select#tema', function (e) {
 
 	//Capturar los temas de la noticia
 	var temas = [];
-	$('#tema option:selected').each(function () {
+	$('input[name="idtema[]"]:checked').each(function () {
 		temas.push(this.value);
 	});
 
+	/*$('#tema option:selected').each(function () {
+		temas.push(this.value);
+	});*/
+
 	noticia.temas = temas;
+
 
 
 	console.log(noticia);
@@ -131,8 +136,8 @@ function setNoticia(noticia) {
 			console.log('RECIBIDO');
 			console.log(html);
 			location.reload();
-			$('#tipo-medio option[value=" "]').attr('selected', true);
-			$('#tipo-medio option:first').attr('selected','selected');
+			//$('#tipo-medio option[value=" "]').attr('selected', true);
+			//$('#tipo-medio option:first').attr('selected','selected');
 			$('#tipo-medio option:first').prop('selected', true);
 
 
@@ -360,37 +365,6 @@ $(document).ready(function() {
 	});
 });
 
-$('#subtemac').click(function () {
 
-
-	/*var nombre;
-	var texto = '';
-	alert("Hola");
-	nombre = $('input:radio:checked').attr("name");
-	alert("nombre: " + nombre);
-	valor = $('input:radio:checked').val();
-	alert("Valor: " + valor);
-	if(valor==0)
-	{
-		texto += '<label>Especifique otra :</label><br>';
-		texto += '<input type="text" id="otrosubtema" name="otrossubtema" placeholder="Otro Subtema" >';
-		console.log("Activar otro tema");
-	}*/
-	/*var valor;
-	var texto='';
-	valor = $('input[name=idsubtema]:checked').val();
-	if(valor==0)
-	{
-		//Agregar contenido a #cajatexto
-		texto += '<label>Especifique otra :</label><br>';
-		texto += '<input type="text" id="otrosubtema" name="otrossubtema" placeholder="Otro Subtema" >';
-		$('#otrosubtema').addClass('contenedores');
-		$('#otrosubtema').html(texto);
-	}else {
-		//Vaciar contenido de #cajatexto
-		$('#otrosubtema').removeClass('contenedores');
-		$('#otrosubtema').empty();
-	}*/
-});
 
 
