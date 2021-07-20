@@ -40,6 +40,7 @@ class Reformaelectoral extends CI_Controller
 			$noticia_objeto = $this->objetoNoticia();
 			$this->session->set_userdata('noticia_nueva', []);
 			$this->session->set_userdata('noticia_nueva', $noticia_objeto);
+
 			$noticia = $this->session->noticia_nueva;
 			$data['noticia'] = $noticia;
 		}else{
@@ -47,7 +48,6 @@ class Reformaelectoral extends CI_Controller
 			$noticia = $this->session->noticia_nueva;
 			$data['noticia'] = $noticia;
 			//var_dump($noticia);
-
 		}
 
 
@@ -182,13 +182,13 @@ class Reformaelectoral extends CI_Controller
 		$this->Cuestionario_model->setTemaIDs($noticia->temas);
 		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
 		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+		$actores_sel = $this->Cuestionario_model->leerActoresPorIDs($noticia->actores);
 
-		//echo "<br><br><br>";
-		//var_dump($temas_sel);
-		//echo "<br><br><br>";
-		//var_dump($subtemas_sel);
+
+
 		$data['temas_sel'] = $temas_sel;
 		$data['subtemas_sel'] = $subtemas_sel;
+		$data['actores_sel'] = $actores_sel;
 		/*
 		 * CARGA DE VISTAS
 		 */
@@ -271,6 +271,15 @@ class Reformaelectoral extends CI_Controller
 			$noticia = $this->session->noticia_nueva;
 
 		}
+		$this->Cuestionario_model->setTemaIDs($noticia->temas);
+		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+		$actores_sel = $this->Cuestionario_model->leerActoresPorIDs($noticia->actores);
+
+
+		$datos['temas_sel'] = $temas_sel;
+		$datos['subtemas_sel'] = $subtemas_sel;
+		$datos['actores_sel'] = $actores_sel;
 		$datos['noticia'] = $noticia;
 
 		$this->load->view('html/encabezado');

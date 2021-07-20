@@ -17,6 +17,7 @@
 <!--                         <th>Cuestionario</th>
                          <th>Numero de Cuestionarios</th>-->
                         <?php foreach ($NumeroDeCuestionarios as $nC) {?>
+                        <th><?php echo "fecha ".$nC->nombre_cuestionario;?></th>
                         <th><?php echo $nC->nombre_cuestionario;?></th>
                         <?php } ?>
                         
@@ -28,7 +29,9 @@
 				<td><?php echo $f->apellido;?></td>
 				<td><?php echo $f->departamento;?></td>
                                 <?php foreach ($NumeroDeCuestionarios as $NDC) {?>
-                                <?php $cuestionarios=$NDC->nombre_cuestionario; ?>
+                                    <?php $cuestionarios=$NDC->nombre_cuestionario; ?>
+                                        <?php $auxiliar="fecha ".$NDC->nombre_cuestionario; ?>
+                                <td><?php echo $f->$auxiliar;?></td>
                                 <td><?php echo $f->$cuestionarios; ?></td>
                                 <?php } ?>
 			</tr>

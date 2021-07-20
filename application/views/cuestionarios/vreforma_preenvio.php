@@ -11,11 +11,11 @@
 						<div class="list-group">
 							<a href="#" class="list-group-item disabled">
 								Fecha Registro:
-								<?php echo ' '.$noticia->fecha_registro; ?>
+								<?php echo ' '.mdate('%m-%d-%Y', $noticia->fecha_registro); ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Fecha:
-								<?php echo ' '.$noticia->fecha_noticia; ?>
+								<?php echo ' '.mdate('%m-%d-%Y', $noticia->fecha_noticia); ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Titular:
@@ -31,24 +31,38 @@
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Medio:
-								<?php echo ' ' ?>
+								<?php echo $noticia->medio['nombre']; ?>
+								<?php echo ' - '.$noticia->tipo_medio['nombre']; ?>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Actor:
-
-								<?php echo ' '; ?>
+								<ul>
+									<?php foreach ($actores_sel as $ac): ?>
+										<li type="circle" ><?php echo $ac['nombre_actor'] ?></li>
+									<?php endforeach; ?>
+								</ul>
 							</a>
 							<a href="#" class="list-group-item disabled">
 								Tema:
-								<?php echo ' '; ?>
+								<ul>
+									<?php foreach ($temas_sel as $temas): ?>
+										<li type="circle" ><?php echo $temas['nombre_tema'] ?></li>
+									<?php endforeach; ?>
+								</ul>
+								<?php if(isset($noticia->otro_tema) && !empty($noticia->otro_tema) ): ?>
+									<h7>Otro Tema</h7>
+									<p>
+									<ul>
+										<li type="circle" > <?php echo $noticia->otro_tema; ?> </li>
+									</ul>
+									</p>
+								<?php endif; ?>
 
 							</a>
 							<a href="#" class="list-group-item disabled">
-								Subtema:
-								<?php
-								echo ' ';
-								?>
+
 							</a>
+
 						</div>
 
 					</div>

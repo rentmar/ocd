@@ -229,4 +229,25 @@ class Cuestionario_model extends CI_Model
 		return $tema_subtema;
 	}
 
+	public function leerActoresPorIDs($actores)
+	{
+		$sql = "SELECT * "
+			."FROM actor as ac  "
+			."WHERE ac.idactor = ?  ";
+		$tema_subtema = array();
+
+
+		foreach ($actores as $i=>$id)
+		{
+			if($id != 0)
+			{
+				$qry = $this->db->query($sql, [$id,  ]);
+				$registro = $qry->result_array();
+
+				$tema_subtema = array_merge($tema_subtema, $registro);
+			}
+		}
+		return $tema_subtema;
+	}
+
 }
