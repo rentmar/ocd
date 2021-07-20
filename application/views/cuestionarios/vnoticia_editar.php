@@ -3,7 +3,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
-				<?php echo form_open('noticia/editarNoticia'); ?>
 				<br>
 				<div class="card">
 					<div class="card-header">
@@ -15,43 +14,86 @@
 								<label for="fecha" >
 									Fecha:
 								</label>
-								<input type="date" id="fecha" name="fecha" class="form-control"
-									   value="<?php echo mdate('%Y-%m-%d', $noticia->fecha_registro);?>" >
-								<input type="hidden" id="idnoticia" name="idnoticia"
-									   value="<?php echo $noticia->idnoticia; ?>">
-								<input type="hidden" id="idcuestionario" name="idcuestionario"
-									   value="<?php echo $noticia->rel_idcuestionario; ?>" >
-
+								<input type="date" id="fecha" name="fecha" class="form-control" disabled="true"
+									   value="<?php echo mdate('%Y-%m-%d', $noticia->fecha_noticia);?>" >
 							</div>
 							<div class="col-2">
-								<button type="submit" name="accion" value="1" class="btn btn-primary">
+								<button type="submit" data-toggle="modal" data-target="#fechamodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
 									Cambiar Fecha
 								</button>
 							</div>
 						</div>
-
 						<div class="form-row">
 							<div class="col">
 								<hr>
 							</div>
 						</div>
-
+						<div class="form-row">
+							<div class="col-10">
+								<div class="form-group">
+									<label for="rel_idtipomedio" >
+										Tipo Medio
+									</label>
+									<select class="combo" id='cuadro' name='rel_idtipomedio' disabled="true" required>
+										<option value="0"></option>
+										<?php foreach ($tipos as $tm) {?>
+											<?php if ($tm->idtipomedio == $medio->rel_idtipomedio) {?>
+											<option selected='true' value='<?php echo $tm->idtipomedio;?>'><?php echo $tm->nombre_tipo;?></option>
+											<?php } ?>
+											<?php if ($tm->idtipomedio != $medio->rel_idtipomedio) {?>
+											<option value='<?php echo $tm->idtipomedio;?>'><?php echo $tm->nombre_tipo;?></option>
+											<?php } ?>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-2">
+								<button type="submit" data-toggle="modal" data-target="#mediomodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+									Cambiar Medio Comunicacion
+								</button>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-10">
+								<div class="form-group">
+									<label for="medio" >
+										Medio de Comunicacion
+									</label>
+									<select class="combo" id='cuadro' name='medio' disabled="true" required>
+										<option value="0"></option>
+										<?php foreach ($medios as $m) {?>
+											<?php if ($m->idmedio == $medio->idmedio) {?>
+											<option selected='true' value='<?php echo $m->idmedio;?>'><?php echo $m->nombre_medio;?></option>
+											<?php } ?>
+											<?php if ($m->idmedio != $medio->idmedio) {?>
+											<option value='<?php echo $m->idmedio;?>'><?php echo $m->nombre_medio;?></option>
+											<?php } ?>
+										<?php } ?>
+									</select>
+								</div>
+							</div>
+						</div>
+		
+						<div class="form-row">
+							<div class="col">
+								<hr>
+							</div>
+						</div>
+						
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
 									<label for="titular" >
 										Titular:
 									</label>
-									<input type="text" id="titular" name="titular" class="form-control"
+									<input type="text" id="titular" name="titular" class="form-control" disabled="true"
 										   value="<?php echo $noticia->titular; ?>" required>
 								</div>
 							</div>
 							<div class="col-2">
-								<div class="form-group">
-									<button type="submit" name="accion" value="2" class="btn btn-primary">
-										Cambiar Datos
-									</button>
-								</div>
+								<button type="submit" data-toggle="modal" data-target="#datosmodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+									Cambiar Datos Noticia
+								</button>
 							</div>
 						</div>
 						<div class="form-row">
@@ -60,7 +102,8 @@
 									<label for="resumen" >
 										Resumen:
 									</label>
-									<textarea id="resumen" name="resumen" required class="form-control"><?php echo $noticia->resumen; ?>
+									<textarea id="resumen" name="resumen" required class="form-control" disabled="true">
+										<?php echo $noticia->resumen; ?>
 									</textarea>
 								</div>
 							</div>
@@ -71,312 +114,274 @@
 									<label for="url" >
 										url:
 									</label>
-									<input id="url" name="url" class="form-control" value="<?php echo $noticia->url_noticia;  ?>" >
+									<input id="url" name="url" class="form-control" disabled="true" value="<?php echo $noticia->url_noticia; ?>" >
 								</div>
 							</div>
 						</div>
-
 						<div class="form-row">
 							<div class="col">
 								<hr>
 							</div>
 						</div>
-
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
-									<label for="nombre_actor" >
-										Actor:
-									</label>
-									<br>
-									<p>
-									<?php foreach ($actores as $a): ?>
-										<?php echo $a->nombre_actor; ?>
-										<?php echo "<br>"; ?>
-									<?php endforeach; ?>
-									</p>
+
+									<label>
+										Seleccionar Actor/es:
+									</label><br>
+									<?php foreach ($actores as $a ) { ?>
+										<?php foreach ( $na as $n) { ?>
+											<?php if ($a->idactor==$n->rel_idactor) { ?>
+												<input disabled="true" type="checkbox" checked="true" id="a<?php echo $a->idactor; ?>" name="a<?php echo $a->idactor; ?>" value="<?php echo $a->idactor; ?>">
+												<label for="a<?php echo $a->idactor; ?>"><?php echo $a->nombre_actor; ?></label><br>
+											<?php break; } ?>
+										<?php } ?>
+										<?php if ($a->idactor!=$n->rel_idactor) { ?>
+											<input disabled="true" type="checkbox" id="a<?php echo $a->idactor; ?>" name="a<?php echo $a->idactor; ?>" value="<?php echo $a->idactor; ?>">
+											<label for="a<?php echo $a->idactor; ?>"><?php echo $a->nombre_actor; ?></label><br>
+										<?php } ?>
+									<?php } ?>
 
 								</div>
 							</div>
 							<div class="col-2">
-								<div class="form-group">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#actormodal">
-										Cambiar Actor
-									</button>
-								</div>
+								<button type="submit" data-toggle="modal" data-target="#actormodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+									Cambiar Actor/es
+								</button>
 							</div>
 						</div>
-
 						<div class="form-row">
 							<div class="col">
 								<hr>
 							</div>
 						</div>
-
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
-									<label for="nombre_tipo" >
-										Tipo de Medio:
-									</label>
-									<input type="text" id="nombre_tipo" name="nombre_tipo" class="form-control"
-										   value="<?php echo $noticia->nombre_medio; ?>" readonly>
-									<input type="hidden" id="idtipomedio" name="idtipomedio"
-										   value="<?php echo $noticia->idmedio; ?>" >
+									<label>
+										Seleccionar Tema/s:
+									</label><br>
+									<?php foreach ($temas as $tema) { ?>
+										<?php foreach ( $temase as $temaelegido) { ?>
+											<?php if ($tema->idtema==$temaelegido->idtema) { ?>
+												<input disabled="true" type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+												<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+											<?php break; } ?>
+										<?php } ?>
+										<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+											<input disabled="true" type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+											<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+										<?php } ?>
+									<?php } ?>
 								</div>
 							</div>
 							<div class="col-2">
-								<div class="form-group">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mediomodal"">
-										Cambiar Medio
-									</button>
-								</div>
+								<button type="submit" data-toggle="modal" data-target="#temamodal" style="background-color:#474142; color:#ffffff">
+									Cambiar Tema/s
+								</button>
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="col-10">
-								<div class="form-group">
-									<label for="nombre_medio" >
-										Medio:
-									</label>
-									<input type="text" id="nombre_medio" name="nombre_medio" class="form-control"
-										   value="<?php echo $noticia->nombre_medio; ?>" readonly>
-									<input type="hidden" id="idmedio" name="idmedio"
-										   value="<?php echo $noticia->idmedio; ?>" >
-								</div>
-							</div>
-						</div>
-
 						<div class="form-row">
 							<div class="col">
 								<hr>
 							</div>
 						</div>
-						
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
-									<label for="nombre_tema" >
-										Tema:
-									</label>
-									<br>
-									<?php foreach ($temas as $t): ?>
-										<?php echo $t->nombre_tema;?>
-										<?php echo "<br>";?>
-									<?php endforeach; ?>
-								</div>
-							</div>
-							<div class="col-2">
-								<div class="form-group">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temamodal">
-											Cambiar Tema
-									</button>
+									<?php foreach ($temase as $te) { ?>
+										<label>
+											Seleccionar SubTema/s para <?php echo $te->nombre_tema;?>:
+										</label><br>
+										<?php foreach ($subtemas[$te->idtema] as $st) {?>
+											<?php foreach ( $subtemase as $subtemaelegido) { ?>
+											<?php if ($st->idsubtema==$subtemaelegido->idsubtema) { ?>
+												<input disabled="true" type="checkbox" checked="true" id="st<?php echo $st->idsubtema; ?>" name="st<?php echo $st->idsubtema; ?>" value="<?php echo $st->idsubtema; ?>">
+												<label for="st<?php echo $st->nombre_subtema; ?>"><?php echo $st->nombre_subtema; ?></label><br>
+											<?php break; } ?>
+											<?php } ?>
+											<?php if ($st->idsubtema!=$subtemaelegido->idsubtema) { ?>
+												<input disabled="true" type="checkbox"  id="st<?php echo $st->idsubtema; ?>" name="st<?php echo $st->idsubtema; ?>" value="<?php echo $st->idsubtema; ?>">
+												<label for="st<?php echo $st->nombre_subtema; ?>"><?php echo $st->nombre_subtema; ?></label><br>
+											<?php } ?>
+											<?php } ?>
+											<div class="form-row">
+												<div class="col">
+													<hr>
+												</div>
+											</div>
+									<?php } ?>
+									<div class="form-row">
+										<div class="col">
+											<hr>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="col-10">
-								<div class="form-group">
-									<label for="nombre_subtema" >
-										Subtema:
-									</label>
-									<br>
-									<?php foreach ($subtemas as $st): ?>
-									<?php echo $st->nombre_subtema;?>
-									<?php echo "<br>"; ?>
-									<?php endforeach; ?>
-								</div>
-							</div>
-						</div>
-
-
-
-
-				
-					</div>
-					<div class="card-footer">
-						<button type="" name="accion" value="cambiar" class="btn btn-primary">
-							Confirmar Edicion
-						</button>
-						<button type="" name="accion" value="cancelar" class="btn btn-danger">
-							Cancelar edicion
-						</button>
 					</div>
 				</div>
-				<br>
-				<?php echo form_close();?>
 			</div>
-
-
 		</div>
 	</div>
-
 </main>
 
-
-<!-- Modal Edicion de Actor -->
-<div class="modal" id="actormodal">
+<div class="modal" id="fechamodal">
 	<div class="modal-dialog">
 		<div class="modal-content">
-
-			<!-- Modal Header -->
 			<div class="modal-header">
-				<h1 class="modal-title">Editar Actor</h1>
+				<h1 class="modal-title">Editar Fecha</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('noticia/editarNoticia');?>
-			<!-- Modal body -->
+			<?php echo form_open('noticia/modificarNoticia/'.$noticia->idnoticia);?>
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="hidden" id="idnoticia" name="idnoticia"
-						   value="<?php echo $noticia->idnoticia; ?>">
-					<input type="hidden" id="idcuestionario" name="idcuestionario"
-						   value="<?php echo $idcuestionario; ?>" >
+					<label>Fecha de la Noticia:</label><br>
+					<input type="date" id="fecha" name="fecha" class="form-control">
 				</div>
-				<div class="form-group">
-					<label>Escoja el tipo de actor que es la fuente de la noticia:</label><br>
-					<?php $contador = 0; ?>
-					<?php foreach ($actor as $key => $element): ?>
-						<?php if($contador == 0): ?>
-							<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>"  checked >
-							<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
-							<?php $contador++; ?>
-						<?php else: ?>
-							<input type="radio" id="radio<?php echo $element['idactor']; ?>" name="idactor" value="<?php echo $element['idactor']; ?>" >
-							<label for="radio<?php echo $element['idactor']; ?>"><?php echo $element['nombre_actor']; ?></label><br>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</div>
-
-
-
 			</div>
-
-			<!-- Modal footer -->
 			<div class="modal-footer">
-				<button type="submit" name="accion" value="3" class="btn btn-primary" >Editar</button>
+				<button type="submit" name="accion" value="1" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
 			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			</div>
-
 		</div>
 	</div>
 </div>
 
-
-
-<!-- Modal Edicion de Medio -->
 <div class="modal" id="mediomodal">
 	<div class="modal-dialog">
 		<div class="modal-content">
-
-			<!-- Modal Header -->
 			<div class="modal-header">
-				<h1 class="modal-title">Editar Medio</h1>
+				<h1 class="modal-title">Editar Medio de Comunicacion</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('noticia/editarNoticia');?>
-			<!-- Modal body -->
+			<?php echo form_open('Reformaelectoral/editarMedio');?>
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" id="idnoticia" name="idnoticia"
-						   value="<?php echo $noticia->idnoticia; ?>">
-					<input type="hidden" id="idcuestionario" name="idcuestionario"
-						   value="<?php echo $idcuestionario; ?>" >
+						value="<?php echo $noticia->idnoticia; ?>">
 				</div>
 				<div class="form-group">
-					<label for="tipo-medio">Tipo de Medio:</label><br>
-					<select id="tipo-medio" name="idtipomedio" class="form-control" required>
-						<option value="" >Seleccione el Tipo de Medio</option>
-						<?php foreach ($tipo_medio as $key=>$element): ?>
-							<option value="<?php echo $element['tipo_id']; ?>" ><?php echo $element['tipo_nombre']; ?></option>
-						<?php endforeach; ?>
+					<label for="rel_idtipomedio" >
+						Seleccionar Tipo Medio
+					</label>
+					<select class="combo" id='cuadro' name='rel_idtipomedio' required>
+						<option value="0"></option>
+						<?php foreach ($tipos as $tm) {?>
+						<option value='<?php echo $tm->idtipomedio;?>'><?php echo $tm->nombre_tipo;?></option>
+						<?php } ?>
 					</select>
 				</div>
-				<div class="form-group">
-					<label>Escoja el medio al cual hizo el seguimiento:</label><br>
-					<select id="medio" name="idmedio" class="form-control" required >
-						<option value="" >Seleccione medio</option>
-					</select>
-				</div>
-
-
-
 			</div>
-
-			<!-- Modal footer -->
 			<div class="modal-footer">
-				<button type="submit" name="accion" value="4" class="btn btn-primary" >Editar</button>
-				<?php echo form_close();?>
+				<button type="submit" name="accion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+					Continuar
+				</button>
+			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			</div>
-
 		</div>
 	</div>
 </div>
 
-<!-- Modal Edicion de Tema/Subtema -->
+<div class="modal" id="datosmodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Editar Datos de la Noticia</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('noticia/modificarNoticia/'.$noticia->idnoticia);?>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="titular" >
+						Titular:
+					</label>
+					<input type="text" id="titular" name="titular" class="form-control" value="<?php echo $noticia->titular; ?>"
+						 required>
+				</div>
+				<div class="form-group">
+					<label for="resumen" >
+						Resumen:
+					</label>
+					<textarea id="resumen" name="resumen" required class="form-control">
+						<?php echo $noticia->resumen; ?>
+					</textarea>
+				</div>
+				<div class="form-group">
+					<label for="url" >
+						url:
+					</label>
+					<input id="url" name="url" class="form-control" value="<?php echo $noticia->url_noticia; ?>">			
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
+			<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="actormodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Editar Actor/es</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('noticia/modificarNoticia/'.$noticia->idnoticia);?>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>
+						Seleccionar Actor/es:
+					</label><br>
+					<?php foreach ($actores as $a ) { ?>
+						<input type="checkbox" id="a<?php echo $a->idactor; ?>" name="a<?php echo $a->idactor; ?>" value="<?php echo $a->idactor; ?>">
+						<label for="a<?php echo $a->idactor; ?>"><?php echo $a->nombre_actor; ?></label><br>
+					<?php } ?>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="4" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
+			<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="modal" id="temamodal">
 	<div class="modal-dialog">
 		<div class="modal-content">
-
-			<!-- Modal Header -->
 			<div class="modal-header">
-				<h1 class="modal-title">Editar Tema</h1>
+				<h1 class="modal-title">Editar Tema/s</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('noticia/editarNoticia');?>
-			<!-- Modal body -->
+			<?php echo form_open('Reformaelectoral/editarTemas');?>
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" id="idnoticia" name="idnoticia"
-						   value="<?php echo $noticia->idnoticia; ?>">
-					<input type="hidden" id="idcuestionario" name="idcuestionario"
-						   value="<?php echo $idcuestionario; ?>" >
+						value="<?php echo $noticia->idnoticia; ?>">
 				</div>
 				<div class="form-group">
-					<label>Escoge el tema al que está referido la nota :</label><br>
-					<select id="tema" name="idtema" class="form-control" required >
-						<option value="" >Seleccione Tema</option>
-						<?php foreach ( $tema as $key => $element): ?>
-							<option value="<?php echo $element['idtema']; ?>" >
-								<?php echo $element['nombre_tema']; ?>
-							</option>
-						<?php endforeach; ?>
-						<option value="0" >Otro</option>
-					</select>
+					<label>
+						Seleccionar Tema/s:
+					</label><br>
+					<?php foreach ($temas as $tema) { ?>
+						<input type="checkbox" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+						<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+					<?php } ?>
 				</div>
-				<div class="form-group ">
-					<div id="otrotemac"  >
-
-					</div>
-				</div>
-				<div class="form-group">
-					<div id="subtemac" >
-
-					</div>
-				</div>
-				<div class="form-group">
-					<div id="otrosubtema">
-
-					</div>
-				</div>
-
 			</div>
-
-			<!-- Modal footer -->
 			<div class="modal-footer">
-				<button type="submit" name="accion" value="5" class="btn btn-primary" >Editar</button>
-				<?php echo form_close();?>
+				<button type="submit" name="accion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Continuar</button>
+			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			</div>
-
 		</div>
 	</div>
 </div>
-
-
-
-
-
-

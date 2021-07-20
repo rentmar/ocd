@@ -197,8 +197,6 @@ class Reformaelectoral extends CI_Controller
 		$this->load->view('cuestionarios/vnoticia_subtemas', $data);
 		$this->load->view('html/pie');
 
-
-
 	}
 
 	public function getprueba()
@@ -234,12 +232,14 @@ class Reformaelectoral extends CI_Controller
 
 	public function preenvio()
 	{
+
 		//Extraer la variable de session nueva noticia
 		$noticia = $this->session->noticia_nueva;
 		//var_dump($noticia);
 		if(!$noticia->es_preenvio)
 		{
 			//Definir la fecha de registro de la noticia
+
 			$noticia->fecha_registro = now();
 			//definir los identificadores de los subtemas
 			$idtemas = array_filter($noticia->temas) ;
@@ -277,9 +277,6 @@ class Reformaelectoral extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_preenvio',$datos);
 		$this->load->view('html/pie');
-
-
-
 	}
 
 	public function seleccionarMedio()
@@ -329,6 +326,7 @@ class Reformaelectoral extends CI_Controller
 
 
 		redirect('reformaelectoral');
+
 	}
 
 
@@ -338,124 +336,70 @@ class Reformaelectoral extends CI_Controller
 		$cantidad_noticia = $this->session->noticia_editable;
 		//echo $usuario->id;
 		//echo $cantidad_noticia;
-		//$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
-		$noticias = $this->Noticia_model->leerTodasNoticiasCuestionarioUsuario($this->_idformulario, $usuario->id);
-
 		//var_dump($noticias);
-
-		$data['noticias'] = $noticias;
-		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
-
+		$dt['noticias'] =$this->Noticia_model->leerNoticiasUsuario($usuario->id,$this->_idformulario);
+		$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_lista_noticias', $data);
+		$this->load->view('cuestionarios/vreforma_lista_noticias', $dt);
 		$this->load->view('html/pie');
 	}
-
 
 	public function editarNoticia($idnoticia)
 	{
-		$idnoticia = $idnoticia;
-		if(!$this->session->edicion_activa)
+		$usuario = $this->ion_auth->user()->row();
+		$n=$this->Noticia_model->leerNoticiaPorId($idnoticia);
+		$medio=$this->Noticia_model->leerMedioPorId($n->rel_idmedio);
+		$dt['actores']=$this->Noticia_model->leerTodoActores();
+		$dt['medios']=$this->Noticia_model->leerMediosPorTipoDepartamento($medio->rel_idtipomedio,$usuario->rel_iddepartamento);
+		$dt['tipos']=$this->Noticia_model->leerTipos();
+		$dt['noticia']= $n;
+		$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
+		$dt['medio']=$medio;
+		$dt['temas']=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
+		$dt['temase']=$this->Noticia_model->leerTemasNoticia($idnoticia);
+		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
+		foreach ($dt['temase'] as $te)
 		{
-			//Noticia
-			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
-			//Actores
-			$actores = $this->Noticia_model->leerActores($idnoticia);
-			//Temas
-			//$temas = $this->Noticia_model->leerTemas($idnoticia);
-			//Subtemas
-			//$subtemas = $this->Noticia_model->leerSubtemas($idnoticia);
-			//Otro tema
-			//$otrotema = $this->Noticia_model->leerOtrotema($idnoticia);
-			//Otros subtemas
-			//$otrosubtemas = $this->Noticia_model->leerOtrosubtemas($idnoticia);
-
-			//Limpiar la variable de edicion_activa
-			$this->session->set_userdata('edicion_activa', true);
-			$this->session->set_userdata('edicion_cuestionario', $this->_idformulario);
-			$this->session->set_userdata('noticia_ed', []);
-			$this->session->set_userdata('noticia_ed', $noticia);
-			$this->session->set_userdata('actores_ed', []);
-			$this->session->set_userdata('actores_ed', $actores);
-			$this->session->set_userdata('temas_ed', []);
-			$this->session->set_userdata('temas_ed', $actores);
-			$this->session->set_userdata('actores_ed', []);
-			$this->session->set_userdata('actores_ed', $actores);
-
-
-
+			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
 		}
-		$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
-		$actores = $this->Noticia_model->leerActores($idnoticia);
-		$temas = $this->Noticia_model->leerTemas($idnoticia);
-		$subtemas = $this->Noticia_model->leerSubtemas($idnoticia);
-		//Otro tema
-		$otrotema = $this->Noticia_model->leerOtrotema($idnoticia);
-		//Otros subtemas
-		$otrosubtemas = $this->Noticia_model->leerOtrosubtemas($idnoticia);
-
-
-		$data['noticia'] = $noticia ;
-		$data['actores'] = $actores;
-		$data['temas'] = $temas ;
-		$data['subtemas'] = $subtemas;
-		$data['otrotema'] = $otrotema;
-		$data['otrosubtemas'] = $otrosubtemas;
-
+		$dt['subtemas']=$subtemas;
+		
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vnoticia_editar', $data);
+		$this->load->view('cuestionarios/vnoticia_editar', $dt);
 		$this->load->view('html/pie');
-
-
-		/*//Comprobar si hay edicion activa
-		if(!$this->session->edicion_activa)
-		{
-			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
-			//Noticia original
-			$noticia_original = $this->Noticia_model->leerNoticiaID($idnoticia);
-			//Limpiar la variable de edicion_activa
-			$this->session->set_userdata('edicion_activa', true);
-			$this->session->set_userdata('edicion_cuestionario', $this->_idformulario);
-			//Cargar la noticia y la noticia original a la session
-			$this->session->set_userdata('noticia', []);
-			$this->session->set_userdata('noticia', $noticia);
-			$this->session->set_userdata('noticia_original', []);
-			$this->session->set_userdata('noticia_original', $noticia_original);
-			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
-		}
-
-		$data['idnoticia'] = $idnoticia;
-		if($this->session->edicion_activa)
-		{
-			//Noticia editada
-			$noticia_edicion = $this->session->noticia;
-			//Noticia original
-			$noticia_original = $this->session->noticia_original;
-			//var_dump($noticia_original);
-
-			$data['noticia'] = $noticia_edicion;
-			$data['idcuestionario'] = $this->_idformulario;
-			$data['actor'] = $this->Cuestionario_model->leerActor();
-			$data['tipo_medio'] = $this->Cuestionario_model->leerTodosTiposMedio();
-			$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
-			$tema = $this->Cuestionario_model->leerTema();
-			$data['tema']=$tema;
-
-		}*/
-		/*$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vnoticia_editar', $data);
-		$this->load->view('html/pie');*/
 	}
-
-	//Actualizar los valores del titular, resumen y url
-	private function updateDatosGenerales()
+	public function editarMedio()
 	{
-
+		$usuario = $this->ion_auth->user()->row();
+		$dt['idnoticia']=$this->input->post('idnoticia');
+		$dt['medios']=$this->Noticia_model->leerMediosPorTipoDepartamento($this->input->post('rel_idtipomedio'),$usuario->rel_iddepartamento);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/veditarmedio',$dt);
+		$this->load->view('html/pie');
 	}
-
+	public function editarTemas()
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$dt['idnoticia']=$this->input->post('idnoticia');
+		$temas=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
+		foreach ($temas as $t)
+		{	
+			if ($this->input->post('t'.$t->idtema)!=null)
+			{
+				$temase[$t->idtema]=$this->Noticia_model->leerTemaPorId($t->idtema);
+				$subtemase[$t->idtema]=$this->Noticia_model->leerSubtemasPorTema($t->idtema);
+			}
+		}
+		$dt['temase']=$temase;
+		$dt['subtemase']=$subtemase;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/veditartema',$dt);
+		$this->load->view('html/pie');
+	}
 	public function capturarDatos()
 	{
 		echo "Capturar la informacion del Formulario";

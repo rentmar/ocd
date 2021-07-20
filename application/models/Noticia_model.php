@@ -28,11 +28,67 @@ class Noticia_model extends CI_Model{
 		$q= $this->db->get('noticia');
 		return $q->row();
 	}
+	public function leerTodoActores()
+	{
+		$q= $this->db->get('actor');
+		return $q->result();
+	}
+	public function leerTipos()
+	{
+		$q= $this->db->get('tipo_medio');
+		return $q->result();
+	}
+	public function leerMedioPorId($idm)
+	{
+		$this->db->where('idmedio',$idm);
+		$q= $this->db->get('medio_comunicacion');
+		return $q->row();
+	}
+	public function leerMediosPorTipoDepartamento($idtipo,$iddep)
+	{
+		$sql = "SELECT medio_comunicacion.idmedio,medio_comunicacion.nombre_medio "
+			."FROM medio_departamento "
+			."LEFT JOIN medio_comunicacion ON medio_departamento.rel_idmedio=medio_comunicacion.idmedio "
+			."WHERE medio_departamento.rel_iddepartamento = ".$iddep." AND rel_idtipomedio =".$idtipo;
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
 	public function leerNoticiaMedioPorId($idnoticia)
 	{
 		$this->db->where('rel_idnoticia',$idnoticia);
 		$q= $this->db->get('noticia_medio');
 		return $q->row();
+	}
+	public function leerSubtemasNoticia($idn)
+	{
+		$sql = "SELECT subtema.idsubtema,subtema.nombre_subtema "
+			."FROM noticia_subtema "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema "
+			."WHERE noticia_subtema.rel_idnoticia = ".$idn;
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+	public function leerTemasNoticia($idn)
+	{
+		$sql = "SELECT DISTINCT tema.idtema,tema.nombre_tema "
+			."FROM noticia_subtema "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema "
+			."LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
+			."WHERE noticia_subtema.rel_idnoticia = ".$idn;
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+	public function leerSubtemasPorTema($idt)
+	{
+		$this->db->where('rel_idtema',$idt);
+		$q= $this->db->get('subtema');
+		return $q->result();
+	}
+	public function leerTemasCuestionario($idc)
+	{
+		$this->db->where('rel_idcuestionario',$idc);
+		$q= $this->db->get('tema');
+		return $q->result();
 	}
 	public function leerTemaPorSubtema($ids)
 	{
@@ -40,26 +96,32 @@ class Noticia_model extends CI_Model{
 		$q= $this->db->get('subtema');
 		return $q->row();
 	}
+	public function leerTodoSubTemas()
+	{
+		$q= $this->db->get('subtema');
+		return $q->result();
+	}
 	public function leerTemaPorId($idt)
 	{
 		$this->db->where('idtema',$idt);
 		$q= $this->db->get('tema');
 		return $q->row();
 	}
-	public function editarNoticia($idnoticia)
+	public function leerNoticiaActores($idn)
 	{
-		
+		$this->db->where('rel_idnoticia',$idn);
+		$q= $this->db->get('noticia_actor');
+		return $q->result();
 	}
-	public function leerNoticiasUsuarioCuestionario($idusuario)
+	public function leerNoticiasUsuario($idusuario,$idcuestionario)
 	{
 		$sql = "SELECT idnoticia,fecha_registro,fecha_noticia,titular,nombre_medio "
 			."FROM noticia "
 			."LEFT JOIN medio_comunicacion ON noticia.rel_idmedio=medio_comunicacion.idmedio "
-			."WHERE noticia.rel_idusuario = ".$idusuario;
+			."WHERE noticia.rel_idusuario = ".$idusuario." AND noticia.rel_idcuestionario=".$idcuestionario;
 		$qry = $this->db->query($sql);
-		return $qry->row();
+		return $qry->result();
 	}
-
 	//Extrae una noticia por su identificador
 	public function leerNoticiaID($idnoticia){
 		$sql = "SELECT * "
@@ -193,7 +255,6 @@ class Noticia_model extends CI_Model{
 
 	}
 
-
 	//Extraer actores de una noticia
 	public function leerActores($idnoticia)
 	{
@@ -254,8 +315,6 @@ class Noticia_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
 		return $qry->result();
 	}
-
-
 	public function leerTodasNoticiasCuestionarioUsuario($idcuestionario, $idusuario){
 		$sql = "SELECT * "
 			."FROM noticia  "
@@ -264,5 +323,50 @@ class Noticia_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idusuario, $idcuestionario ]);
 		return $qry->result();
 	}
-    
+    public function modificarFechaNoticia($idn,$f)
+	{
+		$this->db->set('fecha_noticia',$f);
+		$this->db->where('idnoticia', $idn);
+		$this->db->update('noticia');
+	}
+	public function modificarMedioNoticia($idn,$idm)
+	{
+		$this->db->set('rel_idmedio',$idm);
+		$this->db->where('idnoticia', $idn);
+		$this->db->update('noticia');
+	}
+	public function modificarDatosNoticia($idn,$dts)
+	{
+		$this->db->set($dts);
+		$this->db->where('idnoticia', $idn);
+		$this->db->update('noticia');
+	}
+	public function modificarActoresNoticia($idn,$dtchkbox)
+	{
+		$this->db->trans_start();
+			$this->db->where('rel_idnoticia',$idn);
+			$this->db->delete('noticia_actor');
+			foreach ($dtchkbox as $idactor)
+			{
+				$dtna=array('rel_idnoticia'=>$idn,
+						'rel_idactor'=>$idactor
+						);
+				$this->db->insert('noticia_actor',$dtna);
+			}
+		$this->db->trans_complete();
+	}
+	public function modificarSubTemasNoticia($idn,$dtchkboxst)
+	{
+		$this->db->trans_start();
+			$this->db->where('rel_idnoticia',$idn);
+			$this->db->delete('noticia_subtema');
+			foreach ($dtchkboxst as $idst)
+			{
+				$dtst=array('rel_idnoticia'=>$idn,
+						'rel_idsubtema'=>$idst
+						);
+				$this->db->insert('noticia_subtema',$dtst);
+			}
+		$this->db->trans_complete();
+	}
 }
