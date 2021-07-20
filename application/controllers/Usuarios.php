@@ -54,6 +54,7 @@ class Usuarios extends CI_Controller
 			$usuario = $this->input->post('usuario');
 			$password = $this->input->post('password');
 			$email = $this->input->post('email');
+			/** @noinspection PhpLanguageLevelInspection */
 			$datos_extra = [
 				'first_name' => $this->input->post('nombre'),
 				'last_name' => $this->input->post('apellido'),
@@ -62,12 +63,16 @@ class Usuarios extends CI_Controller
 				'rel_iddepartamento' => $this->input->post('departamento'),
 				'direccion' => $this->input->post('direccion'),
 			];
+			/** @noinspection PhpLanguageLevelInspection */
 			$grupo = [$this->input->post('grupo'),];
 
+
+
 			if(!$this->ion_auth->register($usuario, $password, $email, $datos_extra, $grupo)){
-				echo "Error de creacion";
+				//echo "Error de creacion";
 			}else{
-				echo "Usuario Creado";
+				//echo "Usuario Creado";
+				redirect('inicio/');
 			}
 		}
 

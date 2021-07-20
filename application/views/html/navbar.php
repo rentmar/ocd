@@ -28,6 +28,8 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">Switch account</a>
 			</li>-->
+
+			<?php if($this->ion_auth->is_admin()): ?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Usuarios
@@ -38,7 +40,9 @@
 					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/3');?>">Monitores</a>
 				</div>
 			</li>
+			<?php endif; ?>
 
+			<?php if($this->ion_auth->is_admin()): ?>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Datos Formulario
@@ -47,12 +51,13 @@
 					<a class="dropdown-item" href="<?php echo site_url('formulario/');?>">Formularios</a>
 					<a class="dropdown-item" href="<?php echo site_url('actor/');?>">Actores</a>
 					<a class="dropdown-item" href="<?php echo site_url('departamento/');?>">Departamentos</a>
-					<a class="dropdown-item" href="<?php echo site_url('tipomedio/');?>">Tipo de Medio</a>
-					<a class="dropdown-item" href="<?php echo site_url('mediocomunicacion/');?>">Medio de Comunicacion</a>
+					<a class="dropdown-item" href="<?php echo site_url('tipoMedio/');?>">Tipo de Medio</a>
+					<a class="dropdown-item" href="<?php echo site_url('medioComunicacion/');?>">Medio de Comunicacion</a>
 					<a class="dropdown-item" href="<?php echo site_url('tema/');?>">Tema</a>
-					<a class="dropdown-item" href="<?php echo site_url('subtema/');?>">Subtema</a>
+					<a class="dropdown-item" href="<?php echo site_url('subTema/');?>">Subtema</a>
 				</div>
 			</li>
+			<?php endif; ?>
 
 		</ul>
 		<ul class="navbar-nav ml-auto">
@@ -85,15 +90,18 @@
 </div>
 <div class="nav-scroller ">
 	<nav class="nav nav-underline">
+		<?php if(!$this->ion_auth->is_admin()): ?>
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
+		<?php endif; ?>
 
-		<a class="nav-link" href="<?php echo site_url('manejodb')?>">Base de Datos</a>
-
+		<?php if($this->ion_auth->is_admin()): ?>
+		<a class="nav-link" href="<?php echo site_url('manejoDB')?>">Base de Datos</a>
 		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis Grafico</a>
-<!--		<a class="nav-link" href="--><?php //echo site_url('seguimientoMonitores')?><!--">Seguimiento-Monitores</a>-->
-
-<!--		<a class="nav-link" href="#">Analisis</a>-->
-		<a class="nav-link" href="<?php echo site_url('seguimientoMonitores')?>">Seguimiento-Monitores</a>
+		<a class="nav-link" href="<?php echo site_url('seguimientomonitores')?>">
+			Seguimiento-Monitores
+		</a>
+		<a class="nav-link" href="#">Analisis</a>
+		<?php endif; ?>
 
 	</nav>
 </div>

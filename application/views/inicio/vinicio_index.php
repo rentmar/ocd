@@ -1,5 +1,6 @@
 <main role="main" >
-<br>
+<?php if(!$this->ion_auth->is_admin()): ?>
+	<br>
 	<div class="container">
 
 		<div class="row">
@@ -67,6 +68,6 @@
 
 	</div>
 
-
+<?php endif; ?>
 </main>
 
