@@ -9,6 +9,7 @@ class Reformaelectoral extends CI_Controller
 		parent::__construct();
 		$this->load->model('Cuestionario_model');
 		$this->load->model('Noticia_model');
+		$this->load->model('MedioComunicacion_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -25,59 +26,51 @@ class Reformaelectoral extends CI_Controller
 
 	public function index()
 	{
+		//Variables de sesion
+		//var_dump($this->session->userdata());
+		//echo "<br><br>";
+
+		/*
+		 * COMPROBAR SI SE CREA NUEVA NUEVA NOTICIA
+		 */
+		if(!$this->session->es_nueva_noticia)
+		{
+			//Nueva noticia inactiva
+			$this->session->set_userdata('es_nueva_noticia', true);
+			$noticia_objeto = $this->objetoNoticia();
+			$this->session->set_userdata('noticia_nueva', []);
+			$this->session->set_userdata('noticia_nueva', $noticia_objeto);
+			$noticia = $this->session->noticia_nueva;
+			$data['noticia'] = $noticia;
+		}else{
+			//Nueva noticia activa
+			$noticia = $this->session->noticia_nueva;
+			$data['noticia'] = $noticia;
+			//var_dump($noticia);
+
+		}
+
+
+		/*
+		 * DATOS DE LLENADO DE FORMULARIO
+		 */
+		//Informacion del usuario logueado
 		$usuario = $this->ion_auth->user()->row();
-		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
-		//Todos los temas referidos al formulario
+		//Temas
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
-
-		//Inicializar las variables de session
-		if(!$this->session->nuevo_c1)
-		{
-			//echo "Nueva noticia no activada";
-			//Activar la bandera nueva noticia
-			$this->session->set_userdata("nuevo_c1", true);
-			//Actualizar la variable de session
-			$noticia = new stdClass();
-			$this->session->set_userdata("reforma", []);
-			$this->session->set_userdata("reforma", $noticia);
-		}
-		else{
-			$reforma = $this->session->reforma;
-			//var_dump($reforma);
-			//echo "<br><br>";
-			$data['fecha'] = $reforma->fecha_noticia;
-			$data['titular'] = $reforma->titular;
-			$data['resumen'] = $reforma->resumen;
-			$data['url'] = $reforma->url_noticia;
-			$data['idactores'] = $reforma->actores;
-			$data['idtemas'] = $reforma->temas;
-			//Extraer los temas seleccionados
-			$this->Cuestionario_model->setTemaIDs($reforma->temas);
-			$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
-			$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
-			//var_dump($temas_sel);
-			//echo "<br><br>";
-			//var_dump($subtemas_sel);
-			//echo "<br><br>";
-			//var_dump($reforma->actores);
-			$data['temas_sel'] = $temas_sel;
-			$data['subtemas_sel'] = $subtemas_sel;
-
-			//echo "Nueva noticia activada";
-			//Actualizar la variable de session
-
-			//$this->session->set_userdata("reforma", []);
-			//$this->session->set_userdata("reforma", $noticia);*/
-		}
+		//Informacion para poblar el formulario
+		$data['tema'] = $this->Cuestionario_model->leerTodosTiposMedio();
+		$data['idformulario'] = $this->_idformulario;
 		$data['idusuario'] = $usuario->id;
-		$data['iddepartamento'] = $usuario->rel_iddepartamento;
-		$data['tipo_medio'] = $tipo_medio;
+		$data['tipo_medio'] = $this->Cuestionario_model->leerTodosTiposMedio();
 		$data['actor'] = $this->Cuestionario_model->leerActor();
 		$data['tema'] = $tema;
-		$data['idformulario'] = $this->_idformulario;
 
+		/*
+		 * CARGA DE VISTAS
+		 */
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_electoral', $data);
@@ -109,35 +102,101 @@ class Reformaelectoral extends CI_Controller
 		echo json_encode($json);
 	}
 
-	public function actualizar()
+	public function setvariables()
 	{
-		$html = array();
-		$not = $this->input->post('noticia');
-		$noticia = json_decode($not) ;
-		if(!$this->session->nuevo_c1)
-		{
-			//echo "Nueva noticia no activada";
-			//Activar la bandera nueva noticia
-			$this->session->set_userdata("nuevo_c1", true);
-			//Actualizar la variable de session
-			$this->session->set_userdata("reforma", []);
-			$this->session->set_userdata("reforma", $noticia);
-		}
-		else{
-			//echo "Nueva noticia activada";
-			//Actualizar la variable de session
-			$this->session->set_userdata("reforma", []);
-			$this->session->set_userdata("reforma", $noticia);
-		}
+		$json = array();
+		$nt = json_decode($this->input->post('noticia'));
 
-		if($noticia->idformulario == 1)
-		{
-			$html = "reformaelectoral";
-		}elseif ($noticia->idformulario == 2){
-			$html = "instdemocratica";
-		}
 
-		echo $html;
+		//Actualizar la variable noticia
+		$noticia = $this->session->noticia_nueva;
+		$noticia->temas = [];
+		$noticia->actores = [];
+		$noticia->actores = $nt->actores;
+		$noticia->temas = $nt->temas;
+		$noticia->actores = $nt->actores;
+		//Actualizar la variable de session
+		$this->session->set_userdata('noticia_nueva', []);
+		$this->session->set_userdata('noticia_nueva', $noticia);
+		redirect('reformaelectoral');
+	}
+
+
+	public function subtemas()
+	{
+
+
+		//Extraer la variable de session nueva noticia
+		$noticia = $this->session->noticia_nueva;
+		//var_dump($noticia);
+		if(!$noticia->es_segundo_paso)
+		{
+			//Capturar actores
+			$actores = $this->input->post('idactor[]');
+			$noticia->actores = $actores;
+			//Capturar temas
+			$temas = $this->input->post('idtema[]');
+			$noticia->temas = $temas;
+
+			//Datos generales
+			$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha')) ;
+			$noticia->titular = $this->input->post('titular');
+			$noticia->resumen = $this->input->post('resumen') ;
+			$noticia->url_noticia = $this->input->post('url') ;
+			$noticia->rel_idusuario = $this->input->post('idusuario');
+			$noticia->rel_idcuestionario = $this->input->post('idformulario');
+
+			//Capturar la informacion del medio
+			$idmedio = $this->input->post('idmedio');
+			$idtipomedio = $this->input->post('idtipomedio');
+			//Extraer la informacion de la base de datos
+			$medio = $this->MedioComunicacion_model->leerMedioPorId($idmedio);
+			$tipo = $this->MedioComunicacion_model->leerTipoMedioPorId($idtipomedio);
+
+			//Actualizar los valores de la noticia
+			$noticia->rel_idmedio = $medio->idmedio;
+			/** @noinspection PhpLanguageLevelInspection */
+			$noticia->medio = [
+				'id'=>$medio->idmedio,
+				'nombre' =>$medio->nombre_medio,
+
+			];
+			/** @noinspection PhpLanguageLevelInspection */
+			$noticia->tipo_medio = [
+				'id'=> $tipo->idtipomedio,
+				'nombre' => $tipo->nombre_tipo,
+			];
+
+			$otro_tema = $this->input->post('tema0');
+			$noticia->otro_tema = $otro_tema;
+			$noticia->es_segundo_paso= true;
+
+			//Actualizar la variable de session
+			$this->session->set_userdata('noticia_nueva', []);
+			$this->session->set_userdata('noticia_nueva', $noticia);
+
+		}else{
+			$noticia = $this->session->noticia_nueva;
+		}
+		$data['noticia'] = $noticia;
+		$this->Cuestionario_model->setTemaIDs($noticia->temas);
+		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+
+		//echo "<br><br><br>";
+		//var_dump($temas_sel);
+		//echo "<br><br><br>";
+		//var_dump($subtemas_sel);
+		$data['temas_sel'] = $temas_sel;
+		$data['subtemas_sel'] = $subtemas_sel;
+		/*
+		 * CARGA DE VISTAS
+		 */
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vnoticia_subtemas', $data);
+		$this->load->view('html/pie');
+
 
 
 	}
@@ -175,168 +234,103 @@ class Reformaelectoral extends CI_Controller
 
 	public function preenvio()
 	{
-		$accion = $this->input->post('action');
-		if($accion == 1){
-			//Procesar formulario
-			//echo "Procesar formulario";
-			$noticia = $this->session->reforma;
+		//Extraer la variable de session nueva noticia
+		$noticia = $this->session->noticia_nueva;
+		//var_dump($noticia);
+		if(!$noticia->es_preenvio)
+		{
+			//Definir la fecha de registro de la noticia
 			$noticia->fecha_registro = now();
-			$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha'));
-			$noticia->titular = $this->input->post('titular');
-			$noticia->resumen = $this->input->post('resumen');
-			$noticia->url_noticia = $this->input->post('url');
-			$noticia->rel_idusuario = $this->input->post('idusuario');
-			$noticia->idformulario = $this->input->post('idformulario');
-			$noticia->rel_idmedio = $this->input->post('idmedio');
-
-
-			//Capturar los actores
-			$actores = $this->input->post('idactor[]');
-			$noticia->actores = $actores;
-
-			//Capturar los temas
-			$temas = $this->input->post('idtema[]');
-
-			//Capturar otro tema
-			$otro_tema = $this->input->post('tema0');
-			$noticia->otro_tema = $otro_tema;
-
-
+			//definir los identificadores de los subtemas
+			$idtemas = array_filter($noticia->temas) ;
 			//Capturar subtemas
 			$subtemas = [];
-			foreach ($temas as $t)
+			foreach ($idtemas as $t)
 			{
 				$subtemas[$t] = $this->input->post('tema'.$t);
 			}
-
-			$noticia->subtemas = $subtemas;
-
-
+			$noticia->subtemas = $subtemas; //Guardar los subtemas
 			//Capturar otros subtemas
 			$otros_subtemas = [];
-			foreach ($temas as $t)
+			foreach ($idtemas as $t)
 			{
 				$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
 			}
+			$noticia->otros_subtemas = $otros_subtemas; //Guardar otros subtemas
+			//Actualizar la bandera de cambio
+			$noticia->es_preenvio = true;
 
-			$noticia->otros_subtemas = $otros_subtemas;
-
-			//var_dump($noticia);
-
+			//Colocar la noticia en la pila de insercion
 			$this->session->set_userdata('noticia_insert', []);
 			$this->session->set_userdata('noticia_insert', $noticia);
-
-
-			$datos['noticia'] = $noticia;
-
-			$this->load->view('html/encabezado');
-			$this->load->view('html/navbar');
-			$this->load->view('cuestionarios/vreforma_preenvio',$datos);
-			$this->load->view('html/pie');
-
-		}elseif ($accion == 0){
-			//Seleccionar temas
-			//echo "Seleccionar temas"."<br>";
-			$noticia = $this->session->reforma;
-			$noticia->fecha_registro = now();
-			$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha'));
-			$noticia->titular = $this->input->post('titular');
-			$noticia->resumen = $this->input->post('resumen');
-			$noticia->url_noticia = $this->input->post('url');
-			$noticia->rel_idusuario = $this->input->post('idusuario');
-			$noticia->idformulario = $this->input->post('idformulario');
-			$noticia->rel_idmedio = $this->input->post('idmedio');
-
-			//Capturar los actores
-			$actores = $this->input->post('idactor[]');
-			$noticia->actores = $actores;
-
-			//Capturar los temas
-			$temas = $this->input->post('idtema[]');
-			$noticia->temas = $temas;
-
-			//var_dump($noticia);
-
-			$this->session->set_userdata('reforma', []);
-			$this->session->set_userdata('reforma', $noticia);
-
-			redirect('reformaelectoral/');
-
+			//Actualizar la variable de session
+			$this->session->set_userdata('noticia_nueva', []);
+			$this->session->set_userdata('noticia_nueva', $noticia);
 
 		}else{
+			$noticia = $this->session->noticia_nueva;
 
 		}
-
-
-		//Capturar la noticia
-		/*$noticia = $this->session->reforma;
-		$noticia->fecha_registro = now();
-		$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha'));
-		$noticia->titular = $this->input->post('titular');
-		$noticia->resumen = $this->input->post('resumen');
-		$noticia->url_noticia = $this->input->post('url');
-		$noticia->rel_idusuario = $this->input->post('idusuario');
-		$noticia->idformulario = $this->input->post('idformulario');
-		$noticia->rel_idmedio = $this->input->post('idmedio');
-
-
-		//Capturar los actores
-		$actores = $this->input->post('idactor[]');
-		$noticia->actores = $actores;
-
-		//Capturar los temas
-		$temas = $this->input->post('idtema[]');
-
-		//Capturar otro tema
-		$otro_tema = $this->input->post('tema0');
-		$noticia->otro_tema = $otro_tema;
-
-
-		//Capturar subtemas
-		$subtemas = [];
-		foreach ($temas as $t)
-		{
-			$subtemas[$t] = $this->input->post('tema'.$t);
-		}
-
-		$noticia->subtemas = $subtemas;
-
-
-		//Capturar otros subtemas
-		$otros_subtemas = [];
-		foreach ($temas as $t)
-		{
-			$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
-		}
-
-		$noticia->otros_subtemas = $otros_subtemas;
-
-		//var_dump($noticia);
-
-		$this->session->set_userdata('noticia_insert', []);
-		$this->session->set_userdata('noticia_insert', $noticia);
-
-
 		$datos['noticia'] = $noticia;
-
-
-
-
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vreforma_preenvio',$datos);
-		$this->load->view('html/pie');*/
-
-
-
-
-
-
+		$this->load->view('html/pie');
 
 
 
 	}
+
+	public function seleccionarMedio()
+	{
+		//Capturar la informacion del post
+		$idmedio = $this->input->post('idmedio');
+		$idtipomedio = $this->input->post('idtipomedio');
+		//Extraer la informacion de la base de datos
+		$medio = $this->MedioComunicacion_model->leerMedioPorId($idmedio);
+		$tipo = $this->MedioComunicacion_model->leerTipoMedioPorId($idtipomedio);
+
+		//Extraer la varible de session
+		$noticia = $this->session->noticia_nueva;
+
+		//Actualizar los valores de la noticia
+		$noticia->rel_idmedio = $medio->idmedio;
+		/** @noinspection PhpLanguageLevelInspection */
+		$noticia->medio = [
+				'id'=>$medio->idmedio,
+				'nombre' =>$medio->nombre_medio,
+
+			];
+		/** @noinspection PhpLanguageLevelInspection */
+		$noticia->tipo_medio = [
+			'id'=> $tipo->idtipomedio,
+			'nombre' => $tipo->nombre_tipo,
+		];
+
+		//Actualizar datos generales
+		$noticia->fecha_noticia = $this->input->post('fecha');
+		$noticia->titular = $this->input->post('titular');
+		$noticia->resumen = $this->input->post('resumen') ;
+		$noticia->url_noticia = $this->input->post('url') ;
+		$noticia->rel_idusuario = $this->input->post('idusuario');
+		$noticia->rel_idcuestionario = $this->input->post('idformulario');
+
+
+
+		//Actualizar actores
+
+
+
+		//Actualizar la variable de session
+		$this->session->set_userdata('noticia_nueva', []);
+		$this->session->set_userdata('noticia_nueva', $noticia);
+
+
+
+		redirect('reformaelectoral');
+	}
+
 
 	public function editar()
 	{
@@ -518,6 +512,43 @@ class Reformaelectoral extends CI_Controller
 		$this->session->set_userdata('reforma', []);
 		//Redireccionar al inicio
 		redirect('inicio/');
+	}
+
+	private function objetoNoticia()
+	{
+		$noticia = new stdClass;
+		$noticia->idnoticia = '';
+		$noticia->fecha_registro = '';
+		$noticia->fecha_noticia = '';
+		$noticia->titular = '';
+		$noticia->resumen = '';
+		$noticia->url_noticia = '';
+
+		$noticia->rel_idmedio = '';
+		$noticia->rel_idcuestionario = '';
+		$noticia->rel_idusuario = '';
+
+		$noticia->iddepartamento = '';
+
+		$noticia->actores = [];
+		$noticia->temas = [];
+		$noticia->subtemas = [];
+		$noticia->medio = [];
+		$noticia->tipo_medio = [];
+
+		$noticia->es_segundo_paso = false;
+		$noticia->es_preenvio = false;
+
+		return $noticia;
+	}
+
+	public function pruebas()
+	{
+		$var = '';
+		if(isset($var) && !empty($var) )
+		{
+			echo $var;
+		}
 	}
 
 }

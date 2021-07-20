@@ -47,29 +47,32 @@ class Instdemocratica extends CI_Controller
 			$reforma = $this->session->reforma;
 			//var_dump($reforma);
 			//echo "<br><br>";
-			$data['fecha'] = $reforma->fecha_noticia;
-			$data['titular'] = $reforma->titular;
-			$data['resumen'] = $reforma->resumen;
-			$data['url'] = $reforma->url_noticia;
-			$data['idactores'] = $reforma->actores;
-			$data['idtemas'] = $reforma->temas;
+			if(isset($reforma->fecha_noticia)){
+				$data['fecha'] = $reforma->fecha_noticia;
+			}
+			if(isset($reforma->titular)){
+				$data['titular'] = $reforma->titular;
+			}
+			if(isset($reforma->resumen)){
+				$data['resumen'] = $reforma->resumen;
+			}
+			if(isset($reforma->url_noticia)){
+				$data['url'] = $reforma->url_noticia;
+			}
+			if(isset($reforma->actores)){
+				$data['idactores'] = $reforma->actores;
+			}
+			if(isset($reforma->temas)){
+				$data['idtemas'] = $reforma->temas;
+			}
 			//Extraer los temas seleccionados
-			$this->Cuestionario_model->setTemaIDs($reforma->temas);
-			$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
-			$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
-			//var_dump($temas_sel);
-			//echo "<br><br>";
-			//var_dump($subtemas_sel);
-			//echo "<br><br>";
-			//var_dump($reforma->actores);
-			$data['temas_sel'] = $temas_sel;
-			$data['subtemas_sel'] = $subtemas_sel;
-
-			//echo "Nueva noticia activada";
-			//Actualizar la variable de session
-
-			//$this->session->set_userdata("reforma", []);
-			//$this->session->set_userdata("reforma", $noticia);*/
+			if(isset($reforma->temas)) {
+				$this->Cuestionario_model->setTemaIDs($reforma->temas);
+				$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+				$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+				$data['temas_sel'] = $temas_sel;
+				$data['subtemas_sel'] = $subtemas_sel;
+			}
 		}
 		$data['idusuario'] = $usuario->id;
 		$data['iddepartamento'] = $usuario->rel_iddepartamento;

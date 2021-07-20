@@ -7,7 +7,57 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
 });
 
 //Funcion para desplegar
-jQuery(document).on('change', '#checktema-desactivado', function (e) {
+jQuery(document).on('click', '#checktema', function (e) {
+	//alert('Presionado');
+	var texto_otro = '';
+	if(this.checked)
+	{
+		console.log('CHECKED');
+		console.log(this.value);
+		if(this.value == 0){
+
+			texto_otro += '<label for="otrotema" >Especifique  otra :</label><br>';
+			texto_otro += '<input type="text" id="otrotema" name="tema0" placeholder="Otro tema" class="form-control" required >';
+			$('#otrotemac').html(texto_otro);
+			$('#otrotemac').addClass('contenedores');
+		}
+	}else{
+		console.log('NO CHECKED');
+		console.log(this.value);
+		if(this.value == 0){
+			$("#otrotemac").removeClass("contenedores");
+			$('#otrotemac').empty();
+
+		}
+	}
+
+});
+
+
+
+jQuery(document).on('click', '#tipomedio', function (e) {
+	e.preventDefault();
+	$('#modalmediocomm').modal("show");
+});
+jQuery(document).on('click', '#mediocomunicacion', function (e) {
+	e.preventDefault();
+	$('#modalmediocomm').modal("show");
+});
+
+jQuery(document).on('click', '#cardtemas', function (e) {
+	e.preventDefault();
+	$('#modalmediocomm').modal("show");
+});
+
+
+
+jQuery(document).on('change', '#seleccionartema----cc', function (e) {
+	e.preventDefault();
+	var tms = $('#tema').select2('data');
+	console.log(tms);
+
+
+
 	e.preventDefault();
 	var fecha = $('#fecha').val();
 	var titular = $('#titular').val();
@@ -44,6 +94,7 @@ jQuery(document).on('change', '#checktema-desactivado', function (e) {
 		actores.push(this.value);
 	});
 
+	noticia.actores = [];
 	noticia.actores = actores;
 
 	//Capturar los temas de la noticia
@@ -55,28 +106,27 @@ jQuery(document).on('change', '#checktema-desactivado', function (e) {
 	/*$('#tema option:selected').each(function () {
 		temas.push(this.value);
 	});*/
-
+	noticia.temas = [];
 	noticia.temas = temas;
 
 
 
 	console.log(noticia);
-
-	setNoticia(noticia);
+	//$('#modaltemas').modal("show");
 });
 
-//Definimos el objeto  noticia
+//Definir el objeto Noticia
 function Noticia() {
-	this.fecha_noticia = "";
-	this.titular = "";
-	this.resumen = "";
-	this.url_noticia = "";
-	this.rel_idusuario = "";
-	this.idformulario = "" ;
+	this.fecha_registro = '';
+	this.titular = '';
+	this.parrafo = '';
+	this.url = '';
+	this.rel_idusuario = '';
+	this.idformulario = '';
 	this.actores = [];
 	this.temas = [];
-	this.subtemas = [];
 }
+
 
 //Definimos el obj tipo de medio
 function Tipomedio(identificador, nombre) {
@@ -121,9 +171,8 @@ function Otrosubtema(nombre, idtema) {
 }
 
 function setNoticia(noticia) {
-	//alert(noticia.temas);
 	$.ajax({
-		url: baseurl + "/reformaelectoral/actualizar",
+		url: baseurl + "/reformaelectoral/setvariables",
 		type: 'post',
 		data: {noticia: JSON.stringify(noticia) },
 		dataType: 'html',
@@ -134,20 +183,20 @@ function setNoticia(noticia) {
 		},
 		success: function (html) {
 			console.log('RECIBIDO');
-			console.log(html);
+			//console.log(html);
+			location.reload();
 			location.reload();
 			//$('#tipo-medio option[value=" "]').attr('selected', true);
 			//$('#tipo-medio option:first').attr('selected','selected');
-			$('#tipo-medio option:first').prop('selected', true);
-
-
+			//$('#tipo-medio option:first').prop('selected', true);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
-	
 }
+
+
 
 
 
@@ -361,8 +410,26 @@ function getSubtemaList(temaID, temaTitulo, color) {
 
 $(document).ready(function() {
 	$('.selector-multiple').select2({
-		placeholder: "Seleccione un tema"
+		placeholder: "Seleccione un tema",
 	});
+});
+
+//Validador del formulario noticia
+$('#formulario').submit(function (e) {
+	var numero_actores_seleccionados;
+	var numero_temas_seleccionados;
+	numero_actores_seleccionados = $('input[name="idactor[]"]:checked').length;
+	numero_temas_seleccionados = $('input[name="idtema[]"]:checked').length;
+	if(numero_actores_seleccionados==0)
+	{
+		e.preventDefault();
+		$('#actorsinseleccionar').modal("show");
+	}
+	if(numero_temas_seleccionados==0){
+		e.preventDefault();
+		$('#temasinseleccionar').modal("show");
+	}
+
 });
 
 
