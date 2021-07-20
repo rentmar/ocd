@@ -31,14 +31,15 @@ class Seguimientomonitores extends CI_Controller
                 {
                     $cuestionarioA=$nDc0->nombre_cuestionario;
                     $feechaa='fecha '.$cuestionarioA;
-                    if($f->nombre_cuestionario === $nDc0->nombre_cuestionario)
+                    if($f->nombre_cuestionario == $nDc0->nombre_cuestionario)
                     {
-                        $TablaAuxiliarSm->$feechaa=$f->fecha_registro;
+                        $TablaAuxiliarSm->$feechaa=date('d-m-Y',$f->fecha_registro);
                         $TablaAuxiliarSm->$cuestionarioA=$f->ncuestionario;
                     }
                     else
                     {
-                        if(/*$TablaAuxiliarSm->$feechaa === 0 &&*/ $TablaAuxiliarSm->$cuestionarioA === 0)
+                        //var_dump($TablaAuxiliarSm->$feechaa);
+                        if(/*$TablaAuxiliarSm->$feechaa == 0 &&*/ $TablaAuxiliarSm->$cuestionarioA == 0)
                         {
                             $TablaAuxiliarSm->$feechaa=0;
                             $TablaAuxiliarSm->$cuestionarioA=0;
@@ -60,17 +61,18 @@ class Seguimientomonitores extends CI_Controller
                 foreach($DatosSeguimientoM['NumeroDeCuestionarios'] as $nDc)
                 {
                     $cuestionarioA=$nDc->nombre_cuestionario;
-//                    $feecha='fecha '.$cuestionarioA;
-                    if($f->nombre_cuestionario === $nDc->nombre_cuestionario)
+                    $feecha='fecha '.$cuestionarioA;
+                    if($f->nombre_cuestionario == $nDc->nombre_cuestionario)
                     {
-//                        $TablaAuxiliarSm->$feecha=$f->fecha_registro;
+                        $TablaAuxiliarSm->$feecha=date('d-m-Y',$f->fecha_registro);
                         $TablaAuxiliarSm->$cuestionarioA=$f->ncuestionario;
                     }
                     else
                     {
-                        if(/*$TablaAuxiliarSm->$feecha === 0 &&*/ $TablaAuxiliarSm->$cuestionarioA === 0)
+                        //var_dump($TablaAuxiliarSm->$feechaa);
+                        if(/*$TablaAuxiliarSm->$feecha == 0 &&*/ $TablaAuxiliarSm->$cuestionarioA == 0)
                         {
-//                            $TablaAuxiliarSm->$feecha=0;
+                            $TablaAuxiliarSm->$feecha=0;
                             $TablaAuxiliarSm->$cuestionarioA=0;
                         }
                     }
@@ -83,7 +85,9 @@ class Seguimientomonitores extends CI_Controller
 /*        echo "<pre>";
         var_dump($tablaSm);
         echo "</pre>";*/
-//        var_dump($DatosSeguimientoM['SeguimientoMonitores']);
+ /*       echo "<pre>";
+        var_dump($DatosSeguimientoM['SeguimientoMonitores']);
+        echo "</pre>";*/
 
         //var_dump($DatosSeguimientoM);
         $this->load->view('html/encabezado');
