@@ -91,7 +91,6 @@ class Seguimientomonitores extends CI_Controller
         if(empty($tablaSm))
         {
         redirect('Seguimientomonitores');
-        
         }
          else
          {
