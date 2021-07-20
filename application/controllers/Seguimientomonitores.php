@@ -88,12 +88,19 @@ class Seguimientomonitores extends CI_Controller
  /*       echo "<pre>";
         var_dump($DatosSeguimientoM['SeguimientoMonitores']);
         echo "</pre>";*/
-
+        if(empty($tablaSm))
+        {
+        redirect('Seguimientomonitores');
+        
+        }
+         else
+         {
         //var_dump($DatosSeguimientoM);
         $this->load->view('html/encabezado');
         $this->load->view('html/navbar');
         $this->load->view('seguimientom/vseguimientoMonitoresTabla',$tablaSm);
         $this->load->view('html/pie');
+        }
     }
 }
 
