@@ -38,11 +38,17 @@ class Login extends CI_Controller{
 			$this->session->set_userdata('iddepartamento', $departamento->iddepartamento );
 			$this->session->set_userdata('departamento', $departamento->nombre_departamento);
 			$this->session->set_userdata('edicion_activa', false);
-			$this->session->set_userdata('es_nueva_noticia', false);
-			$this->session->set_userdata('noticia_nueva', []);
-			$this->session->set_userdata('noticia_editable', 10);
-			redirect('inicio/', 'refresh');
 
+			$this->session->set_userdata('es_nueva_noticia', false);
+			$this->session->set_userdata('es_nueva_noticia1', false);
+			$this->session->set_userdata('nuevo_form', 0);
+
+			$this->session->set_userdata('noticia_nueva', []);
+			$this->session->set_userdata('noticia_nueva1', []);
+
+			$this->session->set_userdata('noticia_editable', 10);
+
+			redirect('inicio/', 'refresh');
 		}
 		else
 		{

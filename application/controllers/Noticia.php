@@ -37,6 +37,8 @@ class Noticia extends CI_Controller
 			$this->session->set_userdata('noticia_insert', []);
 			$this->session->set_userdata('es_nueva_noticia', false);
 			$this->session->set_userdata('noticia_nueva', []);
+			$this->session->set_userdata('es_nueva_noticia1', false);
+			$this->session->set_userdata('noticia_nueva1', []);
 			redirect('/');
 		}else{
 			echo "Error";

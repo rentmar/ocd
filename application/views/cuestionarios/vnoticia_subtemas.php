@@ -63,7 +63,32 @@
 						</h4>
 					</div>
 					<div class="card-body">
-						<label>Actores y Temas seleccionados:</label><br>
+						<h6>Actores</h6>
+						<p>
+						<ul>
+							<?php foreach ($actores_sel as $ac): ?>
+							<li type="circle" ><?php echo $ac['nombre_actor'] ?></li>
+							<?php endforeach; ?>
+						</ul>
+
+						</p>
+						<h6>Temas</h6>
+						<p>
+						<ul>
+							<?php foreach ($temas_sel as $temas): ?>
+								<li type="circle" ><?php echo $temas['nombre_tema'] ?></li>
+							<?php endforeach; ?>
+						</ul>
+						</p>
+
+						<?php if(isset($noticia->otro_tema) && !empty($noticia->otro_tema) ): ?>
+						<h7>Otro Tema</h7>
+						<p>
+						<ul>
+							<li type="circle" > <?php echo $noticia->otro_tema; ?> </li>
+						</ul>
+						</p>
+						<?php endif; ?>
 
 					</div>
 				</div>

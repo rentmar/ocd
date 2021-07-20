@@ -12,6 +12,7 @@ class Instdemocratica extends CI_Controller
 		$this->load->helper('date');
 		$this->load->model('Cuestionario_model');
 		$this->load->model('Noticia_model');
+		$this->load->model('MedioComunicacion_model');
 		$this->load->library('ion_auth');
 
 
@@ -25,62 +26,47 @@ class Instdemocratica extends CI_Controller
 
 	public function index()
 	{
+		//Variables de sesion
+		//var_dump($this->session->userdata());
+		//echo "<br><br>";
+
+		/*
+		 * COMPROBAR SI SE CREA NUEVA NUEVA NOTICIA
+		 */
+		if(!$this->session->es_nueva_noticia1)
+		{
+			//Nueva noticia inactiva
+			$this->session->set_userdata('es_nueva_noticia1', true);
+			$noticia_objeto = $this->objetoNoticia();
+			$this->session->set_userdata('noticia_nueva1', []);
+			$this->session->set_userdata('noticia_nueva1', $noticia_objeto);
+			$noticia = $this->session->noticia_nueva1;
+			$data['noticia'] = $noticia;
+		}else{
+			//Nueva noticia activa
+			$noticia = $this->session->noticia_nueva1;
+			$data['noticia'] = $noticia;
+		}
+		/*
+		 * DATOS DE LLENADO DE FORMULARIO
+		 */
+		//Informacion del usuario logueado
 		$usuario = $this->ion_auth->user()->row();
-		$tipo_medio = $this->Cuestionario_model->leerTodosTiposMedio();
-		//Todos los temas referidos al formulario
+		//Temas
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
-
-		//Inicializar las variables de session
-		if(!$this->session->nuevo_c1)
-		{
-			//echo "Nueva noticia no activada";
-			//Activar la bandera nueva noticia
-			$this->session->set_userdata("nuevo_c1", true);
-			//Actualizar la variable de session
-			$noticia = new stdClass();
-			$this->session->set_userdata("reforma", []);
-			$this->session->set_userdata("reforma", $noticia);
-		}
-		else{
-			$reforma = $this->session->reforma;
-			//var_dump($reforma);
-			//echo "<br><br>";
-			if(isset($reforma->fecha_noticia)){
-				$data['fecha'] = $reforma->fecha_noticia;
-			}
-			if(isset($reforma->titular)){
-				$data['titular'] = $reforma->titular;
-			}
-			if(isset($reforma->resumen)){
-				$data['resumen'] = $reforma->resumen;
-			}
-			if(isset($reforma->url_noticia)){
-				$data['url'] = $reforma->url_noticia;
-			}
-			if(isset($reforma->actores)){
-				$data['idactores'] = $reforma->actores;
-			}
-			if(isset($reforma->temas)){
-				$data['idtemas'] = $reforma->temas;
-			}
-			//Extraer los temas seleccionados
-			if(isset($reforma->temas)) {
-				$this->Cuestionario_model->setTemaIDs($reforma->temas);
-				$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
-				$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
-				$data['temas_sel'] = $temas_sel;
-				$data['subtemas_sel'] = $subtemas_sel;
-			}
-		}
+		//Informacion para poblar el formulario
+		$data['tema'] = $this->Cuestionario_model->leerTodosTiposMedio();
+		$data['idformulario'] = $this->_idformulario;
 		$data['idusuario'] = $usuario->id;
-		$data['iddepartamento'] = $usuario->rel_iddepartamento;
-		$data['tipo_medio'] = $tipo_medio;
+		$data['tipo_medio'] = $this->Cuestionario_model->leerTodosTiposMedio();
 		$data['actor'] = $this->Cuestionario_model->leerActor();
 		$data['tema'] = $tema;
-		$data['idformulario'] = $this->_idformulario;
 
+		/*
+		 * CARGA DE VISTAS
+		 */
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vinst_democratica', $data);
@@ -97,8 +83,62 @@ class Instdemocratica extends CI_Controller
 
 	public function preenvio()
 	{
+		//Extraer la variable de session nueva noticia
+		$noticia = $this->session->noticia_nueva1;
+		//var_dump($noticia);
+		if(!$noticia->es_preenvio)
+		{
+			//Definir la fecha de registro de la noticia
 
-		$accion = $this->input->post('action');
+			$noticia->fecha_registro = now();
+			//definir los identificadores de los subtemas
+			$idtemas = array_filter($noticia->temas) ;
+			//Capturar subtemas
+			$subtemas = [];
+			foreach ($idtemas as $t)
+			{
+				$subtemas[$t] = $this->input->post('tema'.$t);
+			}
+			$noticia->subtemas = $subtemas; //Guardar los subtemas
+			//Capturar otros subtemas
+			$otros_subtemas = [];
+			foreach ($idtemas as $t)
+			{
+				$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+			}
+			$noticia->otros_subtemas = $otros_subtemas; //Guardar otros subtemas
+			//Actualizar la bandera de cambio
+			$noticia->es_preenvio = true;
+
+			//Colocar la noticia en la pila de insercion
+			$this->session->set_userdata('noticia_insert', []);
+			$this->session->set_userdata('noticia_insert', $noticia);
+			//Actualizar la variable de session
+			$this->session->set_userdata('noticia_nueva1', []);
+			$this->session->set_userdata('noticia_nueva1', $noticia);
+
+		}else{
+			$noticia = $this->session->noticia_nueva1;
+
+		}
+		$this->Cuestionario_model->setTemaIDs($noticia->temas);
+		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+		$actores_sel = $this->Cuestionario_model->leerActoresPorIDs($noticia->actores);
+
+
+		$datos['temas_sel'] = $temas_sel;
+		$datos['subtemas_sel'] = $subtemas_sel;
+		$datos['actores_sel'] = $actores_sel;
+		$datos['noticia'] = $noticia;
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vinst_preenvio',$datos);
+		$this->load->view('html/pie');
+
+		/*$accion = $this->input->post('action');
 		if($accion == 1){
 			//Procesar formulario
 			//echo "Procesar formulario";
@@ -189,7 +229,7 @@ class Instdemocratica extends CI_Controller
 		}else{
 
 		}
-
+*/
 
 
 
@@ -366,6 +406,120 @@ class Instdemocratica extends CI_Controller
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vnoticia_editar', $data);
+		$this->load->view('html/pie');
+	}
+
+	private function objetoNoticia()
+	{
+		$noticia = new stdClass;
+		$noticia->idnoticia = '';
+		$noticia->fecha_registro = '';
+		$noticia->fecha_noticia = '';
+		$noticia->titular = '';
+		$noticia->resumen = '';
+		$noticia->url_noticia = '';
+
+		$noticia->rel_idmedio = '';
+		$noticia->rel_idcuestionario = '';
+		$noticia->rel_idusuario = '';
+
+		$noticia->iddepartamento = '';
+
+		$noticia->actores = [];
+		$noticia->temas = [];
+		$noticia->subtemas = [];
+		$noticia->medio = [];
+		$noticia->tipo_medio = [];
+
+		$noticia->es_segundo_paso = false;
+		$noticia->es_preenvio = false;
+
+		return $noticia;
+	}
+
+	public function cancelarNuevo()
+	{
+		$this->session->set_userdata('es_nueva_noticia1', false);
+		$this->session->set_userdata('noticia_nueva1', []);
+
+		//Limpiar las variables de session y colocar la bandera en su estado original
+		$this->session->set_userdata('nuevo_c1', false);
+		$this->session->set_userdata('reforma', []);
+		//Redireccionar al inicio
+		redirect('inicio/');
+	}
+
+	public function subtemas()
+	{
+		//Extraer la variable de session nueva noticia
+		$noticia = $this->session->noticia_nueva1;
+		//var_dump($noticia);
+		if(!$noticia->es_segundo_paso)
+		{
+			//Capturar actores
+			$actores = $this->input->post('idactor[]');
+			$noticia->actores = $actores;
+			//Capturar temas
+			$temas = $this->input->post('idtema[]');
+			$noticia->temas = $temas;
+
+			//Datos generales
+			$noticia->fecha_noticia = $this->fecha_unix($this->input->post('fecha')) ;
+			$noticia->titular = $this->input->post('titular');
+			$noticia->resumen = $this->input->post('resumen') ;
+			$noticia->url_noticia = $this->input->post('url') ;
+			$noticia->rel_idusuario = $this->input->post('idusuario');
+			$noticia->rel_idcuestionario = $this->input->post('idformulario');
+
+			//Capturar la informacion del medio
+			$idmedio = $this->input->post('idmedio');
+			$idtipomedio = $this->input->post('idtipomedio');
+			//Extraer la informacion de la base de datos
+			$medio = $this->MedioComunicacion_model->leerMedioPorId($idmedio);
+			$tipo = $this->MedioComunicacion_model->leerTipoMedioPorId($idtipomedio);
+
+			//Actualizar los valores de la noticia
+			$noticia->rel_idmedio = $medio->idmedio;
+			/** @noinspection PhpLanguageLevelInspection */
+			$noticia->medio = [
+				'id'=>$medio->idmedio,
+				'nombre' =>$medio->nombre_medio,
+
+			];
+			/** @noinspection PhpLanguageLevelInspection */
+			$noticia->tipo_medio = [
+				'id'=> $tipo->idtipomedio,
+				'nombre' => $tipo->nombre_tipo,
+			];
+
+			$otro_tema = $this->input->post('tema0');
+			$noticia->otro_tema = $otro_tema;
+			$noticia->es_segundo_paso= true;
+
+			//Actualizar la variable de session
+			$this->session->set_userdata('noticia_nueva1', []);
+			$this->session->set_userdata('noticia_nueva1', $noticia);
+
+		}else{
+			$noticia = $this->session->noticia_nueva1;
+		}
+		$data['noticia'] = $noticia;
+		$this->Cuestionario_model->setTemaIDs($noticia->temas);
+		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+		$actores_sel = $this->Cuestionario_model->leerActoresPorIDs($noticia->actores);
+
+
+
+		$data['temas_sel'] = $temas_sel;
+		$data['subtemas_sel'] = $subtemas_sel;
+		$data['actores_sel'] = $actores_sel;
+		/*
+		 * CARGA DE VISTAS
+		 */
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vnoticia_subtemas1', $data);
 		$this->load->view('html/pie');
 	}
 
