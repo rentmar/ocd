@@ -297,76 +297,69 @@ class Instdemocratica extends CI_Controller
 	public function editar()
 	{
 		$usuario = $this->ion_auth->user()->row();
-		//echo $usuario->id;
-		//$noticias = $this->Noticia_model->leerTodasNoticiasUsuario($usuario->id, $this->_idformulario);
-		//var_dump($noticias);
-		$noticias = $this->Noticia_model->leerTodasNoticiasCuestionarioUsuario($this->_idformulario, $usuario->id);
-		$data['noticias'] = $noticias;
-		$data['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
-
+		$cantidad_noticia = $this->session->noticia_editable;
+		
+		$dt['noticias'] =$this->Noticia_model->leerNoticiasUsuario($usuario->id,$this->_idformulario);
+		$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vreforma_lista_noticias', $data);
+		$this->load->view('cuestionarios/vinst_lista_noticias', $dt);
 		$this->load->view('html/pie');
 	}
 
 	public function editarNoticia($idnoticia)
 	{
-		$idnoticia = $idnoticia;
-		//Comprobar si la edicion esta activa
-		//$all = $this->session->userdata();
-		//var_dump($all);
-		//echo "<br>";
-		//echo "<br>";
-
-		/*$ed = $this->session->edicion_activa;
-		var_dump($ed);*/
-
-		//Comprobar si hay edicion activa
-		if(!$this->session->edicion_activa)
+		$usuario = $this->ion_auth->user()->row();
+		$n=$this->Noticia_model->leerNoticiaPorId($idnoticia);
+		$medio=$this->Noticia_model->leerMedioPorId($n->rel_idmedio);
+		$dt['actores']=$this->Noticia_model->leerTodoActores();
+		$dt['medios']=$this->Noticia_model->leerMediosPorTipoDepartamento($medio->rel_idtipomedio,$usuario->rel_iddepartamento);
+		$dt['tipos']=$this->Noticia_model->leerTipos();
+		$dt['noticia']= $n;
+		$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
+		$dt['medio']=$medio;
+		$dt['temas']=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
+		$dt['temase']=$this->Noticia_model->leerTemasNoticia($idnoticia);
+		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
+		foreach ($dt['temase'] as $te)
 		{
-			$noticia = $this->Noticia_model->leerNoticiaID($idnoticia);
-			//Noticia original
-			$noticia_original = $this->Noticia_model->leerNoticiaID($idnoticia);
-			//Limpiar la variable de edicion_activa
-			$this->session->set_userdata('edicion_activa', true);
-			$this->session->set_userdata('edicion_cuestionario', $this->_idformulario);
-			//Cargar la noticia a la session
-			$this->session->set_userdata('noticia', [ ]);
-			$this->session->set_userdata('noticia', $noticia);
-			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
-			$this->session->set_userdata('noticia_original', [ ]);
-			$this->session->set_userdata('noticia_original', $noticia_original);
+			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
 		}
-
-		/*$all = $this->session->userdata();
-		var_dump($all);
-		echo "<br>";
-		echo "<br>";*/
-		$data['idnoticia'] = $idnoticia;
-		if($this->session->edicion_activa)
-		{
-			//Noticia editada
-			$noticia_edicion = $this->session->noticia;
-			//Noticia original
-			$noticia_original = $this->session->noticia_original;
-
-			var_dump($noticia_edicion);
-
-
-			$data['noticia'] = $noticia_edicion;
-			$data['idcuestionario'] = $this->_idformulario;
-			$data['actor'] = $this->Cuestionario_model->leerActor();
-			$data['tipo_medio'] = $this->Cuestionario_model->leerTodosTiposMedio();
-			$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
-			$tema = $this->Cuestionario_model->leerTema();
-			$data['tema']=$tema;
-
-		}
+		$dt['subtemas']=$subtemas;
+		
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vnoticia_editar', $data);
+		$this->load->view('cuestionarios/vnoticia_editar_inst', $dt);
 		$this->load->view('html/pie');
 	}
-
+	public function editarMedio()
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$dt['idnoticia']=$this->input->post('idnoticia');
+		$dt['medios']=$this->Noticia_model->leerMediosPorTipoDepartamento($this->input->post('rel_idtipomedio'),$usuario->rel_iddepartamento);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/veditarmedio',$dt);
+		$this->load->view('html/pie');
+	}
+	public function editarTemas()
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$dt['idnoticia']=$this->input->post('idnoticia');
+		$temas=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
+		foreach ($temas as $t)
+		{	
+			if ($this->input->post('t'.$t->idtema)!=null)
+			{
+				$temase[$t->idtema]=$this->Noticia_model->leerTemaPorId($t->idtema);
+				$subtemase[$t->idtema]=$this->Noticia_model->leerSubtemasPorTema($t->idtema);
+			}
+		}
+		$dt['temase']=$temase;
+		$dt['subtemase']=$subtemase;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/veditartema',$dt);
+		$this->load->view('html/pie');
+	}
 }

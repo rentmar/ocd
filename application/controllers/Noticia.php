@@ -44,7 +44,7 @@ class Noticia extends CI_Controller
     }
 	public function modificarNoticia($idn)
 	{
-
+		$n=$this->Noticia_model->leerNoticiaPorId($idn);
 		$accion=$this->input->post('accion');
 		if ($accion==1)
 		{
@@ -90,7 +90,14 @@ class Noticia extends CI_Controller
 			}
 			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
 		}
-		redirect('Reformaelectoral/editar');
+		if ($n->rel_idcuestionario==1)
+		{
+			redirect('Reformaelectoral/editar');
+		}
+		if ($n->rel_idcuestionario==2)
+		{
+			redirect('instdemocratica/editar');
+		}
 	}
     //Cambiar el formato MM/DD/YY a unix timestamp
     private function fecha_unix($fecha) 

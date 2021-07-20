@@ -334,9 +334,7 @@ class Reformaelectoral extends CI_Controller
 	{
 		$usuario = $this->ion_auth->user()->row();
 		$cantidad_noticia = $this->session->noticia_editable;
-		//echo $usuario->id;
-		//echo $cantidad_noticia;
-		//var_dump($noticias);
+		
 		$dt['noticias'] =$this->Noticia_model->leerNoticiasUsuario($usuario->id,$this->_idformulario);
 		$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 		$this->load->view('html/encabezado');
@@ -367,7 +365,7 @@ class Reformaelectoral extends CI_Controller
 		
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vnoticia_editar', $dt);
+		$this->load->view('cuestionarios/vnoticia_editar_reforma', $dt);
 		$this->load->view('html/pie');
 	}
 	public function editarMedio()
