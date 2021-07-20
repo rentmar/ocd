@@ -155,7 +155,7 @@ class Noticia_model extends CI_Model{
 			//'rel_idsubtema' => 1, //Campo de compatibilidad
 			'rel_idmedio' => $noticia->rel_idmedio,
 			'rel_idusuario' => $noticia->rel_idusuario,
-			'rel_idcuestionario' => $noticia->idformulario,
+			'rel_idcuestionario' => $noticia->rel_idcuestionario,
 		];
 		$this->db->insert('noticia', $ntc);
 		$noticia_id = $this->db->insert_id();
@@ -200,7 +200,7 @@ class Noticia_model extends CI_Model{
 						];
 						$this->db->insert('noticia_subtema', $not_subt);
 					}else{
-						echo "insertar otro subtema: ".$otrossubtemas[$idtema];
+						//echo "insertar otro subtema: ".$otrossubtemas[$idtema];
 						//Insertar el otro subtema
 						/** @noinspection PhpLanguageLevelInspection */
 						$ot_st = [
@@ -225,7 +225,7 @@ class Noticia_model extends CI_Model{
 				/** @noinspection PhpLanguageLevelInspection */
 				$ot = [
 					'nombre_otrotema' => $otrotema,
-					'rel_idcuestionario' => $noticia->idformulario,
+					'rel_idcuestionario' => $noticia->rel_idcuestionario,
 					'rel_idusuario' => $noticia->rel_idusuario,
 				];
 				$this->db->insert('otrotema', $ot);

@@ -35,51 +35,16 @@ class Noticia extends CI_Controller
 			$this->session->set_userdata('nuevo_c2', false);
 			$this->session->set_userdata('inst', []);
 			$this->session->set_userdata('noticia_insert', []);
+			$this->session->set_userdata('es_nueva_noticia', false);
+			$this->session->set_userdata('noticia_nueva', []);
 			redirect('/');
 		}else{
 			echo "Error";
 		}
-
-
-
-		/*$idusr=$this->input->post("idusr");
-        $DatosNoticia=[
-            'fecha_registro'=>$this->input->post("fecha_registro"),
-            'fecha_noticia'=>$this->input->post('fecha_noticia'),
-            'titular'=>$this->input->post('titular'),
-            'resumen'=>$this->input->post('resumen'),
-            'url_noticia'=>$this->input->post('url_noticia'),
-            'rel_idactor'=>$this->input->post('idactor'),
-			'rel_idmedio'=>$this->input->post('idmedio'),
-			'rel_idusuario'=>$idusr
-            ];
-		$dtot= array ('nombre_tema'=>$this->input->post('otrotema'),
-						  'rel_idcuestionario'=>$this->input->post('idcuestionario'),
-						  'rel_idusuario'=>$idusr
-							);
-		//  otro tema
-		if ($this->input->post('idtema')==0)
-		{
-			$ost=$this->input->post('otrosubtema');
-			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
-		}
-		elseif ($this->input->post('idsubtema')==0)
-		{
-			$ost=$this->input->post('otrosubtema');
-			$DatosNoticia['rel_idsubtema']=$this->Noticia_model->insertarOtroTema($dtot,$ost);
-		}
-		else
-		{
-			$DatosNoticia['rel_idsubtema']=$this->input->post('idsubtema');
-		}
-		//otro subtema
-		$this->Noticia_model->insertarNoticia($DatosNoticia);
-
-		redirect('inicio/');*/
-                
     }
 	public function modificarNoticia($idn)
 	{
+
 		$accion=$this->input->post('accion');
 		if ($accion==1)
 		{
