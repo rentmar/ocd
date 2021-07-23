@@ -5,55 +5,16 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 				<div class="card">
 					<div class="card-header cuest3" >
-						Formulario3
+						Censo
 					</div>
 					<div class="card-body" >
 						<div class="list-group">
-							<a href="#" class="list-group-item disabled">
-								Fecha Registro:
-								<?php echo ' '.$fecha_registro; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Fecha:
-								<?php echo ' '.$fecha_noticia; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Titular:
-								<?php echo ' '.$titular; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Resumen:
-								<?php echo ' '.$resumen; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								URL:
-								<?php echo ' '.$url_noticia; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Medio:
-								<?php echo ' '.$medio; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Actor:
-								<?php echo ' '.$actor; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Tema:
-								<?php echo ' '.$tema; ?>
-							</a>
-							<a href="#" class="list-group-item disabled">
-								Subtema:
-								<?php
-								echo ' '.$subtema;
-								?>
-							</a>
+							
 						</div>
-
 					</div>
 					<div class="card-footer" >
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Enviar</button>
 						<a href="<?php echo site_url('inicio') ?>" class="btn btn-danger" role="button">Cancelar</a>
-
 					</div>
 
 				</div>
