@@ -82,7 +82,9 @@ class Noticia extends CI_Controller
 		elseif ($accion==5)
 		{	
 			$dtchkboxst=array();
+			$dtotrosubtemas=array();
 			$subtemas=$this->Noticia_model->leerTodoSubTemas();
+			$temas=$this->Noticia_model->leerTodoTemas();
 			foreach ($subtemas as $st)
 			{	
 				if ($this->input->post('st'.$st->idsubtema)!=null)
@@ -90,16 +92,45 @@ class Noticia extends CI_Controller
 					array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
 				}
 			}
-			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
+			foreach ($temas as $t)
+			{
+				if ($this->input->post('te'.$t->idtema)!=null)
+				{
+					$idte=$this->input->post('te'.$t->idtema);
+					if ($this->input->post('ost'.$idte)!=null)
+					{
+						array_push($dtotrosubtemas,$this->input->post('otrosubtema'.$t->idtema));
+					}
+				}
+			}
+			if ($this->input->post('otrotema')=="")
+			{
+				echo "no hay tema";
+			}
+			else 
+			{
+				var_dump($this->input->post('otrotema'));
+			}
+			echo "<br><br>";
+			if (count($dtotrosubtemas)==0)
+			{
+				echo "no hay subtemas";
+			}
+			else
+			{
+				var_dump($dtotrosubtemas);
+			}
+		
+			//$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
 		}
-		if ($n->rel_idcuestionario==1)
+		/*if ($n->rel_idcuestionario==1)
 		{
 			redirect('Reformaelectoral/editar');
 		}
 		if ($n->rel_idcuestionario==2)
 		{
 			redirect('instdemocratica/editar');
-		}
+		}*/
 	}
     //Cambiar el formato MM/DD/YY a unix timestamp
     private function fecha_unix($fecha) 
