@@ -8,7 +8,7 @@
 						<h3 id="Título_central"> Crear Nuevo Usuario </h3>
 					</div>
 					<div id="Caja_de_datos" class="Caja_de_datos">
-						<?php echo form_open('usuarios/procesarCrear')?>
+						<?php echo form_open('usuarios/procesarCrear/'.$grupo)?>
 						<div class="form-group">
 							<label for="usuario" >
 								Nombre de usuario
