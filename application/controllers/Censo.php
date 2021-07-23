@@ -219,8 +219,8 @@ class Censo extends CI_Controller
 			$this->session->set_userdata('noticia_insert', []);
 			$this->session->set_userdata('noticia_insert', $noticia);
 			//Actualizar la variable de session
-			$this->session->set_userdata('noticia_nueva1', []);
-			$this->session->set_userdata('noticia_nueva1', $noticia);
+			$this->session->set_userdata('noticia_nueva2', []);
+			$this->session->set_userdata('noticia_nueva2', $noticia);
 
 		}else{
 			$noticia = $this->session->noticia_nueva2;
@@ -437,6 +437,18 @@ class Censo extends CI_Controller
 		$this->load->view('cuestionarios/vinst_preenvio',$DatosNoticia);
 		$this->load->view('html/pie');*/
 
+	}
+
+	public function cancelarNuevo()
+	{
+		$this->session->set_userdata('es_nueva_noticia2', false);
+		$this->session->set_userdata('noticia_nueva2', []);
+
+		//Limpiar las variables de session y colocar la bandera en su estado original
+		$this->session->set_userdata('nuevo_c1', false);
+		$this->session->set_userdata('reforma', []);
+		//Redireccionar al inicio
+		redirect('inicio/');
 	}
 
 

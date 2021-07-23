@@ -10,7 +10,7 @@
 	<?php echo form_open('censo/preenvio/', $atr_form);?>
 
 	<div class="contenedores_divididos">
-		<div class="contenedor_superior2" id="contenedor_pequeño">
+		<div class="contenedor_superior3" id="contenedor_pequeño">
 		</div>
 		<div class="contenedor_inferior">
 			<h3 id="Título_formulario"> Institucionalidad democrática </h3>
@@ -20,8 +20,8 @@
 	<br>
 	<div class="contenedores">
 		<div class="card">
-			<div class="card-header cuest2">
-				<h4>
+			<div class="card-header cuest3">
+				<h4 class="text-white">
 					Datos de la noticia
 				</h4>
 			</div>
@@ -56,8 +56,8 @@
 	<br>
 	<div class="contenedores">
 		<div class="card">
-			<div class="card-header cuest2">
-				<h4>
+			<div class="card-header cuest3">
+				<h4 class="text-white">
 					ACTORES Y TEMAS
 				</h4>
 			</div>
@@ -101,8 +101,8 @@
 		<?php foreach ($temas_sel as $tm): ?>
 			<div class="contenedores">
 				<div class="card">
-					<div class="card-header cuest2">
-						<h4>
+					<div class="card-header cuest3">
+						<h4 class="text-white">
 							<?php echo $tm['nombre_tema'] ?>
 						</h4>
 					</div>
@@ -148,7 +148,7 @@
 		<button id="BOTON" type="submit" name="action" value="1" >
 			SIGUIENTE
 		</button>
-		<a href="<?php echo site_url('instdemocratica/cancelarNuevo/');?>">
+		<a href="<?php echo site_url('censo/cancelarNuevo/');?>">
 			<input type="button" class="BOTON" value="CANCELAR">
 		</a>
 	</div>

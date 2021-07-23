@@ -4,8 +4,8 @@
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 				<div class="card">
-					<div class="card-header cuest1" >
-						Reforma Electoral
+					<div class="card-header cuest3" >
+						<h6 class="text-white" >Censo</h6>
 					</div>
 					<div class="card-body" >
 						<div class="list-group">

@@ -12,7 +12,7 @@
 	<?php //echo form_open('reformaelectoral/capturarDatos', $atr_form);?>
 
 	<div class="contenedores_divididos">
-		<div class="contenedor_superior1" id="contenedor_pequeño">
+		<div class="contenedor_superior3" id="contenedor_pequeño">
 		</div>
 		<div class="contenedor_inferior">
 			<h3 id="Título_formulario"> Censo </h3>
@@ -98,8 +98,8 @@
 	<br>
 	<div class="contenedores">
 		<div class="card">
-			<div class="card-header cuest1">
-				<h4>
+			<div class="card-header cuest3">
+				<h4 class="text-white">
 					ACTORES
 				</h4>
 			</div>
@@ -120,8 +120,8 @@
 	<br>
 	<div class="contenedores">
 		<div class="card">
-			<div class="card-header cuest1">
-				<h4>
+			<div class="card-header cuest3">
+				<h4 class="text-white">
 					TEMAS
 				</h4>
 			</div>
@@ -157,7 +157,7 @@
 		<button id="BOTON" type="submit" name="action" value="1" >
 			SIGUIENTE
 		</button>
-		<a href="<?php echo site_url('reformaelectoral/cancelarNuevo/');?>">
+		<a href="<?php echo site_url('censo/cancelarNuevo/');?>">
 			<input type="button" class="BOTON" value="CANCELAR">
 		</a>
 	</div>
