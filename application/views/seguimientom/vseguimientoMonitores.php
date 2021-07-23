@@ -25,8 +25,20 @@
 					</div>
 
 				</div>
+			</div>
+                    
+                    	<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+				<div class="card">
+					<div class="card-header cuest2 ">Departamentos</div>
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/pil.png'; ?>" alt="Card image">
+					<div class="card-body">
+						<a href="<?php echo site_url('Seguimientomonitores/CuestionariosPorDepartamento');?>" class="btn btn-info" role="button" style="background-color:#EF9600;">Ver</a>
+					</div>
+
+				</div>
 			</div> 
 			
+                    
 		</div>
 
 	</div>

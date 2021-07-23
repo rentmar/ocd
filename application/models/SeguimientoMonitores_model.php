@@ -38,4 +38,17 @@ class SeguimientoMonitores_model extends CI_Model{
                 . "GROUP BY nombre_cuestionario");
         return $qry->result();
     }
+    public function leerDepartamentos()
+    {
+        $qry=$this->db->query("SELECT nombre_departamento, count(*) ndepartamento "
+                . "FROM noticia "
+                . "LEFT JOIN users "
+                . "ON users.id = noticia.rel_idusuario "
+                . "LEFT JOIN cuestionario "
+                . "ON noticia.rel_idcuestionario = cuestionario.idcuestionario "
+                . "LEFT JOIN departamento "
+                . "ON departamento.iddepartamento = users.rel_iddepartamento "
+                . "GROUP BY nombre_departamento");
+        return $qry->result();
+    }
 }

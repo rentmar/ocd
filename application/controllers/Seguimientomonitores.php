@@ -102,7 +102,7 @@ class Seguimientomonitores extends CI_Controller
         }
     }
     
-        public function EstadoObservacionElectoralDocentes()
+    public function EstadoObservacionElectoralDocentes()
     {
         $DatosSeguimientoM['SeguimientoMonitores']=$this->SeguimientoMonitores_model->leerSeguimientoMonitoresDocentes();
         $DatosSeguimientoM['NumeroDeCuestionarios']=$this->SeguimientoMonitores_model->leerCuestionarios();
@@ -186,6 +186,15 @@ class Seguimientomonitores extends CI_Controller
         $this->load->view('seguimientom/vseguimientoMonitoresTabla',$tablaSm);
         $this->load->view('html/pie');
         }
+    }
+    public function CuestionariosPorDepartamento()
+    {
+        $DatosDepartamentos['Departamentos']=$this->SeguimientoMonitores_model->leerDepartamentos();
+        
+        $this->load->view('html/encabezado');
+        $this->load->view('html/navbar');
+        $this->load->view('seguimientom/vdpartamentosN',$DatosDepartamentos);
+        $this->load->view('html/pie');
     }
 }
 
