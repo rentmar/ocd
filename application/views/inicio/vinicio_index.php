@@ -55,6 +55,7 @@
 					<div class="card-header cuest3 text-white ">
 						Censo
 						<br><br>
+
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.jpg'; ?>" alt="Card image">
 					<div class="card-body">

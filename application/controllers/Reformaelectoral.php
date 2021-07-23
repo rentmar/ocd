@@ -365,13 +365,14 @@ class Reformaelectoral extends CI_Controller
 		$dt['medio']=$medio;
 		$dt['temas']=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
 		$dt['temase']=$this->Noticia_model->leerTemasNoticia($idnoticia);
+		$dt['otrotema']=$this->Noticia_model->leerOtroTemaNoticia($idnoticia);
+		$dt['otrosubtema']=$this->Noticia_model->leerOtroSubTemaNoticia($idnoticia);
 		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
 		foreach ($dt['temase'] as $te)
 		{
 			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
 		}
 		$dt['subtemas']=$subtemas;
-		
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vnoticia_editar_reforma', $dt);
@@ -389,6 +390,8 @@ class Reformaelectoral extends CI_Controller
 	}
 	public function editarTemas()
 	{
+		$temase=array();
+		$subtemase=array();
 		$usuario = $this->ion_auth->user()->row();
 		$dt['idnoticia']=$this->input->post('idnoticia');
 		$temas=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
@@ -399,6 +402,14 @@ class Reformaelectoral extends CI_Controller
 				$temase[$t->idtema]=$this->Noticia_model->leerTemaPorId($t->idtema);
 				$subtemase[$t->idtema]=$this->Noticia_model->leerSubtemasPorTema($t->idtema);
 			}
+		}
+		if ($this->input->post('idot')==null)
+		{
+			$dt['otrotema']=null;
+		}
+		else 
+		{
+			$dt['otrotema']=$this->input->post('otrotema');
 		}
 		$dt['temase']=$temase;
 		$dt['subtemase']=$subtemase;
