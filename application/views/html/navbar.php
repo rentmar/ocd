@@ -96,12 +96,21 @@
 
 		<?php if($this->ion_auth->is_admin()): ?>
 		<a class="nav-link" href="<?php echo site_url('manejoDB')?>">Base de Datos</a>
+		<?php endif;?>
+
+		<?php if($this->ion_auth->is_admin()):  ?>
 		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis Grafico</a>
+		<?php endif;  ?>
+
+		<?php if($this->ion_auth->is_admin()): ?>
 		<a class="nav-link" href="<?php echo site_url('seguimientomonitores')?>">
 			Seguimiento-Monitores
 		</a>
-		<a class="nav-link" href="#">Analisis</a>
 		<?php endif; ?>
+
+		<?php if($this->ion_auth->is_admin()): ?>
+		<a class="nav-link" href="#">Analisis</a>
+		<?php  endif;  ?>
 
 	</nav>
 </div>

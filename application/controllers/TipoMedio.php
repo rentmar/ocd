@@ -40,13 +40,13 @@ class TipoMedio extends CI_Controller{
 		$dts = array(
 				'nombre_tipo' => $this->input->post('nombre_tipomedio'));
 		$this->MedioComunicacion_model->agregarTipoMedio($dts);
-		redirect ('tipomedio');
+		redirect ('tipoMedio');
 	}
 	public function modificarTipoMedio($idtm)
 	{
 		$dts = array(
 				'nombre_tipo' => $this->input->post('nombre_tipomedio'));
 		$this->MedioComunicacion_model->modificarTipoMedio($dts,$idtm);
-		redirect ('tipomedio');
+		redirect ('tipoMedio');
 	}
 }

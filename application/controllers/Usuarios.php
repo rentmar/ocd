@@ -42,7 +42,7 @@ class Usuarios extends CI_Controller
 		$this->form_validation->set_rules('apellido', 'Apellido', 'required');
 		$this->form_validation->set_rules('carnet', 'Carnet de Identidad', 'required|numeric');
 		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'req  uired');
+		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('password1', 'Confirmar Password', 'required|matches[password]');
 
 		if($this->form_validation->run()==false)
@@ -69,9 +69,6 @@ class Usuarios extends CI_Controller
 			];
 			/** @noinspection PhpLanguageLevelInspection */
 			$grupo = [$this->input->post('grupo'),];
-
-
-
 			if(!$this->ion_auth->register($usuario, $password, $email, $datos_extra, $grupo)){
 				//echo "Error de creacion";
 			}else{
