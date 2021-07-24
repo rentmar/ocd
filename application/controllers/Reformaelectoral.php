@@ -403,16 +403,17 @@ class Reformaelectoral extends CI_Controller
 				$subtemase[$t->idtema]=$this->Noticia_model->leerSubtemasPorTema($t->idtema);
 			}
 		}
-		if ($this->input->post('idot')==null)
-		{
-			$dt['otrotema']=null;
-		}
-		else 
+		if ($this->input->post('idot')!=null)
 		{
 			$dt['otrotema']=$this->input->post('otrotema');
 		}
+		else
+		{
+			$dt['otrotema']=null;
+		}
 		$dt['temase']=$temase;
 		$dt['subtemase']=$subtemase;
+		$dt['cntTemas']=count($temase);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/veditartema',$dt);
