@@ -87,27 +87,31 @@ class Noticia extends CI_Controller
 			$dtotrosubtemas=array();
 			$subtemas=$this->Noticia_model->leerTodoSubTemas();
 			$temas=$this->Noticia_model->leerTodoTemas();
-			foreach ($subtemas as $st)
-			{	
-				if ($this->input->post('st'.$st->idsubtema)!=null)
-				{
-					array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
-				}
-			}
-			foreach ($temas as $t)
+			if ($this->input->post('cnttemas')!=0)
 			{
-				if ($this->input->post('te'.$t->idtema)!=null)
-				{
-					$idte=$this->input->post('te'.$t->idtema);
-					if ($this->input->post('ost'.$idte)!=null)
+				foreach ($subtemas as $st)
+				{	
+					if ($this->input->post('st'.$st->idsubtema)!=null)
 					{
-						array_push($dtotrosubtemas,$this->input->post('otrosubtema'.$t->idtema));
+						array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
+					}
+				}
+				foreach ($temas as $t)
+				{
+					if ($this->input->post('te'.$t->idtema)!=null)
+					{
+						$idte=$this->input->post('te'.$t->idtema);
+						if ($this->input->post('ost'.$idte)!=null)
+						{
+							array_push($dtotrosubtemas,$this->input->post('otrosubtema'.$t->idtema));
+						}
 					}
 				}
 			}
+			
 			if ($this->input->post('otrotema')=="")
 			{
-				echo "no hay tema";
+				echo "no hay otrotema";
 			}
 			else 
 			{
