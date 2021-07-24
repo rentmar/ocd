@@ -2,7 +2,7 @@
 	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 		<div id="caja_boton">
 			<div id="contenedor-submit">
-				<a href="#">Exportar opcion 1</a><br>
+				<a href="<?php echo site_url('manejoDB/reportesPorFecha/')?>">Reportes por fecha</a><br>
 				<a href="#">Exportar opcion 2</a><br>
 				<a href="#">Exportar opcion 3</a><br>
 				<a href="#">Exportar opcion 4</a><br>
