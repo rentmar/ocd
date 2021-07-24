@@ -101,11 +101,34 @@ class Noticia_model extends CI_Model{
 		$q= $this->db->get('subtema');
 		return $q->result();
 	}
+	public function leerTodoTemas()
+	{
+		$q= $this->db->get('tema');
+		return $q->result();
+	}
 	public function leerTemaPorId($idt)
 	{
 		$this->db->where('idtema',$idt);
 		$q= $this->db->get('tema');
 		return $q->row();
+	}
+	public function leerOtroTemaNoticia($idnoticia)
+	{
+		$sql = "SELECT otrotema.idotrotema,otrotema.nombre_otrotema,otrotema.rel_idcuestionario "
+			."FROM noticia_otrotema "
+			."LEFT JOIN otrotema ON noticia_otrotema.rel_idotrotema=otrotema.idotrotema "
+			."WHERE noticia_otrotema.rel_idnoticia = ".$idnoticia;
+		$qry = $this->db->query($sql);
+		return $qry->row();
+	}
+	public function leerOtroSubTemaNoticia($idnoticia)
+	{
+		$sql = "SELECT otrosubtema.idotrosubtema,otrosubtema.nombre_otrosubtema,otrosubtema.rel_idtema "
+			."FROM noticia_otrosubtema "
+			."LEFT JOIN otrosubtema ON noticia_otrosubtema.rel_idotrosubtema=otrosubtema.idotrosubtema "
+			."WHERE noticia_otrosubtema.rel_idnoticia = ".$idnoticia;
+		$qry = $this->db->query($sql);
+		return $qry->row();
 	}
 	public function leerNoticiaActores($idn)
 	{

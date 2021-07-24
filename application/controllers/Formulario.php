@@ -13,12 +13,16 @@ class Formulario extends CI_Controller{
 
 	}
 	public function index()
-	{	
-		$dt['formularios']=$this->Formulario_model->leerCuestionarios();
+	{
+		//Crear el nombre del archivo
+		$filename = 'usuarios.xlsx';
+		$this->load->library('excel');
+
+		/*$dt['formularios']=$this->Formulario_model->leerCuestionarios();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('formularios/vcuestionario',$dt);
-		$this->load->view('html/pie');
+		$this->load->view('html/pie');*/
 	}
 	public function crearFormulario()
 	{

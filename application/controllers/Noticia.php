@@ -39,6 +39,8 @@ class Noticia extends CI_Controller
 			$this->session->set_userdata('noticia_nueva', []);
 			$this->session->set_userdata('es_nueva_noticia1', false);
 			$this->session->set_userdata('noticia_nueva1', []);
+			$this->session->set_userdata('es_nueva_noticia2', false);
+			$this->session->set_userdata('noticia_nueva2', []);
 			redirect('/');
 		}else{
 			echo "Error";
@@ -82,24 +84,59 @@ class Noticia extends CI_Controller
 		elseif ($accion==5)
 		{	
 			$dtchkboxst=array();
+			$dtotrosubtemas=array();
 			$subtemas=$this->Noticia_model->leerTodoSubTemas();
-			foreach ($subtemas as $st)
-			{	
-				if ($this->input->post('st'.$st->idsubtema)!=null)
+			$temas=$this->Noticia_model->leerTodoTemas();
+			if ($this->input->post('cnttemas')!=0)
+			{
+				foreach ($subtemas as $st)
+				{	
+					if ($this->input->post('st'.$st->idsubtema)!=null)
+					{
+						array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
+					}
+				}
+				foreach ($temas as $t)
 				{
-					array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
+					if ($this->input->post('te'.$t->idtema)!=null)
+					{
+						$idte=$this->input->post('te'.$t->idtema);
+						if ($this->input->post('ost'.$idte)!=null)
+						{
+							array_push($dtotrosubtemas,$this->input->post('otrosubtema'.$t->idtema));
+						}
+					}
 				}
 			}
-			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
+			
+			if ($this->input->post('otrotema')=="")
+			{
+				echo "no hay otrotema";
+			}
+			else 
+			{
+				var_dump($this->input->post('otrotema'));
+			}
+			echo "<br><br>";
+			if (count($dtotrosubtemas)==0)
+			{
+				echo "no hay subtemas";
+			}
+			else
+			{
+				var_dump($dtotrosubtemas);
+			}
+			
+			//$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
 		}
-		if ($n->rel_idcuestionario==1)
+		/*if ($n->rel_idcuestionario==1)
 		{
 			redirect('Reformaelectoral/editar');
 		}
 		if ($n->rel_idcuestionario==2)
 		{
 			redirect('instdemocratica/editar');
-		}
+		}*/
 	}
     //Cambiar el formato MM/DD/YY a unix timestamp
     private function fecha_unix($fecha) 

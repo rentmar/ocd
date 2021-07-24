@@ -175,25 +175,38 @@
 										<?php } ?>
 									<?php } ?>
 								</div>
-								<div class="col-2">
+								<?php if ($otrotema!=NULL) {?>
+									<div class="form-group">
+									<input disabled="true" type="checkbox" checked="true" id="ot<?php echo $otrotema->idotrotema;?>" name="ot<?php echo $otrotema->idotrotema;?>" value="<?php echo $otrotema->idotrotema;?>">
+									<label style="background-color: #ccc" for="ot<?php echo $otrotema->idotrotema;?>">Otro Tema</label><br>		
+								</div>
+								<div class="form-group">
+									<label for="otrotema">Especificar Otro Tema</label><br>
+									<input disabled="true" type="text" id="otrotema" name="otrotema" value="<?php echo $otrotema->nombre_otrotema;?>">
+								</div>
+								<?php } ?>
+								<?php if ($otrotema==NULL) {?>
+								<div class="form-group">
+									<input disabled="true" type="checkbox" id="ot0" name="ot0" value="0">
+									<label for="ot0">Otro Tema</label><br>		
+								</div>
+								<div class="form-group">
+									<label for="otrotema">Especificar Otro Tema</label><br>
+									<input disabled="true" type="text" id="otrotema" name="otrotema" value="">
+								</div>
+								<?php } ?>
+							</div>
+							<div class="col-2">
 									<button type="submit" data-toggle="modal" data-target="#temamodal" style="background-color:#474142; color:#ffffff">
 										Cambiar Tema/s
 									</button>
 								</div>
-								<div>
-									<input disabled="true" type="checkbox" id="totro" name="totro" value="0">
-									<label for="totro">Otro Tema</label><br>		
-								</div>
-								<div>
-									<label for="otrotema">Especificar Otro Tema</label><br>
-									<input disabled="true" type="text" id="otrotema" name="otrotema" value="">
-								</div>
-							</div>
 							<div class="form-row">
 								<div class="col">
 									<hr>
 								</div>
 							</div>
+						</div>
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
@@ -213,20 +226,29 @@
 												<label for="st<?php echo $st->nombre_subtema; ?>"><?php echo $st->nombre_subtema; ?></label><br>
 											<?php } ?>
 											<?php } ?>
-											<div class="form-row">
-												<div class="col">
-													<hr>
-												</div>
-											</div>
 									<?php } ?>
-									</div>
-										<input disabled="true" type="checkbox" id="totrosub" name="totrosub" value="0">
-										<label for="totro">Otro SubTema</label><br>		
-									</div>
-									</div>
-										<label for="otrotema">Especificar Otro SubTema</label><br>
-										<input disabled="true" type="text" id="otrosubtema" name="otrosubtema" value="">
-									</div>
+								</div>
+								<?php if ($otrosubtema!=NULL) {?>
+									<div class="form-group">
+									<input disabled="true" type="checkbox" checked="true" id="ost<?php echo $otrosubtema->idotrosubtema;?>" name="ost<?php echo $otrosubtema->idotrosubtema;?>" value="<?php echo $otrosubtema->idotrosubtema;?>">
+									<label style="background-color: #ccc" for="ost<?php echo $otrosubtema->idotrosubtema;?>">Otro SubTema</label><br>		
+								</div>
+								<div class="form-group">
+									<label for="otrosubtema">Especificar Otro SubTema</label><br>
+									<input disabled="true" type="text" id="otrosubtema" name="otrosubtema" value="<?php echo $otrosubtema->nombre_otrosubtema;?>">
+								</div>
+								<?php } ?>
+								<?php if ($otrosubtema==NULL) {?>
+								<div class="form-group">
+									<input disabled="true" type="checkbox" id="ost0" name="ost0" value="0">
+									<label for="ost0">Otro SubTema</label><br>		
+								</div>
+								<div class="form-group">
+									<label for="otrotema">Especificar Otro SubTema</label><br>
+									<input disabled="true" type="text" id="otrosubtema" name="otrosubtema" value="">
+								</div>
+								<?php } ?>
+							</div>
 									<div class="form-row">
 										<div class="col">
 											<hr>
@@ -383,14 +405,42 @@
 						value="<?php echo $noticia->idnoticia; ?>">
 				</div>
 				<div class="form-group">
-					<label>
+					<label style="font-size:20px">
 						Seleccionar Tema/s:
 					</label><br>
 					<?php foreach ($temas as $tema) { ?>
-						<input type="checkbox" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
-						<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+						<?php foreach ( $temase as $temaelegido) { ?>
+							<?php if ($tema->idtema==$temaelegido->idtema) { ?>
+								<input type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+								<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+							<?php break; } ?>
+						<?php } ?>
+						<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+							<input type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+							<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+						<?php } ?>
 					<?php } ?>
 				</div>
+				<?php if ($otrotema!=NULL) {?>
+				<div class="form-group">
+					<input type="checkbox" checked="true" id="idot" name="idot" value="0">
+					<label for="idot">Otro Tema</label><br>		
+				</div>
+				<div class="form-group">
+					<label for="otrotema">Especificar Otro Tema</label><br>
+					<input type="text" id="otrotema" name="otrotema" value="<?php echo $otrotema->nombre_otrotema;?>">
+				</div>
+				<?php } ?>
+				<?php if ($otrotema==NULL) {?>
+				<div class="form-group">
+					<input type="checkbox" id="idot" name="idot" value="0">
+					<label for="ot0">Otro Tema</label><br>		
+				</div>
+				<div class="form-group">
+					<label for="otrotema">Especificar Otro Tema</label><br>
+					<input type="text" id="otrotema" name="otrotema" value="">
+				</div>
+				<?php } ?>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" name="accion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Continuar</button>

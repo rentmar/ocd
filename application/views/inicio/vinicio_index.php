@@ -52,9 +52,10 @@
 
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
-					<div class="card-header cuest3 ">
+					<div class="card-header cuest3 text-white ">
 						Censo
-						<br>
+						<br><br>
+
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.jpg'; ?>" alt="Card image">
 					<div class="card-body">
