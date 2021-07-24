@@ -19,7 +19,7 @@ class SeguimientoMonitores_model extends CI_Model{
     }
     public function leerSeguimientoMonitoresDocentes()
     {
-        $qry=$this->db->query("SELECT first_name,last_name,nombre_departamento,fecha_registro,nombre_cuestionario,count(*) ncuestionario "
+        $qry=$this->db->query("SELECT nombre_departamento, first_name,last_name,nombre_departamento,fecha_registro,nombre_cuestionario,count(*) ncuestionario "
                 . "FROM noticia "
                 . "LEFT JOIN users "
                 . "ON users.id = noticia.rel_idusuario "
@@ -40,7 +40,7 @@ class SeguimientoMonitores_model extends CI_Model{
     }
     public function leerDepartamentos()
     {
-        $qry=$this->db->query("SELECT nombre_departamento, count(*) ndepartamento "
+        $qry=$this->db->query("SELECT nombre_departamento first_name, nombre_cuestionario, count(*) ncuestionario "
                 . "FROM noticia "
                 . "LEFT JOIN users "
                 . "ON users.id = noticia.rel_idusuario "
