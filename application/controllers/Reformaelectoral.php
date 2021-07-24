@@ -390,7 +390,7 @@ class Reformaelectoral extends CI_Controller
 	}
 	public function editarTemas()
 	{
-		$temase=array();
+		/*$temase=array();
 		$subtemase=array();
 		$usuario = $this->ion_auth->user()->row();
 		$dt['idnoticia']=$this->input->post('idnoticia');
@@ -403,19 +403,18 @@ class Reformaelectoral extends CI_Controller
 				$subtemase[$t->idtema]=$this->Noticia_model->leerSubtemasPorTema($t->idtema);
 			}
 		}
-		if ($this->input->post('idot')==null)
-		{
-			$dt['otrotema']=null;
-		}
-		else 
+		if ($this->input->post('idot')!=null)
 		{
 			$dt['otrotema']=$this->input->post('otrotema');
 		}
+		else
+		{
+			$dt['otrotema']=null;
+		}
 		$dt['temase']=$temase;
-		$dt['subtemase']=$subtemase;
-		$this->load->view('html/encabezado');
+		$dt['subtemase']=$subtemase;*/
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/veditartema',$dt);
+		$this->load->view('cuestionarios/veditartema');
 		$this->load->view('html/pie');
 	}
 	public function capturarDatos()

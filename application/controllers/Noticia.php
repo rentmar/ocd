@@ -122,7 +122,7 @@ class Noticia extends CI_Controller
 			{
 				var_dump($dtotrosubtemas);
 			}
-		
+			
 			//$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
 		}
 		/*if ($n->rel_idcuestionario==1)

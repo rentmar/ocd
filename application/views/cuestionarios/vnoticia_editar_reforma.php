@@ -433,7 +433,7 @@
 				<?php } ?>
 				<?php if ($otrotema==NULL) {?>
 				<div class="form-group">
-					<input type="checkbox" id="ot0" name="ot0" value="0">
+					<input type="checkbox" id="idot" name="idot" value="0">
 					<label for="ot0">Otro Tema</label><br>		
 				</div>
 				<div class="form-group">
