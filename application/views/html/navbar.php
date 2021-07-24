@@ -90,24 +90,29 @@
 </div>
 <div class="nav-scroller ">
 	<nav class="nav nav-underline">
-		<?php if(!$this->ion_auth->is_admin()): ?>
+		<!--Solo Monitores -->
+		<?php if($this->ion_auth->in_group(3)): ?>
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
 		<?php endif; ?>
 
-		<?php if($this->ion_auth->is_admin()): ?>
+		<!-- Administradores y Docentes -->
+		<?php if($this->ion_auth->is_admin() || $this->ion_auth->in_group(2)): ?>
 		<a class="nav-link" href="<?php echo site_url('manejoDB')?>">Base de Datos</a>
 		<?php endif;?>
 
+		<!-- Administradores -->
 		<?php if($this->ion_auth->is_admin()):  ?>
 		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis Grafico</a>
 		<?php endif;  ?>
 
-		<?php if($this->ion_auth->is_admin()): ?>
+		<!-- Administradores y Docentes -->
+		<?php if($this->ion_auth->is_admin() || $this->ion_auth->in_group(2) ): ?>
 		<a class="nav-link" href="<?php echo site_url('seguimientomonitores')?>">
 			Seguimiento-Monitores
 		</a>
 		<?php endif; ?>
 
+		<!-- Administradores-->
 		<?php if($this->ion_auth->is_admin()): ?>
 		<a class="nav-link" href="#">Analisis</a>
 		<?php  endif;  ?>

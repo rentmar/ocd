@@ -1,5 +1,5 @@
 <main role="main" >
-<?php if(!$this->ion_auth->is_admin()): ?>
+<?php if($this->ion_auth->in_group(3)): ?>
 	<br>
 	<div class="container">
 
