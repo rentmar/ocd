@@ -118,7 +118,7 @@
 					<br>
 					<h3>Tema </h3>
 					<div class="form-row">
-						<select id="tema" name="tema" class="form-control simple" >
+						<select id="tema" name="idtema" class="form-control simple" >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($tema as $tm): ?>
 							<option value="<?php echo $tm->idtema; ?>" >
@@ -131,7 +131,7 @@
 					<br>
 					<h3>Subtema </h3>
 					<div class="form-row">
-						<select id="stema" name="stema" class="form-control simple" >
+						<select id="stema" name="idsubtema" class="form-control simple" >
 							<option value="0">Seleccione una opcion</option>
 							<?php foreach ($stema as $st): ?>
 							<option value="<?php echo $st->idsubtema;?>" >

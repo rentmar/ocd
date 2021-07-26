@@ -50,6 +50,8 @@ class ManejoDB extends CI_Controller{
 	}
 
 
+
+
 	public function reportesPorFecha()
 	{
 
@@ -58,9 +60,9 @@ class ManejoDB extends CI_Controller{
 		$this->load->view('manejodb/vexportar_fecha');
 		$this->load->view('html/pie');
 	}
-	public function procesarReportesPorFecha(){
 
-	}
+
+
 
 	public function download()
 	{
@@ -93,6 +95,7 @@ class ManejoDB extends CI_Controller{
 			$this->mensaje('Intervalo incorrecto', 'warning');
 			redirect('manejoDB');
 		}else{
+			
 
 		}
 	}
