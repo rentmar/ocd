@@ -272,7 +272,7 @@
 				<h1 class="modal-title">Editar Medio de Comunicacion</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('Reformaelectoral/editarMedio');?>
+			<?php echo form_open('Censo/editarMedio');?>
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" id="idnoticia" name="idnoticia"
@@ -376,7 +376,7 @@
 				<h1 class="modal-title">Editar Tema/s</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('Reformaelectoral/editarTemas');?>
+			<?php echo form_open('Censo/editarTemas');?>
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" id="idnoticia" name="idnoticia"

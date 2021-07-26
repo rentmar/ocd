@@ -378,17 +378,149 @@ class Noticia_model extends CI_Model{
 			}
 		$this->db->trans_complete();
 	}
-	public function modificarSubTemasNoticia($idn,$dtchkboxst)
+	public function modificarSubTemasNoticia($idn,$dtchkboxst,$dtsotrotema,$dtotrosubtemas)
 	{
 		$this->db->trans_start();
-			$this->db->where('rel_idnoticia',$idn);
-			$this->db->delete('noticia_subtema');
-			foreach ($dtchkboxst as $idst)
+			if (count($dtsotrotema)!=0)
 			{
-				$dtst=array('rel_idnoticia'=>$idn,
-						'rel_idsubtema'=>$idst
-						);
-				$this->db->insert('noticia_subtema',$dtst);
+				$this->db->where('rel_idnoticia',$idn);
+				$not=count($this->db->get('noticia_otrotema')->result());
+				if ($not==0)
+				{
+					echo "inserta otro tema";
+					echo "<br><br>";
+					$this->db->insert('otrotema',$dtsotrotema);
+					$idotrotema=$this->db->insert_id();
+					$dtot=array('rel_idnoticia'=>$idn,
+							'rel_idotrotema'=>$idotrotema
+							);
+					$this->db->insert('noticia_otrotema',$dtot);
+				}
+				else
+				{
+					echo "edita otro tema";
+					echo "<br><br>";
+					$this->db->where('rel_idnoticia',$idn);
+					$ot=$this->db->get('noticia_otrotema')->row();
+					$this->db->set('nombre_otrotema',$dtsotrotema['nombre_otrotema']);
+					$this->db->where('idotrotema',$ot->rel_idotrotema);
+					$this->db->update('otrotema');
+				}
+			}
+			else
+			{
+				$this->db->where('rel_idnoticia',$idn);
+				$not=count($this->db->get('noticia_otrotema')->result());
+				if ($not!=0)
+				{
+					echo "borra otro tema";
+					echo "<br><br>";
+					$this->db->where('rel_idnoticia',$idn);
+					$ot=$this->db->get('noticia_otrotema')->row();
+					$idot=$ot->rel_idotrotema;
+					$this->db->where('rel_idnoticia',$idn);
+					$this->db->delete('noticia_otrotema');
+					$this->db->where('idotrotema',$idot);
+					$this->db->delete('otrotema');					
+				}
+				else
+				{
+					echo "sin accion en otro tema";
+					echo "<br><br>";
+				}
+			}
+		
+			if (count($dtchkboxst)!=0)
+			{
+				echo "remplaza subtemas";
+				echo "<br><br>";
+				$this->db->where('rel_idnoticia',$idn);
+				$this->db->delete('noticia_subtema');
+				foreach ($dtchkboxst as $idst)
+				{
+					$dtst=array('rel_idnoticia'=>$idn,
+							'rel_idsubtema'=>$idst
+							);
+					$this->db->insert('noticia_subtema',$dtst);
+				}
+			}
+			else 
+			{
+				echo "borra subtemas";
+				echo "<br><br>";
+				$this->db->where('rel_idnoticia',$idn);
+				$nst=count($this->db->get('noticia_subtema')->result());
+				if ($nst!=0)
+				{
+					$this->db->where('rel_idnoticia',$idn);
+					$this->db->delete('noticia_subtema');
+				}
+			}
+			if (count($dtotrosubtemas)!=0)
+			{
+				$this->db->where('rel_idnoticia',$idn);
+				$nost=count($this->db->get('noticia_otrosubtema')->result());
+				if ($nost!=0)
+				{
+					echo "replaza otro subtemas";
+					echo "<br><br>";
+					$this->db->where('rel_idnoticia',$idn);
+					$otrost=$this->db->get('noticia_otrosubtema')->result();
+					foreach ($otrost as $ost)
+					{
+						$idost=$ost->rel_idotrosubtema;
+						$this->db->where('rel_idotrosubtema',$idost);
+						$this->db->delete('noticia_otrosubtema');	
+						$this->db->where('idotrosubtema',$idost);
+						$this->db->delete('otrosubtema');
+					}
+					foreach ($dtotrosubtemas as $dtost)
+					{
+						$this->db->insert('otrosubtema',$dtost);
+						$idotrosubtema=$this->db->insert_id();
+						$dtnost=array('rel_idnoticia'=>$idn,
+										'rel_idotrosubtema'=>$idotrosubtema);
+						$this->db->insert('noticia_otrosubtema',$dtnost);
+					}
+				}
+				else
+				{
+					echo "inserta otro subtemas";
+					echo "<br><br>";
+					foreach ($dtotrosubtemas as $dtost)
+					{
+						$this->db->insert('otrosubtema',$dtost);
+						$idotrosubtema=$this->db->insert_id();
+						$dtnost=array('rel_idnoticia'=>$idn,
+										'rel_idotrosubtema'=>$idotrosubtema);
+						$this->db->insert('noticia_otrosubtema',$dtnost);
+					}
+				}
+			}
+			else 
+			{
+				$this->db->where('rel_idnoticia',$idn);
+				$nost=count($this->db->get('noticia_otrosubtema')->result());
+				if ($nost!=0)
+				{
+					echo "borra otro subtemas";
+					echo "<br><br>";
+					$this->db->where('rel_idnoticia',$idn);
+					$otrost=$this->db->get('noticia_otrosubtema')->result();
+					foreach ($otrost as $ost)
+					{
+						$idost=$ost->rel_idotrosubtema;
+						$this->db->where('rel_idotrosubtema',$idost);
+						$this->db->delete('noticia_otrosubtema');	
+						$this->db->where('idotrosubtema',$idost);
+						$this->db->delete('otrosubtema');
+					}
+				}
+				else
+				{
+					echo "sin accion subtemas";
+					echo "<br><br>";
+				}
 			}
 		$this->db->trans_complete();
 	}

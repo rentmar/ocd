@@ -28,8 +28,8 @@
 							<td><?php echo $n->titular; ?></td>
 							<td><?php echo $n->nombre_medio; ?></td>
 							<td>
-								<a href="<?php echo site_url('reformaelectoral/editarNoticia/'.$n->idnoticia); ?>">
-									Editar
+								<a href="<?php echo site_url('Reformaelectoral/editarNoticia/'.$n->idnoticia); ?>">
+									Editar<i class="fas fa-edit"></i>
 								</a>
 							</td>
 						</tr>

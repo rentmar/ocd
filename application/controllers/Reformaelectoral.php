@@ -118,7 +118,7 @@ class Reformaelectoral extends CI_Controller
 		//Actualizar la variable de session
 		$this->session->set_userdata('noticia_nueva', []);
 		$this->session->set_userdata('noticia_nueva', $noticia);
-		redirect('reformaelectoral');
+		redirect('Reformaelectoral');
 	}
 
 
@@ -334,7 +334,7 @@ class Reformaelectoral extends CI_Controller
 
 
 
-		redirect('reformaelectoral');
+		redirect('Reformaelectoral');
 
 	}
 
@@ -381,6 +381,7 @@ class Reformaelectoral extends CI_Controller
 	public function editarMedio()
 	{
 		$usuario = $this->ion_auth->user()->row();
+		$dt['idcuestionario']=$this->_idformulario;
 		$dt['idnoticia']=$this->input->post('idnoticia');
 		$dt['medios']=$this->Noticia_model->leerMediosPorTipoDepartamento($this->input->post('rel_idtipomedio'),$usuario->rel_iddepartamento);
 		$this->load->view('html/encabezado');
@@ -393,6 +394,8 @@ class Reformaelectoral extends CI_Controller
 		$temase=array();
 		$subtemase=array();
 		$usuario = $this->ion_auth->user()->row();
+		$dt['idusuario']=$usuario->id;
+		$dt['idcuestionario']=$this->_idformulario;
 		$dt['idnoticia']=$this->input->post('idnoticia');
 		$temas=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
 		foreach ($temas as $t)
@@ -474,7 +477,7 @@ class Reformaelectoral extends CI_Controller
 		$this->session->set_userdata('nuevo_c1', false);
 		$this->session->set_userdata('reforma', []);
 		//Redireccionar al inicio
-		redirect('inicio/');
+		redirect('Inicio/');
 	}
 
 	private function objetoNoticia()
