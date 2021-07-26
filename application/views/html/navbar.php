@@ -113,9 +113,9 @@
 		<?php endif; ?>
 
 		<!-- Administradores-->
-		<?php if($this->ion_auth->is_admin()): ?>
+		<?php /*if($this->ion_auth->is_admin()): */?><!--
 		<a class="nav-link" href="#">Analisis</a>
-		<?php  endif;  ?>
+		--><?php /* endif;  */?>
 
 	</nav>
 </div>

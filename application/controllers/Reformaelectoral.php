@@ -470,6 +470,8 @@ class Reformaelectoral extends CI_Controller
 
 	public function cancelarNuevo()
 	{
+		$this->session->set_userdata('es_nueva_noticia', false);
+		$this->session->set_userdata('noticia_nueva', []);
 		//Limpiar las variables de session y colocar la bandera en su estado original
 		$this->session->set_userdata('nuevo_c1', false);
 		$this->session->set_userdata('reforma', []);
