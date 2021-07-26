@@ -51,7 +51,7 @@
 					<a class="dropdown-item" href="<?php echo site_url('formulario/');?>">Formularios</a>
 					<a class="dropdown-item" href="<?php echo site_url('actor/');?>">Actores</a>
 					<a class="dropdown-item" href="<?php echo site_url('departamento/');?>">Departamentos</a>
-					<a class="dropdown-item" href="<?php echo site_url('universidad/');?>">Universidad</a>
+					<a class="dropdown-item" href="<?php echo site_url('universidad/');?>">Universidades</a>
 					<a class="dropdown-item" href="<?php echo site_url('tipoMedio/');?>">Tipo de Medio</a>
 					<a class="dropdown-item" href="<?php echo site_url('medioComunicacion/');?>">Medio de Comunicacion</a>
 					<a class="dropdown-item" href="<?php echo site_url('tema/');?>">Tema</a>
