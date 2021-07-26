@@ -26,7 +26,7 @@ class Seguimientomonitores extends CI_Controller
         $TablaAuxiliarSm->nombre=0;
         foreach ($DatosSeguimientoM['SeguimientoMonitores'] as $f)
         {
-            if($f->nombre_departamento === $TablaAuxiliarSm->nombre)
+            if($f->first_name === $TablaAuxiliarSm->nombre)
             {
                 foreach($DatosSeguimientoM['NumeroDeCuestionarios'] as $nDc0)
                 {

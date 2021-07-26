@@ -48,7 +48,7 @@ class SeguimientoMonitores_model extends CI_Model{
                 . "ON noticia.rel_idcuestionario = cuestionario.idcuestionario "
                 . "LEFT JOIN departamento "
                 . "ON departamento.iddepartamento = users.rel_iddepartamento "
-                . "GROUP BY nombre_departamento");
+                . "GROUP BY first_name, nombre_cuestionario");
         return $qry->result();
     }
 }
