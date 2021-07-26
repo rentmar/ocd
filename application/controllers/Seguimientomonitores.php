@@ -8,6 +8,7 @@ class Seguimientomonitores extends CI_Controller
 
         $this->load->library('ion_auth');
         $this->load->model('SeguimientoMonitores_model');
+        $this->load->model('Cuestionario_model');
     }
     public function index()
     {
@@ -25,7 +26,7 @@ class Seguimientomonitores extends CI_Controller
         $TablaAuxiliarSm->nombre=0;
         foreach ($DatosSeguimientoM['SeguimientoMonitores'] as $f)
         {
-            if($f->first_name === $TablaAuxiliarSm->nombre)
+            if($f->nombre_departamento === $TablaAuxiliarSm->nombre)
             {
                 foreach($DatosSeguimientoM['NumeroDeCuestionarios'] as $nDc0)
                 {
@@ -168,12 +169,8 @@ class Seguimientomonitores extends CI_Controller
         }
         $tablaSm['SeguimientoM1']=$SeguimientoM;
         $tablaSm['NumeroDeCuestionarios']=$DatosSeguimientoM['NumeroDeCuestionarios'];
-/*        echo "<pre>";
-        var_dump($tablaSm);
-        echo "</pre>";*/
- /*       echo "<pre>";
-        var_dump($DatosSeguimientoM['SeguimientoMonitores']);
-        echo "</pre>";*/
+/*        echo "<pre>"; var_dump($tablaSm); echo "</pre>";*/
+ /*       echo "<pre>"; var_dump($DatosSeguimientoM['SeguimientoMonitores']); echo "</pre>";*/
         if(empty($tablaSm))
         {
         redirect('Seguimientomonitores');
@@ -187,14 +184,74 @@ class Seguimientomonitores extends CI_Controller
         $this->load->view('html/pie');
         }
     }
-    public function CuestionariosPorDepartamento()
-    {
-        $DatosDepartamentos['Departamentos']=$this->SeguimientoMonitores_model->leerDepartamentos();
-        
+    public function CuestionariosPorDepartamentoUsuario()
+{
+        $DatosSeguimientoM['SeguimientoMonitores']=$this->SeguimientoMonitores_model->leerDepartamentos();
+        $DatosSeguimientoM['NumeroDeCuestionarios']=$this->SeguimientoMonitores_model->leerCuestionarios();
+
+        $TablaAuxiliarSm=new stdClass();
+        $TablaAuxiliarSm->nombre=0;
+        foreach ($DatosSeguimientoM['SeguimientoMonitores'] as $f)
+        {
+            if($f->first_name === $TablaAuxiliarSm->nombre)
+            {
+                foreach($DatosSeguimientoM['NumeroDeCuestionarios'] as $nDc0)
+                {
+                    $cuestionarioA=$nDc0->nombre_cuestionario;
+                    if($f->nombre_cuestionario == $nDc0->nombre_cuestionario)
+                    {
+                        $TablaAuxiliarSm->$cuestionarioA=$f->ncuestionario;
+                    }
+                    else
+                    {
+                        if($TablaAuxiliarSm->$cuestionarioA == 0)
+                        {
+                            $TablaAuxiliarSm->$cuestionarioA=0;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $TablaAuxiliarSm=new stdClass();
+                $TablaAuxiliarSm->nombre=$f->first_name;
+                foreach($DatosSeguimientoM['NumeroDeCuestionarios'] as $ndc1)
+                {
+                    $cuestionario1=$ndc1->nombre_cuestionario;
+                    $TablaAuxiliarSm->$cuestionario1=0;
+                }
+                foreach($DatosSeguimientoM['NumeroDeCuestionarios'] as $nDc)
+                {
+                    $cuestionarioA=$nDc->nombre_cuestionario;
+                    if($f->nombre_cuestionario == $nDc->nombre_cuestionario)
+                    {
+                        $TablaAuxiliarSm->$cuestionarioA=$f->ncuestionario;
+                    }
+                    else
+                    {
+                        if($TablaAuxiliarSm->$cuestionarioA == 0)
+                        {
+                            $TablaAuxiliarSm->$cuestionarioA=0;
+                        }
+                    }
+                }
+                $SeguimientoM[]=$TablaAuxiliarSm;
+            }
+        }
+        $tablaSm['SeguimientoM1']=$SeguimientoM;
+        $tablaSm['NumeroDeCuestionarios']=$DatosSeguimientoM['NumeroDeCuestionarios'];
+/*        echo "<pre>"; var_dump($tablaSm); echo "</pre>";*/
+        if(empty($tablaSm))
+        {
+        redirect('Seguimientomonitores');
+        }
+         else
+         {
         $this->load->view('html/encabezado');
         $this->load->view('html/navbar');
-        $this->load->view('seguimientom/vdpartamentosN',$DatosDepartamentos);
+        $this->load->view('seguimientom/vseguimientoMonitoresTabla1',$tablaSm);
         $this->load->view('html/pie');
+        }
     }
 }
 

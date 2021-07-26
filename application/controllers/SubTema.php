@@ -34,7 +34,7 @@ class SubTema extends CI_Controller{
 				'nombre_subtema' => $this->input->post('nombre_subtema'),
 				'rel_idtema' => $this->input->post('idtema'));
 		$this->SubTema_model->agregarSubTema($dts);
-		redirect ('subtema');
+		redirect ('subTema');
 	}
 	public function editarSubTema($idt)
 	{
@@ -51,6 +51,6 @@ class SubTema extends CI_Controller{
 				'nombre_subtema' => $this->input->post('nombre_subtema'),
 				'rel_idtema' => $this->input->post('idtema'));
 		$this->SubTema_model->modificarSubTema($dts,$idt);
-		redirect ('subtema');
+		redirect ('subTema');
 	}
 }
