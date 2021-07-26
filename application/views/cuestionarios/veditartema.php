@@ -11,6 +11,8 @@
 					<div class="form-row">
 						<div class="col-10">
 							<div class="form-group">
+								<input type="hidden" id="idcuestionario" name="idcuestionario" value="<?php echo $idcuestionario; ?>">
+								<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>">
 								<?php if ($otrotema==null) { ?>
 									<input type="hidden" id="otrotema" name="otrotema" value="">
 								<?php } ?>
@@ -28,6 +30,11 @@
 										<input type="checkbox" id="st<?php echo $st->idsubtema; ?>" name="st<?php echo $st->idsubtema; ?>" value="<?php echo $st->idsubtema; ?>">
 										<label for="st<?php echo $st->nombre_subtema; ?>"><?php echo $st->nombre_subtema; ?></label><br>
 										<?php } ?>
+										<div class="form-row">
+											<div class="col">
+												<hr>
+											</div>
+										</div>
 										<div class="form-group">
 											<input type="checkbox" id="ost<?php echo $te->idtema; ?>" name="ost<?php echo $te->idtema; ?>" value="<?php echo $te->idtema; ?>">
 											<label for="ost<?php echo $te->idtema; ?>">Otro SubTema</label><br>		
@@ -43,20 +50,27 @@
 										</div>
 									<?php } ?>
 								<?php } ?>
-								<div class="form-row">
-									<div class="col">
-										<hr>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>	
 				<div>
 					<button type="submit" name="accion" value="5" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
 					<?php echo form_close();?>
-					<a href="<?php echo site_url('reformaelectoral/editarNoticia/'.$idnoticia); ?>" >
-						<button type="button" class="btn btn-danger" >Cancelar</button>
-					</a>
+					<?php if ($idcuestionario==1) {?>
+						<a href="<?php echo site_url('Reformaelectoral/editarNoticia/'.$idnoticia); ?>" >
+							<button type="button" class="btn btn-danger" >Cancelar</button>
+						</a>
+					<?php } ?>
+					<?php if ($idcuestionario==2) {?>
+						<a href="<?php echo site_url('Instdemocratica/editarNoticia/'.$idnoticia); ?>" >
+							<button type="button" class="btn btn-danger" >Cancelar</button>
+						</a>
+					<?php } ?>
+					<?php if ($idcuestionario==3) {?>
+						<a href="<?php echo site_url('Censo/editarNoticia/'.$idnoticia); ?>" >
+							<button type="button" class="btn btn-danger" >Cancelar</button>
+						</a>
+					<?php } ?>
 				</div>
 				<br>
 				</div>

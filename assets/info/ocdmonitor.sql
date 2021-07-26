@@ -315,29 +315,6 @@ CREATE TABLE `noticia` (
   `rel_idusuario` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `noticia`
---
-
-INSERT INTO `noticia` (`idnoticia`, `fecha_registro`, `fecha_noticia`, `titular`, `resumen`, `url_noticia`, `rel_idmedio`, `rel_idcuestionario`, `rel_idusuario`) VALUES
-(2, 1626788432, 1625090400, 'Titular', 'Parrafo resumen', 'htttp', 23, 1, 5),
-(3, 1626788594, 1626732000, 'Titular', 'Parrafo resumen', 'htttp', 24, 1, 5),
-(4, 1626789055, 1625004000, 'Titular', 'Parrafo resumen', 'htttp', 23, 1, 5),
-(5, 1626790519, 1624831200, 'Titular', 'Parrafo resumen', 'htttp', 24, 1, 5),
-(6, 1626794756, 1626732000, 'Titular', 'Parrafo resumen', 'htttp', 24, 1, 5),
-(8, 1626802217, 1626732000, 'Titular', 'Parrafo resumen', 'htttp', 47, 2, 5),
-(9, 1626802443, 1625522400, 'Titular', 'Parrafo resumen', 'htttp', 14, 2, 5),
-(10, 1627041781, 1627077600, 'Titular de la noticia', 'Resumen del titular de la noticia', 'https://usa', 23, 2, 5),
-(11, 1627059070, 1626991200, 'Titular de la noticia', 'Resumen del titular de la noticia', 'https://usa', 23, 3, 5),
-(12, 1627060204, 1626300000, 'Titular Censo', 'Parrafo resumen del titular censo', 'https://censo', 38, 3, 5),
-(13, 1627061517, 1626300000, 'Censo', 'Resumen del censo ', 'https://censo', 23, 3, 5),
-(14, 1627061966, 1625608800, 'Titular censo 2021', 'Reumen del censo 2021', 'https://censo', 38, 3, 5);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `noticia_actor`
---
 
 CREATE TABLE `noticia_actor` (
   `idnotactor` int(11) NOT NULL,
@@ -349,41 +326,7 @@ CREATE TABLE `noticia_actor` (
 -- Volcado de datos para la tabla `noticia_actor`
 --
 
-INSERT INTO `noticia_actor` (`idnotactor`, `rel_idnoticia`, `rel_idactor`) VALUES
-(4, 2, 1),
-(5, 2, 5),
-(6, 2, 10),
-(7, 3, 1),
-(8, 3, 5),
-(9, 3, 10),
-(10, 4, 1),
-(11, 4, 4),
-(12, 4, 7),
-(13, 4, 10),
-(14, 5, 1),
-(15, 5, 5),
-(16, 5, 10),
-(17, 6, 1),
-(18, 6, 5),
-(19, 6, 9),
-(20, 6, 10),
-(24, 8, 1),
-(25, 9, 6),
-(26, 9, 10),
-(27, 10, 1),
-(28, 10, 5),
-(29, 10, 10),
-(30, 11, 4),
-(31, 11, 7),
-(32, 12, 1),
-(33, 12, 6),
-(34, 12, 10),
-(35, 13, 3),
-(36, 13, 7),
-(37, 13, 10),
-(38, 14, 4),
-(39, 14, 8),
-(40, 14, 10);
+
 
 -- --------------------------------------------------------
 
@@ -397,30 +340,7 @@ CREATE TABLE `noticia_otrosubtema` (
   `rel_idotrosubtema` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `noticia_otrosubtema`
---
 
-INSERT INTO `noticia_otrosubtema` (`idnototrosubtema`, `rel_idnoticia`, `rel_idotrosubtema`) VALUES
-(3, 2, 3),
-(4, 2, 4),
-(5, 3, 5),
-(6, 3, 6),
-(7, 4, 7),
-(8, 4, 8),
-(9, 5, 9),
-(10, 5, 10),
-(11, 6, 11),
-(12, 11, 12),
-(13, 11, 13),
-(14, 12, 14),
-(15, 12, 15),
-(16, 13, 16),
-(17, 13, 17),
-(18, 13, 18),
-(19, 14, 19);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `noticia_otrotema`
@@ -432,21 +352,6 @@ CREATE TABLE `noticia_otrotema` (
   `rel_idotrotema` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `noticia_otrotema`
---
-
-INSERT INTO `noticia_otrotema` (`idnototrotema`, `rel_idnoticia`, `rel_idotrotema`) VALUES
-(1, 2, 1),
-(2, 3, 2),
-(3, 4, 3),
-(4, 5, 4),
-(5, 6, 5),
-(6, 10, 6),
-(7, 11, 7),
-(8, 12, 8),
-(9, 13, 9),
-(10, 14, 10);
 
 -- --------------------------------------------------------
 
@@ -464,45 +369,6 @@ CREATE TABLE `noticia_subtema` (
 -- Volcado de datos para la tabla `noticia_subtema`
 --
 
-INSERT INTO `noticia_subtema` (`idnotsubtema`, `rel_idnoticia`, `rel_idsubtema`) VALUES
-(3, 2, 1),
-(4, 2, 22),
-(5, 3, 1),
-(6, 3, 22),
-(7, 4, 1),
-(8, 4, 12),
-(9, 4, 13),
-(10, 4, 8),
-(11, 4, 10),
-(12, 4, 11),
-(13, 5, 1),
-(14, 5, 22),
-(15, 6, 1),
-(16, 6, 24),
-(17, 6, 9),
-(18, 6, 11),
-(23, 8, 25),
-(24, 8, 28),
-(25, 8, 40),
-(26, 8, 42),
-(27, 9, 25),
-(28, 9, 28),
-(29, 9, 39),
-(30, 9, 42),
-(31, 10, 29),
-(32, 10, 37),
-(33, 11, 49),
-(34, 11, 51),
-(35, 11, 59),
-(36, 11, 61),
-(37, 12, 54),
-(38, 12, 57),
-(39, 12, 59),
-(40, 13, 49),
-(41, 13, 51),
-(42, 13, 61),
-(43, 13, 67),
-(44, 14, 61);
 
 -- --------------------------------------------------------
 
@@ -520,25 +386,6 @@ CREATE TABLE `otrosubtema` (
 -- Volcado de datos para la tabla `otrosubtema`
 --
 
-INSERT INTO `otrosubtema` (`idotrosubtema`, `nombre_otrosubtema`, `rel_idtema`) VALUES
-(3, 'aaaa', 1),
-(4, 'bbbb', 6),
-(5, 'aaaa', 1),
-(6, 'bbb', 6),
-(7, '', 1),
-(8, 'aaaa', 4),
-(9, 'aaa', 1),
-(10, 'bbbb', 6),
-(11, 'aaa', 1),
-(12, 'aaaa', 16),
-(13, 'bbbb', 18),
-(14, 'aaaaa', 17),
-(15, 'bbb', 18),
-(16, 'aaa', 16),
-(17, 'bbbbb', 18),
-(18, 'bbbbb', 19),
-(19, 'cdcdcddddd', 18);
-
 -- --------------------------------------------------------
 
 --
@@ -552,21 +399,7 @@ CREATE TABLE `otrotema` (
   `rel_idusuario` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `otrotema`
---
 
-INSERT INTO `otrotema` (`idotrotema`, `nombre_otrotema`, `rel_idcuestionario`, `rel_idusuario`) VALUES
-(1, 'Otro tema reforma electoral', 1, 5),
-(2, 'Otro', 1, 5),
-(3, 'Otro tema de reforma electoral', 1, 5),
-(4, 'AAAAAA', 1, 5),
-(5, 'Otro tema de reforma electoral', 1, 5),
-(6, 'Ptrpe', 2, 5),
-(7, 'Otro Temas', 3, 5),
-(8, 'Otro tema censo', 3, 5),
-(9, 'Otro tema sobre censo', 3, 5),
-(10, 'aaa', 3, 5);
 
 -- --------------------------------------------------------
 
@@ -1110,43 +943,43 @@ ALTER TABLE `medio_departamento`
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_actor`
 --
 ALTER TABLE `noticia_actor`
-  MODIFY `idnotactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `idnotactor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_otrosubtema`
 --
 ALTER TABLE `noticia_otrosubtema`
-  MODIFY `idnototrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idnototrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_otrotema`
 --
 ALTER TABLE `noticia_otrotema`
-  MODIFY `idnototrotema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idnototrotema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_subtema`
 --
 ALTER TABLE `noticia_subtema`
-  MODIFY `idnotsubtema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idnotsubtema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `otrosubtema`
 --
 ALTER TABLE `otrosubtema`
-  MODIFY `idotrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idotrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `otrotema`
 --
 ALTER TABLE `otrotema`
-  MODIFY `idotrotema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idotrotema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `subtema`

@@ -42,9 +42,15 @@ class Departamento_model extends CI_Model
 	}
 	public function leerUsuarioPorIdGrupo($idgrupo)
 	{
-		$sql="SELECT * FROM users "
+		$sql="SELECT users.id as idusuario,
+					users.username,
+					users.first_name,
+					users.last_name,
+					departamento.nombre_departamento 
+					FROM users "
 		."LEFT JOIN users_groups ON users.id=users_groups.user_id "
 		."LEFT JOIN groups ON users_groups.group_id=groups.id "
+		."LEFT JOIN departamento ON users.rel_iddepartamento=departamento.iddepartamento "
 		."WHERE groups.id =".$idgrupo;
 		$qry = $this->db->query($sql);
 		return $qry->result();
