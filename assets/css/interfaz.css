@@ -11,6 +11,11 @@ div #Caja_de_orden {
 	padding-bottom:50px;
 }
 
+select .selmultiple{
+	background-color: #d3d3d3;
+	border-radius:6px;
+}
+
 div #Caja_de_datos{
 	border-radius:5px;
 	margin-top:1px;
