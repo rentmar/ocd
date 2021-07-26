@@ -67,8 +67,14 @@
 
 					</div>
 					<div class="card-footer" >
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Enviar</button>
-						<a href="<?php echo site_url('inicio') ?>" class="btn btn-danger" role="button">Cancelar</a>
+						<button id="BOTON" type="button"  data-toggle="modal" data-target="#myModal">
+							Enviar
+						</button>
+						<a  href="<?php echo site_url('censo/cancelarNuevo') ?>"  role="button">
+							<button id="BOTON">
+								Cancelar
+							</button>
+						</a>
 					</div>
 
 				</div>
@@ -119,8 +125,8 @@
 			<!-- Modal footer -->
 			<div class="modal-footer">
 				<!-- Al metodo de insercion -->
-				<button type="submit" class="btn btn-primary">Si</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+				<button type="submit" id="BOTON">Si</button>
+				<button type="button" class="BOTONROJO" data-dismiss="modal">No</button>
 			</div>
 			<?php echo form_close(); ?>
 

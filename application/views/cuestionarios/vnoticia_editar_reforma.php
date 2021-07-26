@@ -175,6 +175,11 @@
 										<?php } ?>
 									<?php } ?>
 								</div>
+								<div class="form-row">
+									<div class="col">
+										<hr>
+									</div>
+								</div>
 								<?php if ($otrotema!=NULL) {?>
 									<div class="form-group">
 									<input disabled="true" type="checkbox" checked="true" id="ot<?php echo $otrotema->idotrotema;?>" name="ot<?php echo $otrotema->idotrotema;?>" value="<?php echo $otrotema->idotrotema;?>">
@@ -225,29 +230,34 @@
 												<input disabled="true" type="checkbox"  id="st<?php echo $st->idsubtema; ?>" name="st<?php echo $st->idsubtema; ?>" value="<?php echo $st->idsubtema; ?>">
 												<label for="st<?php echo $st->nombre_subtema; ?>"><?php echo $st->nombre_subtema; ?></label><br>
 											<?php } ?>
-											<?php } ?>
+										<?php } ?>
+										<div class="form-row">
+											<div class="col">
+												<hr>
+											</div>
+										</div>
+										<?php if ($otrosubtema!=NULL) {?>
+										<div class="form-group">
+											<input disabled="true" type="checkbox" checked="true" id="ost<?php echo $otrosubtema->idotrosubtema;?>" name="ost<?php echo $otrosubtema->idotrosubtema;?>" value="<?php echo $otrosubtema->idotrosubtema;?>">
+											<label style="background-color: #ccc" for="ost<?php echo $otrosubtema->idotrosubtema;?>">Otro SubTema</label><br>		
+										</div>
+										<div class="form-group">
+											<label for="otrosubtema">Especificar Otro SubTema</label><br>
+											<input disabled="true" type="text" id="otrosubtema" name="otrosubtema" value="<?php echo $otrosubtema->nombre_otrosubtema;?>">
+										</div>
+										<?php } ?>
+										<?php if ($otrosubtema==NULL) {?>
+										<div class="form-group">
+											<input disabled="true" type="checkbox" id="ost0" name="ost0" value="0">
+											<label for="ost0">Otro SubTema</label><br>		
+										</div>
+										<div class="form-group">
+											<label for="otrotema">Especificar Otro SubTema</label><br>
+											<input disabled="true" type="text" id="otrosubtema" name="otrosubtema" value="">
+										</div>
+										<?php } ?>
 									<?php } ?>
 								</div>
-								<?php if ($otrosubtema!=NULL) {?>
-									<div class="form-group">
-									<input disabled="true" type="checkbox" checked="true" id="ost<?php echo $otrosubtema->idotrosubtema;?>" name="ost<?php echo $otrosubtema->idotrosubtema;?>" value="<?php echo $otrosubtema->idotrosubtema;?>">
-									<label style="background-color: #ccc" for="ost<?php echo $otrosubtema->idotrosubtema;?>">Otro SubTema</label><br>		
-								</div>
-								<div class="form-group">
-									<label for="otrosubtema">Especificar Otro SubTema</label><br>
-									<input disabled="true" type="text" id="otrosubtema" name="otrosubtema" value="<?php echo $otrosubtema->nombre_otrosubtema;?>">
-								</div>
-								<?php } ?>
-								<?php if ($otrosubtema==NULL) {?>
-								<div class="form-group">
-									<input disabled="true" type="checkbox" id="ost0" name="ost0" value="0">
-									<label for="ost0">Otro SubTema</label><br>		
-								</div>
-								<div class="form-group">
-									<label for="otrotema">Especificar Otro SubTema</label><br>
-									<input disabled="true" type="text" id="otrosubtema" name="otrosubtema" value="">
-								</div>
-								<?php } ?>
 							</div>
 									<div class="form-row">
 										<div class="col">
@@ -431,9 +441,14 @@
 					<input type="text" id="otrotema" name="otrotema" value="<?php echo $otrotema->nombre_otrotema;?>">
 				</div>
 				<?php } ?>
+				<div class="form-row">
+					<div class="col">
+						<hr>
+					</div>
+				</div>
 				<?php if ($otrotema==NULL) {?>
 				<div class="form-group">
-					<input type="checkbox" id="ot0" name="ot0" value="0">
+					<input type="checkbox" id="idot" name="idot" value="0">
 					<label for="ot0">Otro Tema</label><br>		
 				</div>
 				<div class="form-group">
@@ -450,3 +465,4 @@
 		</div>
 	</div>
 </div>
+</main>

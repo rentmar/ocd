@@ -87,52 +87,72 @@ class Noticia extends CI_Controller
 			$dtotrosubtemas=array();
 			$subtemas=$this->Noticia_model->leerTodoSubTemas();
 			$temas=$this->Noticia_model->leerTodoTemas();
-			foreach ($subtemas as $st)
-			{	
-				if ($this->input->post('st'.$st->idsubtema)!=null)
-				{
-					array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
-				}
-			}
-			foreach ($temas as $t)
+			if ($this->input->post('cnttemas')!=0)
 			{
-				if ($this->input->post('te'.$t->idtema)!=null)
-				{
-					$idte=$this->input->post('te'.$t->idtema);
-					if ($this->input->post('ost'.$idte)!=null)
+				foreach ($subtemas as $st)
+				{	
+					if ($this->input->post('st'.$st->idsubtema)!=null)
 					{
-						array_push($dtotrosubtemas,$this->input->post('otrosubtema'.$t->idtema));
+						array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
+					}
+				}
+				foreach ($temas as $t)
+				{
+					if ($this->input->post('te'.$t->idtema)!=null)
+					{
+						$idte=$this->input->post('te'.$t->idtema);
+						if ($this->input->post('ost'.$idte)!=null)
+						{
+							array_push($dtotrosubtemas,array('nombre_otrosubtema'=>$this->input->post('otrosubtema'.$t->idtema),
+															'rel_idtema'=>$t->idtema));
+						}
 					}
 				}
 			}
 			if ($this->input->post('otrotema')=="")
 			{
-				echo "no hay tema";
-			}
-			else 
-			{
-				var_dump($this->input->post('otrotema'));
-			}
-			echo "<br><br>";
-			if (count($dtotrosubtemas)==0)
-			{
-				echo "no hay subtemas";
+				$dtsotrotema=array();
 			}
 			else
 			{
-				var_dump($dtotrosubtemas);
+				$dtsotrotema=array(
+							'nombre_otrotema'=>$this->input->post('otrotema'),
+							'rel_idcuestionario'=>$this->input->post('idcuestionario'),
+							'rel_idusuario'=>$this->input->post('idusuario'));
 			}
-		
+			/*echo "Numrero de Temas: ";
+			echo $this->input->post('cnttemas');
+			echo "<br><br>";
+			echo "Numero de otro Tema: ";
+			echo count($dtsotrotema);
+			echo "<br><br>";
+			var_dump($dtsotrotema);
+			echo "<br><br>";
+			echo "Numero de Sub Temas: ";
+			echo count($dtchkboxst);
+			echo "<br><br>";
+			var_dump($dtchkboxst);
+			echo "<br><br>";
+			echo "Numero de otro SubTemas: ";
+			echo count($dtotrosubtemas);
+			echo "<br><br>";
+			var_dump($dtotrosubtemas);*/
+			
+			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst,$dtsotrotema,$dtotrosubtemas);
 			//$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
 		}
-		/*if ($n->rel_idcuestionario==1)
+		if ($n->rel_idcuestionario==1)
 		{
 			redirect('Reformaelectoral/editar');
 		}
-		if ($n->rel_idcuestionario==2)
+		elseif ($n->rel_idcuestionario==2)
 		{
-			redirect('instdemocratica/editar');
-		}*/
+			redirect('Instdemocratica/editar');
+		}
+		elseif ($n->rel_idcuestionario==3)
+		{
+			redirect('Censo/editar');
+		}
 	}
     //Cambiar el formato MM/DD/YY a unix timestamp
     private function fecha_unix($fecha) 

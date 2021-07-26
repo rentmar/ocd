@@ -1,5 +1,5 @@
 <main role="main" >
-<?php if(!$this->ion_auth->is_admin()): ?>
+<?php if($this->ion_auth->in_group(3)): ?>
 	<br>
 	<div class="container">
 
@@ -52,15 +52,19 @@
 
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
-					<div class="card-header cuest3 text-white ">
+					<div class="card-header cuest3 ">
 						Censo
 						<br><br>
 
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.jpg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('censo/');?>" class="btn btn-info" role="button" style="background-color:#474142;">Nuevo</a>
-						<a href="<?php echo site_url('censo/editar/');?>" class="btn btn-info" role="button" style="background-color:#474142;">Editar</a>
+						<a href="<?php echo site_url('censo/');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
+							Nuevo
+						</a>
+						<a href="<?php echo site_url('censo/editar/');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
+							Editar
+						</a>
 					</div>
 				</div>
 			</div>

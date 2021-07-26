@@ -94,18 +94,10 @@
 						<div class="form-group">
 							<input type="submit" id="BOTON" value="CREAR USUARIO">
 							<a href="<?php echo site_url('usuarios/listar/'.$grupo);?>">
-								<input type="button" class="BOTONROJO" value="CANCELAR"></a>
-
-
+								<input type="submit" class="BOTONROJO" value="CANCELAR">
+							</a>
 						</div>
-
 						<?php echo form_close()?>
-
-
-
-
-
-
 					</div>
 				</div>
 			</div>

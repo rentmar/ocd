@@ -51,6 +51,7 @@
 					<a class="dropdown-item" href="<?php echo site_url('formulario/');?>">Formularios</a>
 					<a class="dropdown-item" href="<?php echo site_url('actor/');?>">Actores</a>
 					<a class="dropdown-item" href="<?php echo site_url('departamento/');?>">Departamentos</a>
+					<a class="dropdown-item" href="<?php echo site_url('universidad/');?>">Universidades</a>
 					<a class="dropdown-item" href="<?php echo site_url('tipoMedio/');?>">Tipo de Medio</a>
 					<a class="dropdown-item" href="<?php echo site_url('medioComunicacion/');?>">Medio de Comunicacion</a>
 					<a class="dropdown-item" href="<?php echo site_url('tema/');?>">Tema</a>
@@ -90,18 +91,32 @@
 </div>
 <div class="nav-scroller ">
 	<nav class="nav nav-underline">
-		<?php if(!$this->ion_auth->is_admin()): ?>
+		<!--Solo Monitores -->
+		<?php if($this->ion_auth->in_group(3)): ?>
 		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
 		<?php endif; ?>
 
-		<?php if($this->ion_auth->is_admin()): ?>
+		<!-- Administradores y Docentes -->
+		<?php if($this->ion_auth->is_admin() || $this->ion_auth->in_group(2)): ?>
 		<a class="nav-link" href="<?php echo site_url('manejoDB')?>">Base de Datos</a>
+		<?php endif;?>
+
+		<!-- Administradores -->
+		<?php if($this->ion_auth->is_admin()):  ?>
 		<a class="nav-link" href="<?php echo site_url('graficos');?>">Analisis Grafico</a>
+		<?php endif;  ?>
+
+		<!-- Administradores y Docentes -->
+		<?php if($this->ion_auth->is_admin() || $this->ion_auth->in_group(2) ): ?>
 		<a class="nav-link" href="<?php echo site_url('seguimientomonitores')?>">
 			Seguimiento-Monitores
 		</a>
-		<a class="nav-link" href="#">Analisis</a>
 		<?php endif; ?>
+
+		<!-- Administradores-->
+		<?php /*if($this->ion_auth->is_admin()): */?><!--
+		<a class="nav-link" href="#">Analisis</a>
+		--><?php /* endif;  */?>
 
 	</nav>
 </div>

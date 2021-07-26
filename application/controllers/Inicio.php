@@ -19,6 +19,7 @@ class Inicio extends CI_Controller
 	{
 		//var_dump($this->session->userdata());
 
+
 		if($this->session->edicion_activa)
 		{
 
