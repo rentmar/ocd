@@ -412,6 +412,13 @@ $(document).ready(function() {
 	$('.selector-multiple').select2({
 		placeholder: "Seleccione un tema",
 	});
+	$('.selmultiple').select2({
+		placeholder: {
+			id: 0,
+			text: 'Seleccione una opcion'
+		}
+	});
+	$('.simple').select2();
 });
 
 //Validador del formulario noticia
