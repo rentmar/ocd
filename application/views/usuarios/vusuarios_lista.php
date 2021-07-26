@@ -31,12 +31,12 @@
 					</tr>
 					<?php foreach ($usuarios as $u) {?>
 						<tr>
-							<td><?php echo $u->id;?></td>
+							<td><?php echo $u->idusuario;?></td>
 							<td><?php echo $u->username;?></td>
 							<td><?php echo $u->first_name;?></td>
 							<td><?php echo $u->last_name;?></td>
-							<td><?php echo $u->rel_iddepartamento;?></td>
-							<td><a href="<?php echo site_url('usuarios/editarusuario/'.$u->id);?>">editar</a></td>
+							<td><?php echo $u->nombre_departamento;?></td>
+							<td><a href="<?php echo site_url('usuarios/editarusuario/'.$u->idusuario);?>">editar</a></td>
 						</tr>
 					<?php } ?>
 				</table>
