@@ -12,6 +12,7 @@ class ManejoDB extends CI_Controller{
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
+		$this->load->helper('date');
 		$this->load->model('Departamento_model');
 		$this->load->model('MedioComunicacion_model');
 		$this->load->model('Cuestionario_model');
@@ -19,6 +20,7 @@ class ManejoDB extends CI_Controller{
 		$this->load->model('Universidad_model');
 		$this->load->model('Tema_model');
 		$this->load->model('SubTema_model');
+		$this->load->model('Noticia_model');
 	}
 	public function index()
 	{
@@ -89,13 +91,24 @@ class ManejoDB extends CI_Controller{
 	{
 		//Primer validador
 		$consulta = $this->objetoConsulta();
-		var_dump($consulta);
+
 		if($consulta->fecha_inicio > $consulta->fecha_fin)
 		{
-			$this->mensaje('Intervalo incorrecto', 'warning');
+			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
 			redirect('manejoDB');
 		}else{
-			
+
+			$datos_simples = $this->Noticia_model->reportesDatosSimples($consulta);
+			$data['noticias'] = $datos_simples;
+
+			$this->load->view('html/encabezado');
+			$this->load->view('html/navbar');
+			$this->load->view('manejodb/vexportar_fecha', $data);
+			$this->load->view('html/pie');
+
+
+
+
 
 		}
 	}
@@ -139,9 +152,13 @@ class ManejoDB extends CI_Controller{
 
 	private function fecha_unix($fecha)
 	{
-		list($anio, $mes, $dia) = explode('-', $fecha);
-		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		$fecha_std = str_replace('/', '-', $fecha);
+		$fecha_unix = strtotime($fecha_std);
 		return $fecha_unix;
+
+		/*list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;*/
 	}
 
 }

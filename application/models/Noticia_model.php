@@ -170,7 +170,7 @@ class Noticia_model extends CI_Model{
 		//Insertar la noticia
 		/** @noinspection PhpLanguageLevelInspection */
 		$ntc = [
-			'fecha_registro' => now() ,
+			'fecha_registro' => time() ,
 			'fecha_noticia' => $noticia->fecha_noticia ,
 			'titular' => $noticia->titular,
 			'resumen' => $noticia->resumen,
@@ -524,4 +524,27 @@ class Noticia_model extends CI_Model{
 			}
 		$this->db->trans_complete();
 	}
+
+	//Funcion para busqueda de noticias y generacion de reportes
+	public function reportesDatosSimples($parametros)
+	{
+		$identificadores = $parametros;
+		$sql = "SELECT *  "
+			."FROM noticia AS n  "
+			."LEFT JOIN users ON users.id = n.rel_idusuario  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio  "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio  "
+			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad  "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario  "
+			."WHERE n.fecha_noticia >= ? AND n.fecha_noticia <= ?  "
+			."ORDER BY n.fecha_noticia ASC ";
+		/** @noinspection PhpLanguageLevelInspection */
+		$qry = $this->db->query($sql, [$identificadores->fecha_inicio, $identificadores->fecha_fin, ]);
+		return $qry->result();
+	}
+
+
+
+
 }

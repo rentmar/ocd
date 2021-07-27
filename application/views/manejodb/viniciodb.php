@@ -11,7 +11,7 @@
 				<div class="contenedor">
 					<div id="caja_boton">
 						<div id="contenedor-submit">
-							<a href=""><input type="submit" class="BOTON" value="EXPORTAR"></a>
+							<a href=""><input type="submit" class="BOTON" value="GENERAR"></a>
 						</div><br>
 						<div id="contenedor-submit">
 							<a href=""><input type="submit" class="BOTONROJO" value="CANCELAR"></a>
@@ -67,9 +67,9 @@
 						<select id="idtipomedio" name="idtipomedio" class="form-control simple"  >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($tipo_medio as $tm): ?>
-							<option value="<?php echo $tm->idtipomedio; ?>" >
-								<?php echo $tm->nombre_tipo; ?>
-							</option>
+								<option value="<?php echo $tm->idtipomedio; ?>" >
+									<?php echo $tm->nombre_tipo; ?>
+								</option>
 							<?php endforeach;  ?>
 						</select>
 					</div>
@@ -80,9 +80,9 @@
 						<select id="idmedio" name="idmedio" class="form-control simple"  >
 							<option value="0">Seleccione una opcion</option>
 							<?php foreach ($medio as $m): ?>
-							<option value="<?php echo $m->idmedio;?>">
-								<?php echo $m->nombre_medio; ?>
-							</option>
+								<option value="<?php echo $m->idmedio;?>">
+									<?php echo $m->nombre_medio; ?>
+								</option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -93,9 +93,9 @@
 						<select id="idactor" name="idactor" class="form-control simple" >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($actor as $a): ?>
-							<option value="<?php echo $a->idactor;?>">
-								<?php echo $a->nombre_actor; ?>
-							</option>
+								<option value="<?php echo $a->idactor;?>">
+									<?php echo $a->nombre_actor; ?>
+								</option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -106,11 +106,11 @@
 						<select id="iduniversidad" name="iduniversidad" class="form-control simple"  >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($universidad as $u): ?>
-							<?php if($u->iduniversidad != 1): ?>
-							<option value="<?php $u->iduniversidad ?>">
-								<?php echo $u->nombre_universidad;?>
-							</option>
-							<?php endif; ?>
+								<?php if($u->iduniversidad != 1): ?>
+									<option value="<?php $u->iduniversidad ?>">
+										<?php echo $u->nombre_universidad;?>
+									</option>
+								<?php endif; ?>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -121,9 +121,9 @@
 						<select id="tema" name="idtema" class="form-control simple" >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($tema as $tm): ?>
-							<option value="<?php echo $tm->idtema; ?>" >
-								<?php echo $tm->nombre_tema;?>
-							</option>
+								<option value="<?php echo $tm->idtema; ?>" >
+									<?php echo $tm->nombre_tema;?>
+								</option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -134,9 +134,9 @@
 						<select id="stema" name="idsubtema" class="form-control simple" >
 							<option value="0">Seleccione una opcion</option>
 							<?php foreach ($stema as $st): ?>
-							<option value="<?php echo $st->idsubtema;?>" >
-								<?php echo $st->nombre_subtema;?>
-							</option>
+								<option value="<?php echo $st->idsubtema;?>" >
+									<?php echo $st->nombre_subtema;?>
+								</option>
 							<?php endforeach; ?>
 						</select>
 					</div>

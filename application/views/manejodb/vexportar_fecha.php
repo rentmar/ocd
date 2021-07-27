@@ -1,31 +1,41 @@
 <main role="main">
 	<br>
-	<div class="container">
-		<div class="row">
-			<div class="contenedores">
-				<div class="form-group">
-					<h4>Generar reporte por Intervalo de fecha</h4>
-				</div>
-				<?php echo form_open();?>
-				<div class="form-group">
-					<label for="fecha">Fecha Inicial:</label>
-					<input id="fechainicial" name="fechainicial" type="date" required class="form-control">
-				</div>
-				<div class="form-group">
-					<label for="fecha">Fecha Final:</label>
-					<input id="fechafinal" name="fechafinal" type="date" required class="form-control">
-				</div>
+	<div class="container ">
+		<div class="table-responsive">
 
-				<div class="form-group">
-					<button type="submit" id="BOTON">
-						Exportar
-					</button>
+				<table class="table table-striped ">
+					<thead>
+						<tr>
+							<th>Fecha Registro</th>
+							<th>Fecha Noticia</th>
+							<th>Titular</th>
+							<th>Resumen</th>
+							<th>Medio</th>
+							<th>Tipo de Medio</th>
+							<th>Formulario</th>
+							<th>Usuario</th>
+							<th>Universidad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($noticias as $n): ?>
+						<tr>
+							<td><?php echo mdate('%m-%d-%Y', $n->fecha_registro); ?></td>
+							<td><?php echo mdate('%m-%d-%Y', $n->fecha_noticia); ?></td>
+							<td><?php echo $n->titular; ?></td>
+							<td><?php echo $n->resumen; ?></td>
+							<td><?php echo $n->nombre_medio; ?></td>
+							<td><?php echo $n->nombre_tipo; ?></td>
+							<td><?php echo $n->nombre_cuestionario;?></td>
+							<td><?php echo $n->username;?></td>
+							<td><?php echo $n->nombre_universidad; ?></td>
+						</tr>
+						<?php endforeach; ?>
 
-				</div>
+					</tbody>
 
-				<?php echo form_close(); ?>
+				</table>
 
-			</div>
 		</div>
 	</div>
 	<br>
