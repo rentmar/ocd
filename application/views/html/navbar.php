@@ -51,6 +51,7 @@
 					<a class="dropdown-item" href="<?php echo site_url('formulario/');?>">Formularios</a>
 					<a class="dropdown-item" href="<?php echo site_url('actor/');?>">Actores</a>
 					<a class="dropdown-item" href="<?php echo site_url('departamento/');?>">Departamentos</a>
+					<a class="dropdown-item" href="<?php echo site_url('universidad/');?>">Universidades</a>
 					<a class="dropdown-item" href="<?php echo site_url('tipoMedio/');?>">Tipo de Medio</a>
 					<a class="dropdown-item" href="<?php echo site_url('medioComunicacion/');?>">Medio de Comunicacion</a>
 					<a class="dropdown-item" href="<?php echo site_url('tema/');?>">Tema</a>
@@ -113,9 +114,9 @@
 		<?php endif; ?>
 
 		<!-- Administradores-->
-		<?php if($this->ion_auth->is_admin()): ?>
+		<?php /*if($this->ion_auth->is_admin()): */?><!--
 		<a class="nav-link" href="#">Analisis</a>
-		<?php  endif;  ?>
+		--><?php /* endif;  */?>
 
 	</nav>
 </div>

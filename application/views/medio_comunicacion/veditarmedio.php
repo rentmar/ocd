@@ -44,7 +44,7 @@
 						<input type="checkbox" id='<?php echo "d".$d->iddepartamento; ?>' name='<?php echo "d".$d->iddepartamento; ?>' value='<?php echo $d->iddepartamento; ?>'>
 						<label for='<?php echo "d".$d->iddepartamento; ?>'> <?php echo $d->nombre_departamento;?></label><br>	
 					<?php } ?>
-					<?php $h=0; } ?>
+				<?php $h=0; } ?>
 				<br>
 				<input type="submit" id="BOTON" value="EDITAR">
 				<a href="<?php echo site_url('mediocomunicacion/');?>"><input type="button" class="BOTON" value="CANCELAR"></a>

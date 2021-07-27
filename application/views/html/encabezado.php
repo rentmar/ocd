@@ -112,6 +112,52 @@
 				.rojo {
 					color:#ff0000;
 				}
+				
+				.contenedor_filtros {
+					background-color:#7f182b;
+					color:white;
+					max-width:740px;
+					margin-left:auto;
+					margin-right:auto;
+					height:30px;
+					border-top-left-radius:10px;
+					border-top-right-radius:10px;
+				}
+				.contenedor{
+					background-color:#ffffff;
+					max-width:740px;
+					margin-left:auto;
+					margin-right:auto;
+					padding:20px 30px 20px 30px;
+					border-bottom-left-radius:10px;
+					border-bottom-right-radius:10px;
+				}
+				select {
+					padding:6px 2px;
+					border-radius:6px;
+					background-color:#d3d3d3;
+				}
+				input[type=date] {
+					border-top:1px #cccccc;
+					border-left:none;
+					border-right:none;
+					font-family: Verdana;	
+					font-size:12pt;
+					color:#595959;
+				}
+				#send{
+					background-color:#0066ff;
+					color:#ffffff;
+					font-family: Verdana;
+					border-radius:10px;
+					border-color:#005ce2;
+					padding:10px 30px 10px 30px;
+				}
+				#contenedor-submit {
+					max-width:740px;
+					margin-left:auto;
+					margin-right:auto;
+				}
 	</style>
 
 

@@ -53,7 +53,7 @@ class MedioComunicacion extends CI_Controller{
 			}
 		}
 		$this->MedioComunicacion_model->agregarMedioComunicacion($dts,$dtchkbox);
-		redirect ('medioComunicacion');
+		redirect ('MedioComunicacion');
 	}
 	public function editarMedioComunicacion($idm)
 	{
@@ -81,6 +81,6 @@ class MedioComunicacion extends CI_Controller{
 			}
 		}
 		$this->MedioComunicacion_model->modificarMedioComunicacion($dts,$dtchkbox,$idm);
-		redirect ('medioComunicacion');
+		redirect ('MedioComunicacion');
 	}
 }

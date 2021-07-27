@@ -360,13 +360,14 @@ class Instdemocratica extends CI_Controller
 		$dt['medio']=$medio;
 		$dt['temas']=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
 		$dt['temase']=$this->Noticia_model->leerTemasNoticia($idnoticia);
+		$dt['otrotema']=$this->Noticia_model->leerOtroTemaNoticia($idnoticia);
+		$dt['otrosubtema']=$this->Noticia_model->leerOtroSubTemaNoticia($idnoticia);
 		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
 		foreach ($dt['temase'] as $te)
 		{
 			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
 		}
 		$dt['subtemas']=$subtemas;
-		
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vnoticia_editar_inst', $dt);
@@ -375,6 +376,7 @@ class Instdemocratica extends CI_Controller
 	public function editarMedio()
 	{
 		$usuario = $this->ion_auth->user()->row();
+		$dt['idcuestionario']=$this->_idformulario;
 		$dt['idnoticia']=$this->input->post('idnoticia');
 		$dt['medios']=$this->Noticia_model->leerMediosPorTipoDepartamento($this->input->post('rel_idtipomedio'),$usuario->rel_iddepartamento);
 		$this->load->view('html/encabezado');
@@ -384,7 +386,11 @@ class Instdemocratica extends CI_Controller
 	}
 	public function editarTemas()
 	{
+		$temase=array();
+		$subtemase=array();
 		$usuario = $this->ion_auth->user()->row();
+		$dt['idusuario']=$usuario->id;
+		$dt['idcuestionario']=$this->_idformulario;
 		$dt['idnoticia']=$this->input->post('idnoticia');
 		$temas=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
 		foreach ($temas as $t)
@@ -395,14 +401,22 @@ class Instdemocratica extends CI_Controller
 				$subtemase[$t->idtema]=$this->Noticia_model->leerSubtemasPorTema($t->idtema);
 			}
 		}
+		if ($this->input->post('idot')!=null)
+		{
+			$dt['otrotema']=$this->input->post('otrotema');
+		}
+		else
+		{
+			$dt['otrotema']=null;
+		}
 		$dt['temase']=$temase;
 		$dt['subtemase']=$subtemase;
+		$dt['cntTemas']=count($temase);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/veditartema',$dt);
 		$this->load->view('html/pie');
 	}
-
 	private function objetoNoticia()
 	{
 		$noticia = new stdClass;
