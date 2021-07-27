@@ -22,7 +22,7 @@
                             </div>
                         <img class="card-img-top" src="<?php echo base_url().'assets/img/pul.png'; ?>" alt="Card image">
                         <div class="card-body">
-                            <a href="<?php echo site_url('Seguimientomonitores/EstadoObservacionElectoralDocentes');?>" class="BOTON" role="button">Ver</a>
+                            <a href="<?php echo site_url('Seguimientomonitores/EstadoObservacionElectoralXuniversidad');?>" class="BOTON" role="button">Ver</a>
                         </div>
                     </div>
         </div>
