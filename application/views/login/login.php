@@ -136,8 +136,8 @@
 	</div>
 
 
-	<div id="contenedor_vacío">	</div>
-	<div>
+	<!--<div id="contenedor_vacío">	</div>
+	<div>-->
 		<br>
 		<div id="esquinas_redondeadas">
 			<div id="Caja_principal">
