@@ -78,7 +78,7 @@ class ManejoDB extends CI_Controller{
 	public function download()
 	{
 		//Extraer la noticia y sus datos
-		$consulta = $this->session->consulta;
+		/*$consulta = $this->session->consulta;
 
 		$noticia = $this->Noticia_model->reporteNoticias($consulta);
 		$noticia_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
