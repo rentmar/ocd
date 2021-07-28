@@ -14,7 +14,7 @@
 							<a href=""><input type="submit" class="BOTON" value="GENERAR"></a>
 						</div><br>
 						<div id="contenedor-submit">
-							<a href=""><input type="submit" class="BOTONROJO" value="CANCELAR"></a>
+							<a href="<?php echo site_url('inicio');?>"><input type="" class="BOTONROJO" value="CANCELAR"></a>
 						</div>
 					</div>
 				</div>
@@ -79,11 +79,12 @@
 					<div class="form-row">
 						<select id="idmedio" name="idmedio" class="form-control simple"  >
 							<option value="0">Seleccione una opcion</option>
-							<?php foreach ($medio as $m): ?>
-								<option value="<?php echo $m->idmedio;?>">
-									<?php echo $m->nombre_medio; ?>
+
+							<?php /*foreach ($medio as $m): */?><!--
+								<option value="<?php /*echo $m->idmedio;*/?>">
+									<?php /*echo $m->nombre_medio; */?>
 								</option>
-							<?php endforeach; ?>
+							--><?php /*endforeach; */?>
 						</select>
 					</div>
 
@@ -107,7 +108,7 @@
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($universidad as $u): ?>
 								<?php if($u->iduniversidad != 1): ?>
-									<option value="<?php $u->iduniversidad ?>">
+									<option value="<?php echo $u->iduniversidad; ?>">
 										<?php echo $u->nombre_universidad;?>
 									</option>
 								<?php endif; ?>
@@ -118,7 +119,7 @@
 					<br>
 					<h3>Tema </h3>
 					<div class="form-row">
-						<select id="tema" name="idtema" class="form-control simple" >
+						<select id="idtema" name="idtema" class="form-control simple" >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($tema as $tm): ?>
 								<option value="<?php echo $tm->idtema; ?>" >
@@ -131,13 +132,13 @@
 					<br>
 					<h3>Subtema </h3>
 					<div class="form-row">
-						<select id="stema" name="idsubtema" class="form-control simple" >
+						<select id="idsubtema" name="idsubtema" class="form-control simple" >
 							<option value="0">Seleccione una opcion</option>
-							<?php foreach ($stema as $st): ?>
-								<option value="<?php echo $st->idsubtema;?>" >
-									<?php echo $st->nombre_subtema;?>
+							<?php /*foreach ($stema as $st): */?><!--
+								<option value="<?php /*echo $st->idsubtema;*/?>" >
+									<?php /*echo $st->nombre_subtema;*/?>
 								</option>
-							<?php endforeach; ?>
+							--><?php /*endforeach; */?>
 						</select>
 					</div>
 					<br>

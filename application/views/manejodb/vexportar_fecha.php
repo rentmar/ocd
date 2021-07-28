@@ -15,6 +15,10 @@
 							<th>Formulario</th>
 							<th>Usuario</th>
 							<th>Universidad</th>
+							<th>Departamento</th>
+							<th>Actor</th>
+							<th>Tema</th>
+							<th>SubTema</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -29,6 +33,10 @@
 							<td><?php echo $n->nombre_cuestionario;?></td>
 							<td><?php echo $n->username;?></td>
 							<td><?php echo $n->nombre_universidad; ?></td>
+							<td><?php echo $n->nombre_departamento; ?></td>
+							<td><?php echo $n->nombre_actor;  ?></td>
+							<td><?php echo $n->nombre_tema;  ?></td>
+							<td><?php echo $n->nombre_subtema;  ?></td>
 						</tr>
 						<?php endforeach; ?>
 

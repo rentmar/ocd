@@ -50,6 +50,8 @@ class Login extends CI_Controller{
 
 			$this->session->set_userdata('noticia_editable', 10);
 
+			$this->session->set_userdata('consulta', []);
+
 			redirect('inicio/', 'refresh');
 		}
 		else
