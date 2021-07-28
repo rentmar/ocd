@@ -13,6 +13,7 @@ class Universidad_model extends CI_Model
 		$qry = $this->db->get('universidad');
 		return $qry->result();
 	}
+
 	public function leerUniversidadId($idu)
 	{
 		$this->db->where('iduniversidad',$idu);
@@ -60,5 +61,15 @@ class Universidad_model extends CI_Model
 			}
 		$this->db->trans_complete();
 	}
+
+	/*public function leerUniverdiadID($id)
+	{
+		$this->db->where('iduniversidad',$id);
+		$q=$this->db->get('universidad');
+		return $q->row();
+
+	}*/
+	
+	
 
 }

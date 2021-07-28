@@ -136,8 +136,8 @@
 	</div>
 
 
-	<div id="contenedor_vacío">	</div>
-	<div>
+	<!--<div id="contenedor_vacío">	</div>
+	<div>-->
 		<br>
 		<div id="esquinas_redondeadas">
 			<div id="Caja_principal">
@@ -146,6 +146,18 @@
 					Le damos la bienvenida a esta aplicación desarrollada para el monitoreo a medios de comunicacion
 				</p>
 			</div>
+
+			<!-- Mensaje de error -->
+			<?php if(!empty($this->session->flashdata())): ?>
+			<div id="Caja_secundaria" class="contenedor">
+				<div id="mensaje-loggin" class="bg-warning">
+					<div class="alert alert-warning">
+						<?php echo $this->session->flashdata('log_mensaje') ?>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
+
 
 			<div id="Caja_secundaria" class="contenedor">
 				<h3 id="Título_secundario"> Inicio de sesión </h3>

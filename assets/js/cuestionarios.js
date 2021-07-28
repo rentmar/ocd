@@ -6,6 +6,23 @@ jQuery(document).on('change', 'select#tipo-medio', function (e) {
 	getMediosList(tipomedioID);
 });
 
+/*Funcion para la carga de medios de comunicacion segun al tipo de medio seleccionado*/
+jQuery(document).on('change', 'select#idtipomedio', function (e) {
+	e.preventDefault();
+	var tipomedioID = jQuery(this).val();
+	//alert(tipomedioID);
+	getMediosReport(tipomedioID);
+});
+
+/*Funcion para la carga de medios de comunicacion segun al tipo de medio seleccionado*/
+jQuery(document).on('change', 'select#idtema', function (e) {
+	e.preventDefault();
+	var temaID = jQuery(this).val();
+	//alert(temaID);
+	getSubtemaReport(temaID)
+});
+
+
 //Funcion para desplegar
 jQuery(document).on('click', '#checktema', function (e) {
 	//alert('Presionado');
@@ -196,12 +213,6 @@ function setNoticia(noticia) {
 	});
 }
 
-
-
-
-
-
-
 /*
 Funcion para extraer la lista de medios segun su tipo
  */
@@ -225,6 +236,60 @@ function getMediosList(tipomedioID) {
 				options += '<option value="' + json[i].medio_id + '">' + json[i].medio_name + '</option>';
 			}
 			jQuery("select#medio").html(options);
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+function getMediosReport(tipomedioID) {
+	//alert(tipomedioID + ' ' + baseurl);
+	$.ajax({
+		url: baseurl + "/manejoDB/getmedios",
+		type: 'post',
+		data: {tipomedioID: tipomedioID},
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#idmedio').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			var options = '';
+			options +='<option value="0" selected >Seleccione una opcion</option>';
+			for (var i = 0; i < json.length; i++) {
+				options += '<option value="' + json[i].medio_id + '">' + json[i].medio_name + '</option>';
+			}
+			jQuery("select#idmedio").html(options);
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+function getSubtemaReport(temaID) {
+	$.ajax({
+		url: baseurl + "/manejoDB/getsubtema",
+		type: 'post',
+		data: {temaID: temaID},
+		beforeSend: function () {
+			jQuery('select#idsubtema').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			var options = '';
+			options +='<option value="" selected >Seleccione una opcion</option>';
+			for (var i = 0; i < json.length; i++) {
+				options += '<option value="' + json[i].stema_id + '">' + json[i].stema_name + '</option>';
+			}
+			jQuery("select#idsubtema").html(options);
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
