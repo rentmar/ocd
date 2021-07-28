@@ -21,9 +21,16 @@ class ManejoDB extends CI_Controller{
 		$this->load->model('Tema_model');
 		$this->load->model('SubTema_model');
 		$this->load->model('Noticia_model');
+		//Comprobacion de session
+		if($this->session->sesion_activa ===  null){
+			$this->session->sess_destroy();
+			redirect('/');
+		}
 	}
 	public function index()
 	{
+		$usuario = $this->ion_auth->user()->row();
+		//var_dump($usuario);
 		//Poblar el formulario
 		$depas = $this->Departamento_model->leerDepartamentos();
 		$tipo_medio = $this->MedioComunicacion_model->leerTipoMedio();
@@ -32,6 +39,7 @@ class ManejoDB extends CI_Controller{
 		$universidad = $this->Universidad_model->leerUniversidades();
 		$tema = $this->Tema_model->leerTemas();
 		$stema = $this->SubTema_model->leerSubTemas();
+		$un = $this->Universidad_model->leerUniverdiadID($usuario->rel_iduniversidad);
 
 
 
@@ -42,6 +50,7 @@ class ManejoDB extends CI_Controller{
 		$data['universidad'] = $universidad;
 		$data['tema'] = $tema;
 		$data['stema'] = $stema;
+		$data['un'] = $un;
 
 
 

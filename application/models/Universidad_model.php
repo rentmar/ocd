@@ -13,6 +13,14 @@ class Universidad_model extends CI_Model
 		$qry = $this->db->get('universidad');
 		return $qry->result();
 	}
+
+	public function leerUniverdiadID($id)
+	{
+		$this->db->where('iduniversidad',$id);
+		$q=$this->db->get('universidad');
+		return $q->row();
+
+	}
 	
 	
 

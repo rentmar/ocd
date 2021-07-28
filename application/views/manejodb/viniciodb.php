@@ -50,7 +50,9 @@
 
 					<br>
 					<h3>Departamento </h3>
+
 					<div class="form-row">
+						<?php if($this->ion_auth->is_admin()): ?>
 						<select id="iddepartamento" name="iddepartamento" class="form-control simple " >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($dep as $d): ?>
@@ -59,6 +61,13 @@
 								</option>
 							<?php endforeach; ?>
 						</select>
+						<?php elseif ($this->ion_auth->in_group(2)): ?>
+							<input class="form-control" value="<?php echo $this->session->departamento;?>" readonly >
+							<input type="hidden" id="iddepartamento" name="iddepartamento"
+								   value="<?php echo $this->session->iddepartamento; ?>"
+							>
+						<?php endif; ?>
+
 					</div>
 
 					<br>
@@ -104,6 +113,7 @@
 					<br>
 					<h3>Universidad </h3>
 					<div class="form-row">
+						<?php if($this->ion_auth->is_admin()): ?>
 						<select id="iduniversidad" name="iduniversidad" class="form-control simple"  >
 							<option value="0" >Seleccione una opcion</option>
 							<?php foreach ($universidad as $u): ?>
@@ -114,6 +124,13 @@
 								<?php endif; ?>
 							<?php endforeach; ?>
 						</select>
+						<?php elseif ($this->ion_auth->in_group(2)): ?>
+							<input class="form-control" value="<?php echo $un->nombre_universidad;?>" readonly 	>
+							<input type="hidden" id="iduniversidad" name="iduniversidad"
+								   value="<?php echo $un->iduniversidad; ?>"
+							>
+						<?php endif; ?>
+
 					</div>
 
 					<br>
