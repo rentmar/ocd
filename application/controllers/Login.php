@@ -57,7 +57,6 @@ class Login extends CI_Controller{
 		else
 		{
 			$this->session->set_flashdata('log_mensaje', $this->ion_auth->errors());
-			$this->session->sess_destroy();
 			redirect('login/', 'refresh');
 		}
 	}
@@ -71,4 +70,6 @@ class Login extends CI_Controller{
 		//Redirigir al login
 		redirect('login/', 'refresh');
 	}
+
+
 }
