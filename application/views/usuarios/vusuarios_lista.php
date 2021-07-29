@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
-						<a href="<?php echo site_url('usuarios/crearusuario/'.$grupo);?>">
+						<a href="<?php echo site_url('Usuarios/crearUsuario/'.$grupo);?>">
 							<input type="submit" class="BOTON" value="CREAR">
 						</a>
 						<a href="<?php echo site_url('/'); ?>">
@@ -36,7 +36,7 @@
 							<td><?php echo $u->first_name;?></td>
 							<td><?php echo $u->last_name;?></td>
 							<td><?php echo $u->nombre_departamento;?></td>
-							<td><a href="<?php echo site_url('usuarios/editarusuario/'.$u->idusuario);?>">editar</a></td>
+							<td><a href="<?php echo site_url('Usuarios/editarUsuario/'.$u->idusuario);?>">editar</a></td>
 						</tr>
 					<?php } ?>
 				</table>
