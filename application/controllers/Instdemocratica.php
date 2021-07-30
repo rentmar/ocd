@@ -454,7 +454,7 @@ class Instdemocratica extends CI_Controller
 		$this->session->set_userdata('nuevo_c1', false);
 		$this->session->set_userdata('reforma', []);
 		//Redireccionar al inicio
-		redirect('inicio/');
+		redirect('Inicio/');
 	}
 
 	public function subtemas()

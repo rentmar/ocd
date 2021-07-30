@@ -11,7 +11,7 @@
 				<input type="text" id="cuadro" name="nombre_actor"  required>
 				<br><br>
 			    <input type="submit" id="BOTON" value="CREAR">
-				<a href="<?php echo site_url('actor/');?>"><input type="button" class="BOTON" value="CANCELAR"></a>
+				<a href="<?php echo site_url('Actor/');?>"><input type="button" class="BOTONROJO" value="CANCELAR"></a>
 			</form>
 		</div>
 	</div>

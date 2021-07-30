@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
-						<a href="<?php echo site_url('actor/crearactor');?>">
+						<a href="<?php echo site_url('Actor/crearActor');?>">
 							<input type="submit" class="BOTON" value="CREAR">
 						</a>
 						<a href="<?php echo site_url('/')?>">
@@ -28,7 +28,7 @@
 						<tr>
 							<td><?php echo $a->idactor;?></td>
 							<td><?php echo $a->nombre_actor;?></td>
-							<td><a href="<?php echo site_url('actor/editaractor/'.$a->idactor);?>">editar</a></td>
+							<td><a href="<?php echo site_url('Actor/editarActor/'.$a->idactor);?>">editar</a></td>
 						</tr>
 					<?php } ?>
 					</tbody>

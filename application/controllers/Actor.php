@@ -40,14 +40,14 @@ class Actor extends CI_Controller{
 		$dts = array(
 				'nombre_actor' => $this->input->post('nombre_actor'));
 		$this->Actor_model->agregarActor($dts);
-	    redirect('actor');
+	    redirect('Actor');
 	}
 	public function modificarActor($ida)
 	{
 		$dts = array(
 				'nombre_actor' => $this->input->post('nombre_actor'));
 		$this->Actor_model->modificarActor($dts,$ida);
-		redirect ('actor');
+		redirect ('Actor');
 		
 	}
 }
