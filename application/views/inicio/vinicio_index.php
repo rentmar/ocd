@@ -78,10 +78,10 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/leyes.jpg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('#');?>" class="btn btn-info text-body" role="button" style="background-color:#AFA3E1;">
+						<a href="<?php echo site_url('ley/');?>" class="btn btn-info text-body" role="button" style="background-color:#AFA3E1;">
 							Nuevo
 						</a>
-						<a href="<?php echo site_url('#');?>" class="btn btn-info text-body " role="button" style="background-color:#AFA3E1;">
+						<a href="<?php echo site_url('ley/editar/');?>" class="btn btn-info text-body " role="button" style="background-color:#AFA3E1;">
 							Editar
 						</a>
 					</div>

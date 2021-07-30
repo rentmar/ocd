@@ -2,11 +2,11 @@
 
 class Ley extends CI_Controller
 {
-	protected $_idformulario;
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->model('Cuestionario_model');
+    protected $_idformulario;
+    public function __construct()
+    {
+        	parent::__construct();
+                	$this->load->model('Cuestionario_model');
 		$this->load->model('Noticia_model');
 		$this->load->model('MedioComunicacion_model');
 		$this->load->helper("html");
@@ -15,29 +15,21 @@ class Ley extends CI_Controller
 		$this->load->helper('date');
 		$this->load->library('ion_auth');
 		$this->_idformulario = 4;
-        $this->load->library('form_validation');
+                $this->load->library('form_validation');
 		//Comprobacion de session
-		if($this->session->sesion_activa ===  null){
-			$this->session->sess_destroy();
-			redirect('/');
+		if($this->session->sesion_activa ===  null)
+                {
+                    $this->session->sess_destroy();
+                    redirect('/');
 		}
-
-	}
-
-	public function index()
-	{
-
-		
-
-	}
-	
-	private function fecha_unix($fecha)
-	{
-		list($anio, $mes, $dia) = explode('-', $fecha);
-		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
-		return $fecha_unix;
-	}
-
-
-	
+    }
+    public function index()
+    {
+        
+        
+        $this->load->view('html/encabezado');
+        $this->load->view('html/navbar');
+        $this->load->view('ley/vley0');
+        $this->load->view('html/pie');
+    }
 }
