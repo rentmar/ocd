@@ -1,6 +1,6 @@
 <?php
 
-class Censo extends CI_Controller
+class Ley extends CI_Controller
 {
 	protected $_idformulario;
 	public function __construct()
