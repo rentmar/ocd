@@ -42,13 +42,13 @@ class Departamento extends CI_Controller
 		$dts = array(
 				'nombre_departamento' => $this->input->post('nombre_departamento'));
 		$this->Departamento_model->crearDepartamento($dts);
-		redirect ('departamento');
+		redirect ('Departamento');
 	}
 	public function modificarDepartamento($idd)
 	{
 		$dts = array(
 				'nombre_departamento' => $this->input->post('nombre_departamento'));
 		$this->Departamento_model->updateDepartamento($idd,$dts);
-		redirect ('departamento');
+		redirect ('Departamento');
 	}
 }

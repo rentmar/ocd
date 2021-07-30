@@ -32,7 +32,7 @@
 				<?php } ?>
 				<br>
 				<input type="submit" id="BOTON" value="CREAR">
-				<a href="<?php echo site_url('mediocomunicacion/');?>"><input type="button" class="BOTON" value="CANCELAR"></a>
+				<a href="<?php echo site_url('MedioComunicacion/');?>"><input type="button" class="BOTONROJO" value="CANCELAR"></a>
 				<br>
 			</form>
 		</div>

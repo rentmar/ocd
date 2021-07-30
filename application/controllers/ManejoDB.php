@@ -272,7 +272,7 @@ class ManejoDB extends CI_Controller{
 		if($consulta->fecha_inicio > $consulta->fecha_fin)
 		{
 			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
-			redirect('manejoDB');
+			redirect('ManejoDB');
 		}else{
 			//var_dump($consulta);
 			$noticias = $this->Noticia_model->reporteNoticias($consulta);
@@ -281,7 +281,7 @@ class ManejoDB extends CI_Controller{
 			{
 				//Si la consulta esta vacia no se genera reporte
 				$this->mensaje('No existen resultados', 'info');
-				redirect('manejoDB');
+				redirect('ManejoDB');
 			}
 			else{
 				//Cargar los datos a las session
@@ -289,7 +289,7 @@ class ManejoDB extends CI_Controller{
 				$this->session->set_userdata('consulta', $consulta);
 
 
-				redirect('manejoDB/download');
+				redirect('ManejoDB/download');
 			}
 
 

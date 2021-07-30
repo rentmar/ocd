@@ -27,6 +27,7 @@ class Usuarios extends CI_Controller
 		$data['grupo']=$g;
 		$data['grupos'] = $this->ion_auth->groups()->result();
 		$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
+		$data['universidades']= $this->Departamento_model->leerUniversidades();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('usuarios/vformulario_usuario', $data);

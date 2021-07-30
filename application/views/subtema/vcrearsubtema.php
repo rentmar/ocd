@@ -21,7 +21,7 @@
 				</select>
 				<br><br>
 			    <input type="submit" id="BOTON" value="CREAR">
-				<a href="<?php echo site_url('SubTema/');?>"><input type="button" class="BOTON" value="CANCELAR"></a>
+				<a href="<?php echo site_url('SubTema/');?>"><input type="button" class="BOTONROJO" value="CANCELAR"></a>
 			</form>
 		</div>
 	</div>

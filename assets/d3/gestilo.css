@@ -1,22 +1,20 @@
-.barra{
-	width: 25px;
-	height: 100px;
-	margin-right: 2px;
-	background-color:green;
-	display: inline-block;
+span {
+	color: white;	
 }
-
-svg{
-	border: 2px solid #aaa;
+.column {
+  background-color: green;
 }
-
-circle{
-	fill: blue;
-	stroke: orange;
-	stroke-width: 5px;
+.baseline { 
+  background-color: #ccc;
+  height: 10px;
 }
-
-path{
-	fill: red;
-	stroke: #aaa;
+.box {
+	margin-top:2px;
+	text-align:center;
+	background-color: #ccc;
+	width:200px;
+	height:200px
+}
+.control-group {
+	background-color:#ccc;
 }

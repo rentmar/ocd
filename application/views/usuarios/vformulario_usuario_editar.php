@@ -6,7 +6,7 @@
 					<p></p>
 				</div>
 				<div id="Caja_de_datos" class="Caja_de_datos">
-					<?php echo form_open('usuarios/procesarEditar')?>
+					<?php echo form_open('Usuarios/procesarEditar')?>
                         <input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>" >
 
                       <label for="nombre" class="form-group"> Nombre </label>
@@ -55,7 +55,7 @@
 
 
 						<input type="submit" id="BOTON" value="EDITAR USUARIO">
-						<a href="<?php echo site_url('usuarios/listar/'.$grupo->group_id);?>"><input type="button" class="BOTON" value="CANCELAR"></a>
+						<a href="<?php echo site_url('Usuarios/Listar/'.$grupo->group_id);?>"><input type="button" class="BOTONROJO" value="CANCELAR"></a>
 						<?php echo form_close()?>
 				</div>
 			</div>

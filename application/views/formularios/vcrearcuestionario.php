@@ -11,7 +11,7 @@
 				<input type="text" id="cuadro" name="nombre_cuestionario"  required>
 				<br><br>
 			    <input type="submit" id="BOTON" value="CREAR">
-				<a href="<?php echo site_url('formulario/');?>"><input type="button" class="BOTON" value="CANCELAR"></a>
+				<a href="<?php echo site_url('Formulario/');?>"><input type="button" class="BOTONROJO" value="CANCELAR"></a>
 			</form>
 		</div>
 	</div>
