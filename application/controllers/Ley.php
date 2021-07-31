@@ -39,5 +39,21 @@ class Ley extends CI_Controller
 	}
 
 
+	public function crearley()
+	{
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vleyes_form');
+		$this->load->view('html/pie');
+
+	}
+
+	public function subtemas()
+	{
+
+	}
+
+
 	
 }
