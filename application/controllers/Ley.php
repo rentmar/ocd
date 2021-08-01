@@ -31,18 +31,11 @@ class Ley extends CI_Controller
 
 	}
 	
-	private function fecha_unix($fecha)
-	{
-		list($anio, $mes, $dia) = explode('-', $fecha);
-		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
-		return $fecha_unix;
-	}
-
 
 	public function crearley()
 	{
 		//Variables de sesion
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 		//echo "<br><br>";
 
 		/*
@@ -71,13 +64,12 @@ class Ley extends CI_Controller
 		//Temas
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
-		var_dump($tema);
+
 		$data['tema'] = $tema;
 		$data['estado_ley'] = $this->Cuestionario_model->leerEstadosDeLey();
+		$data['fuente_ley'] = $this->Cuestionario_model->leerFuentesDeLey();
 		$data['idformulario'] = $this->_idformulario;
 		$data['idusuario'] = $usuario->id;
-
-
 
 
 		$this->load->view('html/encabezado');
@@ -89,35 +81,145 @@ class Ley extends CI_Controller
 
 	public function subtemas()
 	{
+		//Extraer la variable de session
+		$ley = $this->session->ley_nueva;
+		var_dump($ley);
+		if(!$ley->es_segundo_paso)
+		{
+			//Capturar temas
+			$temas = $this->input->post('idtema[]');
+			$ley->temas = $temas;
+
+			//Datos generales
+			$ley->fecha_ley = $this->fecha_unix($this->input->post('fecha'));
+			$ley->fuente = $this->input->post('idfuente');
+			$ley->estado = $this->input->post('idestadoley');
+			$ley->codigo = $this->input->post('codigo_ley');
+			$ley->titulo = $this->input->post('nombreley');
+			$ley->resumen = $this->input->post('resumen');
+			$ley->url_ley = $this->input->post('url_ley');
+
+			$ley->rel_idusuario = $this->input->post('idusuario');
+			$ley->rel_idcuestionario = $this->input->post('idformulario');
+
+			$otro_tema = $this->input->post('tema0');
+			$ley->otro_tema = $otro_tema;
+			$ley->es_segundo_paso= true;
+
+			//Actualizar la variable de session
+			$this->session->set_userdata('ley_nueva', []);
+			$this->session->set_userdata('ley_nueva', $ley);
+		}else{
+			$ley = $this->session->ley_nueva;
+		}
+		$data['ley'] = $ley;
+		$this->Cuestionario_model->setTemaIDs($ley->temas);
+		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+		$data['temas_sel'] = $temas_sel;
+		$data['subtemas_sel'] = $subtemas_sel;
+		$data['estado_ley'] = $this->Cuestionario_model->leerEstadosDeLeyID($ley->estado);
+
+		/*
+		 * CARGA DE VISTAS
+		 */
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vley_subtemas', $data);
+		$this->load->view('html/pie');
 
 	}
 
 	private function objetoLey()
 	{
-		$noticia = new stdClass;
-		$noticia->idnoticia = '';
-		$noticia->fecha_registro = '';
-		$noticia->fecha_noticia = '';
-		$noticia->titular = '';
-		$noticia->resumen = '';
-		$noticia->url_noticia = '';
+		$ley = new stdClass;
+		$ley->idley = '';
+		$ley->fecha_registro = '';
+		$ley->fecha_ley = '';
+		$ley->fuente = '';
+		$ley->estado = '';
 
-		$noticia->rel_idmedio = '';
-		$noticia->rel_idcuestionario = '';
-		$noticia->rel_idusuario = '';
+		$ley->codigo = '';
+		$ley->titulo = '';
 
-		$noticia->iddepartamento = '';
+		$ley->resumen = '';
+		$ley->url_ley = '';
 
-		$noticia->actores = [];
-		$noticia->temas = [];
-		$noticia->subtemas = [];
-		$noticia->medio = [];
-		$noticia->tipo_medio = [];
+		$ley->rel_idcuestionario = '';
+		$ley->rel_idusuario = '';
 
-		$noticia->es_segundo_paso = false;
-		$noticia->es_preenvio = false;
+		$ley->iddepartamento = '';
 
-		return $noticia;
+		$ley->temas = [];
+		$ley->subtemas = [];
+
+		$ley->es_segundo_paso = false;
+		$ley->es_preenvio = false;
+
+		return $ley;
+	}
+
+	public function preenvio()
+	{
+		//Extraer la variable de session nueva noticia
+		$ley = $this->session->ley_nueva;
+		var_dump($ley);
+		if(!$ley->es_preenvio)
+		{
+			//Definir la fecha de registro de la ley
+			$ley->fecha_registro = now();
+			//definir los identificadores de los subtemas
+			$idtemas = array_filter($ley->temas) ;
+			//Capturar subtemas
+			$subtemas = [];
+			foreach ($idtemas as $t)
+			{
+				$subtemas[$t] = $this->input->post('tema'.$t);
+			}
+			$ley->subtemas = $subtemas; //Guardar los subtemas
+			//Capturar otros subtemas
+			$otros_subtemas = [];
+			foreach ($idtemas as $t)
+			{
+				$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+			}
+			$ley->otros_subtemas = $otros_subtemas; //Guardar otros subtemas
+			//Actualizar la bandera de cambio
+			$ley->es_preenvio = true;
+
+			//Colocar la ley en la pila de insercion
+			//Colocar la noticia en la pila de insercion
+			$this->session->set_userdata('ley_insert', []);
+			$this->session->set_userdata('ley_insert', $ley);
+
+			//Actualizar la variable de session
+			$this->session->set_userdata('ley_nueva', []);
+			$this->session->set_userdata('ley_nueva', $ley);
+		}else{
+			$ley = $this->session->ley_nueva;
+		}
+		$this->Cuestionario_model->setTemaIDs($ley->temas);
+		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+
+		$datos['temas_sel'] = $temas_sel;
+		$datos['subtemas_sel'] = $subtemas_sel;
+		$datos['ley'] = $ley;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vley_preenvio',$datos);
+		$this->load->view('html/pie');
+
+
+	}
+
+	//Rutina de dd/mm/AA a unix timestamp
+	private function fecha_unix($fecha)
+	{
+		$fecha_std = str_replace('/', '-', $fecha);
+		$fecha_unix = strtotime($fecha_std);
+		return $fecha_unix;
 	}
 
 
