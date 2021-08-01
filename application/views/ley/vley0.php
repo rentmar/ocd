@@ -1,34 +1,32 @@
 <html>
-	
-<!--	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-		<div id="caja_boton">
-			<div id="contenedor-submit">
-				<a href="<?php //echo site_url('formulario/crearformulario');?>"><input type="submit" class="BOTON" value="CREAR"></a>
-				<a href=""><input type="button" class="BOTON" value="CANCELAR"></a>
-			</div>
-		</div>
-	</div>-->
-	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-		<table>
-                    <tr id="datos">
-                        <th>Resumen</th>
-                        <th>Ley en Tratamiento</th>
-                        <th>Ley Sancionada</th>
-                        <th>Ley Aprobada</th>
-                        <th>Ley con Modificacion</th>
-                        <th>Ley Promulgada</th>
-                        <th>Accion</th>
-                    </tr>
-                    <?php foreach ($usuarios as $u) {?>
-                    <tr>
-                            <td><?php echo $u->idusuario;?></td>
-                            <td><?php echo $u->username;?></td>
-                            <td><?php echo $u->first_name;?></td>
-                            <td><?php echo $u->last_name;?></td>
-                            <td><?php echo $u->nombre_departamento;?></td>
-                            <td><a href="<?php echo site_url('Usuarios/editarUsuario/'.$u->idusuario);?>">editar</a></td>
-                    </tr>
-                    <?php } ?>
-		</table>
-	</div>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
+        <p>
+            <br>
+        	<table>
+            <tr id="datos">
+                <th>Ley</th>
+                <th>En Tratamiento</th>
+                <th>Sancionada</th>
+                <th>Aprobada</th>
+                <th>Con Modificacion</th>
+                <th>Promulgada</th>
+<!--                <th>Accion</th>-->
+            </tr>
+            <?php foreach ($Leyes1 as $u) {?>
+            <tr>
+                <td><?php echo $u->nombre;?></td>
+                <td><?php echo $u->{'Ley en Tratamiento'};?></td>
+                <td><?php echo $u->{'Ley Sancionada'};?></td>
+                <td><?php echo $u->{'Ley Aprobada'};?></td>
+                <td><?php echo $u->{'Ley con Modificacion'};?></td>
+                <?php if($u->{'Ley Promulgada'} != '0'):?>
+                <td><a data-toggle="modal" data-target="ModalWill"><?php echo $u->{'Ley Promulgada'};?></a></td>
+                <?php else: ?>
+                <td><?php echo $u->{'Ley Promulgada'};?></td>
+                <?php endif; ?>
+<!--                <td><a href="<?php //echo site_url('Usuarios/editarUsuario/'.$u->idusuario);?>">editar</a></td>-->
+            </tr>
+            <?php } ?>
+	</table>
+    </div>
 </html>
