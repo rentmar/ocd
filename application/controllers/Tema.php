@@ -34,7 +34,7 @@ class Tema extends CI_Controller{
 		$dts = array(
 				'nombre_tema' => $this->input->post('nombre_tema'),
 				'rel_idcuestionario' => $this->input->post('idcuestionario'),
-				'rel_idusuario' => $idusr);
+				);
 		$this->Tema_model->agregarTema($dts);
 		redirect ('tema');
 	}

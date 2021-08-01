@@ -78,4 +78,27 @@ class Ley extends CI_Controller
         }
     }
 
+	private function fecha_unix($fecha)
+	{
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
+	}
+
+
+	public function crearley()
+	{
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vleyes_form');
+		$this->load->view('html/pie');
+
+	}
+
+	public function subtemas()
+	{
+
+	}
+
 }
