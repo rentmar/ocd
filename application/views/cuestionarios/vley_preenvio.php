@@ -61,7 +61,7 @@
 						<button id="BOTON" type="button"  data-toggle="modal" data-target="#myModal">
 							Enviar
 						</button>
-						<a  href="<?php echo site_url('censo/cancelarNuevo') ?>"  role="button">
+						<a  href="<?php echo site_url('ley/cancelarNuevo') ?>"  role="button">
 							<button id="BOTON">
 								Cancelar
 							</button>

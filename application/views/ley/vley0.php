@@ -13,7 +13,7 @@
               <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
                   <div id="caja_boton">
                       <div id="contenedor-submit">
-                  <a href="<?php echo site_url('Formulario/crearFormulario');?>">
+                  <a href="<?php echo site_url('ley/crearley');?>">
                       <input type="submit" class="BOTON" value="CREAR">
                   </a>
                   <a href="<?php echo site_url('/'); ?>">

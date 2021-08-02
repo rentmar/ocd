@@ -9,6 +9,7 @@ class Ley extends CI_Controller
                 $this->settings = new stdClass();
                 $this->load->model('Ley_model');
                 
+		$this->load->model('Cuestionario_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -129,7 +130,7 @@ class Ley extends CI_Controller
 	{
 		//Extraer la variable de session
 		$ley = $this->session->ley_nueva;
-		var_dump($ley);
+		//var_dump($ley);
 		if(!$ley->es_segundo_paso)
 		{
 			//Capturar temas
@@ -209,7 +210,7 @@ class Ley extends CI_Controller
 	{
 		//Extraer la variable de session nueva noticia
 		$ley = $this->session->ley_nueva;
-		var_dump($ley);
+		//var_dump($ley);
 		if(!$ley->es_preenvio)
 		{
 			//Definir la fecha de registro de la ley
@@ -295,6 +296,18 @@ class Ley extends CI_Controller
 		$fecha_std = str_replace('/', '-', $fecha);
 		$fecha_unix = strtotime($fecha_std);
 		return $fecha_unix;
+	}
+
+	public function cancelarNuevo()
+	{
+		$this->session->set_userdata('es_nueva_ley', false);
+		$this->session->set_userdata('ley_nueva', []);
+
+		//Limpiar las variables de session y colocar la bandera en su estado original
+		$this->session->set_userdata('nuevo_c1', false);
+		$this->session->set_userdata('reforma', []);
+		//Redireccionar al inicio
+		redirect('inicio/');
 	}
 
 }

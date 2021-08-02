@@ -141,7 +141,7 @@
 		<button id="BOTON" type="submit" name="action" value="1" >
 			SIGUIENTE
 		</button>
-		<a href="<?php echo site_url('censo/cancelarNuevo/');?>">
+		<a href="<?php echo site_url('ley/cancelarNuevo/');?>">
 			<input type="button" class="BOTON" value="CANCELAR">
 		</a>
 	</div>
