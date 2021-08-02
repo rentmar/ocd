@@ -691,6 +691,151 @@ class Noticia_model extends CI_Model{
 	}
 
 
+	//Funcion para la creacion de nuevos registros de ley
+	public function crearLey($ley)
+	{
+		/*
+		 *
+		 * INICIAR LA TRANSACCION
+		 */
+		$this->db->trans_begin();
+		//Insertar la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$ly = [
+			'fecha_registro' => $ley->fecha_registro ,
+			'fecha_ley' => $ley->fecha_ley ,
+			'resumen' => $ley->resumen,
+			'rel_idcuestionario' => $ley->rel_idcuestionario,
+			'rel_idusuario' => $ley->rel_idusuario,
+		];
+		$this->db->insert('leyes', $ly);
+		$ley_id = $this->db->insert_id();
+
+		//Insertar el codigo de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$cdly = [
+			'codigo_ley' => $ley->codigo,
+			'rel_idley' => $ley_id,
+			'rel_idestadoley' => $ley->estado,
+		];
+		$this->db->insert('codigoley', $cdly);
+		$codigo_id = $this->db->insert_id();
+
+		//Insertar el nombre de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$nmbrley = [
+			'nombre_ley' => $ley->titulo,
+			'rel_idestadoley' => $ley->estado,
+			'rel_idley' => $ley_id,
+		];
+		$this->db->insert('nombreley', $nmbrley);
+		$nombre_ley_id = $this->db->insert_id();
+
+		//insertar el estado en q se encuentra la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$estdly = [
+			'rel_idleyes' => $ley_id,
+			'rel_idestadoley' => $ley->estado,
+		];
+		$this->db->insert('leyes_estadoley', $estdly);
+
+		//Insertar la fuente de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$lysfnt = [
+			'rel_idleyes' => $ley_id,
+			'rel_idfuente' => $ley->fuente,
+		];
+		$this->db->insert('leyes_fuente', $lysfnt);
+
+		//Insertar la URL del estado de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$urlly = [
+			'url_ley' => $ley->url_ley,
+			'rel_idley' => $ley_id,
+			'rel_idestadoley' => $ley->estado,
+		];
+		$this->db->insert('urlley', $urlly);
 
 
+		//Insertar otro tema
+		//Insertar subtema
+		//insertar otrosubtema
+		$temas = $ley->temas;
+		$subtemas = $ley->subtemas;
+		$otrossubtemas = $ley->otros_subtemas;
+		$otrotema = $ley->otro_tema;
+
+		foreach ($temas as $t)
+		{
+			//Tema es una bandera
+			$idtema = $t;
+			if($idtema!=0)
+			{
+				$stemas = $subtemas[$idtema];
+				foreach ($stemas as $st)
+				{
+					$idsubtema = $st;
+					if($idsubtema!=0)
+					{
+						//Insertar la relacion noticia subtema
+						//echo $idsubtema." / ";
+						/** @noinspection PhpLanguageLevelInspection */
+						$ley_subt = [
+							'rel_idleyes' => $ley_id,
+							'rel_idsubtema' => $idsubtema,
+						];
+						$this->db->insert('ley_subtema', $ley_subt);
+					}else{
+						//echo "insertar otro subtema: ".$otrossubtemas[$idtema];
+						//Insertar el otro subtema
+						/** @noinspection PhpLanguageLevelInspection */
+						$ot_st = [
+							'nombre_otrosubtema' => $otrossubtemas[$idtema],
+							'rel_idtema' => $idtema,
+						];
+						$this->db->insert('otrosubtema', $ot_st);
+						$otro_st_id = $this->db->insert_id();
+						//Relacion de otrosubtema con la ley
+						/** @noinspection PhpLanguageLevelInspection */
+						$ley_ost = [
+							'rel_idleyes' => $ley_id,
+							'rel_idotrosubtema '=>$otro_st_id,
+						];
+						$this->db->insert('ley_otrosubtema', $ley_ost);
+					}
+				}
+
+			}else{
+				//Insertar otro tema
+				//echo "Registrar otro tema: ".$otrotema;
+				/** @noinspection PhpLanguageLevelInspection */
+				$ot = [
+					'nombre_otrotema' => $otrotema,
+					'rel_idcuestionario' => $ley->rel_idcuestionario,
+					'rel_idusuario' => $ley->rel_idusuario,
+				];
+				$this->db->insert('otrotema', $ot);
+				$otro_tema_id = $this->db->insert_id();
+				//Relacion de otro con la ley
+				/** @noinspection PhpLanguageLevelInspection */
+				$ley_ot =[
+					'rel_idleyes' => $ley_id,
+					'rel_idotrotema' => $otro_tema_id,
+				];
+				$this->db->insert('ley_otrotema', $ley_ot);
+			}
+		}
+
+
+
+		if ($this->db->trans_status() === FALSE){
+			//Hubo errores en la consulta, entonces se cancela la transacción.
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			//Todas las consultas se hicieron correctamente.
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 }

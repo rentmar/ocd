@@ -214,6 +214,35 @@ class Ley extends CI_Controller
 
 	}
 
+	//Registrar ley en la db
+	public function registrarley()
+	{
+		$ley = $this->session->ley_insert;
+		//$this->Noticia_model->crearNoticia($noticia);
+		if($this->Noticia_model->crearLey($ley))
+		{
+			$this->session->set_userdata('nuevo_c1', false);
+			$this->session->set_userdata('reforma', []);
+			$this->session->set_userdata('nuevo_c2', false);
+			$this->session->set_userdata('inst', []);
+			$this->session->set_userdata('noticia_insert', []);
+			$this->session->set_userdata('es_nueva_noticia', false);
+			$this->session->set_userdata('noticia_nueva', []);
+			$this->session->set_userdata('es_nueva_noticia1', false);
+			$this->session->set_userdata('noticia_nueva1', []);
+			$this->session->set_userdata('es_nueva_noticia2', false);
+			$this->session->set_userdata('noticia_nueva2', []);
+			$this->session->set_userdata('es_nueva_ley', false);
+			$this->session->set_userdata('ley_nueva', []);
+			redirect('/');
+		}else{
+			echo "Error";
+		}
+
+	}
+
+
+
 	//Rutina de dd/mm/AA a unix timestamp
 	private function fecha_unix($fecha)
 	{
