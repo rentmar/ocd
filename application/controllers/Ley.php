@@ -5,11 +5,12 @@ class Ley extends CI_Controller
 //    protected $_idformulario;
     public function __construct()
     {
+
         	parent::__construct();
-                $this->settings = new stdClass();
-                $this->load->model('Ley_model');
-        $this->load->model('Noticia_model');       
+        $this->settings = new stdClass();
+        $this->load->model('Ley_model');
 		$this->load->model('Cuestionario_model');
+		$this->load->model('Noticia_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
