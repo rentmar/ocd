@@ -253,4 +253,33 @@ class Cuestionario_model extends CI_Model
 		return $tema_subtema;
 	}
 
+	//Leer los estados de ley definidos
+	public function leerEstadosDeLey()
+	{
+		$sql = "SELECT * "
+			."FROM estadoley "
+			."ORDER BY estadoley.porcentaje_estadoley ASC ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	//Leer por estado de ley definidos por id
+	public function leerEstadosDeLeyID($id)
+	{
+		$sql = "SELECT * "
+			."FROM estadoley "
+			."WHERE estadoley.idestadoley = ? ";
+		$qry = $this->db->query($sql, [$id, ]);
+		return $qry->row();
+	}
+
+	//Leer las fuentes de la ley
+	public function leerFuentesDeLey()
+	{
+		$sql = "SELECT * "
+			."FROM fuente ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
 }
