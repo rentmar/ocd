@@ -22,4 +22,10 @@ class Ley_model extends CI_Model{
                 . "GROUP BY idestadoley");
         return $qry->result();
     }
+    public function leerEstadosDeLeyes()
+    {
+        $qry=$this->db->query("SELECT * "
+                . "FROM estadoley");
+        return $qry->result();
+    }
 }

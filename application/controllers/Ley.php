@@ -63,8 +63,11 @@ class Ley extends CI_Controller
             }
         }
 //        echo "<pre>";var_dump($Leyes);echo "</pre>";
-        $tablaLey['Leyes1']=$Leyes;
-//        $tablaLey['NumeroDeCuestionarios']=$DatosLeyes['nEstadoDeLeyes'];
+        if(isset($Leyes)){
+                    $tablaLey['Leyes1']=$Leyes;
+        }
+
+        $tablaLey['NumeroDeCuestionarios']=$DatosLeyes['nEstadoDeLeyes'];
         if(empty($tablaLey))
         {
         redirect('Ley');
@@ -267,5 +270,19 @@ class Ley extends CI_Controller
 		$fecha_unix = strtotime($fecha_std);
 		return $fecha_unix;
 	}
+        public function ActualizarLey()
+        {
+            $titulo = $this->input->post('titulo');
+            $url = $this->input->post('url');
+            $idEstadoL = $this->input->post('rel_idestadoley');
+            $this->Ley_model->insertarEstadoDeLey($titulo,$url,$idEstadoL);
+
+/*            $Dat['EsDeLe'] = $this->Ley_model->leerEstadosDeLeyes();
+            var_dump($Dat);
+            $this->load->view('html/encabezado');
+            $this->load->view('html/navbar');
+            $this->load->view('ley/vley0',$Dat);
+            $this->load->view('html/pie');*/
+        }
 
 }
