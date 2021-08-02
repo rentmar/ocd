@@ -27,7 +27,13 @@ class Ley extends CI_Controller
     }
     public function index()
     {
-        $DatosLeyes['Leyes']=$this->Ley_model->leerLeyes();       
+    	$data['Leyes'] = $this->Ley_model->leerAllLeyes();
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('ley/vley0',$data);
+		$this->load->view('html/pie');
+        /*$DatosLeyes['Leyes']=$this->Ley_model->leerLeyes();
         $DatosLeyes['nEstadoDeLeyes']=$this->Ley_model->leerEstadoDeLeyes();
         $TablaAuxiliarLey=new stdClass();
         $TablaAuxiliarLey->nombre='xxxxxxx';
@@ -77,7 +83,7 @@ class Ley extends CI_Controller
         $this->load->view('html/navbar');
         $this->load->view('ley/vley0',$tablaLey);
         $this->load->view('html/pie');
-        }
+        }*/
     }
 
 	public function crearley()

@@ -27,22 +27,24 @@
         	<table>
             <tr id="datos">
                 <th>Ley</th>
-                <th>En Tratamiento</th>
-                <th>Sancionada</th>
-                <th>Aprobada</th>
-                <th>Con Modificacion</th>
-                <th>Promulgada</th>
+                <th style="width:300px">Avance</th>
                 <th>Accion</th>
             </tr>
-            <?php foreach ($Leyes1 as $u) {?>
+            <?php foreach ($Leyes as $u) {?>
             <tr>
-                <td><?php echo $u->nombre;?></td>
-                <td><?php echo $u->{'Ley en Tratamiento'};?></td>
-                <td><?php echo $u->{'Ley Sancionada'};?></td>
-                <td><?php echo $u->{'Ley Aprobada'};?></td>
-                <td><?php echo $u->{'Ley con Modificacion'};?></td>
-                <td><?php echo $u->{'Ley Promulgada'};?></td>
-                <td><a href="#" data-toggle="modal" data-target="#miModal"><?php echo 'Editar';?></a></td>
+                <td><?php echo $u->resumen;?></td>
+                <td>
+					<div class="progress" style="height:50px">
+						<div class="progress-bar progress-bar-striped " style="width:<?php echo $u->porcentaje_estadoley;?>%;height:20px">
+							<div class="">
+								<?php echo $u->porcentaje_estadoley."%";?>
+							</div>
+
+						</div>
+					</div>
+				</td>
+
+                <td><a href="#" data-toggle="modal" data-target="#miModal"><?php echo 'Modificar';?></a></td>
                 
 <!--                <?php// if($u->{'Ley Promulgada'} != '0'):?>
                 <td><a href="#" data-toggle="modal" data-target="#miModal"><?php //echo $u->{'Ley Promulgada'};?></a></td>

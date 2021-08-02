@@ -130,4 +130,15 @@ class Ley_model extends CI_Model{
 		$this->db->where('rel_idleyes', $idl);
 		$this->db->update('leyes_fuente');
 	}
+
+	public function leerAllLeyes()
+	{
+		$sql = "SELECT *"
+			."FROM leyes AS l "
+			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
 }
