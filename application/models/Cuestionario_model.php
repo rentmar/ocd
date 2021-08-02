@@ -281,5 +281,14 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	public function leerLeyesIdUsuario($idu)
+	{
+		$sql="SELECT leyes.idleyes,leyes.fecha_registro,leyes.fecha_ley,leyes.resumen,fuente.nombre_fuente FROM "
+			."leyes_fuente "
+			."LEFT JOIN leyes ON leyes_fuente.rel_idleyes=leyes.idleyes "
+			."LEFT JOIN fuente ON leyes_fuente.rel_idfuente=fuente.idfuente "
+			."WHERE leyes.rel_idusuario = ".$idu;
+		$q=$this->db->query($sql);
+        return $q->result();
+	}
 }

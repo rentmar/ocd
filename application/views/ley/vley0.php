@@ -13,57 +13,49 @@
               <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
                   <div id="caja_boton">
                       <div id="contenedor-submit">
-                  <a href="<?php echo site_url('Formulario/crearFormulario');?>">
-                      <input type="submit" class="BOTON" value="CREAR">
-                  </a>
-                  <a href="<?php echo site_url('/'); ?>">
-                      <input type="button" class="BOTONROJO" value="CANCELAR">
-                  </a>
+                          <a href="<?php echo site_url('ley/crearley');?>">
+                              <input type="submit" class="BOTON" value="CREAR">
+                          </a>
+                          <a href="<?php echo site_url('/'); ?>">
+                              <input type="button" class="BOTONROJO" value="CANCELAR">
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
+                  <p>
+                      <table>
+                          <tr id="datos">
+                              <th>Ley</th>
+                              <th>En Tratamiento</th>
+                              <th>Sancionada</th>
+                              <th>Aprobada</th>
+                              <th>Con Modificacion</th>
+                              <th>Promulgada</th>
+                              <th>Accion</th>
+                          </tr>
+                          <tbody>
+                              <?php if(isset($Leyes1)): ?>
+                                <?php foreach ($Leyes1 as $u) {?>
+                                <tr>
+                                    <td><?php echo $u->nombre;?></td>
+                                    <td><?php echo $u->{'Leyes en tratamiento'};?></td>
+                                    <td><?php echo $u->{'Leyes sancionadas'};?></td>
+                                    <td><?php echo $u->{'Leyes aprobadas'};?></td>
+                                    <td><?php echo $u->{'Leyes con modificacion'};?></td>
+                                    <td><?php echo $u->{'Leyes promulgadas'};?></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#miModal"><?php echo 'Actualizar';?></a></td>
+                                </tr>
+                                <?php } ?>
+                              <?php endif; ?>
+                          </tbody>
+                      </table>
               </div>
           </div>
       </div>
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-        <p>
-        	<table>
-            <tr id="datos">
-                <th>Ley</th>
-                <th>En Tratamiento</th>
-                <th>Sancionada</th>
-                <th>Aprobada</th>
-                <th>Con Modificacion</th>
-                <th>Promulgada</th>
-                <th>Accion</th>
-            </tr>
-            					<tbody>
-					<?php if(isset($Leyes1)): ?>
-            <?php foreach ($Leyes1 as $u) {?>
-            <tr>
-                <td><?php echo $u->nombre;?></td>
-                <td><?php echo $u->{'Leyes en tratamiento'};?></td>
-                <td><?php echo $u->{'Leyes sancionadas'};?></td>
-                <td><?php echo $u->{'Leyes aprobadas'};?></td>
-                <td><?php echo $u->{'Leyes con modificacion'};?></td>
-                <td><?php echo $u->{'Leyes promulgadas'};?></td>
-                <td><a href="#" data-toggle="modal" data-target="#miModal"><?php echo 'Actualizar';?></a></td>
-                
-<!--                <?php// if($u->{'Ley Promulgada'} != '0'):?>
-                <td><a href="#" data-toggle="modal" data-target="#miModal"><?php //echo $u->{'Ley Promulgada'};?></a></td>
-                <?php //else: ?>
-                <td><?php //echo $u->{'Ley Promulgada'};?></td>
-                <?php //endif; ?>-->
-            </tr>
-            <?php } ?>
-            					<?php endif; ?>
-					</tbody>
-            
-	</table>
-    </div>
-                    		</div>
-	</div>
       <br>
-      
-    <div id="miModal" class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
+      <div id="miModal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
                   <h1 class="modal-title" id="exampleModalLabel"></h1>
@@ -107,53 +99,6 @@
       </div>
     </div>
     
-<div class="modal" id="mediomodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">Editar Medio de Comunicacion</h1>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<?php echo form_open('Instdemocratica/editarMedio');?>
-			<div class="modal-body">
-				<div class="form-group">
-					<input type="hidden" id="idnoticia" name="idnoticia"
-						value="<?php echo $noticia->idnoticia; ?>">
-				</div>
-				<div class="form-group">
-					<label for="rel_idtipomedio" >
-						Seleccionar Tipo Medio
-					</label>
-					<select class="combo" id='cuadro' name='rel_idtipomedio' required>
-						<option value="0"></option>
-						<?php foreach ($tipos as $tm) {?>
-						<option value='<?php echo $tm->idtipomedio;?>'><?php echo $tm->nombre_tipo;?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" name="accion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Continuar
-				</button>
-			<?php echo form_close();?>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			</div>
-		</div>
-	</div>
-</div>      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
       
     <script src="jquery/jquery-3.3.1.min.js"></script>
     <script src="popper/popper.min.js"></script>
