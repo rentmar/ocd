@@ -78,7 +78,7 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/leyes.svg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('ley/');?>" class="btn btn-info text-body" role="button" style="background-color:#7c5295;">
+						<a href="<?php echo site_url('Ley');?>" class="btn btn-info text-body" role="button" style="background-color:#7c5295;">
 							Nuevo
 						</a>
 						<a href="<?php echo site_url('ley/editar/');?>" class="btn btn-info text-body " role="button" style="background-color:#7c5295;">
