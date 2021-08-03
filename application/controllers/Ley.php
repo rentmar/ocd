@@ -320,14 +320,46 @@ class Ley extends CI_Controller
 		$fecha_unix = strtotime($fecha_std);
 		return $fecha_unix;
 	}
-    public function ActualizarLey()
+	public function estadoLey($idl)
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$dt['leyes'] =$this->Cuestionario_model->leerLeyesIdUsuario($usuario->id);
+        $dt['estados'] = $this->Cuestionario_model->leerEstadosDeLey();
+		$dt['idley']=$idl;
+		$dt['estadose']=$this->Ley_model->leerEstadosEnLey($idl);
+		$this->load->view('html/encabezado');
+        $this->load->view('html/navbar');
+        $this->load->view('ley/vactualizar_ley',$dt);
+        $this->load->view('html/pie');
+	}
+    public function actualizarLey($idl)
     {
-        $titulo = $this->input->post('titulo');
-        $url = $this->input->post('url');
-        $idEstadoL = $this->input->post('rel_idestadoley');
-        $this->Ley_model->insertarEstadoDeLey($titulo,$url,$idEstadoL);
-
-
+		$idel = $this->input->post('idestadoley');
+		if (count($this->Ley_model->leerEstadoLey($idl,$idel))==0)
+		{
+			$dtestado=array(
+						'rel_idleyes'=>$idl,
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'fecha_estadoley'=>$this->fecha_unix($this->input->post('fechaestado'))
+						);
+			$dttitulo=array(
+						'nombre_ley'=>$this->input->post('titulo'),
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'rel_idley'=>$idl
+						);
+			$dtcodigo=array(
+						'codigo_ley'=>$this->input->post('codigo'),
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'rel_idley'=>$idl
+						);
+			$dturl=array(
+						'url_ley'=>$this->input->post('url'),
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'rel_idley'=>$idl
+						);
+			$this->Ley_model->insertarEstadoDeLey($dtestado,$dttitulo,$dtcodigo,$dturl);
+		}        
+		redirect('Ley');
     }
 
 	public function cancelarNuevo()
