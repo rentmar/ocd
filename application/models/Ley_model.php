@@ -230,7 +230,12 @@ class Ley_model extends CI_Model{
 		$q=$this->db->query($sql);
 		return $q->result();
 	}
-
-
+	public function leerTemaPorId($idt)
+	{
+		$this->db->where('idtema',$idt);
+		$q= $this->db->get('tema');
+		return $q->row();
+	}
+	
 
 }
