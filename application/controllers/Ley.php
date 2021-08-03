@@ -29,6 +29,7 @@ class Ley extends CI_Controller
     {
     	$data['Leyes'] = $this->Ley_model->leerAllLeyes();
 
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('ley/vley0',$data);
