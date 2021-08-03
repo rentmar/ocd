@@ -144,4 +144,6 @@ class Ley_model extends CI_Model{
 		return $qry->result();
 	}
 
+
+
 }

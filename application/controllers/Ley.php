@@ -33,7 +33,7 @@ class Ley extends CI_Controller
 		$dt['leyes'] =$this->Cuestionario_model->leerLeyesIdUsuario($usuario->id);
         $dt['estados'] = $this->Cuestionario_model->leerEstadosDeLey();
 
-        
+
 
 		/*$DatosLeyes['Leyes']=$this->Ley_model->leerLeyes();
         $DatosLeyes['nEstadoDeLeyes']=$this->Ley_model->leerEstadoDeLeyes();
