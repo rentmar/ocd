@@ -62,7 +62,7 @@
 							Enviar
 						</button>
 						<a  href="<?php echo site_url('ley/cancelarNuevo') ?>"  role="button">
-							<button id="BOTON">
+							<button class="BOTONROJO">
 								Cancelar
 							</button>
 						</a>

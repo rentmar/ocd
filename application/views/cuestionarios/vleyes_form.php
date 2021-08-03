@@ -111,7 +111,7 @@
 	<br>
 	<div class="contenedores">
 		<label>Pegue el link donde se encuentra la ley:</label><br>
-		<input type="text" id="url_ley" name="url_ley" class="form-control"
+		<input type="text" id="url_ley" name="url_ley" class="form-control" required
 			   value="<?php
 			   if(isset($ley) && !empty($ley->url_ley) )
 			   {
@@ -125,7 +125,7 @@
 
 	<div class="contenedores">
 		<div class="card">
-			<div class="card-header cuest3">
+			<div class="card-header cuest4">
 				<h4 class="text-white">
 					TEMAS
 				</h4>
@@ -163,7 +163,7 @@
 			SIGUIENTE
 		</button>
 		<a href="<?php echo site_url('ley/cancelarNuevo/');?>">
-			<input type="button" class="BOTON" value="CANCELAR">
+			<input type="button" class="BOTONROJO" value="CANCELAR">
 		</a>
 	</div>
 
