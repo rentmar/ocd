@@ -34,7 +34,7 @@ class Ley extends CI_Controller
 		var_dump($leyes);
 		$dt['leyes'] = $leyes;*/
 		$dt['leyes'] = $this->Ley_model->leerLeyesEstado($usuario->id);
-		
+
 
 
 

@@ -703,7 +703,7 @@ class Noticia_model extends CI_Model{
 		/** @noinspection PhpLanguageLevelInspection */
 		$ly = [
 			'fecha_registro' => $ley->fecha_registro ,
-			'fecha_ley' => $ley->fecha_ley ,
+			//'fecha_ley' => $ley->fecha_ley ,
 			'resumen' => $ley->resumen,
 			'rel_idcuestionario' => $ley->rel_idcuestionario,
 			'rel_idusuario' => $ley->rel_idusuario,

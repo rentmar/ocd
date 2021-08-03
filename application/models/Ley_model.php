@@ -211,7 +211,7 @@ class Ley_model extends CI_Model{
 			//$idley, $idestado
 			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
 			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
-			$ley['aprobada']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
 			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
 			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
 
@@ -222,7 +222,7 @@ class Ley_model extends CI_Model{
 
 	public function leerLeyesIdUsuario($idu)
 	{
-		$sql="SELECT leyes.idleyes,leyes.fecha_registro,leyes.fecha_ley,leyes.resumen,fuente.nombre_fuente FROM "
+		$sql="SELECT leyes.idleyes,leyes.fecha_registro,leyes.resumen,fuente.nombre_fuente FROM "
 			."leyes_fuente "
 			."LEFT JOIN leyes ON leyes_fuente.rel_idleyes=leyes.idleyes "
 			."LEFT JOIN fuente ON leyes_fuente.rel_idfuente=fuente.idfuente "
