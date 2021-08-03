@@ -13,7 +13,6 @@
 					<thead>
 						<tr>
 							<th>Fecha de Registro</th>
-							<th>Fecha de la ley</th>
 							<th>Resumen</th>
 							<th>Fuente</th>
 							<th>Accion</th>
@@ -24,7 +23,6 @@
 						<?php foreach ($leyes as $l): ?>
 						<tr>
 							<td><?php echo mdate('%d-%m-%Y', $l->fecha_registro); ?></td>
-							<td><?php echo mdate('%d-%m-%Y', $l->fecha_ley); ?></td>
 							<td><?php echo $l->resumen; ?></td>
 							<td><?php echo $l->nombre_fuente;?></td>
 							<td>

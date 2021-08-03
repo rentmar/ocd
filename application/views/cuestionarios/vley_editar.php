@@ -1,11 +1,12 @@
 <main role="main" >
 	<br><br>
-	<div class="container">
+	<div class="container" style="background-color:#7c5295">
+	<br>
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
 				<br>
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header;" >
 						<h4>Editar Ley</h4>
 					</div>
 					<div class="card-body ">
@@ -15,7 +16,7 @@
 									Fecha Ley:
 								</label>
 								<input type="date" id="fecha" name="fecha" class="form-control" disabled="true"
-									   value="<?php echo mdate('%Y-%m-%d', $ley->fecha_ley);?>" >
+									   value="<?php //echo mdate('%Y-%m-%d', $ley->fecha_ley);?>" >
 							</div>
 							<div class="col-2">
 								<button type="submit" data-toggle="modal" data-target="#fechamodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
@@ -254,7 +255,7 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label>Fecha de la Ley:</label><br>
-					<input type="date" id="fecha" name="fecha" class="form-control">
+					<input type="date" id="fecha" name="fecha" class="form-control" required>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -343,7 +344,7 @@
 									Codigo <?php echo $de['nombre_estadoley'];?>:
 								</label>
 								<input id="codigoley" name="codigoley" class="form-control" 
-										value="<?php echo $de['codigo_ley']; ?>" >
+										value="<?php echo $de['codigo_ley']; ?>" required>
 							</div>
 						</div>
 					</div>
@@ -354,7 +355,7 @@
 									URL <?php echo $de['nombre_estadoley'];?>:
 								</label>
 								<input id="urlley" name="urlley" class="form-control"  
-										value="<?php echo $de['url_ley']; ?>" >
+										value="<?php echo $de['url_ley']; ?>" required>
 							</div>
 						</div>
 					</div>
@@ -434,7 +435,7 @@
 				</div>
 				<div class="form-group">
 					<label for="otrotema">Especificar Otro Tema</label><br>
-					<input type="text" id="otrotema" name="otrotema" value="<?php echo $otrotema->nombre_otrotema;?>">
+					<input type="text" id="otrotema" name="otrotema" value="<?php echo $otrotema->nombre_otrotema;?>" required>
 				</div>
 				<?php } ?>
 				<div class="form-row">
@@ -449,7 +450,7 @@
 				</div>
 				<div class="form-group">
 					<label for="otrotema">Especificar Otro Tema</label><br>
-					<input type="text" id="otrotema" name="otrotema" value="">
+					<input type="text" id="otrotema" name="otrotema" value="" required>
 				</div>
 				<?php } ?>
 			</div>
