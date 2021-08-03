@@ -22,9 +22,16 @@ class Ley_model extends CI_Model{
                 . "GROUP BY idestadoley");
         return $qry->result();
     }
-    
-    
-    
+    public function insertarEstadoDeLey($dtestado,$dttitulo,$dtcodigo,$dturl)
+	{
+		$this->db->trans_start();
+		$this->db->insert('leyes_estadoley',$dtestado);
+		$this->db->insert('nombreley',$dttitulo);
+		$this->db->insert('codigoley',$dtcodigo);
+		$this->db->insert('urlley',$dturl);
+		$this->db->trans_complete();
+	} 
+	
 	public function leerLeyPorId($idley)
 	{
 		$this->db->where('idleyes',$idley);
@@ -44,12 +51,25 @@ class Ley_model extends CI_Model{
 	}
 	public function leerEstadosDeLey($idl)
 	{
-		$sql="SELECT leyes_estadoley.rel_idestadoley,estadoley.nombre_estadoley FROM "
+		$sql="SELECT leyes_estadoley.rel_idestadoley,estadoley.nombre_estadoley,leyes_estadoley.fecha_estadoley FROM "
 			."leyes_estadoley "
 			."LEFT JOIN estadoley ON leyes_estadoley.rel_idestadoley=estadoley.idestadoley "
 			."WHERE rel_idleyes =  ".$idl;
 		$q=$this->db->query($sql);
         return $q->result();
+	}
+	public function leerEstadoLey($idl,$ide)
+	{
+		$this->db->where('rel_idleyes',$idl);
+		$this->db->where('rel_idestadoley',$ide);
+		$q=$this->db->get('leyes_estadoley');
+		return $q->result();
+	}
+	public function leerEstadosEnLey($idl)
+	{
+		$this->db->where('rel_idleyes',$idl);
+		$q=$this->db->get('leyes_estadoley');
+		return $q->result();
 	}
 	public function leerNombreLeyIdEstado($idl,$ids)
 	{
@@ -143,5 +163,5 @@ class Ley_model extends CI_Model{
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	
 }
