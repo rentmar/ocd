@@ -211,7 +211,7 @@ class Ley_model extends CI_Model{
 			//$idley, $idestado
 			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
 			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
-			$ley['aprobada']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
 			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
 			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
 

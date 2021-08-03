@@ -69,6 +69,7 @@
 				</div>
 			</div>
 			
+			<?php if($this->ion_auth->in_group(4)): ?>
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest4 ">
@@ -87,6 +88,7 @@
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 
 		</div>
 
