@@ -28,10 +28,15 @@ class Ley extends CI_Controller
     public function index()
     {
 		$usuario = $this->ion_auth->user()->row();
+		//$dt['leyes'] =$this->Cuestionario_model->leerLeyesIdUsuario($usuario->id);
+        //$dt['estados'] = $this->Cuestionario_model->leerEstadosDeLey();
+		/*$leyes = $this->Ley_model->leerLeyesEstado($usuario->id);
+		var_dump($leyes);
+		$dt['leyes'] = $leyes;*/
+		$dt['leyes'] = $this->Ley_model->leerLeyesEstado($usuario->id);
+		
 
 
-		$dt['leyes'] =$this->Cuestionario_model->leerLeyesIdUsuario($usuario->id);
-        $dt['estados'] = $this->Cuestionario_model->leerEstadosDeLey();
 
 
 
@@ -94,6 +99,8 @@ class Ley extends CI_Controller
         }
         else
         {*/
+
+
         $this->load->view('html/encabezado');
         $this->load->view('html/navbar');
         $this->load->view('ley/vley',$dt);
@@ -102,6 +109,10 @@ class Ley extends CI_Controller
 
 
     }
+
+
+
+
 	public function crearley()
 	{
 		//Variables de sesion

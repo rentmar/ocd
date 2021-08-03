@@ -26,21 +26,135 @@
 						<th>Promulgada</th>
 						<th>Accion</th>
 					</tr>
-					<?php foreach ($leyes as $l) {?>
+					<?php if(isset($leyes)): ?>
+					<?php foreach ($leyes as $l):?>
 						<tr>
-							<td><?php echo $l->resumen;?></td>
-							<td><?php echo "Ley en Tratamiento"; ?></td>
-							<td><?php echo "";?></td>
-							<td><?php echo "";?></td>
-							<td><?php echo "";?></td>
-							<td><?php echo "";?></td>
+							<td><?php echo $l['resumen'];?></td>
 							<td>
-								<a href="<?php echo site_url('Ley/estadoLey/'.$l->idleyes);?>" >
+								<?php if(empty($l['tratamiento'])): ?>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled type="checkbox" class="form-check-input" value="">
+											S/N
+										</label>
+									</div>
+								<?php else: ?>
+									<?php $estado = $l['tratamiento'];  ?>
+									<div class="form-check">
+										<label>
+											Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<?php echo $estado->codigo_ley; ?>
+										</label>
+									</div>
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if(empty($l['sancionado'])): ?>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled type="checkbox" class="form-check-input" value="">
+											S/N
+										</label>
+									</div>
+								<?php else: ?>
+									<?php $estado = $l['sancionado'];  ?>
+									<div class="form-check">
+										<label>
+											Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<?php echo $estado->codigo_ley; ?>
+										</label>
+									</div>
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if(empty($l['aprobado'])): ?>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled type="checkbox" class="form-check-input" value="">
+											S/N
+										</label>
+									</div>
+								<?php else: ?>
+									<?php $estado = $l['aprobado'];  ?>
+									<div class="form-check">
+										<label>
+											Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<?php echo $estado->codigo_ley; ?>
+										</label>
+									</div>
+								<?php endif; ?>
+
+							</td>
+							<td>
+								<?php if(empty($l['modificacion'])): ?>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled type="checkbox" class="form-check-input" value="">
+											S/N
+										</label>
+									</div>
+								<?php else: ?>
+									<?php $estado = $l['modificacion'];  ?>
+									<div class="form-check">
+										<label>
+											Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<?php echo $estado->codigo_ley; ?>
+										</label>
+									</div>
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if(empty($l['promulgada'])): ?>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled type="checkbox" class="form-check-input" value="">
+											S/N
+										</label>
+									</div>
+								<?php else: ?>
+									<?php $estado = $l['promulgada'];  ?>
+									<div class="form-check">
+										<label>
+											Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+										</label>
+									</div>
+									<div class="form-check">
+										<label class="form-check-label">
+											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<?php echo $estado->codigo_ley; ?>
+										</label>
+									</div>
+								<?php endif; ?>
+
+							</td>
+							<td>
+								<a href="<?php echo site_url('Ley/estadoLey/'.$l['idley']);?>" >
 									Actualizar
 								</a>
 							</td>
 						</tr>
-					<?php } ?>
+					<?php endforeach; ?>
+					<?php endif; ?>
 				</table>
 			</div>
 		</div>
