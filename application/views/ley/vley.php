@@ -18,7 +18,7 @@
 				<p>
 				<table>
 					<tr id="datos">
-						<th>Ley</th>
+						<th>Descripcion Ley</th>
 						<th>En Tratamiento</th>
 						<th>Sancionada</th>
 						<th>Aprobada</th>
@@ -29,7 +29,7 @@
 					<?php if(isset($leyes)): ?>
 					<?php foreach ($leyes as $l):?>
 						<tr>
-							<td><?php echo $l['resumen'];?></td>
+							<td><?php echo $l['descripcion'];?></td>
 							<td>
 								<?php if(empty($l['tratamiento'])): ?>
 									<div class="form-check">

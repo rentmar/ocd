@@ -177,6 +177,18 @@ class Ley_model extends CI_Model{
 		return $qry->row();
 	}
 
+	public function leerUltimaDescripcion($idley, $idestado)
+	{
+		$sql = "SELECT l.idleyes, leyes_estadoley.fecha_estadoley,codigoley.codigo_ley ,estadoley.nombre_estadoley, estadoley.porcentaje_estadoley  "
+			."FROM leyes AS l  "
+			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes  "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley  "
+			."LEFT JOIN codigoley ON codigoley.rel_idestadoley = estadoley.idestadoley "
+			."WHERE l.idleyes = ? AND estadoley.idestadoley = ?  ";
+		$qry = $this->db->query($sql, [$idley, $idestado, ]);
+		return $qry->row();
+	}
+
 	//Array ley y estados
 	private function leyArray()
 	{
@@ -207,13 +219,40 @@ class Ley_model extends CI_Model{
 		{
 			$ley['idley'] = $lu->idleyes;
 			$ley['resumen'] = $lu->resumen;
+			$ley['descripcion'] = '';
 
 			//$idley, $idestado
 			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+			$t = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
 			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+			$s = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
 			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$a = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
 			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+			$m = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
 			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+			$p = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+
+			if(isset($t))
+			{
+				$ley['descripcion'] = $t->nombre_estadoley;
+			}
+			if(isset($s))
+			{
+				$ley['descripcion'] = $s->nombre_estadoley;
+			}
+			if(isset($a))
+			{
+				$ley['descripcion'] = $a->nombre_estadoley;
+			}
+			if(isset($m))
+			{
+				$ley['descripcion'] = $m->nombre_estadoley;
+			}
+			if(isset($p))
+			{
+				$ley['descripcion'] = $p->nombre_estadoley;
+			}
 
 			$leyes_resultado[] = $ley;
 		}
