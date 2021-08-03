@@ -15,13 +15,16 @@ class Ley_model extends CI_Model{
                 . "GROUP BY idnombreley");
         return $qry->result();
     }
-    public function leerEstadoDeLeyes()
+    public function leerEstadoDeLeyes00()
     {
         $qry=$this->db->query("SELECT * "
                 . "FROM estadoley "
                 . "GROUP BY idestadoley");
         return $qry->result();
     }
+    
+    
+    
 	public function leerLeyPorId($idley)
 	{
 		$this->db->where('idleyes',$idley);

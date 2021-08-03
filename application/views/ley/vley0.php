@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
       <meta charset="utf-8">
       <link rel="stylesheet" href="bootstrap4/css/bootstrap.min.css">
@@ -13,52 +13,49 @@
               <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
                   <div id="caja_boton">
                       <div id="contenedor-submit">
-                  <a href="<?php echo site_url('ley/crearley');?>">
-                      <input type="submit" class="BOTON" value="CREAR">
-                  </a>
-                  <a href="<?php echo site_url('/'); ?>">
-                      <input type="button" class="BOTONROJO" value="CANCELAR">
-                  </a>
+                          <a href="<?php echo site_url('ley/crearley');?>">
+                              <input type="submit" class="BOTON" value="CREAR">
+                          </a>
+                          <a href="<?php echo site_url('/'); ?>">
+                              <input type="button" class="BOTONROJO" value="CANCELAR">
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
+                  <p>
+                      <table>
+                          <tr id="datos">
+                              <th>Ley</th>
+                              <th>En Tratamiento</th>
+                              <th>Sancionada</th>
+                              <th>Aprobada</th>
+                              <th>Con Modificacion</th>
+                              <th>Promulgada</th>
+                              <th>Accion</th>
+                          </tr>
+                          <tbody>
+                              <?php if(isset($Leyes1)): ?>
+                                <?php foreach ($Leyes1 as $u) {?>
+                                <tr>
+                                    <td><?php echo $u->nombre;?></td>
+                                    <td><?php echo $u->{'Leyes en tratamiento'};?></td>
+                                    <td><?php echo $u->{'Leyes sancionadas'};?></td>
+                                    <td><?php echo $u->{'Leyes aprobadas'};?></td>
+                                    <td><?php echo $u->{'Leyes con modificacion'};?></td>
+                                    <td><?php echo $u->{'Leyes promulgadas'};?></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#miModal"><?php echo 'Actualizar';?></a></td>
+                                </tr>
+                                <?php } ?>
+                              <?php endif; ?>
+                          </tbody>
+                      </table>
               </div>
           </div>
       </div>
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-        <p>
-        	<table>
-            <tr id="datos">
-                <th>Ley</th>
-                <th>En Tratamiento</th>
-                <th>Sancionada</th>
-                <th>Aprobada</th>
-                <th>Con Modificacion</th>
-                <th>Promulgada</th>
-                <th>Accion</th>
-            </tr>
-            <?php foreach ($Leyes1 as $u) {?>
-            <tr>
-                <td><?php echo $u->nombre;?></td>
-                <td><?php echo $u->{'Ley en Tratamiento'};?></td>
-                <td><?php echo $u->{'Ley Sancionada'};?></td>
-                <td><?php echo $u->{'Ley Aprobada'};?></td>
-                <td><?php echo $u->{'Ley con Modificacion'};?></td>
-                <td><?php echo $u->{'Ley Promulgada'};?></td>
-                <td><a href="#" data-toggle="modal" data-target="#miModal"><?php echo 'Editar';?></a></td>
-                
-<!--                <?php// if($u->{'Ley Promulgada'} != '0'):?>
-                <td><a href="#" data-toggle="modal" data-target="#miModal"><?php //echo $u->{'Ley Promulgada'};?></a></td>
-                <?php //else: ?>
-                <td><?php //echo $u->{'Ley Promulgada'};?></td>
-                <?php //endif; ?>-->
-            </tr>
-            <?php } ?>
-	</table>
-    </div>
-                    		</div>
-	</div>
       <br>
-      
-    <div id="miModal" class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
+      <div id="miModal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
           <div class="modal-content">
               <div class="modal-header">
                   <h1 class="modal-title" id="exampleModalLabel"></h1>
@@ -66,42 +63,45 @@
                       <span aria-hidden="true">&times;</span>
                   </button>
               </div>
-              <form id="formPersonas">
+              <?php echo form_open('Ley/ActualizarLey/');?>
+<!--              <form id="formPersonas">-->
                   <div class="modal-body">
                       <div class="form-group">
-                          <label for="ley" class="col-form-label">Ley:</label>
-                          <input type="text" class="form-control" id="ley">
+                          <label for="titulo" class="col-form-label">Titulo:</label>
+                          <input type="text" class="form-control" id="titulo" name="titulo" required >
                       </div>
                       <div class="form-group">
-                          <label for="tratamiento" class="col-form-label">Tratamiento:</label>
-                          <input type="text" class="form-control" id="tratamiento">
+                          <label for="url" class="col-form-label">Url:</label>
+                          <input type="text" class="form-control" id="url" name="url" required>
                       </div>
                       <div class="form-group">
-                          <label for="sancionada" class="col-form-label">Sancionada:</label>
-                          <input type="text" class="form-control" id="sancionada">
+                          <input type="hidden" id="idestadoL" name="idestadoL" value="<?php //echo $EsDeLe->idestadoley; ?>">
                       </div>
                       <div class="form-group">
-                          <label for="aprobada" class="col-form-label">Aprobada:</label>
-                          <input type="text" class="form-control" id="aprobada">
-                      </div>
-                      <div class="form-group">
-                          <label for="modificada" class="col-form-label">Modificada:</label>
-                          <input type="text" class="form-control" id="modificada">
-                      </div>
-                      <div class="form-group">
-                          <label for="promulgada" class="col-form-label">Promulgada:</label>
-                          <input type="text" class="form-control" id="promulgada">
+                          <label for="rel_idestadoley" >Seleccionar Estado de Ley</label>
+                          <select class="combo" id='cuadro' name='rel_idestadoley' required>
+                              <option value="0"></option>
+                              <option value="1">Leyes en Tratamiento</option>
+                              <option value="2">Leyes Sancionadas</option>
+                              <option value="3">Leyes Aprobadas</option>
+                              <option value="4">Leyes con Modificacion</option>
+                              <option value="5">Leyes Promulgadas</option>
+                          </select>
                       </div>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                       <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
                   </div>
-              </form>
+              <?php echo form_close();?>
+<!--              </form>-->
           </div>
       </div>
     </div>
     
-    <script src="bootstrap4/js/bootstrap.min.js"></script>
+      
+    <script src="jquery/jquery-3.3.1.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>

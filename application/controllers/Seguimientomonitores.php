@@ -78,10 +78,12 @@ class Seguimientomonitores extends CI_Controller
                         }
                     }
                 }
-                $SeguimientoM[]=$TablaAuxiliarSm;
+                $SeguimientoM[]=$TablaAuxiliarSm;//se guarda cada vez que se crea un fila "stdClass"
             }
         }
+        if(isset($SeguimientoM)){
         $tablaSm['SeguimientoM1']=$SeguimientoM;
+        }
         $tablaSm['NumeroDeCuestionarios']=$DatosSeguimientoM['NumeroDeCuestionarios'];
 /*        echo "<pre>";
         var_dump($tablaSm);
@@ -156,7 +158,9 @@ class Seguimientomonitores extends CI_Controller
                 $SeguimientoM[]=$TablaAuxiliarSm;
             }
         }
+        if(isset($SeguimientoM)){
         $tablaSm['SeguimientoM1']=$SeguimientoM;
+        }
         $tablaSm['NumeroDeCuestionarios']=$DatosSeguimientoM['NumeroDeCuestionarios'];
 /*        echo "<pre>"; var_dump($tablaSm); echo "</pre>";*/
         if(empty($tablaSm))
@@ -238,7 +242,9 @@ class Seguimientomonitores extends CI_Controller
                 $SeguimientoM[]=$TablaAuxiliarSm;
             }
         }
+         if(isset($SeguimientoM)){
         $tablaSm['SeguimientoM1']=$SeguimientoM;
+         }
         $tablaSm['NumeroDeCuestionarios']=$DatosSeguimientoM['NumeroDeCuestionarios'];
 /*        echo "<pre>";
         var_dump($tablaSm);
