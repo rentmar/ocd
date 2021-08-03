@@ -212,7 +212,8 @@ CREATE TABLE `leyes` (
 CREATE TABLE `leyes_estadoley` (
   `idleyesestado` int(11) UNSIGNED NOT NULL,
   `rel_idleyes` int(11) UNSIGNED NOT NULL,
-  `rel_idestadoley` smallint(2) UNSIGNED NOT NULL
+  `rel_idestadoley` smallint(2) UNSIGNED NOT NULL,
+  `fecha_estadoley` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

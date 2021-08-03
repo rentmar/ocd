@@ -1,4 +1,4 @@
-<main role="main">}<br>
+<main role="main"><br>
 	<div class="container">
 		<div class="row">
 
@@ -60,6 +60,19 @@
 			</div>
 			<?php echo form_open('Ley/actualizarLey/'.$l->idleyes);?>
 			<div class="modal-body">
+				<select class="combo" id='cuadro' name='rel_idfuente' required>
+					<option value="">Elegir Estado</option>
+					<?php foreach ($estados as $e): ?>
+					<option value="<?php echo $e->idestadoley; ?>">
+						<?php echo $e->nombre_estadoley; ?>
+					</option>
+					<?php endforeach; ?>
+				</select>
+				<div class="form-row">
+					<div class="col">
+						<hr>
+					</div>
+				</div>
 				<div class="form-group">
 					<label>Titulo de la Ley:</label><br>
 					<input type="text" id="titulo" name="titulo" class="form-control" required >
@@ -72,14 +85,6 @@
 					<label>URL de la Ley:</label><br>
 					<input type="text" id="titulo" name="titulo" class="form-control" required>
 				</div>
-				<select class="combo" id='cuadro' name='rel_idfuente' required>
-					<option value="">Elegir Estado</option>
-					<?php foreach ($estados as $e): ?>
-					<option value="<?php echo $e->idestadoley; ?>">
-						<?php echo $e->nombre_estadoley; ?>
-					</option>
-					<?php endforeach; ?>
-				</select>
 			</div>
 			<div class="modal-footer">
 				<button  type="submit" name="accion" id="BOTON" >
