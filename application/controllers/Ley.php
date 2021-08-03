@@ -28,8 +28,11 @@ class Ley extends CI_Controller
     public function index()
     {
 		$usuario = $this->ion_auth->user()->row();
+
+
 		$dt['leyes'] =$this->Cuestionario_model->leerLeyesIdUsuario($usuario->id);
-        /*$DatosLeyes['Leyes']=$this->Ley_model->leerLeyes();       
+        $dt['estados'] = $this->Cuestionario_model->leerEstadosDeLey();
+		/*$DatosLeyes['Leyes']=$this->Ley_model->leerLeyes();
         $DatosLeyes['nEstadoDeLeyes']=$this->Ley_model->leerEstadoDeLeyes();
 
         $DatosLeyes['Leyes']=$this->Ley_model->leerLeyes();       
@@ -90,10 +93,10 @@ class Ley extends CI_Controller
         {*/
         $this->load->view('html/encabezado');
         $this->load->view('html/navbar');
-        $this->load->view('cuestionarios/vley',$dt);
+        $this->load->view('ley/vley',$dt);
         $this->load->view('html/pie');
 
-        
+
 
     }
 	public function crearley()
