@@ -144,6 +144,8 @@ class Ley_model extends CI_Model{
 		return $qry->result();
 	}
 
+	//Metodo para comprobar el primer estado de ley
+
 
 
 }

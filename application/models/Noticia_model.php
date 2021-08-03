@@ -736,6 +736,7 @@ class Noticia_model extends CI_Model{
 		$estdly = [
 			'rel_idleyes' => $ley_id,
 			'rel_idestadoley' => $ley->estado,
+			'fecha_estadoley ' => $ley->fecha_ley,
 		];
 		$this->db->insert('leyes_estadoley', $estdly);
 
