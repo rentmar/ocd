@@ -15,13 +15,16 @@ class Ley_model extends CI_Model{
                 . "GROUP BY idnombreley");
         return $qry->result();
     }
-    public function leerEstadoDeLeyes()
+    public function leerEstadoDeLeyes00()
     {
         $qry=$this->db->query("SELECT * "
                 . "FROM estadoley "
                 . "GROUP BY idestadoley");
         return $qry->result();
     }
+    
+    
+    
 	public function leerLeyPorId($idley)
 	{
 		$this->db->where('idleyes',$idley);
@@ -44,7 +47,7 @@ class Ley_model extends CI_Model{
 		$sql="SELECT leyes_estadoley.rel_idestadoley,estadoley.nombre_estadoley FROM "
 			."leyes_estadoley "
 			."LEFT JOIN estadoley ON leyes_estadoley.rel_idestadoley=estadoley.idestadoley "
-			."WHERE rel_idleyes = ".$idl;
+			."WHERE rel_idleyes =  ".$idl;
 		$q=$this->db->query($sql);
         return $q->result();
 	}
