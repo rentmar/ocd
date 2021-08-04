@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 03-08-2021 a las 13:00:03
+-- Tiempo de generación: 04-08-2021 a las 10:01:06
 -- Versión del servidor: 10.3.30-MariaDB
 -- Versión de PHP: 7.3.28
 
@@ -67,6 +67,33 @@ CREATE TABLE `ci_sessions` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `codigoley`
+--
+
+CREATE TABLE `codigoley` (
+  `idcodigoley` int(11) UNSIGNED NOT NULL,
+  `codigo_ley` varchar(50) NOT NULL,
+  `rel_idley` int(11) UNSIGNED NOT NULL,
+  `rel_idestadoley` smallint(2) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `codigoley`
+--
+
+INSERT INTO `codigoley` (`idcodigoley`, `codigo_ley`, `rel_idley`, `rel_idestadoley`) VALUES
+(1, 'PL N° 238/2020-2021', 1, 1),
+(2, 'Ley modificada', 1, 4),
+(3, 'PLA N° 237/2020-2021', 2, 1),
+(4, 'PL N° 238/2020-2021', 3, 3),
+(5, 'PL-CM N° 028/2020-2021', 4, 4),
+(6, 'PLA N° 0058/2020-2021', 5, 1),
+(7, 'PL N° 004/2020-2021', 6, 1),
+(8, 'asdf asdfafa', 6, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cuestionario`
 --
 
@@ -82,7 +109,8 @@ CREATE TABLE `cuestionario` (
 INSERT INTO `cuestionario` (`idcuestionario`, `nombre_cuestionario`) VALUES
 (1, 'Reforma Electoral'),
 (2, 'Institucionalidad Democratica'),
-(3, 'Censo');
+(3, 'Censo'),
+(4, 'Leyes');
 
 -- --------------------------------------------------------
 
@@ -113,6 +141,48 @@ INSERT INTO `departamento` (`iddepartamento`, `nombre_departamento`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estadoley`
+--
+
+CREATE TABLE `estadoley` (
+  `idestadoley` smallint(2) UNSIGNED NOT NULL,
+  `nombre_estadoley` varchar(150) NOT NULL,
+  `porcentaje_estadoley` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `estadoley`
+--
+
+INSERT INTO `estadoley` (`idestadoley`, `nombre_estadoley`, `porcentaje_estadoley`) VALUES
+(1, 'Ley en tratamiento', 20),
+(2, 'Ley sancionada', 40),
+(3, 'Ley aprobada', 60),
+(4, 'Ley con modificacion', 80),
+(5, 'Ley promulgada', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fuente`
+--
+
+CREATE TABLE `fuente` (
+  `idfuente` smallint(2) UNSIGNED NOT NULL,
+  `nombre_fuente` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `fuente`
+--
+
+INSERT INTO `fuente` (`idfuente`, `nombre_fuente`) VALUES
+(1, 'Web de la Cámara de Diputados'),
+(2, 'Archivo de Leyes (Gaceta Oficial de Bolivia)');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `groups`
 --
 
@@ -129,7 +199,147 @@ CREATE TABLE `groups` (
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
 (2, 'docentes', 'Usuarios generales, docentes'),
-(3, 'monitores', 'Alumnos registrados');
+(3, 'monitores', 'Alumnos registrados'),
+(4, 'leyes', 'Usuarios autorizados al formulario ley');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `leyes`
+--
+
+CREATE TABLE `leyes` (
+  `idleyes` int(11) UNSIGNED NOT NULL,
+  `fecha_registro` int(11) NOT NULL,
+  `resumen` text NOT NULL,
+  `rel_idcuestionario` smallint(11) UNSIGNED NOT NULL,
+  `rel_idusuario` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `leyes`
+--
+
+INSERT INTO `leyes` (`idleyes`, `fecha_registro`, `resumen`, `rel_idcuestionario`, `rel_idusuario`) VALUES
+(1, 1628022631, 'Resumen de la ley', 4, 5),
+(2, 1628025080, 'OBJETO adfadf asdfas', 4, 51),
+(3, 1628028420, 'OBJETO', 4, 51),
+(4, 1628031045, 'OBJETO ', 4, 51),
+(5, 1628032045, 'objto', 4, 51),
+(6, 1628037738, 'Declarar Primer Centro de Enseñanza y Turístico en materia Ictícola del EPB al Museo.... ', 4, 51);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `leyes_estadoley`
+--
+
+CREATE TABLE `leyes_estadoley` (
+  `idleyesestado` int(11) UNSIGNED NOT NULL,
+  `rel_idleyes` int(11) UNSIGNED NOT NULL,
+  `rel_idestadoley` smallint(2) UNSIGNED NOT NULL,
+  `fecha_estadoley` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `leyes_estadoley`
+--
+
+INSERT INTO `leyes_estadoley` (`idleyesestado`, `rel_idleyes`, `rel_idestadoley`, `fecha_estadoley`) VALUES
+(1, 1, 1, 1626134400),
+(2, 1, 4, 1628640000),
+(3, 2, 1, 1626912000),
+(4, 3, 3, 1626220800),
+(5, 4, 4, 1626825600),
+(6, 5, 1, 1627862400),
+(7, 6, 1, 1606694400),
+(8, 6, 3, 1612915200);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `leyes_fuente`
+--
+
+CREATE TABLE `leyes_fuente` (
+  `idleyesfuente` int(11) UNSIGNED NOT NULL,
+  `rel_idleyes` int(11) UNSIGNED NOT NULL,
+  `rel_idfuente` smallint(2) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `leyes_fuente`
+--
+
+INSERT INTO `leyes_fuente` (`idleyesfuente`, `rel_idleyes`, `rel_idfuente`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 5, 1),
+(6, 6, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ley_otrosubtema`
+--
+
+CREATE TABLE `ley_otrosubtema` (
+  `idleyotrosubtema` int(11) UNSIGNED NOT NULL,
+  `rel_idleyes` int(11) UNSIGNED NOT NULL,
+  `rel_idotrosubtema` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ley_otrosubtema`
+--
+
+INSERT INTO `ley_otrosubtema` (`idleyotrosubtema`, `rel_idleyes`, `rel_idotrosubtema`) VALUES
+(1, 6, 87);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ley_otrotema`
+--
+
+CREATE TABLE `ley_otrotema` (
+  `idleyotrotema` int(11) UNSIGNED NOT NULL,
+  `rel_idleyes` int(11) UNSIGNED NOT NULL,
+  `rel_idotrotema` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ley_otrotema`
+--
+
+INSERT INTO `ley_otrotema` (`idleyotrotema`, `rel_idleyes`, `rel_idotrotema`) VALUES
+(1, 1, 166);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ley_subtema`
+--
+
+CREATE TABLE `ley_subtema` (
+  `idleysubtema` int(10) UNSIGNED NOT NULL,
+  `rel_idleyes` int(11) UNSIGNED NOT NULL,
+  `rel_idsubtema` smallint(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ley_subtema`
+--
+
+INSERT INTO `ley_subtema` (`idleysubtema`, `rel_idleyes`, `rel_idsubtema`) VALUES
+(1, 1, 106),
+(2, 1, 113),
+(3, 2, 93),
+(4, 3, 136),
+(5, 4, 74),
+(6, 5, 73);
 
 -- --------------------------------------------------------
 
@@ -149,8 +359,6 @@ CREATE TABLE `login_attempts` (
 --
 
 INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
-(72, '200.87.91.146', 'mom-erik', 1627933914),
-(73, '200.87.91.146', 'mom-erik', 1627933931),
 (74, '200.105.212.54', 'mon-sandra2', 1628005299);
 
 -- --------------------------------------------------------
@@ -295,6 +503,33 @@ INSERT INTO `medio_departamento` (`idmediodepartamento`, `rel_idmedio`, `rel_idd
 (93, 27, 8),
 (94, 49, 8),
 (95, 54, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nombreley`
+--
+
+CREATE TABLE `nombreley` (
+  `idnombreley` int(11) UNSIGNED NOT NULL,
+  `nombre_ley` text NOT NULL,
+  `rel_idestadoley` smallint(2) UNSIGNED NOT NULL,
+  `rel_idley` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `nombreley`
+--
+
+INSERT INTO `nombreley` (`idnombreley`, `nombre_ley`, `rel_idestadoley`, `rel_idley`) VALUES
+(1, 'Prueba insert PROYECTO DE LEY QUE “ESTABLECE INCENTIVOS TRIBUTARIOS A LA IMPORTACIÓN Y COMERCIALIZACIÓN DE BIENES DE CAPITAL Y PLANTAS INDUSTRIALES DE LOS SECTORES AGROPECUARIO E INDUSTRIAL, PARA LA REACTIVACIÓN ECONÓMICA Y FOMENTO DE LA POLÍTICA DE SUSTITUCIÓN DE IMPORTACIÓN”.', 1, 1),
+(2, 'Titulo de ley prueba modificacion			', 4, 1),
+(3, 'PROYECTO DE LEY “DECENIO DE LAS LENGUAS INDÍGENAS”.', 1, 2),
+(4, 'PROYECTO DE LEY QUE “ESTABLECE INCENTIVOS TRIBUTARIOS A LA IMPORTACIÓN Y COMERCIALIZACIÓN DE BIENES DE CAPITAL Y PLANTAS INDUSTRIALES DE LOS SECTORES AGROPECUARIO E INDUSTRIAL, PARA LA REACTIVACIÓN ECONÓMICA Y FOMENTO DE LA POLÍTICA DE SUSTITUCIÓN DE IMPORTACIÓN”.', 3, 3),
+(5, 'PROYECTO DE LEY QUE “AUTORIZA LA TRANSFERENCIA A TÍTULO GRATUITO DE UN BIEN DE DOMINIO MUNICIPAL A FAVOR DE LA CAJA NACIONAL DE SALUD”.', 4, 4),
+(6, 'lugljhvhvh ljbmlj ljg l  jg valido', 1, 5),
+(7, 'PROYECTO DE LEY QUE “DECLARA EL PRIMER CENTRO DE ENSEÑANZA Y TURÍSTICO EN MATERIA ICTÍCOLA DEL ESTADO PLURINACIONAL DE BOLIVIA AL MUSEO DR. JORGE ESTIVARES JUSTINIANO”.', 1, 6),
+(8, 'PROYECTO DE LEY QUE “DECLARA EL PRIMER CENTRO DE ENSEÑANZA Y TURÍSTICO EN MATERIA ICTÍCOLA DEL ESTADO PLURINACIONAL DE BOLIVIA AL MUSEO DR. JORGE ESTIVARES JUSTINIANO”.', 3, 6);
 
 -- --------------------------------------------------------
 
@@ -979,7 +1214,72 @@ INSERT INTO `noticia` (`idnoticia`, `fecha_registro`, `fecha_noticia`, `titular`
 (658, 1627999581, 1627862400, 'Diputados presentan acción de cumplimiento al Tribunal Departamental de Justicia por las celebraciones del 6 de agosto.', 'Diputados de Comunidad Ciudadana presentaron ante el Tribunal Departamental de Justicia una acción de cumplimiento para la aplicación del art 155 de la CPE, para el desarrollo de actos conmemorativos del 6 de agosto en la capital constitucional', 'https://www.facebook.com/TvSucreUSFX/videos/4482683861796318', 20, 2, 54),
 (659, 1628002974, 1626912000, 'Conferencia de prensa', 'Conferencia de prensa en el comite electoral-invitación a los adultos mayores para elección ( sab,31-Agos-2021)', 'RADIO PERLA DEL ACRE DIGITAL. ///  En conferencia de prensa el comité electoral de la Asociacion del Adulto Mayor  llama a elecciones para la elección', 41, 1, 35),
 (660, 1628008849, 1627430400, 'Taller de capacitacion por la Gobernación,sobre:preveción de incendio y primero auxilio', 'La unidad de riesgo y desastre fue capacitada por el personal ( Guardia Municipal, Gobernación,etc )', 'RADIO PERLA DEL ACRE DIGITAL.  ///  La Unidad de Gestión de Riesgo Y Desastre, junto a la Guardia Municipal y personal de la Dirección Municipal de Se', 41, 1, 35),
-(661, 1628009633, 1627516800, 'Iglesia católica,informe del parofoco ', 'El parofoco de la iglesia católica JUAN ELIA SIRIPI,se refiere al informe presentaro por el fiscal general', 'ACTIVAtv |  IGLESIA CATÓLICA   PÁRROCO DE LA IGLESIA CATÓLICA JUAN ELIAS SIRIPI, SE REFIERE AL INFORME PRESENTADO POR EL FISCAL GENERAL. ///', 41, 1, 35);
+(661, 1628009633, 1627516800, 'Iglesia católica,informe del parofoco ', 'El parofoco de la iglesia católica JUAN ELIA SIRIPI,se refiere al informe presentaro por el fiscal general', 'ACTIVAtv |  IGLESIA CATÓLICA   PÁRROCO DE LA IGLESIA CATÓLICA JUAN ELIAS SIRIPI, SE REFIERE AL INFORME PRESENTADO POR EL FISCAL GENERAL. ///', 41, 1, 35),
+(662, 1628017300, 1627603200, 'Gobierno enviará 20 toneladas de jeringas y alimentos y equipos de bioseguridad a cuba', 'Ministra MARIA NELA PRADA informó que se enviará a cuba 20 toneladas de jeringas,alimentos y equipos de bioseguridad, en un avión Hercules. La donación fue aprobada,mediante el decreto supremo ( DS )4557.', 'ACTIVAtv | NACIONAL   GOBIERNO ENVIARÁ 20 TONELADAS DE JERINGAS, ALIMENTOS Y EQUIPOS DE BIOSEGURIDAD A CUBA . ///  La ministra de la Presidencia, Marí', 41, 1, 35),
+(663, 1628019073, 1627948800, 'Policía investiga sobre material explosivo hallado en oficina de la Gobernación de Tarija', 'La Policía Nacional investiga las razones sobre el almacenamiento de nitroglicerina en una oficina del edificio Elena, donde alquila la Gobernación de Tarija, en la avenida La Paz.', 'https://eldeber.com.bo/tarija/policia-investiga-sobre-material-explosivo-hallado-en-oficina-de-la-gobernacion-de-tarija_241685?utm_medium=Social&utm_s', 17, 2, 16),
+(664, 1628023247, 1627948800, '2da nueva audiencia contra la ex presidenta yaninne añez sobre el caso golpe de estado', 'Se amplio y se separo en diferentes casos contra la ex presidenta yaninne añez eso hace que se atrase su detencion preventiva señalo su abogado defensor. ', 'Radio frontera', 49, 2, 28),
+(665, 1628029793, 1627862400, 'Fiscalia pide ampliación de detención preventiva para un juez imputado por violación', 'El fiscal departamental de pando, MARCO PEÑARANDA, explicó que, en audiencia de medidas cautelares desarrollado el 17 de julio, la fiscalia fundamentó con pruebas suficientes que un funcionario judicial rudiger L.A.M de 58 años, es con probabilidad autor del delito de violación agravada cometido en contra de una adolescente de 14 años quien fue agredida sexualmente desde que tenia 12 años fruto de ello quedo embarazada', 'ACTIVAtv | DETENCIÓN PREVENTIVA   FISCALÍA PIDE AMPLIACIÓN DE DETENCIÓN PREVENTIVA PARA UN JUEZ IMPUTADO POR VIOLACIÓN. ///  El Fiscal Departamental d', 41, 1, 35),
+(666, 1628031849, 1627948800, 'Falta de Hegemonía derumba el discurso del fraude electoral', 'El análista Hugo Molis dijó que el discurso del fraude no logro hacerse hegemónica en la narrativa de todos y eso produjo el derrumbe del mismo ya que establecieron ese discurso pars poder tapar el golpe de Estado que le produjeron a la democracia Boliviana.', '', 47, 2, 34),
+(667, 1628032817, 1627862400, 'Richter: ‘Lo que en realidad existió fue un armado artificial de fraude electoral’', 'El vocero presidencial Jorge Richter afirmó que en la crisis de 2019 lo que en existió fue un armado artificial de fraude electoral para establecer un gobierno de facto, agregó que el “fraude” solamente fue un elemento que los sectores que estaban movilizados en 2019 usaron para “validar un conjunto de acciones fuera de la norma, que finalmente les dio resultado pues Evo Morales renunció a la presidencia”.', 'https://www.la-razon.com/nacional/2021/08/02/richter-lo-que-en-realidad-existio-fue-un-armado-artificial-de-fraude-electoral/', 53, 2, 29),
+(668, 1628033206, 1627862400, 'Asamblea cruceña reúne a sectores opositores al Gobierno y define rearticular el movimiento cívico', 'La Asamblea de la Cruceñidad fustigó al Gobierno y decidió recurrir a instancias nacionales e internacionales para evitar el cierre del caso “fraude electoral”, rearticular el movimiento cívico, sumarse y coordinar la marcha nacional del jueves y apoyar el bloqueo en San José de Chiquitos. En la cita asistieron el representante del comité Nacional por la Defensa de la Democracia (CONADE) Manuel Morales, la exdirigenta de esposas de policías Guadalupe Cárdenas, la presidenta de la Asamblea de DDHH de Bolivia Amparo Carvajal y el dirigente cívico de La Paz Antonio Alarcón. El presidente cívico Rómulo Calvo y el gobernador Luis Fernando Camacho estuvieron al frente de la máxima instancia de decisión cruceña.  ', 'https://www.la-razon.com/nacional/2021/08/02/asamblea-crucena-reune-a-sectores-opuesto-al-gobierno-y-define-rearticular-el-movimiento-civico/', 53, 2, 29),
+(669, 1628033482, 1627948800, 'Novillo advierte a cívicos que se actuará ‘con mano firme’ si cometen excesos', 'El ministro de Defensa, Edmundo Novillo, advirtió a los cívicos que se actuará “con mano firme” si es que durante sus anunciadas protestas cometen excesos o actos irregulares. Indicó que se hará cumplir la ley absolutamente ante todos los posibles hechos irregulares aunque están permitidas en el marco democrático éstas no deben cometer excesos. ', 'https://www.la-razon.com/nacional/2021/08/03/novillo-advierte-a-civicos-que-se-actuara-con-mano-firme-si-cometen-excesos/', 53, 2, 29),
+(670, 1628036032, 1627948800, 'La Justicia ordena otros seis meses de detención contra Áñez, la expresidenta la califica de ‘injusta’', 'A horas de su audiencia de cesación de detención, la Justicia determinó otros seis meses de detención preventiva, a partir de la fecha, contra la expresidenta Jeanine Áñez en el proceso abierto por la ampliación o división del caso “golpe de Estado”. Áñez calificó de “injusta” la decisión, indicando que violan los derechos humanos y las garantías, sin justicia en Bolivia no hay democracia, declaró mediante su twitter.', 'https://www.la-razon.com/nacional/2021/08/03/la-justicia-ordena-otros-seis-meses-de-detencion-contra-anez-la-expresidenta-la-califica-de-injusta/', 53, 2, 29),
+(671, 1628036272, 1627948800, 'CC repudia política de derroche de recursos públicos del Gobierno', 'No vamos a ir a aplaudir el exceso, la ostentación y el despilfarro que el Gobierno del MAS (Movimiento Al Socialismo), durante 15 años operó en el país”, afirmó ayer el diputado Enrique Urquidi en representación de la bancada de Comunidad Ciudadana (CC). ', 'https://impresa.lapatria.bo/noticia/1041097/cc-repudia-politica-de-derroche-de-recursos-publicos-del-gobierno#articulo', 15, 2, 48),
+(672, 1628036288, 1627948800, 'Rearticulan movimiento cívico nacional en defensa de la democracia y libertad', 'La Asamblea de la Cruceñidad extraordinaria denominada por la “libertad y la democracia” aprobó este lunes rearticular el movimiento cívico nacional, realizar acciones “necesarias y legales” para que se pueda sancionar a los responsables del caso fraude electoral de 2019 y convocó una marcha este 5 de agosto.', 'https://impresa.lapatria.bo/noticia/1041107/rearticulan-movimiento-civico-nacional-en-defensa-de-la-democracia-y-libertad#articulo', 15, 2, 23),
+(673, 1628036295, 1627948800, 'Caso fraude, tierras y persecución reactivan movilizaciones de cívicos, Conade y plataformas', 'La Asamblea de la cruceñidad aprobó una serie de medidas en torno al conflicto de tierras y el cierre del caso \"fraude electoral\" y anunció movilizaciones para el 5 de agosto. Estas se realizarán de forma paralela a las determinadas del Comité de Defensa de la Democracia (Conade) que tiene previsto hacer protestas en las calles el próximo 6 de agosto.', 'https://www.lostiempos.com/actualidad/pais/20210803/caso-fraude-tierras-persecucion-reactivan-movilizaciones-civicos-conade', 12, 2, 44),
+(674, 1628036318, 1627948800, 'El Tribunal Constitucional desahucia la ‘sucesión constitucional’ de Jeanine Áñez en 2019', 'En respuesta a la comisión de fiscales que investiga el caso Golpe de Estado, el Tribunal Constitucional Plurinacional (TCP) desahució la “sucesión constitucional” de Jeanine Añez y aclaró que en sus archivos no encontró “sentencia, declaración o auto constitucional” que sustente la constitucionalidad o no de dicha proclamación en 2019.', 'https://www.la-razon.com/nacional/2021/08/03/el-tribunal-constitucional-desahucia-la-sucesion-constitucional-de-jeanine-anez-en-2019/', 53, 2, 29),
+(675, 1628036427, 1627948800, 'Detienen a una de las líderes de la RJC, Milena Soto', 'Una de las líderes de la agrupación Resistencia Juvenil Cochala (RJC), Milena Soto, fue aprehendida en la ciudad de Cochabamba, por efectivos de la Policía. Fue trasladada a instalaciones de la Fuerza Especial de Lucha Contra el Crimen (FELCC). Miembros de la RJC son investigados por hechos de violencia cometidos en Cochabamba contra quienes se manifestaban en favor del MAS y del expresidente Evo Morales en noviembre de 2019, en medio de la crisis política y social; Mario Bascopé también se encuentra detenido en la cárcel de Sucre.', 'https://www.la-razon.com/nacional/2021/08/03/detienen-a-una-de-las-lideres-de-la-rjc-milena-soto/', 53, 2, 29),
+(676, 1628036433, 1627948800, 'Conade y plataformas protestarán el 5 y 6 de agosto contra la persecución y el cierre del caso fraude', 'Representantes de plataformas ciudadanas del 21F anunciaron que realizarán movilizaciones entre el 5 y 6 de agosto, en las fiestas patrias, porque consideran que la Fiscalía y el Gobierno atentan contra la democracia.En tanto, el Comité de Defensa de la Democracia (Conade) también emitió una convocatoria a protestas para el 5 de agosto, pidiendo la renuncia del fiscal general, Juan Lanchipa, la reforma del Ministerio Público, el respeto de las garantías constitucionales, la libertad de las personas injustamente detenidas y contra el cierre del caso fraude electoral. ', 'https://www.lostiempos.com/actualidad/pais/20210803/conade-plataformas-protestaran-5-6-agosto-contra-persecucion-cierre-del', 12, 2, 44),
+(677, 1628038773, 1627948800, 'Defensa del ex ministro de facto Arturo Murillo, nuevamente pide suspensión de audiencia', 'La defensa de Arturo Murillo estaría pidiendo por tercera vez la suspensión de la audiencia para el próximo 8 de septiembre, el procurador sostuvo que hasta el momento la audiencia se mantiene para el 9 de agosto de la presente gestión', 'http://boliviatv', 32, 2, 13),
+(678, 1628041410, 1627948800, 'La CIDOB se pronuncia acerca del caso INRA.', 'Fausto Molina el máximo representante de la CIDOB declara que el Gobernador de Santa Cruz esta intentando quitar las tierras a los pueblos indigenas de tierras bajas y por ello tomaran sus propias estrategias y movilizaciones para defender los derechos de los pueblos indigenas.', '', 47, 2, 34),
+(679, 1628041670, 1627948800, 'Anuncia instructivo, Mamani no dará la palabra a diputado que no salude en idioma nativo.', 'El presidente de la Cámara de Diputados, Freddy Mamani (MAS) anunció que se sacará un instructivo para que los parlamentarios que quieran tomar la palabra, primero saluden en un idioma originario. Anticipó que no les cederá la palabra en caso de que no lo hagan.', 'https://www.paginasiete.bo/nacional/2021/8/3/anuncia-instructivo-mamani-no-dara-la-palabra-diputado-que-no-salude-en-idioma-nativo-302915.html?__twitt', 14, 2, 34),
+(680, 1628041771, 1627948800, 'La asamblea de la cruceñidad decide rearticular el movimiento cívico nacional, para sancionar a los responsables del caso fraude electoral de 2019', '						Según la Asamblea de la Cruceñidad, con la aprobación de la Ley 108, de estrategia nacional de legitimación de ganancias ilícitas y el financiamiento al terrorismo, el gobierno intenta acallar, detener y extorsionar a los ciudadanos, por lo que resolvieron instruir al Comité Pro Santa Cruz, realizar todas las acciones legales necesarias para que los autores del fraude electoral de 2019 sean procesados y castigados. Así mismo deciden respaldar la convocatoria a una marcha a realizarse este jueves 05 de agosto, la misma que a través del CONADE se replique en todo el país.					', 'https://www.facebook.com/KanchaParlaspa/', 37, 2, 42),
+(681, 1628041988, 1627948800, 'Milena Soto denuncia persecución política en Bolivia en nota enviada a Bachelet.', 'Milena Soto, aprehendida esta jornada, envió el domingo una nota a la Alta Comisionada para los Derechos Humanos de las Naciones Unidas, a Michelle Bachelet, en la que denuncia que el Gobierno de Luis Arce desencadenó una persecución política contra la Resistencia Juvenil Cochala (RJC), que comenzó con la captura de dos de sus principales dirigentes y la entrega de 220 notificaciones contra sus miembros.', 'https://www.paginasiete.bo/seguridad/2021/8/3/milena-soto-denuncia-persecucion-politica-en-bolivia-en-nota-enviada-bachelet-302909.html?__twitter_impr', 14, 2, 34),
+(682, 1628042159, 1627948800, 'Aprehenden a Milena Soto, otra miembro de la Resistencia Juvenil Cochala.', 'Milena Soto, una de las principales integrantes de la autodenominada Resistencia Juvenil Cochala (RJC) fue aprehendida este martes en Cochabamba. La activista, que la pasada semana denunció un supuesto intento de secuestro, fue notificada y escoltada presuntamente a instancias de la Fuerza Especial de Lucha Contra el Crimen (Felcc), según muestra un video que circula en las redes sociales. ', 'https://www.paginasiete.bo/seguridad/2021/8/3/aprehenden-milena-soto-otra-miembro-de-la-rjc-302899.html?__twitter_impression=true', 14, 2, 34),
+(683, 1628043299, 1627948800, 'La FEJUVE dice que fue una buena desicióón cerrar el caso fraude electoral', 'Secretario General de la Fejuve Alteña señala que fue la mejor desición cerrar el caso fraude lectoral ya que la oposición intentaba sujetarse del discurso para quitarnos la democracía.', '', 47, 2, 34),
+(684, 1628043307, 1627948800, 'El Gobierno anuncia intervención a protestas en Santa Cruz si hay excesos', 'El Ministro de Defensa anuncia que el Gobierno va a ver cómo actúa el Conade y Los Cívicos durante el anuncio de movilizaciones a partir del 5 de Agosto señaló que si las movilizaciones tendrán exceso se procederá según la norma.', '', 35, 2, 18),
+(685, 1628043373, 1627948800, 'Cívicos y plataformas de 7 regiones marcharán el jueves en rechazo al cierre del caso fraude.', 'El coordinador nacional de las plataformas del 21F, Guillermo Paz, anunció que el 5 de agosto activistas y cívicos de siete regiones del país marcharán en rechazo al cierre del caso fraude electoral. El 6 de agosto, en La Paz, los movimientos ciudadanos realizarán un acto de protestas al frente del nuevo edificio de la Asamblea Legislativa Plurinacional.', 'https://www.paginasiete.bo/nacional/2021/8/3/civicos-plataformas-de-regiones-marcharan-el-jueves-en-rechazo-al-cierre-del-caso-fraude-302891.html?__tw', 14, 2, 34),
+(686, 1628043444, 1627862400, 'Los Ex Vocales informaron que procesaran a Carlos Mesa y Fernando Camacho ', 'Sostuvo uno de los Ex vocales del Tribunal Supremo Electoral Edgar Gonzales anunció que los ex vocales a nivel nacional iniciaran un proceso formal  contra Carlos Mesa, Fernando Camacho y el Ingeniero Edgar Villegas por el caso del Fraude Electoral, consideran que son los principales responsables de haberlos perjudicado con las diferentes denuncias hacia sus personas. Además señalaron que iniciarán un proceso a nivel  internacional contra Luis Almagro de la OEA pidiendo resarcimiento integral por todo lo ocurrido tras las denuncias del Fraude Electoral.', '', 35, 1, 18),
+(687, 1628043482, 1627948800, 'Asamblea Legislativa Departamental en proyecto de ley para la vacunación contra el Covid-19', 'La Asamblea Legislativa Departamental de Chuquisaca a través de una comisión analiza un ante proyecto de ley para incentivar la vacunación contra el Covid-19 en Sucre y los municipios, tal cual lo informa el asambleísta Isaac Tejerina, clasificando a los municipios según la población que contengan.', 'https://www.facebook.com/TvSucreUSFX/videos/550220359664193', 20, 2, 54);
+INSERT INTO `noticia` (`idnoticia`, `fecha_registro`, `fecha_noticia`, `titular`, `resumen`, `url_noticia`, `rel_idmedio`, `rel_idcuestionario`, `rel_idusuario`) VALUES
+(688, 1628043493, 1627948800, 'Audiencia de Murillo se pospone hasta septiembre.', 'La Fiscalía de Estados Unidos (EEUU) solicitó por tercera vez la suspensión de la audiencia de medidas cautelares del exministro de Gobierno  Arturo Murillo, debido a la “inusual complejidad” de los hechos. La exautoridad será procesada formalmente  por los cargos de soborno y conspiración para cometer lavado de dinero.', 'https://www.paginasiete.bo/seguridad/2021/8/3/audiencia-de-murillo-se-pospone-hasta-septiembre-302857.html?__twitter_impression=true', 14, 2, 34),
+(689, 1628043565, 1630281600, 'Asambleísta propone proceso de investigación a autoridades por planta generadora de oxígeno. ', 'Luis Aillón, Asambleísta Departamental de Chuquisaca manifestó que se debe iniciar un proceso de investigación a anteriores autoridades con respecto a la planta generadora de oxígeno en el Hospital Santa Bárbara, indicado que el daño podría alcanzar los 4 millones de bolivianos', 'https://www.facebook.com/TvSucreUSFX/videos/550220359664193', 20, 2, 54),
+(690, 1628043631, 1627948800, 'COD realiza marcha exigiendo respeto laboral y respeto de derechos de los trabajadores', 'Sectores afiliados a la Central Obrera Departamental de Chuquisaca realizaron una marcha en la plaza 25 de mayo exigiendo el respeto laboral ante despidos de trabajadores de diferentes empresas e instituciones  ', 'https://www.facebook.com/TvSucreUSFX/videos/550220359664193', 20, 2, 54),
+(691, 1628043705, 1627948800, 'El Movimiento al Socialismo anuncia procesos penales contra Cívicos que resolvieron movilizaciones ', 'El movimiento al socialismo pretende llevar a procesos, a los cívicos y al gobernador Fernando Camacho por intentar enfrentar a los bolivianos por las tierras en el oriente, según el diputado Rolando Cuellar los cívicos tienen muchas cuentas pendientes con la justicia. Otro sector que anuncia y convoca ,movilizaciones es el Comité Nacional de Defensa de la Democracia convocó al pueblo a movilizarse en las calles para exigir el procedimiento de los actores, cómplices y beneficiarios del Fraude Electoral cometido el 20 de Octubre del 2019, el representante del Conade Manuel Morales entre otros de los puntos está exigir el alejamiento del cargo de Fiscal General del Estado de Juan Lanchipa Ponce.', '', 35, 2, 18),
+(692, 1628043837, 1627948800, 'El movimiento al Socialismo procesara al Gobernador de Santa Cruz por alentar las protestas ', 'El diputado por el partido del MAS Daniel Rojas anunció una demanda penal en contra al Gobernador Fernando Camacho por alentar las protestas y amenazar con la economía de la población cruceña, además convocó al gobernador cruceño a comparecer ante el legislativo para responder las competencias que tiene el gobierno y la dotación de tierras en Santa Cruz.', '', 35, 2, 18),
+(693, 1628043896, 1627948800, 'Procurador asegura que la OEA no remitió auditoria de las elecciones del 2019.', '#ANF El procurador del Estado, Wilfredo Chávez, asegura que la OEA no remitió la auditoría de las Elecciones Generales de 2019 sino sólo un informe. Vía: @cadenaabolivia https://t.co/8mSubc0egg', 'El procurador del Estado, Wilfredo Chávez, asegura que la OEA no remitió la auditoría de las Elecciones Generales de 2019 sino sólo un informe. ', 35, 2, 34),
+(694, 1628043907, 1627948800, 'El Comité Cívico anuncia que a diario llegan requerimientos fiscales para esclarecer sucesos del 2019 ', 'El Abogado Pedro Lima asegura que a diario llegan requerimientos fiscales al comité cívico Potosinista, bajo el argumento de establecer los sucesos de la conmoción del 2019 estas actitudes pretenden apricionar a la dirigente de la comité cívica aseguró el abogado.', '', 35, 2, 18),
+(695, 1628044078, 1627948800, 'Con una nueva detención preventiva para Añez.', 'Con nueva detención preventiva, Áñez seguirá en la cárcel hasta inicios de febrero de 2022. En la cuenta de Twitter de la expresidenta se denuncia que la división del proceso solo tiene el fin de prolongar sus detención.', '', 35, 2, 34),
+(696, 1628044211, 1627948800, 'El accionar de los cívicos cruceños es por miedo.', 'El presidente del Senado, Andronico Rodriguez, afirmó hoy que el accionar de los cívicos cruceños es político. \"El caso fraude les preocupa, no tienen sustento y están utilizando el tema de tierras para generar movilizaciones de manera sigilosa”.', '', 35, 2, 34),
+(697, 1628044421, 1627948800, 'Presidente del comité provincial de Santa Cruz declara acerca del tema de tierras. ', 'Presidente del Comité Provincial de Santa Cruz sobre el tema tierras:\"El Gobierno no cumple la ley (...) es por eso que nosotros hablamos de avasallamiento porque no entra con los papeles en regla ni pasa por la CAD que regulariza la entrega de tierras\". ', '', 35, 2, 34),
+(698, 1628044767, 1627948800, 'El Tribunal Constitucional desahucia la sucesión constitucional de Jeanine Añez el 2019', 'En respuesta a la comisión de fiscales que investiga el caso Golpe de Estado, el Tribunal Constitucional Plurinacional (TCP) desahució la “sucesión constitucional” de Jeanine Añez y aclaró que en sus archivos no encontró “sentencia, declaración o auto constitucional” que sustente la constitucionalidad o no de dicha proclamación en 2019.', '', 23, 2, 34),
+(699, 1628044960, 1627948800, 'Asamblea Cruceña reúne a sectores opositores al Gobierno.', 'La Asamblea de la Cruceñidad decidió recurrir a instancias nacionales e internacionales para evitar el cierre del caso “fraude electoral”, rearticular el movimiento cívico, sumarse y coordinar la marcha nacional. ', '', 23, 2, 34),
+(700, 1628045156, 1627948800, 'Notifican con denuncia penal a cuatro vocales del TSE que habilitaron a Manfred', 'El diputado Jhonny Pardo Ramírez presentó una querella penal en contra de cuatro vocales del Tribunal Supremo Electoral (TSE): María Angélica Ruiz Vaca Díez, Nancy Gutiérrez Salas, Rosario Baptista Canedo y Salvador Romero Ballivián, por haber firmado la resolución 052/2021 que habilitó la candidatura de Manfred Reyes Villa al municipio de Cochabamba. ', 'https://eldeber.com.bo/pais/notifican-con-denuncia-penal-a-cuatro-vocales-del-tse-que-habilitaron-a-manfred_241703', 17, 2, 16),
+(701, 1628045607, 1627948800, 'Juez ordena detención por otros seis meses contra la expresidenta Áñez', 'El juez segundo Anticorrupción, Andrés Zabaleta, ordenó que la expresidenta Jeanine Áñez sea detenida por otros seis meses, a contar desde esta fecha. Esta vez por un nuevo juicio ordinario interpuesto por el Ministerio de Gobierno, la Procuraduría y la presidencia del Senado.', 'https://eldeber.com.bo/pais/juez-ordena-detencion-por-otros-seis-meses-contra-la-expresidenta-anez_241694', 17, 2, 16),
+(702, 1628047986, 1627948800, 'Frenar la persecución política, garantizar las fuentes laborales y reactivar la economía; conforman la serie de peticiones de una marcha de obreros en Chuquisaca.', 'El ejecutivo de los maestros urbanos Rodrigo Echalar, manifestó los pedidos que derivan de una marcha de cientos de obreros en Chuquisaca; donde la reactivación económica y garantía de fuentes laborales por un lado y por otro terminar con la persecución política a líderes que se movilizaron exigiendo nuevas elecciones en 2019; son los pedidos que emanan de estas movilizaciones.', '', 43, 2, 46),
+(703, 1628048449, 1627948800, 'Un bono escolar de cuanta del desayuno escolar.', 'La representación de municipios del pais esta presentando un proyecto para ver como entregar el desayuno escolar a un pago efectivo, en la ciudad de La Paz.', 'https://www.redbolivision.tv.bo/video/noticieros-al-dia-programa-del-03-de-agosto-del-2021/', 22, 2, 31),
+(704, 1628049005, 1627948800, 'Entregan insumos a la UTOP', '						Ministro de gobierno Eduardo del Castillo , en un acto de ceremonia de la UTOP, entrego insumos dentro de lo que es el plan dignidad. 					', 'https://www.redbolivision.tv.bo/video/noticieros-al-dia-programa-del-03-de-agosto-del-2021/', 22, 2, 31),
+(705, 1628049351, 1627948800, 'Acusan a funcionarios municipales por extorción.', 'En Santa Cruz comerciantes demandan a funcionarios públicos por  extorción, estos estarían pidiendo dinero a cambio de permisos de ventas en el mercado Abasto.  ', 'https://www.redbolivision.tv.bo/video/noticieros-al-dia-programa-del-03-de-agosto-del-2021/', 22, 2, 31),
+(706, 1628050973, 1627948800, 'Aprenden a Milena Soto en Cochabamba ', 'Aprenden a principal cabecilla de la Resistencia Juvenil Cochala por los actos paramilitares realizados a finales del año 2019. Es el tercer miembro de esta agrupación en ser aprendida', 'https://www.youtube.com/watch?v=Ra-A0_q54us', 32, 2, 43),
+(707, 1628051018, 1627948800, 'Detención preventiva por otros 6 meses', 'Ratifican el encarcelamiento de la ex presidante Áñez, se trata de otro proceso abierto contra el gobierno, el diputado  de CC, Enrique Urquidi, indica que existe el abuso de poder y que este hecho señala que la justicia se constituye en un brazo operador del gobierno. ', '', 24, 2, 29),
+(708, 1628051180, 1627948800, 'Vuelve a cuestionar a la Iglesia', 'El procurador del Estado acude al llamado del legislativo, dice que todos los que participaron en la reunión de la UCB son delincuentes, señalando que Bolivia no es colonia del Vaticano.', '', 24, 2, 29),
+(709, 1628051290, 1627948800, 'Milena Soto, miembro de la resistencia juvenil cochala, RJC, fue aprehendida esta tarde.', 'La policía arrestó a Milena Soto, fue trasladada a la FELCC, indican que será procesada por destrozos el 2019 (deterioro de bienes del Estado, daño calificado, organización criminal, fabricación o portación de armas ilegales, entre otros), luego fue trasladada a Sucre. Ella declara que es una injusticia.', '', 24, 2, 29),
+(710, 1628051392, 1627948800, 'Congreso interno del MAS asumirá definiciones sobre el tema disciplinario ', 'El diputado del MAS, Juan Angulo, confirmó que este miércoles se realizará el congreso del MAS en la ciudad de Cochabamba con la perspectiva de temas disciplinarios entre otra cosas, también se trabajará para generar unidad.', '', 38, 2, 29),
+(711, 1628051559, 1627948800, 'Desde la Alianza Creemos critican las acciones para cerrar el caso del fraude electoral ', 'La diputada de la alianza Creemos, la diputada María René Álvarez hizo referencia a las acciones que asume su fuerza política (MAS) en la perspectiva de buscar el cierre definitivo del caso Fraude Electoral y señaló que existe indignación por la parcialización de la justicia, señaló que se presentaron recursos judiciales ante las instancias correspondientes. Suponen nuevo acto de confrontación pues se pretenda actuar en contra de la Ley. Hizo conocer algunas decisiones del movimiento cívico como la marcha que se ha programado para este jueves en Santa Cruz.', '', 38, 2, 29),
+(712, 1628051805, 1628035200, 'Bolivia participara de la audiencia en Estados Unidos ', 'Bolivia sera parte de la audiencia de Arturo Murillo por el caso gases lacrimógenos buscando un resarcimiento para el estado.', 'https://www.youtube.com/watch?v=Ra-A0_q54us', 32, 2, 43),
+(713, 1628054414, 1627862400, 'Asociación de Radio Taxis de Cochabamba rechaza nacionalización de autos chutos', 'Los propietarios de autos indocumentados y la Asociación Departamental de Radio Taxis proceden con vigilancia en el cruce a Paracaya en San Benito debido a la espera de personas de otros municipios para empezar con bloqueos por el motivo de que reclaman en rechazo al pedido de nacionalización de 150 mil autos que son indocumentados, en ello el viceministro de Régimen Interior, Marcelo Cox, dio a conocer a la Policía sobre los hechos en ello tienen una orden de intervención por medidas de que es un negocio ilícito. ', 'https://www.opinion.com.bo/articulo/cochabamba/asociacion-radio-taxis-cochabamba-rechaza-nacionalizacion-autos-chutos/20210802103906829537.html', 13, 2, 39),
+(714, 1628055688, 1627862400, 'Concejal denuncia que Municipio de Cochabamba debe más de un millón de bolivianos por suministro de luz', 'El Concejal Joel Flores dio a conocer una denuncia que el Gobierno Autónomo Municipal de Cochabamba adeuda más de un Millón (1.069.969) de bolivianos debido al suministro de luz a los Centros de Salud (SALU) junto con la Empresa de Luz y Fuerza Eléctrica Cochabamba (ELFEC), a respuesta de la empresa pidió priorizar los pagos de Junio, pero la documentación que presento Flores, el desembolso no habría sido realizado.', 'https://www.opinion.com.bo/articulo/cochabamba/concejal-denuncia-que-municipio-cochabamba-debe-mas-millon-bolivianos-suministro-luz/202108021134038295', 13, 2, 39),
+(715, 1628057042, 1627862400, 'Vecinos de San Antonio de Pucara protestan por agua potable y personería jurídica para su OTB', 'Un grupo de vecinos de la zona de San Antonio de Pucara realizó una protesta en la Plaza Principal, exigiendo una dotación de agua potable para su OTB, en ello los vecinos dieron a conocer que enviaron notas a la subalcaldesa de la zona de Pucara pero las medidas que tomaron no dieron resultado. ', 'https://www.opinion.com.bo/articulo/cochabamba/vecinos-san-antonio-pucara-protestan-agua-potable-personeria-juridica-otb/20210802110419829541.html', 13, 2, 39),
+(716, 1628058738, 1627862400, 'La Fiscalía de EEUU nuevamente pide aplazar la audiencia de Murillo', 'La Fiscalía de Estados Unidos solicitó la postergación de la audiencia judicial contra el exministro Arturo Murillo, en la modo que se realizará el 8 de septiembre debido al proceso por lavado de dinero y soborno, que informó la agencia EFE, de acuerdo a la causa de Estados Unidos, Murillo y exfuncionarios recibieron sobornos a causa de comprar gases lacrimógenos de parte del Gobierno transitorio a la empresa Bravo Tactical Solutions.', 'https://www.opinion.com.bo/articulo/pais/fiscalia-eeuu-solicita-postergar-septiembre-audiencia-murillo/20210802174338829585.html', 13, 2, 39),
+(717, 1628060043, 1627862400, 'Senador, tras polémica con Barrientos: \"Es una mujer, le puedo decir que me disculpo, ¿no?\"', 'El senador Hilarión Padilla, del Movimiento Al Socialismo (MAS) dijo que quiere pedir disculpas a su compañera Andrea Barrientos, de Comunidad Ciudadana (CC), que anteriormente se refirió con tildes machistas, en respecto a la denuncia en la Comisión de Ética, el senador Padilla dijo; que puede seguir adelante con esa acción y mencionó que no le ha faltado el respeto, en ello la senadora Barrientos considero que es “inaceptable que tengamos representantes machistas en nuestra Cámara de Senadores”. ', 'https://www.opinion.com.bo/articulo/pais/senador-padilla-dice-que-puede-pedir-disculpas-opositora-dichos-tildados-machistas/20210802181725829589.html', 13, 2, 39),
+(718, 1628061247, 1627948800, 'Buscan que Murillo siga preso y devuelva dinero del caso gases', 'El Gobierno de Bolivia y la Fiscalía de EEUU está en búsqueda que el exministro de Gobierno Arturo Murillo continúe tras las rejas y que devuelva el dinero debido a la compra de gases lacrimógenos, en año 2020 con la suma de 5.6 millones de bolivianos y con un sobreprecio de más de 3 millones, en el caso el procurador del caso  Wilfredo Chávez, dijo que según ABI, se instauró la demanda civil contra Murillo, recluido en el Centro de Detención Federal (FDC) de Estados Unidos (EEUU), desde hace más de dos meses, por los delitos de soborno y lavado de dinero.', 'https://www.opinion.com.bo/articulo/pais/buscan-que-murillo-siga-preso-devuelva-dinero-caso-gases/20210802235039829667.html', 13, 2, 39),
+(719, 1628062315, 1627948800, 'María Galindo firma convenio con Copa y da inicio al \"movimiento del escobazo\".', 'La alcaldesa de El Alto, Eva Copa, firmó un convenio con la representante de la organización Mujeres Creando, María Galindo, debido a que se debe implementar la Ruta crítica para mujeres en situación de violencia” en el Municipio y de mejorar la atención a las víctimas de violencia en los Servicios Legales Integrales Municipales (SLIM’s), la Alcaldía alteña, dijo que la ruta crítica para mujeres en situación de violencia es un texto plasmando los mecanismos en el cual existen normas y procedimientos legales adecuados para servicios legales en la Fuerza Especial de Lucha Contra la Violencia (FELCV) y en la que se plantea servicios públicos con la atención las 24 horas del día. ', 'https://www.opinion.com.bo/articulo/pais/maria-galindo-firma-convenio-interviene-escoba-discurso/20210803194021829758.html', 13, 2, 39),
+(720, 1628072813, 1627948800, 'CHICOS DE BLANCO SERAN PARTICIPE DE LA SERENATA A BOLIVIA REPRESENTADON A PANDO', 'Los chicos de blanco surge de una idea de un video club mexicano de que se llamaba chicos de calla', '', 54, 2, 45),
+(721, 1628084553, 1628035200, 'Lima: “Quienes apuestan por la desestabilización solo atentan contra el derecho de las víctimas a obtener justicia”', 'El ministro de Justicia reivindica los fundamentos del caso de supuesto golpe de Estado. Justifica el sobreseimiento de los exvocales electorales porque no se encontró pruebas', 'https://eldeber.com.bo/pais/lima-quienes-apuestan-por-la-desestabilizacion-solo-atentan-contra-el-derecho-de-las-victimas-a-obte_241778?utm_medium=Soc', 17, 2, 16),
+(722, 1628084813, 1628035200, 'El conflicto sube de tono y el Gobierno advierte “mano firme” contra contra las medidas cívicas', 'El MAS cuestionó las movilizaciones que convocó el Comité Cívico y amenazó con juicios a Luis Fernando Camacho. El ministro de Defensa advirtió con ‘mano firme’ si es que hay excesos en las protestas', 'https://eldeber.com.bo/pais/el-conflicto-sube-de-tono-y-el-gobierno-advierte-mano-firme-contra-contra-las-medidas-civicas_241749?utm_medium=Social&utm', 17, 2, 16),
+(723, 1628085059, 1627862400, ' Taller de capacitación sentencia constitucional  plurinacional ', 'El personal de la Dirección de genero y generacional de familia participaron del Taller de capacitación sentencia constitucional Plurinacional, marco normativo para la intervención legal del embarazo, embarazo infantil forzado y evitar además de proteger los derechos, hay mucho silencio y miedo de la sociedad que se cree dueño de la moral es el principal indicador para q existan este problema q mas q ser de cobija es mundial expresa la exponentes.', 'https://www.facebook.com/UNITELPANDO11/videos/312262210586970', 29, 2, 55),
+(724, 1628085130, 1628035200, 'La expresidenta Áñez sufre nuevo revés judicial y estará seis meses más en prisión', 'La Procuraduría, el Ministerio de Gobierno y la Presidencia del Senado activaron un segundo proceso ordinario contra la exautoridad que está detenida desde marzo. Lidia Patty la demandó por ese mismo hecho. La defensa no ve un debido proceso', 'https://eldeber.com.bo/pais/la-expresidenta-anez-sufre-nuevo-reves-judicial-y-estara-seis-meses-mas-en-prision_241729?utm_medium=Social&utm_source=Fac', 17, 2, 16),
+(725, 1628085515, 1628035200, 'Denuncian a cuatro vocales del TSE por habilitar a Reyes Villa', 'El diputado Jhonny Pardo presentó una querella en contra de cuatro vocales del Tribunal Supremo Electoral (TSE): María Angélica Ruiz Vaca Díez, Nancy Gutiérrez Salas, Rosario Baptista Canedo y Salvador Romero Ballivián, por haber firmado la resolución 052/2021 que habilitó la candidatura de Manfred Reyes Villa al municipio de Cochabamba. ', 'https://eldeber.com.bo/pais/denuncian-a-cuatro-vocales-del-tse-por-habilitar-a-reyes-villa_241727?utm_medium=Social&utm_source=Facebook#Echobox=162807', 17, 2, 16);
 
 -- --------------------------------------------------------
 
@@ -1832,7 +2132,96 @@ INSERT INTO `noticia_actor` (`idnotactor`, `rel_idnoticia`, `rel_idactor`) VALUE
 (876, 658, 5),
 (877, 659, 4),
 (878, 660, 6),
-(879, 661, 3);
+(879, 661, 3),
+(880, 662, 6),
+(881, 663, 10),
+(882, 663, 13),
+(883, 664, 3),
+(884, 665, 3),
+(885, 666, 5),
+(886, 667, 2),
+(887, 668, 6),
+(888, 669, 2),
+(889, 670, 6),
+(890, 671, 5),
+(891, 672, 6),
+(892, 673, 6),
+(893, 674, 3),
+(894, 675, 6),
+(895, 676, 6),
+(896, 677, 1),
+(897, 677, 3),
+(898, 678, 6),
+(899, 679, 1),
+(900, 680, 6),
+(901, 681, 6),
+(902, 682, 6),
+(903, 683, 6),
+(904, 684, 6),
+(905, 685, 6),
+(906, 686, 3),
+(907, 686, 6),
+(908, 687, 8),
+(909, 688, 3),
+(910, 689, 7),
+(911, 690, 6),
+(912, 691, 1),
+(913, 691, 5),
+(914, 692, 5),
+(915, 693, 3),
+(916, 694, 6),
+(917, 695, 6),
+(918, 696, 1),
+(919, 697, 6),
+(920, 698, 6),
+(921, 699, 6),
+(922, 700, 2),
+(923, 700, 3),
+(924, 701, 1),
+(925, 701, 2),
+(926, 701, 3),
+(927, 702, 6),
+(928, 703, 6),
+(929, 704, 2),
+(930, 705, 6),
+(931, 705, 9),
+(932, 706, 3),
+(933, 707, 3),
+(934, 707, 5),
+(935, 707, 6),
+(936, 708, 2),
+(937, 709, 6),
+(938, 710, 5),
+(939, 711, 1),
+(940, 711, 5),
+(941, 712, 2),
+(942, 713, 2),
+(943, 713, 6),
+(944, 714, 6),
+(945, 714, 7),
+(946, 715, 6),
+(947, 715, 7),
+(948, 716, 1),
+(949, 716, 6),
+(950, 717, 5),
+(951, 717, 8),
+(952, 718, 1),
+(953, 718, 3),
+(954, 719, 6),
+(955, 719, 7),
+(956, 720, 6),
+(957, 721, 1),
+(958, 721, 2),
+(959, 721, 3),
+(960, 722, 2),
+(961, 722, 6),
+(962, 722, 7),
+(963, 723, 3),
+(964, 723, 9),
+(965, 724, 2),
+(966, 724, 3),
+(967, 725, 1),
+(968, 725, 4);
 
 -- --------------------------------------------------------
 
@@ -1928,7 +2317,11 @@ INSERT INTO `noticia_otrosubtema` (`idnototrosubtema`, `rel_idnoticia`, `rel_ido
 (78, 645, 78),
 (79, 652, 79),
 (80, 659, 80),
-(81, 661, 81);
+(81, 661, 81),
+(82, 662, 82),
+(83, 668, 83),
+(84, 670, 84),
+(86, 671, 86);
 
 -- --------------------------------------------------------
 
@@ -2111,7 +2504,21 @@ INSERT INTO `noticia_otrotema` (`idnototrotema`, `rel_idnoticia`, `rel_idotrotem
 (162, 644, 162),
 (163, 646, 163),
 (164, 654, 164),
-(165, 660, 165);
+(165, 660, 165),
+(166, 667, 167),
+(167, 668, 168),
+(168, 670, 169),
+(169, 674, 170),
+(170, 677, 171),
+(171, 680, 172),
+(172, 703, 173),
+(173, 704, 174),
+(174, 707, 175),
+(175, 708, 176),
+(176, 709, 177),
+(177, 710, 178),
+(178, 711, 179),
+(179, 720, 180);
 
 -- --------------------------------------------------------
 
@@ -2882,7 +3289,113 @@ INSERT INTO `noticia_subtema` (`idnotsubtema`, `rel_idnoticia`, `rel_idsubtema`)
 (808, 656, 29),
 (809, 656, 45),
 (810, 657, 29),
-(811, 658, 46);
+(811, 658, 46),
+(812, 663, 25),
+(813, 663, 26),
+(814, 664, 25),
+(815, 665, 2),
+(816, 666, 40),
+(817, 668, 25),
+(818, 668, 26),
+(819, 669, 25),
+(820, 669, 26),
+(821, 669, 29),
+(822, 670, 25),
+(823, 670, 26),
+(825, 672, 27),
+(826, 672, 28),
+(827, 672, 29),
+(828, 672, 30),
+(829, 673, 25),
+(830, 673, 29),
+(831, 674, 25),
+(832, 674, 26),
+(833, 675, 25),
+(834, 675, 26),
+(835, 676, 25),
+(836, 676, 26),
+(837, 676, 29),
+(840, 671, 25),
+(841, 671, 29),
+(842, 677, 30),
+(843, 678, 45),
+(844, 679, 32),
+(845, 681, 25),
+(846, 681, 26),
+(847, 682, 25),
+(848, 682, 26),
+(849, 683, 40),
+(850, 684, 29),
+(851, 685, 40),
+(852, 686, 4),
+(853, 687, 25),
+(854, 688, 26),
+(855, 689, 48),
+(856, 690, 25),
+(857, 691, 25),
+(858, 691, 26),
+(859, 692, 48),
+(860, 693, 40),
+(861, 694, 25),
+(862, 695, 26),
+(863, 696, 40),
+(865, 697, 33),
+(866, 698, 40),
+(867, 698, 41),
+(868, 699, 40),
+(869, 700, 25),
+(870, 700, 26),
+(871, 700, 28),
+(872, 701, 25),
+(873, 701, 26),
+(874, 701, 27),
+(875, 701, 44),
+(876, 702, 33),
+(877, 702, 34),
+(878, 702, 35),
+(879, 705, 25),
+(880, 706, 26),
+(881, 707, 25),
+(882, 707, 26),
+(883, 709, 25),
+(884, 709, 26),
+(885, 711, 25),
+(886, 711, 26),
+(887, 711, 29),
+(888, 711, 36),
+(889, 712, 48),
+(890, 713, 25),
+(891, 713, 33),
+(892, 713, 34),
+(893, 714, 25),
+(894, 714, 48),
+(895, 715, 25),
+(896, 715, 34),
+(897, 716, 48),
+(898, 717, 44),
+(899, 718, 48),
+(900, 719, 44),
+(901, 719, 36),
+(902, 721, 25),
+(903, 721, 26),
+(904, 721, 28),
+(905, 721, 44),
+(906, 721, 31),
+(907, 722, 25),
+(908, 722, 27),
+(909, 722, 28),
+(910, 722, 33),
+(911, 722, 34),
+(912, 722, 36),
+(913, 723, 33),
+(914, 723, 34),
+(915, 724, 25),
+(916, 724, 26),
+(917, 724, 28),
+(918, 724, 44),
+(919, 725, 26),
+(920, 725, 28),
+(921, 725, 34);
 
 -- --------------------------------------------------------
 
@@ -2978,7 +3491,12 @@ INSERT INTO `otrosubtema` (`idotrosubtema`, `nombre_otrosubtema`, `rel_idtema`) 
 (78, 'Participación de elecciones transparentes', 12),
 (79, '', 9),
 (80, '', 9),
-(81, '', 2);
+(81, '', 2),
+(82, '', 10),
+(83, 'Movimientos cívicos ', 11),
+(84, 'derechos y garantías ', 11),
+(86, 'Opinion Politica', 12),
+(87, 'Declaración de Centro de Enseñanza ', 20);
 
 -- --------------------------------------------------------
 
@@ -3162,7 +3680,22 @@ INSERT INTO `otrotema` (`idotrotema`, `nombre_otrotema`, `rel_idcuestionario`, `
 (162, 'Iglesia Católica', 2, 29),
 (163, 'Fraude electoral', 2, 29),
 (164, 'Persecución político judicial  ', 2, 42),
-(165, 'Ninguno', 1, 35);
+(165, 'Ninguno', 1, 35),
+(166, 'Ley de comercio', 4, 5),
+(167, 'Fraude electoral', 2, 29),
+(168, 'Fraude electoral', 2, 29),
+(169, 'persecución política', 2, 29),
+(170, 'persecución política', 2, 29),
+(171, 'detencion politica a ex ministro de gobieno', 2, 13),
+(172, 'Protesta ciudadana por manipulación judicial', 2, 42),
+(173, 'Proyecto bono escolar.', 2, 31),
+(174, 'Donación del plan dignidad a la UTOP.', 2, 31),
+(175, 'vulneración de derechos y garantías ', 2, 29),
+(176, 'Iglesia Católica', 2, 29),
+(177, 'persecución política', 2, 29),
+(178, 'Congreso del MAS', 2, 29),
+(179, 'Fraude electoral, Movimiento Cívico ', 2, 29),
+(180, 'celebración de aniversario de Bolivia ', 2, 45);
 
 -- --------------------------------------------------------
 
@@ -3172,7 +3705,7 @@ INSERT INTO `otrotema` (`idotrotema`, `nombre_otrotema`, `rel_idcuestionario`, `
 
 CREATE TABLE `subtema` (
   `idsubtema` smallint(5) UNSIGNED NOT NULL,
-  `nombre_subtema` varchar(150) NOT NULL,
+  `nombre_subtema` text NOT NULL,
   `rel_idtema` smallint(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -3250,7 +3783,114 @@ INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
 (67, 'Programa de tabulación', 19),
 (68, 'Preparación de la Boleta o cuestionario', 19),
 (69, 'Piloto', 19),
-(70, 'Selección y formación del personal', 19);
+(70, 'Selección y formación del personal', 19),
+(71, 'Universalizar el acceso a la educación', 20),
+(72, 'Instalar laboratorios de ciencia y tecnología con acceso a Internet en todas las Unidades Educativas del país.', 20),
+(73, 'Desarrollar programas nacionales que vinculen la educación superior con prácticas profesionales en el sector público y las empresas estatales.', 20),
+(74, 'Construcción y equipamiento de los hospitales de segundo y tercer nivel, así como los Institutos de cuarto nivel de atención, Contar con nuevos ítems ', 21),
+(75, 'Consolidar y fortalecer los centros de radioterapia', 21),
+(76, 'Construcción y equipamiento de Hospitales Materno infantiles,', 21),
+(77, 'Crear programas destinados a la educación en salud sexual y reproductiva', 21),
+(78, 'Instaurar en el país el chequeo médico obligatorio en el mes del cumpleaños de cada uno de los bolivianos', 21),
+(79, 'Reducir el sobrepeso de la población', 21),
+(80, 'Modernizar la gestión judicial e introducir tecnologías de la información y comunicación que permitan agilizar los procesos judiciales', 22),
+(81, 'Incrementar el número de procesos judiciales en todas las materias: civil-comercial, penal, familiar, niñez y adolescencia, coactivo fiscal, violencia, anticorrupción y laboral, con énfasis  en los casos de feminicidios y violencia hacia las mujeres, niñas y adolescentes', 22),
+(82, 'Selección de autoridades judiciales bajo criterios de transparencia y meritocracia,', 22),
+(83, 'Ampliar la infraestructura de centros penitenciarios a lo largo del país,', 22),
+(84, 'Nueva normativa para viabilizar la sanción penal, mejorar las capacidades de los servidores públicos del Ministerio Público, Policía Boliviana, Defensa Pública y Órgano Judicial.', 22),
+(85, 'Mayor inversión en seguridad ciudadana, específicamente para la lucha contra la violencia hacia las mujeres, niñas y adolescentes. ', 23),
+(86, 'Más programas y proyectos dirigidos a la prevención y registro de crímenes de violencia contra la mujer', 23),
+(87, 'Construcción de centros integrales de atención para víctimas de violencia y programas de sensibilización de trato a víctimas de violencia', 23),
+(88, 'Incorporar mecanismos que garanticen la transparencia en las funciones que realiza la Policía, e implementar procedimientos que aseguren la selección de agentes policiales', 23),
+(89, 'Mejorar las condiciones del personal en los puestos militares', 23),
+(90, 'Crear incentivos para ampliar su incorporación al mundo laboral y entrarán en esquemas de protección social ', 24),
+(91, 'Promover la participación de la mujer dentro de la sociedad y la economía,', 24),
+(92, 'Promover proyectos de infraestructura y programas específicos para personas con capacidades diferentes o de la tercera edad.', 25),
+(93, 'Difundir, sensibilizar y Promocionar la Declaración sobre los Derechos de los Pueblos Indígenas', 25),
+(94, 'Apoyar la aplicación mundial de la Declaración sobre los Derechos de los Pueblos Indígenas', 25),
+(95, 'Fomentar la participación de los pueblos indígenas en los procesos de las Naciones Unidas', 25),
+(96, 'Defensa y promoción de la consulta previa, libre e informada como contribución a la protección y realización los derechos de los pueblos indígenas.', 25),
+(97, 'Mantener la política de bonos, aportando a los ingresos de los hogares más vulnerables.', 26),
+(98, 'Implementar sistemas de información y comunicación para control y monitoreo de contaminación y daños ambientales ', 27),
+(99, 'Para el periodo 2020 - 2025 es necesario implementar un Plan Nacional Para el Bosque Seco Chiquitano denominado “8 Raíces de Vida para Restaurar y Fortalecer nuestros Bosques y la biodiversidad”', 27),
+(100, 'Desarrollar la CAMPAÑA NACIONAL BOSQUE VIVO HOGAR DE TODOS en el marco de un Proyecto de Forestación y Reforestación masiva en las áreas afectadas por incendios', 27),
+(101, 'Desarrollar un Plan y un marco normativo y de regulación de la conservación y el uso de los componentes de los ecosistemas amazónicos y chiquitanos', 27),
+(102, 'Fortalecer las Áreas Protegidas respetando los fines y objetivos de las mismas correspondientes del Sistema Nacional, Departamental, y Municipal de Áreas Protegidas.', 27),
+(103, 'Consolidar procesos de gestión integral de residuos sólidos ', 27),
+(104, 'Reactivar la economía y el aparato productivo ', 28),
+(105, 'Digitalización de comercio, comercio de bienes y servicios tecnológicos.', 28),
+(106, 'ii. Dinamizar negocios basados en operaciones confiables y gestionadas con seguridad y soporte financiero regulado y normado.', 28),
+(107, 'iii. Proteger los datos e información de nuestros actores comerciales y financieros con un sistema de seguridad cibernética nacional en el marco de la soberanía tecnológica.', 28),
+(108, 'iv. Desarrollo de marcos normativos y mecanismos institucionales sobre incorporación de sistemas informáticos y tecnologías de información asociados a las inversiones y el comercio', 28),
+(109, 'Fomentar el desarrollo económico y social, preservando la estabilidad macroeconómica,', 28),
+(110, 'Fortalecer la industrialización en Bolivia y mantener un crecimiento económico sostenido; la meta en 2025 es un PIB nominal cercano a 60.000 millones de dólares o un PIB per cápita superior a 5.000 de dólares. ', 28),
+(111, 'Garantizar la sostenibilidad de la deuda pública', 28),
+(112, 'Desarrollar estrategias de articulación e integración económica y sectorial (agropecuaria, agroindustria, industria manufacturera, servicios, turismo, etc.),', 28),
+(113, 'Desarrollar mecanismos de integración económica regional,  con una política de incentivos tributarios selectivos para la exportación de productos con valor agregado', 28),
+(114, 'Establecer una política arancelaria dinámica, que responda a las necesidades del producción, estableciendo un comité público – privado, encargado de revisar mensualmente los aranceles', 28),
+(115, 'Desarrollar incentivos para la inversión privada (nacional o extranjera), entre estos incentivos se pueden mencionar la exención temporal de impuestos,', 28),
+(116, 'Lograr la desburocratización y facilitación de trámites en entidades encargadas de fiscalizar la producción', 28),
+(117, 'Suscribir acuerdos específicos de protección de inversiones, ya sea con inversionistas o con países, respetando la Constitución Boliviana', 28),
+(118, 'Llegar, en 2025, a una pobreza extrema del 5%, es decir, lograr su reducción, en los próximos cinco años, en diez puntos porcentuales', 29),
+(119, 'Incrementar la cobertura del servicio de agua potable al 96% y saneamiento básico al 80%, ', 29),
+(120, 'Dotar de alcantarillado a las zonas urbanas y de saneamiento mejorado al área rural del país, a través del programa \"Mi Alcantarillado\".', 29),
+(121, 'Implementar la Televisión Digital Abierta en ciudades intermedias', 29),
+(122, 'Incrementar la cobertura del servicio de telefonía móvil e internet al 100% en todas las regiones y localidades del país, con tarifas reducidas.', 29),
+(123, 'Alcanzar una cobertura de gas domiciliario del 90% en las grandes ciudades y ciudades intermedias.', 29),
+(124, 'Disminuir a 9% la incidencia de desnutrición crónica en niños y niñas menores de cinco años, disminuir a 30% la prevalencia de anemia en niños y niñas menores de cinco años e incrementar la lactancia materna a 84%.', 29),
+(125, 'Apoyar la alimentación complementaria en las escuelas a lo largo de al menos 150 días al año.', 29),
+(126, 'normativa para la combinación estudio-trabajo,', 30),
+(127, 'implementaremos políticas fiscales, financieras y de incentivo para la creación de fuentes de trabajo', 30),
+(128, 'plantear esquemas tributarios adecuados y progresivos para impulsar la generación de empleo de calidad,', 30),
+(129, 'incentivos para ampliar su incorporación al mundo laboral y entrarán en esquemas de protección social para la mujer', 30),
+(130, 'Aumentar del tamaño de la producción por inversión pública - proyectos de industrialización con altos retornos', 32),
+(131, 'Impulsar la variedad de productos y su posicionamiento en el mercado internacional', 32),
+(132, 'Producción de bienes y servicios que sustituyan las importaciones y aumenten la oferta exportadora.', 32),
+(133, 'Desarrollar la petroquímica, siderurgia, la industria del litio y sus derivados', 32),
+(134, 'Producción de hierro de Mutún permitirá a Bolivia ingresar a la era de la siderurgia', 32),
+(135, 'Promover los emprendimientos de las industrias digitales será una de nuestras prioridades.', 32),
+(136, 'Apoyar a la industria naciente con incentivos (premios a la innovación, celeridad en la apertura y disminución de los trámites burocráticos, así como apoyo a los productores en las áreas de ciencia y tecnología, inocuidad alimentaria, procesos de exportación, importación de insumos, gobierno electrónico para tributación y obligaciones laborales)', 32),
+(137, 'Mejores condiciones productivas y tecnológicas para los pequeños y medianos productores del área rural y urbana ', 32),
+(138, 'Expandir la frontera agropecuaria para que nuestros productores puedan producir más alimentos.', 32),
+(139, 'Transformar las instituciones como SENASAG y SENAVEX ', 32),
+(140, 'Crear una oficina de apoyo al exportador', 32),
+(141, 'Cambio de la matriz energética (impulsando los proyectos de industrialización de nuestros recursos evaporíticos e hidrocarburíferos, para conformar una industria básica en el país: química, siderúrgica, petroquímica) (logrando un mayor uso de plantas hidroeléctricas y de energías alternativas (solar, eólica y biomasa)', 33),
+(142, 'Especializarnos e insertarnos en los primeros eslabones de la industrialización de baterías', 33),
+(143, 'Industrialización del litio boliviano', 33),
+(144, 'Exportar la energía eléctrica a nuestros vecinos', 33),
+(145, 'Producción de etanol y continuar con la producción de biocombustibles (bio-diésel). (Reducir la importación del diésel oíl y cubrir el consumo interno con la puesta en marcha del Proyecto de Biodiesel responsable y equilibrada con el medio ambiente)', 33),
+(146, 'Asegurar que todas las bolivianas y los bolivianos cuenten con servicio eléctrico', 33),
+(147, 'Incrementar las reservas de gas natural a 20 TCF, (mediante inversiones realizadas en varios proyectos de exploración y perforación de pozos)', 33),
+(148, 'Realizar inversiones que permitan incrementar la producción de minerales (yeso, zinc y otros) ', 34),
+(149, 'Incrementar las exportaciones de minerales con un proceso de agregación de valor.', 34),
+(150, 'Montar plantas de fundición y refinación de minerales, y poner en funcionamiento la Planta Siderúrgica del Mutún.', 34),
+(151, 'Consolidar la industrialización del litio boliviano diversificando la matriz productiva del pais.', 34),
+(152, 'Consolidar los mercados de exportación para generar nuevas fuentes de ingresos.', 34),
+(153, 'Una eficiente Gobernanza de los recursos hídricos que permita la gestión eficiente y sustentable de los mismos y así como la prevención de conflictos y su solución.', 34),
+(154, 'Promover el reconocimiento del derecho de los pueblos indígenas de participar activamente en la toma de decisiones.', 34),
+(155, 'Promoverá la gestión pública del agua. (Los recursos hídricos constituyen patrimonio común universal de la humanidad y la afectación de éstos constituye un perjuicio para la vida y el planeta por ello no pueden estar en manos privadas)', 34),
+(156, 'Promocionar un modelo de combate a las drogas basado en el respeto a los derechos humanos, la concertación social y la corresponsabilidad de los Estados.', 36),
+(157, 'Fortalecer decididamente la lucha contra el narcotráfico', 36),
+(158, 'Implementar mecanismos que eviten que el narcotráfico penetre en las estructuras de la Policía Boliviana, Fuerzas Armadas ni en ninguna otra institución pública.', 36),
+(159, 'Impulsar e incrementar los operativos antidroga', 36),
+(160, 'Continuar con la racionalización y erradicación de cultivos excedentarios de coca.', 36),
+(161, 'Terminaremos la construcción del Sistema de Contrataciones Electrónico (iniciada por el MEFP en 2018) ', 37),
+(162, 'Fortalecer la administración pública del Estado Plurinacional ( basándose en los principios ético-morales del ama suwa (no robar), ama llulla (no mentir) y ama quella (no ser flojo), cumpliendo el mandato de \"Cero Tolerancia a la Corrupción\".)', 37),
+(163, 'Fortalecer el modelo de gestión que desconcentra las acciones de transparencia, prevención y lucha contra la corrupción en todos los órganos del Estado, empresas públicas, autárquicas y otras.', 37),
+(164, 'Promover la inversión del sector privado en turismo', 38),
+(165, 'Promoverlo como un mecanismo de práctica comunitaria', 38),
+(166, 'Elaborar y poner en marcha el Plan Integral de Aprovechamiento de la Hidrovía Ichilo-Mamoré-Madera', 38),
+(167, 'Construir nueva infraestructura deportiva de iniciación, formación y alto rendimiento,', 40),
+(168, 'Implementar las Escuelas Deportivas Plurinacionales en cada municipio', 40),
+(169, 'Formar y capacitar a deportistas, técnicos, entrenadores, jueces, médicos y otros actores del deporte a través de la otorgación de becas', 40),
+(170, 'Implementar el Programa Plurinacional de Alto Rendimiento Deportivo,', 40),
+(171, 'Nuestra visión estratégica también incluye la transformación del país en un centro de transporte de la región', 41),
+(172, 'Concluir con las gestiones y el inicio de la construcción del Corredor Ferroviario Bioceánico de Integración,', 41),
+(173, 'temas de la política exterior (Diplomacia de los pueblos por la paz y la democracia, reforma de la arquitectura financiera mundial y de las instituciones financieras, derechos de los pueblos indígenas, cambio climático y la Madre Tierra, diplomacia del agua, promoción del comercio y las inversiones, atención de las bolivianas y bolivianos en el exterior y ciudadanía universal, revalorización de la hoja de coca, continuar la labor para la reforma de la Organización de las Naciones Unidas y su Consejo de Seguridad, Promoción Comercial, Negociaciones Comerciales Internacionales, Promoción de las Inversiones, acceso a puertos en condiciones favorables para Bolivia.)', 41),
+(174, 'Promover la investigación y difusión de los múltiples beneficios medicinales y nutricionales de la hoja de coca ', 41),
+(175, 'Desarrollar una diplomacia comercial que nos permita superar barreras no arancelarias en mercados como los Estados Unidos, la Unión Europea y países asiáticos, ', 41),
+(176, 'Construir en lugares a determinar puertos secos, para que la consolidación y desconsolidación de carga se realice en Bolivia', 41),
+(177, 'Realizar las inversiones portuarias necesarias para que Ilo sea una verdadera alternativa al comercio exterior boliviano', 41);
 
 -- --------------------------------------------------------
 
@@ -3261,34 +3901,55 @@ INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
 CREATE TABLE `tema` (
   `idtema` smallint(4) UNSIGNED NOT NULL,
   `nombre_tema` varchar(150) NOT NULL,
-  `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL,
-  `rel_idusuario` int(11) UNSIGNED NOT NULL
+  `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tema`
 --
 
-INSERT INTO `tema` (`idtema`, `nombre_tema`, `rel_idcuestionario`, `rel_idusuario`) VALUES
-(1, 'Presentacion de Estatutos de organizaciones politicas', 1, 1),
-(2, 'Competencias Jurisdicionales del TSE', 1, 1),
-(3, 'Redistribuicion de Escaños', 1, 1),
-(4, 'Circunscripciones uninominales', 1, 1),
-(5, 'Difusion de encuestas', 1, 1),
-(6, 'Inhabilitacion de candidatos', 1, 1),
-(7, 'Computo departamental', 1, 1),
-(8, 'Padron Electoral', 1, 1),
-(9, 'Procedimientos Tecnico Electorales', 1, 1),
-(10, 'Financiamiento politico y partidario', 1, 1),
-(11, 'Ejercicio en libertad de derechos políticos', 2, 1),
-(12, 'Inclusión política', 2, 1),
-(13, 'Participación en el ámbito electoral', 2, 1),
-(14, 'Integración de los ciudadanos en la definición y gestión del Estado', 2, 1),
-(15, 'Instituciones', 2, 1),
-(16, 'Información a la población ', 3, 1),
-(17, 'Uso de los datos censales', 3, 1),
-(18, 'Otros Censos', 3, 1),
-(19, 'Etapa Pre Censal ', 3, 1);
+INSERT INTO `tema` (`idtema`, `nombre_tema`, `rel_idcuestionario`) VALUES
+(1, 'Presentacion de Estatutos de organizaciones politicas', 1),
+(2, 'Competencias Jurisdicionales del TSE', 1),
+(3, 'Redistribuicion de Escaños', 1),
+(4, 'Circunscripciones uninominales', 1),
+(5, 'Difusion de encuestas', 1),
+(6, 'Inhabilitacion de candidatos', 1),
+(7, 'Computo departamental', 1),
+(8, 'Padron Electoral', 1),
+(9, 'Procedimientos Tecnico Electorales', 1),
+(10, 'Financiamiento politico y partidario', 1),
+(11, 'Ejercicio en libertad de derechos políticos', 2),
+(12, 'Inclusión política', 2),
+(13, 'Participación en el ámbito electoral', 2),
+(14, 'Integración de los ciudadanos en la definición y gestión del Estado', 2),
+(15, 'Instituciones', 2),
+(16, 'Información a la población ', 3),
+(17, 'Uso de los datos censales', 3),
+(18, 'Otros Censos', 3),
+(19, 'Etapa Pre Censal ', 3),
+(20, 'Educación', 4),
+(21, 'Salud', 4),
+(22, 'Administración De Justicia', 4),
+(23, 'Seguridad Ciudadana', 4),
+(24, 'Género', 4),
+(25, 'Igualdad (Inclusión)', 4),
+(26, 'Bonos', 4),
+(27, 'Medio Ambiente', 4),
+(28, 'Economía', 4),
+(29, 'Pobreza Y Desarrollo', 4),
+(30, 'Empleo', 4),
+(31, 'Impuestos', 4),
+(32, 'Industria', 4),
+(33, 'Energía', 4),
+(34, 'Recursos Naturales', 4),
+(35, 'Descentralización Y Autonomía', 4),
+(36, 'Narcotráfico', 4),
+(37, 'Corrupción', 4),
+(38, 'Turismo', 4),
+(39, 'Arte Y Cultura', 4),
+(40, 'Deportes', 4),
+(41, 'Política Exterior', 4);
 
 -- --------------------------------------------------------
 
@@ -3330,13 +3991,14 @@ CREATE TABLE `universidad` (
 --
 
 INSERT INTO `universidad` (`iduniversidad`, `nombre_universidad`, `sigla_universidad`) VALUES
-(1, 'Universidad Técnica de Oruro', 'UTO'),
-(2, 'Universidad Mayor de San Simón', 'UMSS'),
-(3, 'Universidad Católica Boliviana', 'UCB'),
-(4, 'Universidad Mayor Real y Pontificia San Francisco Xavier', 'USFX'),
-(5, 'Universidad Amazónica de Pando', 'UAP'),
-(6, 'Universidad Autónoma Gabriel René Moreno', 'UAGRM'),
-(7, 'Universidad Mayor de San Andrés', 'UMSA');
+(1, 'No definido', 'ND'),
+(2, 'Universidad Tecnica de Oruro', 'UTO'),
+(3, 'Universidad Mayor de San Simon', 'UMSS'),
+(4, 'Universidad Catolica Boliviana', 'UCB'),
+(5, 'Universidad Mayor Real y Pontificia de San Francisco Xavier', 'USFX'),
+(6, 'Universidad Amazonica de Pando', 'UAP'),
+(7, 'Universidad Autonoma Gabriel Rene Moreno', 'UAGRM'),
+(8, 'Universidad Mayor de San Andres', 'UMSA');
 
 -- --------------------------------------------------------
 
@@ -3362,6 +4024,33 @@ INSERT INTO `universidad_departamento` (`idudepa`, `rel_iduniversidad`, `rel_idd
 (0, 5, 8),
 (0, 6, 2),
 (0, 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `urlley`
+--
+
+CREATE TABLE `urlley` (
+  `idurlley` int(11) UNSIGNED NOT NULL,
+  `url_ley` varchar(255) NOT NULL,
+  `rel_idley` int(11) UNSIGNED NOT NULL,
+  `rel_idestadoley` smallint(2) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `urlley`
+--
+
+INSERT INTO `urlley` (`idurlley`, `url_ley`, `rel_idley`, `rel_idestadoley`) VALUES
+(1, 'http://www.diputados.bo/leyes/pl-n%C2%B0-2382020-2021-test', 1, 1),
+(2, 'https://proyecto-de-ley-modificacion', 1, 4),
+(3, 'http://www.diputados.bo/leyes/pla-n%C2%B0-2372020-2021', 2, 1),
+(4, 'http://www.diputados.bo/leyes/pl-n%C2%B0-2382020-2021', 3, 3),
+(5, 'http://www.diputados.bo/leyes/pl-cm-n%C2%B0-0282020-2021', 4, 4),
+(6, 'http://www.diputados.bo/leyes/pla-n%C2%B0-2372020-2021jhg ', 5, 1),
+(7, 'http://www.diputados.bo/leyes/pl-n%C2%B0-0042020-2021', 6, 1),
+(8, 'avaadfasdfasd', 6, 3);
 
 -- --------------------------------------------------------
 
@@ -3401,65 +4090,65 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`, `direccion`, `rel_iduniversidad`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1627622344, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 0),
-(2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, 1625414827, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', 'GEOLOCALIZACION', 1, 'Mariano Colodro #1447', 0),
+(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1628027964, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 1),
+(2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, 1625414827, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', 'GEOLOCALIZACION', 1, 'Mariano Colodro #1447', 1),
 (3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, 1625414291, 1, 'Julia Carmen', 'Misericordia Morales', NULL, NULL, '7298782', '', 3, '', 0),
 (4, '127.0.0.1', 'jcarlos', '$2y$10$xj7vhmTVFZOMLHbKfrhz.O2l37pN7cssOOBM0mGsXZ1A9B4S3se.W', 'almeyda@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625358200, NULL, 1, 'Juan Carlos', 'Almeyda', NULL, NULL, '48693587', '45465456456456454', 4, 'Calle Alberto #4323', 0),
-(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1627140697, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL, 0),
+(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1628031111, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL, 0),
 (6, '127.0.0.1', 'mon-claudia', '$2y$10$oq9duUb2wp.cOrNj0h.oouNPk7redo3vaUlwpKEsrfT.Q4nN7.A9C', 'claudia@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415426, 1625420030, 1, 'Claudia', 'Arteaga', NULL, NULL, '49512234654', '546545456456454654', 4, 'Av. Sucre #4452', 0),
 (7, '127.0.0.1', 'mon-carlos', '$2y$10$qzJf1mPzU1NH0EJ6YIwZ.uL2P18cx3OaAkYjIy.F5En57hbNrWJBe', 'carlos@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415550, 1625419998, 1, 'Carlos', 'Olivera', NULL, NULL, '495452121', '94945454654654', 2, 'Av. Circunvalacion #476', 0),
-(8, '127.0.0.1', 'mon-adriana', '$2y$10$kVDfs/u3izDKtmAJCieTb.PJNrV6SYQv3vazv3fV4kXw1.aJ3ZCHG', 'adrianitajus98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674404, NULL, 1, 'Adriana', 'Mier Justiniano', NULL, NULL, '6787516', '', 1, '', 0),
-(9, '127.0.0.1', 'mon-alejandro', '$2y$10$u.4.qtFJYfAEoPnNXaYOZeeA6Foyfw5QCDjLcSpA26NPinNaclhMO', '201907084@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674506, 1627693709, 1, 'Alejandro', 'Galindo Wieler', NULL, NULL, '00', '', 4, '', 0),
-(10, '127.0.0.1', 'mon-alison', '$2y$10$u/6WP7Hnfa1BQQ7M0RtJVOfHunpiTN3wJjn5vzrVx7Q5Q8BxMoPD2', 'alison.sthephanie30@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674629, NULL, 1, 'Alison', 'Romero', NULL, NULL, '8537724', '', 1, '', 0),
-(11, '127.0.0.1', 'mon-ami', '$2y$10$Q3Y8QpHoHPVEb2u5pmJtAebSM7IcIetvLCnQUXGs/2urqDlGnrAqC', 'amisita_la_seri@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625675771, NULL, 1, 'Ami', 'Cruz Amacifen', NULL, NULL, '4217053', '', 8, '', 0),
-(12, '127.0.0.1', 'mon-andres', '$2y$10$K925qdJA4PPWbjmdB/mVQuZZdXAXOfOGtIFFoD6JglaARZiuJowQ6', 'andresventiadesb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625675847, 1627747386, 1, 'Andrés', 'Ventiades Velásquez ', NULL, NULL, '13905327', '', 5, '', 0),
-(13, '127.0.0.1', 'mon-angelo', '$2y$10$frwfgKIzEEtuXd1pnYAX2Oj62X9CaA9t7mcLCIgBRkEn5OwmjPPAq', 'ap819994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676142, 1627833507, 1, 'Angelo Michael', 'Perez Pool ', NULL, NULL, '7351503', '', 3, '', 0),
-(14, '127.0.0.1', 'mon-belen', '$2y$10$80ltEsx4ns0nfK8/iBdfXO4CAcUoxxsIFqF0OhNIW/BMobpcQWypm', 'anabelengl24@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676205, NULL, 1, 'Ana Belen', 'Gutierrez Lopez', NULL, NULL, '9779920', '', 2, '', 0),
-(15, '127.0.0.1', 'mon-bernardo', '$2y$10$qe8865xObWmbnq1q8EB0O.uQGSEUXZyljFd0EVhKIyCWGmfHO/zJ6', 'enzobernardogallo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676259, NULL, 1, 'Bernardo', 'Gallo', NULL, NULL, '12578751', '', 1, '', 0),
-(16, '127.0.0.1', 'mon-cecilia', '$2y$10$x8xji0mC62TwN5AZJ6tcg.BCWWtD480jC09r72tTX1IVy8gf28M/2', 'ceciliajustiniano306@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676367, 1627958424, 1, 'Cecilia', 'Justiniano Escalante', NULL, NULL, '12475248', '', 2, '', 0),
-(17, '127.0.0.1', 'mon-cristian', '$2y$10$ZkPhZsLt7V2NjJFZTD7mqelkwVk0b1Xpcgcj.vv9NHeOBkIez.qNO', 'cmisericordia123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676428, 1627922111, 1, 'Cristian Alberto', 'Misericordia Morales', NULL, NULL, '7390130', '', 3, '', 0),
-(18, '127.0.0.1', 'mon-daniela', '$2y$10$55nP4beMdkX4xAfTC0vfnulkG6R9HDikFAaK7rnO6aPqdKGE8012y', '202004866@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676684, 1627774317, 1, 'Daniela Rosario', 'Hualuque Rodríguez', NULL, NULL, '0', '', 4, '', 0),
-(19, '127.0.0.1', 'mon-diego', '$2y$10$1JlsIQbtpDEEwDANz5nTouWlDO/k8sxq9/CV2MTHCsSr8PiL7NHqe', 'ayo2019@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676805, NULL, 1, 'Diego', 'Ayoroa', NULL, NULL, '6964639', '', 1, '', 0),
-(20, '127.0.0.1', 'mon-elsifania', '$2y$10$d.GWZs3Yw/SXQLyP7AJavOMSnS.XdVUzhyKvtVvbp/CQZgY6.TSgi', 'fannyolarterojas@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676855, 1627959495, 1, 'Elsifania', 'Olarte Rojas', NULL, NULL, '1766568', '', 8, '', 0),
-(21, '127.0.0.1', 'mon-erick', '$2y$10$LfEdf4MpfrTxm9tByOqW/uQyJ1mb01DlEETHy1uqAYQxon6VQeASO', 'tapiaerik1500@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676925, 1627951055, 1, 'Erik Roger ', 'Calizaya Tapia ', NULL, NULL, '10393487', '', 5, 'Ostria Reyes #236', 0),
-(22, '127.0.0.1', 'mon-ericka', '$2y$10$6xava60aeGfmf0s29weyseDY4nkQmZByMN5R0TILcKIXhe.3M6J0i', 'mniko4218@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676994, 1627742622, 1, 'Erick', 'Alvarado Beltrán ', NULL, NULL, '12681679', '', 4, '', 0),
-(23, '127.0.0.1', 'mon-evelin', '$2y$10$SE7MMZ7n3md5e6tHdLl5Vu7BEX4XEi/iohn68.u331sFUuwKOmzCe', 'evelinmachaca123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677141, 1627954783, 1, 'Evelin E.', 'Machaca Flores ', NULL, NULL, '7353738', '', 3, '', 0),
-(24, '127.0.0.1', 'mon-fabiola', '$2y$10$QSCc3/taQIYIYOqUeB2VNuPtP.wxgHRE6NjwW4IFW49gVkVHrRpBi', 'fabi-justiniano-@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677382, 1627598579, 1, 'Fabiola', 'Justiniano', NULL, NULL, '570431', '', 8, '', 0),
-(25, '127.0.0.1', 'mon-gabriel', '$2y$10$U6SqPiI2dfSohR/iAUKWW.czeDRJZ/HyRECsHAL6SSl5nJSAl0JFK', 'garandiabarrios@gmail.com ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677434, NULL, 1, 'Gabriel ', 'Arandia ', NULL, NULL, '7519015', '', 1, '', 0),
-(26, '127.0.0.1', 'mon-genesis', '$2y$10$jWe6K9Qq155/xDpnPEqVrO0ei0l.Q5JpiZx/pbGO9mYP9r3l.5tL2', 'mier.genesis@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677623, 1625680035, 1, 'Génesis ', 'S/A', NULL, NULL, '5645025', '', 1, '', 0),
-(27, '127.0.0.1', 'mon-gustavo', '$2y$10$tpe.nGYN5IuvCygYIUtFtucPBcIJdV5QY9mCmOqptvO0U8GFfC9Rq', 'mamaniquispegustavo2006@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677685, 1627864433, 1, 'Gustavo', 'Mamani Quispe ', NULL, NULL, '7288481', '', 3, '', 0),
-(28, '127.0.0.1', 'mon-idar', '$2y$10$XnaHNH4n7jw3ygaRi3ebg.2Tg5X2O9R7zVSpukLdRmM2lcPNl7rD.', 'chubyjuu18hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677745, 1627935532, 1, 'Idar Josue ', 'Villca Villanueva', NULL, NULL, '7889449', '', 8, '', 0),
-(29, '127.0.0.1', 'mon-jodie', '$2y$10$gYUBwSF7tm6hHRshPTVTMOCN6NXUWbo7bBzgo8JSHvrfTp7V3DKvS', 'michellevillarroeljb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677848, 1627963252, 1, 'Jodie Michelle ', 'Bautista Villarroel', NULL, NULL, '8302800', '', 1, '', 0),
-(30, '127.0.0.1', 'mon-julia', '$2y$10$GD0VAoOh082/6rQ3OVv8ze2qmpYl2bTrxDxqytlDUuvppTIljjkX2', 'mise.juli.1991@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677922, 1627830457, 1, 'Julia Carmen', 'Julia Carmen', NULL, NULL, '7298782', '', 3, '', 0),
-(31, '127.0.0.1', 'mon-keylin', '$2y$10$kX1JLROYSjg3/1Y459BogegWEUGKwBFmsnTHZz/5MaG7U2mQUR3MG', 'kelynsuarez@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677986, 1627962185, 1, 'Keylin', 'Suárez Rojas', NULL, NULL, '9433132', '', 4, '', 0),
-(32, '127.0.0.1', 'mon-kiebel', '$2y$10$i23IBg8Ca8aBjI0iQScuMO1zfL6NK0.OLAbZ55YEyqtd4NiSz7zLa', 'kiebel6garcia6rocabado6@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678075, 1627967526, 1, 'Kiebel', 'Garcia Rocabado', NULL, NULL, '8043490', '', 4, '', 0),
-(33, '127.0.0.1', 'mon-leidy', '$2y$10$YP94xAOZw.3oyHdCXMgwcej04ZbdByCbsQL9KBwzcfX2kLlQ24KM6', 'sincorreo@correo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678176, NULL, 1, 'Leidy Estefania ', 'Cordero Mamani', NULL, NULL, '5701704', '', 8, '', 0),
-(34, '127.0.0.1', 'mon-leonela', '$2y$10$AHRxM3lTzX6vCviO4JmVaOZZ6kiIjgS0jjMhLHT6m4tC8tVvUTwwO', 'ullcafernandezleonela@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678254, 1627958647, 1, 'Leonela', 'Sullca Fernandez ', NULL, NULL, '9122028', '', 1, '', 0),
-(35, '127.0.0.1', 'mon-luis', '$2y$10$bGIsAr6x6Vc6gk7kWPKdOeuhWuOi0/YpHnRrzAL9EPLSVoSXnE4OS', 'luis@dominio.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678599, 1628002869, 1, 'Luis David ', 'Santos Suárez', NULL, NULL, '4209452', '', 8, '', 0),
-(36, '127.0.0.1', 'mon-luisb', '$2y$10$4w9gVeRYO2P82rKW6.G8E.WpFfJGBTURgHjDGp2Qd.qoRHQTSb9jO', 'luissdanielabc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678683, 1627963373, 1, 'Luis Daniel', 'Salamanca Barral ', NULL, NULL, '8621075', '', 5, '', 0),
-(37, '127.0.0.1', 'mon-luz', '$2y$10$ET3v1Y3jEmRq8lZ2HxFPFOhqbIQam/FHJvinjrAr4tXrjMet9rjKG', 'bordaortusteluzmilena@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678837, NULL, 1, 'Luz Milena', 'Borda Ortuste ', NULL, NULL, '10384512', '', 5, '', 0),
-(38, '127.0.0.1', 'mon-maria', '$2y$10$9fbJUMRXHmfkr8JzuU.wqe.7a9F7mPtMlEvA85tRvXu1tzwK9245W', 'delcielogalindo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678903, NULL, 1, 'María del Cielo ', 'Galindo', NULL, NULL, '8808885', '', 1, '', 0),
-(39, '127.0.0.1', 'mon-mariac', '$2y$10$TvTELC9mcL5NRlG3Dp1uR.m.xwcXFaYS4dALCz5D12mw4QO19P39e', '202001453@ est.umss.edu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678999, 1627773213, 1, 'Ma. Celeste', 'Condorhuayra Araoz', NULL, NULL, '14071014', '', 4, '', 0),
-(40, '127.0.0.1', 'mon-mariao', '$2y$10$TgVZu4Af9tJstRWrowoIK.0Ek.2/KDBnkkT/Kh/qRYQXanCsBW7Em', 'vikyosorio123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679075, NULL, 1, 'María Victoria ', 'Osorio', NULL, NULL, '7208546', '', 1, '', 0),
-(41, '127.0.0.1', 'mon-marioly', '$2y$10$S9EgXybZP/7JepUxA9cqaOAThrpPfZj1RXRdlcJhw05ngIFt9FzXG', 'mariolicruz98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679162, 1626991330, 1, 'Marioly', 'Cruz Heredia', NULL, NULL, '9619837', '', 2, '', 0),
-(42, '127.0.0.1', 'mon-mayel', '$2y$10$gjaF9xP2bPEkr.21WXqnWuqCray604Gt/n6Bm5kQePS8Y6.wv0JpG', 'ligiaherbascabrera@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679244, 1627958051, 1, 'Mavel Ligia ', 'Herbas Cabrera ', NULL, NULL, '975576', '', 4, '', 0),
-(43, '127.0.0.1', 'mon-mihaela', '$2y$10$QK72MT1oZ86xuRSPYxDi2.nc4lafQWkkgzIEfX.MA2KZth1gq4cbK', 'mivigafeQQ@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679307, 1627956454, 1, 'Mihaela Victoria ', 'Gareca Fernandez', NULL, NULL, '4074239', '', 4, '', 0),
-(44, '127.0.0.1', 'mon-paula', '$2y$10$3sd0GsvARcjpor1bevHaXuAcXGP3gYbSmLwLiXjjs5LWZ1SiM4d5O', 'paulafariast28@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679373, 1627950938, 1, 'Paula Thais ', 'Farías Teran', NULL, NULL, '5597049', '', 4, '', 0),
-(45, '127.0.0.1', 'mon-ralhs', '$2y$10$YIrMU3oHyw/1/ViYavsYReRoOgHfoPjOVdZC/ssds7fnNO0h/YzQO', 'gonsalesporumaemer@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679440, 1627936971, 1, 'Ralhs W', 'Gonzáles Parumo', NULL, NULL, '4211751', '', 8, '', 0),
-(46, '127.0.0.1', 'mon-ronald', '$2y$10$fBjuFnHXpcT3glOCyF/Fge4zyz8OtRA/wlQuFvkWEaK.GCeHA1HY.', 'ronaldalexiscondori@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679510, 1627961978, 1, 'Ronald Alexis', 'Condori Fernandez', NULL, NULL, '10653943', '', 2, '', 0),
-(47, '127.0.0.1', 'mon-rosana', '$2y$10$GSJs5F7pt7D7ohryQvnhpem8a63RKrYBd.IcX5bLxvmQsYQ/NDA9a', 'rosivas17@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679577, 1627967674, 1, 'Rosana Agar', 'Vásquez Pimentel ', NULL, NULL, '6591343', '', 5, '', 0),
-(48, '127.0.0.1', 'mon-sholay', '$2y$10$WXJ8amnAWLdp1sScT69T8uQDL/tYDO0rO6mnlI0mGcHll6EBh7tmG', 'sholaymisericordiamolina@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679666, 1627954679, 1, 'Sholay Gabriela', 'Misericordia Molina ', NULL, NULL, '7359512', '', 3, '', 0),
-(49, '127.0.0.1', 'mon-taliana', '$2y$10$.pkDJOCdsIZWVRTCc3VWPekFvK85EtGlJp5Lf8Sfjrq9dfHW.1wMO', 'talianamedina1999@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679726, 1627793361, 1, 'Taliana', 'Quiroga Medina', NULL, NULL, '14656162', '', 2, '', 0),
-(50, '127.0.0.1', 'mon-tania', '$2y$10$Ci5Nqgut1Iv7Lh0CKGsZ2ev/fwU00g4lPIJtIkjJdAUrrFLHiEe.G', 'thewantedtanita@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679786, NULL, 1, 'Tania Adriana ', 'Oros Ortiz', NULL, NULL, '7879403', '', 4, '', 0),
-(51, '127.0.0.1', 'mon-alejandroc', '$2y$10$lubj9zh1AGUxdmXkV40W1.sZBHox5qoLE5NvE.KY2c8hrP4U9NprS', 'alecar@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625688141, 1628005367, 1, 'Alejandro', 'Carvajal', NULL, NULL, '0000', '', 1, '', 0),
-(52, '200.105.212.232', 'adm-alejandro', '$2y$12$OPArNBZJXAo.9dAfKgONIu5fUZ9KoS92JZ1sdP1rrV7WmlVbCPyHe', 'alecar1@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626813394, 1628005192, 1, 'Alejandro', 'Carvajal', NULL, NULL, '4845151', 'ssaas', 1, 'ss', 0),
-(53, '177.222.113.11', 'mon-paohu', '$2y$10$qGt25cGC4iGNq190f60q7.EzQWOeQcNPwSxJYmi9mJ4gOmOwbHAHW', 'paola.hb.1997.17@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626823428, 1627701176, 1, 'Paola ', 'Hurtado Borobobo', NULL, NULL, '4212295', '', 8, '', 0),
-(54, '181.115.160.189', 'mon-marisol', '$2y$10$Vhud6bHQekvouLk6Du05CORUC8nQ6jwah5VpY9r.C1nbUNac.mMsO', 'marisol.mzfl@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626913208, 1627999421, 1, 'Marisol', 'Muñoz', NULL, NULL, '7567747', '', 5, '', 0),
-(55, '177.222.113.11', 'mon-selky', '$2y$10$mNazTtweCTd622XwqV1Zt.XI44u2GlFkc2uTs4EGlWX90Wmn.jZsW', 'SelkymolinaVaca@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627049788, 1627765084, 1, 'Selky ', 'Molina Vaca', NULL, NULL, '5600866', '', 8, '', 0),
-(56, '177.222.113.11', 'adm-sverd', '$2y$10$D9SJ4Oz57MpGdbqzIqMgYeo9jM.SCS8S/nGUMjgMwXRzrEOCPkt3u', 'observacionciudadana0@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627077743, NULL, 1, 'Sandra', 'Verduguez', NULL, NULL, '3124967', '', 1, '', 0),
-(57, '177.222.113.11', 'mon-jennifer', '$2y$10$RUhcPXZ56B0JejI.JmT/euDWq4dKZ7Gl7D0Q2evL.c1UeP3Z5yn7O', 'arredondovillagomez10@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627566874, 1627769429, 1, 'Jennifer ', 'Arreondo Villagomez', NULL, NULL, '11304518', '', 2, '', 0),
-(58, '200.105.212.122', 'mon-pando', '$2y$10$V9cQD75V8lHnnBSuedUw9eN67IGi0nP5ArpRNleXkpzYuC95clAWq', 'pando@pando.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627593507, 1627602566, 1, 'Monitor', 'Pando', NULL, NULL, '486512152', '', 8, '', 0),
-(59, '200.105.212.122', 'mon-sucre', '$2y$10$VmPKi4IxtzjVKNLGpu/CG.A29X0wFGWFFqYLy41USMmCpGpVxROJS', 'monsucre@sucre', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627593926, 1627593943, 1, 'Monitor', 'Sucre', NULL, NULL, '48542122', '', 5, '', 0);
+(8, '127.0.0.1', 'mon-adriana', '$2y$10$kVDfs/u3izDKtmAJCieTb.PJNrV6SYQv3vazv3fV4kXw1.aJ3ZCHG', 'adrianitajus98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674404, NULL, 1, 'Adriana', 'Mier Justiniano', NULL, NULL, '6787516', '', 1, '', 4),
+(9, '127.0.0.1', 'mon-alejandro', '$2y$10$u.4.qtFJYfAEoPnNXaYOZeeA6Foyfw5QCDjLcSpA26NPinNaclhMO', '201907084@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674506, 1627693709, 1, 'Alejandro', 'Galindo Wieler', NULL, NULL, '00', '', 4, '', 1),
+(10, '127.0.0.1', 'mon-alison', '$2y$10$u/6WP7Hnfa1BQQ7M0RtJVOfHunpiTN3wJjn5vzrVx7Q5Q8BxMoPD2', 'alison.sthephanie30@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674629, 1628038585, 1, 'Alison', 'Romero', NULL, NULL, '8537724', '', 1, '', 4),
+(11, '127.0.0.1', 'mon-ami', '$2y$10$Q3Y8QpHoHPVEb2u5pmJtAebSM7IcIetvLCnQUXGs/2urqDlGnrAqC', 'amisita_la_seri@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625675771, NULL, 1, 'Ami', 'Cruz Amacifen', NULL, NULL, '4217053', '', 8, '', 1),
+(12, '127.0.0.1', 'mon-andres', '$2y$10$K925qdJA4PPWbjmdB/mVQuZZdXAXOfOGtIFFoD6JglaARZiuJowQ6', 'andresventiadesb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625675847, 1627747386, 1, 'Andrés', 'Ventiades Velásquez ', NULL, NULL, '13905327', '', 5, '', 5),
+(13, '127.0.0.1', 'mon-angelo', '$2y$10$frwfgKIzEEtuXd1pnYAX2Oj62X9CaA9t7mcLCIgBRkEn5OwmjPPAq', 'ap819994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676142, 1628036607, 1, 'Angelo Michael', 'Perez Pool ', NULL, NULL, '7351503', '', 3, '', 2),
+(14, '127.0.0.1', 'mon-belen', '$2y$10$80ltEsx4ns0nfK8/iBdfXO4CAcUoxxsIFqF0OhNIW/BMobpcQWypm', 'anabelengl24@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676205, NULL, 1, 'Ana Belen', 'Gutierrez Lopez', NULL, NULL, '9779920', '', 2, '', 7),
+(15, '127.0.0.1', 'mon-bernardo', '$2y$10$qe8865xObWmbnq1q8EB0O.uQGSEUXZyljFd0EVhKIyCWGmfHO/zJ6', 'enzobernardogallo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676259, NULL, 1, 'Bernardo', 'Gallo', NULL, NULL, '12578751', '', 1, '', 4),
+(16, '127.0.0.1', 'mon-cecilia', '$2y$10$x8xji0mC62TwN5AZJ6tcg.BCWWtD480jC09r72tTX1IVy8gf28M/2', 'ceciliajustiniano306@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676367, 1628084332, 1, 'Cecilia', 'Justiniano Escalante', NULL, NULL, '12475248', '', 2, '', 7),
+(17, '127.0.0.1', 'mon-cristian', '$2y$10$ZkPhZsLt7V2NjJFZTD7mqelkwVk0b1Xpcgcj.vv9NHeOBkIez.qNO', 'cmisericordia123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676428, 1627922111, 1, 'Cristian Alberto', 'Misericordia Morales', NULL, NULL, '7390130', '', 3, '', 2),
+(18, '127.0.0.1', 'mon-daniela', '$2y$10$55nP4beMdkX4xAfTC0vfnulkG6R9HDikFAaK7rnO6aPqdKGE8012y', '202004866@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676684, 1628043141, 1, 'Daniela Rosario', 'Hualuque Rodríguez', NULL, NULL, '0', '', 4, '', 1),
+(19, '127.0.0.1', 'mon-diego', '$2y$10$1JlsIQbtpDEEwDANz5nTouWlDO/k8sxq9/CV2MTHCsSr8PiL7NHqe', 'ayo2019@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676805, NULL, 1, 'Diego', 'Ayoroa', NULL, NULL, '6964639', '', 1, '', 4),
+(20, '127.0.0.1', 'mon-elsifania', '$2y$10$d.GWZs3Yw/SXQLyP7AJavOMSnS.XdVUzhyKvtVvbp/CQZgY6.TSgi', 'fannyolarterojas@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676855, 1627959495, 1, 'Elsifania', 'Olarte Rojas', NULL, NULL, '1766568', '', 8, '', 6),
+(21, '127.0.0.1', 'mon-erick', '$2y$10$LfEdf4MpfrTxm9tByOqW/uQyJ1mb01DlEETHy1uqAYQxon6VQeASO', 'tapiaerik1500@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676925, 1628011876, 1, 'Erik Roger ', 'Calizaya Tapia ', NULL, NULL, '10393487', '', 5, 'Ostria Reyes #236', 5),
+(22, '127.0.0.1', 'mon-ericka', '$2y$10$6xava60aeGfmf0s29weyseDY4nkQmZByMN5R0TILcKIXhe.3M6J0i', 'mniko4218@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676994, 1627742622, 1, 'Erick', 'Alvarado Beltrán ', NULL, NULL, '12681679', '', 4, '', 1),
+(23, '127.0.0.1', 'mon-evelin', '$2y$10$SE7MMZ7n3md5e6tHdLl5Vu7BEX4XEi/iohn68.u331sFUuwKOmzCe', 'evelinmachaca123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677141, 1628033920, 1, 'Evelin E.', 'Machaca Flores ', NULL, NULL, '7353738', '', 3, '', 2),
+(24, '127.0.0.1', 'mon-fabiola', '$2y$10$QSCc3/taQIYIYOqUeB2VNuPtP.wxgHRE6NjwW4IFW49gVkVHrRpBi', 'fabi-justiniano-@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677382, 1627598579, 1, 'Fabiola', 'Justiniano', NULL, NULL, '570431', '', 8, '', 6),
+(25, '127.0.0.1', 'mon-gabriel', '$2y$10$U6SqPiI2dfSohR/iAUKWW.czeDRJZ/HyRECsHAL6SSl5nJSAl0JFK', 'garandiabarrios@gmail.com ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677434, NULL, 1, 'Gabriel ', 'Arandia ', NULL, NULL, '7519015', '', 1, '', 4),
+(26, '127.0.0.1', 'mon-genesis', '$2y$10$jWe6K9Qq155/xDpnPEqVrO0ei0l.Q5JpiZx/pbGO9mYP9r3l.5tL2', 'mier.genesis@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677623, 1625680035, 1, 'Génesis ', 'S/A', NULL, NULL, '5645025', '', 1, '', 4),
+(27, '127.0.0.1', 'mon-gustavo', '$2y$10$tpe.nGYN5IuvCygYIUtFtucPBcIJdV5QY9mCmOqptvO0U8GFfC9Rq', 'mamaniquispegustavo2006@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677685, 1627864433, 1, 'Gustavo', 'Mamani Quispe ', NULL, NULL, '7288481', '', 3, '', 2),
+(28, '127.0.0.1', 'mon-idar', '$2y$10$XnaHNH4n7jw3ygaRi3ebg.2Tg5X2O9R7zVSpukLdRmM2lcPNl7rD.', 'chubyjuu18hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677745, 1628019558, 1, 'Idar Josue ', 'Villca Villanueva', NULL, NULL, '7889449', '', 8, '', 6),
+(29, '127.0.0.1', 'mon-jodie', '$2y$10$gYUBwSF7tm6hHRshPTVTMOCN6NXUWbo7bBzgo8JSHvrfTp7V3DKvS', 'michellevillarroeljb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677848, 1628050848, 1, 'Jodie Michelle ', 'Bautista Villarroel', NULL, NULL, '8302800', '', 1, '', 8),
+(30, '127.0.0.1', 'mon-julia', '$2y$10$GD0VAoOh082/6rQ3OVv8ze2qmpYl2bTrxDxqytlDUuvppTIljjkX2', 'mise.juli.1991@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677922, 1627830457, 1, 'Julia Carmen', 'Julia Carmen', NULL, NULL, '7298782', '', 3, '', 2),
+(31, '127.0.0.1', 'mon-keylin', '$2y$10$kX1JLROYSjg3/1Y459BogegWEUGKwBFmsnTHZz/5MaG7U2mQUR3MG', 'kelynsuarez@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677986, 1628047119, 1, 'Keylin', 'Suárez Rojas', NULL, NULL, '9433132', '', 4, '', 1),
+(32, '127.0.0.1', 'mon-kiebel', '$2y$10$i23IBg8Ca8aBjI0iQScuMO1zfL6NK0.OLAbZ55YEyqtd4NiSz7zLa', 'kiebel6garcia6rocabado6@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678075, 1627967526, 1, 'Kiebel', 'Garcia Rocabado', NULL, NULL, '8043490', '', 4, '', 3),
+(33, '127.0.0.1', 'mon-leidy', '$2y$10$YP94xAOZw.3oyHdCXMgwcej04ZbdByCbsQL9KBwzcfX2kLlQ24KM6', 'sincorreo@correo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678176, NULL, 1, 'Leidy Estefania ', 'Cordero Mamani', NULL, NULL, '5701704', '', 8, '', 1),
+(34, '127.0.0.1', 'mon-leonela', '$2y$10$AHRxM3lTzX6vCviO4JmVaOZZ6kiIjgS0jjMhLHT6m4tC8tVvUTwwO', 'ullcafernandezleonela@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678254, 1628041267, 1, 'Leonela', 'Sullca Fernandez ', NULL, NULL, '9122028', '', 1, '', 8),
+(35, '127.0.0.1', 'mon-luis', '$2y$10$bGIsAr6x6Vc6gk7kWPKdOeuhWuOi0/YpHnRrzAL9EPLSVoSXnE4OS', 'luis@dominio.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678599, 1628028708, 1, 'Luis David ', 'Santos Suárez', NULL, NULL, '4209452', '', 8, '', 6),
+(36, '127.0.0.1', 'mon-luisb', '$2y$10$4w9gVeRYO2P82rKW6.G8E.WpFfJGBTURgHjDGp2Qd.qoRHQTSb9jO', 'luissdanielabc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678683, 1627963373, 1, 'Luis Daniel', 'Salamanca Barral ', NULL, NULL, '8621075', '', 5, '', 5),
+(37, '127.0.0.1', 'mon-luz', '$2y$10$ET3v1Y3jEmRq8lZ2HxFPFOhqbIQam/FHJvinjrAr4tXrjMet9rjKG', 'bordaortusteluzmilena@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678837, NULL, 1, 'Luz Milena', 'Borda Ortuste ', NULL, NULL, '10384512', '', 5, '', 1),
+(38, '127.0.0.1', 'mon-maria', '$2y$10$9fbJUMRXHmfkr8JzuU.wqe.7a9F7mPtMlEvA85tRvXu1tzwK9245W', 'delcielogalindo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678903, NULL, 1, 'María del Cielo ', 'Galindo', NULL, NULL, '8808885', '', 1, '', 4),
+(39, '127.0.0.1', 'mon-mariac', '$2y$10$TvTELC9mcL5NRlG3Dp1uR.m.xwcXFaYS4dALCz5D12mw4QO19P39e', '202001453@ est.umss.edu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678999, 1628051231, 1, 'Ma. Celeste', 'Condorhuayra Araoz', NULL, NULL, '14071014', '', 4, '', 1),
+(40, '127.0.0.1', 'mon-mariao', '$2y$10$TgVZu4Af9tJstRWrowoIK.0Ek.2/KDBnkkT/Kh/qRYQXanCsBW7Em', 'vikyosorio123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679075, 1628043429, 1, 'María Victoria ', 'Osorio', NULL, NULL, '7208546', '', 1, '', 4),
+(41, '127.0.0.1', 'mon-marioly', '$2y$10$S9EgXybZP/7JepUxA9cqaOAThrpPfZj1RXRdlcJhw05ngIFt9FzXG', 'mariolicruz98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679162, 1626991330, 1, 'Marioly', 'Cruz Heredia', NULL, NULL, '9619837', '', 2, '', 7),
+(42, '127.0.0.1', 'mon-mayel', '$2y$10$gjaF9xP2bPEkr.21WXqnWuqCray604Gt/n6Bm5kQePS8Y6.wv0JpG', 'ligiaherbascabrera@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679244, 1628040492, 1, 'Mavel Ligia ', 'Herbas Cabrera ', NULL, NULL, '975576', '', 4, '', 3),
+(43, '127.0.0.1', 'mon-mihaela', '$2y$10$QK72MT1oZ86xuRSPYxDi2.nc4lafQWkkgzIEfX.MA2KZth1gq4cbK', 'mivigafeQQ@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679307, 1628050235, 1, 'Mihaela Victoria ', 'Gareca Fernandez', NULL, NULL, '4074239', '', 4, '', 3),
+(44, '127.0.0.1', 'mon-paula', '$2y$10$3sd0GsvARcjpor1bevHaXuAcXGP3gYbSmLwLiXjjs5LWZ1SiM4d5O', 'paulafariast28@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679373, 1628036197, 1, 'Paula Thais ', 'Farías Teran', NULL, NULL, '5597049', '', 4, '', 3),
+(45, '127.0.0.1', 'mon-ralhs', '$2y$10$YIrMU3oHyw/1/ViYavsYReRoOgHfoPjOVdZC/ssds7fnNO0h/YzQO', 'gonsalesporumaemer@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679440, 1628072486, 1, 'Ralhs W', 'Gonzáles Parumo', NULL, NULL, '4211751', '', 8, '', 6),
+(46, '127.0.0.1', 'mon-ronald', '$2y$10$fBjuFnHXpcT3glOCyF/Fge4zyz8OtRA/wlQuFvkWEaK.GCeHA1HY.', 'ronaldalexiscondori@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679510, 1628047581, 1, 'Ronald Alexis', 'Condori Fernandez', NULL, NULL, '10653943', '', 2, '', 7),
+(47, '127.0.0.1', 'mon-rosana', '$2y$10$GSJs5F7pt7D7ohryQvnhpem8a63RKrYBd.IcX5bLxvmQsYQ/NDA9a', 'rosivas17@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679577, 1627967674, 1, 'Rosana Agar', 'Vásquez Pimentel ', NULL, NULL, '6591343', '', 5, '', 5),
+(48, '127.0.0.1', 'mon-sholay', '$2y$10$WXJ8amnAWLdp1sScT69T8uQDL/tYDO0rO6mnlI0mGcHll6EBh7tmG', 'sholaymisericordiamolina@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679666, 1628036137, 1, 'Sholay Gabriela', 'Misericordia Molina ', NULL, NULL, '7359512', '', 3, '', 2),
+(49, '127.0.0.1', 'mon-taliana', '$2y$10$.pkDJOCdsIZWVRTCc3VWPekFvK85EtGlJp5Lf8Sfjrq9dfHW.1wMO', 'talianamedina1999@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679726, 1627793361, 1, 'Taliana', 'Quiroga Medina', NULL, NULL, '14656162', '', 2, '', 7),
+(50, '127.0.0.1', 'mon-tania', '$2y$10$Ci5Nqgut1Iv7Lh0CKGsZ2ev/fwU00g4lPIJtIkjJdAUrrFLHiEe.G', 'thewantedtanita@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679786, NULL, 1, 'Tania Adriana ', 'Oros Ortiz', NULL, NULL, '7879403', '', 4, '', 3),
+(51, '127.0.0.1', 'mon-alejandroc', '$2y$10$lubj9zh1AGUxdmXkV40W1.sZBHox5qoLE5NvE.KY2c8hrP4U9NprS', 'alecar@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625688141, 1628036502, 1, 'Alejandro', 'Carvajal', NULL, NULL, '0000', '', 1, '', 4),
+(52, '200.105.212.232', 'adm-alejandro', '$2y$12$OPArNBZJXAo.9dAfKgONIu5fUZ9KoS92JZ1sdP1rrV7WmlVbCPyHe', 'alecar1@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626813394, 1628040626, 1, 'Alejandro', 'Carvajal', NULL, NULL, '4845151', 'ssaas', 1, 'ss', 1),
+(53, '177.222.113.11', 'mon-paohu', '$2y$10$qGt25cGC4iGNq190f60q7.EzQWOeQcNPwSxJYmi9mJ4gOmOwbHAHW', 'paola.hb.1997.17@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626823428, 1627701176, 1, 'Paola ', 'Hurtado Borobobo', NULL, NULL, '4212295', '', 8, '', 1),
+(54, '181.115.160.189', 'mon-marisol', '$2y$10$Vhud6bHQekvouLk6Du05CORUC8nQ6jwah5VpY9r.C1nbUNac.mMsO', 'marisol.mzfl@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626913208, 1628043343, 1, 'Marisol', 'Muñoz', NULL, NULL, '7567747', '', 5, '', 1),
+(55, '177.222.113.11', 'mon-selky', '$2y$10$mNazTtweCTd622XwqV1Zt.XI44u2GlFkc2uTs4EGlWX90Wmn.jZsW', 'SelkymolinaVaca@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627049788, 1628084419, 1, 'Selky ', 'Molina Vaca', NULL, NULL, '5600866', '', 8, '', 1),
+(56, '177.222.113.11', 'adm-sverd', '$2y$10$D9SJ4Oz57MpGdbqzIqMgYeo9jM.SCS8S/nGUMjgMwXRzrEOCPkt3u', 'observacionciudadana0@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627077743, NULL, 1, 'Sandra', 'Verduguez', NULL, NULL, '3124967', '', 1, '', 1),
+(57, '177.222.113.11', 'mon-jennifer', '$2y$10$RUhcPXZ56B0JejI.JmT/euDWq4dKZ7Gl7D0Q2evL.c1UeP3Z5yn7O', 'arredondovillagomez10@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627566874, 1627769429, 1, 'Jennifer ', 'Arreondo Villagomez', NULL, NULL, '11304518', '', 2, '', 1),
+(58, '200.105.212.122', 'mon-pando', '$2y$10$V9cQD75V8lHnnBSuedUw9eN67IGi0nP5ArpRNleXkpzYuC95clAWq', 'pando@pando.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627593507, 1627602566, 1, 'Monitor', 'Pando', NULL, NULL, '486512152', '', 8, '', 1),
+(59, '200.105.212.122', 'mon-sucre', '$2y$10$VmPKi4IxtzjVKNLGpu/CG.A29X0wFGWFFqYLy41USMmCpGpVxROJS', 'monsucre@sucre', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627593926, 1627593943, 1, 'Monitor', 'Sucre', NULL, NULL, '48542122', '', 5, '', 1);
 
 -- --------------------------------------------------------
 
@@ -3485,27 +4174,34 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (5, 3, 3),
 (6, 4, 3),
 (7, 5, 3),
+(71, 5, 4),
 (8, 6, 3),
 (9, 7, 3),
 (10, 8, 3),
+(62, 8, 4),
 (11, 9, 3),
 (12, 10, 3),
+(63, 10, 4),
 (13, 11, 3),
 (14, 12, 3),
 (15, 13, 3),
 (16, 14, 3),
 (17, 15, 3),
+(64, 15, 4),
 (18, 16, 3),
 (19, 17, 3),
 (20, 18, 3),
 (21, 19, 3),
+(65, 19, 4),
 (22, 20, 3),
 (23, 21, 3),
 (24, 22, 3),
 (25, 23, 3),
 (26, 24, 3),
 (27, 25, 3),
+(66, 25, 4),
 (28, 26, 3),
+(67, 26, 4),
 (29, 27, 3),
 (30, 28, 3),
 (31, 29, 3),
@@ -3518,8 +4214,10 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (38, 36, 3),
 (39, 37, 3),
 (40, 38, 3),
+(68, 38, 4),
 (41, 39, 3),
 (42, 40, 3),
+(69, 40, 4),
 (43, 41, 3),
 (44, 42, 3),
 (45, 43, 3),
@@ -3531,6 +4229,7 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (51, 49, 3),
 (52, 50, 3),
 (53, 51, 3),
+(70, 51, 4),
 (54, 52, 1),
 (55, 53, 3),
 (56, 54, 3),
@@ -3558,6 +4257,14 @@ ALTER TABLE `ci_sessions`
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
 
 --
+-- Indices de la tabla `codigoley`
+--
+ALTER TABLE `codigoley`
+  ADD PRIMARY KEY (`idcodigoley`),
+  ADD KEY `fk_codigo_a_estadoley` (`rel_idestadoley`),
+  ADD KEY `fk_codigo_a_ley` (`rel_idley`);
+
+--
 -- Indices de la tabla `cuestionario`
 --
 ALTER TABLE `cuestionario`
@@ -3570,10 +4277,66 @@ ALTER TABLE `departamento`
   ADD PRIMARY KEY (`iddepartamento`);
 
 --
+-- Indices de la tabla `estadoley`
+--
+ALTER TABLE `estadoley`
+  ADD PRIMARY KEY (`idestadoley`);
+
+--
+-- Indices de la tabla `fuente`
+--
+ALTER TABLE `fuente`
+  ADD PRIMARY KEY (`idfuente`);
+
+--
 -- Indices de la tabla `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `leyes`
+--
+ALTER TABLE `leyes`
+  ADD PRIMARY KEY (`idleyes`);
+
+--
+-- Indices de la tabla `leyes_estadoley`
+--
+ALTER TABLE `leyes_estadoley`
+  ADD PRIMARY KEY (`idleyesestado`),
+  ADD KEY `fk_a_estadoley` (`rel_idestadoley`),
+  ADD KEY `fk_a_leyes` (`rel_idleyes`);
+
+--
+-- Indices de la tabla `leyes_fuente`
+--
+ALTER TABLE `leyes_fuente`
+  ADD PRIMARY KEY (`idleyesfuente`);
+
+--
+-- Indices de la tabla `ley_otrosubtema`
+--
+ALTER TABLE `ley_otrosubtema`
+  ADD PRIMARY KEY (`idleyotrosubtema`),
+  ADD KEY `fk_rel_leyes` (`rel_idleyes`),
+  ADD KEY `fk_otrosubtema_rel` (`rel_idotrosubtema`);
+
+--
+-- Indices de la tabla `ley_otrotema`
+--
+ALTER TABLE `ley_otrotema`
+  ADD PRIMARY KEY (`idleyotrotema`),
+  ADD KEY `fk_rel_ley` (`rel_idleyes`),
+  ADD KEY `fk_rel_ot` (`rel_idotrotema`);
+
+--
+-- Indices de la tabla `ley_subtema`
+--
+ALTER TABLE `ley_subtema`
+  ADD PRIMARY KEY (`idleysubtema`),
+  ADD KEY `fk_leyes` (`rel_idleyes`),
+  ADD KEY `fk_subtema` (`rel_idsubtema`);
 
 --
 -- Indices de la tabla `login_attempts`
@@ -3595,6 +4358,14 @@ ALTER TABLE `medio_departamento`
   ADD PRIMARY KEY (`idmediodepartamento`),
   ADD KEY `FK_mediodepartamento` (`rel_idmedio`),
   ADD KEY `FK_departamentomedio` (`rel_iddepartamento`);
+
+--
+-- Indices de la tabla `nombreley`
+--
+ALTER TABLE `nombreley`
+  ADD PRIMARY KEY (`idnombreley`),
+  ADD KEY `fk_nombreley_a_estadoley` (`rel_idestadoley`),
+  ADD KEY `fk_nombreley_a_leyes` (`rel_idley`);
 
 --
 -- Indices de la tabla `noticia`
@@ -3662,8 +4433,7 @@ ALTER TABLE `subtema`
 --
 ALTER TABLE `tema`
   ADD PRIMARY KEY (`idtema`),
-  ADD KEY `fk_cuestionariotema` (`rel_idcuestionario`),
-  ADD KEY `fk_usuario_tema` (`rel_idusuario`);
+  ADD KEY `fk_cuestionariotema` (`rel_idcuestionario`);
 
 --
 -- Indices de la tabla `tipo_medio`
@@ -3683,6 +4453,14 @@ ALTER TABLE `universidad`
 ALTER TABLE `universidad_departamento`
   ADD KEY `fk_rel_depa` (`rel_iddepartamento`),
   ADD KEY `fk_rel_universidad` (`rel_iduniversidad`);
+
+--
+-- Indices de la tabla `urlley`
+--
+ALTER TABLE `urlley`
+  ADD PRIMARY KEY (`idurlley`),
+  ADD KEY `fk_urlley_a_estadoley` (`rel_idestadoley`),
+  ADD KEY `fk_urlley_a_leyes` (`rel_idley`);
 
 --
 -- Indices de la tabla `users`
@@ -3714,6 +4492,12 @@ ALTER TABLE `actor`
   MODIFY `idactor` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `codigoley`
+--
+ALTER TABLE `codigoley`
+  MODIFY `idcodigoley` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `cuestionario`
 --
 ALTER TABLE `cuestionario`
@@ -3726,16 +4510,64 @@ ALTER TABLE `departamento`
   MODIFY `iddepartamento` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `estadoley`
+--
+ALTER TABLE `estadoley`
+  MODIFY `idestadoley` smallint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `fuente`
+--
+ALTER TABLE `fuente`
+  MODIFY `idfuente` smallint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `leyes`
+--
+ALTER TABLE `leyes`
+  MODIFY `idleyes` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `leyes_estadoley`
+--
+ALTER TABLE `leyes_estadoley`
+  MODIFY `idleyesestado` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `leyes_fuente`
+--
+ALTER TABLE `leyes_fuente`
+  MODIFY `idleyesfuente` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `ley_otrosubtema`
+--
+ALTER TABLE `ley_otrosubtema`
+  MODIFY `idleyotrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `ley_otrotema`
+--
+ALTER TABLE `ley_otrotema`
+  MODIFY `idleyotrotema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `ley_subtema`
+--
+ALTER TABLE `ley_subtema`
+  MODIFY `idleysubtema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT de la tabla `medio_comunicacion`
@@ -3750,58 +4582,64 @@ ALTER TABLE `medio_departamento`
   MODIFY `idmediodepartamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
+-- AUTO_INCREMENT de la tabla `nombreley`
+--
+ALTER TABLE `nombreley`
+  MODIFY `idnombreley` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `noticia`
 --
 ALTER TABLE `noticia`
-  MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=662;
+  MODIFY `idnoticia` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=726;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_actor`
 --
 ALTER TABLE `noticia_actor`
-  MODIFY `idnotactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=880;
+  MODIFY `idnotactor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=969;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_otrosubtema`
 --
 ALTER TABLE `noticia_otrosubtema`
-  MODIFY `idnototrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `idnototrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_otrotema`
 --
 ALTER TABLE `noticia_otrotema`
-  MODIFY `idnototrotema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `idnototrotema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia_subtema`
 --
 ALTER TABLE `noticia_subtema`
-  MODIFY `idnotsubtema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=812;
+  MODIFY `idnotsubtema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=922;
 
 --
 -- AUTO_INCREMENT de la tabla `otrosubtema`
 --
 ALTER TABLE `otrosubtema`
-  MODIFY `idotrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `idotrosubtema` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `otrotema`
 --
 ALTER TABLE `otrotema`
-  MODIFY `idotrotema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `idotrotema` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
 
 --
 -- AUTO_INCREMENT de la tabla `subtema`
 --
 ALTER TABLE `subtema`
-  MODIFY `idsubtema` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `idsubtema` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT de la tabla `tema`
 --
 ALTER TABLE `tema`
-  MODIFY `idtema` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idtema` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_medio`
@@ -3813,7 +4651,13 @@ ALTER TABLE `tipo_medio`
 -- AUTO_INCREMENT de la tabla `universidad`
 --
 ALTER TABLE `universidad`
-  MODIFY `iduniversidad` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `iduniversidad` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `urlley`
+--
+ALTER TABLE `urlley`
+  MODIFY `idurlley` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -3825,11 +4669,46 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `codigoley`
+--
+ALTER TABLE `codigoley`
+  ADD CONSTRAINT `fk_codigo_a_estadoley` FOREIGN KEY (`rel_idestadoley`) REFERENCES `estadoley` (`idestadoley`),
+  ADD CONSTRAINT `fk_codigo_a_ley` FOREIGN KEY (`rel_idley`) REFERENCES `leyes` (`idleyes`);
+
+--
+-- Filtros para la tabla `leyes_estadoley`
+--
+ALTER TABLE `leyes_estadoley`
+  ADD CONSTRAINT `fk_a_estadoley` FOREIGN KEY (`rel_idestadoley`) REFERENCES `estadoley` (`idestadoley`),
+  ADD CONSTRAINT `fk_a_leyes` FOREIGN KEY (`rel_idleyes`) REFERENCES `leyes` (`idleyes`);
+
+--
+-- Filtros para la tabla `ley_otrosubtema`
+--
+ALTER TABLE `ley_otrosubtema`
+  ADD CONSTRAINT `fk_otrosubtema_rel` FOREIGN KEY (`rel_idotrosubtema`) REFERENCES `otrosubtema` (`idotrosubtema`),
+  ADD CONSTRAINT `fk_rel_leyes` FOREIGN KEY (`rel_idleyes`) REFERENCES `leyes` (`idleyes`);
+
+--
+-- Filtros para la tabla `ley_otrotema`
+--
+ALTER TABLE `ley_otrotema`
+  ADD CONSTRAINT `fk_rel_ley` FOREIGN KEY (`rel_idleyes`) REFERENCES `leyes` (`idleyes`),
+  ADD CONSTRAINT `fk_rel_ot` FOREIGN KEY (`rel_idotrotema`) REFERENCES `otrotema` (`idotrotema`);
+
+--
+-- Filtros para la tabla `ley_subtema`
+--
+ALTER TABLE `ley_subtema`
+  ADD CONSTRAINT `fk_leyes` FOREIGN KEY (`rel_idleyes`) REFERENCES `leyes` (`idleyes`),
+  ADD CONSTRAINT `fk_subtema` FOREIGN KEY (`rel_idsubtema`) REFERENCES `subtema` (`idsubtema`);
 
 --
 -- Filtros para la tabla `medio_comunicacion`
@@ -3843,6 +4722,13 @@ ALTER TABLE `medio_comunicacion`
 ALTER TABLE `medio_departamento`
   ADD CONSTRAINT `FK_departamentomedio` FOREIGN KEY (`rel_iddepartamento`) REFERENCES `departamento` (`iddepartamento`),
   ADD CONSTRAINT `FK_mediodepartamento` FOREIGN KEY (`rel_idmedio`) REFERENCES `medio_comunicacion` (`idmedio`);
+
+--
+-- Filtros para la tabla `nombreley`
+--
+ALTER TABLE `nombreley`
+  ADD CONSTRAINT `fk_nombreley_a_estadoley` FOREIGN KEY (`rel_idestadoley`) REFERENCES `estadoley` (`idestadoley`),
+  ADD CONSTRAINT `fk_nombreley_a_leyes` FOREIGN KEY (`rel_idley`) REFERENCES `leyes` (`idleyes`);
 
 --
 -- Filtros para la tabla `noticia`
@@ -3896,8 +4782,7 @@ ALTER TABLE `subtema`
 -- Filtros para la tabla `tema`
 --
 ALTER TABLE `tema`
-  ADD CONSTRAINT `fk_cuestionariotema` FOREIGN KEY (`rel_idcuestionario`) REFERENCES `cuestionario` (`idcuestionario`),
-  ADD CONSTRAINT `fk_usuario_tema` FOREIGN KEY (`rel_idusuario`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `fk_cuestionariotema` FOREIGN KEY (`rel_idcuestionario`) REFERENCES `cuestionario` (`idcuestionario`);
 
 --
 -- Filtros para la tabla `universidad_departamento`
@@ -3905,6 +4790,13 @@ ALTER TABLE `tema`
 ALTER TABLE `universidad_departamento`
   ADD CONSTRAINT `fk_rel_depa` FOREIGN KEY (`rel_iddepartamento`) REFERENCES `departamento` (`iddepartamento`),
   ADD CONSTRAINT `fk_rel_universidad` FOREIGN KEY (`rel_iduniversidad`) REFERENCES `universidad` (`iduniversidad`);
+
+--
+-- Filtros para la tabla `urlley`
+--
+ALTER TABLE `urlley`
+  ADD CONSTRAINT `fk_urlley_a_estadoley` FOREIGN KEY (`rel_idestadoley`) REFERENCES `estadoley` (`idestadoley`),
+  ADD CONSTRAINT `fk_urlley_a_leyes` FOREIGN KEY (`rel_idley`) REFERENCES `leyes` (`idleyes`);
 
 --
 -- Filtros para la tabla `users_groups`

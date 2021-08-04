@@ -1,4 +1,4 @@
-<main role="">
+<main role="main">
 	<br>
 	<div class="container">
 		<div class="row">
@@ -46,6 +46,22 @@
 								<input type="date" class="form-control" id="fech_fin" name="fecha_fin" required >
 							</div>
 						</div>
+					</div>
+
+					<br>
+
+					<h3>Formulario </h3>
+					<div class="form-row">
+						<select id="idcuestionario" name="idcuestionario" class="form-control simple"  >
+							<option value="0" >Seleccione una opcion</option>
+							<?php foreach ($forms as $fm): ?>
+								<?php if($fm->idcuestionario != 4): ?>
+								<option value="<?php echo $fm->idcuestionario; ?>" >
+									<?php echo $fm->nombre_cuestionario; ?>
+								</option>
+								<?php endif; ?>
+							<?php endforeach;  ?>
+						</select>
 					</div>
 
 					<br>
@@ -159,9 +175,6 @@
 						</select>
 					</div>
 					<br>
-
-
-
 
 
 

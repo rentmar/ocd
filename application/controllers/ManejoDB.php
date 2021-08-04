@@ -21,6 +21,7 @@ class ManejoDB extends CI_Controller{
 		$this->load->model('Tema_model');
 		$this->load->model('SubTema_model');
 		$this->load->model('Noticia_model');
+		$this->load->model('Formulario_model');
 		//Comprobacion de session
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -32,6 +33,7 @@ class ManejoDB extends CI_Controller{
 		$usuario = $this->ion_auth->user()->row();
 		//var_dump($usuario);
 		//Poblar el formulario
+		$forms = $this->Formulario_model->leerCuestionarios();
 		$depas = $this->Departamento_model->leerDepartamentos();
 		$tipo_medio = $this->MedioComunicacion_model->leerTipoMedio();
 		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
@@ -44,6 +46,7 @@ class ManejoDB extends CI_Controller{
 
 
 		$data['dep'] = $depas;
+		$data['forms'] = $forms;
 		$data['tipo_medio'] = $tipo_medio;
 		$data['medio'] = $medio;
 		$data['actor'] = $actor;
