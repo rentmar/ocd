@@ -8,7 +8,7 @@
                             TABLA MONITORES <br>
                             Nombre y Cuestionario
                             </div>
-                        <img class="card-img-top" src="<?php echo base_url().'assets/img/pol.png'; ?>" alt="Card image">
+                        <img class="card-img-top" src="<?php echo base_url().'assets/img/seguimiento.svg'; ?>" alt="Card image">
                         <div class="card-body">
                             <a href="<?php echo site_url('Seguimientomonitores/EstadoObservacionElectoral');?>" class="BOTON" role="button">Ver</a>
                         </div>
@@ -20,7 +20,7 @@
                             TABLA MONITORES <br>
                             Universidad Cuestionario
                             </div>
-                        <img class="card-img-top" src="<?php echo base_url().'assets/img/pul.png'; ?>" alt="Card image">
+                        <img class="card-img-top" src="<?php echo base_url().'assets/img/universidad.svg'; ?>" alt="Card image">
                         <div class="card-body">
                             <a href="<?php echo site_url('Seguimientomonitores/EstadoObservacionElectoralXuniversidad');?>" class="BOTON" role="button">Ver</a>
                         </div>
@@ -32,7 +32,7 @@
                             TABLA MONITORES <br>
                             Depto Cuestionario
                             </div>
-                        <img class="card-img-top" src="<?php echo base_url().'assets/img/pil.png'; ?>" alt="Card image">
+                        <img class="card-img-top" src="<?php echo base_url().'assets/img/departamento.svg'; ?>" alt="Card image">
                         <div class="card-body">
                             <a href="<?php echo site_url('Seguimientomonitores/CuestionariosPorDepartamentoUsuario');?>" class="BOTON" role="button">Ver</a>
                         </div>

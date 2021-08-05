@@ -1,110 +1,85 @@
 <main role="main" >
 	<br><br>
-	<div class="container" style="background-color:#93C90F;">
+	<div class="container" style="background-color:#7c5295">
 	<br>
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
 				<br>
 				<div class="card">
-					<div class="card-header">
-						<h4>Editar Noticia</h4>
+					<div class="card-header;" >
+						<h4>Editar Ley</h4>
 					</div>
 					<div class="card-body ">
 						<div class="form-row">
 							<div class="col-10">
-								<label for="fecha" >
-									Fecha:
-								</label>
-								<input type="date" id="fecha" name="fecha" class="form-control" disabled="true"
-									   value="<?php echo mdate('%Y-%m-%d', $noticia->fecha_noticia);?>" >
-							</div>
-							<div class="col-2">
-								<button type="submit" data-toggle="modal" data-target="#fechamodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-									Cambiar Fecha
-								</button>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="col">
-								<hr>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="col-10">
 								<div class="form-group">
-									<label for="rel_idtipomedio" >
-										Tipo Medio
+									<label for="rel_idfuente" >
+										Fuente de la Ley
 									</label>
-									<select class="combo" id='cuadro' name='rel_idtipomedio' disabled="true" required>
+									<select class="combo" id='cuadro' name='rel_idfuente' disabled="true" required>
 										<option value="0"></option>
-										<?php foreach ($tipos as $tm) {?>
-											<?php if ($tm->idtipomedio == $medio->rel_idtipomedio) {?>
-											<option selected='true' value='<?php echo $tm->idtipomedio;?>'><?php echo $tm->nombre_tipo;?></option>
+										<?php foreach ($fuentes as $f) {?>
+											<?php if ($f->idfuente == $fuente->rel_idfuente) {?>
+											<option selected='true' value='<?php echo $f->idfuente;?>'><?php echo $f->nombre_fuente;?></option>
 											<?php } ?>
-											<?php if ($tm->idtipomedio != $medio->rel_idtipomedio) {?>
-											<option value='<?php echo $tm->idtipomedio;?>'><?php echo $tm->nombre_tipo;?></option>
+											<?php if ($f->idfuente != $fuente->rel_idfuente) {?>
+											<option value='<?php echo $f->idfuente;?>'><?php echo $f->nombre_fuente;?></option>
 											<?php } ?>
 										<?php } ?>
 									</select>
 								</div>
 							</div>
 							<div class="col-2">
-								<button type="submit" data-toggle="modal" data-target="#mediomodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-									Cambiar Medio Comunicacion
+								<button type="submit" data-toggle="modal" data-target="#fuentemodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+									Cambiar Fuente de Ley
 								</button>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="col-10">
-								<div class="form-group">
-									<label for="medio" >
-										Medio de Comunicacion
-									</label>
-									<select class="combo" id='cuadro' name='medio' disabled="true" required>
-										<option value="0"></option>
-										<?php foreach ($medios as $m) {?>
-											<?php if ($m->idmedio == $medio->idmedio) {?>
-											<option selected='true' value='<?php echo $m->idmedio;?>'><?php echo $m->nombre_medio;?></option>
-											<?php } ?>
-											<?php if ($m->idmedio != $medio->idmedio) {?>
-											<option value='<?php echo $m->idmedio;?>'><?php echo $m->nombre_medio;?></option>
-											<?php } ?>
-										<?php } ?>
-									</select>
-								</div>
 							</div>
 						</div>
 		
 						<div class="form-row">
 							<div class="col">
-								<hr>
+								<hr  color="black">
 							</div>
 						</div>
 						
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
-									<label for="titular" >
-										Titular:
+									<label for="resumen" >
+										Resumen:
 									</label>
-									<input type="text" id="titular" name="titular" class="form-control" disabled="true"
-										   value="<?php echo $noticia->titular; ?>" required>
+									<textarea id="resumen" name="resumen" class="form-control" disabled="true" required>
+										<?php echo $ley->resumen; ?>
+									</textarea>
 								</div>
 							</div>
 							<div class="col-2">
 								<button type="submit" data-toggle="modal" data-target="#datosmodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-									Cambiar Datos Noticia
+									Cambiar Datos Ley
 								</button>
+							</div>
+						</div>
+						<br>
+						<?php foreach ($datosestado as $de) {?>
+						<div class="form-row">
+							<div class="col-10">
+								<div class="form-group">
+								<label for="fecha<?php echo $de['idestadoley'];?>" >
+									Fecha <?php echo $de['nombre_estadoley'];?>:
+								</label>
+								<input type="date" id="fecha<?php echo $de['idestadoley'];?>" name="fecha<?php echo $de['idestadoley'];?>" class="form-control" disabled="true"
+									   value="<?php echo mdate('%Y-%m-%d', $de['fecha_estadoley']);?>" >
+								</div>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
-									<label for="resumen" >
-										Resumen:
+									<label for="tituloley<?php echo $de['idestadoley'];?>" >
+										Titulo <?php echo $de['nombre_estadoley'];?>:
 									</label>
-									<textarea id="resumen" name="resumen" required class="form-control" disabled="true">
-										<?php echo $noticia->resumen; ?>
+									<textarea id="cuadro" name="tituloley<?php echo $de['idestadoley'];?>" required class="form-control" disabled="true">
+										<?php echo $de['nombre_ley']; ?>
 									</textarea>
 								</div>
 							</div>
@@ -112,51 +87,31 @@
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
-									<label for="url" >
-										url:
+									<label for="codigoley<?php echo $de['idestadoley'];?>" >
+										Codigo <?php echo $de['nombre_estadoley'];?>:
 									</label>
-									<input id="url" name="url" class="form-control" disabled="true" value="<?php echo $noticia->url_noticia; ?>" >
+									<input id="codigoley" name="codigoley<?php echo $de['idestadoley'];?>" class="form-control" disabled="true" 
+											value="<?php echo $de['codigo_ley']; ?>" >
 								</div>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="col">
-								<hr>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
-
-									<label style="font-size:20px">
-										Seleccionar Actor/es:
-									</label><br>
-									<?php foreach ($actores as $a ) { ?>
-										<?php foreach ( $na as $n) { ?>
-											<?php if ($a->idactor==$n->rel_idactor) { ?>
-												<input disabled="true" type="checkbox" checked="true" id="a<?php echo $a->idactor; ?>" name="a<?php echo $a->idactor; ?>" value="<?php echo $a->idactor; ?>">
-												<label style="background-color: #ccc" for="a<?php echo $a->idactor; ?>"><?php echo $a->nombre_actor; ?></label><br>
-											<?php break; } ?>
-										<?php } ?>
-										<?php if ($a->idactor!=$n->rel_idactor) { ?>
-											<input disabled="true" type="checkbox" id="a<?php echo $a->idactor; ?>" name="a<?php echo $a->idactor; ?>" value="<?php echo $a->idactor; ?>">
-											<label for="a<?php echo $a->idactor; ?>"><?php echo $a->nombre_actor; ?></label><br>
-										<?php } ?>
-									<?php } ?>
-
+									<label for="urlley<?php echo $de['idestadoley'];?>" >
+										URL <?php echo $de['nombre_estadoley'];?>:
+									</label>
+									<input id="urlley" name="urlley<?php echo $de['idestadoley'];?>" class="form-control" disabled="true" 
+											value="<?php echo $de['url_ley']; ?>" >
 								</div>
-							</div>
-							<div class="col-2">
-								<button type="submit" data-toggle="modal" data-target="#actormodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-									Cambiar Actor/es
-								</button>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="col">
-								<hr>
+								<hr  color="black">
 							</div>
 						</div>
+						<?php } ?>
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
@@ -206,13 +161,13 @@
 									<button type="submit" data-toggle="modal" data-target="#temamodal" style="background-color:#474142; color:#ffffff">
 										Cambiar Tema/s
 									</button>
-								</div>
-							<div class="form-row">
-								<div class="col">
-									<hr>
-								</div>
 							</div>
 						</div>
+						<div class="form-row">
+								<div class="col">
+									<hr  color="black">
+								</div>
+							</div>
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
@@ -233,8 +188,8 @@
 											<?php } ?>
 										<?php } ?>
 										<div class="form-row">
-											<div class="col">
-												<hr>
+										<div class="col">
+											<hr  color="black">
 											</div>
 										</div>
 										<?php if ($otrosubtema!=NULL) {?>
@@ -260,72 +215,49 @@
 									<?php } ?>
 								</div>
 							</div>
-									<div class="form-row">
-										<div class="col">
-											<hr>
-										</div>
-									</div>
+							<div class="form-row">
+								<div class="col">
+									<hr  color="black">
 								</div>
 							</div>
+									
 						</div>
 					</div>
+							
 				</div>
 			</div>
 		</div>
 	</div>
 </main>
 
-<div class="modal" id="fechamodal">
+<div class="modal" id="fuentemodal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title">Editar Fecha</h1>
+				<h1 class="modal-title">Editar Fuente de Ley</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('noticia/modificarNoticia/'.$noticia->idnoticia);?>
+			<?php echo form_open('Ley/modificarLey/'.$ley->idleyes);?>
 			<div class="modal-body">
 				<div class="form-group">
-					<label>Fecha de la Noticia:</label><br>
-					<input type="date" id="fecha" name="fecha" class="form-control">
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" name="accion" value="1" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
-			<?php echo form_close();?>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal" id="mediomodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">Editar Medio de Comunicacion</h1>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<?php echo form_open('Reformaelectoral/editarMedio');?>
-			<div class="modal-body">
-				<div class="form-group">
-					<input type="hidden" id="idnoticia" name="idnoticia"
-						value="<?php echo $noticia->idnoticia; ?>">
+					<input type="hidden" id="idleyes" name="idleyes"
+						value="<?php echo $ley->idleyes;?>">
 				</div>
 				<div class="form-group">
-					<label for="rel_idtipomedio" >
-						Seleccionar Tipo Medio
+					<label for="rel_idleyes">
+						Seleccionar Fuente
 					</label>
-					<select class="combo" id='cuadro' name='rel_idtipomedio' required>
+					<select class="combo" id='cuadro' name='rel_idfuente' required>
 						<option value="0"></option>
-						<?php foreach ($tipos as $tm) {?>
-						<option value='<?php echo $tm->idtipomedio;?>'><?php echo $tm->nombre_tipo;?></option>
+						<?php foreach ($fuentes as $f) {?>
+						<option value='<?php echo $f->idfuente;?>'><?php echo $f->nombre_fuente;?></option>
 						<?php } ?>
 					</select>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" name="accion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Continuar
+				<button type="submit" name="accion" value="1" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+					Editar
 				</button>
 			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -338,63 +270,83 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title">Editar Datos de la Noticia</h1>
+				<h1 class="modal-title">Editar Datos de la Ley</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('noticia/modificarNoticia/'.$noticia->idnoticia);?>
+			<?php echo form_open('Ley/modificarLey/'.$ley->idleyes);?>
 			<div class="modal-body">
-				<div class="form-group">
-					<label for="titular" >
-						Titular:
-					</label>
-					<input type="text" id="titular" name="titular" class="form-control" value="<?php echo $noticia->titular; ?>"
-						 required>
+				<div class="form-row">
+					<div class="col-10">
+						<div class="form-group">
+							<label for="resumen" >
+								Resumen:
+							</label>
+							<textarea id="resumen" name="resumen" class="form-control"  required>
+								<?php echo $ley->resumen; ?>
+							</textarea>
+						</div>
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="resumen" >
-						Resumen:
-					</label>
-					<textarea id="resumen" name="resumen" required class="form-control">
-						<?php echo $noticia->resumen; ?>
-					</textarea>
+				<div class="form-row">
+					<div class="col">
+						<hr  color="black">
+					</div>
 				</div>
-				<div class="form-group">
-					<label for="url" >
-						url:
-					</label>
-					<input id="url" name="url" class="form-control" value="<?php echo $noticia->url_noticia; ?>">			
-				</div>
+				<?php foreach ($datosestado as $de) {?>
+						<div class="form-row">
+							<div class="col-10">
+								<div class="form-group">
+								<label for="fecha<?php echo $de['idestadoley'];?>" >
+									Fecha <?php echo $de['nombre_estadoley'];?>:
+								</label>
+								<input type="date" id="fecha<?php echo $de['idestadoley'];?>" name="fecha<?php echo $de['idestadoley'];?>" class="form-control" 
+									   value="<?php echo mdate('%Y-%m-%d', $de['fecha_estadoley']);?>" >
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-10">
+								<div class="form-group">
+									<label for="tituloley<?php echo $de['idestadoley'];?>" >
+										Titulo <?php echo $de['nombre_estadoley'];?>:
+									</label>
+									<textarea id="cuadro" name="tituloley<?php echo $de['idestadoley'];?>" required class="form-control">
+										<?php echo $de['nombre_ley']; ?>
+									</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-10">
+								<div class="form-group">
+									<label for="codigoley<?php echo $de['idestadoley'];?>" >
+										Codigo <?php echo $de['nombre_estadoley'];?>:
+									</label>
+									<input id="codigoley" name="codigoley<?php echo $de['idestadoley'];?>" class="form-control" 
+											value="<?php echo $de['codigo_ley']; ?>" >
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-10">
+								<div class="form-group">
+									<label for="urlley<?php echo $de['idestadoley'];?>" >
+										URL <?php echo $de['nombre_estadoley'];?>:
+									</label>
+									<input id="urlley" name="urlley<?php echo $de['idestadoley'];?>" class="form-control"  
+											value="<?php echo $de['url_ley']; ?>" >
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col">
+								<hr  color="black">
+							</div>
+						</div>
+				<?php } ?>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
-			<?php echo form_close();?>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal" id="actormodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">Editar Actor/es</h1>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<?php echo form_open('noticia/modificarNoticia/'.$noticia->idnoticia);?>
-			<div class="modal-body">
-				<div class="form-group">
-					<label>
-						Seleccionar Actor/es:
-					</label><br>
-					<?php foreach ($actores as $a ) { ?>
-						<input type="checkbox" id="a<?php echo $a->idactor; ?>" name="a<?php echo $a->idactor; ?>" value="<?php echo $a->idactor; ?>">
-						<label for="a<?php echo $a->idactor; ?>"><?php echo $a->nombre_actor; ?></label><br>
-					<?php } ?>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" name="accion" value="4" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
+				<button type="submit" name="accion" value="2" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
 			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			</div>
@@ -409,11 +361,11 @@
 				<h1 class="modal-title">Editar Tema/s</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
-			<?php echo form_open('Reformaelectoral/editarTemas');?>
+			<?php echo form_open('Ley/editarTemas');?>
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="hidden" id="idnoticia" name="idnoticia"
-						value="<?php echo $noticia->idnoticia; ?>">
+					<input type="hidden" id="idley" name="idley"
+						value="<?php echo $ley->idleyes; ?>">
 				</div>
 				<div class="form-group">
 					<label style="font-size:20px">
@@ -439,7 +391,7 @@
 				</div>
 				<div class="form-group">
 					<label for="otrotema">Especificar Otro Tema</label><br>
-					<input type="text" id="otrotema" name="otrotema" value="<?php echo $otrotema->nombre_otrotema;?>">
+					<input type="text" id="otrotema" name="otrotema" value="<?php echo $otrotema->nombre_otrotema;?>" required>
 				</div>
 				<?php } ?>
 				<div class="form-row">
@@ -454,12 +406,12 @@
 				</div>
 				<div class="form-group">
 					<label for="otrotema">Especificar Otro Tema</label><br>
-					<input type="text" id="otrotema" name="otrotema" value="">
+					<input type="text" id="otrotema" name="otrotema" value="" >
 				</div>
 				<?php } ?>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" name="accion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Continuar</button>
+				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Continuar</button>
 			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			</div>

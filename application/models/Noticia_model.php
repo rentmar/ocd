@@ -703,7 +703,7 @@ class Noticia_model extends CI_Model{
 		/** @noinspection PhpLanguageLevelInspection */
 		$ly = [
 			'fecha_registro' => $ley->fecha_registro ,
-			'fecha_ley' => $ley->fecha_ley ,
+			//'fecha_ley' => $ley->fecha_ley ,
 			'resumen' => $ley->resumen,
 			'rel_idcuestionario' => $ley->rel_idcuestionario,
 			'rel_idusuario' => $ley->rel_idusuario,
@@ -736,6 +736,7 @@ class Noticia_model extends CI_Model{
 		$estdly = [
 			'rel_idleyes' => $ley_id,
 			'rel_idestadoley' => $ley->estado,
+			'fecha_estadoley ' => $ley->fecha_ley,
 		];
 		$this->db->insert('leyes_estadoley', $estdly);
 
@@ -838,4 +839,6 @@ class Noticia_model extends CI_Model{
 			return true;
 		}
 	}
+
+
 }

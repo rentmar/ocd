@@ -5,7 +5,8 @@ class Ley extends CI_Controller
 //    protected $_idformulario;
     public function __construct()
     {
-    	parent::__construct();
+
+        	parent::__construct();
         $this->settings = new stdClass();
         $this->load->model('Ley_model');
 		$this->load->model('Cuestionario_model');
@@ -26,57 +27,15 @@ class Ley extends CI_Controller
     }
     public function index()
     {
-        $DatosLeyes['Leyes']=$this->Ley_model->leerLeyes();       
-        $DatosLeyes['nEstadoDeLeyes']=$this->Ley_model->leerEstadoDeLeyes();
-        $TablaAuxiliarLey=new stdClass();
-        $TablaAuxiliarLey->nombre='xxxxxxx';
-        foreach ($DatosLeyes['Leyes'] as $f)
-        {
-            if($f->nombre_ley == $TablaAuxiliarLey->nombre)
-            {
-                foreach($DatosLeyes['nEstadoDeLeyes'] as $nDc0)
-                {
-                    if($f->nombre_estadoley == $nDc0->nombre_estadoley)
-                    {
-                        $cuestionarioA=$nDc0->nombre_estadoley;
-                        $TablaAuxiliarLey->$cuestionarioA=$f->codigo_ley;
-                    }
-                }
-            }
-            else
-            {
-                $TablaAuxiliarLey=new stdClass();
-                $TablaAuxiliarLey->nombre=$f->nombre_ley;
-                foreach($DatosLeyes['nEstadoDeLeyes'] as $ndc1)
-                {
-                    $cuestionario1=$ndc1->nombre_estadoley;
-                    $TablaAuxiliarLey->$cuestionario1=0;
-                }
-                foreach($DatosLeyes['nEstadoDeLeyes'] as $nDc)
-                {
-                    if($f->nombre_estadoley == $nDc->nombre_estadoley)
-                    {
-                        $cuestionarioA=$nDc->nombre_estadoley;
-                        $TablaAuxiliarLey->$cuestionarioA=$f->codigo_ley;
-                    }
-                }
-                $Leyes[]=$TablaAuxiliarLey;
-            }
-        }
-//        echo "<pre>";var_dump($Leyes);echo "</pre>";
-        $tablaLey['Leyes1']=$Leyes;
-//        $tablaLey['NumeroDeCuestionarios']=$DatosLeyes['nEstadoDeLeyes'];
-        if(empty($tablaLey))
-        {
-        redirect('Ley');
-        }
-         else
-         {
+		$usuario = $this->ion_auth->user()->row();
+		
+		$dt['leyes'] = $this->Ley_model->leerLeyesEstado($usuario->id);
+
         $this->load->view('html/encabezado');
         $this->load->view('html/navbar');
-        $this->load->view('ley/vley0',$tablaLey);
+        $this->load->view('ley/vley',$dt);
         $this->load->view('html/pie');
-        }
+
     }
 
 	public function crearley()
@@ -297,6 +256,47 @@ class Ley extends CI_Controller
 		$fecha_unix = strtotime($fecha_std);
 		return $fecha_unix;
 	}
+	public function estadoLey($idl)
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$dt['leyes'] =$this->Cuestionario_model->leerLeyesIdUsuario($usuario->id);
+        $dt['estados'] = $this->Cuestionario_model->leerEstadosDeLey();
+		$dt['idley']=$idl;
+		$dt['estadose']=$this->Ley_model->leerEstadosEnLey($idl);
+		$this->load->view('html/encabezado');
+        $this->load->view('html/navbar');
+        $this->load->view('ley/vactualizar_ley',$dt);
+        $this->load->view('html/pie');
+	}
+    public function actualizarLey($idl)
+    {
+		$idel = $this->input->post('idestadoley');
+		if (count($this->Ley_model->leerEstadoLey($idl,$idel))==0)
+		{
+			$dtestado=array(
+						'rel_idleyes'=>$idl,
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'fecha_estadoley'=>$this->fecha_unix($this->input->post('fechaestado'))
+						);
+			$dttitulo=array(
+						'nombre_ley'=>$this->input->post('titulo'),
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'rel_idley'=>$idl
+						);
+			$dtcodigo=array(
+						'codigo_ley'=>$this->input->post('codigo'),
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'rel_idley'=>$idl
+						);
+			$dturl=array(
+						'url_ley'=>$this->input->post('url'),
+						'rel_idestadoley'=>$this->input->post('idestadoley'),
+						'rel_idley'=>$idl
+						);
+			$this->Ley_model->insertarEstadoDeLey($dtestado,$dttitulo,$dtcodigo,$dturl);
+		}        
+		redirect('Ley');
+    }
 
 	public function cancelarNuevo()
 	{
@@ -309,5 +309,209 @@ class Ley extends CI_Controller
 		//Redireccionar al inicio
 		redirect('inicio/');
 	}
-
+	public function editar()
+	{
+		$usuario = $this->ion_auth->user()->row();
+		
+		$dt['leyes'] =$this->Cuestionario_model->leerLeyesIdUsuario($usuario->id);
+		$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vley_lista', $dt);
+		$this->load->view('html/pie');
+	}
+	public function editarLey($idley)
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$l=$this->Ley_model->leerLeyPorId($idley);
+		$dt['fuentes']=$this->Ley_model->leerfuentes();
+		$dt['ley']= $l;
+		$dt['fuente']=$this->Ley_model->leerFuenteLey($idley);
+		$estadosdeley=$this->Ley_model->leerEstadosDeLey($idley);
+		$datosestado=array();
+		foreach ($estadosdeley as $el)
+		{
+			$nl=$this->Ley_model->leerNombreLeyIdEstado($idley,$el->rel_idestadoley);
+			$cl=$this->Ley_model->leerCodigoLeyIdEstado($idley,$el->rel_idestadoley);
+			$ul=$this->Ley_model->leerUrlLeyIdEstado($idley,$el->rel_idestadoley);
+			$dtestado=array(
+					'idestadoley'=>$el->rel_idestadoley,
+					'nombre_estadoley'=>$el->nombre_estadoley,
+					'fecha_estadoley'=>$el->fecha_estadoley,
+					'nombre_ley'=>$nl->nombre_ley,
+					'codigo_ley'=>$cl->codigo_ley,
+					'url_ley'=>$ul->url_ley
+					);
+			array_push($datosestado,$dtestado);
+		}
+		$dt['datosestado']=$datosestado;
+		$dt['temas']=$this->Ley_model->leerTemasCuestionario($this->_idformulario);
+		$dt['temase']=$this->Ley_model->leerTemasLey($idley);
+		$dt['otrotema']=$this->Ley_model->leerOtroTemaLey($idley);
+		$dt['otrosubtema']=$this->Ley_model->leerOtroSubTemaLey($idley);
+		$dt['subtemase']=$this->Ley_model->leerSubtemasLey($idley);
+		foreach ($dt['temase'] as $te)
+		{
+			$subtemas[$te->idtema]=$this->Ley_model->leerSubtemasPorTema($te->idtema);
+		}
+		$dt['subtemas']=$subtemas;
+		/*$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
+		
+		$dt['temas']=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
+		$dt['temase']=$this->Noticia_model->leerTemasNoticia($idnoticia);
+		$dt['otrotema']=$this->Noticia_model->leerOtroTemaNoticia($idnoticia);
+		$dt['otrosubtema']=$this->Noticia_model->leerOtroSubTemaNoticia($idnoticia);
+		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
+		foreach ($dt['temase'] as $te)
+		{
+			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
+		}
+		$dt['subtemas']=$subtemas;*/
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vley_editar', $dt);
+		$this->load->view('html/pie');
+	}
+	public function modificarLey($idley)
+	{
+		$l=$this->Ley_model->leerLeyPorId($idley);
+		$accion=$this->input->post('accion');
+		if ($accion==1)
+		{
+			//$fecha=$this->fecha_unix($this->input->post('fecha'));
+			//$this->Ley_model->modificarFechaLey($idley,$fecha);
+			$this->Ley_model->modificarFuenteLey($idley,$this->input->post('rel_idfuente'));
+		}
+		elseif ($accion==2)
+		{	
+			//$this->Ley_model->modificarFuenteLey($idley,$this->input->post('rel_idfuente'));
+		}
+		elseif ($accion==3)
+		{	
+			/*$dts = array(
+						'titular'=>$this->input->post('titular'),
+						'resumen'=>$this->input->post('resumen'),
+						'url_noticia'=>$this->input->post('url')
+						);
+			$this->Noticia_model->modificarDatosNoticia($idn,$dts);*/
+		}
+		elseif ($accion==4)
+		{	
+			/*$dtchkbox=array();
+			$actores=$this->Noticia_model->leerTodoActores();
+			foreach ($actores as $a)
+			{	
+				if ($this->input->post('a'.$a->idactor)!=null)
+				{
+					array_push($dtchkbox,$this->input->post('a'.$a->idactor));
+				}
+			}
+			$this->Noticia_model->modificarActoresNoticia($idn,$dtchkbox);*/
+		}
+		elseif ($accion==5)
+		{	
+			/*$dtchkboxst=array();
+			$dtotrosubtemas=array();
+			$subtemas=$this->Noticia_model->leerTodoSubTemas();
+			$temas=$this->Noticia_model->leerTodoTemas();
+			if ($this->input->post('cnttemas')!=0)
+			{
+				foreach ($subtemas as $st)
+				{	
+					if ($this->input->post('st'.$st->idsubtema)!=null)
+					{
+						array_push($dtchkboxst,$this->input->post('st'.$st->idsubtema));
+					}
+				}
+				foreach ($temas as $t)
+				{
+					if ($this->input->post('te'.$t->idtema)!=null)
+					{
+						$idte=$this->input->post('te'.$t->idtema);
+						if ($this->input->post('ost'.$idte)!=null)
+						{
+							array_push($dtotrosubtemas,array('nombre_otrosubtema'=>$this->input->post('otrosubtema'.$t->idtema),
+															'rel_idtema'=>$t->idtema));
+						}
+					}
+				}
+			}
+			if ($this->input->post('otrotema')=="")
+			{
+				$dtsotrotema=array();
+			}
+			else
+			{
+				$dtsotrotema=array(
+							'nombre_otrotema'=>$this->input->post('otrotema'),
+							'rel_idcuestionario'=>$this->input->post('idcuestionario'),
+							'rel_idusuario'=>$this->input->post('idusuario'));
+			}
+			/*echo "Numrero de Temas: ";
+			echo $this->input->post('cnttemas');
+			echo "<br><br>";
+			echo "Numero de otro Tema: ";
+			echo count($dtsotrotema);
+			echo "<br><br>";
+			var_dump($dtsotrotema);
+			echo "<br><br>";
+			echo "Numero de Sub Temas: ";
+			echo count($dtchkboxst);
+			echo "<br><br>";
+			var_dump($dtchkboxst);
+			echo "<br><br>";
+			echo "Numero de otro SubTemas: ";
+			echo count($dtotrosubtemas);
+			echo "<br><br>";
+			var_dump($dtotrosubtemas);*
+			
+			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst,$dtsotrotema,$dtotrosubtemas);*/
+			//$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
+		}
+		/*if ($n->rel_idcuestionario==1)
+		{
+			redirect('Reformaelectoral/editar');
+		}
+		elseif ($n->rel_idcuestionario==2)
+		{
+			redirect('Instdemocratica/editar');
+		}
+		elseif ($n->rel_idcuestionario==3)
+		{
+			redirect('Censo/editar');
+		}*/
+	}
+	public function editarTemas()
+	{
+		$temase=array();
+		$subtemase=array();
+		$usuario = $this->ion_auth->user()->row();
+		$dt['idusuario']=$usuario->id;
+		$dt['idcuestionario']=$this->_idformulario;
+		$dt['idley']=$this->input->post('idley');
+		$temas=$this->Ley_model->leerTemasCuestionario($this->_idformulario);
+		foreach ($temas as $t)
+		{	
+			if ($this->input->post('t'.$t->idtema)!=null)
+			{
+				$temase[$t->idtema]=$this->Ley_model->leerTemaPorId($t->idtema);
+				$subtemase[$t->idtema]=$this->Ley_model->leerSubtemasPorTema($t->idtema);
+			}
+		}
+		if ($this->input->post('idot')!=null)
+		{
+			$dt['otrotema']=$this->input->post('otrotema');
+		}
+		else
+		{
+			$dt['otrotema']=null;
+		}
+		$dt['temase']=$temase;
+		$dt['subtemase']=$subtemase;
+		$dt['cntTemas']=count($temase);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/veditartema_ley',$dt);
+		$this->load->view('html/pie');
+	}
 }

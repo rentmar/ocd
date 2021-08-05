@@ -142,7 +142,7 @@
 			SIGUIENTE
 		</button>
 		<a href="<?php echo site_url('ley/cancelarNuevo/');?>">
-			<input type="button" class="BOTON" value="CANCELAR">
+			<input type="button" class="BOTONROJO" value="CANCELAR">
 		</a>
 	</div>
 	<?php echo form_close();?>

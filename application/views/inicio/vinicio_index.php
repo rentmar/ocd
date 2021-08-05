@@ -57,7 +57,7 @@
 						<br><br>
 
 					</div>
-					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.jpg'; ?>" alt="Card image">
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.svg'; ?>" alt="Card image">
 					<div class="card-body">
 						<a href="<?php echo site_url('censo/');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
 							Nuevo
@@ -69,6 +69,7 @@
 				</div>
 			</div>
 			
+			<?php if($this->ion_auth->in_group(4)): ?>
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest4 ">
@@ -76,17 +77,18 @@
 						<br><br>
 
 					</div>
-					<img class="card-img-top" src="<?php echo base_url().'assets/img/leyes.jpg'; ?>" alt="Card image">
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/leyes.svg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('ley/');?>" class="btn btn-info text-body" role="button" style="background-color:#AFA3E1;">
+						<a href="<?php echo site_url('Ley');?>" class="btn btn-info text-body" role="button" style="background-color:#7c5295;">
 							Nuevo
 						</a>
-						<a href="<?php echo site_url('ley/editar/');?>" class="btn btn-info text-body " role="button" style="background-color:#AFA3E1;">
+						<a href="<?php echo site_url('ley/editar/');?>" class="btn btn-info text-body " role="button" style="background-color:#7c5295;">
 							Editar
 						</a>
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 
 		</div>
 
