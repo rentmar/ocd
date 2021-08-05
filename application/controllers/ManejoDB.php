@@ -264,6 +264,62 @@ class ManejoDB extends CI_Controller{
 
 	}
 
+	public function downloadUniveridad()
+	{
+		$filename = "reporte-universidad.xlsx";
+		$ruta = 'assets/info/';
+		$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+		header('Content-Disposition: attachment; filename="' . $filename. '"');
+		header('Cache-Control: max-age=0');
+
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+		$worksheet = $spreadsheet->getActiveSheet();
+		$worksheet->setTitle("Noticias Universidad");
+		$worksheet->getCell("B4")->setValue("El Perfume");
+		$worksheet->getCell("B5")->setValue("La Virgen de los sicarios");
+		$worksheet->getCell("B6")->setValue("Angeles y Demonios");
+		$worksheet->getCell("B7")->setValue("The Killer inside me");
+
+		$worksheet->getCell("C4")->setValue("Patrick Suskind");
+		$worksheet->getCell("C5")->setValue("Fernando Vallejo");
+		$worksheet->getCell("C6")->setValue("Dan Brown");
+		$worksheet->getCell("C7")->setValue("Jim Thompson");
+
+		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+		$writer->save("php://output");
+
+	}
+
+	public function downloadTipomedio()
+	{
+
+
+
+		$filename = "reporte-universidad.xlsx";
+		$ruta = 'assets/info/';
+		$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+		header('Content-Disposition: attachment; filename="' . $filename. '"');
+		header('Cache-Control: max-age=0');
+
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+		$worksheet = $spreadsheet->getActiveSheet();
+		$worksheet->setTitle("Noticias Universidad");
+		$worksheet->getCell("B4")->setValue("El Perfume");
+		$worksheet->getCell("B5")->setValue("La Virgen de los sicarios");
+		$worksheet->getCell("B6")->setValue("Angeles y Demonios");
+		$worksheet->getCell("B7")->setValue("The Killer inside me");
+
+		$worksheet->getCell("C4")->setValue("Patrick Suskind");
+		$worksheet->getCell("C5")->setValue("Fernando Vallejo");
+		$worksheet->getCell("C6")->setValue("Dan Brown");
+		$worksheet->getCell("C7")->setValue("Jim Thompson");
+
+		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+		$writer->save("php://output");
+	}
+
 
 
 
