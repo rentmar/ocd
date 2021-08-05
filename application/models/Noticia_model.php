@@ -840,5 +840,25 @@ class Noticia_model extends CI_Model{
 		}
 	}
 
+	//Filtrar noticias por tipo de medio
+	public function noticiaPorTipomedio($consulta)
+	{
+		$fecha_inicio = $consulta->fecha_inicio;
+		$fecha_fin = $consulta->fecha_fin;
+		$idtipomedio = $consulta->idtipomedio;
+
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+			."FROM noticia AS n   "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
+			."LEFT JOIN users ON users.id = n.rel_idusuario   "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento   "
+			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
+			."WHERE tipo_medio.idtipomedio = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
+		$qry = $this->db->query($sql, [$idtipomedio, $fecha_inicio, $fecha_fin,  ]);
+		return $qry->result();
+	}
+
 
 }

@@ -30,8 +30,22 @@ class ManejoDB extends CI_Controller{
 	}
 	public function index()
 	{
+
+
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+	    $this->load->view('manejodb/viniciodb');
+		$this->load->view('html/pie');
+	}
+
+
+
+
+	public function reportesSimples()
+	{
 		$usuario = $this->ion_auth->user()->row();
-		//var_dump($usuario);
 		//Poblar el formulario
 		$forms = $this->Formulario_model->leerCuestionarios();
 		$depas = $this->Departamento_model->leerDepartamentos();
@@ -55,24 +69,44 @@ class ManejoDB extends CI_Controller{
 		$data['stema'] = $stema;
 		$data['un'] = $un;
 
-
-
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-	    $this->load->view('manejodb/viniciodb', $data);
+		$this->load->view('manejodb/vmanejodb_repsimples', $data);
 		$this->load->view('html/pie');
 	}
 
 
-
-
-	public function reportesPorFecha()
+	public function reportesCompuestos()
 	{
+		$usuario = $this->ion_auth->user()->row();
+		//Poblar el formulario
+		$forms = $this->Formulario_model->leerCuestionarios();
+		$depas = $this->Departamento_model->leerDepartamentos();
+		$tipo_medio = $this->MedioComunicacion_model->leerTipoMedio();
+		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
+		$actor = $this->Actor_model->leerActores();
+		$universidad = $this->Universidad_model->leerUniversidades();
+		$tema = $this->Tema_model->leerTemas();
+		$stema = $this->SubTema_model->leerSubTemas();
+		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
+
+
+
+		$data['dep'] = $depas;
+		$data['forms'] = $forms;
+		$data['tipo_medio'] = $tipo_medio;
+		$data['medio'] = $medio;
+		$data['actor'] = $actor;
+		$data['universidad'] = $universidad;
+		$data['tema'] = $tema;
+		$data['stema'] = $stema;
+		$data['un'] = $un;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('manejodb/vexportar_fecha');
+		$this->load->view('manejodb/vmanejodb_repcomp', $data);
 		$this->load->view('html/pie');
+
 	}
 
 
@@ -276,6 +310,10 @@ class ManejoDB extends CI_Controller{
 		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 		$worksheet = $spreadsheet->getActiveSheet();
 		$worksheet->setTitle("Noticias Universidad");
+
+
+
+
 		$worksheet->getCell("B4")->setValue("El Perfume");
 		$worksheet->getCell("B5")->setValue("La Virgen de los sicarios");
 		$worksheet->getCell("B6")->setValue("Angeles y Demonios");
@@ -293,34 +331,174 @@ class ManejoDB extends CI_Controller{
 
 	public function downloadTipomedio()
 	{
+		$consulta = $this->session->consulta_tipomedio;
+		$this->session->unset_userdata("consulta_tipomedio");
+		$noticias = $this->Noticia_model->noticiaPorTipomedio($consulta);
 
+		if(!empty($consulta))
+		{
+			$filename = "reporte-universidad.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
 
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			foreach ($noticias as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
 
-		$filename = "reporte-universidad.xlsx";
-		$ruta = 'assets/info/';
-		$plantilla = $ruta.'plantilla-tipomedio.xlsx';
-		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-		header('Content-Disposition: attachment; filename="' . $filename. '"');
-		header('Cache-Control: max-age=0');
+				$eje_y++;
+			endforeach;
 
-		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-		$worksheet = $spreadsheet->getActiveSheet();
-		$worksheet->setTitle("Noticias Universidad");
-		$worksheet->getCell("B4")->setValue("El Perfume");
-		$worksheet->getCell("B5")->setValue("La Virgen de los sicarios");
-		$worksheet->getCell("B6")->setValue("Angeles y Demonios");
-		$worksheet->getCell("B7")->setValue("The Killer inside me");
-
-		$worksheet->getCell("C4")->setValue("Patrick Suskind");
-		$worksheet->getCell("C5")->setValue("Fernando Vallejo");
-		$worksheet->getCell("C6")->setValue("Dan Brown");
-		$worksheet->getCell("C7")->setValue("Jim Thompson");
-
-		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-		$writer->save("php://output");
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
 	}
 
 
+
+	public function procesarConsultasimple()
+	{
+		/*
+		 *
+		 * Redireccion a reportes simples
+		 *
+		 */
+		$consulta = $this->objetoConsulta();
+		if($consulta->fecha_inicio > $consulta->fecha_fin) //Comprobacion del intervalo de fechas
+		{
+			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
+		else{
+			/** @noinspection PhpLanguageLevelInspection */
+			//Reporte por cuestionario
+			if(!empty($this->input->post('cuestionario')))
+			{
+				if($consulta->idcuestionario == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Redireccion a rutina de reporte
+					echo "cuestionario";
+				}
+			}
+			elseif (!empty($this->input->post('departamento')))  //Reporte por departamento
+			{
+				if($consulta->iddepartamento == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Redireccion a rutina de reporte
+				}
+			}
+			elseif (!empty($this->input->post('tipomedio'))) //Reporte por tipo de medio
+			{
+				if($consulta->idtipomedio == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Rutina de reporte
+					$noticias = $this->Noticia_model->noticiaPorTipomedio($consulta);
+					if(empty($noticias))
+					{
+						//Si la consulta esta vacia no se genera reporte
+						$this->mensaje('No existen resultados', 'info');
+						redirect('ManejoDB/reportesSimples');
+					}
+					else{
+						//Cargar los datos a las session
+						$this->session->set_userdata('consulta_tipomedio', []);
+						$this->session->set_userdata('consulta_tipomedio', $consulta);
+						redirect('ManejoDB/downloadTipomedio');
+					}
+				}
+			}
+			elseif (!empty($this->input->post('medio'))) //Reporte por medio
+			{
+				if($consulta->idmedio == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Redireccion a rutina de reporte
+
+				}
+			}
+			elseif (!empty($this->input->post('actor'))) //Reporte por actor
+			{
+				if($consulta->idactor == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Redireccion a rutina de reporte
+				}
+			}
+			elseif (!empty($this->input->post('universidad'))) //Reporte por universidad
+			{
+				if($consulta->iduniversidad == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Redireccion a rutina de reporte
+				}
+			}
+			elseif (!empty($this->input->post('tema'))) //Reporte por tema
+			{
+				if($consulta->idtema == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Redireccion a rutina de reporte
+				}
+			}
+			elseif (!empty($this->input->post('subtema'))) //Reporte por subtema
+			{
+				if($consulta->idsubtema == 0)
+				{
+					$this->mensaje('Sin seleccion', 'warning');
+					redirect('ManejoDB/reportesSimples');
+				}else{
+					//Redireccion a rutina de reporte
+				}
+			}
+			else{
+				$this->mensaje('Error', 'danger');
+				redirect('ManejoDB/reportesSimples');
+			}
+
+		}
+	}
+
+	public function prueba($consulta)
+	{
+		echo $consulta->fecha_inicio;
+		echo $consulta->fecha_fin;
+	}
 
 
 	public function procesarConsulta()
@@ -340,7 +518,7 @@ class ManejoDB extends CI_Controller{
 			{
 				//Si la consulta esta vacia no se genera reporte
 				$this->mensaje('No existen resultados', 'info');
-				redirect('ManejoDB');
+				redirect('ManejoDB/reportesCompuestos');
 			}
 			else{
 				//Cargar los datos a las session
@@ -375,11 +553,14 @@ class ManejoDB extends CI_Controller{
 		}
 	}
 
+
+
 	private function objetoConsulta()
 	{
 		$ids = new stdClass();
 		$ids->fecha_inicio = '';
 		$ids->fecha_fin = '';
+		$ids->idcuestionario = '';
 		$ids->iddepartamento = '';
 		$ids->idtipomedio = '';
 		$ids->idmedio = '';
@@ -391,6 +572,7 @@ class ManejoDB extends CI_Controller{
 		//Capturar datos
 		$ids->fecha_inicio = $this->fecha_unix($this->input->post('fecha_inicio'));
 		$ids->fecha_fin = $this->fecha_unix($this->input->post('fecha_fin')) ;
+		$ids->idcuestionario = $this->input->post('idcuestionario');
 		$ids->iddepartamento = $this->input->post('iddepartamento');
 		$ids->idtipomedio = $this->input->post('idtipomedio');
 		$ids->idmedio = $this->input->post('idmedio');
