@@ -855,10 +855,70 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE tipo_medio.idtipomedio = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
+			."WHERE tipo_medio.idtipomedio = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$idtipomedio, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
 	}
+
+	//Filtrar noticias por tipo de universidad
+	public function noticiaPorUniversidad($consulta)
+	{
+		$fecha_inicio = $consulta->fecha_inicio;
+		$fecha_fin = $consulta->fecha_fin;
+		$iduniversidad = $consulta->iduniversidad;
+
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+			."FROM noticia AS n   "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
+			."LEFT JOIN users ON users.id = n.rel_idusuario   "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento   "
+			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
+			."WHERE universidad.iduniversidad  = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."ORDER BY n.fecha_noticia ASC ";
+		$qry = $this->db->query($sql, [$iduniversidad, $fecha_inicio, $fecha_fin,  ]);
+		return $qry->result();
+	}
+
+	//Rutina para filtrar temas
+	public function noticiaPorTemas($consulta)
+	{
+		$fecha_inicio = $consulta->fecha_inicio;
+		$fecha_fin = $consulta->fecha_fin;
+		$idtema = $consulta->idtema;
+		$sql = "SELECT t.nombre_tema, t.idtema, subtema.rel_idtema, subtema.idsubtema, subtema.nombre_subtema, noticia_subtema.rel_idsubtema, noticia_subtema.rel_idnoticia, noticia.idnoticia, noticia.titular    "
+			."FROM tema AS t    "
+			."LEFT JOIN subtema ON t.idtema = subtema.rel_idtema   "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema   "
+			."LEFT JOIN noticia ON noticia_subtema.rel_idnoticia = noticia.idnoticia   "
+			."WHERE t.idtema = ? AND (noticia.fecha_noticia BETWEEN ? AND ?)   "
+			."GROUP BY noticia.fecha_noticia   "
+			."     "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idtema, $fecha_inicio, $fecha_fin,  ]);
+		return $qry->result();
+	}
+
+	public function noticiaPorId($idnoticia)
+	{
+		$sql = "SELECT *    "
+			."FROM noticia AS n     "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio   "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
+			."LEFT JOIN users ON users.id = n.rel_idusuario   "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento   "
+			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad     "
+			."WHERE n.idnoticia = ?   "
+			."   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->row();
+	}
+
+
 
 
 }
