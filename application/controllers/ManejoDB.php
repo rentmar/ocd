@@ -449,8 +449,135 @@ class ManejoDB extends CI_Controller{
 		}
 	}
 
+	public function downloadCuestionario()
+	{
+		$consulta = $this->session->consulta_cuestionario;
+		$this->session->unset_userdata("consulta_cuestionario");
+		$noticias = $this->Noticia_model->noticiaPorCuestionario($consulta);
 
+		if(!empty($consulta))
+		{
+			$filename = "reporte-cuestionario.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
 
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			foreach ($noticias as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
+
+				$eje_y++;
+			endforeach;
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
+	}
+	public function downloadDepartamento()
+	{
+		$consulta = $this->session->consulta_departamento;
+		$this->session->unset_userdata("consulta_departamento");
+		$noticias = $this->Noticia_model->noticiaPorDepartamento($consulta);
+
+		if(!empty($consulta))
+		{
+			$filename = "reporte-departamento.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			foreach ($noticias as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
+
+				$eje_y++;
+			endforeach;
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
+	}
+	public function downloadActor()
+	{
+		$consulta = $this->session->consulta_actor;
+		$this->session->unset_userdata("consulta_actor");
+		$noticias = $this->Noticia_model->noticiaPorActor($consulta);
+
+		if(!empty($consulta))
+		{
+			$filename = "reporte-actor.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			foreach ($noticias as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
+
+				$eje_y++;
+			endforeach;
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
+	}
 	public function procesarConsultasimple()
 	{
 		/*
@@ -459,6 +586,7 @@ class ManejoDB extends CI_Controller{
 		 *
 		 */
 		$consulta = $this->objetoConsulta();
+//                echo "<pre>";var_dump($consulta);echo "</pre>";
 		if($consulta->fecha_inicio > $consulta->fecha_fin) //Comprobacion del intervalo de fechas
 		{
 			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
@@ -474,8 +602,21 @@ class ManejoDB extends CI_Controller{
 					$this->mensaje('Sin seleccion', 'warning');
 					redirect('ManejoDB/reportesSimples');
 				}else{
-					//Redireccion a rutina de reporte
-					echo "cuestionario";
+                                    $cuestionario = $this->Noticia_model->noticiaPorCuestionario($consulta);
+					if(empty($cuestionario))
+					{
+						//Si la consulta esta vacia no se genera reporte
+						$this->mensaje('No existen resultados', 'info');
+						redirect('ManejoDB/reportesSimples');
+					}
+					else{
+						//Cargar los datos a las session
+						$this->session->set_userdata('consulta_cuestionario', []);
+						$this->session->set_userdata('consulta_cuestionario', $consulta);
+						redirect('ManejoDB/downloadCuestionario');
+					}
+                                    //Redireccion a rutina de reporte
+//					echo "cuestionario";
 				}
 			}
 			elseif (!empty($this->input->post('departamento')))  //Reporte por departamento
@@ -485,6 +626,19 @@ class ManejoDB extends CI_Controller{
 					$this->mensaje('Sin seleccion', 'warning');
 					redirect('ManejoDB/reportesSimples');
 				}else{
+                                    $departamento = $this->Noticia_model->noticiaPorDepartamento($consulta);
+					if(empty($departamento))
+					{
+						//Si la consulta esta vacia no se genera reporte
+						$this->mensaje('No existen resultados', 'info');
+						redirect('ManejoDB/reportesSimples');
+					}
+					else{
+						//Cargar los datos a las session
+						$this->session->set_userdata('consulta_departamento', []);
+						$this->session->set_userdata('consulta_departamento', $consulta);
+						redirect('ManejoDB/downloadDepartamento');
+					}
 					//Redireccion a rutina de reporte
 				}
 			}
@@ -529,6 +683,19 @@ class ManejoDB extends CI_Controller{
 					$this->mensaje('Sin seleccion', 'warning');
 					redirect('ManejoDB/reportesSimples');
 				}else{
+                                    $actor = $this->Noticia_model->noticiaPorActor($consulta);
+					if(empty($actor))
+					{
+						//Si la consulta esta vacia no se genera reporte
+						$this->mensaje('No existen resultados', 'info');
+						redirect('ManejoDB/reportesSimples');
+					}
+					else{
+						//Cargar los datos a las session
+						$this->session->set_userdata('consulta_actor', []);
+						$this->session->set_userdata('consulta_actor', $consulta);
+						redirect('ManejoDB/downloadActor');
+					}
 					//Redireccion a rutina de reporte
 				}
 			}
