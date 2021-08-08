@@ -878,7 +878,7 @@ class Noticia_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idcuestionario, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
 	}
-        	public function noticiaPorDepartamento($consulta)
+    public function noticiaPorDepartamento($consulta)
 	{
 		$fecha_inicio = $consulta->fecha_inicio;
 		$fecha_fin = $consulta->fecha_fin;
@@ -895,8 +895,6 @@ class Noticia_model extends CI_Model{
 			."WHERE departamento.iddepartamento = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
 			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$iddepartamento, $fecha_inicio, $fecha_fin,  ]);
-		return $qry->result();
-		$qry = $this->db->query($sql, [$iduniversidad, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
 	}
 
