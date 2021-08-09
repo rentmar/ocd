@@ -309,4 +309,6 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
+
+
 }

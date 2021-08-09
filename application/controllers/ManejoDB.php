@@ -53,10 +53,9 @@ class ManejoDB extends CI_Controller{
 		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
 		$actor = $this->Actor_model->leerActores();
 		$universidad = $this->Universidad_model->leerUniversidades();
-		$tema = $this->Tema_model->leerTemas();
-		$stema = $this->SubTema_model->leerSubTemas();
+		$tema = $this->Tema_model->leerTemasForms();
+		$stema = $this->SubTema_model->leerSubtemasForms();
 		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
-
 
 
 		$data['dep'] = $depas;
@@ -86,8 +85,8 @@ class ManejoDB extends CI_Controller{
 		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
 		$actor = $this->Actor_model->leerActores();
 		$universidad = $this->Universidad_model->leerUniversidades();
-		$tema = $this->Tema_model->leerTemas();
-		$stema = $this->SubTema_model->leerSubTemas();
+		$tema = $this->Tema_model->leerTemasForms();
+		$stema = $this->SubTema_model->leerSubtemasForms();
 		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
 
 
@@ -355,7 +354,59 @@ class ManejoDB extends CI_Controller{
 		$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
 
 
-		if(!empty($consulta))
+		/*foreach ($noticias as $n)
+		{
+			$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
+			var_dump($nt);
+			echo "<br><br>";
+
+
+		}*/
+		if(!empty($consulta)){
+			$filename = "reporte-tema.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-tema.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			//Colocar el tipo de medio
+			$tema = $this->Cuestionario_model->leerTemaPorId($consulta->idtema);
+			$sheet->setCellValue('E3', $tema->nombre_tema);
+
+			foreach ($noticias as $n):
+
+				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
+
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $nt->titular);
+				$sheet->setCellValue('E'.$eje_y, $nt->resumen);
+				$sheet->setCellValue('F'.$eje_y, $nt->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $nt->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $nt->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $nt->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $nt->username);
+				$sheet->setCellValue('K'.$eje_y, $nt->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $nt->nombre_departamento);
+
+				$eje_y++;
+			endforeach;
+
+
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
+
+		/*if(!empty($consulta))
 		{
 			$filename = "reporte-tema.xlsx";
 			$ruta = 'assets/info/';
@@ -397,7 +448,7 @@ class ManejoDB extends CI_Controller{
 		}else{
 			$this->mensaje('No existen datos', 'warning');
 			redirect('ManejoDB/reportesSimples');
-		}
+		}*/
 	}
 
 	public function downloadTipomedio()
@@ -730,7 +781,7 @@ class ManejoDB extends CI_Controller{
 					redirect('ManejoDB/reportesSimples');
 				}else{
 					//Redireccion a rutina de reporte
-					$noticias = $this->Noticia_model->noticiaPorUniversidad($consulta);
+					$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
 					if(empty($noticias))
 					{
 						//Si la consulta esta vacia no se genera reporte

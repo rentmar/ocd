@@ -32,4 +32,17 @@ class Tema_model extends CI_Model
 		$q=$this->db->get ('tema');
 		return $q->row();
 	}
+	//Rutina para extraer los temas de los tres primeros formularios
+	public function leerTemasForms()
+	{
+		$sql = "SELECT *  "
+			."FROM tema as t  "
+			."WHERE t.rel_idcuestionario != 4  "
+			."ORDER by t.idtema ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+
 }
