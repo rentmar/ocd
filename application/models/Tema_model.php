@@ -44,5 +44,22 @@ class Tema_model extends CI_Model
 		return $qry->result();
 	}
 
+	public function leerTemaFormulario()
+	{
+		$sql = "SELECT *  "
+			."FROM tema AS t  "
+			."LEFT JOIN cuestionario ON t.rel_idcuestionario = cuestionario.idcuestionario  "
+			."ORDER BY t.idtema  ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+
+	}
+
+
+
+
+
+
 
 }

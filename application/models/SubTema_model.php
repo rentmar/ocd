@@ -43,4 +43,23 @@ class SubTema_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
+
+	//Extrae Subtemas, temas y cuestionario
+	public function leerSubtemaTemaCuestionario()
+	{
+		$sql = "SELECT *  "
+			."FROM subtema AS s   "
+			."LEFT JOIN tema ON tema.idtema = s.rel_idtema  "
+			."LEFT JOIN cuestionario ON tema.rel_idcuestionario = cuestionario.idcuestionario  "
+			."ORDER BY s.idsubtema   "
+			."  ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+
+	}
+
+
+
+
 }

@@ -14,7 +14,7 @@ class Tema extends CI_Controller{
 	}
 	public function index()
 	{
-		$dt['temas']=$this->Tema_model->leerTemas();
+		$dt['temas']=$this->Tema_model->leerTemaFormulario();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('tema/vtema',$dt);

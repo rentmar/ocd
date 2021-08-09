@@ -18,13 +18,15 @@
 						<th>Nro</th>
 						<th>SubTema</th>
 						<th>Tema</th>
+						<th>Formulario</th>
 						<th>Accion</th>
 					</tr>
 					<?php foreach ($subtemas as $st) {?>
 						<tr>
 							<td><?php echo $st->idsubtema;?></td>
 							<td><?php echo $st->nombre_subtema;?></td>
-							<td><?php echo $st->rel_idtema;?></td>
+							<td><?php echo $st->nombre_tema;?></td>
+							<td><?php echo $st->nombre_cuestionario; ?></td>
 							<td>
 								<a href="<?php echo site_url('SubTema/editarSubTema/'.$st->idsubtema);?>">
 									<i class="fas fa-edit"></i>
