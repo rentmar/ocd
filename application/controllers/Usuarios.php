@@ -50,6 +50,7 @@ class Usuarios extends CI_Controller
 		{
 			$data['grupos'] = $this->ion_auth->groups()->result();
 			$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
+			$data['universidades']= $this->Departamento_model->leerUniversidades();
 			$this->load->view('html/encabezado');
 			$this->load->view('html/navbar');
 			$this->load->view('usuarios/vformulario_usuario', $data);
@@ -69,18 +70,19 @@ class Usuarios extends CI_Controller
 				'direccion' => $this->input->post('direccion'),
 				'rel_iduniversidad' => $this->input->post('iduniversidad'),
 			];
-			/** @noinspection PhpLanguageLevelInspection */
-			//$grupo = [$this->input->post('grupo'),];
-			if($this->input->post('iduniversidad')==4)
+			$grupo_leyes = $this->input->post('grupoleyes');
+			if(empty($grupo_leyes))
 			{
-				$grupo = [$g, 4,];
-			}else{
+				echo "No cuarto formulario";
 				$grupo = [$g, ];
-			}
-			if(!$this->ion_auth->register($usuario, $password, $email, $datos_extra, $grupo)){
-				//echo "Error de creacion";
 			}else{
-				//echo "Usuario Creado";
+				echo "Ingreso a cuarto formulario";
+				$grupo = [$g, $grupo_leyes];
+			}
+
+			if(!$this->ion_auth->register($usuario, $password, $email, $datos_extra, $grupo)){
+
+			}else{
 				redirect('inicio/');
 			}
 		}
