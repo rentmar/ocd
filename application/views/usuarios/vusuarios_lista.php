@@ -37,11 +37,8 @@
 							<td><?php echo $u->nombre_departamento;?></td>
 							<td><?php echo $u->nombre_universidad ?></td>
 							<td>
-								<a href="<?php echo site_url('Usuarios/editarUsuario/'.$u->id);?>">
-									editar <i class="fas fa-user"></i>
-								</a>
-								<a href="">
-									habilitar
+								<a  href="<?php echo site_url('Usuarios/editarUsuario/'.$u->id);?>">
+									<i class="fas fa-user-edit"></i>
 								</a>
 							</td>
 						</tr>

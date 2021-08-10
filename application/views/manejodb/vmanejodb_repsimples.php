@@ -155,11 +155,9 @@
 							<select id="iduniversidad" name="iduniversidad" class="form-control simple"  >
 								<option value="0" >Seleccione una opcion</option>
 								<?php foreach ($universidad as $u): ?>
-									<?php if($u->iduniversidad != 1): ?>
-										<option value="<?php echo $u->iduniversidad; ?>">
-											<?php echo $u->nombre_universidad;?>
-										</option>
-									<?php endif; ?>
+									<option value="<?php echo $u->iduniversidad; ?>">
+										<?php echo $u->nombre_universidad;?>
+									</option>
 								<?php endforeach; ?>
 							</select>
 						<?php elseif ($this->ion_auth->in_group(2)): ?>

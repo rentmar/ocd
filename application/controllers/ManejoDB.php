@@ -53,10 +53,9 @@ class ManejoDB extends CI_Controller{
 		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
 		$actor = $this->Actor_model->leerActores();
 		$universidad = $this->Universidad_model->leerUniversidades();
-		$tema = $this->Tema_model->leerTemas();
-		$stema = $this->SubTema_model->leerSubTemas();
+		$tema = $this->Tema_model->leerTemasForms();
+		$stema = $this->SubTema_model->leerSubtemasForms();
 		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
-
 
 
 		$data['dep'] = $depas;
@@ -86,8 +85,8 @@ class ManejoDB extends CI_Controller{
 		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
 		$actor = $this->Actor_model->leerActores();
 		$universidad = $this->Universidad_model->leerUniversidades();
-		$tema = $this->Tema_model->leerTemas();
-		$stema = $this->SubTema_model->leerSubTemas();
+		$tema = $this->Tema_model->leerTemasForms();
+		$stema = $this->SubTema_model->leerSubtemasForms();
 		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
 
 
@@ -298,35 +297,158 @@ class ManejoDB extends CI_Controller{
 
 	}
 
-	public function downloadUniveridad()
+	public function downloadUniversidad()
 	{
-		$filename = "reporte-universidad.xlsx";
-		$ruta = 'assets/info/';
-		$plantilla = $ruta.'plantilla-tipomedio.xlsx';
-		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-		header('Content-Disposition: attachment; filename="' . $filename. '"');
-		header('Cache-Control: max-age=0');
+		$consulta = $this->session->consulta_universidad;
+		$this->session->unset_userdata("consulta_universidad");
+		$noticias = $this->Noticia_model->noticiaPorUniversidad($consulta);
 
-		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-		$worksheet = $spreadsheet->getActiveSheet();
-		$worksheet->setTitle("Noticias Universidad");
+		if(!empty($consulta))
+		{
+			$filename = "reporte-universidad.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-universidad.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			//Colocar el tipo de medio
+			$universidad = $this->Universidad_model->leerUniversidadId($consulta->iduniversidad);
+			$sheet->setCellValue('E3', $universidad->nombre_universidad);
+
+			foreach ($noticias as $n):
+				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
+
+				$eje_y++;
+			endforeach;
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
+	}
+
+	public function downloadTema()
+	{
+
+		$consulta = $this->session->consulta_tema;
+		$this->session->unset_userdata("consulta_tema");
+		$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
+
+
+		/*foreach ($noticias as $n)
+		{
+			$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
+			var_dump($nt);
+			echo "<br><br>";
+
+
+		}*/
+		if(!empty($consulta)){
+			$filename = "reporte-tema.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-tema.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			//Colocar el tipo de medio
+			$tema = $this->Cuestionario_model->leerTemaPorId($consulta->idtema);
+			$sheet->setCellValue('E3', $tema->nombre_tema);
+
+			foreach ($noticias as $n):
+
+				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
+
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $nt->titular);
+				$sheet->setCellValue('E'.$eje_y, $nt->resumen);
+				$sheet->setCellValue('F'.$eje_y, $nt->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $nt->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $nt->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $nt->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $nt->username);
+				$sheet->setCellValue('K'.$eje_y, $nt->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $nt->nombre_departamento);
+
+				$eje_y++;
+			endforeach;
 
 
 
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}
 
-		$worksheet->getCell("B4")->setValue("El Perfume");
-		$worksheet->getCell("B5")->setValue("La Virgen de los sicarios");
-		$worksheet->getCell("B6")->setValue("Angeles y Demonios");
-		$worksheet->getCell("B7")->setValue("The Killer inside me");
+		/*if(!empty($consulta))
+		{
+			$filename = "reporte-tema.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-universidad.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
 
-		$worksheet->getCell("C4")->setValue("Patrick Suskind");
-		$worksheet->getCell("C5")->setValue("Fernando Vallejo");
-		$worksheet->getCell("C6")->setValue("Dan Brown");
-		$worksheet->getCell("C7")->setValue("Jim Thompson");
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
 
-		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-		$writer->save("php://output");
+			//Colocar el tipo de medio
+			$tema = $this->Universidad_model->leerTemaPorId($consulta->idtema);
+			$sheet->setCellValue('E3', $tema->nombre_tema);
 
+			foreach ($noticias as $n):
+
+				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
+
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $nt->titular);
+				$sheet->setCellValue('E'.$eje_y, $nt->resumen);
+				$sheet->setCellValue('F'.$eje_y, $nt->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $nt->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $nt->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $nt->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $nt->username);
+				$sheet->setCellValue('K'.$eje_y, $nt->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $nt->nombre_departamento);
+
+				$eje_y++;
+			endforeach;
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
+		}*/
 	}
 
 	public function downloadTipomedio()
@@ -337,7 +459,7 @@ class ManejoDB extends CI_Controller{
 
 		if(!empty($consulta))
 		{
-			$filename = "reporte-universidad.xlsx";
+			$filename = "reporte-tipo-medio.xlsx";
 			$ruta = 'assets/info/';
 			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
@@ -348,8 +470,13 @@ class ManejoDB extends CI_Controller{
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
 			$eje_y = 6;
+
+			//Colocar el tipo de medio
+			$tipo_medio = $this->Cuestionario_model->leerTipoMedioPorId($consulta->idtipomedio);
+			$sheet->setCellValue('E3', $tipo_medio->nombre_tipo);
+
 			foreach ($noticias as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
@@ -631,6 +758,19 @@ class ManejoDB extends CI_Controller{
 					redirect('ManejoDB/reportesSimples');
 				}else{
 					//Redireccion a rutina de reporte
+					$noticias = $this->Noticia_model->noticiaPorUniversidad($consulta);
+					if(empty($noticias))
+					{
+						//Si la consulta esta vacia no se genera reporte
+						$this->mensaje('No existen resultados', 'info');
+						redirect('ManejoDB/reportesSimples');
+					}
+					else{
+						//Cargar los datos a las session
+						$this->session->set_userdata('consulta_universidad', []);
+						$this->session->set_userdata('consulta_universidad', $consulta);
+						redirect('ManejoDB/downloadUniversidad');
+					}
 				}
 			}
 			elseif (!empty($this->input->post('tema'))) //Reporte por tema
@@ -641,6 +781,19 @@ class ManejoDB extends CI_Controller{
 					redirect('ManejoDB/reportesSimples');
 				}else{
 					//Redireccion a rutina de reporte
+					$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
+					if(empty($noticias))
+					{
+						//Si la consulta esta vacia no se genera reporte
+						$this->mensaje('No existen resultados', 'info');
+						redirect('ManejoDB/reportesSimples');
+					}
+					else{
+						//Cargar los datos a las session
+						$this->session->set_userdata('consulta_tema', []);
+						$this->session->set_userdata('consulta_tema', $consulta);
+						redirect('ManejoDB/downloadTema');
+					}
 				}
 			}
 			elseif (!empty($this->input->post('subtema'))) //Reporte por subtema
