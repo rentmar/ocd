@@ -34,7 +34,7 @@
 								<?php if(empty($l['tratamiento'])): ?>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled type="checkbox" class="form-check-input" value="">
+											<i class="far fa-square"></i>
 											S/N
 										</label>
 									</div>
@@ -47,7 +47,8 @@
 									</div>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<i class="far fa-check-square"></i>
+<!--											<input disabled checked type="checkbox" class="form-check-input" value="">-->
 											<?php echo $estado->codigo_ley; ?>
 										</label>
 									</div>
@@ -57,7 +58,7 @@
 								<?php if(empty($l['sancionado'])): ?>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled type="checkbox" class="form-check-input" value="">
+											<i class="far fa-square"></i>
 											S/N
 										</label>
 									</div>
@@ -70,7 +71,7 @@
 									</div>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<i class="far fa-check-square"></i>
 											<?php echo $estado->codigo_ley; ?>
 										</label>
 									</div>
@@ -80,7 +81,7 @@
 								<?php if(empty($l['aprobado'])): ?>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled type="checkbox" class="form-check-input" value="">
+											<i class="far fa-square"></i>
 											S/N
 										</label>
 									</div>
@@ -93,7 +94,7 @@
 									</div>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<i class="far fa-check-square"></i>
 											<?php echo $estado->codigo_ley; ?>
 										</label>
 									</div>
@@ -104,7 +105,7 @@
 								<?php if(empty($l['modificacion'])): ?>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled type="checkbox" class="form-check-input" value="">
+											<i class="far fa-square"></i>
 											S/N
 										</label>
 									</div>
@@ -117,7 +118,7 @@
 									</div>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<i class="far fa-check-square"></i>
 											<?php echo $estado->codigo_ley; ?>
 										</label>
 									</div>
@@ -127,7 +128,7 @@
 								<?php if(empty($l['promulgada'])): ?>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled type="checkbox" class="form-check-input" value="">
+											<i class="far fa-square"></i>
 											S/N
 										</label>
 									</div>
@@ -140,7 +141,7 @@
 									</div>
 									<div class="form-check">
 										<label class="form-check-label">
-											<input disabled checked type="checkbox" class="form-check-input" value="">
+											<i class="far fa-check-square"></i>
 											<?php echo $estado->codigo_ley; ?>
 										</label>
 									</div>
@@ -149,7 +150,8 @@
 							</td>
 							<td>
 								<a href="<?php echo site_url('Ley/estadoLey/'.$l['idley']);?>" >
-									Actualizar
+									<i class="fas fa-pencil-alt"></i>
+									Actualiza
 								</a>
 							</td>
 						</tr>
