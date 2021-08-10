@@ -179,13 +179,9 @@ class Ley_model extends CI_Model{
 
 	public function leerUltimaDescripcion($idley, $idestado)
 	{
-		$sql = "SELECT l.idleyes, leyes_estadoley.fecha_estadoley,codigoley.codigo_ley ,estadoley.nombre_estadoley, estadoley.porcentaje_estadoley  "
-			."FROM leyes AS l  "
-			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes  "
-			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley  "
-			."LEFT JOIN codigoley ON codigoley.rel_idestadoley = estadoley.idestadoley "
-			."WHERE l.idleyes = ? AND estadoley.idestadoley = ?  ";
-		$qry = $this->db->query($sql, [$idley, $idestado, ]);
+		$this->db->where('rel_idley',$idley);
+		$this->db->where('rel_idestadoley',$idestado);
+		$qry=$this->db->get('nombreley');
 		return $qry->row();
 	}
 
@@ -223,35 +219,35 @@ class Ley_model extends CI_Model{
 
 			//$idley, $idestado
 			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
-			$t = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+			$t = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 1);
 			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
-			$s = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+			$s = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 2);
 			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
-			$a = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$a = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 3);
 			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
-			$m = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+			$m = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 4);
 			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
-			$p = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+			$p = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 5);
 
 			if(isset($t))
 			{
-				$ley['descripcion'] = $t->nombre_estadoley;
+				$ley['descripcion'] = $t->nombre_ley;
 			}
 			if(isset($s))
 			{
-				$ley['descripcion'] = $s->nombre_estadoley;
+				$ley['descripcion'] = $s->nombre_ley;
 			}
 			if(isset($a))
 			{
-				$ley['descripcion'] = $a->nombre_estadoley;
+				$ley['descripcion'] = $a->nombre_ley;
 			}
 			if(isset($m))
 			{
-				$ley['descripcion'] = $m->nombre_estadoley;
+				$ley['descripcion'] = $m->nombre_ley;
 			}
 			if(isset($p))
 			{
-				$ley['descripcion'] = $p->nombre_estadoley;
+				$ley['descripcion'] = $p->nombre_ley;
 			}
 
 			$leyes_resultado[] = $ley;
