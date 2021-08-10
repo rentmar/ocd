@@ -188,6 +188,12 @@ class Cuestionario_model extends CI_Model
 		$q= $this->db->get('medio_comunicacion');
 		return $q->row();
 	}
+	public function leerTipoMedioPorId($id)
+	{
+		$this->db->where('idtipomedio',$id);
+		$q= $this->db->get('tipo_medio');
+		return $q->row();
+	}
 
 	public function leerSubtemasPorIDs()
 	{
@@ -303,4 +309,6 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
+
+
 }

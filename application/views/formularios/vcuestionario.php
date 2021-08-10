@@ -28,7 +28,11 @@
 						<tr>
 							<td><?php echo $f->idcuestionario;?></td>
 							<td><?php echo $f->nombre_cuestionario;?></td>
-							<td><a href="<?php echo site_url('Formulario/editarFormulario/'.$f->idcuestionario);?>">Editar</a></td>
+							<td>
+								<a href="<?php echo site_url('Formulario/editarFormulario/'.$f->idcuestionario);?>">
+									<i class="fas fa-edit"></i>
+								</a>
+							</td>
 						</tr>
 					<?php } ?>
 					</tbody>

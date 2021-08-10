@@ -32,7 +32,7 @@
 								<td><?php echo $u->sigla_universidad;?></td>
 								<td>
 								<a href="<?php echo site_url('Universidad/editarUniversidad/'.$u->iduniversidad);?>">
-									editar
+									<i class="fas fa-edit"></i>
 								</a>
 								</td>
 							</tr>

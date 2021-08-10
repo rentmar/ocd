@@ -67,9 +67,16 @@ class Usuarios extends CI_Controller
 				'geolocalizacion' => $this->input->post('ubicacion'),
 				'rel_iddepartamento' => $this->input->post('departamento'),
 				'direccion' => $this->input->post('direccion'),
+				'rel_iduniversidad' => $this->input->post('iduniversidad'),
 			];
 			/** @noinspection PhpLanguageLevelInspection */
-			$grupo = [$this->input->post('grupo'),];
+			//$grupo = [$this->input->post('grupo'),];
+			if($this->input->post('iduniversidad')==4)
+			{
+				$grupo = [$g, 4,];
+			}else{
+				$grupo = [$g, ];
+			}
 			if(!$this->ion_auth->register($usuario, $password, $email, $datos_extra, $grupo)){
 				//echo "Error de creacion";
 			}else{
