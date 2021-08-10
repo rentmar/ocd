@@ -383,7 +383,7 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-cuestionario.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-cuestionario.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -426,7 +426,7 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-departamento.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-departamento.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -469,7 +469,7 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-actor.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-actor.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
