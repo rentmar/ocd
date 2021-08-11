@@ -322,7 +322,7 @@ class ManejoDB extends CI_Controller{
 			$sheet->setCellValue('E3', $universidad->nombre_universidad);
 
 			foreach ($noticias as $n):
-				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
@@ -476,7 +476,7 @@ class ManejoDB extends CI_Controller{
 			$sheet->setCellValue('E3', $tipo_medio->nombre_tipo);
 
 			foreach ($noticias as $n):
-				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
@@ -510,7 +510,7 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-cuestionario.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-formulario.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -553,7 +553,7 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-departamento.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-departamento.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -596,7 +596,7 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-actor.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-actor.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
