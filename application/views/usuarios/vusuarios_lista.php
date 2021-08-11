@@ -22,21 +22,25 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<table>
 					<tr id="datos">
-						<th>Nro</th>
 						<th>Usuario</th>
 						<th>Nombre</th>
 						<th>Apellido</th>
 						<th>Departamento</th>
+						<th>Universidad</th>
 						<th>Accion</th>
 					</tr>
 					<?php foreach ($usuarios as $u) {?>
 						<tr>
-							<td><?php echo $u->idusuario;?></td>
 							<td><?php echo $u->username;?></td>
 							<td><?php echo $u->first_name;?></td>
 							<td><?php echo $u->last_name;?></td>
 							<td><?php echo $u->nombre_departamento;?></td>
-							<td><a href="<?php echo site_url('Usuarios/editarUsuario/'.$u->idusuario);?>">editar</a></td>
+							<td><?php echo $u->nombre_universidad ?></td>
+							<td>
+								<a  href="<?php echo site_url('Usuarios/editarUsuario/'.$u->id);?>">
+									<i class="fas fa-user-edit"></i>
+								</a>
+							</td>
 						</tr>
 					<?php } ?>
 				</table>

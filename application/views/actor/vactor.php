@@ -28,7 +28,10 @@
 						<tr>
 							<td><?php echo $a->idactor;?></td>
 							<td><?php echo $a->nombre_actor;?></td>
-							<td><a href="<?php echo site_url('Actor/editarActor/'.$a->idactor);?>">editar</a></td>
+							<td><a href="<?php echo site_url('Actor/editarActor/'.$a->idactor);?>">
+									<i class="fas fa-edit"></i>
+								</a>
+							</td>
 						</tr>
 					<?php } ?>
 					</tbody>

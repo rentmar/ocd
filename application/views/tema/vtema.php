@@ -20,7 +20,7 @@
 						<tr id="datos">
 							<th>Nro</th>
 							<th>Tema</th>
-							<th>Nro Formulario</th>
+							<th>Formulario</th>
 							<th>Accion</th>
 						</tr>
 					</thead>
@@ -29,8 +29,11 @@
 						<tr>
 							<td><?php echo $t->idtema;?></td>
 							<td><?php echo $t->nombre_tema;?></td>
-							<td><?php echo $t->rel_idcuestionario;?></td>
-							<td><a href="<?php echo site_url('Tema/editarTema/'.$t->idtema);?>">editar</a></td>
+							<td><?php echo $t->nombre_cuestionario;?></td>
+							<td><a href="<?php echo site_url('Tema/editarTema/'.$t->idtema);?>">
+									<i class="fas fa-edit"></i>
+								</a>
+							</td>
 						</tr>
 					<?php } ?>
 

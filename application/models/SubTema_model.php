@@ -32,4 +32,34 @@ class SubTema_model extends CI_Model
 		$q=$this->db->get('tema');
 		return $q->result();
 	}
+	//Rutina para extraer los subtemas de los tres primero formularios
+	public function leerSubtemasForms()
+	{
+		$sql = "SELECT *  "
+			."FROM subtema AS s  "
+			."LEFT JOIN tema ON s.rel_idtema = tema.idtema  "
+			."WHERE tema.rel_idcuestionario != 4 ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	//Extrae Subtemas, temas y cuestionario
+	public function leerSubtemaTemaCuestionario()
+	{
+		$sql = "SELECT *  "
+			."FROM subtema AS s   "
+			."LEFT JOIN tema ON tema.idtema = s.rel_idtema  "
+			."LEFT JOIN cuestionario ON tema.rel_idcuestionario = cuestionario.idcuestionario  "
+			."ORDER BY s.idsubtema   "
+			."  ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+
+	}
+
+
+
+
 }

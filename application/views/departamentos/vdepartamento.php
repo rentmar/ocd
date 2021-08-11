@@ -28,7 +28,11 @@
 							<tr>
 								<td><?php echo $d->iddepartamento;?></td>
 								<td><?php echo $d->nombre_departamento;?></td>
-								<td><a href="<?php echo site_url('Departamento/editarDepartamento/'.$d->iddepartamento);?>">editar</a></td>
+								<td>
+									<a href="<?php echo site_url('Departamento/editarDepartamento/'.$d->iddepartamento);?>">
+										<i class="fas fa-edit"></i>
+									</a>
+								</td>
 							</tr>
 						<?php } ?>
 					</tbody>

@@ -14,7 +14,7 @@ class SubTema extends CI_Controller{
 	}
 	public function index()
 	{
-		$dt['subtemas']=$this->SubTema_model->leerSubTemas();
+		$dt['subtemas']=$this->SubTema_model->leerSubtemaTemaCuestionario();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('subtema/vsubtema',$dt);
@@ -53,4 +53,6 @@ class SubTema extends CI_Controller{
 		$this->SubTema_model->modificarSubTema($dts,$idt);
 		redirect ('subTema');
 	}
+
+
 }
