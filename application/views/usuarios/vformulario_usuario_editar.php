@@ -41,6 +41,21 @@
                             <?php  endforeach;  ?>
                         </select>
                         <br><br>
+						<label for="iduniversidad" class="form-group">Departamento</label>
+                        <select id="iduniversidad" name="iduniversidad">
+                            <?php foreach ($universidades as $u): ?>
+                                <?php if($u->iduniversidad == $usuario->rel_iduniversidad): ?>
+                                    <option value="<?php echo  $u->iduniversidad;?>" selected  >
+                                        <?php echo $u->nombre_universidad;  ?>
+                                    </option>
+                                <?php else: ?>
+                                    <option value="<?php echo  $u->iduniversidad;?>"  >
+                                        <?php echo $u->nombre_universidad;  ?>
+                                    </option>
+                                <?php endif; ?>
+                            <?php  endforeach;  ?>
+                        </select>
+                        <br><br>
 
 						<label for="direccion" class="form-group">Direccion </label>
 						<span class="red">  </span>

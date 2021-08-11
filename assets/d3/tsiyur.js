@@ -1,65 +1,46 @@
 //----------------------------------definicion datos
-var tiempo=1000;id=0,data=[],alto=100,ancho=680;
-for (var i=0;i<20;++i){poner(data);}
+var a=400,h=400,fullAngle=2*Math.PI,
+	colores =  d3.schemeCategory10;
+//----------------------------------metodos
 function load ()
 {	
-	setInterval(function () {
-		data.shift();
-		poner(data);
-		render();
-	}, 2000);
-	/*render();
-	d3.select("body")
-		.append("div")
-		.attr("class", "baseline")
-		.style("position", "fixed")
-		.style("top", alto + "px")
-		.style("left", "0px")
-		.style("width", ancho + "px");*/
+	d3.select("body").select("h1").text("Iniciando");
+	
 }
-function render ()
-{	
-	//console.log(data);
-	barras=d3.select("body").selectAll("div.column").data(data);
-	barras.enter().append("div")
-			.attr("class","column")
-			.style("position","fixed")
-			.style("top",alto+"px")
-			.style("left", function (d,i) {
-				return barLeft(i+1)+"px";
+function render() 
+{
+	//console.log(colores);
+	var misvg = d3.select("body").append("svg").attr("class","pie").attr("width",a).attr("height",h);
+	function dona(radioInterno,finAngulo)
+	{
+		if (!finAngulo) finAngulo = fullAngle;
+		var data =[
+			{startAngle:0,endAngle: 0.1*finAngulo},
+			{startAngle:0.1,endAngle: 0.2*finAngulo},
+			{startAngle:0.2,endAngle: 0.4*finAngulo},
+			{startAngle:0.4,endAngle: 0.6*finAngulo},
+			{startAngle:0.6,endAngle: 0.7*finAngulo},
+			{startAngle:0.7,endAngle: 0.9*finAngulo},
+			{startAngle:2,endAngle: finAngulo}
+		];
+		var arco = d3.arc().innerRadius(radioInterno).outerRadius(200);
+		misvg.select("g").remove();
+		misvg.append("g").attr("transform","translate(200,200)")
+			.selectAll("path.arc")
+			.data(data)
+			.enter()
+			.append("path")
+			.attr("class","arc")
+			.attr("fill", function (d,i){
+				return colores[i];
 			})
-			.style("height","2px")
-		.append("span");	
-	barras.transition().duration(tiempo)
-			.style("top", function (d,i) {
-				return alto - barHeight(d) +"px";
-			})
-			.style("left", function (d,i) {
-				return barLeft(i)+"px";
-			})
-			.style("height",function (d){
-				return barHeight(d)+"px";
-			})
-		.select("span")
-			.text( function (d){
-				return d.valor;
+			.attr("d", function (d,i){
+				return arco(d,i);
 			});
-	barras.exit()
-			.transition().duration(tiempo)
-			.style("left", function (d,i){
-				return barLeft(-1)+"px";
-			})
-			.remove();
+	}
+	dona(100);
 }
-function poner(data){
-	data.push({id:++id,valor:randomValor()});
-}
-function randomValor() {
-return Math.round(Math.random() * 100);
-}
-function barLeft (i) {
-	return i*20 +2;
-}
-function barHeight (d){
-	return d.valor;
-}
+
+
+
+
