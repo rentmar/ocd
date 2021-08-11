@@ -95,8 +95,10 @@ class Usuarios extends CI_Controller
 		$usuario = $this->ion_auth->user($idusuario)->row();
 		$data['usuario'] = $usuario;
 		$data['grupos'] = $this->ion_auth->groups()->result();
+		$data['usuario_grupos'] = $this->ion_auth->get_users_groups($usuario->id)->result();
 		$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
 		$data['universidades']=$this->Departamento_model->leerUniversidades();
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('usuarios/vformulario_usuario_editar', $data);
@@ -251,7 +253,7 @@ class Usuarios extends CI_Controller
 		}
 		$data['grupo']=$g;
 		//Solo administradores
-		//$data['usuarios']= $this->ion_auth->users('admin')->result();
+		//$data['usuarios']= $this->ion_auth->users($g)->result();
 		$data['usuarios']= $this->Departamento_model->leerUsuarioPorIdGrupo($g);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
