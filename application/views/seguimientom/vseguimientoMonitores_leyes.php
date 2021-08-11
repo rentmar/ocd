@@ -51,7 +51,7 @@
 												<!--											<input disabled checked type="checkbox" class="form-check-input" value="">-->
 												<?php echo $estado->codigo_ley; ?>
 											</label>
-											<hr class="bg-primary" />
+											<hr style="height:20px; background-color: red;"  />
 										</div>
 									<?php endif; ?>
 								</td>
@@ -124,7 +124,7 @@
 												<i class="far fa-check-square"></i>
 												<?php echo $estado->codigo_ley; ?>
 											</label>
-											<hr class="bg-primary" />
+											<hr style="height:20px; background-color: #00CC00;" />
 										</div>
 									<?php endif; ?>
 								</td>
@@ -148,7 +148,7 @@
 												<i class="far fa-check-square"></i>
 												<?php echo $estado->codigo_ley; ?>
 											</label>
-											<hr class="bg-primary" />
+											<hr  />
 										</div>
 									<?php endif; ?>
 
