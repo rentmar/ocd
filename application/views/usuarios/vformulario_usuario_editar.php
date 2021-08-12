@@ -27,24 +27,37 @@
 						<br>
 						<input type="text" id="cuadro" name="carnet" value="<?php echo $usuario->carnet_identidad;?>" >
 						<br><br>
+                        <label for="departamento" class="form-group">Departamento</label>
+                        <select id="departamento" name="departamento">
+                            <?php foreach ($departamentos as $d): ?>
+                                <?php if($d->iddepartamento == $usuario->rel_iddepartamento): ?>
+                                    <option value="<?php echo  $d->iddepartamento;?>" selected  >
+                                        <?php echo $d->nombre_departamento;  ?>
+                                    </option>
+                                <?php else: ?>
+                                    <option value="<?php echo  $d->iddepartamento;?>"  >
+                                        <?php echo $d->nombre_departamento;  ?>
+                                    </option>
+                                <?php endif; ?>
 
-						<label for="departamento" class="form-group">Departamento</label>
-						<select id="departamento" name="departamento">
-							<?php foreach ($departamentos as $d): ?>
-								<?php if($d->iddepartamento == $usuario->rel_iddepartamento): ?>
-									<option value="<?php echo  $d->iddepartamento;?>" selected  >
-										<?php echo $d->nombre_departamento;  ?>
-									</option>
-								<?php else: ?>
-									<option value="<?php echo  $d->iddepartamento;?>"  >
-										<?php echo $d->nombre_departamento;  ?>
-									</option>
-								<?php endif; ?>
-
-							<?php  endforeach;  ?>
-						</select>
-						<br><br>
-
+                            <?php  endforeach;  ?>
+                        </select>
+                        <br><br>
+						<label for="iduniversidad" class="form-group">Departamento</label>
+                        <select id="iduniversidad" name="iduniversidad">
+                            <?php foreach ($universidades as $u): ?>
+                                <?php if($u->iduniversidad == $usuario->rel_iduniversidad): ?>
+                                    <option value="<?php echo  $u->iduniversidad;?>" selected  >
+                                        <?php echo $u->nombre_universidad;  ?>
+                                    </option>
+                                <?php else: ?>
+                                    <option value="<?php echo  $u->iduniversidad;?>"  >
+                                        <?php echo $u->nombre_universidad;  ?>
+                                    </option>
+                                <?php endif; ?>
+                            <?php  endforeach;  ?>
+                        </select>
+                        <br><br>
 						<label for="direccion" class="form-group">Direccion </label>
 						<span class="red">  </span>
 						<input type="text" id="direccion" name="direccion" value="<?php echo $usuario->direccion; ?>"  >
@@ -67,6 +80,3 @@
 	</div>
 	<br>
 </main>
-
-
-		

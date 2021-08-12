@@ -1,3 +1,10 @@
+svg {
+	background-color: #ccc;
+}
+.dot{
+	stroke: black;
+	fill: blue;
+}
 span {
 	color: white;	
 }
@@ -16,5 +23,8 @@ span {
 	height:200px
 }
 .control-group {
+	background-color:#ccc;
+}
+.countdown{
 	background-color:#ccc;
 }
