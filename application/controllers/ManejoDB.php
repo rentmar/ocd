@@ -943,6 +943,21 @@ class ManejoDB extends CI_Controller{
 		echo json_encode($json);
 	}
 
+	//
+	public function noticiasAdministrador()
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$cantidad_noticia = $this->session->noticia_editable;
+
+		$dt['noticias'] =$this->Noticia_model->leerNoticiasUsuario($usuario->id,$this->_idformulario);
+		$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vinst_lista_noticias', $dt);
+		$this->load->view('html/pie');
+
+	}
+
 
 
 

@@ -976,4 +976,21 @@ class Noticia_model extends CI_Model{
 		return $qry->result();
 	}
 
+	public function leerTodasLasNoticias()
+	{
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+			."FROM noticia AS n   "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
+			."LEFT JOIN users ON users.id = n.rel_idusuario   "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento   "
+			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
+			. "LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia "
+			. "LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor "
+			."   ";
+		$qry = $this->db->query($sql, );
+		return $qry->result();
+	}
+
 }
