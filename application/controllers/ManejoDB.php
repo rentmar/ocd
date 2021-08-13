@@ -353,15 +353,6 @@ class ManejoDB extends CI_Controller{
 		$this->session->unset_userdata("consulta_tema");
 		$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
 
-
-		/*foreach ($noticias as $n)
-		{
-			$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-			var_dump($nt);
-			echo "<br><br>";
-
-
-		}*/
 		if(!empty($consulta)){
 			$filename = "reporte-tema.xlsx";
 			$ruta = 'assets/info/';
@@ -381,7 +372,7 @@ class ManejoDB extends CI_Controller{
 			foreach ($noticias as $n):
 
 				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-
+				$sheet->setCellValue('A'.$eje_y, $nt->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $nt->titular);
@@ -505,6 +496,7 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_cuestionario;
 		$this->session->unset_userdata("consulta_cuestionario");
 		$noticias = $this->Noticia_model->noticiaPorCuestionario($consulta);
+		$cuestionario = $this->Cuestionario_model->leerCuestionario($consulta->idcuestionario);
 
 		if(!empty($consulta))
 		{
@@ -518,6 +510,7 @@ class ManejoDB extends CI_Controller{
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('E3', $cuestionario->nombre_cuestionario);
 			$eje_y = 6;
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
@@ -548,6 +541,7 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_departamento;
 		$this->session->unset_userdata("consulta_departamento");
 		$noticias = $this->Noticia_model->noticiaPorDepartamento($consulta);
+		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
 		if(!empty($consulta))
 		{
@@ -562,6 +556,7 @@ class ManejoDB extends CI_Controller{
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
 			$eje_y = 6;
+			$sheet->setCellValue('E3', $departamento->nombre_departamento);
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
@@ -591,6 +586,7 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_actor;
 		$this->session->unset_userdata("consulta_actor");
 		$noticias = $this->Noticia_model->noticiaPorActor($consulta);
+		$actor = $this->Actor_model->leerActorID($consulta->idactor);
 
 		if(!empty($consulta))
 		{
@@ -604,6 +600,7 @@ class ManejoDB extends CI_Controller{
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('E3', $actor->nombre_actor );
 			$eje_y = 6;
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
