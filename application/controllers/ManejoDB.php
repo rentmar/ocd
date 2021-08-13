@@ -946,16 +946,33 @@ class ManejoDB extends CI_Controller{
 	//
 	public function noticiasAdministrador()
 	{
-		$usuario = $this->ion_auth->user()->row();
-		$cantidad_noticia = $this->session->noticia_editable;
+		//$usuario = $this->ion_auth->user()->row();
+		//$cantidad_noticia = $this->session->noticia_editable;
 
-		$dt['noticias'] =$this->Noticia_model->leerNoticiasUsuario($usuario->id,$this->_idformulario);
-		$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
+
+		$dt['noticias'] =$this->Noticia_model->leerTodasLasNoticias();
+		//$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vinst_lista_noticias', $dt);
+		$this->load->view('manejodb/vmanejodb_listanot', $dt);
 		$this->load->view('html/pie');
 
+	}
+
+	public function cambiarEstado($identificador)
+	{
+		$idnoticia = $identificador;
+		$noticia = $this->Noticia_model->noticiaPorId($idnoticia);
+		if($noticia->esta_activa)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Noticia_model->cambiarEstado($idnoticia, $estado);
+		redirect('manejoDB/noticiasAdministrador');
 	}
 
 
