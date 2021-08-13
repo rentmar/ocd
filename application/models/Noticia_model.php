@@ -969,8 +969,8 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-                        . "LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia "
-                        . "LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor "
+			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia "
+            ."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor "
 			."WHERE actor.idactor = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
 		$qry = $this->db->query($sql, [$idactor, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();

@@ -50,7 +50,19 @@
 							<?php endif; ?>
 
 							<td>
-								<a href="<?php echo site_url('manejoDB/editarNoticia/'.$n->idnoticia); ?>">
+							<?php
+								if($n->idcuestionario == 1)
+								{
+									$urledit = 'reformaelectoral/editarNoticia/'.$n->idnoticia;
+								}elseif ($n->idcuestionario == 2){
+									$urledit = 'instdemocratica/editarNoticia/'.$n->idnoticia;
+								}
+								elseif ($n->idcuestionario == 3){
+									$urledit = 'censo/editarNoticia/'.$n->idnoticia;
+								}
+
+							?>
+								<a href="<?php echo site_url($urledit); ?>">
 									<i class="fas fa-edit"></i>
 								</a>
 								<?php if($n->esta_activa): ?>
