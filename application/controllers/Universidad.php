@@ -14,7 +14,7 @@ class Universidad extends CI_Controller
 
 	public function index()
 	{
-		$dt['universidades']=0;//$this->Universidad_model->leerUniversidades();
+		$dt['universidades']=$this->Universidad_model->leerUniversidades();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('universidades/vuniversidad',$dt);
@@ -23,14 +23,17 @@ class Universidad extends CI_Controller
 
 	public function crearUniversidad()
 	{
+		$dt['departamentos']=$this->Universidad_model->leerDepartamentos();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-	    $this->load->view('universidades/vcrearuniversidad');
+	    $this->load->view('universidades/vcrearuniversidad',$dt);
 		$this->load->view('html/pie');
 	}
 	public function editarUniversidad($idu)
 	{
-		$dt['u']=$this->Universidad_model->leerUniversidad($idu);
+		$dt['departamentos']=$this->Universidad_model->leerDepartamentos();
+		$dt['deptose']=$this->Universidad_model->leerDepartamentoUniversidad($idu);
+		$dt['u']=$this->Universidad_model->leerUniversidadId($idu);
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('universidades/veditaruniversidad',$dt);
@@ -39,16 +42,46 @@ class Universidad extends CI_Controller
 
 	public function agregarUniversidad()
 	{
-		/*$dts = array(
-				'nombre_departamento' => $this->input->post('nombre_departamento'));
-		$this->Departamento_model->crearDepartamento($dts);
-		redirect ('Universidad');*/
+		$dtchkbox=array();
+		$departamentos=$this->Universidad_model->leerDepartamentos();
+		$dts = array(
+				'nombre_universidad' => $this->input->post('nombre_universidad'),
+				'sigla_universidad'=> $this->input->post('sigla_universidad'));
+		if ($this->input->post('d0') == NULL) {
+			foreach ($departamentos as $d)
+			{
+				if ($this->input->post('d'.$d->iddepartamento) != NULL)
+				{
+					array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
+				}
+			}
+		}
+		if ($this->input->post('d0') != NULL)
+		{
+			foreach ($departamentos as $d)
+			{
+				array_push($dtchkbox,$d->iddepartamento);
+			}
+		}
+		$this->Universidad_model->agregarUniversidad($dts,$dtchkbox);
+		redirect ('Universidad');
 	}
+	
 	public function modificarUniversidad($idu)
 	{
-		/*$dts = array(
-				'nombre_departamento' => $this->input->post('nombre_departamento'));
-		$this->Departamento_model->updateDepartamento($idd,$dts);
-		redirect ('Universidad');*/
+		$dts = array(
+				'nombre_universidad' => $this->input->post('nombre_universidad'),
+				'sigla_universidad'=> $this->input->post('sigla_universidad'));
+		$dtchkbox=array();
+		$departamentos=$this->Universidad_model->leerDepartamentos();
+		foreach ($departamentos as $d)
+		{
+			if ($this->input->post('d'.$d->iddepartamento) != NULL)
+			{
+				array_push($dtchkbox,$this->input->post('d'.$d->iddepartamento));
+			}
+		}
+		$this->Universidad_model->modificarUniversidad($dts,$dtchkbox,$idu);
+		redirect ('Universidad');
 	}
 }

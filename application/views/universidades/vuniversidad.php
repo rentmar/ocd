@@ -20,21 +20,23 @@
 						<tr id="datos">
 							<th>Nro</th>
 							<th>Universidad</th>
+							<th>Sigla</th>
 							<th>Accion</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php //foreach ($universidades as $u) {?>
+						<?php foreach ($universidades as $u) {?>
 							<tr>
-								<td><?php //echo $u->iduniversidad;?></td>
-								<td><?php //echo $u->nombre_universidad;?></td>
+								<td><?php echo $u->iduniversidad;?></td>
+								<td><?php echo $u->nombre_universidad;?></td>
+								<td><?php echo $u->sigla_universidad;?></td>
 								<td>
-								<a href="<?php echo site_url('Universidad/editarUniversidad/'.'1');//$u->iduniversidad);?>">
-									editar
+								<a href="<?php echo site_url('Universidad/editarUniversidad/'.$u->iduniversidad);?>">
+									<i class="fas fa-edit"></i>
 								</a>
 								</td>
 							</tr>
-						<?php //} ?>
+						<?php } ?>
 					</tbody>
 				</table>
 			</div>

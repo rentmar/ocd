@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
 				<?php echo form_open('noticia/modificarNoticia/'.$idnoticia); ?>
 				<br>
-				<h1>Editar Medio de Comunicacion</h1>
+				<h1>Editar Tema/s</h1>
 				<br>
 				<div class="card">
 					<div class="form-row">

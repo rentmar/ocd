@@ -40,13 +40,13 @@ class Formulario extends CI_Controller{
 		$dts = array(
 				'nombre_cuestionario'=>$this->input->post('nombre_cuestionario'));
 		$this->Formulario_model->agregarFormulario($dts);
-		redirect ('formulario');
+		redirect ('Formulario');
 	}
 	public function modificarFormulario($idf)
 	{
 		$dts = array(
 				'nombre_cuestionario'=>$this->input->post('nombre_cuestionario'));
 		$this->Formulario_model->modificarFormulario($dts,$idf);
-		redirect ('formulario');
+		redirect ('Formulario');
 	}
 }

@@ -1,3 +1,4 @@
+
 <main role="main">
 	<br>
 	<div class="container">
@@ -9,6 +10,17 @@
 					</div>
 					<div id="Caja_de_datos" class="Caja_de_datos">
 						<?php echo form_open('usuarios/procesarCrear/'.$grupo)?>
+
+						<?php if(!empty(validation_errors())): ?>
+						<div class="form-group">
+							<div class="alert alert-warning">
+								<strong>
+									<?php echo validation_errors(); ?>
+								</strong>
+							</div>
+						</div>
+						<?php endif; ?>
+
 						<div class="form-group">
 							<label for="usuario" >
 								Nombre de usuario
@@ -62,17 +74,50 @@
 							<label for="grupo" >
 								Tipo de Usuario
 							</label>
-							<select id="grupo" name="grupo" class="form-control">
+							<select disabled="true" id="grupo" name="grupo" class="form-control">
 								<?php foreach ($grupos as $g): ?>
-									<option value="<?php echo $g->id ?>"  >
+									<?php if($g->id==$grupo) { ?>
+										<option  selected="true" value="<?php echo $g->id; ?>"  >
 										<?php echo $g->name; ?>
-									</option>
+										</option>
+									<?php } ?>
 								<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="form-group">
+							<label for="iduniverisdad" >
+								Universidad/Institucion del Usuario
+							</label>
+							<select id="iduniversidad" name="iduniversidad" class="form-control" required>
+								<?php foreach ($universidades as $u): ?>
+									<?php if($grupo==1 && $u->iduniversidad==1) { ?>
+										<option disabled="true" selected="true" value="<?php echo 1; ?>"  >
+										<?php echo "administrador"; ?>
+										</option>
+									<?php } ?>
+									<?php if($grupo!=1 && $u->iduniversidad!=1) { ?>
+										<option value="" >Seleccione Universidad</option>
+										<option value="<?php echo $u->iduniversidad; ?>"  >
+										<?php echo $u->nombre_universidad; ?>
+										</option>
+									<?php } ?>
+								<?php endforeach; ?>
+							</select>
+						</div>
+						<?php if($grupo == 3): ?>
+						<div class="form-group">
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="grupoleyes" name="grupoleyes" type="checkbox" class="form-check-input" value="4">
+									Habilitar Ingreso a Formulario LEYES
+								</label>
+							</div>
+						</div>
+						<?php endif; ?>
+						<div class="form-group">
 							<label for="departamento" >Departamento</label>
-							<select id="departamento" name="departamento" class="form-control">
+							<select id="departamento" name="departamento" class="form-control" required>
+									<option value="" >Seleccione un Departamento</option>
 								<?php foreach ($departamentos as $d): ?>
 									<option value="<?php echo  $d->iddepartamento;?>"  >
 										<?php echo $d->nombre_departamento;  ?>
@@ -93,8 +138,8 @@
 						</div>
 						<div class="form-group">
 							<input type="submit" id="BOTON" value="CREAR USUARIO">
-							<a href="<?php echo site_url('usuarios/listar/'.$grupo);?>">
-								<input type="submit" class="BOTONROJO" value="CANCELAR">
+							<a href="<?php echo site_url('Usuarios/Listar/'.$grupo);?>">
+								<input type="button" class="BOTONROJO" value="CANCELAR">
 							</a>
 						</div>
 						<?php echo form_close()?>

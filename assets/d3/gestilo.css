@@ -1,22 +1,30 @@
-.barra{
-	width: 25px;
-	height: 100px;
-	margin-right: 2px;
-	background-color:green;
-	display: inline-block;
+svg {
+	background-color: #ccc;
 }
-
-svg{
-	border: 2px solid #aaa;
-}
-
-circle{
+.dot{
+	stroke: black;
 	fill: blue;
-	stroke: orange;
-	stroke-width: 5px;
 }
-
-path{
-	fill: red;
-	stroke: #aaa;
+span {
+	color: white;	
+}
+.column {
+  background-color: green;
+}
+.baseline { 
+  background-color: #ccc;
+  height: 10px;
+}
+.box {
+	margin-top:2px;
+	text-align:center;
+	background-color: #ccc;
+	width:200px;
+	height:200px
+}
+.control-group {
+	background-color:#ccc;
+}
+.countdown{
+	background-color:#ccc;
 }

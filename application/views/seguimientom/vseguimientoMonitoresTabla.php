@@ -23,6 +23,9 @@
                         
 
 			</tr>
+                        <p>
+                        					<tbody>
+					<?php if(isset($SeguimientoM1)): ?>
 			<?php foreach ($SeguimientoM1 as $f) {?>
 			<tr>
 				<td><?php echo $f->nombre;?></td>
@@ -36,6 +39,8 @@
                                 <?php } ?>
 			</tr>
 			<?php } ?>
+                        					<?php endif; ?>
+					</tbody>
 		</table>
 	</div>
 </html>

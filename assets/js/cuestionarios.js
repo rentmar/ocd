@@ -504,6 +504,15 @@ $('#formulario').submit(function (e) {
 
 });
 
+$('#formulario_ley').submit(function (e) {
+	var numero_temas_seleccionados;
+	numero_temas_seleccionados = $('input[name="idtema[]"]:checked').length;
+	if(numero_temas_seleccionados==0){
+		e.preventDefault();
+		$('#temasinseleccionar').modal("show");
+	}
+});
+
 
 
 

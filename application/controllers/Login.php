@@ -42,11 +42,13 @@ class Login extends CI_Controller{
 			$this->session->set_userdata('es_nueva_noticia', false);
 			$this->session->set_userdata('es_nueva_noticia1', false);
 			$this->session->set_userdata('es_nueva_noticia2', false);
+			$this->session->set_userdata('es_nueva_ley', false);
 			$this->session->set_userdata('nuevo_form', 0);
 
 			$this->session->set_userdata('noticia_nueva', []);
 			$this->session->set_userdata('noticia_nueva1', []);
 			$this->session->set_userdata('noticia_nueva2', []);
+			$this->session->set_userdata('ley_nueva', []);
 
 			$this->session->set_userdata('noticia_editable', 10);
 
@@ -70,4 +72,33 @@ class Login extends CI_Controller{
 		//Redirigir al login
 		redirect('login/', 'refresh');
 	}
+	private function objetoLey()
+	{
+		$noticia = new stdClass;
+		$noticia->idnoticia = '';
+		$noticia->fecha_registro = '';
+		$noticia->fecha_noticia = '';
+		$noticia->titular = '';
+		$noticia->resumen = '';
+		$noticia->url_noticia = '';
+
+		$noticia->rel_idmedio = '';
+		$noticia->rel_idcuestionario = '';
+		$noticia->rel_idusuario = '';
+
+		$noticia->iddepartamento = '';
+
+		$noticia->actores = [];
+		$noticia->temas = [];
+		$noticia->subtemas = [];
+		$noticia->medio = [];
+		$noticia->tipo_medio = [];
+
+		$noticia->es_segundo_paso = false;
+		$noticia->es_preenvio = false;
+
+		return $noticia;
+	}
+
+
 }

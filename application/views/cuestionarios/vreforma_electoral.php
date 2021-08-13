@@ -239,7 +239,7 @@
 				<button id="BOTON" type="submit">Seleccionar</button>
 				<button id="BOTON" type="button" class="" data-dismiss="modal">Cancelar</button>
 			</div>
-			<?php echo form_close(); ?>
+
 
 		</div>
 	</div>

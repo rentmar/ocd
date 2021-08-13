@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
-						<a href="<?php echo site_url('departamento/creardepartamento');?>">
+						<a href="<?php echo site_url('Departamento/crearDepartamento');?>">
 							<input type="submit" class="BOTON" value="CREAR">
 						</a>
 						<a href="<?php echo site_url('/');?>">
@@ -28,7 +28,11 @@
 							<tr>
 								<td><?php echo $d->iddepartamento;?></td>
 								<td><?php echo $d->nombre_departamento;?></td>
-								<td><a href="<?php echo site_url('departamento/editardepartamento/'.$d->iddepartamento);?>">editar</a></td>
+								<td>
+									<a href="<?php echo site_url('Departamento/editarDepartamento/'.$d->iddepartamento);?>">
+										<i class="fas fa-edit"></i>
+									</a>
+								</td>
 							</tr>
 						<?php } ?>
 					</tbody>

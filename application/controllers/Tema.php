@@ -14,7 +14,7 @@ class Tema extends CI_Controller{
 	}
 	public function index()
 	{
-		$dt['temas']=$this->Tema_model->leerTemas();
+		$dt['temas']=$this->Tema_model->leerTemaFormulario();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 	    $this->load->view('tema/vtema',$dt);
@@ -34,7 +34,7 @@ class Tema extends CI_Controller{
 		$dts = array(
 				'nombre_tema' => $this->input->post('nombre_tema'),
 				'rel_idcuestionario' => $this->input->post('idcuestionario'),
-				'rel_idusuario' => $idusr);
+				);
 		$this->Tema_model->agregarTema($dts);
 		redirect ('tema');
 	}

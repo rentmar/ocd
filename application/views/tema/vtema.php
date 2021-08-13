@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
-						<a href="<?php echo site_url('tema/creartema');?>">
+						<a href="<?php echo site_url('Tema/crearTema');?>">
 							<input type="submit" class="BOTON" value="CREAR">
 						</a>
 						<a href="<?php echo site_url('/');?>">
@@ -20,7 +20,7 @@
 						<tr id="datos">
 							<th>Nro</th>
 							<th>Tema</th>
-							<th>Nro Formulario</th>
+							<th>Formulario</th>
 							<th>Accion</th>
 						</tr>
 					</thead>
@@ -29,8 +29,11 @@
 						<tr>
 							<td><?php echo $t->idtema;?></td>
 							<td><?php echo $t->nombre_tema;?></td>
-							<td><?php echo $t->rel_idcuestionario;?></td>
-							<td><a href="<?php echo site_url('tema/editartema/'.$t->idtema);?>">editar</a></td>
+							<td><?php echo $t->nombre_cuestionario;?></td>
+							<td><a href="<?php echo site_url('Tema/editarTema/'.$t->idtema);?>">
+									<i class="fas fa-edit"></i>
+								</a>
+							</td>
 						</tr>
 					<?php } ?>
 

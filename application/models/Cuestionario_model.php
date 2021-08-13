@@ -89,11 +89,14 @@ class Cuestionario_model extends CI_Model
 	public function leerTema()
 	{
 		$sql = "SELECT tema.idtema, tema.nombre_tema "
+			."FROM tema "
+			."WHERE tema.rel_idcuestionario = ?  ";
+		/*$sql = "SELECT tema.idtema, tema.nombre_tema "
 			."FROM groups AS g "
 			."LEFT JOIN users_groups ON users_groups.group_id = g.id  "
 			."LEFT JOIN users ON users.id = users_groups.user_id "
 			."LEFT JOIN tema ON tema.rel_idusuario = users.id "
-			."WHERE g.id = 1 AND tema.rel_idcuestionario = ?  ";
+			."WHERE g.id = 1 AND tema.rel_idcuestionario = ?  ";*/
 		$qry = $this->db->query($sql, [$this->_cuestionarioID,  ]);
 		return $qry->result_array();
 
@@ -185,6 +188,12 @@ class Cuestionario_model extends CI_Model
 		$q= $this->db->get('medio_comunicacion');
 		return $q->row();
 	}
+	public function leerTipoMedioPorId($id)
+	{
+		$this->db->where('idtipomedio',$id);
+		$q= $this->db->get('tipo_medio');
+		return $q->row();
+	}
 
 	public function leerSubtemasPorIDs()
 	{
@@ -249,5 +258,57 @@ class Cuestionario_model extends CI_Model
 		}
 		return $tema_subtema;
 	}
+
+	//Leer los estados de ley definidos
+	public function leerEstadosDeLey()
+	{
+		$sql = "SELECT * "
+			."FROM estadoley "
+			."ORDER BY estadoley.porcentaje_estadoley ASC ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	//Leer por estado de ley definidos por id
+	public function leerEstadosDeLeyID($id)
+	{
+		$sql = "SELECT * "
+			."FROM estadoley "
+			."WHERE estadoley.idestadoley = ? ";
+		$qry = $this->db->query($sql, [$id, ]);
+		return $qry->row();
+	}
+
+	//Leer las fuentes de la ley
+	public function leerFuentesDeLey()
+	{
+		$sql = "SELECT * "
+			."FROM fuente ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+	public function leerLeyesIdUsuario($idu)
+	{
+		$sql="SELECT leyes.idleyes,leyes.fecha_registro,leyes.resumen,fuente.nombre_fuente FROM "
+			."leyes_fuente "
+			."LEFT JOIN leyes ON leyes_fuente.rel_idleyes=leyes.idleyes "
+			."LEFT JOIN fuente ON leyes_fuente.rel_idfuente=fuente.idfuente "
+			."WHERE leyes.rel_idusuario = ".$idu;
+		$q=$this->db->query($sql);
+        return $q->result();
+	}
+
+	public function leerLeyesEstadoIdUsuario()
+	{
+		$sql = "SELECT *"
+			."FROM leyes AS l "
+			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley "
+			."WHERE l.rel_idusuario = ? "
+			."ORDER BY estadoley.porcentaje_estadoley ASC";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
 
 }
