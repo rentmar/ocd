@@ -636,6 +636,11 @@ class Noticia_model extends CI_Model{
 		array_push($placeholder, $consulta->fecha_fin);
 
 		//Añadir el resto de los discriminantes
+		if($consulta->idcuestionario !=0)
+		{
+			$sql .= "AND cuestionario.idcuestionario = ?  ";
+			array_push($placeholder, $consulta->idcuestionario);
+		}
 		if($consulta->iddepartamento !=0)
 		{
 			//Agregar el discriminante a la sentencia SQL
@@ -1001,6 +1006,41 @@ class Noticia_model extends CI_Model{
 		];
 		$this->db->where('idnoticia', $identificador);
 		$this->db->update('noticia', $data);
+	}
+
+	public function otroTemaNoticiaPorId($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_otrotema ON n.idnoticia = noticia_otrotema.rel_idnoticia   "
+			."LEFT JOIN otrotema ON noticia_otrotema.rel_idotrotema = otrotema.idotrotema   "
+			."LEFT JOIN cuestionario ON otrotema.rel_idcuestionario = cuestionario.idcuestionario   "
+			."WHERE n.idnoticia = ?  "
+			."ORDER BY n.fecha_noticia ASC   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->result();
+	}
+
+	public function otroSubtemaNoticiaPorId($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_otrosubtema ON n.idnoticia = noticia_otrosubtema.rel_idnoticia   "
+			."LEFT JOIN otrosubtema ON noticia_otrosubtema.rel_idotrosubtema = otrosubtema.idotrosubtema   "
+			."LEFT JOIN tema ON otrosubtema.rel_idtema = tema.idtema   "
+			."LEFT JOIN cuestionario ON tema.rel_idcuestionario = cuestionario.idcuestionario  "
+			."WHERE n.idnoticia = ?   "
+			."ORDER BY n.fecha_noticia ASC   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->result();
+
 	}
 
 }
