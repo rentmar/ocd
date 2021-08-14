@@ -534,20 +534,26 @@ class Noticia_model extends CI_Model{
 		//Array de placeholders
 		$placeholder = [];
 
-		$sql = "SELECT DISTINCT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.url_noticia, n.resumen, medio_comunicacion.nombre_medio, tipo_medio.nombre_tipo, cuestionario.nombre_cuestionario, universidad.nombre_universidad, departamento.nombre_departamento, users.username  "
+		$sql = "SELECT *   "
 			."FROM noticia AS n  "
-			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario  "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario "
+			."LEFT JOIN medio_comunicacion ON n.rel_idmedio = medio_comunicacion.idmedio  "
+			."LEFT JOIN tipo_medio ON medio_comunicacion.rel_idtipomedio = tipo_medio.idtipomedio  "
 			."LEFT JOIN users ON users.id = n.rel_idusuario  "
-			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento  "
-			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio  "
-			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio  "
-			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad  "
-			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia  "
-			."LEFT JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema  "
-			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
-			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia  "
-			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
-			."WHERE (n.fecha_noticia BETWEEN ? AND ?)  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad  "
+			."WHERE n.esta_activa = 1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
 			."  ";
 
 		/** @noinspection PhpLanguageLevelInspection */
@@ -556,11 +562,16 @@ class Noticia_model extends CI_Model{
 		array_push($placeholder, $consulta->fecha_inicio);
 		array_push($placeholder, $consulta->fecha_fin);
 
+		if($consulta->idcuestionario != 0)
+		{
+			$sql .= "AND n.rel_idcuestionario = ?  ";
+			array_push($placeholder, $consulta->idcuestionario);
+		}
 		//Añadir el resto de los discriminantes
 		if($consulta->iddepartamento !=0)
 		{
 			//Agregar el discriminante a la sentencia SQL
-			$sql .= "AND departamento.iddepartamento  = ?  ";
+			$sql .= "AND users.rel_iddepartamento =  ?  ";
 			array_push($placeholder, $consulta->iddepartamento);
 		}
 		if ($consulta->idtipomedio != 0)
@@ -575,19 +586,19 @@ class Noticia_model extends CI_Model{
 			$sql .= "AND medio_comunicacion.idmedio = ?  ";
 			array_push($placeholder, $consulta->idmedio);
 		}
-		if ($consulta->idactor != 0 )
+		/*if ($consulta->idactor != 0 )
 		{
 			//Agregar el discriminante a la sentencia SQL
 			$sql .= "AND actor.idactor = ?  ";
 			array_push($placeholder, $consulta->idactor);
-		}
+		}*/
 		if ($consulta->iduniversidad != 0 )
 		{
 			//Agregar el discriminante a la sentencia SQL
 			$sql .= "AND universidad.iduniversidad = ?  ";
 			array_push($placeholder, $consulta->iduniversidad);
 		}
-		if ($consulta->idtema != 0 )
+		/*if ($consulta->idtema != 0 )
 		{
 			//Agregar el discriminante a la sentencia SQL
 			$sql .= "AND tema.idtema = ?   ";
@@ -598,7 +609,7 @@ class Noticia_model extends CI_Model{
 			//Agregar el discriminante a la sentencia SQL
 			$sql .= "AND subtema.idsubtema = ?  ";
 			array_push($placeholder, $consulta->idsubtema);
-		}
+		}*/
 		$sql .= 'ORDER BY n.fecha_noticia ASC ';
 		$qry = $this->db->query($sql, $placeholder);
 		return $qry->result();
@@ -626,7 +637,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
 			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia  "
 			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
-			."WHERE (n.fecha_noticia BETWEEN ? AND ?)  "
+			."WHERE n.esta_activa = 1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
 			."  ";
 
 		/** @noinspection PhpLanguageLevelInspection */
@@ -975,5 +986,33 @@ class Noticia_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idactor, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
 	}
+
+	public function leerActorPorIdnoticia($idnoticia)
+	{
+		$sql = "SELECT *  "
+			  ."FROM noticia AS n  "
+			  ."LEFT JOIN noticia_actor ON n.idnoticia = noticia_actor.rel_idnoticia  "
+			  ."LEFT JOIN actor ON noticia_actor.rel_idactor = actor.idactor   "
+			  ."WHERE n.idnoticia = ?   "
+			  ."ORDER BY n.fecha_noticia ASC   ";
+		$qry = $this->db->query($sql, [$idnoticia, ]);
+		return $qry->result();
+	}
+
+	public function leerTemaPorIdnoticia($idnoticia)
+	{
+		$sql = "SELECT *  "
+			."FROM noticia AS n  "
+			."LEFT JOIN noticia_subtema ON n.idnoticia = noticia_subtema.rel_idnoticia  "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema   "
+			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema    "
+			."WHERE n.idnoticia = ?  "
+			."GROUP BY tema.idtema  ";
+		$qry = $this->db->query($sql, [$idnoticia, ]);
+		return $qry->result();
+	}
+
+
+	
 
 }

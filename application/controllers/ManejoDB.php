@@ -105,7 +105,6 @@ class ManejoDB extends CI_Controller{
 		$this->load->view('html/navbar');
 		$this->load->view('manejodb/vmanejodb_repcomp', $data);
 		$this->load->view('html/pie');
-
 	}
 
 
@@ -115,126 +114,70 @@ class ManejoDB extends CI_Controller{
 	{
 		//Datos extraidos
 		$consulta = $this->session->consulta;
+		$noticias = $this->Noticia_model->reporteNoticias($consulta);
 
-		$noticia = $this->Noticia_model->reporteNoticias($consulta);
-		$noticia_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
+		/*var_dump($noticias);
+		echo "<br><br><br>";
+		foreach ($noticias as $n):
+			$actores = $this->Noticia_model->leerActorPorIdnoticia($n->idnoticia);
+			var_dump($actores);
+			echo "<br><br><br>";
+		endforeach;*/
 
-		//Eje X
-		$eje_x = 1;
-		//Eje Y
-		$eje_y = 1;
-
-
-
-		//Crear una nueva hoja electronica
-		$spreadsheet = new Spreadsheet();
-
-		/*
-		 * Libro de trabajo
-		 * NOTICIAS TEMAS SUBTEMAS
-		 */
-		$sheet = $spreadsheet->getActiveSheet();
-		$sheet->setTitle('GENERAL');
-		//Encabezado
-		$sheet->setCellValue('A1', 'ID');
-		$sheet->setCellValue('B1', 'FECHA REGISTRO');
-		$sheet->setCellValue('C1', 'FECHA NOTICIA');
-		$sheet->setCellValue('D1', 'TITULAR');
-		$sheet->setCellValue('E1', 'RESUMEN');
-		$sheet->setCellValue('F1', 'URL');
-		$sheet->setCellValue('G1', 'MEDIO' );
-		$sheet->setCellValue('H1', 'TIPO MEDIO' );
-		$sheet->setCellValue('I1', 'FORMULARIO' );
-		$sheet->setCellValue('J1', 'USUARIO');
-		$sheet->setCellValue('K1', 'UNIVERSIDAD');
-		$sheet->setCellValue('L1', 'DEPARTAMENTO');
-		$sheet->setCellValue('M1', 'ACTOR');
-		$sheet->setCellValue('N1', 'TEMA');
-		$sheet->setCellValue('O1', 'SUBTEMA');
+		//Temas
 
 
-		$eje_y++;
-		foreach ($noticia_datos as $n):
-			$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-			$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-			$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-			$sheet->setCellValue('D'.$eje_y, $n->titular);
-			$sheet->setCellValue('E'.$eje_y, $n->resumen);
-			$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-			$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-			$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-			$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
-			$sheet->setCellValue('J'.$eje_y, $n->username);
-			$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-			$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-			$sheet->setCellValue('M'.$eje_y, $n->nombre_actor);
-			$sheet->setCellValue('N'.$eje_y, $n->nombre_tema);
-			$sheet->setCellValue('O'.$eje_y, $n->nombre_subtema);
-			$eje_y++;
-		endforeach;
+		if(!empty($consulta)){
+			$filename = "reporte.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-reporte.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
 
-		//Autosize de las columnas
-		foreach (range('A', 'P') as $col ){
-			$sheet->getColumnDimension($col)->setAutoSize(true);
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			$eje_y_actores = 6;
+			$eje_y_tema = 6;
+
+			foreach ($noticias as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
+				$actores = $this->Noticia_model->leerActorPorIdnoticia($n->idnoticia);
+				$temas = $this->Noticia_model->leerTemaPorIdnoticia($n->idnoticia);
+					foreach ($actores as $ac):
+						$sheet->setCellValue('M'.$eje_y_actores, $ac->nombre_actor);
+						$eje_y_actores++;
+					endforeach;
+					foreach ($temas as $tm):
+						$sheet->setCellValue('N'.$eje_y_tema, $tm->nombre_tema);
+						$eje_y_tema++;
+					endforeach;
+
+				$eje_y++;
+			endforeach;
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesSimples');
 		}
 
-
-		/*
-		 *
-		 * Libro de trabajo
-		 * Otros temas
-		 */
-		$spreadsheet->createSheet();
-		$sheet = $spreadsheet->getSheet(1);
-		$sheet->setTitle('OTROS TEMAS');
-		//Encabezado
-		$sheet->setCellValue('A1', 'ID');
-		$sheet->setCellValue('B1', 'FECHA REGISTRO');
-		$sheet->setCellValue('C1', 'FECHA NOTICIA');
-		$sheet->setCellValue('D1', 'TITULAR');
-		$sheet->setCellValue('E1', 'RESUMEN');
-		$sheet->setCellValue('F1', 'URL');
-		$sheet->setCellValue('G1', 'MEDIO' );
-		$sheet->setCellValue('H1', 'TIPO MEDIO' );
-		$sheet->setCellValue('I1', 'FORMULARIO' );
-		$sheet->setCellValue('J1', 'USUARIO');
-		$sheet->setCellValue('K1', 'UNIVERSIDAD');
-		$sheet->setCellValue('L1', 'DEPARTAMENTO');
-		$sheet->setCellValue('M1', 'ACTOR');
-
-		//Libro de trabajo
-		$spreadsheet->createSheet();
-		$sheet = $spreadsheet->getSheet(2);
-		$sheet->setTitle('OTROS SUBTEMAS');
-		//Encabezado
-		$sheet->setCellValue('A1', 'ID');
-		$sheet->setCellValue('B1', 'FECHA REGISTRO');
-		$sheet->setCellValue('C1', 'FECHA NOTICIA');
-		$sheet->setCellValue('D1', 'TITULAR');
-		$sheet->setCellValue('E1', 'RESUMEN');
-		$sheet->setCellValue('F1', 'URL');
-		$sheet->setCellValue('G1', 'MEDIO' );
-		$sheet->setCellValue('H1', 'TIPO MEDIO' );
-		$sheet->setCellValue('I1', 'FORMULARIO' );
-		$sheet->setCellValue('J1', 'USUARIO');
-		$sheet->setCellValue('K1', 'UNIVERSIDAD');
-		$sheet->setCellValue('L1', 'DEPARTAMENTO');
-		$sheet->setCellValue('M1', 'ACTOR');
-
-
-
-		/*
-		 * RUTINA PARA DESCARGA
-		 */
-		$writer = new Xlsx($spreadsheet);
-
-		$filename = 'reporte';
-
-		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"');
-		header('Cache-Control: max-age=0');
-
-		$writer->save('php://output');
 
 
 
@@ -958,7 +901,6 @@ class ManejoDB extends CI_Controller{
 		}else{
 			//var_dump($consulta);
 			$noticias = $this->Noticia_model->reporteNoticias($consulta);
-			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
 			if(empty($noticias))
 			{
 				//Si la consulta esta vacia no se genera reporte
@@ -973,28 +915,6 @@ class ManejoDB extends CI_Controller{
 
 				redirect('ManejoDB/download');
 			}
-
-
-
-
-
-
-
-			/*$noticias = $this->Noticia_model->reporteNoticias($consulta);
-			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
-
-			//var_dump($idnoticias);
-
-			$data['idnoticias'] = $noticias;
-			$data['noticias'] = $noticias_datos;
-
-
-
-			$this->load->view('html/encabezado');
-			$this->load->view('html/navbar');
-			$this->load->view('manejodb/vexportar_fecha', $data);
-			$this->load->view('html/pie');*/
-
 		}
 	}
 
