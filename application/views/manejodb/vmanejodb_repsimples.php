@@ -109,6 +109,7 @@
 				</div>
 
 				<br>
+				<!--
 				<div class="contenedor">
 					<h3>Medio de Comunicación </h3>
 					<div class="form-row">
@@ -126,7 +127,7 @@
 					<div class="form-row">
 						<input type="submit" class="BOTON" value="GENERAR" name="medio">
 					</div>
-				</div>
+				</div> -->
 
 				<br>
 				<div class="contenedor">
@@ -192,24 +193,24 @@
 					</div>
 				</div>
 
-				<br>
+				<!--<br>
 				<div class="contenedor">
 					<h3>Subtema </h3>
 					<div class="form-row">
 						<select id="idsubtemas" name="idsubtema" class="form-control simple" >
 							<option value="0">Seleccione una opcion</option>
-							<?php foreach ($stema as $st): ?>
-								<option value="<?php echo $st->idsubtema;?>" >
-									<?php echo $st->nombre_subtema;?>
+							<?php /*foreach ($stema as $st): */?>
+								<option value="<?php /*echo $st->idsubtema;*/?>" >
+									<?php /*echo $st->nombre_subtema;*/?>
 								</option>
-							<?php endforeach; ?>
+							<?php /*endforeach; */?>
 						</select>
 					</div>
 					<br>
 					<div class="form-row">
 						<input type="submit" class="BOTON" value="GENERAR" name="subtema">
 					</div>
-				</div>
+				</div>-->
 
 
 

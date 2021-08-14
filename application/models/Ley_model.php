@@ -258,6 +258,66 @@ class Ley_model extends CI_Model{
 		}
 		return $leyes_resultado;
 	}
+	public function leerTodasLeyesEstado()
+	{
+		$leyes_resultado = [];
+		$ley = $this->leyArray();
+		//Extraer las leyes definidas por el usuario
+		$leyes = $this->Ley_model->leerLeyesIdUsuario($idusuario);
+
+		foreach ($leyes_usuario as $lu)
+		{
+			$ley['idley'] = $lu->idleyes;
+			$ley['resumen'] = $lu->resumen;
+			$ley['descripcion'] = '';
+
+			//$idley, $idestado
+			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+			$t = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+			$s = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$a = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+			$m = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+			$p = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+
+			if(isset($t))
+			{
+				$ley['descripcion'] = $t->nombre_estadoley;
+			}
+			if(isset($s))
+			{
+				$ley['descripcion'] = $s->nombre_estadoley;
+			}
+			if(isset($a))
+			{
+				$ley['descripcion'] = $a->nombre_estadoley;
+			}
+			if(isset($m))
+			{
+				$ley['descripcion'] = $m->nombre_estadoley;
+			}
+			if(isset($p))
+			{
+				$ley['descripcion'] = $p->nombre_estadoley;
+			}
+
+			$leyes_resultado[] = $ley;
+		}
+		return $leyes_resultado;
+	}
+	public function leerLeyeId($id)
+	{
+		$sql="SELECT leyes.idleyes,leyes.fecha_registro,leyes.resumen,fuente.nombre_fuente FROM "
+			."leyes_fuente "
+			."LEFT JOIN leyes ON leyes_fuente.rel_idleyes=leyes.idleyes "
+			."LEFT JOIN fuente ON leyes_fuente.rel_idfuente=fuente.idfuente "
+			."WHERE leyes.idleyes = ".$id;
+		$q=$this->db->query($sql);
+		return $q->result();
+	}
 
 	public function leerLeyesIdUsuario($idu)
 	{

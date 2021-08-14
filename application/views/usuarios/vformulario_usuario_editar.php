@@ -28,7 +28,8 @@
 						<input type="text" id="cuadro" name="carnet" value="<?php echo $usuario->carnet_identidad;?>" >
 						<br><br>
                         <label for="departamento" class="form-group">Departamento</label>
-                        <select id="departamento" name="departamento">
+                        <select id="departamento" name="departamento" class="form-control" required>
+									<option value="">Seleccione un departamento</option>
                             <?php foreach ($departamentos as $d): ?>
                                 <?php if($d->iddepartamento == $usuario->rel_iddepartamento): ?>
                                     <option value="<?php echo  $d->iddepartamento;?>" selected  >
@@ -43,8 +44,8 @@
                             <?php  endforeach;  ?>
                         </select>
                         <br><br>
-						<label for="iduniversidad" class="form-group">Departamento</label>
-                        <select id="iduniversidad" name="iduniversidad">
+						<label for="iduniversidad" class="form-group">Universidad</label>
+                        <select id="iduniversidad" name="iduniversidad" class="form-control" required >
                             <?php foreach ($universidades as $u): ?>
                                 <?php if($u->iduniversidad == $usuario->rel_iduniversidad): ?>
                                     <option value="<?php echo  $u->iduniversidad;?>" selected  >
@@ -57,15 +58,32 @@
                                 <?php endif; ?>
                             <?php  endforeach;  ?>
                         </select>
-                        <br><br>
+                       	<br>
+
+						<?php foreach ($usuario_grupos as $sg): ?>
+						<?php if($sg->id == 3): ?>
+						<div class="form-group">
+							<div class="form-check">
+								<label class="form-check-label">
+									<input id="grupoleyes" name="grupoleyes" type="checkbox" class="form-check-input" value="4">
+									Habilitar Ingreso a Formulario LEYES<?php echo $sg->id;?>
+								</label>
+							</div>
+						</div>
+						<?php endif; ?>
+						<?php endforeach; ?>
+
+
+
+						<br>
 						<label for="direccion" class="form-group">Direccion </label>
 						<span class="red">  </span>
-						<input type="text" id="direccion" name="direccion" value="<?php echo $usuario->direccion; ?>"  >
+						<input type="text" id="direccion" class="form-control" name="direccion" value="<?php echo $usuario->direccion; ?>"  >
 						<br><br>
 
 						<label for="ubicacion" class="form-group">Ubicacion </label>
 						<span class="red">  </span>
-						<input type="text" id="ubicacion" name="ubicacion"  value="<?php echo $usuario->geolocalizacion; ?>"  >
+						<input type="text" id="ubicacion" name="ubicacion"  class="form-control" value="<?php echo $usuario->geolocalizacion; ?>"  >
 						<br><br>
 
 

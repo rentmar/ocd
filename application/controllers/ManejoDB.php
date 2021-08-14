@@ -322,7 +322,7 @@ class ManejoDB extends CI_Controller{
 			$sheet->setCellValue('E3', $universidad->nombre_universidad);
 
 			foreach ($noticias as $n):
-				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
@@ -353,15 +353,6 @@ class ManejoDB extends CI_Controller{
 		$this->session->unset_userdata("consulta_tema");
 		$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
 
-
-		/*foreach ($noticias as $n)
-		{
-			$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-			var_dump($nt);
-			echo "<br><br>";
-
-
-		}*/
 		if(!empty($consulta)){
 			$filename = "reporte-tema.xlsx";
 			$ruta = 'assets/info/';
@@ -381,7 +372,7 @@ class ManejoDB extends CI_Controller{
 			foreach ($noticias as $n):
 
 				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-
+				$sheet->setCellValue('A'.$eje_y, $nt->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $nt->titular);
@@ -476,7 +467,7 @@ class ManejoDB extends CI_Controller{
 			$sheet->setCellValue('E3', $tipo_medio->nombre_tipo);
 
 			foreach ($noticias as $n):
-				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
@@ -505,12 +496,17 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_cuestionario;
 		$this->session->unset_userdata("consulta_cuestionario");
 		$noticias = $this->Noticia_model->noticiaPorCuestionario($consulta);
+		$cuestionario = $this->Cuestionario_model->leerCuestionario($consulta->idcuestionario);
 
 		if(!empty($consulta))
 		{
 			$filename = "reporte-cuestionario.xlsx";
 			$ruta = 'assets/info/';
+<<<<<<< HEAD
 			$plantilla = $ruta.'plantilla-cuestionario.xlsx';
+=======
+			$plantilla = $ruta.'plantilla-formulario.xlsx';
+>>>>>>> 63aa9d939ac70b83ac45eabde45c396fd3a1d37b
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -518,6 +514,7 @@ class ManejoDB extends CI_Controller{
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('E3', $cuestionario->nombre_cuestionario);
 			$eje_y = 6;
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
@@ -548,6 +545,7 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_departamento;
 		$this->session->unset_userdata("consulta_departamento");
 		$noticias = $this->Noticia_model->noticiaPorDepartamento($consulta);
+		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
 		if(!empty($consulta))
 		{
@@ -562,6 +560,7 @@ class ManejoDB extends CI_Controller{
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
 			$eje_y = 6;
+			$sheet->setCellValue('E3', $departamento->nombre_departamento);
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
@@ -591,6 +590,7 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_actor;
 		$this->session->unset_userdata("consulta_actor");
 		$noticias = $this->Noticia_model->noticiaPorActor($consulta);
+		$actor = $this->Actor_model->leerActorID($consulta->idactor);
 
 		if(!empty($consulta))
 		{
@@ -604,6 +604,7 @@ class ManejoDB extends CI_Controller{
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('E3', $actor->nombre_actor );
 			$eje_y = 6;
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
@@ -941,6 +942,38 @@ class ManejoDB extends CI_Controller{
 		$json = $this->Cuestionario_model->leerSubtema();
 		header('Content-Type: application/json');
 		echo json_encode($json);
+	}
+
+	//
+	public function noticiasAdministrador()
+	{
+		//$usuario = $this->ion_auth->user()->row();
+		//$cantidad_noticia = $this->session->noticia_editable;
+
+
+		$dt['noticias'] =$this->Noticia_model->leerTodasLasNoticias();
+		//$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_listanot', $dt);
+		$this->load->view('html/pie');
+
+	}
+
+	public function cambiarEstado($identificador)
+	{
+		$idnoticia = $identificador;
+		$noticia = $this->Noticia_model->noticiaPorId($idnoticia);
+		if($noticia->esta_activa)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Noticia_model->cambiarEstado($idnoticia, $estado);
+		redirect('manejoDB/noticiasAdministrador');
 	}
 
 

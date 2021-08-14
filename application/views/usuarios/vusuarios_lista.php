@@ -29,7 +29,7 @@
 						<th>Universidad</th>
 						<th>Accion</th>
 					</tr>
-					<?php foreach ($usuarios as $u) {?>
+					<?php foreach ($usuarios as $u):?>
 						<tr>
 							<td><?php echo $u->username;?></td>
 							<td><?php echo $u->first_name;?></td>
@@ -42,7 +42,7 @@
 								</a>
 							</td>
 						</tr>
-					<?php } ?>
+					<?php endforeach; ?>
 				</table>
 			</div>
 		</div>
