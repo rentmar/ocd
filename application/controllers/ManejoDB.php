@@ -116,6 +116,7 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta;
 		$noticia = $this->Noticia_model->reporteNoticias($consulta);
 		$noticia_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
+		$noticia_datos_ids = $this->Noticia_model->reportesNoticiasDatosID($consulta);
 		if(!empty($consulta))
 		{
 			$filename = "reporte.xlsx";
@@ -125,7 +126,8 @@ class ManejoDB extends CI_Controller{
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Noticias');
+
 			$worksheet = $spreadsheet->getActiveSheet();
 			$eje_y = 6;
 
@@ -136,9 +138,9 @@ class ManejoDB extends CI_Controller{
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
 				$sheet->setCellValue('E'.$eje_y, $n->resumen);
 				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_tipo );
 				$sheet->setCellValue('J'.$eje_y, $n->username);
 				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
 				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
@@ -147,6 +149,49 @@ class ManejoDB extends CI_Controller{
 				$sheet->setCellValue('O'.$eje_y, $n->nombre_subtema);
 				$eje_y++;
 			endforeach;
+
+			//Llenar Otros Temas
+			$sheet = $spreadsheet->getSheet(1)->setTitle('OtrosTemas');
+			$eje_y = 6;
+			foreach ($noticia_datos_ids as $n):
+				$notot = $this->Noticia_model->otroTemaNoticiaPorId($n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $notot->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $notot->titular);
+				$sheet->setCellValue('E'.$eje_y, $notot->resumen);
+				$sheet->setCellValue('F'.$eje_y, $notot->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $notot->nombre_cuestionario );
+				$sheet->setCellValue('H'.$eje_y, $notot->nombre_otrotema );
+
+				$eje_y++;
+
+			endforeach;
+
+
+			//Llenar Subtemas
+			//Llenar Otros Temas
+			$sheet = $spreadsheet->getSheet(2)->setTitle('OtrosSubtemas');
+			$eje_y = 6;
+			foreach ($noticia_datos_ids as $n):
+				$nototsub = $this->Noticia_model->otroSubtemaNoticiaPorId($n->idnoticia);
+				foreach ($nototsub as $nots):
+				$sheet->setCellValue('A'.$eje_y, $nots->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $nots->titular);
+				$sheet->setCellValue('E'.$eje_y, $nots->resumen);
+				$sheet->setCellValue('F'.$eje_y, $nots->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $nots->nombre_cuestionario );
+				$sheet->setCellValue('H'.$eje_y, $nots->nombre_tema );
+				$sheet->setCellValue('I'.$eje_y, $nots->nombre_otrosubtema );
+				$eje_y++;
+				endforeach;
+
+			endforeach;
+
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
 
 			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
 			$writer->save("php://output");

@@ -626,7 +626,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
 			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia  "
 			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
-			."WHERE (n.fecha_noticia BETWEEN ? AND ?)  "
+			."WHERE n.esta_activa=1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
 			."  ";
 
 		/** @noinspection PhpLanguageLevelInspection */
@@ -1022,7 +1022,7 @@ class Noticia_model extends CI_Model{
 			."   "
 			."   ";
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
-		return $qry->result();
+		return $qry->row();
 	}
 
 	public function otroSubtemaNoticiaPorId($idnoticia)
@@ -1041,6 +1041,91 @@ class Noticia_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idnoticia,  ]);
 		return $qry->result();
 
+	}
+
+	public function reportesNoticiasDatosID($parametros)
+	{
+		//Solo la fecha de la noticia
+
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT DISTINCT n.idnoticia, n.esta_activa  "
+			."FROM noticia AS n  "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario  "
+			."LEFT JOIN users ON users.id = n.rel_idusuario  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio  "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio  "
+			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad  "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema  "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
+			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
+			."WHERE n.esta_activa=1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			."  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+		//Añadir el resto de los discriminantes
+		if($consulta->idcuestionario !=0)
+		{
+			$sql .= "AND cuestionario.idcuestionario = ?  ";
+			array_push($placeholder, $consulta->idcuestionario);
+		}
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+		if ($consulta->idtipomedio != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tipo_medio.idtipomedio = ?  ";
+			array_push($placeholder, $consulta->idtipomedio);
+		}
+		if ($consulta->idmedio != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND medio_comunicacion.idmedio = ?  ";
+			array_push($placeholder, $consulta->idmedio);
+		}
+		if ($consulta->idactor != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND actor.idactor = ?  ";
+			array_push($placeholder, $consulta->idactor);
+		}
+		if ($consulta->iduniversidad != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND universidad.iduniversidad = ?  ";
+			array_push($placeholder, $consulta->iduniversidad);
+		}
+		if ($consulta->idtema != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tema.idtema = ?   ";
+			array_push($placeholder, $consulta->idtema);
+		}
+		if ($consulta->idsubtema !=0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND subtema.idsubtema = ?  ";
+			array_push($placeholder, $consulta->idsubtema);
+		}
+
+		$sql .= 'ORDER BY n.fecha_noticia ASC   ';
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
 	}
 
 }
