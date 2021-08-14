@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-08-2021 a las 13:33:34
+-- Tiempo de generación: 14-08-2021 a las 10:29:25
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -47,9 +47,8 @@ INSERT INTO `actor` (`idactor`, `nombre_actor`) VALUES
 (8, 'Pertenece al Organo Legislativo Departamental'),
 (9, 'Pertenece al Organo Ejecutivo Municipal'),
 (10, 'Pertenece al Organo Legislativo Municipal'),
-(11, 'Actor de prueba editado'),
-(12, 'Segundo Actor de prueba editado'),
-(13, 'Actor de prueba Editado');
+(12, 'Pertenece a las Fuerzas Armadas'),
+(13, 'Pertenece a la Policía Boliviana');
 
 -- --------------------------------------------------------
 
@@ -141,11 +140,11 @@ CREATE TABLE `estadoley` (
 --
 
 INSERT INTO `estadoley` (`idestadoley`, `nombre_estadoley`, `porcentaje_estadoley`) VALUES
-(1, 'Leyes en tratamiento', 20),
-(2, 'Leyes sancionadas', 40),
-(3, 'Leyes aprobadas', 60),
-(4, 'Leyes con modificación', 80),
-(5, 'Leyes promulgadas', 100);
+(1, 'Ley en tratamiento', 20),
+(2, 'Ley sancionada', 40),
+(3, 'Ley aprobada', 60),
+(4, 'Ley con modificacion', 80),
+(5, 'Ley promulgada', 100);
 
 -- --------------------------------------------------------
 
@@ -164,7 +163,7 @@ CREATE TABLE `fuente` (
 
 INSERT INTO `fuente` (`idfuente`, `nombre_fuente`) VALUES
 (1, 'Web de la Cámara de Diputados'),
-(2, 'Archivo de Leyes (Gaceta Oficial de Bolivia) ');
+(2, 'Archivo de Leyes (Gaceta Oficial de Bolivia)');
 
 -- --------------------------------------------------------
 
@@ -186,7 +185,7 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
 (2, 'docentes', 'Usuarios generales, docentes'),
 (3, 'monitores', 'Alumnos registrados'),
-(4, 'leyes', 'Usuarios autorizados al formulario leyes');
+(4, 'leyes', 'Usuarios autorizados al formulario ley');
 
 -- --------------------------------------------------------
 
@@ -293,45 +292,52 @@ CREATE TABLE `medio_comunicacion` (
 --
 
 INSERT INTO `medio_comunicacion` (`idmedio`, `nombre_medio`, `rel_idtipomedio`) VALUES
-(1, 'La Palabra del Beni', 4),
-(2, 'Correo del Sur', 4),
-(3, 'Los Tiempos', 4),
-(4, 'Opinion', 4),
-(5, 'Pagina 7', 4),
-(6, 'La Patria', 4),
-(7, 'El Potosi', 4),
-(8, 'El Deber', 4),
-(9, 'El Pais', 4),
-(10, 'VTB', 2),
-(11, 'TVU', 2),
-(12, 'Unitel', 2),
-(13, 'Bolivision', 2),
-(14, 'ATB', 2),
-(15, 'Red Uno', 2),
-(16, 'CEACOM 51', 2),
-(17, 'Sistema Pandino de Comunicacion', 2),
-(18, 'SITEL', 2),
-(19, 'REITEL TV', 5),
-(20, 'BTV', 5),
-(21, 'COTEVI TV', 5),
-(22, 'Plus TLT', 5),
-(23, 'FIDES', 3),
-(24, 'GLOBAL', 3),
-(25, 'Kancha Parlaspa', 3),
-(26, 'Panamericana', 3),
-(27, 'Universitaria', 3),
-(28, 'OASIS', 3),
-(29, 'Perla del Acre', 3),
-(30, 'Kolla Suyo', 3),
-(31, 'Radio SC', 3),
-(32, 'San Miguel', 6),
-(33, 'ACLO', 6),
-(34, 'Soberania', 6),
-(35, 'Illimani', 6),
-(36, 'Pio XII', 6),
-(37, 'Frontera Pando', 6),
-(38, 'FIDES', 6),
-(39, 'Turbo', 6);
+(10, 'LA PALABRA DEL BENI', 4),
+(11, 'CORREO DEL SUR', 4),
+(12, 'LOS TIEMPOS', 4),
+(13, 'OPINIÓN', 4),
+(14, 'PAGINA 7 ', 4),
+(15, 'LA PATRIA ', 4),
+(16, 'EL POTOSÍ', 4),
+(17, 'EL DEBER ', 4),
+(18, 'EL PAÍS', 4),
+(19, 'BTV', 2),
+(20, 'TVU', 2),
+(21, 'UNITEL', 2),
+(22, 'BOLIVISIÓN', 2),
+(23, 'ATB', 2),
+(24, 'RED UNO', 2),
+(25, 'CEACOM 51', 2),
+(26, 'CANAL UNIVERSITARIO', 2),
+(27, 'SISTEMA PANDINO DE COMUNICACIÓN', 2),
+(28, 'TELEVISIÓN UNVERSITARIA ', 2),
+(29, 'UNITEL COBIJA', 2),
+(30, 'SITEL', 2),
+(31, 'REITEL TV', 5),
+(32, 'BTV – RURAL', 5),
+(33, 'COTEVI TV', 5),
+(34, 'PLUS TLT', 5),
+(35, 'FIDES', 3),
+(36, 'GLOBAL', 3),
+(37, 'KANCHA PARLASPA', 3),
+(38, 'PANAMERICANA', 3),
+(39, 'UNIVERSITARIA', 3),
+(40, 'OASIS', 3),
+(41, 'PERLA DEL ACRE', 3),
+(42, 'KOLLASUYO', 3),
+(43, 'RADIO SC', 3),
+(44, 'SAN MIGUEL', 6),
+(45, 'ACLO', 6),
+(46, 'SOBERANÍA', 6),
+(47, 'ILLIMANI', 6),
+(48, 'PIO XII', 6),
+(49, 'FRONTERA', 6),
+(50, 'FIDES – RURAL', 6),
+(51, 'TURBO', 6),
+(52, 'ACLO TARIJA', 6),
+(53, 'La Razón', 4),
+(54, 'RADIO UNIVERSITARIA', 3),
+(55, 'RADIO CENTRO', 6);
 
 -- --------------------------------------------------------
 
@@ -350,114 +356,69 @@ CREATE TABLE `medio_departamento` (
 --
 
 INSERT INTO `medio_departamento` (`idmediodepartamento`, `rel_idmedio`, `rel_iddepartamento`) VALUES
-(1, 1, 7),
-(2, 2, 5),
-(3, 3, 4),
-(4, 4, 4),
-(5, 5, 1),
-(6, 6, 3),
-(7, 7, 9),
-(8, 8, 2),
-(9, 9, 6),
-(10, 10, 1),
-(11, 10, 2),
-(12, 10, 3),
-(13, 10, 4),
-(14, 10, 5),
-(15, 10, 6),
-(16, 10, 7),
-(17, 10, 8),
-(18, 10, 9),
-(19, 11, 1),
-(20, 11, 2),
-(21, 11, 3),
-(22, 11, 4),
-(23, 11, 5),
-(24, 11, 6),
-(25, 11, 7),
-(26, 11, 8),
-(27, 11, 9),
-(28, 12, 1),
-(29, 12, 2),
-(30, 12, 3),
-(31, 12, 4),
-(32, 12, 5),
-(33, 12, 6),
-(34, 12, 7),
-(35, 12, 8),
-(36, 12, 9),
-(37, 13, 1),
-(38, 13, 2),
-(39, 13, 3),
-(40, 13, 4),
-(41, 13, 5),
-(42, 13, 6),
-(43, 13, 7),
-(44, 13, 8),
-(45, 13, 9),
-(46, 14, 1),
-(47, 14, 2),
-(48, 14, 3),
-(49, 14, 4),
-(50, 14, 5),
-(51, 14, 6),
-(52, 14, 7),
-(53, 14, 8),
-(54, 14, 9),
-(55, 15, 1),
-(56, 15, 2),
-(57, 15, 3),
-(58, 15, 4),
-(59, 15, 5),
-(60, 15, 6),
-(61, 15, 7),
-(62, 15, 8),
-(63, 15, 9),
-(64, 16, 3),
-(65, 17, 8),
-(66, 18, 9),
-(67, 19, 7),
-(68, 20, 1),
-(69, 20, 2),
-(70, 20, 3),
-(71, 20, 4),
-(72, 20, 5),
-(73, 20, 6),
-(74, 20, 7),
-(75, 20, 8),
-(76, 20, 9),
-(77, 21, 9),
-(78, 22, 6),
-(79, 23, 1),
-(80, 23, 4),
-(81, 23, 6),
-(82, 23, 7),
-(83, 24, 5),
-(84, 25, 4),
-(85, 26, 1),
-(86, 27, 3),
-(87, 28, 8),
-(88, 29, 8),
-(89, 30, 9),
-(90, 31, 2),
-(91, 32, 7),
-(93, 34, 4),
-(94, 35, 1),
-(95, 35, 4),
-(96, 36, 3),
-(97, 37, 8),
-(98, 38, 1),
-(99, 38, 2),
-(100, 38, 3),
-(101, 38, 4),
-(102, 38, 5),
-(103, 38, 6),
-(104, 38, 7),
-(105, 38, 8),
-(106, 38, 9),
-(107, 39, 2),
-(108, 33, 5),
-(109, 33, 6);
+(1, 10, 7),
+(3, 31, 7),
+(5, 44, 7),
+(6, 11, 5),
+(8, 32, 5),
+(9, 36, 5),
+(21, 12, 4),
+(22, 13, 4),
+(23, 21, 4),
+(24, 22, 4),
+(25, 32, 4),
+(26, 37, 4),
+(28, 46, 4),
+(29, 47, 4),
+(30, 14, 1),
+(31, 23, 1),
+(32, 24, 1),
+(33, 32, 1),
+(34, 38, 1),
+(35, 47, 1),
+(36, 15, 3),
+(37, 25, 3),
+(38, 26, 3),
+(39, 32, 3),
+(40, 39, 3),
+(41, 48, 3),
+(45, 32, 8),
+(46, 40, 8),
+(49, 16, 9),
+(50, 30, 9),
+(51, 33, 9),
+(54, 17, 2),
+(55, 21, 2),
+(56, 24, 2),
+(57, 32, 2),
+(58, 43, 2),
+(59, 51, 2),
+(60, 18, 6),
+(61, 21, 6),
+(62, 34, 6),
+(64, 52, 6),
+(69, 42, 5),
+(70, 42, 9),
+(71, 19, 5),
+(72, 19, 7),
+(73, 45, 5),
+(74, 45, 6),
+(75, 45, 9),
+(82, 53, 1),
+(83, 28, 8),
+(84, 20, 5),
+(85, 29, 8),
+(86, 41, 8),
+(87, 35, 1),
+(88, 35, 4),
+(89, 35, 6),
+(90, 35, 7),
+(91, 35, 8),
+(92, 35, 9),
+(93, 27, 8),
+(94, 49, 8),
+(95, 54, 8),
+(97, 55, 4);
 
 -- --------------------------------------------------------
 
@@ -487,7 +448,8 @@ CREATE TABLE `noticia` (
   `url_noticia` varchar(150) DEFAULT NULL,
   `rel_idmedio` smallint(5) UNSIGNED NOT NULL,
   `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL,
-  `rel_idusuario` int(11) UNSIGNED NOT NULL
+  `rel_idusuario` int(11) UNSIGNED NOT NULL,
+  `esta_activa` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -645,11 +607,11 @@ INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
 (63, 'Presupuesto ', 19),
 (64, 'Cronograma ', 19),
 (65, 'Organización administrativa', 19),
-(66, 'Actualización cartográfica ', 19),
+(66, 'Actualización cartográfica', 19),
 (67, 'Programa de tabulación', 19),
-(68, 'Preparación de la Boleta o cuestionario ', 19),
-(69, 'Piloto ', 19),
-(70, 'Selección y formación del personal ', 19),
+(68, 'Preparación de la Boleta o cuestionario', 19),
+(69, 'Piloto', 19),
+(70, 'Selección y formación del personal', 19),
 (71, 'Universalizar el acceso a la educación', 20),
 (72, 'Instalar laboratorios de ciencia y tecnología con acceso a Internet en todas las Unidades Educativas del país.', 20),
 (73, 'Desarrollar programas nacionales que vinculen la educación superior con prácticas profesionales en el sector público y las empresas estatales.', 20),
@@ -766,7 +728,7 @@ INSERT INTO `subtema` (`idsubtema`, `nombre_subtema`, `rel_idtema`) VALUES
 
 CREATE TABLE `tema` (
   `idtema` smallint(4) UNSIGNED NOT NULL,
-  `nombre_tema` varchar(255) NOT NULL,
+  `nombre_tema` varchar(150) NOT NULL,
   `rel_idcuestionario` smallint(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -850,14 +812,14 @@ CREATE TABLE `universidad` (
   `iduniversidad` smallint(3) UNSIGNED NOT NULL,
   `nombre_universidad` varchar(150) NOT NULL,
   `sigla_universidad` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `universidad`
 --
 
 INSERT INTO `universidad` (`iduniversidad`, `nombre_universidad`, `sigla_universidad`) VALUES
-(1, 'nodefinido', 'nd'),
+(1, 'No definido', 'ND'),
 (2, 'Universidad Tecnica de Oruro', 'UTO'),
 (3, 'Universidad Mayor de San Simon', 'UMSS'),
 (4, 'Universidad Catolica Boliviana', 'UCB'),
@@ -876,22 +838,20 @@ CREATE TABLE `universidad_departamento` (
   `idudepa` int(11) NOT NULL,
   `rel_iduniversidad` smallint(3) UNSIGNED NOT NULL,
   `rel_iddepartamento` smallint(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `universidad_departamento`
 --
 
 INSERT INTO `universidad_departamento` (`idudepa`, `rel_iduniversidad`, `rel_iddepartamento`) VALUES
-(1, 2, 3),
-(2, 3, 4),
-(3, 4, 1),
-(4, 4, 2),
-(5, 4, 4),
-(6, 5, 5),
-(7, 6, 8),
-(8, 7, 2),
-(9, 8, 1);
+(0, 1, 3),
+(0, 2, 4),
+(0, 3, 1),
+(0, 4, 5),
+(0, 5, 8),
+(0, 6, 2),
+(0, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -927,7 +887,7 @@ CREATE TABLE `users` (
   `remember_code` varchar(255) DEFAULT NULL,
   `created_on` int(11) UNSIGNED NOT NULL,
   `last_login` int(11) UNSIGNED DEFAULT NULL,
-  `active` tinyint(1) UNSIGNED DEFAULT 1,
+  `active` tinyint(1) UNSIGNED DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
@@ -936,7 +896,7 @@ CREATE TABLE `users` (
   `geolocalizacion` varchar(250) DEFAULT NULL,
   `rel_iddepartamento` smallint(3) UNSIGNED NOT NULL,
   `direccion` varchar(255) DEFAULT NULL,
-  `rel_iduniversidad` smallint(3) UNSIGNED NOT NULL DEFAULT 1
+  `rel_iduniversidad` smallint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -944,57 +904,68 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`, `direccion`, `rel_iduniversidad`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1627942958, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 1),
+(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1628906032, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 1),
 (2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, 1625414827, 1, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', 'GEOLOCALIZACION', 1, 'Mariano Colodro #1447', 1),
-(3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, 1625414291, 1, 'Alberto', 'Cruzo', NULL, NULL, '4444444', '4.5', 7, 'Calle Montes #5555', 0),
+(3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, 1625414291, 1, 'Julia Carmen', 'Misericordia Morales', NULL, NULL, '7298782', '', 3, '', 0),
 (4, '127.0.0.1', 'jcarlos', '$2y$10$xj7vhmTVFZOMLHbKfrhz.O2l37pN7cssOOBM0mGsXZ1A9B4S3se.W', 'almeyda@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625358200, NULL, 1, 'Juan Carlos', 'Almeyda', NULL, NULL, '48693587', '45465456456456454', 4, 'Calle Alberto #4323', 0),
-(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1628010207, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL, 0),
+(5, '127.0.0.1', 'mon-alfredo', '$2y$10$qzrbE.2JZUSt/AAi7.ObZuBYsK3/R6YJANzOSJvxp7aHSPXIuhTWi', 'alfredo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415047, 1628809866, 1, 'Alfredo R.', 'Torrico L.', NULL, NULL, NULL, NULL, 1, NULL, 0),
 (6, '127.0.0.1', 'mon-claudia', '$2y$10$oq9duUb2wp.cOrNj0h.oouNPk7redo3vaUlwpKEsrfT.Q4nN7.A9C', 'claudia@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415426, 1625420030, 1, 'Claudia', 'Arteaga', NULL, NULL, '49512234654', '546545456456454654', 4, 'Av. Sucre #4452', 0),
 (7, '127.0.0.1', 'mon-carlos', '$2y$10$qzJf1mPzU1NH0EJ6YIwZ.uL2P18cx3OaAkYjIy.F5En57hbNrWJBe', 'carlos@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625415550, 1625419998, 1, 'Carlos', 'Olivera', NULL, NULL, '495452121', '94945454654654', 2, 'Av. Circunvalacion #476', 0),
 (8, '127.0.0.1', 'mon-adriana', '$2y$10$kVDfs/u3izDKtmAJCieTb.PJNrV6SYQv3vazv3fV4kXw1.aJ3ZCHG', 'adrianitajus98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674404, NULL, 1, 'Adriana', 'Mier Justiniano', NULL, NULL, '6787516', '', 1, '', 4),
-(9, '127.0.0.1', 'mon-alejandro', '$2y$10$u.4.qtFJYfAEoPnNXaYOZeeA6Foyfw5QCDjLcSpA26NPinNaclhMO', '201907084@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674506, NULL, 1, 'Alejandro', 'Galindo Wieler', NULL, NULL, '00', '', 4, '', 1),
-(10, '127.0.0.1', 'mon-alison', '$2y$10$u/6WP7Hnfa1BQQ7M0RtJVOfHunpiTN3wJjn5vzrVx7Q5Q8BxMoPD2', 'alison.sthephanie30@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674629, NULL, 1, 'Alison', 'Romero', NULL, NULL, '8537724', '', 1, '', 4),
+(9, '127.0.0.1', 'mon-alejandro', '$2y$10$u.4.qtFJYfAEoPnNXaYOZeeA6Foyfw5QCDjLcSpA26NPinNaclhMO', '201907084@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674506, 1628124055, 1, 'Alejandro', 'Galindo Wieler', NULL, NULL, '00', '', 4, '', 1),
+(10, '127.0.0.1', 'mon-alison', '$2y$10$u/6WP7Hnfa1BQQ7M0RtJVOfHunpiTN3wJjn5vzrVx7Q5Q8BxMoPD2', 'alison.sthephanie30@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625674629, 1628038585, 1, 'Alison', 'Romero', NULL, NULL, '8537724', '', 1, '', 4),
 (11, '127.0.0.1', 'mon-ami', '$2y$10$Q3Y8QpHoHPVEb2u5pmJtAebSM7IcIetvLCnQUXGs/2urqDlGnrAqC', 'amisita_la_seri@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625675771, NULL, 1, 'Ami', 'Cruz Amacifen', NULL, NULL, '4217053', '', 8, '', 1),
-(12, '127.0.0.1', 'mon-andres', '$2y$10$K925qdJA4PPWbjmdB/mVQuZZdXAXOfOGtIFFoD6JglaARZiuJowQ6', 'andresventiadesb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625675847, NULL, 1, 'Andrés', 'Ventiades Velásquez ', NULL, NULL, '13905327', '', 5, '', 5),
-(13, '127.0.0.1', 'mon-angelo', '$2y$10$frwfgKIzEEtuXd1pnYAX2Oj62X9CaA9t7mcLCIgBRkEn5OwmjPPAq', 'ap819994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676142, NULL, 1, 'Angelo Michael', 'Perez Pool ', NULL, NULL, '7351503', '', 3, '', 2),
+(12, '127.0.0.1', 'mon-andres', '$2y$10$K925qdJA4PPWbjmdB/mVQuZZdXAXOfOGtIFFoD6JglaARZiuJowQ6', 'andresventiadesb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625675847, 1627747386, 1, 'Andrés', 'Ventiades Velásquez ', NULL, NULL, '13905327', '', 5, '', 5),
+(13, '127.0.0.1', 'mon-angelo', '$2y$10$frwfgKIzEEtuXd1pnYAX2Oj62X9CaA9t7mcLCIgBRkEn5OwmjPPAq', 'ap819994@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676142, 1628134476, 1, 'Angelo Michael', 'Perez Pool ', NULL, NULL, '7351503', '', 3, '', 2),
 (14, '127.0.0.1', 'mon-belen', '$2y$10$80ltEsx4ns0nfK8/iBdfXO4CAcUoxxsIFqF0OhNIW/BMobpcQWypm', 'anabelengl24@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676205, NULL, 1, 'Ana Belen', 'Gutierrez Lopez', NULL, NULL, '9779920', '', 2, '', 7),
 (15, '127.0.0.1', 'mon-bernardo', '$2y$10$qe8865xObWmbnq1q8EB0O.uQGSEUXZyljFd0EVhKIyCWGmfHO/zJ6', 'enzobernardogallo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676259, NULL, 1, 'Bernardo', 'Gallo', NULL, NULL, '12578751', '', 1, '', 4),
-(16, '127.0.0.1', 'mon-cecilia', '$2y$10$x8xji0mC62TwN5AZJ6tcg.BCWWtD480jC09r72tTX1IVy8gf28M/2', 'ceciliajustiniano306@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676367, NULL, 1, 'Cecilia', 'Justiniano Escalante', NULL, NULL, '12475248', '', 2, '', 7),
-(17, '127.0.0.1', 'mon-cristian', '$2y$10$ZkPhZsLt7V2NjJFZTD7mqelkwVk0b1Xpcgcj.vv9NHeOBkIez.qNO', 'cmisericordia123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676428, NULL, 1, 'Cristian Alberto', 'Misericordia Morales', NULL, NULL, '7390130', '', 3, '', 2),
-(18, '127.0.0.1', 'mon-daniela', '$2y$10$55nP4beMdkX4xAfTC0vfnulkG6R9HDikFAaK7rnO6aPqdKGE8012y', '202004866@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676684, NULL, 1, 'Daniela Rosario', 'Hualuque Rodríguez', NULL, NULL, '0', '', 4, '', 1),
-(19, '127.0.0.1', 'mon-diego', '$2y$10$1JlsIQbtpDEEwDANz5nTouWlDO/k8sxq9/CV2MTHCsSr8PiL7NHqe', 'ayo2019@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676805, NULL, 1, 'Diego', 'Ayoroa', NULL, NULL, '6964639', '', 1, '', 4),
-(20, '127.0.0.1', 'mon-elsifania', '$2y$10$d.GWZs3Yw/SXQLyP7AJavOMSnS.XdVUzhyKvtVvbp/CQZgY6.TSgi', 'fannyolarterojas@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676855, NULL, 1, 'Elsifania', 'Olarte Rojas', NULL, NULL, '1766568', '', 8, '', 6),
-(21, '127.0.0.1', 'mon-erick', '$2y$10$LfEdf4MpfrTxm9tByOqW/uQyJ1mb01DlEETHy1uqAYQxon6VQeASO', 'tapiaerik1500@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676925, 1627861544, 1, 'Erik Roger ', 'Calizaya Tapia ', NULL, NULL, '10393487', '', 5, '', 5),
-(22, '127.0.0.1', 'mon-ericka', '$2y$10$6xava60aeGfmf0s29weyseDY4nkQmZByMN5R0TILcKIXhe.3M6J0i', 'mniko4218@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676994, NULL, 1, 'Erick', 'Alvarado Beltrán ', NULL, NULL, '12681679', '', 4, '', 1),
-(23, '127.0.0.1', 'mon-evelin', '$2y$10$SE7MMZ7n3md5e6tHdLl5Vu7BEX4XEi/iohn68.u331sFUuwKOmzCe', 'evelinmachaca123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677141, NULL, 1, 'Evelin E.', 'Machaca Flores ', NULL, NULL, '7353738', '', 3, '', 2),
-(24, '127.0.0.1', 'mon-fabiola', '$2y$10$QSCc3/taQIYIYOqUeB2VNuPtP.wxgHRE6NjwW4IFW49gVkVHrRpBi', 'fabi-justiniano-@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677382, NULL, 1, 'Fabiola', 'Justiniano', NULL, NULL, '570431', '', 8, '', 6),
+(16, '127.0.0.1', 'mon-cecilia', '$2y$10$x8xji0mC62TwN5AZJ6tcg.BCWWtD480jC09r72tTX1IVy8gf28M/2', 'ceciliajustiniano306@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676367, 1628135027, 1, 'Cecilia', 'Justiniano Escalante', NULL, NULL, '12475248', '', 2, '', 7),
+(17, '127.0.0.1', 'mon-cristian', '$2y$10$ZkPhZsLt7V2NjJFZTD7mqelkwVk0b1Xpcgcj.vv9NHeOBkIez.qNO', 'cmisericordia123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676428, 1627922111, 1, 'Cristian Alberto', 'Misericordia Morales', NULL, NULL, '7390130', '', 3, '', 2),
+(18, '127.0.0.1', 'mon-daniela', '$2y$10$55nP4beMdkX4xAfTC0vfnulkG6R9HDikFAaK7rnO6aPqdKGE8012y', '202004866@ est.edu.bo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676684, 1628043141, 1, 'Daniela Rosario', 'Hualuque Rodríguez', NULL, NULL, '0', '', 4, '', 1),
+(19, '127.0.0.1', 'mon-diego', '$2y$10$1JlsIQbtpDEEwDANz5nTouWlDO/k8sxq9/CV2MTHCsSr8PiL7NHqe', 'ayo2019@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676805, 1628178406, 1, 'Diego', 'Ayoroa', NULL, NULL, '6964639', '', 1, '', 4),
+(20, '127.0.0.1', 'mon-elsifania', '$2y$10$d.GWZs3Yw/SXQLyP7AJavOMSnS.XdVUzhyKvtVvbp/CQZgY6.TSgi', 'fannyolarterojas@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676855, 1627959495, 1, 'Elsifania', 'Olarte Rojas', NULL, NULL, '1766568', '', 8, '', 6),
+(21, '127.0.0.1', 'mon-erick', '$2y$10$LfEdf4MpfrTxm9tByOqW/uQyJ1mb01DlEETHy1uqAYQxon6VQeASO', 'tapiaerik1500@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676925, 1628170370, 1, 'Erik Roger ', 'Calizaya Tapia ', NULL, NULL, '10393487', '', 5, 'Ostria Reyes #236', 5),
+(22, '127.0.0.1', 'mon-ericka', '$2y$10$6xava60aeGfmf0s29weyseDY4nkQmZByMN5R0TILcKIXhe.3M6J0i', 'mniko4218@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625676994, 1627742622, 1, 'Erick', 'Alvarado Beltrán ', NULL, NULL, '12681679', '', 4, '', 1),
+(23, '127.0.0.1', 'mon-evelin', '$2y$10$SE7MMZ7n3md5e6tHdLl5Vu7BEX4XEi/iohn68.u331sFUuwKOmzCe', 'evelinmachaca123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677141, 1628033920, 1, 'Evelin E.', 'Machaca Flores ', NULL, NULL, '7353738', '', 3, '', 2),
+(24, '127.0.0.1', 'mon-fabiola', '$2y$10$QSCc3/taQIYIYOqUeB2VNuPtP.wxgHRE6NjwW4IFW49gVkVHrRpBi', 'fabi-justiniano-@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677382, 1627598579, 1, 'Fabiola', 'Justiniano', NULL, NULL, '570431', '', 8, '', 6),
 (25, '127.0.0.1', 'mon-gabriel', '$2y$10$U6SqPiI2dfSohR/iAUKWW.czeDRJZ/HyRECsHAL6SSl5nJSAl0JFK', 'garandiabarrios@gmail.com ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677434, NULL, 1, 'Gabriel ', 'Arandia ', NULL, NULL, '7519015', '', 1, '', 4),
-(26, '127.0.0.1', 'mon-genesis', '$2y$10$jWe6K9Qq155/xDpnPEqVrO0ei0l.Q5JpiZx/pbGO9mYP9r3l.5tL2', 'mier.genesis@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677623, 1625680035, 1, 'Génesis ', 'Mier', NULL, NULL, '5645025', '', 1, '', 4),
-(27, '127.0.0.1', 'mon-gustavo', '$2y$10$tpe.nGYN5IuvCygYIUtFtucPBcIJdV5QY9mCmOqptvO0U8GFfC9Rq', 'mamaniquispegustavo2006@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677685, NULL, 1, 'Gustavo', 'Mamani Quispe ', NULL, NULL, '7288481', '', 3, '', 2),
-(28, '127.0.0.1', 'mon-idar', '$2y$10$XnaHNH4n7jw3ygaRi3ebg.2Tg5X2O9R7zVSpukLdRmM2lcPNl7rD.', 'chubyjuu18hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677745, NULL, 1, 'Idar Josue ', 'Villca Villanueva', NULL, NULL, '7889449', '', 8, '', 6),
-(29, '127.0.0.1', 'mon-jodie', '$2y$10$c3KpX6mLf5OHdTKk.1lwW.psVKkeIfMyUyxVgwfRkdX1N7SrFvL2.', 'michellevillarroeljb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677848, NULL, 1, 'Jodie Michelle ', 'Bautista Villarroel', NULL, NULL, '8302800', '', 1, '', 8),
-(30, '127.0.0.1', 'mon-julia', '$2y$10$GD0VAoOh082/6rQ3OVv8ze2qmpYl2bTrxDxqytlDUuvppTIljjkX2', 'mise.juli.1991@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677922, NULL, 1, 'Julia Carmen', 'Misericordia Morales', NULL, NULL, '7298782', '', 3, '', 2),
-(31, '127.0.0.1', 'mon-keylin', '$2y$10$kX1JLROYSjg3/1Y459BogegWEUGKwBFmsnTHZz/5MaG7U2mQUR3MG', 'kelynsuarez@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677986, NULL, 1, 'Keylin', 'Suárez Rojas', NULL, NULL, '9433132', '', 4, '', 1),
-(32, '127.0.0.1', 'mon-kiebel', '$2y$10$i23IBg8Ca8aBjI0iQScuMO1zfL6NK0.OLAbZ55YEyqtd4NiSz7zLa', 'kiebel6garcia6rocabado6@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678075, NULL, 1, 'Kiebel', 'Garcia Rocabado', NULL, NULL, '8043490', '', 4, '', 3),
+(26, '127.0.0.1', 'mon-genesis', '$2y$10$jWe6K9Qq155/xDpnPEqVrO0ei0l.Q5JpiZx/pbGO9mYP9r3l.5tL2', 'mier.genesis@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677623, 1625680035, 1, 'Génesis ', 'S/A', NULL, NULL, '5645025', '', 1, '', 4),
+(27, '127.0.0.1', 'mon-gustavo', '$2y$10$tpe.nGYN5IuvCygYIUtFtucPBcIJdV5QY9mCmOqptvO0U8GFfC9Rq', 'mamaniquispegustavo2006@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677685, 1627864433, 1, 'Gustavo', 'Mamani Quispe ', NULL, NULL, '7288481', '', 3, '', 2),
+(28, '127.0.0.1', 'mon-idar', '$2y$10$XnaHNH4n7jw3ygaRi3ebg.2Tg5X2O9R7zVSpukLdRmM2lcPNl7rD.', 'chubyjuu18hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677745, 1628202553, 1, 'Idar Josue ', 'Villca Villanueva', NULL, NULL, '7889449', '', 8, '', 6),
+(29, '127.0.0.1', 'mon-jodie', '$2y$10$gYUBwSF7tm6hHRshPTVTMOCN6NXUWbo7bBzgo8JSHvrfTp7V3DKvS', 'michellevillarroeljb@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677848, 1628176030, 1, 'Jodie Michelle ', 'Bautista Villarroel', NULL, NULL, '8302800', '', 1, '', 8),
+(30, '127.0.0.1', 'mon-julia', '$2y$10$GD0VAoOh082/6rQ3OVv8ze2qmpYl2bTrxDxqytlDUuvppTIljjkX2', 'mise.juli.1991@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677922, 1627830457, 1, 'Julia Carmen', 'Julia Carmen', NULL, NULL, '7298782', '', 3, '', 2),
+(31, '127.0.0.1', 'mon-keylin', '$2y$10$kX1JLROYSjg3/1Y459BogegWEUGKwBFmsnTHZz/5MaG7U2mQUR3MG', 'kelynsuarez@ gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625677986, 1628132172, 1, 'Keylin', 'Suárez Rojas', NULL, NULL, '9433132', '', 4, '', 1),
+(32, '127.0.0.1', 'mon-kiebel', '$2y$10$i23IBg8Ca8aBjI0iQScuMO1zfL6NK0.OLAbZ55YEyqtd4NiSz7zLa', 'kiebel6garcia6rocabado6@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678075, 1627967526, 1, 'Kiebel', 'Garcia Rocabado', NULL, NULL, '8043490', '', 4, '', 3),
 (33, '127.0.0.1', 'mon-leidy', '$2y$10$YP94xAOZw.3oyHdCXMgwcej04ZbdByCbsQL9KBwzcfX2kLlQ24KM6', 'sincorreo@correo.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678176, NULL, 1, 'Leidy Estefania ', 'Cordero Mamani', NULL, NULL, '5701704', '', 8, '', 1),
-(34, '127.0.0.1', 'mon-leonela', '$2y$10$AHRxM3lTzX6vCviO4JmVaOZZ6kiIjgS0jjMhLHT6m4tC8tVvUTwwO', 'ullcafernandezleonela@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678254, NULL, 1, 'Leonela', 'Sullca Fernández ', NULL, NULL, '9122028', '', 1, '', 8),
-(35, '127.0.0.1', 'mon-luis', '$2y$10$bGIsAr6x6Vc6gk7kWPKdOeuhWuOi0/YpHnRrzAL9EPLSVoSXnE4OS', 'luis@dominio.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678599, NULL, 1, 'Luis David ', 'Santos Suárez', NULL, NULL, '4209452', '', 8, '', 6),
-(36, '127.0.0.1', 'mon-luisb', '$2y$10$4w9gVeRYO2P82rKW6.G8E.WpFfJGBTURgHjDGp2Qd.qoRHQTSb9jO', 'luissdanielabc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678683, NULL, 1, 'Luis Daniel', 'Salamanca Barral ', NULL, NULL, '8621075', '', 5, '', 5),
+(34, '127.0.0.1', 'mon-leonela', '$2y$10$AHRxM3lTzX6vCviO4JmVaOZZ6kiIjgS0jjMhLHT6m4tC8tVvUTwwO', 'ullcafernandezleonela@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678254, 1628127571, 1, 'Leonela', 'Sullca Fernandez ', NULL, NULL, '9122028', '', 1, '', 8),
+(35, '127.0.0.1', 'mon-luis', '$2y$10$bGIsAr6x6Vc6gk7kWPKdOeuhWuOi0/YpHnRrzAL9EPLSVoSXnE4OS', 'luis@dominio.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678599, 1628028708, 1, 'Luis David ', 'Santos Suárez', NULL, NULL, '4209452', '', 8, '', 6),
+(36, '127.0.0.1', 'mon-luisb', '$2y$10$4w9gVeRYO2P82rKW6.G8E.WpFfJGBTURgHjDGp2Qd.qoRHQTSb9jO', 'luissdanielabc@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678683, 1627963373, 1, 'Luis Daniel', 'Salamanca Barral ', NULL, NULL, '8621075', '', 5, '', 5),
 (37, '127.0.0.1', 'mon-luz', '$2y$10$ET3v1Y3jEmRq8lZ2HxFPFOhqbIQam/FHJvinjrAr4tXrjMet9rjKG', 'bordaortusteluzmilena@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678837, NULL, 1, 'Luz Milena', 'Borda Ortuste ', NULL, NULL, '10384512', '', 5, '', 1),
 (38, '127.0.0.1', 'mon-maria', '$2y$10$9fbJUMRXHmfkr8JzuU.wqe.7a9F7mPtMlEvA85tRvXu1tzwK9245W', 'delcielogalindo@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678903, NULL, 1, 'María del Cielo ', 'Galindo', NULL, NULL, '8808885', '', 1, '', 4),
-(39, '127.0.0.1', 'mon-mariac', '$2y$10$TvTELC9mcL5NRlG3Dp1uR.m.xwcXFaYS4dALCz5D12mw4QO19P39e', '202001453@ est.umss.edu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678999, NULL, 1, 'Ma. Celeste', 'Condorhuayra Araoz', NULL, NULL, '14071014', '', 4, '', 1),
-(40, '127.0.0.1', 'mon-mariao', '$2y$10$TgVZu4Af9tJstRWrowoIK.0Ek.2/KDBnkkT/Kh/qRYQXanCsBW7Em', 'vikyosorio123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679075, NULL, 1, 'María Victoria ', 'Osorio', NULL, NULL, '7208546', '', 1, '', 4),
-(41, '127.0.0.1', 'mon-marioly', '$2y$10$S9EgXybZP/7JepUxA9cqaOAThrpPfZj1RXRdlcJhw05ngIFt9FzXG', 'mariolicruz98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679162, NULL, 1, 'Marioly', 'Cruz Heredia', NULL, NULL, '9619837', '', 2, '', 7),
-(42, '127.0.0.1', 'mon-mayel', '$2y$10$gjaF9xP2bPEkr.21WXqnWuqCray604Gt/n6Bm5kQePS8Y6.wv0JpG', 'ligiaherbascabrera@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679244, NULL, 1, 'Mavel Ligia ', 'Herbas Cabrera ', NULL, NULL, '975576', '', 4, '', 3),
-(43, '127.0.0.1', 'mon-mihaela', '$2y$10$QK72MT1oZ86xuRSPYxDi2.nc4lafQWkkgzIEfX.MA2KZth1gq4cbK', 'mivigafeQQ@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679307, NULL, 1, 'Mihaela Victoria ', 'Gareca Fernandez', NULL, NULL, '4074239', '', 4, '', 3),
-(44, '127.0.0.1', 'mon-paula', '$2y$10$3sd0GsvARcjpor1bevHaXuAcXGP3gYbSmLwLiXjjs5LWZ1SiM4d5O', 'paulafariast28@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679373, 1625679974, 1, 'Paula Thais ', 'Farías Teran', NULL, NULL, '5597049', '', 4, '', 3),
-(45, '127.0.0.1', 'mon-ralhs', '$2y$10$YIrMU3oHyw/1/ViYavsYReRoOgHfoPjOVdZC/ssds7fnNO0h/YzQO', 'gonsalesporumaemer@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679440, NULL, 1, 'Ralhs W', 'Gonzáles Parumo', NULL, NULL, '4211751', '', 8, '', 6),
-(46, '127.0.0.1', 'mon-ronald', '$2y$10$fBjuFnHXpcT3glOCyF/Fge4zyz8OtRA/wlQuFvkWEaK.GCeHA1HY.', 'ronaldalexiscondori@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679510, NULL, 1, 'Ronald Alexis', 'Condori Fernandez', NULL, NULL, '10653943', '', 2, '', 7),
-(47, '127.0.0.1', 'mon-rosana', '$2y$10$GSJs5F7pt7D7ohryQvnhpem8a63RKrYBd.IcX5bLxvmQsYQ/NDA9a', 'rosivas17@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679577, NULL, 1, 'Rosana Agar', 'Vásquez Pimentel ', NULL, NULL, '6591343', '', 5, '', 5),
-(48, '127.0.0.1', 'mon-sholay', '$2y$10$WXJ8amnAWLdp1sScT69T8uQDL/tYDO0rO6mnlI0mGcHll6EBh7tmG', 'sholaymisericordiamolina@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679666, NULL, 1, 'Sholay Gabriela', 'Misericordia Molina ', NULL, NULL, '7359512', '', 3, '', 2),
-(49, '127.0.0.1', 'mon-taliana', '$2y$10$.pkDJOCdsIZWVRTCc3VWPekFvK85EtGlJp5Lf8Sfjrq9dfHW.1wMO', 'talianamedina1999@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679726, NULL, 1, 'Taliana', 'Quiroga Medina', NULL, NULL, '14656162', '', 2, '', 7),
+(39, '127.0.0.1', 'mon-mariac', '$2y$10$TvTELC9mcL5NRlG3Dp1uR.m.xwcXFaYS4dALCz5D12mw4QO19P39e', '202001453@ est.umss.edu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625678999, 1628051231, 1, 'Ma. Celeste', 'Condorhuayra Araoz', NULL, NULL, '14071014', '', 4, '', 1),
+(40, '127.0.0.1', 'mon-mariao', '$2y$10$TgVZu4Af9tJstRWrowoIK.0Ek.2/KDBnkkT/Kh/qRYQXanCsBW7Em', 'vikyosorio123@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679075, 1628043429, 1, 'María Victoria ', 'Osorio', NULL, NULL, '7208546', '', 1, '', 4),
+(41, '127.0.0.1', 'mon-marioly', '$2y$10$S9EgXybZP/7JepUxA9cqaOAThrpPfZj1RXRdlcJhw05ngIFt9FzXG', 'mariolicruz98@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679162, 1626991330, 1, 'Marioly', 'Cruz Heredia', NULL, NULL, '9619837', '', 2, '', 7),
+(42, '127.0.0.1', 'mon-mayel', '$2y$10$gjaF9xP2bPEkr.21WXqnWuqCray604Gt/n6Bm5kQePS8Y6.wv0JpG', 'ligiaherbascabrera@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679244, 1628142218, 1, 'Mavel Ligia ', 'Herbas Cabrera ', NULL, NULL, '975576', '', 4, '', 3),
+(43, '127.0.0.1', 'mon-mihaela', '$2y$10$QK72MT1oZ86xuRSPYxDi2.nc4lafQWkkgzIEfX.MA2KZth1gq4cbK', 'mivigafeQQ@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679307, 1628133168, 1, 'Mihaela Victoria ', 'Gareca Fernandez', NULL, NULL, '4074239', '', 4, '', 3),
+(44, '127.0.0.1', 'mon-paula', '$2y$10$3sd0GsvARcjpor1bevHaXuAcXGP3gYbSmLwLiXjjs5LWZ1SiM4d5O', 'paulafariast28@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679373, 1628121137, 1, 'Paula Thais ', 'Farías Teran', NULL, NULL, '5597049', '', 4, '', 3),
+(45, '127.0.0.1', 'mon-ralhs', '$2y$10$YIrMU3oHyw/1/ViYavsYReRoOgHfoPjOVdZC/ssds7fnNO0h/YzQO', 'gonsalesporumaemer@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679440, 1628131516, 1, 'Ralhs W', 'Gonzáles Parumo', NULL, NULL, '4211751', '', 8, '', 6),
+(46, '127.0.0.1', 'mon-ronald', '$2y$10$fBjuFnHXpcT3glOCyF/Fge4zyz8OtRA/wlQuFvkWEaK.GCeHA1HY.', 'ronaldalexiscondori@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679510, 1628140421, 1, 'Ronald Alexis', 'Condori Fernandez', NULL, NULL, '10653943', '', 2, '', 7),
+(47, '127.0.0.1', 'mon-rosana', '$2y$10$GSJs5F7pt7D7ohryQvnhpem8a63RKrYBd.IcX5bLxvmQsYQ/NDA9a', 'rosivas17@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679577, 1628136176, 1, 'Rosana Agar', 'Vásquez Pimentel ', NULL, NULL, '6591343', '', 5, '', 5),
+(48, '127.0.0.1', 'mon-sholay', '$2y$10$WXJ8amnAWLdp1sScT69T8uQDL/tYDO0rO6mnlI0mGcHll6EBh7tmG', 'sholaymisericordiamolina@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679666, 1628140226, 1, 'Sholay Gabriela', 'Misericordia Molina ', NULL, NULL, '7359512', '', 3, '', 2),
+(49, '127.0.0.1', 'mon-taliana', '$2y$10$.pkDJOCdsIZWVRTCc3VWPekFvK85EtGlJp5Lf8Sfjrq9dfHW.1wMO', 'talianamedina1999@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679726, 1627793361, 1, 'Taliana', 'Quiroga Medina', NULL, NULL, '14656162', '', 2, '', 7),
 (50, '127.0.0.1', 'mon-tania', '$2y$10$Ci5Nqgut1Iv7Lh0CKGsZ2ev/fwU00g4lPIJtIkjJdAUrrFLHiEe.G', 'thewantedtanita@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625679786, NULL, 1, 'Tania Adriana ', 'Oros Ortiz', NULL, NULL, '7879403', '', 4, '', 3),
-(51, '127.0.0.1', 'mon-alejandroc', '$2y$10$lubj9zh1AGUxdmXkV40W1.sZBHox5qoLE5NvE.KY2c8hrP4U9NprS', 'alecar@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625688141, 1625688181, 1, 'Alejandro', 'Carvajal', NULL, NULL, '0000', '', 1, '', 1);
+(51, '127.0.0.1', 'mon-alejandroc', '$2y$10$lubj9zh1AGUxdmXkV40W1.sZBHox5qoLE5NvE.KY2c8hrP4U9NprS', 'alecar@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625688141, 1628036502, 1, 'Alejandro', 'Carvajal', NULL, NULL, '0000', '', 1, '', 4),
+(52, '200.105.212.232', 'adm-alejandro', '$2y$12$OPArNBZJXAo.9dAfKgONIu5fUZ9KoS92JZ1sdP1rrV7WmlVbCPyHe', 'alecar1@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626813394, 1628089211, 1, 'Alejandro', 'Carvajal', NULL, NULL, '4845151', 'ssaas', 1, 'ss', 1),
+(53, '177.222.113.11', 'mon-paohu', '$2y$10$qGt25cGC4iGNq190f60q7.EzQWOeQcNPwSxJYmi9mJ4gOmOwbHAHW', 'paola.hb.1997.17@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626823428, 1627701176, 1, 'Paola ', 'Hurtado Borobobo', NULL, NULL, '4212295', '', 8, '', 1),
+(54, '181.115.160.189', 'mon-marisol', '$2y$10$Vhud6bHQekvouLk6Du05CORUC8nQ6jwah5VpY9r.C1nbUNac.mMsO', 'marisol.mzfl@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1626913208, 1628126757, 1, 'Marisol', 'Muñoz', NULL, NULL, '7567747', '', 5, '', 1),
+(55, '177.222.113.11', 'mon-selky', '$2y$10$mNazTtweCTd622XwqV1Zt.XI44u2GlFkc2uTs4EGlWX90Wmn.jZsW', 'SelkymolinaVaca@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627049788, 1628087769, 1, 'Selky ', 'Molina Vaca', NULL, NULL, '5600866', '', 8, '', 1),
+(56, '177.222.113.11', 'adm-sverd', '$2y$10$D9SJ4Oz57MpGdbqzIqMgYeo9jM.SCS8S/nGUMjgMwXRzrEOCPkt3u', 'observacionciudadana0@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627077743, NULL, 1, 'Sandra', 'Verduguez', NULL, NULL, '3124967', '', 1, '', 1),
+(57, '177.222.113.11', 'mon-jennifer', '$2y$10$RUhcPXZ56B0JejI.JmT/euDWq4dKZ7Gl7D0Q2evL.c1UeP3Z5yn7O', 'arredondovillagomez10@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627566874, 1628132224, 1, 'Jennifer ', 'Arreondo Villagomez', NULL, NULL, '11304518', '', 2, '', 1),
+(58, '200.105.212.122', 'mon-pando', '$2y$10$V9cQD75V8lHnnBSuedUw9eN67IGi0nP5ArpRNleXkpzYuC95clAWq', 'pando@pando.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627593507, 1627602566, 1, 'Monitor', 'Pando', NULL, NULL, '486512152', '', 8, '', 1),
+(59, '200.105.212.122', 'mon-sucre', '$2y$10$VmPKi4IxtzjVKNLGpu/CG.A29X0wFGWFFqYLy41USMmCpGpVxROJS', 'monsucre@sucre', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1627593926, 1627593943, 1, 'Monitor', 'Sucre', NULL, NULL, '48542122', '', 5, '', 1),
+(60, '127.0.0.1', 'mon-monitor', '$2y$10$ggRupywlI.A9EHdmVKAyTeYYJ//dyybRuvAcKeqCmqOdrcCNDCjhW', 'monitor@prueba.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1628614200, NULL, 1, 'Monitor', 'Prueba', NULL, NULL, '4865464', '1564654165,165465456', 1, 'Calle Pando #432', 4),
+(61, '127.0.0.1', 'mon-monitor1', '$2y$10$CX93Q2RCaQ.x7IvblHG3z.0pUlZ8JAjZNq.wuxUlJ/K7/iwt0.TO.', 'monitor@prueba2.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1628614624, 1628614641, 1, 'Monitor', 'Prueba2', NULL, NULL, '57896541', '1564654165,165465456', 6, 'Calle Pando #432', 4),
+(62, '127.0.0.1', 'mon-monitor2', '$2y$10$2lShzTL/.6voqgyVOupmTeMWp7fF.RuLrEGcJt/a0xDcg21xMwCzC', 'monitor@prueba3.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1628614878, NULL, 1, 'Monitor', 'Prueba3', NULL, NULL, '85465421', '4542123, 4564654', 9, 'Av. circunvalacion', 4);
 
 -- --------------------------------------------------------
 
@@ -1020,28 +991,34 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (5, 3, 3),
 (6, 4, 3),
 (7, 5, 3),
-(60, 5, 4),
+(71, 5, 4),
 (8, 6, 3),
 (9, 7, 3),
 (10, 8, 3),
+(62, 8, 4),
 (11, 9, 3),
 (12, 10, 3),
+(63, 10, 4),
 (13, 11, 3),
 (14, 12, 3),
 (15, 13, 3),
 (16, 14, 3),
 (17, 15, 3),
+(64, 15, 4),
 (18, 16, 3),
 (19, 17, 3),
 (20, 18, 3),
 (21, 19, 3),
+(65, 19, 4),
 (22, 20, 3),
 (23, 21, 3),
 (24, 22, 3),
 (25, 23, 3),
 (26, 24, 3),
 (27, 25, 3),
+(66, 25, 4),
 (28, 26, 3),
+(67, 26, 4),
 (29, 27, 3),
 (30, 28, 3),
 (31, 29, 3),
@@ -1054,8 +1031,10 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (38, 36, 3),
 (39, 37, 3),
 (40, 38, 3),
+(68, 38, 4),
 (41, 39, 3),
 (42, 40, 3),
+(69, 40, 4),
 (43, 41, 3),
 (44, 42, 3),
 (45, 43, 3),
@@ -1067,12 +1046,20 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (51, 49, 3),
 (52, 50, 3),
 (53, 51, 3),
+(70, 51, 4),
 (54, 52, 1),
-(55, 53, 1),
-(56, 54, 2),
-(57, 55, 1),
-(58, 57, 2),
-(59, 58, 3);
+(55, 53, 3),
+(56, 54, 3),
+(57, 55, 3),
+(58, 56, 1),
+(59, 57, 3),
+(60, 58, 3),
+(61, 59, 3),
+(72, 60, 3),
+(74, 61, 3),
+(75, 61, 4),
+(76, 62, 3),
+(77, 62, 4);
 
 --
 -- Índices para tablas volcadas
@@ -1267,7 +1254,8 @@ ALTER TABLE `subtema`
 -- Indices de la tabla `tema`
 --
 ALTER TABLE `tema`
-  ADD PRIMARY KEY (`idtema`);
+  ADD PRIMARY KEY (`idtema`),
+  ADD KEY `fk_cuestionariotema` (`rel_idcuestionario`);
 
 --
 -- Indices de la tabla `tipo_medio`
@@ -1285,7 +1273,6 @@ ALTER TABLE `universidad`
 -- Indices de la tabla `universidad_departamento`
 --
 ALTER TABLE `universidad_departamento`
-  ADD PRIMARY KEY (`idudepa`),
   ADD KEY `fk_rel_depa` (`rel_iddepartamento`),
   ADD KEY `fk_rel_universidad` (`rel_iduniversidad`);
 
@@ -1342,7 +1329,7 @@ ALTER TABLE `cuestionario`
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `iddepartamento` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `iddepartamento` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `estadoley`
@@ -1408,13 +1395,13 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT de la tabla `medio_comunicacion`
 --
 ALTER TABLE `medio_comunicacion`
-  MODIFY `idmedio` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idmedio` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `medio_departamento`
 --
 ALTER TABLE `medio_departamento`
-  MODIFY `idmediodepartamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `idmediodepartamento` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT de la tabla `nombreley`
@@ -1489,12 +1476,6 @@ ALTER TABLE `universidad`
   MODIFY `iduniversidad` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `universidad_departamento`
---
-ALTER TABLE `universidad_departamento`
-  MODIFY `idudepa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT de la tabla `urlley`
 --
 ALTER TABLE `urlley`
@@ -1504,13 +1485,13 @@ ALTER TABLE `urlley`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT de la tabla `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- Restricciones para tablas volcadas
@@ -1620,6 +1601,12 @@ ALTER TABLE `subtema`
   ADD CONSTRAINT `subtema_ibfk_1` FOREIGN KEY (`rel_idtema`) REFERENCES `tema` (`idtema`);
 
 --
+-- Filtros para la tabla `tema`
+--
+ALTER TABLE `tema`
+  ADD CONSTRAINT `fk_cuestionariotema` FOREIGN KEY (`rel_idcuestionario`) REFERENCES `cuestionario` (`idcuestionario`);
+
+--
 -- Filtros para la tabla `universidad_departamento`
 --
 ALTER TABLE `universidad_departamento`
@@ -1632,6 +1619,13 @@ ALTER TABLE `universidad_departamento`
 ALTER TABLE `urlley`
   ADD CONSTRAINT `fk_urlley_a_estadoley` FOREIGN KEY (`rel_idestadoley`) REFERENCES `estadoley` (`idestadoley`),
   ADD CONSTRAINT `fk_urlley_a_leyes` FOREIGN KEY (`rel_idley`) REFERENCES `leyes` (`idleyes`);
+
+--
+-- Filtros para la tabla `users_groups`
+--
+ALTER TABLE `users_groups`
+  ADD CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
