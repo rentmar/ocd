@@ -154,7 +154,7 @@
 
 								</td>
 								<td>
-									<a href="<?php ?>" >
+									<a href="<?php echo site_url('Seguimientomonitores/editarl/'.$l['idley']); ?>" >
 										<i class="fas fa-info"></i>
 										Info
 									</a>

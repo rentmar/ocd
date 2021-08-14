@@ -279,4 +279,21 @@ class Seguimientomonitores extends CI_Controller
 		$this->load->view('seguimientom/vseguimientoMonitores_leyes',$dt);
 		$this->load->view('html/pie');
 	}
+    public function editarl($idm)
+    {
+        $dat['leyes']=$this->SeguimientoMonitores_model->leerLey($idm);
+//        echo "<pre>";var_dump($dat);echo "</pre>";
+        
+        $this->load->view('html/encabezado');
+        $this->load->view('html/navbar');
+        $this->load->view('seguimientom/vley',$dat);
+        $this->load->view('html/pie');
+    }
+    public function actualizarLey($w1)
+    {
+        $prueba=date('d/m/Y',$this->input->post('fechaReg'));
+        
+        echo "<pre>";var_dump($prueba,$w1);echo "</pre>";
+//        $this->SeguimientoMonitores_model->escribirFechReg($fR);
+    }
 }

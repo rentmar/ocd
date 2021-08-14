@@ -409,7 +409,11 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-cuestionario.xlsx";
 			$ruta = 'assets/info/';
+<<<<<<< HEAD
+			$plantilla = $ruta.'plantilla-cuestionario.xlsx';
+=======
 			$plantilla = $ruta.'plantilla-formulario.xlsx';
+>>>>>>> 63aa9d939ac70b83ac45eabde45c396fd3a1d37b
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
