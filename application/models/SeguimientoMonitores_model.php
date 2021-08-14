@@ -52,4 +52,16 @@ class SeguimientoMonitores_model extends CI_Model{
                 . "GROUP BY nombre_departamento, nombre_cuestionario");
         return $qry->result();
     }
+    public function leerLey($idm)
+    {
+        $qry=$this->db->query("SELECT idleyes, fecha_registro, fecha_estadoley, nombre_ley, nombre_estadoley, codigo_ley, resumen "
+                . "FROM leyes "
+                . "LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = leyes.idleyes "
+                . "LEFT JOIN codigoley ON codigoley.rel_idley = leyes.idleyes "
+                . "LEFT JOIN nombreley On nombreley.rel_idley = leyes.idleyes "
+                . "LEFT JOIN estadoley ON codigoley.rel_idestadoley = estadoley.idestadoley "
+                . "WHERE $idm = leyes.idleyes "
+                . "GROUP BY idleyes ");
+        return $qry->result();
+    }
 }
