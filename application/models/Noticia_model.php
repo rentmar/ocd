@@ -847,7 +847,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$idtipomedio = $consulta->idtipomedio;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -855,7 +855,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE tipo_medio.idtipomedio = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE n.esta_activa = 1 AND tipo_medio.idtipomedio = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
 			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$idtipomedio, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -867,7 +867,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$idcuestionario = $consulta->idcuestionario;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -875,7 +875,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE cuestionario.idcuestionario = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
+			."WHERE n.esta_activa = 1 AND  cuestionario.idcuestionario = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
 		$qry = $this->db->query($sql, [$idcuestionario, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
 	}
@@ -885,7 +885,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$iddepartamento = $consulta->iddepartamento;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -893,7 +893,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE departamento.iddepartamento = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE n.esta_activa=1 AND departamento.iddepartamento = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
 			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$iddepartamento, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -904,7 +904,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$iduniversidad = $consulta->iduniversidad;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -912,7 +912,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE universidad.iduniversidad = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE n.esta_activa=1 AND  universidad.iduniversidad = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
 			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$iduniversidad, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -924,12 +924,12 @@ class Noticia_model extends CI_Model{
 		$fecha_inicio = $consulta->fecha_inicio;
 		$fecha_fin = $consulta->fecha_fin;
 		$idtema = $consulta->idtema;
-		$sql = "SELECT t.nombre_tema, t.idtema, subtema.rel_idtema, subtema.idsubtema, subtema.nombre_subtema, noticia_subtema.rel_idsubtema, noticia_subtema.rel_idnoticia, noticia.idnoticia, noticia.titular     "
+		$sql = "SELECT t.nombre_tema, t.idtema, subtema.rel_idtema, subtema.idsubtema, subtema.nombre_subtema, noticia_subtema.rel_idsubtema, noticia_subtema.rel_idnoticia, noticia.idnoticia, noticia.titular, noticia.esta_activa     "
 			."FROM tema AS t     "
 			."LEFT JOIN subtema ON t.idtema = subtema.rel_idtema   "
 			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema   "
 			."LEFT JOIN noticia ON noticia_subtema.rel_idnoticia = noticia.idnoticia   "
-			."WHERE t.idtema = ? AND (noticia.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE noticia.esta_activa = 1 AND t.idtema = ? AND (noticia.fecha_noticia BETWEEN ? AND ?)   "
 			."GROUP BY noticia.idnoticia   "
 			."     "
 			."   "
@@ -961,7 +961,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$idactor = $consulta->idactor;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -969,11 +969,38 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-                        . "LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia "
-                        . "LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor "
-			."WHERE actor.idactor = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
+			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia "
+            ."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor "
+			."WHERE n.esta_activa=1 AND actor.idactor = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
 		$qry = $this->db->query($sql, [$idactor, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
+	}
+
+	public function leerTodasLasNoticias()
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN medio_comunicacion ON n.rel_idmedio = medio_comunicacion.idmedio   "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio   "
+			."LEFT JOIN cuestionario ON n.rel_idcuestionario = cuestionario.idcuestionario   "
+			."LEFT JOIN users ON users.id = n.rel_idusuario   "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad   "
+			."     "
+			."ORDER BY n.idnoticia ASC  "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql );
+		return $qry->result();
+	}
+
+	public function cambiarEstado($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'esta_activa' => $estado,
+		];
+		$this->db->where('idnoticia', $identificador);
+		$this->db->update('noticia', $data);
 	}
 
 }
