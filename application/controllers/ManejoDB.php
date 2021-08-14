@@ -409,11 +409,9 @@ class ManejoDB extends CI_Controller{
 		{
 			$filename = "reporte-cuestionario.xlsx";
 			$ruta = 'assets/info/';
-<<<<<<< HEAD
-			$plantilla = $ruta.'plantilla-cuestionario.xlsx';
-=======
+
 			$plantilla = $ruta.'plantilla-formulario.xlsx';
->>>>>>> 63aa9d939ac70b83ac45eabde45c396fd3a1d37b
+
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -742,7 +740,7 @@ class ManejoDB extends CI_Controller{
 			//var_dump($consulta);
 			$noticias = $this->Noticia_model->reporteNoticias($consulta);
 			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
-			if(empty($noticias))
+			if(empty($noticias_datos))
 			{
 				//Si la consulta esta vacia no se genera reporte
 				$this->mensaje('No existen resultados', 'info');
