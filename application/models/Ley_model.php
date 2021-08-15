@@ -164,7 +164,7 @@ class Ley_model extends CI_Model{
 		return $qry->result();
 	}
 
-	//Metodo para comprobar el primer estado de ley
+	//Metodo para leer el estado de una ley
 	public function leerEstadoDeLey($idley, $idestado)
 	{
 		$sql = "SELECT *     "
@@ -345,21 +345,6 @@ class Ley_model extends CI_Model{
 			$ley['resumen'] = $l->resumen;
 			$ley['descripcion'] = '';
 
-
-			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
-			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
-			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
-			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
-			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
-			$leyes_resultado[] = $ley;
-		}
-
-		/*foreach ($leyes_usuario as $lu)
-		{
-			$ley['idley'] = $lu->idleyes;
-			$ley['resumen'] = $lu->resumen;
-			$ley['descripcion'] = '';
-
 			//$idley, $idestado
 			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
 			$t = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 1);
@@ -393,8 +378,12 @@ class Ley_model extends CI_Model{
 				$ley['descripcion'] = $p->nombre_ley;
 			}
 
+
+
+
+
 			$leyes_resultado[] = $ley;
-		}*/
+		}
 		return $leyes_resultado;
 	}
 
@@ -408,6 +397,131 @@ class Ley_model extends CI_Model{
 		$q=$this->db->query($sql);
 		return $q->result();
 	}
+
+	public function leerInfoLeyPorId($identificador)
+	{
+		$idleyes = $identificador;
+		$sql="SELECT *   "
+			."FROM leyes   "
+			."LEFT JOIN users ON leyes.rel_idusuario = users.id   "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento   "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad   "
+			."WHERE leyes.idleyes = ?   ";
+		$qry=$this->db->query($sql, [$idleyes, ]);
+		return $qry->row();
+	}
+
+	public function leerFuentePorIdLey($identificador){
+		$idleyes = $identificador;
+		$sql="SELECT l.idleyes, fuente.idfuente, fuente.nombre_fuente   "
+			."FROM leyes AS l    "
+			."LEFT JOIN leyes_fuente ON l.idleyes = leyes_fuente.rel_idleyes   "
+			."LEFT JOIN fuente ON leyes_fuente.rel_idfuente = fuente.idfuente   "
+			."WHERE l.idleyes = ?   "
+			."   ";
+		$qry=$this->db->query($sql, [$idleyes, ]);
+		return $qry->row();
+	}
+
+	public function leerEstadoPorcentajePorIdLey($identificador){
+		$idleyes = $identificador;
+		$sql="SELECT MAX(estadoley.porcentaje_estadoley) AS porcentaje  "
+			."FROM leyes as l     "
+			."LEFT JOIN leyes_estadoley ON l.idleyes = leyes_estadoley.rel_idleyes   "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley   "
+			."WHERE l.idleyes = ?   "
+			."   ";
+		$qry=$this->db->query($sql, [$idleyes, ]);
+		return $qry->row();
+	}
+
+	public function leerEstadosPorLeyID($identificador)
+	{
+		$idley = $identificador;
+		$ley = $this->leyArray();
+
+		//Extraer las leyes definidas por el usuario
+		$li = $this->leerInfoLeyPorId($idley);
+		$ley['idley'] = $li->idleyes;
+		$ley['resumen'] = $li->resumen;
+
+		//$idley, $idestado
+		$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+		$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+		$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+		$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+		$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+
+		return $ley;
+	}
+
+	//Metodo para leer el estado de una ley
+	public function leerEstadoDeLeyURL($idley, $idestado)
+	{
+		$sql = "SELECT *      "
+			."FROM leyes AS l       "
+			."LEFT JOIN leyes_estadoley ON l.idleyes = leyes_estadoley.rel_idleyes      "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley   "
+			."LEFT JOIN urlley ON urlley.rel_idestadoley = estadoley.idestadoley AND urlley.rel_idley = l.idleyes   "
+			."WHERE l.idleyes = ? AND estadoley.idestadoley = ?   ";
+		$qry = $this->db->query($sql, [$idley, $idestado, ]);
+		return $qry->row();
+	}
+
+	public function leerTemasDeLeyPorID($idley)
+	{
+		$sql = "SELECT l.idleyes, tema.idtema, tema.nombre_tema     "
+			."FROM leyes AS l     "
+			."LEFT JOIN ley_subtema ON l.idleyes = ley_subtema.rel_idleyes   "
+			."LEFT JOIN subtema ON subtema.idsubtema = ley_subtema.rel_idsubtema   "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema   "
+			."WHERE l.idleyes = ?   "
+			."GROUP BY tema.idtema ";
+		$qry = $this->db->query($sql, [$idley, ]);
+		return $qry->result();
+
+	}
+
+	public function leerSubtemasDeLeyPorID($idley)
+	{
+		$sql = "SELECT *    "
+			."FROM leyes AS l     "
+			."LEFT JOIN ley_subtema ON l.idleyes = ley_subtema.rel_idleyes   "
+			."LEFT JOIN subtema ON subtema.idsubtema = ley_subtema.rel_idsubtema   "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema   "
+			."WHERE l.idleyes = ?   "
+			."ORDER BY subtema.idsubtema ";
+		$qry = $this->db->query($sql, [$idley, ]);
+		return $qry->result();
+	}
+
+	public function leerOtrosTemasDeLeyPorID($idley)
+	{
+		$sql = "SELECT *    "
+			."FROM leyes AS l      "
+			."LEFT JOIN ley_otrotema ON ley_otrotema.rel_idleyes = l.idleyes   "
+			."LEFT JOIN otrotema ON otrotema.idotrotema = ley_otrotema.rel_idotrotema   "
+			."WHERE l.idleyes = ?   "
+			."   "
+			." ";
+		$qry = $this->db->query($sql, [$idley, ]);
+		return $qry->result();
+	}
+
+	public function leerOtrosSubTemasDeLeyPorID($idley)
+	{
+		$sql = "SELECT otrosubtema.idotrosubtema, otrosubtema.nombre_otrosubtema, tema.nombre_tema    "
+			."FROM leyes AS l     "
+			."LEFT JOIN ley_otrosubtema ON ley_otrosubtema.rel_idleyes = l.idleyes   "
+			."LEFT JOIN otrosubtema ON otrosubtema.idotrosubtema = ley_otrosubtema.rel_idotrosubtema   "
+			."LEFT JOIN tema ON tema.idtema = otrosubtema.rel_idtema   "
+			."WHERE l.idleyes = ?   "
+			."   ";
+		$qry = $this->db->query($sql, [$idley, ]);
+		return $qry->result();
+	}
+
+
 
 
 

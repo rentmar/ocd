@@ -12,7 +12,7 @@
 			<div>
 			<table id="noticias-tabla" class="table table-striped table-hoover">
 				<thead>
-				<tr>
+				<tr id="datos">
 					<th>No</th>
 					<th>Fecha de la noticia</th>
 					<th>Titular</th>
