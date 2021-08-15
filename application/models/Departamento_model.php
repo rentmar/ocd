@@ -46,7 +46,7 @@ class Departamento_model extends CI_Model
 	}
 	public function leerUsuarioPorIdGrupo($idgrupo)
 	{
-		$sql = "SELECT *  "
+		$sql = "SELECT u.id, u.username, u.first_name, u.last_name, departamento.nombre_departamento, universidad.nombre_universidad  "
 		 	. "FROM users as u  "
 		 	. "LEFT JOIN departamento ON departamento.iddepartamento = u.rel_iddepartamento  "
 			. "LEFT JOIN universidad ON universidad.iduniversidad = u.rel_iduniversidad "

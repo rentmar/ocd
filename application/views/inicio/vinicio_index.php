@@ -10,7 +10,7 @@
 					<div class="card-header cuest1">
 						Reforma<br>Electoral
 					</div>
-					<img class="card-img-top" src="<?php echo base_url().'assets/img/democracia.svg'; ?>" alt="Card image">
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/reforma.svg'; ?>" alt="Card image">
 					<div class="card-body">
 
 

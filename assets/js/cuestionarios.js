@@ -484,6 +484,22 @@ $(document).ready(function() {
 		}
 	});
 	$('.simple').select2();
+	$('#noticias-tabla').DataTable({
+		responsive: true,
+		language: {
+			"zeroRecords": "No se encontró ninguna noticia",
+			"lengthMenu":     "Mostrar _MENU_ registros",
+			'search': 'Buscar:',
+			"info": "Mostrando la página _PAGE_ de _PAGES_",
+			"infoEmpty": "No hay registros disponibles",
+			"infoFiltered": "(filtrado de _MAX_ registros totales)",
+			'paginate':{
+				'next': 'Siguiente',
+				'previous': 'Anterior'
+			}
+		}
+	});
+
 });
 
 //Validador del formulario noticia

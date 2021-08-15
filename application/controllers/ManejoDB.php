@@ -113,187 +113,94 @@ class ManejoDB extends CI_Controller{
 
 	public function download()
 	{
-		//Extraer la noticia y sus datos
 		$consulta = $this->session->consulta;
-
 		$noticia = $this->Noticia_model->reporteNoticias($consulta);
 		$noticia_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
+		$noticia_datos_ids = $this->Noticia_model->reportesNoticiasDatosID($consulta);
+		if(!empty($consulta))
+		{
+			$filename = "reporte.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-reportes.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Noticias');
 
-		$spreadsheet = new Spreadsheet();
-		$sheet = $spreadsheet->getActiveSheet();
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
 
-		//Encabezado
-		$sheet->setCellValue('A1', 'ID');
-		$sheet->setCellValue('B1', 'FECHA REGISTRO');
-		$sheet->setCellValue('C1', 'FECHA NOTICIA');
-		$sheet->setCellValue('D1', 'TITULAR');
-		$sheet->setCellValue('E1', 'RESUMEN');
-		$sheet->setCellValue('F1', 'URL');
-		$sheet->setCellValue('G1', 'MEDIO' );
-		$sheet->setCellValue('H1', 'TIPO MEDIO' );
-		$sheet->setCellValue('I1', 'FORMULARIO' );
-		$sheet->setCellValue('J1', 'USUARIO');
-		$sheet->setCellValue('K1', 'UNIVERSIDAD');
-		$sheet->setCellValue('L1', 'DEPARTAMENTO');
-		$sheet->setCellValue('M1', 'ACTOR');
-		$sheet->setCellValue('N1', 'TEMA');
-		$sheet->setCellValue('O1', 'SUBTEMA');
+			foreach ($noticia_datos as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
+				$sheet->setCellValue('M'.$eje_y, $n->nombre_actor);
+				$sheet->setCellValue('N'.$eje_y, $n->nombre_tema);
+				$sheet->setCellValue('O'.$eje_y, $n->nombre_subtema);
+				$eje_y++;
+			endforeach;
 
+			//Llenar Otros Temas
+			$sheet = $spreadsheet->getSheet(1)->setTitle('OtrosTemas');
+			$eje_y = 6;
+			foreach ($noticia_datos_ids as $n):
+				$notot = $this->Noticia_model->otroTemaNoticiaPorId($n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $notot->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $notot->titular);
+				$sheet->setCellValue('E'.$eje_y, $notot->resumen);
+				$sheet->setCellValue('F'.$eje_y, $notot->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $notot->nombre_cuestionario );
+				$sheet->setCellValue('H'.$eje_y, $notot->nombre_otrotema );
 
+				$eje_y++;
 
-		//Eje X
-		$eje_x = 1;
-		//Eje Y
-		$eje_y = 1;
-
-		//Bordes del encabezado
-
-		$sheet->getStyle('A1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('A1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('A1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('A1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('B1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('B1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('B1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('B1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('C1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('C1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('C1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('C1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('D1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('D1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('D1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('D1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('E1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('E1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('E1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('E1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('F1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('F1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('F1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('F1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('G1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('G1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('G1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('G1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('H1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('H1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('H1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('H1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('I1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('I1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('I1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('I1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('J1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('J1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('J1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('J1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('K1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('K1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('K1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('K1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('L1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('L1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('L1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('L1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('M1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('M1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('M1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('M1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('N1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('N1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('N1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('N1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-
-		$sheet->getStyle('O1')->getBorders()->getTop()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('O1')->getBorders()->getBottom()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('O1')->getBorders()->getLeft()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
-		$sheet->getStyle('O1')->getBorders()->getRight()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK);
+			endforeach;
 
 
-		//Color del encabezado
-		$spreadsheet->getActiveSheet()->getStyle('A1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('B1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('C1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('D1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('E1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('F1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('G1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('H1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('I1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('J1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('K1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('L1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('M1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('N1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-		$spreadsheet->getActiveSheet()->getStyle('O1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+			//Llenar Subtemas
+			//Llenar Otros Temas
+			$sheet = $spreadsheet->getSheet(2)->setTitle('OtrosSubtemas');
+			$eje_y = 6;
+			foreach ($noticia_datos_ids as $n):
+				$nototsub = $this->Noticia_model->otroSubtemaNoticiaPorId($n->idnoticia);
+				foreach ($nototsub as $nots):
+				$sheet->setCellValue('A'.$eje_y, $nots->idnoticia);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $nots->titular);
+				$sheet->setCellValue('E'.$eje_y, $nots->resumen);
+				$sheet->setCellValue('F'.$eje_y, $nots->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $nots->nombre_cuestionario );
+				$sheet->setCellValue('H'.$eje_y, $nots->nombre_tema );
+				$sheet->setCellValue('I'.$eje_y, $nots->nombre_otrosubtema );
+				$eje_y++;
+				endforeach;
 
+			endforeach;
 
-		$eje_y++;
-		$eje_y_actor = 1;
-		$eje_y_tema = 1;
-		$eje_y_stema = 1;
-		foreach ($noticia_datos as $n):
-			$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-			$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-			$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-			$sheet->setCellValue('D'.$eje_y, $n->titular);
-			$sheet->setCellValue('E'.$eje_y, $n->resumen);
-			$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-			$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-			$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-			$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
-			$sheet->setCellValue('J'.$eje_y, $n->username);
-			$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-			$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-			$sheet->setCellValue('M'.$eje_y, $n->nombre_actor);
-			$sheet->setCellValue('N'.$eje_y, $n->nombre_tema);
-			$sheet->setCellValue('O'.$eje_y, $n->nombre_subtema);
-			$eje_y++;
-		endforeach;
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
 
-		//Autosize de las columnas
-		foreach (range('A', 'P') as $col ){
-			$sheet->getColumnDimension($col)->setAutoSize(true);
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDB/reportesCompuestos');
+
 		}
-
-		$writer = new Xlsx($spreadsheet);
-
-		$filename = 'reporte';
-
-		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"');
-		header('Cache-Control: max-age=0');
-
-		$writer->save('php://output');
-
-
-		/*$spreadsheet = new Spreadsheet();
-		$sheet = $spreadsheet->getActiveSheet();
-		$sheet->setCellValue('A1', 'Hola Mundo');
-
-		$writer = new Xlsx($spreadsheet);
-
-		$filename = 'name-of-the-generated-file';
-
-		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: attachment;filename="'. $filename .'.xlsx"');
-		header('Cache-Control: max-age=0');
-
-		$writer->save('php://output'); // download file*/
 
 	}
 
@@ -322,7 +229,7 @@ class ManejoDB extends CI_Controller{
 			$sheet->setCellValue('E3', $universidad->nombre_universidad);
 
 			foreach ($noticias as $n):
-				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
@@ -353,15 +260,6 @@ class ManejoDB extends CI_Controller{
 		$this->session->unset_userdata("consulta_tema");
 		$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
 
-
-		/*foreach ($noticias as $n)
-		{
-			$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-			var_dump($nt);
-			echo "<br><br>";
-
-
-		}*/
 		if(!empty($consulta)){
 			$filename = "reporte-tema.xlsx";
 			$ruta = 'assets/info/';
@@ -381,7 +279,7 @@ class ManejoDB extends CI_Controller{
 			foreach ($noticias as $n):
 
 				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-
+				$sheet->setCellValue('A'.$eje_y, $nt->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $nt->titular);
@@ -476,7 +374,7 @@ class ManejoDB extends CI_Controller{
 			$sheet->setCellValue('E3', $tipo_medio->nombre_tipo);
 
 			foreach ($noticias as $n):
-				//$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
+				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
 				$sheet->setCellValue('D'.$eje_y, $n->titular);
@@ -505,12 +403,15 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_cuestionario;
 		$this->session->unset_userdata("consulta_cuestionario");
 		$noticias = $this->Noticia_model->noticiaPorCuestionario($consulta);
+		$cuestionario = $this->Cuestionario_model->leerCuestionario($consulta->idcuestionario);
 
 		if(!empty($consulta))
 		{
 			$filename = "reporte-cuestionario.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+
+			$plantilla = $ruta.'plantilla-formulario.xlsx';
+
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -518,6 +419,7 @@ class ManejoDB extends CI_Controller{
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('E3', $cuestionario->nombre_cuestionario);
 			$eje_y = 6;
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
@@ -548,12 +450,13 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_departamento;
 		$this->session->unset_userdata("consulta_departamento");
 		$noticias = $this->Noticia_model->noticiaPorDepartamento($consulta);
+		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
 		if(!empty($consulta))
 		{
 			$filename = "reporte-departamento.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-departamento.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -562,6 +465,7 @@ class ManejoDB extends CI_Controller{
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
 			$eje_y = 6;
+			$sheet->setCellValue('E3', $departamento->nombre_departamento);
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
@@ -591,12 +495,13 @@ class ManejoDB extends CI_Controller{
 		$consulta = $this->session->consulta_actor;
 		$this->session->unset_userdata("consulta_actor");
 		$noticias = $this->Noticia_model->noticiaPorActor($consulta);
+		$actor = $this->Actor_model->leerActorID($consulta->idactor);
 
 		if(!empty($consulta))
 		{
 			$filename = "reporte-actor.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
+			$plantilla = $ruta.'plantilla-actor.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -604,6 +509,7 @@ class ManejoDB extends CI_Controller{
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getActiveSheet();
 			$worksheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('E3', $actor->nombre_actor );
 			$eje_y = 6;
 			foreach ($noticias as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
@@ -834,7 +740,7 @@ class ManejoDB extends CI_Controller{
 			//var_dump($consulta);
 			$noticias = $this->Noticia_model->reporteNoticias($consulta);
 			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
-			if(empty($noticias))
+			if(empty($noticias_datos))
 			{
 				//Si la consulta esta vacia no se genera reporte
 				$this->mensaje('No existen resultados', 'info');
@@ -941,6 +847,38 @@ class ManejoDB extends CI_Controller{
 		$json = $this->Cuestionario_model->leerSubtema();
 		header('Content-Type: application/json');
 		echo json_encode($json);
+	}
+
+	//
+	public function noticiasAdministrador()
+	{
+		//$usuario = $this->ion_auth->user()->row();
+		//$cantidad_noticia = $this->session->noticia_editable;
+
+
+		$dt['noticias'] =$this->Noticia_model->leerTodasLasNoticias();
+		//$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_listanot', $dt);
+		$this->load->view('html/pie');
+
+	}
+
+	public function cambiarEstado($identificador)
+	{
+		$idnoticia = $identificador;
+		$noticia = $this->Noticia_model->noticiaPorId($idnoticia);
+		if($noticia->esta_activa)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Noticia_model->cambiarEstado($idnoticia, $estado);
+		redirect('manejoDB/noticiasAdministrador');
 	}
 
 

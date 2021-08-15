@@ -7,8 +7,10 @@ class Seguimientomonitores extends CI_Controller
         parent::__construct();
 
         $this->load->library('ion_auth');
+        $this->load->helper('date');
         $this->load->model('SeguimientoMonitores_model');
         $this->load->model('Cuestionario_model');
+        $this->load->model('Ley_model');
     }
     public function index()
     {
@@ -264,5 +266,34 @@ class Seguimientomonitores extends CI_Controller
         $this->load->view('seguimientom/vseguimientoMonitoresXuniversidad',$tablaSm);
         $this->load->view('html/pie');
         }
+    }
+
+    public function leyesTabla()
+	{
+		$usuario = $this->ion_auth->user()->row();
+
+		$dt['leyes'] = $this->Ley_model->leerLeyesEstado(5);
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('seguimientom/vseguimientoMonitores_leyes',$dt);
+		$this->load->view('html/pie');
+	}
+    public function editarl($idm)
+    {
+        $dat['leyes']=$this->SeguimientoMonitores_model->leerLey($idm);
+//        echo "<pre>";var_dump($dat);echo "</pre>";
+        
+        $this->load->view('html/encabezado');
+        $this->load->view('html/navbar');
+        $this->load->view('seguimientom/vley',$dat);
+        $this->load->view('html/pie');
+    }
+    public function actualizarLey($w1)
+    {
+        $prueba=date('d/m/Y',$this->input->post('fechaReg'));
+        
+        echo "<pre>";var_dump($prueba,$w1);echo "</pre>";
+//        $this->SeguimientoMonitores_model->escribirFechReg($fR);
     }
 }

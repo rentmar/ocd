@@ -105,14 +105,26 @@
 			</div>
 			<div class="card-body">
 				<label>Escoja el tipo de actor que es la fuente de la noticia:</label><br>
+				<?php $contador = 0; ?>
 				<?php foreach ($actor as $a): ?>
-					<div class="form-check">
-						<label class="form-check-label">
-							<input id="checkactor" name="idactor[]" type="checkbox" class="form-check-input"
-								   value="<?php echo $a['idactor']; ?>"   >
-							<?php echo $a['nombre_actor']; ?>
-						</label>
-					</div>
+					<?php if($contador==0):  ?>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input checked id="checkactor" name="idactor[]" type="radio" class="form-check-input"
+									   value="<?php echo $a['idactor']; ?>"   >
+								<?php echo $a['nombre_actor']; ?>
+							</label>
+						</div>
+						<?php $contador++; ?>
+					<?php else:  ?>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input id="checkactor" name="idactor[]" type="radio" class="form-check-input"
+									   value="<?php echo $a['idactor']; ?>"   >
+								<?php echo $a['nombre_actor']; ?>
+							</label>
+						</div>
+					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
 		</div>
