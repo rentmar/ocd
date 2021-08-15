@@ -271,8 +271,10 @@ class Seguimientomonitores extends CI_Controller
     public function leyesTabla()
 	{
 		$usuario = $this->ion_auth->user()->row();
+		$leyes = $this->Ley_model->leerTodasLasLeyesEstado();
+		$dt['leyes'] = $leyes;
 
-		$dt['leyes'] = $this->Ley_model->leerLeyesEstado(5);
+		//var_dump($leyes);
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');

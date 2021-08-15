@@ -167,12 +167,12 @@ class Ley_model extends CI_Model{
 	//Metodo para comprobar el primer estado de ley
 	public function leerEstadoDeLey($idley, $idestado)
 	{
-		$sql = "SELECT l.idleyes, leyes_estadoley.fecha_estadoley,codigoley.codigo_ley ,estadoley.nombre_estadoley, estadoley.porcentaje_estadoley  "
-			."FROM leyes AS l  "
-			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes  "
-			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley  "
-			."LEFT JOIN codigoley ON codigoley.rel_idestadoley = estadoley.idestadoley "
-			."WHERE l.idleyes = ? AND estadoley.idestadoley = ?  ";
+		$sql = "SELECT *     "
+			."FROM leyes AS l    "
+			."LEFT JOIN leyes_estadoley ON l.idleyes = leyes_estadoley.rel_idleyes   "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley   "
+			."LEFT JOIN codigoley ON codigoley.rel_idestadoley = estadoley.idestadoley AND codigoley.rel_idley = l.idleyes   "
+			."WHERE l.idleyes = ? AND estadoley.idestadoley = ?   ";
 		$qry = $this->db->query($sql, [$idley, $idestado, ]);
 		return $qry->row();
 	}
@@ -331,6 +331,84 @@ class Ley_model extends CI_Model{
 		$q= $this->db->get('tema');
 		return $q->row();
 	}
-	
+
+	//Leer todas las leyes y estado
+	public function leerTodasLasLeyesEstado()
+	{
+		$leyes_resultado = [];
+		$ley = $this->leyArray();
+		//Extraer las leyes definidas por el usuario
+		$leyes = $this->leerTodasLeyes();
+		foreach ($leyes as $l)
+		{
+			$ley['idley'] = $l->idleyes;
+			$ley['resumen'] = $l->resumen;
+			$ley['descripcion'] = '';
+
+
+			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+			$leyes_resultado[] = $ley;
+		}
+
+		/*foreach ($leyes_usuario as $lu)
+		{
+			$ley['idley'] = $lu->idleyes;
+			$ley['resumen'] = $lu->resumen;
+			$ley['descripcion'] = '';
+
+			//$idley, $idestado
+			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+			$t = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 1);
+			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+			$s = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 2);
+			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$a = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 3);
+			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+			$m = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 4);
+			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+			$p = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 5);
+
+			if(isset($t))
+			{
+				$ley['descripcion'] = $t->nombre_ley;
+			}
+			if(isset($s))
+			{
+				$ley['descripcion'] = $s->nombre_ley;
+			}
+			if(isset($a))
+			{
+				$ley['descripcion'] = $a->nombre_ley;
+			}
+			if(isset($m))
+			{
+				$ley['descripcion'] = $m->nombre_ley;
+			}
+			if(isset($p))
+			{
+				$ley['descripcion'] = $p->nombre_ley;
+			}
+
+			$leyes_resultado[] = $ley;
+		}*/
+		return $leyes_resultado;
+	}
+
+	public function leerTodasLeyes()
+	{
+		$sql="SELECT *   "
+			."FROM leyes AS l   "
+			."   "
+			."   "
+			."   ";
+		$q=$this->db->query($sql);
+		return $q->result();
+	}
+
+
 
 }
