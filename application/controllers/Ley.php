@@ -355,18 +355,18 @@ class Ley extends CI_Controller
 			$subtemas[$te->idtema]=$this->Ley_model->leerSubtemasPorTema($te->idtema);
 		}
 		$dt['subtemas']=$subtemas;
-		/*$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
+		//$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
 		
-		$dt['temas']=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
-		$dt['temase']=$this->Noticia_model->leerTemasNoticia($idnoticia);
-		$dt['otrotema']=$this->Noticia_model->leerOtroTemaNoticia($idnoticia);
-		$dt['otrosubtema']=$this->Noticia_model->leerOtroSubTemaNoticia($idnoticia);
-		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
+		$dt['temas']=$this->Ley_model->leerTemasCuestionario($this->_idformulario);
+		$dt['temase']=$this->Ley_model->leerTemasLey($idley);
+		$dt['otrotema']=$this->Ley_model->leerOtroTemaLey($idley);
+		$dt['otrosubtema']=$this->Ley_model->leerOtroSubTemaLey($idley);
+		$dt['subtemase']=$this->Ley_model->leerSubtemasLey($idley);
 		foreach ($dt['temase'] as $te)
 		{
-			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
+			$subtemas[$te->idtema]=$this->Ley_model->leerSubtemasPorTema($te->idtema);
 		}
-		$dt['subtemas']=$subtemas;*/
+		$dt['subtemas']=$subtemas;
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vley_editar', $dt);
@@ -384,36 +384,38 @@ class Ley extends CI_Controller
 		}
 		elseif ($accion==2)
 		{	
-			//$this->Ley_model->modificarFuenteLey($idley,$this->input->post('rel_idfuente'));
+			$this->Ley_model->modificarResumenLey($idley,$this->input->post('resumen'));
 		}
 		elseif ($accion==3)
 		{	
-			/*$dts = array(
-						'titular'=>$this->input->post('titular'),
-						'resumen'=>$this->input->post('resumen'),
-						'url_noticia'=>$this->input->post('url')
+			$leyes_estado=$this->Ley_model->leerEstadosDeLey($idley);
+			foreach($leyes_estado as $el)
+			{
+				$dtestado=array(
+						'rel_idleyes'=>$idley,
+						'rel_idestadoley'=>$this->input->post('idestadoley'.$el->rel_idestadoley)
 						);
-			$this->Noticia_model->modificarDatosNoticia($idn,$dts);*/
+				$dtfecha = array(
+						'fecha_estadoley'=>$this->fecha_unix($this->input->post('fecha'.$el->rel_idestadoley))
+						);
+				$dttitulo = array(
+						'nombre_ley'=>$this->input->post('tituloley'.$el->rel_idestadoley)
+						);
+				$dtcodigo = array(
+						'codigo_ley'=>$this->input->post('codigoley'.$el->rel_idestadoley)
+						);
+				$dturl = array(
+						'url_ley'=>$this->input->post('urlley'.$el->rel_idestadoley)
+						);
+				$this->Ley_model->modificarDatosLey($dtestado,$dtfecha,$dttitulo,$dtcodigo,$dturl);
+			}
 		}
 		elseif ($accion==4)
 		{	
-			/*$dtchkbox=array();
-			$actores=$this->Noticia_model->leerTodoActores();
-			foreach ($actores as $a)
-			{	
-				if ($this->input->post('a'.$a->idactor)!=null)
-				{
-					array_push($dtchkbox,$this->input->post('a'.$a->idactor));
-				}
-			}
-			$this->Noticia_model->modificarActoresNoticia($idn,$dtchkbox);*/
-		}
-		elseif ($accion==5)
-		{	
-			/*$dtchkboxst=array();
+			$dtchkboxst=array();
 			$dtotrosubtemas=array();
-			$subtemas=$this->Noticia_model->leerTodoSubTemas();
-			$temas=$this->Noticia_model->leerTodoTemas();
+			$subtemas=$this->Ley_model->leerTodoSubTemas();
+			$temas=$this->Ley_model->leerTodoTemas();
 			if ($this->input->post('cnttemas')!=0)
 			{
 				foreach ($subtemas as $st)
@@ -463,23 +465,13 @@ class Ley extends CI_Controller
 			echo "Numero de otro SubTemas: ";
 			echo count($dtotrosubtemas);
 			echo "<br><br>";
-			var_dump($dtotrosubtemas);*
+			var_dump($dtotrosubtemas);*/
 			
-			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst,$dtsotrotema,$dtotrosubtemas);*/
-			//$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
+			$this->Ley_model->modificarSubTemasLey($idley,$dtchkboxst,$dtsotrotema,$dtotrosubtemas);
+			
 		}
-		/*if ($n->rel_idcuestionario==1)
-		{
-			redirect('Reformaelectoral/editar');
-		}
-		elseif ($n->rel_idcuestionario==2)
-		{
-			redirect('Instdemocratica/editar');
-		}
-		elseif ($n->rel_idcuestionario==3)
-		{
-			redirect('Censo/editar');
-		}*/
+		
+		redirect('Ley/editar');
 	}
 	public function editarTemas()
 	{

@@ -46,6 +46,32 @@ class Noticia extends CI_Controller
 			echo "Error";
 		}
     }
+	public function editarNoticia($idnoticia)
+	{
+		$usuario = $this->ion_auth->user()->row();
+		$n=$this->Noticia_model->leerNoticiaPorId($idnoticia);
+		$medio=$this->Noticia_model->leerMedioPorId($n->rel_idmedio);
+		$dt['actores']=$this->Noticia_model->leerTodoActores();
+		$dt['medios']=$this->Noticia_model->leerMediosPorTipoDepartamento($medio->rel_idtipomedio,$usuario->rel_iddepartamento);
+		$dt['tipos']=$this->Noticia_model->leerTipos();
+		$dt['noticia']= $n;
+		$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
+		$dt['medio']=$medio;
+		$dt['temas']=$this->Noticia_model->leerTemasCuestionario($this->_idformulario);
+		$dt['temase']=$this->Noticia_model->leerTemasNoticia($idnoticia);
+		$dt['otrotema']=$this->Noticia_model->leerOtroTemaNoticia($idnoticia);
+		$dt['otrosubtema']=$this->Noticia_model->leerOtroSubTemaNoticia($idnoticia);
+		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
+		foreach ($dt['temase'] as $te)
+		{
+			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
+		}
+		$dt['subtemas']=$subtemas;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vnoticia_editar_inst', $dt);
+		$this->load->view('html/pie');
+	}
 	public function modificarNoticia($idn)
 	{
 		$n=$this->Noticia_model->leerNoticiaPorId($idn);
@@ -139,7 +165,7 @@ class Noticia extends CI_Controller
 			var_dump($dtotrosubtemas);*/
 			
 			$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst,$dtsotrotema,$dtotrosubtemas);
-			//$this->Noticia_model->modificarSubTemasNoticia($idn,$dtchkboxst);
+		
 		}
 		if ($n->rel_idcuestionario==1)
 		{

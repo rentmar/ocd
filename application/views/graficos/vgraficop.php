@@ -7,11 +7,8 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url().'/assets/d3/gestilo.css';?>">
 	</head>
 	<body>
-		<button onclick="render()">Ver</button>
-		<br>
-		<br>
-	
-	
-		
+	<button onclick="render ()">
+		ver
+	</button>
 	</body>
 </html>

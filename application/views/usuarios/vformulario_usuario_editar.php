@@ -11,6 +11,7 @@
 					<div id="Caja_de_datos" class="Caja_de_datos">
 						<?php echo form_open('Usuarios/procesarEditar')?>
 						<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>" >
+						<input type="hidden" id="idgrupo" name="idgrupo" value="<?php echo $grupo->group_id; ?>" >
 
 						<label for="nombre" class="form-group"> Nombre </label>
 						<span class="red"> * </span>
@@ -27,8 +28,8 @@
 						<br>
 						<input type="text" id="cuadro" name="carnet" value="<?php echo $usuario->carnet_identidad;?>" >
 						<br><br>
-                        <label for="departamento" class="form-group">Departamento</label>
-                        <select id="departamento" name="departamento" class="form-control" required>
+                        <label for="iddepartamento" class="form-group">Departamento</label>
+                        <select id="iddepartamento" name="iddepartamento" class="form-control" required>
 									<option value="">Seleccione un departamento</option>
                             <?php foreach ($departamentos as $d): ?>
                                 <?php if($d->iddepartamento == $usuario->rel_iddepartamento): ?>
@@ -65,8 +66,14 @@
 						<div class="form-group">
 							<div class="form-check">
 								<label class="form-check-label">
+									<?php if ($enleyes==0) { ?>
 									<input id="grupoleyes" name="grupoleyes" type="checkbox" class="form-check-input" value="4">
 									Habilitar Ingreso a Formulario LEYES<?php echo $sg->id;?>
+									<?php } ?>
+									<?php if ($enleyes!=0) { ?>
+									<input checked="true" id="grupoleyes" name="grupoleyes" type="checkbox" class="form-check-input" value="4">
+									Habilitar Ingreso a Formulario LEYES<?php echo $sg->id;?>
+									<?php } ?>
 								</label>
 							</div>
 						</div>

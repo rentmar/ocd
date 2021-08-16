@@ -51,7 +51,7 @@ class Ley_model extends CI_Model{
 	}
 	public function leerEstadosDeLey($idl)
 	{
-		$sql="SELECT leyes_estadoley.rel_idestadoley,estadoley.nombre_estadoley,leyes_estadoley.fecha_estadoley FROM "
+		$sql="SELECT leyes_estadoley.rel_idleyes,leyes_estadoley.rel_idestadoley,estadoley.nombre_estadoley,leyes_estadoley.fecha_estadoley FROM "
 			."leyes_estadoley "
 			."LEFT JOIN estadoley ON leyes_estadoley.rel_idestadoley=estadoley.idestadoley "
 			."WHERE rel_idleyes =  ".$idl;
@@ -520,9 +520,178 @@ class Ley_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idley, ]);
 		return $qry->result();
 	}
-
-
-
-
-
+	public function modificarResumenLey($idleyes,$res)
+	{
+		$dt=array('resumen'=>$res);
+		$this->db->where('idleyes', $idleyes);
+		$this->db->update('leyes', $dt);
+	}
+	public function modificarDatosLey($dte,$dtf,$dtt,$dtc,$dtu)
+	{	$idley=$dte['rel_idleyes'];
+		$idestadoley=$dte['rel_idestadoley'];
+		$this->db->trans_start();
+		$this->db->where('rel_idleyes',$idley);
+		$this->db->where('rel_idestadoley', $idestadoley);
+		$this->db->update('leyes_estadoley', $dtf);
+		$this->db->update('nombreley', $dtt);
+		$this->db->update('codigoley', $dtc);
+		$this->db->update('urlley', $dtu);
+		$this->db->trans_complete();
+	}
+	public function leerTodoSubTemas()
+	{
+		$q= $this->db->get('subtema');
+		return $q->result();
+	}
+	public function leerTodoTemas()
+	{
+		$q= $this->db->get('tema');
+		return $q->result();
+	}
+	public function modificarSubTemasLey($idn,$dtchkboxst,$dtsotrotema,$dtotrosubtemas)
+	{
+		$this->db->trans_start();
+			if (count($dtsotrotema)!=0)
+			{
+				$this->db->where('rel_idleyes',$idn);
+				$not=count($this->db->get('ley_otrotema')->result());
+				if ($not==0)
+				{
+					//echo "inserta otro tema";
+					//echo "<br><br>";
+					$this->db->insert('otrotema',$dtsotrotema);
+					$idotrotema=$this->db->insert_id();
+					$dtot=array('rel_idleyes'=>$idn,
+							'rel_idotrotema'=>$idotrotema
+							);
+					$this->db->insert('ley_otrotema',$dtot);
+				}
+				else
+				{
+					//echo "edita otro tema";
+					//echo "<br><br>";
+					$this->db->where('rel_idleyes',$idn);
+					$ot=$this->db->get('ley_otrotema')->row();
+					$this->db->set('nombre_otrotema',$dtsotrotema['nombre_otrotema']);
+					$this->db->where('idotrotema',$ot->rel_idotrotema);
+					$this->db->update('otrotema');
+				}
+			}
+			else
+			{
+				$this->db->where('rel_idleyes',$idn);
+				$not=count($this->db->get('ley_otrotema')->result());
+				if ($not!=0)
+				{
+					//echo "borra otro tema";
+					//echo "<br><br>";
+					$this->db->where('rel_idleyes',$idn);
+					$ot=$this->db->get('ley_otrotema')->row();
+					$idot=$ot->rel_idotrotema;
+					$this->db->where('rel_idleyes',$idn);
+					$this->db->delete('ley_otrotema');
+					$this->db->where('idotrotema',$idot);
+					$this->db->delete('otrotema');					
+				}
+				else
+				{
+					//echo "sin accion en otro tema";
+					//echo "<br><br>";
+				}
+			}
+		
+			if (count($dtchkboxst)!=0)
+			{
+				//echo "remplaza subtemas";
+				//echo "<br><br>";
+				$this->db->where('rel_idleyes',$idn);
+				$this->db->delete('ley_subtema');
+				foreach ($dtchkboxst as $idst)
+				{
+					$dtst=array('rel_idleyes'=>$idn,
+							'rel_idsubtema'=>$idst
+							);
+					$this->db->insert('ley_subtema',$dtst);
+				}
+			}
+			else 
+			{
+				//echo "borra subtemas";
+				//echo "<br><br>";
+				$this->db->where('rel_idleyes',$idn);
+				$nst=count($this->db->get('ley_subtema')->result());
+				if ($nst!=0)
+				{
+					$this->db->where('rel_idleyes',$idn);
+					$this->db->delete('ley_subtema');
+				}
+			}
+			if (count($dtotrosubtemas)!=0)
+			{
+				$this->db->where('rel_idleyes',$idn);
+				$nost=count($this->db->get('ley_otrosubtema')->result());
+				if ($nost!=0)
+				{
+					//echo "replaza otro subtemas";
+					//echo "<br><br>";
+					$this->db->where('rel_idleyes',$idn);
+					$otrost=$this->db->get('ley_otrosubtema')->result();
+					foreach ($otrost as $ost)
+					{
+						$idost=$ost->rel_idotrosubtema;
+						$this->db->where('rel_idotrosubtema',$idost);
+						$this->db->delete('ley_otrosubtema');	
+						$this->db->where('idotrosubtema',$idost);
+						$this->db->delete('otrosubtema');
+					}
+					foreach ($dtotrosubtemas as $dtost)
+					{
+						$this->db->insert('otrosubtema',$dtost);
+						$idotrosubtema=$this->db->insert_id();
+						$dtnost=array('rel_idleyes'=>$idn,
+										'rel_idotrosubtema'=>$idotrosubtema);
+						$this->db->insert('ley_otrosubtema',$dtnost);
+					}
+				}
+				else
+				{
+					//echo "inserta otro subtemas";
+					//echo "<br><br>";
+					foreach ($dtotrosubtemas as $dtost)
+					{
+						$this->db->insert('otrosubtema',$dtost);
+						$idotrosubtema=$this->db->insert_id();
+						$dtnost=array('rel_idleyes'=>$idn,
+										'rel_idotrosubtema'=>$idotrosubtema);
+						$this->db->insert('ley_otrosubtema',$dtnost);
+					}
+				}
+			}
+			else 
+			{
+				$this->db->where('rel_idleyes',$idn);
+				$nost=count($this->db->get('ley_otrosubtema')->result());
+				if ($nost!=0)
+				{
+					//echo "borra otro subtemas";
+					//echo "<br><br>";
+					$this->db->where('rel_idleyes',$idn);
+					$otrost=$this->db->get('ley_otrosubtema')->result();
+					foreach ($otrost as $ost)
+					{
+						$idost=$ost->rel_idotrosubtema;
+						$this->db->where('rel_idotrosubtema',$idost);
+						$this->db->delete('ley_otrosubtema');	
+						$this->db->where('idotrosubtema',$idost);
+						$this->db->delete('otrosubtema');
+					}
+				}
+				else
+				{
+					//echo "sin accion subtemas";
+					//echo "<br><br>";
+				}
+			}
+		$this->db->trans_complete();
+	}
 }
