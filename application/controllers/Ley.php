@@ -345,7 +345,7 @@ class Ley extends CI_Controller
 			array_push($datosestado,$dtestado);
 		}
 		$dt['datosestado']=$datosestado;
-		$dt['temas']=$this->Ley_model->leerTemasCuestionario($this->_idformulario);
+		/*$dt['temas']=$this->Ley_model->leerTemasCuestionario($this->_idformulario);
 		$dt['temase']=$this->Ley_model->leerTemasLey($idley);
 		$dt['otrotema']=$this->Ley_model->leerOtroTemaLey($idley);
 		$dt['otrosubtema']=$this->Ley_model->leerOtroSubTemaLey($idley);
@@ -355,18 +355,25 @@ class Ley extends CI_Controller
 			$subtemas[$te->idtema]=$this->Ley_model->leerSubtemasPorTema($te->idtema);
 		}
 		$dt['subtemas']=$subtemas;
-		//$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);
+		$dt['na']=$this->Noticia_model->leerNoticiaActores($idnoticia);*/
 		
 		$dt['temas']=$this->Ley_model->leerTemasCuestionario($this->_idformulario);
 		$dt['temase']=$this->Ley_model->leerTemasLey($idley);
 		$dt['otrotema']=$this->Ley_model->leerOtroTemaLey($idley);
 		$dt['otrosubtema']=$this->Ley_model->leerOtroSubTemaLey($idley);
 		$dt['subtemase']=$this->Ley_model->leerSubtemasLey($idley);
-		foreach ($dt['temase'] as $te)
+		if(count($dt['temase'])!=0)
 		{
-			$subtemas[$te->idtema]=$this->Ley_model->leerSubtemasPorTema($te->idtema);
+			foreach ($dt['temase'] as $te)
+			{
+				$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
+			}
+			$dt['subtemas']=$subtemas;
 		}
-		$dt['subtemas']=$subtemas;
+		else 
+		{
+			$dt['subtemas']=null;
+		}
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vley_editar', $dt);
@@ -471,7 +478,7 @@ class Ley extends CI_Controller
 			
 		}
 		
-		redirect('Ley/editar');
+		redirect('Ley/editarLey('.$idley.')');
 	}
 	public function editarTemas()
 	{
