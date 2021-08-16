@@ -156,7 +156,7 @@
 										<a href="<?php echo site_url('Seguimientomonitores/leyInformacion/'.$l['idley']); ?>" data-toggle="tooltip" title="Ver informacion del Registro" >
 											<i class="fas fa-book"></i>
 										</a>
-										<a href="<?php echo site_url('Seguimientomonitores/editarl/'.$l['idley']); ?>"  data-toggle="tooltip" title="Editar Registro" >
+										<a href="<?php echo site_url('ley/editarLey/'.$l['idley']); ?>"  data-toggle="tooltip" title="Editar Registro" >
 											<i class="fas fa-edit"></i>
 										</a>
 									</td>
