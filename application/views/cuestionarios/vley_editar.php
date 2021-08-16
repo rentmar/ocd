@@ -129,13 +129,19 @@
 										Seleccionar Tema/s:
 									</label><br>
 									<?php foreach ($temas as $tema) { ?>
-										<?php foreach ( $temase as $temaelegido) { ?>
-											<?php if ($tema->idtema==$temaelegido->idtema) { ?>
-												<input disabled="true" type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
-												<label style="background-color: #0099CC" for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
-											<?php break; } ?>
+										<?php if ($subtemas!=null) { ?>
+											<?php foreach ( $temase as $temaelegido) { ?>
+												<?php if ($tema->idtema==$temaelegido->idtema) { ?>
+													<input disabled="true" type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+													<label style="background-color: #ccc" for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+												<?php break; } ?>
+											<?php } ?>
+											<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+												<input disabled="true" type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+												<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+											<?php } ?>
 										<?php } ?>
-										<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+										<?php if ($subtemas==null) { ?>
 											<input disabled="true" type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
 											<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
 										<?php } ?>
@@ -402,13 +408,19 @@
 						Seleccionar Tema/s:
 					</label><br>
 					<?php foreach ($temas as $tema) { ?>
-						<?php foreach ( $temase as $temaelegido) { ?>
-							<?php if ($tema->idtema==$temaelegido->idtema) { ?>
-								<input type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+						<?php if ($subtemas!=null) { ?>
+							<?php foreach ( $temase as $temaelegido) { ?>
+								<?php if ($tema->idtema==$temaelegido->idtema) { ?>
+									<input type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+									<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+								<?php break; } ?>
+							<?php } ?>
+							<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+								<input type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
 								<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
-							<?php break; } ?>
+							<?php } ?>
 						<?php } ?>
-						<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+						<?php if ($subtemas==null) { ?>
 							<input type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
 							<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
 						<?php } ?>
