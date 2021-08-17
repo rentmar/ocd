@@ -478,7 +478,7 @@ class Ley extends CI_Controller
 			
 		}
 		
-		redirect('Ley/editarLey('.$idley.')');
+		redirect('/');
 	}
 	public function editarTemas()
 	{
