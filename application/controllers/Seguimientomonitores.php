@@ -11,6 +11,7 @@ class Seguimientomonitores extends CI_Controller
         $this->load->model('SeguimientoMonitores_model');
         $this->load->model('Cuestionario_model');
         $this->load->model('Ley_model');
+        $this->load->library('session');
     }
     public function index()
     {
@@ -284,6 +285,7 @@ class Seguimientomonitores extends CI_Controller
     public function editarl($idm)
     {
         $dat['leyes']=$this->SeguimientoMonitores_model->leerLey($idm);
+        $this->session->set_userdata($dat);
 //        echo "<pre>";var_dump($dat);echo "</pre>";
         
         $this->load->view('html/encabezado');
