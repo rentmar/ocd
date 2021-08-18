@@ -1,6 +1,9 @@
 svg {
 	background-color: #ccc;
 }
+.rect{
+	background-color: blue;
+}
 .dot{
 	stroke: black;
 	fill: blue;

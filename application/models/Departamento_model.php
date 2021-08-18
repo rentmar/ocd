@@ -46,14 +46,13 @@ class Departamento_model extends CI_Model
 	}
 	public function leerUsuarioPorIdGrupo($idgrupo)
 	{
-		$sql = "SELECT u.id, u.username, u.first_name, u.last_name, departamento.nombre_departamento, universidad.nombre_universidad  "
-		 	. "FROM users as u  "
-		 	. "LEFT JOIN departamento ON departamento.iddepartamento = u.rel_iddepartamento  "
-			. "LEFT JOIN universidad ON universidad.iduniversidad = u.rel_iduniversidad "
-			. "LEFT JOIN users_groups ON users_groups.user_id = u.id  "
-			. "LEFT JOIN groups ON groups.id = users_groups.group_id  "
-			. "WHERE groups.id = ?  ";
-		$qry = $this->db->query($sql, [$idgrupo, ]);
+		$sql ="SELECT users.id as idusuario, users.username, users.first_name, users.last_name, departamento.nombre_departamento, universidad.nombre_universidad  "
+		 	."FROM users_groups "
+			."LEFT JOIN users ON users_groups.user_id=users.id "
+		 	."LEFT JOIN departamento ON users.rel_iddepartamento=departamento.iddepartamento "
+			."LEFT JOIN universidad ON users.rel_iduniversidad=universidad.iduniversidad "
+			."WHERE users_groups.group_id = ".$idgrupo;
+		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
 	public function leerGrupoPorIdUser($idu)
@@ -63,5 +62,23 @@ class Departamento_model extends CI_Model
 		$q=$this->db->get('users_groups');
 		return $q->row();
 	}
-
+	public function modificarUsuario($idu,$dt)
+	{
+		$this->db->where('id',$idu);
+		$this->db->update('users',$dt);
+	}
+	public function leerUsuarioPerteneceGrupo($idu,$idg)
+	{
+		$this->db->where('user_id',$idu);
+		$this->db->where('group_id',$idg);
+		$q=$this->db->get('users_groups');
+		return $q->result();
+	}
+	public function agregarUsuarioAGrupo($idu,$idg)
+	{
+		$dt=array('user_id'=>$idu,
+				'group_id'=>$idg
+		);
+		$this->db->insert('users_groups', $dt);
+	}
 }

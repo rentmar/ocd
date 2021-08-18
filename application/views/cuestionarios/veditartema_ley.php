@@ -54,7 +54,7 @@
 						</div>
 					</div>	
 				<div>
-					<button type="submit" name="accion" value="5" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
+					<button type="submit" name="accion" value="4" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
 					<?php echo form_close();?>
 						<a href="<?php echo site_url('Ley/editarLey/'.$idley); ?>" >
 							<button type="button" class="btn btn-danger" >Cancelar</button>

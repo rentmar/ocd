@@ -38,6 +38,7 @@
                         </div>
                     </div>
         </div>
+		<?php if($this->ion_auth->is_admin()): ?>
 		<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 			<div class="card">
 				<div class="card-header" style="background-color:#7f182b;color:white">
@@ -52,6 +53,8 @@
 				</div>
 			</div>
 		</div>
+		<?php endif; ?>
+
     </div>
 </div>
 </main>

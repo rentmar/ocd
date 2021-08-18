@@ -38,7 +38,7 @@
 		
 						<div class="form-row">
 							<div class="col">
-								<hr  color="black">
+								<hr  style="height:2px;border:none;color:#333;background-color:#333;">
 							</div>
 						</div>
 						
@@ -54,12 +54,17 @@
 								</div>
 							</div>
 							<div class="col-2">
-								<button type="submit" data-toggle="modal" data-target="#datosmodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-									Cambiar Datos Ley
+								<button type="submit" data-toggle="modal" data-target="#resumenmodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+									Cambiar Resumen
 								</button>
 							</div>
 						</div>
 						<br>
+						<div class="form-row">
+							<div class="col">
+								<hr  style="height:2px;border:none;color:#333;background-color:#333;">
+							</div>
+						</div>
 						<?php foreach ($datosestado as $de) {?>
 						<div class="form-row">
 							<div class="col-10">
@@ -70,6 +75,11 @@
 								<input type="date" id="fecha<?php echo $de['idestadoley'];?>" name="fecha<?php echo $de['idestadoley'];?>" class="form-control" disabled="true"
 									   value="<?php echo mdate('%Y-%m-%d', $de['fecha_estadoley']);?>" >
 								</div>
+							</div>
+							<div class="col-2">
+								<button type="submit" data-toggle="modal" data-target="#datosmodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+									Cambiar Datos Ley
+								</button>
 							</div>
 						</div>
 						<div class="form-row">
@@ -108,7 +118,7 @@
 						</div>
 						<div class="form-row">
 							<div class="col">
-								<hr  color="black">
+								<hr  style="height:2px;border:none;color:#333;background-color:#333;">
 							</div>
 						</div>
 						<?php } ?>
@@ -119,13 +129,19 @@
 										Seleccionar Tema/s:
 									</label><br>
 									<?php foreach ($temas as $tema) { ?>
-										<?php foreach ( $temase as $temaelegido) { ?>
-											<?php if ($tema->idtema==$temaelegido->idtema) { ?>
-												<input disabled="true" type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
-												<label style="background-color: #ccc" for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
-											<?php break; } ?>
+										<?php if ($subtemas!=null) { ?>
+											<?php foreach ( $temase as $temaelegido) { ?>
+												<?php if ($tema->idtema==$temaelegido->idtema) { ?>
+													<input disabled="true" type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+													<label style="background-color: #ccc" for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+												<?php break; } ?>
+											<?php } ?>
+											<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+												<input disabled="true" type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+												<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+											<?php } ?>
 										<?php } ?>
-										<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+										<?php if ($subtemas==null) { ?>
 											<input disabled="true" type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
 											<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
 										<?php } ?>
@@ -133,13 +149,13 @@
 								</div>
 								<div class="form-row">
 									<div class="col">
-										<hr>
+										<hr style="height:2px;border:none;color:#333;background-color:#333;">
 									</div>
 								</div>
 								<?php if ($otrotema!=NULL) {?>
 									<div class="form-group">
 									<input disabled="true" type="checkbox" checked="true" id="ot<?php echo $otrotema->idotrotema;?>" name="ot<?php echo $otrotema->idotrotema;?>" value="<?php echo $otrotema->idotrotema;?>">
-									<label style="background-color: #ccc" for="ot<?php echo $otrotema->idotrotema;?>">Otro Tema</label><br>		
+									<label style="background-color: #0099CC" for="ot<?php echo $otrotema->idotrotema;?>">Otro Tema</label><br>		
 								</div>
 								<div class="form-group">
 									<label for="otrotema">Especificar Otro Tema</label><br>
@@ -165,7 +181,7 @@
 						</div>
 						<div class="form-row">
 								<div class="col">
-									<hr  color="black">
+									<hr  style="height:2px;border:none;color:#333;background-color:#333;">
 								</div>
 							</div>
 						<div class="form-row">
@@ -179,7 +195,7 @@
 											<?php foreach ( $subtemase as $subtemaelegido) { ?>
 											<?php if ($st->idsubtema==$subtemaelegido->idsubtema) { ?>
 												<input disabled="true" type="checkbox" checked="true" id="st<?php echo $st->idsubtema; ?>" name="st<?php echo $st->idsubtema; ?>" value="<?php echo $st->idsubtema; ?>">
-												<label style="background-color: #ccc" for="st<?php echo $st->nombre_subtema; ?>"><?php echo $st->nombre_subtema; ?></label><br>
+												<label style="background-color: #0099CC" for="st<?php echo $st->nombre_subtema; ?>"><?php echo $st->nombre_subtema; ?></label><br>
 											<?php break; } ?>
 											<?php } ?>
 											<?php if ($st->idsubtema!=$subtemaelegido->idsubtema) { ?>
@@ -189,13 +205,13 @@
 										<?php } ?>
 										<div class="form-row">
 										<div class="col">
-											<hr  color="black">
+											<hr  style="height:2px;border:none;color:#333;background-color:#333;">
 											</div>
 										</div>
 										<?php if ($otrosubtema!=NULL) {?>
 										<div class="form-group">
 											<input disabled="true" type="checkbox" checked="true" id="ost<?php echo $otrosubtema->idotrosubtema;?>" name="ost<?php echo $otrosubtema->idotrosubtema;?>" value="<?php echo $otrosubtema->idotrosubtema;?>">
-											<label style="background-color: #ccc" for="ost<?php echo $otrosubtema->idotrosubtema;?>">Otro SubTema</label><br>		
+											<label style="background-color: #0099CC" for="ost<?php echo $otrosubtema->idotrosubtema;?>">Otro SubTema</label><br>		
 										</div>
 										<div class="form-group">
 											<label for="otrosubtema">Especificar Otro SubTema</label><br>
@@ -217,7 +233,7 @@
 							</div>
 							<div class="form-row">
 								<div class="col">
-									<hr  color="black">
+									<hr  style="height:2px;border:none;color:#333;background-color:#333;">
 								</div>
 							</div>
 									
@@ -265,12 +281,11 @@
 		</div>
 	</div>
 </div>
-
-<div class="modal" id="datosmodal">
+<div class="modal" id="resumenmodal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title">Editar Datos de la Ley</h1>
+				<h1 class="modal-title">Editar Resumen de la Ley</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
 			<?php echo form_open('Ley/modificarLey/'.$ley->idleyes);?>
@@ -287,9 +302,28 @@
 						</div>
 					</div>
 				</div>
+				
+			</div>
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="2" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
+			<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="datosmodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Editar Datos de la Ley</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('Ley/modificarLey/'.$ley->idleyes);?>
+			<div class="modal-body">
 				<div class="form-row">
 					<div class="col">
-						<hr  color="black">
+						<hr  style="height:2px;border:none;color:#333;background-color:#333;">
 					</div>
 				</div>
 				<?php foreach ($datosestado as $de) {?>
@@ -299,6 +333,8 @@
 								<label for="fecha<?php echo $de['idestadoley'];?>" >
 									Fecha <?php echo $de['nombre_estadoley'];?>:
 								</label>
+								<input type="hidden" id="idestadoley<?php echo $de['idestadoley'];?>" name="idestadoley<?php echo $de['idestadoley'];?>" class="form-control" 
+									   value="<?php echo $de['idestadoley'];?>" >
 								<input type="date" id="fecha<?php echo $de['idestadoley'];?>" name="fecha<?php echo $de['idestadoley'];?>" class="form-control" 
 									   value="<?php echo mdate('%Y-%m-%d', $de['fecha_estadoley']);?>" >
 								</div>
@@ -340,13 +376,13 @@
 						</div>
 						<div class="form-row">
 							<div class="col">
-								<hr  color="black">
+								<hr  style="height:2px;border:none;color:#333;background-color:#333;">
 							</div>
 						</div>
 				<?php } ?>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" name="accion" value="2" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
+				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Editar</button>
 			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			</div>
@@ -372,13 +408,19 @@
 						Seleccionar Tema/s:
 					</label><br>
 					<?php foreach ($temas as $tema) { ?>
-						<?php foreach ( $temase as $temaelegido) { ?>
-							<?php if ($tema->idtema==$temaelegido->idtema) { ?>
-								<input type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+						<?php if ($subtemas!=null) { ?>
+							<?php foreach ( $temase as $temaelegido) { ?>
+								<?php if ($tema->idtema==$temaelegido->idtema) { ?>
+									<input type="checkbox" checked="true" id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
+									<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
+								<?php break; } ?>
+							<?php } ?>
+							<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+								<input type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
 								<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
-							<?php break; } ?>
+							<?php } ?>
 						<?php } ?>
-						<?php if ($tema->idtema!=$temaelegido->idtema) { ?>
+						<?php if ($subtemas==null) { ?>
 							<input type="checkbox"  id="t<?php echo $tema->idtema; ?>" name="t<?php echo $tema->idtema; ?>" value="<?php echo $tema->idtema; ?>">
 							<label for="t<?php echo $tema->nombre_tema; ?>"><?php echo $tema->nombre_tema; ?></label><br>
 						<?php } ?>
@@ -396,7 +438,7 @@
 				<?php } ?>
 				<div class="form-row">
 					<div class="col">
-						<hr>
+						<hr style="height:2px;border:none;color:#333;background-color:#333;">
 					</div>
 				</div>
 				<?php if ($otrotema==NULL) {?>
@@ -411,7 +453,7 @@
 				<?php } ?>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Continuar</button>
+				<button type="submit" name="accion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">Continuar</button>
 			<?php echo form_close();?>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 			</div>

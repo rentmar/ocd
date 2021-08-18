@@ -81,6 +81,48 @@ h5 {
 	background-color: #7c5295;
 }
 
+div hr{
+	height: 10px;
+	width: 100%;
+}
+
+.hrrojooscuro{
+	background-color: rgba(139, 0, 0, 1);
+}
+.hrrojo{
+	background-color: rgba(255,0,0, 1);
+}
+.hramarillo{
+	background-color: rgba(255,255,0, 1);
+}
+.hrverde{
+	background-color: rgba(0,255,0, 1);
+}
+.hrverdeoscuro{
+	background-color: rgba(0,100,0, 1);
+}
+
+.bprojooscuro{
+	background-color: rgba(139, 0, 0, 0.7);
+}
+.bprojo{
+	background-color: rgba(255,0,0, 0.7);
+}
+.bpamarillo{
+	background-color: rgba(200,200,0, 0.7);
+}
+.bpverde{
+	background-color: rgba(0,128,0, 0.7);
+}
+.bpverdeoscuro{
+	background-color: rgba(0,100,0, 0.7);
+}
+
+.barraprogreso{
+	width:20%;
+	height: 50px;
+}
+
 
 .color-contenedores{
 	background-color:#ffffff;

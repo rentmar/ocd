@@ -30,7 +30,7 @@
 					<input type="date" id="fechaestado" name="fechaestado" class="form-control">
 				</div>
 				<div class="form-group">
-					<label>Titulo de la Ley:</label><br>
+					<label>Descripcion de la Ley:</label><br>
 					<textarea id="titulo" name="titulo" class="form-control" required>
 					</textarea>
 				</div>
