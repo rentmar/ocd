@@ -41,113 +41,6 @@
 						</div>
 					</div>
 				</div>
-
-<!--				<br>
-				<div class="contenedor">
-					<h3>Formulario </h3>
-					<div class="form-row">
-						<select id="idcuestionario" name="idcuestionario" class="form-control simple"  >
-							<option value="0" >Seleccione una opcion</option>
-							<?php //foreach ($forms as $fm): ?>
-								<?php //if($fm->idcuestionario != 4): ?>
-									<option value="<?php //echo $fm->idcuestionario; ?>" >
-										<?php //echo $fm->nombre_cuestionario; ?>
-									</option>
-								<?php //endif; ?>
-							<?php //endforeach;  ?>
-						</select>
-					</div>
-					<br>
-					<div class="form-row">
-						<input type="submit" class="BOTON" value="GENERAR" name="cuestionario">
-					</div>
-				</div>-->
-
-<!--				<br>
-				<div class="contenedor">
-					<h3>Departamento </h3>
-					<div class="form-row">
-						<?php //if($this->ion_auth->is_admin()): ?>
-							<select id="iddepartamento" name="iddepartamento" class="form-control simple " >
-								<option value="0" >Seleccione una opcion</option>
-								<?php //foreach ($dep as $d): ?>
-									<option value="<?php //echo $d->iddepartamento; ?>">
-										<?php //echo $d->nombre_departamento;?>
-									</option>
-								<?php //endforeach; ?>
-							</select>
-						<?php //elseif ($this->ion_auth->in_group(2)): ?>
-							<input class="form-control" value="<?php //echo $this->session->departamento;?>" readonly >
-							<input type="hidden" id="iddepartamento" name="iddepartamento"
-								   value="<?php //echo $this->session->iddepartamento; ?>"
-							>
-						<?php //endif; ?>
-					</div>
-					<br>
-					<div class="form-row">
-						<input type="submit" class="BOTON" value="GENERAR" name="departamento">
-					</div>
-				</div>-->
-
-<!--				<br>
-				<div class="contenedor">
-					<h3>Tipo de Medio </h3>
-					<div class="form-row">
-						<select id="idtipomedio" name="idtipomedio" class="form-control simple"  >
-							<option value="0" >Seleccione una opcion</option>
-							<?php //foreach ($tipo_medio as $tm): ?>
-								<option value="<?php //echo $tm->idtipomedio; ?>" >
-									<?php //echo $tm->nombre_tipo; ?>
-								</option>
-							<?php //endforeach;  ?>
-						</select>
-					</div>
-					<br>
-					<div class="form-row">
-						<input type="submit" class="BOTON" value="GENERAR" name="tipomedio">
-					</div>
-				</div>-->
-
-				<br>
-				<!--
-				<div class="contenedor">
-					<h3>Medio de Comunicación </h3>
-					<div class="form-row">
-						<select id="idmedios" name="idmedio" class="form-control simple"  >
-							<option value="0">Seleccione una opcion</option>
-
-							<?php foreach ($medio as $m): ?>
-								<option value="<?php echo $m->idmedio;?>">
-									<?php echo $m->nombre_medio; ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-					<br>
-					<div class="form-row">
-						<input type="submit" class="BOTON" value="GENERAR" name="medio">
-					</div>
-				</div> -->
-
-<!--				<br>
-				<div class="contenedor">
-					<h3>Actor </h3>
-					<div class="form-row">
-						<select id="idactor" name="idactor" class="form-control simple" >
-							<option value="0" >Seleccione una opcion</option>
-							<?php //foreach ($actor as $a): ?>
-								<option value="<?php //echo $a->idactor;?>">
-									<?php //echo $a->nombre_actor; ?>
-								</option>
-							<?php //endforeach; ?>
-						</select>
-					</div>
-					<br>
-					<div class="form-row">
-						<input type="submit" class="BOTON" value="GENERAR" name="actor">
-					</div>
-				</div>-->
-
 				<br>
 				<div class="contenedor">
 					<h3>Estado de Ley </h3>
@@ -229,16 +122,8 @@
 						<input type="submit" class="BOTON" value="GENERAR" name="subtema">
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-			</div>
-		</div>
-	</div>
-	<br>
+                          </div>
+                 </div>
+         </div>
+        <br>
 </main>

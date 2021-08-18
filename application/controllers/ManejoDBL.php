@@ -22,7 +22,7 @@ class ManejoDBL extends CI_Controller{
         $this->load->model('SubTema_model');
         $this->load->model('Noticia_model');
         $this->load->model('Formulario_model');
-        $this->load->model('Ley_model');
+        $this->load->model('Leyy_model');
 //Comprobacion de session
 	if($this->session->sesion_activa === null)
         {
@@ -37,1135 +37,235 @@ class ManejoDBL extends CI_Controller{
         $this->load->view('manejodb/viniciodb');
         $this->load->view('html/pie');
     }
-    public function reportesSimples()
+    public function reportesLeyes()
     {
-		$usuario = $this->ion_auth->user()->row();
-		//Poblar el formulario
-		$forms = $this->Formulario_model->leerCuestionarios();
-		$depas = $this->Departamento_model->leerDepartamentos();
-		$tipo_medio = $this->MedioComunicacion_model->leerTipoMedio();
-		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
-		$actor = $this->Actor_model->leerActores();
-		$universidad = $this->Universidad_model->leerUniversidades();
-		$tema = $this->Tema_model->leerTemasForms();
-		$stema = $this->SubTema_model->leerSubtemasForms();
-		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
-
-
-		$data['dep'] = $depas;
-		$data['forms'] = $forms;
-		$data['tipo_medio'] = $tipo_medio;
-		$data['medio'] = $medio;
-		$data['actor'] = $actor;
-		$data['universidad'] = $universidad;
-		$data['tema'] = $tema;
-		$data['stema'] = $stema;
-		$data['un'] = $un;
-
-		$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('manejodb/vmanejodb_repsimples', $data);
-		$this->load->view('html/pie');
-	}
-    public function reportesCompuestos()
-	{
-		$usuario = $this->ion_auth->user()->row();
-		//Poblar el formulario
-		$forms = $this->Formulario_model->leerCuestionarios();
-		$depas = $this->Departamento_model->leerDepartamentos();
-		$tipo_medio = $this->MedioComunicacion_model->leerTipoMedio();
-		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
-		$actor = $this->Actor_model->leerActores();
-		$universidad = $this->Universidad_model->leerUniversidades();
-		$tema = $this->Tema_model->leerTemasForms();
-		$stema = $this->SubTema_model->leerSubtemasForms();
-		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
-
-
-
-		$data['dep'] = $depas;
-		$data['forms'] = $forms;
-		$data['tipo_medio'] = $tipo_medio;
-		$data['medio'] = $medio;
-		$data['actor'] = $actor;
-		$data['universidad'] = $universidad;
-		$data['tema'] = $tema;
-		$data['stema'] = $stema;
-		$data['un'] = $un;
-
-		$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('manejodb/vmanejodb_repcomp', $data);
-		$this->load->view('html/pie');
-
-	}
-    public function download()
-	{
-		$consulta = $this->session->consulta;
-		$noticia = $this->Noticia_model->reporteNoticias($consulta);
-		$noticia_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
-		$noticia_datos_ids = $this->Noticia_model->reportesNoticiasDatosID($consulta);
-		if(!empty($consulta))
-		{
-			$filename = "reporte.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-reportes.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getSheet(0)->setTitle('Noticias');
-
-			$worksheet = $spreadsheet->getActiveSheet();
-			$eje_y = 6;
-
-			foreach ($noticia_datos as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $n->titular);
-				$sheet->setCellValue('E'.$eje_y, $n->resumen);
-				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_cuestionario );
-				$sheet->setCellValue('H'.$eje_y, $n->nombre_medio );
-				$sheet->setCellValue('I'.$eje_y, $n->nombre_tipo );
-				$sheet->setCellValue('J'.$eje_y, $n->username);
-				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-				$sheet->setCellValue('M'.$eje_y, $n->nombre_actor);
-				$sheet->setCellValue('N'.$eje_y, $n->nombre_tema);
-				$sheet->setCellValue('O'.$eje_y, $n->nombre_subtema);
-				$eje_y++;
-			endforeach;
-
-			//Llenar Otros Temas
-			$sheet = $spreadsheet->getSheet(1)->setTitle('OtrosTemas');
-			$eje_y = 6;
-			foreach ($noticia_datos_ids as $n):
-				$notot = $this->Noticia_model->otroTemaNoticiaPorId($n->idnoticia);
-				$sheet->setCellValue('A'.$eje_y, $notot->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $notot->titular);
-				$sheet->setCellValue('E'.$eje_y, $notot->resumen);
-				$sheet->setCellValue('F'.$eje_y, $notot->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $notot->nombre_cuestionario );
-				$sheet->setCellValue('H'.$eje_y, $notot->nombre_otrotema );
-
-				$eje_y++;
-
-			endforeach;
-
-
-			//Llenar Subtemas
-			//Llenar Otros Temas
-			$sheet = $spreadsheet->getSheet(2)->setTitle('OtrosSubtemas');
-			$eje_y = 6;
-			foreach ($noticia_datos_ids as $n):
-				$nototsub = $this->Noticia_model->otroSubtemaNoticiaPorId($n->idnoticia);
-				foreach ($nototsub as $nots):
-				$sheet->setCellValue('A'.$eje_y, $nots->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $nots->titular);
-				$sheet->setCellValue('E'.$eje_y, $nots->resumen);
-				$sheet->setCellValue('F'.$eje_y, $nots->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $nots->nombre_cuestionario );
-				$sheet->setCellValue('H'.$eje_y, $nots->nombre_tema );
-				$sheet->setCellValue('I'.$eje_y, $nots->nombre_otrosubtema );
-				$eje_y++;
-				endforeach;
-
-			endforeach;
-
-			//Primer libro por defecto
-			$sheet = $spreadsheet->setActiveSheetIndex(0);
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesCompuestos');
-
-		}
-
-	}
-    public function downloadUniversidad()
-	{
-		$consulta = $this->session->consulta_universidad;
-		$this->session->unset_userdata("consulta_universidad");
-		$noticias = $this->Noticia_model->noticiaPorUniversidad($consulta);
-
-		if(!empty($consulta))
-		{
-			$filename = "reporte-universidad.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-universidad.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$eje_y = 6;
-
-			//Colocar el tipo de medio
-			$universidad = $this->Universidad_model->leerUniversidadId($consulta->iduniversidad);
-			$sheet->setCellValue('E3', $universidad->nombre_universidad);
-
-			foreach ($noticias as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $n->titular);
-				$sheet->setCellValue('E'.$eje_y, $n->resumen);
-				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
-				$sheet->setCellValue('J'.$eje_y, $n->username);
-				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-
-				$eje_y++;
-			endforeach;
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesSimples');
-		}
-	}
-    public function downloadTema()
-	{
-
-		$consulta = $this->session->consulta_tema;
-		$this->session->unset_userdata("consulta_tema");
-		$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
-
-		if(!empty($consulta)){
-			$filename = "reporte-tema.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tema.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$eje_y = 6;
-
-			//Colocar el tipo de medio
-			$tema = $this->Cuestionario_model->leerTemaPorId($consulta->idtema);
-			$sheet->setCellValue('E3', $tema->nombre_tema);
-
-			foreach ($noticias as $n):
-
-				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-				$sheet->setCellValue('A'.$eje_y, $nt->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $nt->titular);
-				$sheet->setCellValue('E'.$eje_y, $nt->resumen);
-				$sheet->setCellValue('F'.$eje_y, $nt->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $nt->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $nt->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $nt->nombre_cuestionario );
-				$sheet->setCellValue('J'.$eje_y, $nt->username);
-				$sheet->setCellValue('K'.$eje_y, $nt->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $nt->nombre_departamento);
-
-				$eje_y++;
-			endforeach;
-
-
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesSimples');
-		}
-
-		/*if(!empty($consulta))
-		{
-			$filename = "reporte-tema.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-universidad.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$eje_y = 6;
-
-			//Colocar el tipo de medio
-			$tema = $this->Universidad_model->leerTemaPorId($consulta->idtema);
-			$sheet->setCellValue('E3', $tema->nombre_tema);
-
-			foreach ($noticias as $n):
-
-				$nt = $this->Noticia_model->noticiaPorId($n->idnoticia);
-
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nt->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $nt->titular);
-				$sheet->setCellValue('E'.$eje_y, $nt->resumen);
-				$sheet->setCellValue('F'.$eje_y, $nt->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $nt->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $nt->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $nt->nombre_cuestionario );
-				$sheet->setCellValue('J'.$eje_y, $nt->username);
-				$sheet->setCellValue('K'.$eje_y, $nt->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $nt->nombre_departamento);
-
-				$eje_y++;
-			endforeach;
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesSimples');
-		}*/
-	}
-    public function downloadTipomedio()
-	{
-		$consulta = $this->session->consulta_tipomedio;
-		$this->session->unset_userdata("consulta_tipomedio");
-		$noticias = $this->Noticia_model->noticiaPorTipomedio($consulta);
-
-		if(!empty($consulta))
-		{
-			$filename = "reporte-tipo-medio.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-tipomedio.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$eje_y = 6;
-
-			//Colocar el tipo de medio
-			$tipo_medio = $this->Cuestionario_model->leerTipoMedioPorId($consulta->idtipomedio);
-			$sheet->setCellValue('E3', $tipo_medio->nombre_tipo);
-
-			foreach ($noticias as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $n->titular);
-				$sheet->setCellValue('E'.$eje_y, $n->resumen);
-				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
-				$sheet->setCellValue('J'.$eje_y, $n->username);
-				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-
-				$eje_y++;
-			endforeach;
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesSimples');
-		}
-	}
-    public function downloadCuestionario()
-	{
-		$consulta = $this->session->consulta_cuestionario;
-		$this->session->unset_userdata("consulta_cuestionario");
-		$noticias = $this->Noticia_model->noticiaPorCuestionario($consulta);
-		$cuestionario = $this->Cuestionario_model->leerCuestionario($consulta->idcuestionario);
-
-		if(!empty($consulta))
-		{
-			$filename = "reporte-cuestionario.xlsx";
-			$ruta = 'assets/info/';
-
-			$plantilla = $ruta.'plantilla-formulario.xlsx';
-
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$sheet->setCellValue('E3', $cuestionario->nombre_cuestionario);
-			$eje_y = 6;
-			foreach ($noticias as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $n->titular);
-				$sheet->setCellValue('E'.$eje_y, $n->resumen);
-				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
-				$sheet->setCellValue('J'.$eje_y, $n->username);
-				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-
-				$eje_y++;
-			endforeach;
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesSimples');
-		}
-	}
-    public function downloadDepartamento()
-	{
-		$consulta = $this->session->consulta_departamento;
-		$this->session->unset_userdata("consulta_departamento");
-		$noticias = $this->Noticia_model->noticiaPorDepartamento($consulta);
-		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
-
-		if(!empty($consulta))
-		{
-			$filename = "reporte-departamento.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-departamento.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$eje_y = 6;
-			$sheet->setCellValue('E3', $departamento->nombre_departamento);
-			foreach ($noticias as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $n->titular);
-				$sheet->setCellValue('E'.$eje_y, $n->resumen);
-				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
-				$sheet->setCellValue('J'.$eje_y, $n->username);
-				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-
-				$eje_y++;
-			endforeach;
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesSimples');
-		}
-	}
-    public function downloadActor()
-	{
-		$consulta = $this->session->consulta_actor;
-		$this->session->unset_userdata("consulta_actor");
-		$noticias = $this->Noticia_model->noticiaPorActor($consulta);
-		$actor = $this->Actor_model->leerActorID($consulta->idactor);
-
-		if(!empty($consulta))
-		{
-			$filename = "reporte-actor.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-actor.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$sheet->setCellValue('E3', $actor->nombre_actor );
-			$eje_y = 6;
-			foreach ($noticias as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $n->titular);
-				$sheet->setCellValue('E'.$eje_y, $n->resumen);
-				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
-				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
-				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
-				$sheet->setCellValue('J'.$eje_y, $n->username);
-				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);
-
-				$eje_y++;
-			endforeach;
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesSimples');
-		}
-	}
-    public function procesarConsultasimple()
-	{
+        $usuario = $this->ion_auth->user()->row();
+        	//Poblar el formulario
+        $estadosley = $this->Leyy_model->leerEstadosLey();
+        $universidad = $this->Universidad_model->leerUniversidades();
+        $tema = $this->Tema_model->leerTemasForms();
+        $stema = $this->SubTema_model->leerSubtemasForms();
+        $un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
+        
+        $data['estadosley'] = $estadosley;
+        $data['universidad'] = $universidad;
+        $data['tema'] = $tema;
+        $data['stema'] = $stema;
+        $data['un'] = $un;
+        
+        $this->load->view('html/encabezado');
+        $this->load->view('html/navbar');
+        $this->load->view('manejodb/vmanejodb_repsimplesley', $data);
+        $this->load->view('html/pie');
+    }
+    public function procesarConsultasimpleley()
+    {
 		/*
 		 *
 		 * Redireccion a reportes simples
 		 *
 		 */
-		$consulta = $this->objetoConsulta();
+        $consulta = $this->objetoConsultaley();
 //                echo "<pre>";var_dump($consulta);echo "</pre>";
-		if($consulta->fecha_inicio > $consulta->fecha_fin) //Comprobacion del intervalo de fechas
-		{
-			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
-			redirect('ManejoDB/reportesSimples');
+
+        if($consulta->fecha_inicio > $consulta->fecha_fin) //Comprobacion del intervalo de fechas
+        {
+            $this->mensaje('Intervalo de fechas incorrecto', 'warning');
+            redirect('ManejoDBL/reportesLeyes');
+        }
+        else
+        {
+            /** @noinspection PhpLanguageLevelInspection */
+            if(!empty($this->input->post('estadol'))) //Reporte por estado de ley
+            {
+                if($consulta->idestadoley == 0)
+                {
+                    $this->mensaje('Sin seleccion', 'warning');
+                    redirect('ManejoDBL/reportesLeyes');
+                }
+                else
+                {
+                    $estadoley = $this->Leyy_model->leyPorEstado($consulta);
+                    if(empty($estadoley))
+                    {
+                        	//Si la consulta esta vacia no se genera reporte
+                        $this->mensaje('No existen resultados', 'info');
+                        redirect('ManejoDBL/reportesLeyes');
+                    }
+                    else
+                    {
+                        	//Cargar los datos a las session
+                        $this->session->set_userdata('consulta_estadoley', []);
+                        $this->session->set_userdata('consulta_estadoley', $consulta);
+                        redirect('ManejoDBL/downloadEstadoLey');
+                    }
+                }
+            }
+            elseif (!empty($this->input->post('universidad'))) //Reporte por universidad
+            {
+                if($consulta->iduniversidad == 0)
+                {
+                    $this->mensaje('Sin seleccion', 'warning');
+                    redirect('ManejoDBL/reportesLeyes');
+                }
+                else
+                {
+                    //Redireccion a rutina de reporte
+                    $universidadl = $this->Leyy_model->leyPorUniversidad($consulta);
+                    if(empty($universidadl))
+                    {
+                        	//Si la consulta esta vacia no se genera reporte
+                        $this->mensaje('No existen resultados', 'info');
+                        redirect('ManejoDBL/reportesLeyes');
+                    }
+                    else
+                    {
+                        //Cargar los datos a las session
+                        $this->session->set_userdata('consulta_universidadl', []);
+                        $this->session->set_userdata('consulta_universidadl', $consulta);
+                        redirect('ManejoDBL/downloadUniversidadLey');
+                    }
+                }
+            }
+            elseif (!empty($this->input->post('tema'))) //Reporte por tema
+            {
+                if($consulta->idtema == 0)
+                {
+                    $this->mensaje('Sin seleccion', 'warning');
+                    redirect('ManejoDBL/reportesLeyes');
+                }
+                else
+                {
+                    //Redireccion a rutina de reporte
+                    $temal = $this->Leyy_model->leyPorTema($consulta);
+                    if(empty($temal))
+                    {
+                        	//Si la consulta esta vacia no se genera reporte
+                        $this->mensaje('No existen resultados', 'info');
+                        redirect('ManejoDBL/reportesLeyes');
+                    }
+                    else
+                    {
+                        	//Cargar los datos a las session
+                        $this->session->set_userdata('consulta_temal', []);
+                        $this->session->set_userdata('consulta_temal', $consulta);
+                        redirect('ManejoDBL/downloadTemaLey');
+                    }
 		}
-		else{
-			/** @noinspection PhpLanguageLevelInspection */
-			//Reporte por cuestionario
-			if(!empty($this->input->post('cuestionario')))
-			{
-				if($consulta->idcuestionario == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-                                    $cuestionario = $this->Noticia_model->noticiaPorCuestionario($consulta);
-					if(empty($cuestionario))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDB/reportesSimples');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_cuestionario', []);
-						$this->session->set_userdata('consulta_cuestionario', $consulta);
-						redirect('ManejoDB/downloadCuestionario');
-					}
-                                    //Redireccion a rutina de reporte
-//					echo "cuestionario";
-				}
-			}
-			elseif (!empty($this->input->post('departamento')))  //Reporte por departamento
-			{
-				if($consulta->iddepartamento == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-                                    $departamento = $this->Noticia_model->noticiaPorDepartamento($consulta);
-					if(empty($departamento))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDB/reportesSimples');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_departamento', []);
-						$this->session->set_userdata('consulta_departamento', $consulta);
-						redirect('ManejoDB/downloadDepartamento');
-					}
-					//Redireccion a rutina de reporte
-				}
-			}
-			elseif (!empty($this->input->post('tipomedio'))) //Reporte por tipo de medio
-			{
-				if($consulta->idtipomedio == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-					//Rutina de reporte
-					$noticias = $this->Noticia_model->noticiaPorTipomedio($consulta);
-					if(empty($noticias))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDB/reportesSimples');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_tipomedio', []);
-						$this->session->set_userdata('consulta_tipomedio', $consulta);
-						redirect('ManejoDB/downloadTipomedio');
-					}
-				}
-			}
-			elseif (!empty($this->input->post('medio'))) //Reporte por medio
-			{
-				if($consulta->idmedio == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-					//Redireccion a rutina de reporte
-
-				}
-			}
-			elseif (!empty($this->input->post('actor'))) //Reporte por actor
-			{
-				if($consulta->idactor == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-                                    $actor = $this->Noticia_model->noticiaPorActor($consulta);
-					if(empty($actor))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDB/reportesSimples');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_actor', []);
-						$this->session->set_userdata('consulta_actor', $consulta);
-						redirect('ManejoDB/downloadActor');
-					}
-					//Redireccion a rutina de reporte
-				}
-			}
-			elseif (!empty($this->input->post('universidad'))) //Reporte por universidad
-			{
-				if($consulta->iduniversidad == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-					//Redireccion a rutina de reporte
-					$noticias = $this->Noticia_model->noticiaPorUniversidad($consulta);
-					if(empty($noticias))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDB/reportesSimples');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_universidad', []);
-						$this->session->set_userdata('consulta_universidad', $consulta);
-						redirect('ManejoDB/downloadUniversidad');
-					}
-				}
-			}
-			elseif (!empty($this->input->post('tema'))) //Reporte por tema
-			{
-				if($consulta->idtema == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-					//Redireccion a rutina de reporte
-					$noticias = $this->Noticia_model->noticiaPorTemas($consulta);
-					if(empty($noticias))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDB/reportesSimples');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_tema', []);
-						$this->session->set_userdata('consulta_tema', $consulta);
-						redirect('ManejoDB/downloadTema');
-					}
-				}
-			}
-			elseif (!empty($this->input->post('subtema'))) //Reporte por subtema
-			{
-				if($consulta->idsubtema == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-					//Redireccion a rutina de reporte
-				}
-			}
-			else{
-				$this->mensaje('Error', 'danger');
-				redirect('ManejoDB/reportesSimples');
-			}
-
-		}
-	}
-    public function prueba($consulta)
-	{
-		echo $consulta->fecha_inicio;
-		echo $consulta->fecha_fin;
-	}
-    public function procesarConsulta()
-	{
-		//Primer validador
-		$consulta = $this->objetoConsulta();
-
-		if($consulta->fecha_inicio > $consulta->fecha_fin)
-		{
-			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
-			redirect('ManejoDB');
-		}else{
-			//var_dump($consulta);
-			$noticias = $this->Noticia_model->reporteNoticias($consulta);
-			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
-			if(empty($noticias_datos))
-			{
-				//Si la consulta esta vacia no se genera reporte
-				$this->mensaje('No existen resultados', 'info');
-				redirect('ManejoDB/reportesCompuestos');
-			}
-			else{
-				//Cargar los datos a las session
-				$this->session->set_userdata('consulta', []);
-				$this->session->set_userdata('consulta', $consulta);
-
-
-				redirect('ManejoDB/download');
-			}
-
-
-
-
-
-
-
-			/*$noticias = $this->Noticia_model->reporteNoticias($consulta);
-			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
-
-			//var_dump($idnoticias);
-
-			$data['idnoticias'] = $noticias;
-			$data['noticias'] = $noticias_datos;
-
-
-
-			$this->load->view('html/encabezado');
-			$this->load->view('html/navbar');
-			$this->load->view('manejodb/vexportar_fecha', $data);
-			$this->load->view('html/pie');*/
-
-		}
-	}
-    private function objetoConsulta()
-	{
-		$ids = new stdClass();
-		$ids->fecha_inicio = '';
-		$ids->fecha_fin = '';
-		$ids->idcuestionario = '';
-		$ids->iddepartamento = '';
-		$ids->idtipomedio = '';
-		$ids->idmedio = '';
-		$ids->idactor = '';
-		$ids->iduniversidad = '';
-		$ids->idtema = '';
-		$ids->idsubtema = '';
-
-		//Capturar datos
-		$ids->fecha_inicio = $this->fecha_unix($this->input->post('fecha_inicio'));
-		$ids->fecha_fin = $this->fecha_unix($this->input->post('fecha_fin')) ;
-		$ids->idcuestionario = $this->input->post('idcuestionario');
-		$ids->iddepartamento = $this->input->post('iddepartamento');
-		$ids->idtipomedio = $this->input->post('idtipomedio');
-		$ids->idmedio = $this->input->post('idmedio');
-		$ids->idactor = $this->input->post('idactor');
-		$ids->iduniversidad = $this->input->post('iduniversidad');
-		$ids->idtema = $this->input->post('idtema');
-		$ids->idsubtema = $this->input->post('idsubtema');
-
-
-		return $ids;
-	}
-	//Despliegue de mensaje
-    public function mensaje($mensaje, $clase){
-		/** @noinspection PhpLanguageLevelInspection */
-		$this->session->set_flashdata([
+            }
+            elseif (!empty($this->input->post('subtema'))) //Reporte por subtema
+            {
+                if($consulta->idsubtema == 0)
+                {
+                    $this->mensaje('Sin seleccion', 'warning');
+                    redirect('ManejoDBL/reportesLeyes');
+                    }
+                    else
+                    {
+                        	//Redireccion a rutina de reporte
+                        $subtemal = $this->Leyy_model->leyPorSubtema($consulta);
+                        if(empty($subtemal))
+                        {
+                            //Si la consulta esta vacia no se genera reporte
+                            $this->mensaje('No existen resultados', 'info');
+                            redirect('ManejoDBL/reportesLeyes');
+                        }
+                        else
+                        {
+                            //Cargar los datos a las session
+                            $this->session->set_userdata('consulta_subtemal', []);
+                            $this->session->set_userdata('consulta_subtemal', $consulta);
+                            redirect('ManejoDBL/downloadSubtemaLey');
+                        }
+                     }
+            }
+            else
+            {
+                $this->mensaje('Error', 'danger');
+                redirect('ManejoDBL/reportesLeyes');
+            }
+        }
+    }
+    public function mensaje($mensaje, $clase)
+    {
+        		/** @noinspection PhpLanguageLevelInspection */
+        $this->session->set_flashdata([
 			'mensaje' => $mensaje,
 			'clase' => $clase,
 		]);
-	}
-    private function fecha_unix($fecha)
-	{
-		$fecha_std = str_replace('/', '-', $fecha);
-		$fecha_unix = strtotime($fecha_std);
-		return $fecha_unix;
-	}
-	//Metodos de respuestas json
-    public function getMedios()
-	{
-		$json = array();
-		$this->Cuestionario_model->setTipoMedioID($this->input->post('tipomedioID'));
-		$this->Cuestionario_model->setDepartamentoID($this->session->iddepartamento);
-		$json = $this->Cuestionario_model->leerMedios();
-		header('Content-Type: application/json');
-		echo json_encode($json);
-	}
-	//Metodo de respuestas json
-    public function getsubtema()
-	{
-		$json = array();
-		$this->Cuestionario_model->setTemaID($this->input->post('temaID'));
-		$this->Cuestionario_model->setDepartamentoID(1);
-		$json = $this->Cuestionario_model->leerSubtema();
-		header('Content-Type: application/json');
-		echo json_encode($json);
-	}
-	//
-    public function noticiasAdministrador()
-	{
-		//$usuario = $this->ion_auth->user()->row();
-		//$cantidad_noticia = $this->session->noticia_editable;
-
-
-		$dt['noticias'] =$this->Noticia_model->leerTodasLasNoticias();
-		//$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
-		$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('manejodb/vmanejodb_listanot', $dt);
-		$this->load->view('html/pie');
-
-	}
-    public function cambiarEstado($identificador)
-	{
-		$idnoticia = $identificador;
-		$noticia = $this->Noticia_model->noticiaPorId($idnoticia);
-		if($noticia->esta_activa)
-		{
-			//Esta activa, funcion complementaria
-			$estado = 0;
-		}else{
-			//No esta activa, funcion complementaria
-			$estado = 1;
-		}
-		$this->Noticia_model->cambiarEstado($idnoticia, $estado);
-		redirect('manejoDB/noticiasAdministrador');
-	}
-    public function reportesLeyes()
-	{
-		$usuario = $this->ion_auth->user()->row();
-		//Poblar el formulario
-//		$forms = $this->Formulario_model->leerCuestionarios();
-//		$depas = $this->Departamento_model->leerDepartamentos();
-//		$tipo_medio = $this->MedioComunicacion_model->leerTipoMedio();
-//		$medio = $this->MedioComunicacion_model->leerMedioComunicacion();
-//		$actor = $this->Actor_model->leerActores();
-                 $estadosley = $this->Ley_model->leerEstadosLey();
-		$universidad = $this->Universidad_model->leerUniversidades();
-		$tema = $this->Tema_model->leerTemasForms();
-		$stema = $this->SubTema_model->leerSubtemasForms();
-		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
-
-//		$data['dep'] = $depas;
-//		$data['forms'] = $forms;
-//		$data['tipo_medio'] = $tipo_medio;
-//		$data['medio'] = $medio;
-//		$data['actor'] = $actor;
-                 $data['estadosley'] = $estadosley;
-		$data['universidad'] = $universidad;
-		$data['tema'] = $tema;
-		$data['stema'] = $stema;
-		$data['un'] = $un;
-//echo "<pre>";var_dump($estadosley);echo "</pre>";
-		$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('manejodb/vmanejodb_repsimplesley', $data);
-		$this->load->view('html/pie');
-	}
-	public function procesarConsultasimpleley()
-	{
-		/*
-		 *
-		 * Redireccion a reportes simples
-		 *
-		 */
-		$consulta = $this->objetoConsultaley();
-//                echo "<pre>";var_dump($consulta);echo "</pre>";
-
-		if($consulta->fecha_inicio > $consulta->fecha_fin) //Comprobacion del intervalo de fechas
-		{
-			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
-			redirect('ManejoDBL/reportesLeyes');
-		}
-		else{
-			/** @noinspection PhpLanguageLevelInspection */
-			//Reporte por cuestionario
-			if(!empty($this->input->post('estadol')))
-			{
-				if($consulta->idestadoley == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDBL/reportesLeyes');
-				}else{
-                                    $estadoley = $this->Ley_model->leyPorEstado($consulta);
-					if(empty($estadoley))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDBL/reportesLeyes');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_estadoley', []);
-						$this->session->set_userdata('consulta_estadoley', $consulta);
-						redirect('ManejoDBL/downloadEstadoLey');
-					}
-                                    //Redireccion a rutina de reporte
-//					echo "cuestionario";
-				}
-			}
-			elseif (!empty($this->input->post('departamento')))  //Reporte por departamento
-			{
-				if($consulta->iddepartamento == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDBL/reportesLeyes');
-				}else{
-                                    $departamento = $this->Noticia_model->noticiaPorDepartamento($consulta);
-					if(empty($departamento))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDBL/reportesLeyes');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_departamento', []);
-						$this->session->set_userdata('consulta_departamento', $consulta);
-						redirect('ManejoDBL/downloadEstadoLey');
-					}
-					//Redireccion a rutina de reporte
-				}
-			}
-			elseif (!empty($this->input->post('tipomedio'))) //Reporte por tipo de medio
-			{
-				if($consulta->idtipomedio == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDBL/reportesLeyes');
-				}else{
-					//Rutina de reporte
-					$noticias = $this->Noticia_model->noticiaPorTipomedio($consulta);
-					if(empty($noticias))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDBL/reportesLeyes');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_tipomedio', []);
-						$this->session->set_userdata('consulta_tipomedio', $consulta);
-						redirect('ManejoDB/downloadTipomedio');
-					}
-				}
-			}
-			elseif (!empty($this->input->post('medio'))) //Reporte por medio
-			{
-				if($consulta->idmedio == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-					//Redireccion a rutina de reporte
-
-				}
-			}
-			elseif (!empty($this->input->post('actor'))) //Reporte por actor
-			{
-				if($consulta->idactor == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDB/reportesSimples');
-				}else{
-                                    $actor = $this->Noticia_model->noticiaPorActor($consulta);
-					if(empty($actor))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDB/reportesSimples');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_actor', []);
-						$this->session->set_userdata('consulta_actor', $consulta);
-						redirect('ManejoDB/downloadActor');
-					}
-					//Redireccion a rutina de reporte
-				}
-			}
-			elseif (!empty($this->input->post('universidad'))) //Reporte por universidad
-			{
-				if($consulta->iduniversidad == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDBL/reportesLeyes');
-				}else{
-					//Redireccion a rutina de reporte
-					$universidadl = $this->Ley_model->leyPorUniversidad($consulta);
-					if(empty($universidadl))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDBL/reportesLeyes');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_universidadl', []);
-						$this->session->set_userdata('consulta_universidadl', $consulta);
-						redirect('ManejoDBL/downloadUniversidadLey');
-					}
-				}
-			}
-			elseif (!empty($this->input->post('tema'))) //Reporte por tema
-			{
-				if($consulta->idtema == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDBL/reportesLeyes');
-				}else{
-					//Redireccion a rutina de reporte
-					$temal = $this->Ley_model->leyPorTema($consulta);
-					if(empty($temal))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDBL/reportesLeyes');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_temal', []);
-						$this->session->set_userdata('consulta_temal', $consulta);
-						redirect('ManejoDB/downloadTemaLey');
-					}
-				}
-			}
-			elseif (!empty($this->input->post('subtema'))) //Reporte por subtema
-			{
-				if($consulta->idsubtema == 0)
-				{
-					$this->mensaje('Sin seleccion', 'warning');
-					redirect('ManejoDBL/reportesLeyes');
-				}else{
-					//Redireccion a rutina de reporte
-					$subtemal = $this->Ley_model->leyPorSubtema($consulta);
-					if(empty($subtemal))
-					{
-						//Si la consulta esta vacia no se genera reporte
-						$this->mensaje('No existen resultados', 'info');
-						redirect('ManejoDBL/reportesLeyes');
-					}
-					else{
-						//Cargar los datos a las session
-						$this->session->set_userdata('consulta_subtemal', []);
-						$this->session->set_userdata('consulta_subtemal', $consulta);
-						redirect('ManejoDB/downloadSubtemaLey');
-					}
-
-                                  }
-			}
-			else{
-				$this->mensaje('Error', 'danger');
-				redirect('ManejoDB/reportesSimples');
-			}
-
-		}
-	}
-	private function objetoConsultaley()
-	{
-		$ids = new stdClass();
-		$ids->fecha_inicio = '';
-		$ids->fecha_fin = '';
-//		$ids->idcuestionario = '';
-//		$ids->iddepartamento = '';
-//		$ids->idtipomedio = '';
-//		$ids->idmedio = '';
-                 $ids->idestadoley ='';
-//		$ids->idactor = '';
-		$ids->iduniversidad = '';
-		$ids->idtema = '';
-		$ids->idsubtema = '';
-
-		//Capturar datos
-		$ids->fecha_inicio = $this->fecha_unix($this->input->post('fecha_inicio'));
-		$ids->fecha_fin = $this->fecha_unix($this->input->post('fecha_fin')) ;
-//		$ids->idcuestionario = $this->input->post('idcuestionario');
-//		$ids->iddepartamento = $this->input->post('iddepartamento');
-//		$ids->idtipomedio = $this->input->post('idtipomedio');
-//		$ids->idmedio = $this->input->post('idmedio');
-//		$ids->idactor = $this->input->post('idactor');
-                 $ids->idestadoley = $this->input->post('idestadol');
-		$ids->iduniversidad = $this->input->post('iduniversidad');
-		$ids->idtema = $this->input->post('idtema');
-		$ids->idsubtema = $this->input->post('idsubtema');
-
-
-		return $ids;
-	}
-	public function downloadEstadoLey()
-	{
-		$consulta = $this->session->consulta_estadoley;
-		$this->session->unset_userdata("consulta_estadoley");
-		$leyestado = $this->Ley_model->leyPorEstado($consulta);
-
-		if(!empty($consulta))
-		{
-			$filename = "reporte-estadoley.xlsx";
-			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-estadoley.xlsx';
-			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
-			header('Content-Disposition: attachment; filename="' . $filename. '"');
-			header('Cache-Control: max-age=0');
-
-			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
-			$worksheet = $spreadsheet->getActiveSheet();
-			$eje_y = 6;
-
-			//Colocar el tipo de medio
-			$estadoley = $this->Ley_model->leerestadoleyId($consulta->idestadoley);
-			$sheet->setCellValue('E3', $estadoley->nombre_estadoley);
-
-			foreach ($leyestado as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idleyes);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_estadoley));
-				$sheet->setCellValue('D'.$eje_y, $n->nombre_fuente);
-				$sheet->setCellValue('E'.$eje_y, $n->nombre_estadoley);
-				$sheet->setCellValue('F'.$eje_y, $n->codigo_ley);
-				$sheet->setCellValue('G'.$eje_y, $n->nombre_ley);
-				$sheet->setCellValue('H'.$eje_y, $n->resumen);
-				$sheet->setCellValue('I'.$eje_y, $n->url_ley);
-				$sheet->setCellValue('J'.$eje_y, $n->nombre_tema);
-				$sheet->setCellValue('K'.$eje_y, $n->first_name);
-                                $sheet->setCellValue('L'.$eje_y, $n->last_name);
-
-				$eje_y++;
-			endforeach;
-
-			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-			$writer->save("php://output");
-		}else{
-			$this->mensaje('No existen datos', 'warning');
-			redirect('ManejoDB/reportesLeyes');
-		}
-	}
+    }
+    private function objetoConsultaley()
+    {
+        $ids = new stdClass();
+        $ids->fecha_inicio = '';
+        $ids->fecha_fin = '';
+        $ids->idestadoley ='';
+        $ids->iduniversidad = '';
+        $ids->idtema = '';
+        $ids->idsubtema = '';
+        
+        //Capturar datos
+        $ids->fecha_inicio = $this->fecha_unix($this->input->post('fecha_inicio'));
+        $ids->fecha_fin = $this->fecha_unix($this->input->post('fecha_fin'));
+        $ids->idestadoley = $this->input->post('idestadol');
+        $ids->iduniversidad = $this->input->post('iduniversidad');
+        $ids->idtema = $this->input->post('idtema');
+        $ids->idsubtema = $this->input->post('idsubtema');
+        
+        return $ids;
+    }
+    public function downloadEstadoLey()
+    {
+        $consulta = $this->session->consulta_estadoley;
+        $this->session->unset_userdata("consulta_estadoley");
+        $leyestado = $this->Leyy_model->leyPorEstado($consulta);
+        
+        if(!empty($consulta))
+        {
+            $filename = "reporte-estadoley.xlsx";
+            $ruta = 'assets/info/';
+            $plantilla = $ruta.'plantilla-estadoley.xlsx';
+            header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+            header('Content-Disposition: attachment; filename="' . $filename. '"');
+            header('Cache-Control: max-age=0');
+            
+            $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+            $sheet = $spreadsheet->getActiveSheet();
+            $worksheet = $spreadsheet->getActiveSheet();
+            $eje_y = 6;
+            
+            //Colocar el tipo de medio
+            $estadoley = $this->Leyy_model->leerestadoleyId($consulta->idestadoley);
+            $sheet->setCellValue('E3', $estadoley->nombre_estadoley);
+            
+            foreach ($leyestado as $n):
+                $sheet->setCellValue('A'.$eje_y, $n->idleyes);
+                $sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+                $sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_estadoley));
+                $sheet->setCellValue('D'.$eje_y, $n->nombre_fuente);
+                $sheet->setCellValue('E'.$eje_y, $n->nombre_estadoley);
+                $sheet->setCellValue('F'.$eje_y, $n->codigo_ley);
+                $sheet->setCellValue('G'.$eje_y, $n->nombre_ley);
+                $sheet->setCellValue('H'.$eje_y, $n->resumen);
+                $sheet->setCellValue('I'.$eje_y, $n->url_ley);
+                $sheet->setCellValue('J'.$eje_y, $n->nombre_tema);
+                $sheet->setCellValue('K'.$eje_y, $n->first_name);
+                $sheet->setCellValue('L'.$eje_y, $n->last_name);
+                $eje_y++;
+            endforeach;
+            
+            $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save("php://output");
+        }else{
+            $this->mensaje('No existen datos', 'warning');
+            redirect('ManejoDBL/reportesLeyes');
+            }
+    }
     public function downloadUniversidadLey()
     {
         $consulta = $this->session->consulta_universidadl;
         $this->session->unset_userdata("consulta_universidadl");
-        $universidadl = $this->Ley_model->leyPorUniversidad($consulta);
+        $universidadl = $this->Leyy_model->leyPorUniversidad($consulta);
         
         if(!empty($consulta))
         {
@@ -1182,7 +282,7 @@ class ManejoDBL extends CI_Controller{
             $eje_y = 6;
             
             //Colocar el tipo de medio
-//            $universidadley = $this->Ley_model->leeruniversidadlId($consulta->iduniversidad);
+//            $universidadley = $this->Leyy_model->leeruniversidadlId($consulta->iduniversidad);
 //            $sheet->setCellValue('E3', $universidadley->nombre_universidad);
             
             foreach ($universidadl as $n):
@@ -1205,14 +305,14 @@ class ManejoDBL extends CI_Controller{
             $writer->save("php://output");
         }else{
             $this->mensaje('No existen datos', 'warning');
-            redirect('ManejoDB/reportesLeyes');
+            redirect('ManejoDBL/reportesLeyes');
         }
     }
     public function downloadTemaLey()
     {
 		$consulta = $this->session->consulta_temal;
 		$this->session->unset_userdata("consulta_temal");
-		$temal = $this->Ley_model->leyPorTema($consulta);
+		$temal = $this->Leyy_model->leyPorTema($consulta);
 
 		if(!empty($consulta))
 		{
@@ -1229,7 +329,7 @@ class ManejoDBL extends CI_Controller{
 			$eje_y = 6;
 
 			//Colocar el tipo de medio
-			$temaley = $this->Ley_model->leertemaleyId($consulta->idtema);
+			$temaley = $this->Leyy_model->leertemaleyId($consulta->idtema);
 			$sheet->setCellValue('E3', $temaley->nombre_tema);
 
 			foreach ($temal as $n):
@@ -1260,7 +360,7 @@ class ManejoDBL extends CI_Controller{
     {
 		$consulta = $this->session->consulta_subtemal;
 		$this->session->unset_userdata("consulta_subtemal");
-		$subtemal = $this->Ley_model->leyPorTema($consulta);
+		$subtemal = $this->Leyy_model->leyPorSubtema($consulta);
 
 		if(!empty($consulta))
 		{
@@ -1277,7 +377,7 @@ class ManejoDBL extends CI_Controller{
 			$eje_y = 6;
 
 			//Colocar el tipo de medio
-			$subtemaley = $this->Ley_model->leersubtemaleyId($consulta->idsubtema);
+			$subtemaley = $this->Leyy_model->leersubtemaleyId($consulta->idsubtema);
 			$sheet->setCellValue('E3', $subtemaley->nombre_subtema);
 
 			foreach ($subtemal as $n):
@@ -1303,5 +403,11 @@ class ManejoDBL extends CI_Controller{
 			$this->mensaje('No existen datos', 'warning');
 			redirect('ManejoDBL/reportesLeyes');
 		}
+    }
+    private function fecha_unix($fecha)
+    {
+        $fecha_std = str_replace('/', '-', $fecha);
+        $fecha_unix = strtotime($fecha_std);
+        return $fecha_unix;
     }
 }
