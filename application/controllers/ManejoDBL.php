@@ -249,8 +249,9 @@ class ManejoDBL extends CI_Controller{
                 $sheet->setCellValue('H'.$eje_y, $n->resumen);
                 $sheet->setCellValue('I'.$eje_y, $n->url_ley);
                 $sheet->setCellValue('J'.$eje_y, $n->nombre_tema);
-                $sheet->setCellValue('K'.$eje_y, $n->first_name);
-                $sheet->setCellValue('L'.$eje_y, $n->last_name);
+				$sheet->setCellValue('K'.$eje_y, $n->username);
+                $sheet->setCellValue('L'.$eje_y, $n->first_name);
+                $sheet->setCellValue('M'.$eje_y, $n->last_name);
                 $eje_y++;
             endforeach;
             
@@ -296,8 +297,9 @@ class ManejoDBL extends CI_Controller{
                 $sheet->setCellValue('H'.$eje_y, $n->resumen);
                 $sheet->setCellValue('I'.$eje_y, $n->url_ley);
                 $sheet->setCellValue('J'.$eje_y, $n->nombre_tema);
-                $sheet->setCellValue('K'.$eje_y, $n->first_name);
-                $sheet->setCellValue('L'.$eje_y, $n->last_name);
+				$sheet->setCellValue('K'.$eje_y, $n->username);
+                $sheet->setCellValue('L'.$eje_y, $n->first_name);
+                $sheet->setCellValue('M'.$eje_y, $n->last_name);
                 $eje_y++;
             endforeach;
             
@@ -343,8 +345,9 @@ class ManejoDBL extends CI_Controller{
 				$sheet->setCellValue('H'.$eje_y, $n->resumen);
 				$sheet->setCellValue('I'.$eje_y, $n->url_ley);
 				$sheet->setCellValue('J'.$eje_y, $n->nombre_tema);
-				$sheet->setCellValue('K'.$eje_y, $n->first_name);
-                                $sheet->setCellValue('L'.$eje_y, $n->last_name);
+				$sheet->setCellValue('K'.$eje_y, $n->username);
+				$sheet->setCellValue('L'.$eje_y, $n->first_name);
+				$sheet->setCellValue('M'.$eje_y, $n->last_name);
 
 				$eje_y++;
 			endforeach;
@@ -391,9 +394,9 @@ class ManejoDBL extends CI_Controller{
 				$sheet->setCellValue('H'.$eje_y, $n->resumen);
 				$sheet->setCellValue('I'.$eje_y, $n->url_ley);
 				$sheet->setCellValue('J'.$eje_y, $n->nombre_tema);
-				$sheet->setCellValue('K'.$eje_y, $n->first_name);
-                                $sheet->setCellValue('L'.$eje_y, $n->last_name);
-
+				$sheet->setCellValue('K'.$eje_y, $n->username);
+				$sheet->setCellValue('L'.$eje_y, $n->first_name);
+				$sheet->setCellValue('M'.$eje_y, $n->last_name);
 				$eje_y++;
 			endforeach;
 
