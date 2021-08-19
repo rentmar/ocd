@@ -56,6 +56,18 @@ class Tema_model extends CI_Model
 
 	}
 
+	//Rutina para extraer los temas del formulario leyes
+	public function leerTemasLeyes()
+	{
+		$sql = "SELECT *  "
+			."FROM tema as t  "
+			."WHERE t.rel_idcuestionario = 4  "
+			."ORDER by t.idtema ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
 
 
 

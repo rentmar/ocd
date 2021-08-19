@@ -43,8 +43,8 @@ class ManejoDBL extends CI_Controller{
         	//Poblar el formulario
         $estadosley = $this->Leyy_model->leerEstadosLey();
         $universidad = $this->Universidad_model->leerUniversidades();
-        $tema = $this->Tema_model->leerTemasForms();
-        $stema = $this->SubTema_model->leerSubtemasForms();
+        $tema = $this->Tema_model->leerTemasLeyes();
+        $stema = $this->SubTema_model->leerSubtemasLeyes();
         $un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
         
         $data['estadosley'] = $estadosley;
