@@ -23,6 +23,7 @@ class ManejoDBL extends CI_Controller{
         $this->load->model('Noticia_model');
         $this->load->model('Formulario_model');
         $this->load->model('Leyy_model');
+        $this->load->model('Ley_model');
 //Comprobacion de session
 	if($this->session->sesion_activa === null)
         {
@@ -58,6 +59,32 @@ class ManejoDBL extends CI_Controller{
         $this->load->view('manejodb/vmanejodb_repsimplesley', $data);
         $this->load->view('html/pie');
     }
+
+    public function reportesLeyescomp()
+	{
+		$usuario = $this->ion_auth->user()->row();
+		//Poblar el formulario
+		$estadosley = $this->Leyy_model->leerEstadosLey();
+		$universidad = $this->Universidad_model->leerUniversidades();
+		$tema = $this->Tema_model->leerTemasLeyes();
+		$stema = $this->SubTema_model->leerSubtemasLeyes();
+		$un = $this->Universidad_model->leerUniversidadId($usuario->rel_iduniversidad);
+
+
+		$data['estadosley'] = $estadosley;
+		$data['universidad'] = $universidad;
+		$data['tema'] = $tema;
+		$data['stema'] = $stema;
+		$data['un'] = $un;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_repcompley', $data);
+		$this->load->view('html/pie');
+
+	}
+
+
     public function procesarConsultasimpleley()
     {
 		/*
@@ -413,4 +440,125 @@ class ManejoDBL extends CI_Controller{
         $fecha_unix = strtotime($fecha_std);
         return $fecha_unix;
     }
+
+    public function procesarConsulta()
+	{
+		//Primer validador
+		$consulta = $this->objetoConsultaley();
+
+
+		if ($consulta->fecha_inicio > $consulta->fecha_fin) {
+			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
+			redirect('ManejoDB');
+		} else {
+			//var_dump($consulta);
+			$leyes_datos = $this->Ley_model->leerLeyesReporte($consulta);
+			if (empty($leyes_datos)) {
+				//Si la consulta esta vacia no se genera reporte
+				$this->mensaje('No existen resultados', 'info');
+				redirect('ManejoDBL/reportesLeyescomp');
+			} else {
+				//Cargar los datos a las session
+				$this->session->set_userdata('consulta_leyes', []);
+				$this->session->set_userdata('consulta_leyes', $consulta);
+
+
+				redirect('ManejoDBL/download');
+			}
+		}
+	}
+	public function download()
+	{
+		$consulta = $this->session->consulta_leyes;
+
+		$leyes_datos = $this->Ley_model->leerLeyesReporte($consulta);
+		if(!empty($consulta))
+		{
+			$filename = "reporte-leyes.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-repcompuestos-leyes.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Leyes');
+
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			foreach ($leyes_datos as $l):
+				$sheet->setCellValue('A'.$eje_y, $l->idleyes);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $l->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $l->nombre_fuente);
+				$sheet->setCellValue('D'.$eje_y, $l->resumen);
+				$sheet->setCellValue('E'.$eje_y, mdate('%m-%d-%Y', $l->fecha_estadoley));
+				$sheet->setCellValue('F'.$eje_y, $l->nombre_estadoley);
+				$sheet->setCellValue('G'.$eje_y, $l->porcentaje_estadoley );
+				$sheet->setCellValue('H'.$eje_y, $l->codigo_ley );
+				$sheet->setCellValue('I'.$eje_y, $l->nombre_ley );
+				$sheet->setCellValue('J'.$eje_y, $l->url_ley );
+				$sheet->setCellValue('K'.$eje_y, $l->username);
+				$sheet->setCellValue('L'.$eje_y, $l->nombre_universidad);
+				$sheet->setCellValue('M'.$eje_y, $l->nombre_departamento);
+				$sheet->setCellValue('N'.$eje_y, $l->nombre_tema);
+				$sheet->setCellValue('O'.$eje_y, $l->nombre_subtema);
+				$eje_y++;
+			endforeach;
+
+			//Llenar Otros Temas
+			$sheet = $spreadsheet->getSheet(1)->setTitle('OtrosTemas');
+			$eje_y = 6;
+			$ley_otrotema = $this->Ley_model->leerLeyesReporteOtrosTemas($consulta);
+			foreach ($ley_otrotema as $lo):
+				$sheet->setCellValue('A'.$eje_y, $lo->idleyes);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $lo->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $lo->resumen);
+				$sheet->setCellValue('D'.$eje_y, mdate('%m-%d-%Y', $lo->fecha_estadoley));
+				$sheet->setCellValue('E'.$eje_y, $lo->nombre_estadoley);
+				$sheet->setCellValue('F'.$eje_y, $lo->porcentaje_estadoley );
+				$sheet->setCellValue('G'.$eje_y, $lo->nombre_ley );
+				$sheet->setCellValue('H'.$eje_y, $lo->url_ley );
+				$sheet->setCellValue('I'.$eje_y, $lo->username);
+				$sheet->setCellValue('J'.$eje_y, $lo->nombre_universidad);
+				$sheet->setCellValue('K'.$eje_y, $lo->nombre_departamento);
+				$sheet->setCellValue('L'.$eje_y, $lo->nombre_otrotema);
+				$eje_y++;
+			endforeach;
+
+
+			//Llenar Subtemas
+			//Llenar Otros Temas
+			$sheet = $spreadsheet->getSheet(2)->setTitle('OtrosSubtemas');
+			$eje_y = 6;
+			$ley_otrosubtema = $this->Ley_model->leerLeyesReporteOtrosSubtemas($consulta);
+			foreach ($ley_otrosubtema as $los):
+				$sheet->setCellValue('A'.$eje_y, $los->idleyes);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $los->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $los->resumen);
+				$sheet->setCellValue('D'.$eje_y, mdate('%m-%d-%Y', $los->fecha_estadoley));
+				$sheet->setCellValue('E'.$eje_y, $los->nombre_estadoley);
+				$sheet->setCellValue('F'.$eje_y, $los->porcentaje_estadoley );
+				$sheet->setCellValue('G'.$eje_y, $los->nombre_ley );
+				$sheet->setCellValue('H'.$eje_y, $los->url_ley );
+				$sheet->setCellValue('I'.$eje_y, $los->username);
+				$sheet->setCellValue('J'.$eje_y, $los->nombre_universidad);
+				$sheet->setCellValue('K'.$eje_y, $los->nombre_departamento);
+				$sheet->setCellValue('L'.$eje_y, $los->nombre_tema);
+				$sheet->setCellValue('M'.$eje_y, $los->nombre_otrosubtema);
+				$eje_y++;
+			endforeach;
+
+
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('ManejoDBL/reportesLeyescomp');
+
+		}
+	}
 }
