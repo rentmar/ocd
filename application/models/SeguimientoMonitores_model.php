@@ -6,7 +6,7 @@ class SeguimientoMonitores_model extends CI_Model{
     }
     public function leerSeguimientoMonitores()
     {
-        $qry=$this->db->query("SELECT first_name,last_name,nombre_departamento,fecha_registro,nombre_cuestionario,count(*) ncuestionario "
+        $qry=$this->db->query("SELECT first_name,last_name,nombre_departamento,MAX(fecha_registro) fecha_registro,nombre_cuestionario,count(*) ncuestionario "
                 . "FROM noticia "
                 . "LEFT JOIN users "
                 . "ON users.id = noticia.rel_idusuario "
