@@ -97,7 +97,7 @@ class Leyy_model extends CI_Model{
                         . "LEFT JOIN tema ON tema.rel_idcuestionario = le.rel_idcuestionario "
 //                    . "LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad "
                         . "WHERE tema.idtema = ?  AND (le.fecha_registro BETWEEN ? AND ?) "
-                        . "GROUP BY le.idleyes ASC ";
+                        . "GROUP BY fuente.nombre_fuente ";
 		$qry = $this->db->query($sql, [$idtema, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
         }
