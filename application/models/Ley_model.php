@@ -772,6 +772,8 @@ class Ley_model extends CI_Model{
 			."LEFT JOIN ley_subtema ON ley_subtema.rel_idleyes = l.idleyes  "
 			."LEFT JOIN subtema ON subtema.idsubtema = ley_subtema.rel_idsubtema  "
 			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema  "
+			."LEFT JOIN leyes_fuente ON leyes_fuente.rel_idleyes = l.idleyes "
+			."LEFT JOIN fuente ON fuente.idfuente = leyes_fuente.rel_idfuente "
 			."WHERE l.fecha_registro BETWEEN ? AND ?  ";
 
 		/** @noinspection PhpLanguageLevelInspection */

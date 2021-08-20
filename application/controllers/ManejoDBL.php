@@ -476,7 +476,7 @@ class ManejoDBL extends CI_Controller{
 		{
 			$filename = "reporte-leyes.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-reportes.xlsx';
+			$plantilla = $ruta.'plantilla-repcompuestos-leyes.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -489,17 +489,18 @@ class ManejoDBL extends CI_Controller{
 			foreach ($leyes_datos as $l):
 				$sheet->setCellValue('A'.$eje_y, $l->idleyes);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $l->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, $l->resumen);
-				$sheet->setCellValue('D'.$eje_y, mdate('%m-%d-%Y', $l->fecha_estadoley));
-				$sheet->setCellValue('E'.$eje_y, $l->nombre_estadoley);
-				$sheet->setCellValue('F'.$eje_y, $l->porcentaje_estadoley );
-				$sheet->setCellValue('G'.$eje_y, $l->nombre_ley );
-				$sheet->setCellValue('H'.$eje_y, $l->url_ley );
-				$sheet->setCellValue('I'.$eje_y, $l->username);
-				$sheet->setCellValue('J'.$eje_y, $l->nombre_universidad);
-				$sheet->setCellValue('K'.$eje_y, $l->nombre_departamento);
-				$sheet->setCellValue('L'.$eje_y, $l->nombre_tema);
-				$sheet->setCellValue('M'.$eje_y, $l->nombre_subtema);
+				$sheet->setCellValue('C'.$eje_y, $l->nombre_fuente);
+				$sheet->setCellValue('D'.$eje_y, $l->resumen);
+				$sheet->setCellValue('E'.$eje_y, mdate('%m-%d-%Y', $l->fecha_estadoley));
+				$sheet->setCellValue('F'.$eje_y, $l->nombre_estadoley);
+				$sheet->setCellValue('G'.$eje_y, $l->porcentaje_estadoley );
+				$sheet->setCellValue('H'.$eje_y, $l->nombre_ley );
+				$sheet->setCellValue('I'.$eje_y, $l->url_ley );
+				$sheet->setCellValue('J'.$eje_y, $l->username);
+				$sheet->setCellValue('K'.$eje_y, $l->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $l->nombre_departamento);
+				$sheet->setCellValue('M'.$eje_y, $l->nombre_tema);
+				$sheet->setCellValue('N'.$eje_y, $l->nombre_subtema);
 				$eje_y++;
 			endforeach;
 
@@ -541,8 +542,8 @@ class ManejoDBL extends CI_Controller{
 				$sheet->setCellValue('I'.$eje_y, $los->username);
 				$sheet->setCellValue('J'.$eje_y, $los->nombre_universidad);
 				$sheet->setCellValue('K'.$eje_y, $los->nombre_departamento);
-				$sheet->setCellValue('L'.$eje_y, $los->nombre_otrosubtema);
 				$sheet->setCellValue('M'.$eje_y, $los->nombre_tema);
+				$sheet->setCellValue('L'.$eje_y, $los->nombre_otrosubtema);
 				$eje_y++;
 			endforeach;
 
