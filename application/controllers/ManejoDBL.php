@@ -506,42 +506,46 @@ class ManejoDBL extends CI_Controller{
 			//Llenar Otros Temas
 			$sheet = $spreadsheet->getSheet(1)->setTitle('OtrosTemas');
 			$eje_y = 6;
-			/*foreach ($noticia_datos_ids as $n):
-				$notot = $this->Noticia_model->otroTemaNoticiaPorId($n->idnoticia);
-				$sheet->setCellValue('A'.$eje_y, $notot->idnoticia);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $notot->fecha_noticia));
-				$sheet->setCellValue('D'.$eje_y, $notot->titular);
-				$sheet->setCellValue('E'.$eje_y, $notot->resumen);
-				$sheet->setCellValue('F'.$eje_y, $notot->url_noticia);
-				$sheet->setCellValue('G'.$eje_y, $notot->nombre_cuestionario );
-				$sheet->setCellValue('H'.$eje_y, $notot->nombre_otrotema );
-
+			$ley_otrotema = $this->Ley_model->leerLeyesReporteOtrosTemas($consulta);
+			foreach ($ley_otrotema as $lo):
+				$sheet->setCellValue('A'.$eje_y, $lo->idleyes);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $lo->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $lo->resumen);
+				$sheet->setCellValue('D'.$eje_y, mdate('%m-%d-%Y', $lo->fecha_estadoley));
+				$sheet->setCellValue('E'.$eje_y, $lo->nombre_estadoley);
+				$sheet->setCellValue('F'.$eje_y, $lo->porcentaje_estadoley );
+				$sheet->setCellValue('G'.$eje_y, $lo->nombre_ley );
+				$sheet->setCellValue('H'.$eje_y, $lo->url_ley );
+				$sheet->setCellValue('I'.$eje_y, $lo->username);
+				$sheet->setCellValue('J'.$eje_y, $lo->nombre_universidad);
+				$sheet->setCellValue('K'.$eje_y, $lo->nombre_departamento);
+				$sheet->setCellValue('L'.$eje_y, $lo->nombre_otrotema);
 				$eje_y++;
-
-			endforeach;*/
+			endforeach;
 
 
 			//Llenar Subtemas
 			//Llenar Otros Temas
 			$sheet = $spreadsheet->getSheet(2)->setTitle('OtrosSubtemas');
 			$eje_y = 6;
-			/*foreach ($noticia_datos_ids as $n):
-				$nototsub = $this->Noticia_model->otroSubtemaNoticiaPorId($n->idnoticia);
-				foreach ($nototsub as $nots):
-					$sheet->setCellValue('A'.$eje_y, $nots->idnoticia);
-					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_registro));
-					$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $nots->fecha_noticia));
-					$sheet->setCellValue('D'.$eje_y, $nots->titular);
-					$sheet->setCellValue('E'.$eje_y, $nots->resumen);
-					$sheet->setCellValue('F'.$eje_y, $nots->url_noticia);
-					$sheet->setCellValue('G'.$eje_y, $nots->nombre_cuestionario );
-					$sheet->setCellValue('H'.$eje_y, $nots->nombre_tema );
-					$sheet->setCellValue('I'.$eje_y, $nots->nombre_otrosubtema );
-					$eje_y++;
-				endforeach;
+			$ley_otrosubtema = $this->Ley_model->leerLeyesReporteOtrosSubtemas($consulta);
+			foreach ($ley_otrosubtema as $los):
+				$sheet->setCellValue('A'.$eje_y, $los->idleyes);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $los->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $los->resumen);
+				$sheet->setCellValue('D'.$eje_y, mdate('%m-%d-%Y', $los->fecha_estadoley));
+				$sheet->setCellValue('E'.$eje_y, $los->nombre_estadoley);
+				$sheet->setCellValue('F'.$eje_y, $los->porcentaje_estadoley );
+				$sheet->setCellValue('G'.$eje_y, $los->nombre_ley );
+				$sheet->setCellValue('H'.$eje_y, $los->url_ley );
+				$sheet->setCellValue('I'.$eje_y, $los->username);
+				$sheet->setCellValue('J'.$eje_y, $los->nombre_universidad);
+				$sheet->setCellValue('K'.$eje_y, $los->nombre_departamento);
+				$sheet->setCellValue('L'.$eje_y, $los->nombre_otrosubtema);
+				$sheet->setCellValue('M'.$eje_y, $los->nombre_tema);
+				$eje_y++;
+			endforeach;
 
-			endforeach;*/
 
 			//Primer libro por defecto
 			$sheet = $spreadsheet->setActiveSheetIndex(0);

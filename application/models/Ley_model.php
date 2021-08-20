@@ -809,6 +809,100 @@ class Ley_model extends CI_Model{
 		return $qry->result();
 	}
 
+	public function leerLeyesReporteOtrosTemas($parametros)
+	{
+		//Solo la fecha de la noticia
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT *  "
+			."FROM leyes as l  "
+			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes  "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley  "
+			."LEFT JOIN nombreley ON nombreley.rel_idestadoley = estadoley.idestadoley AND nombreley.rel_idley = l.idleyes  "
+			."LEFT JOIN urlley ON urlley.rel_idestadoley = estadoley.idestadoley AND urlley.rel_idley = l.idleyes  "
+			."LEFT JOIN users ON l.rel_idusuario = users.id  "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad  "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."LEFT JOIN ley_otrotema ON ley_otrotema.rel_idleyes = l.idleyes  "
+			."LEFT JOIN otrotema ON otrotema.idotrotema = ley_otrotema.rel_idotrotema  "
+			."WHERE l.fecha_registro BETWEEN ? AND ?  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+		//Añadir el resto de los discriminantes
+		if($consulta->idestadoley !=0)
+		{
+			$sql .= "AND  estadoley.idestadoley = ?  ";
+			array_push($placeholder, $consulta->idestadoley);
+		}
+		if($consulta->iduniversidad !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND universidad.iduniversidad = ?  ";
+			array_push($placeholder, $consulta->iduniversidad );
+		}
+
+		$sql .= 'ORDER BY l.idleyes ASC  ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
+	public function leerLeyesReporteOtrosSubtemas($parametros)
+	{
+		//Solo la fecha de la noticia
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT *  "
+			."FROM leyes as l  "
+			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes  "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley  "
+			."LEFT JOIN nombreley ON nombreley.rel_idestadoley = estadoley.idestadoley AND nombreley.rel_idley = l.idleyes  "
+			."LEFT JOIN urlley ON urlley.rel_idestadoley = estadoley.idestadoley AND urlley.rel_idley = l.idleyes  "
+			."LEFT JOIN users ON l.rel_idusuario = users.id  "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad  "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."LEFT JOIN ley_otrosubtema ON ley_otrosubtema.rel_idleyes = l.idleyes  "
+			."LEFT JOIN otrosubtema ON otrosubtema.idotrosubtema = ley_otrosubtema.rel_idotrosubtema  "
+			."LEFT JOIN tema ON otrosubtema.rel_idtema = tema.idtema  "
+			."WHERE l.fecha_registro BETWEEN ? AND ?  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+		//Añadir el resto de los discriminantes
+		if($consulta->idestadoley !=0)
+		{
+			$sql .= "AND  estadoley.idestadoley = ?  ";
+			array_push($placeholder, $consulta->idestadoley);
+		}
+		if($consulta->iduniversidad !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND universidad.iduniversidad = ?  ";
+			array_push($placeholder, $consulta->iduniversidad );
+		}
+		if ($consulta->idtema != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tema.idtema = ?   ";
+			array_push($placeholder, $consulta->idtema);
+		}
+		$sql .= 'ORDER BY l.idleyes ASC  ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
 
 
 }
