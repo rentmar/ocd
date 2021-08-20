@@ -494,13 +494,14 @@ class ManejoDBL extends CI_Controller{
 				$sheet->setCellValue('E'.$eje_y, mdate('%m-%d-%Y', $l->fecha_estadoley));
 				$sheet->setCellValue('F'.$eje_y, $l->nombre_estadoley);
 				$sheet->setCellValue('G'.$eje_y, $l->porcentaje_estadoley );
-				$sheet->setCellValue('H'.$eje_y, $l->nombre_ley );
-				$sheet->setCellValue('I'.$eje_y, $l->url_ley );
-				$sheet->setCellValue('J'.$eje_y, $l->username);
-				$sheet->setCellValue('K'.$eje_y, $l->nombre_universidad);
-				$sheet->setCellValue('L'.$eje_y, $l->nombre_departamento);
-				$sheet->setCellValue('M'.$eje_y, $l->nombre_tema);
-				$sheet->setCellValue('N'.$eje_y, $l->nombre_subtema);
+				$sheet->setCellValue('H'.$eje_y, $l->codigo_ley );
+				$sheet->setCellValue('I'.$eje_y, $l->nombre_ley );
+				$sheet->setCellValue('J'.$eje_y, $l->url_ley );
+				$sheet->setCellValue('K'.$eje_y, $l->username);
+				$sheet->setCellValue('L'.$eje_y, $l->nombre_universidad);
+				$sheet->setCellValue('M'.$eje_y, $l->nombre_departamento);
+				$sheet->setCellValue('N'.$eje_y, $l->nombre_tema);
+				$sheet->setCellValue('O'.$eje_y, $l->nombre_subtema);
 				$eje_y++;
 			endforeach;
 
@@ -542,8 +543,8 @@ class ManejoDBL extends CI_Controller{
 				$sheet->setCellValue('I'.$eje_y, $los->username);
 				$sheet->setCellValue('J'.$eje_y, $los->nombre_universidad);
 				$sheet->setCellValue('K'.$eje_y, $los->nombre_departamento);
-				$sheet->setCellValue('M'.$eje_y, $los->nombre_tema);
-				$sheet->setCellValue('L'.$eje_y, $los->nombre_otrosubtema);
+				$sheet->setCellValue('L'.$eje_y, $los->nombre_tema);
+				$sheet->setCellValue('M'.$eje_y, $los->nombre_otrosubtema);
 				$eje_y++;
 			endforeach;
 
