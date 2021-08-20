@@ -702,4 +702,113 @@ class Ley_model extends CI_Model{
 			}
 		$this->db->trans_complete();
 	}
+
+	//Leer todas las leyes y estado
+	public function leerTodasLasLeyesEstadoReporte()
+	{
+		$leyes_resultado = [];
+		$ley = $this->leyArray();
+		//Extraer las leyes definidas por el usuario
+		$leyes = $this->leerTodasLeyes();
+		foreach ($leyes as $l)
+		{
+			$ley['idley'] = $l->idleyes;
+			$ley['resumen'] = $l->resumen;
+			$ley['descripcion'] = '';
+
+			//$idley, $idestado
+			$ley['tratamiento']  = $this->Ley_model->leerEstadoDeLey($ley['idley'], 1);
+			$t = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 1);
+			$ley['sancionado']   = $this->Ley_model->leerEstadoDeLey($ley['idley'], 2);
+			$s = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 2);
+			$ley['aprobado']     = $this->Ley_model->leerEstadoDeLey($ley['idley'], 3);
+			$a = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 3);
+			$ley['modificacion'] = $this->Ley_model->leerEstadoDeLey($ley['idley'], 4);
+			$m = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 4);
+			$ley['promulgada']    = $this->Ley_model->leerEstadoDeLey($ley['idley'], 5);
+			$p = $this->Ley_model->leerUltimaDescripcion($ley['idley'], 5);
+
+			if(isset($t))
+			{
+				$ley['descripcion'] = $t->nombre_ley;
+			}
+			if(isset($s))
+			{
+				$ley['descripcion'] = $s->nombre_ley;
+			}
+			if(isset($a))
+			{
+				$ley['descripcion'] = $a->nombre_ley;
+			}
+			if(isset($m))
+			{
+				$ley['descripcion'] = $m->nombre_ley;
+			}
+			if(isset($p))
+			{
+				$ley['descripcion'] = $p->nombre_ley;
+			}
+			$leyes_resultado[] = $ley;
+		}
+		return $leyes_resultado;
+	}
+
+	public function leerLeyesReporte($parametros)
+	{
+		//Solo la fecha de la noticia
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT *  "
+			."FROM leyes as l  "
+			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes  "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley  "
+			."LEFT JOIN nombreley ON nombreley.rel_idestadoley = estadoley.idestadoley AND nombreley.rel_idley = l.idleyes  "
+			."LEFT JOIN urlley ON urlley.rel_idestadoley = estadoley.idestadoley AND urlley.rel_idley = l.idleyes  "
+			."LEFT JOIN users ON l.rel_idusuario = users.id  "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad  "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."LEFT JOIN ley_subtema ON ley_subtema.rel_idleyes = l.idleyes  "
+			."LEFT JOIN subtema ON subtema.idsubtema = ley_subtema.rel_idsubtema  "
+			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema  "
+			."WHERE l.fecha_registro BETWEEN ? AND ?  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+		//Añadir el resto de los discriminantes
+		if($consulta->idestadoley !=0)
+		{
+			$sql .= "AND  estadoley.idestadoley = ?  ";
+			array_push($placeholder, $consulta->idestadoley);
+		}
+		if($consulta->iduniversidad !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND universidad.iduniversidad = ?  ";
+			array_push($placeholder, $consulta->iduniversidad );
+		}
+		if ($consulta->idtema != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tema.idtema = ?   ";
+			array_push($placeholder, $consulta->idtema);
+		}
+		if ($consulta->idsubtema !=0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND subtema.idsubtema = ?  ";
+			array_push($placeholder, $consulta->idsubtema);
+		}
+		$sql .= 'ORDER BY l.idleyes ASC  ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
+
+
 }
