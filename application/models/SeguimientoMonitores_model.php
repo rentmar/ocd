@@ -57,7 +57,7 @@ class SeguimientoMonitores_model extends CI_Model{
                 . "LEFT JOIN cuestionario C ON C.idcuestionario = L.rel_idcuestionario "
                 . "LEFT JOIN users U ON U.id = L.rel_idusuario "
                 . "LEFT JOIN departamento D ON D.iddepartamento = U.rel_iddepartamento "
-                . "GROUP BY U.first_name, C.nombre_cuestionario "
+                . "GROUP BY nombre_departamento, nombre_cuestionario "
                 . "UNION "
                 . "SELECT nombre_departamento first_name, nombre_cuestionario, count(*) ncuestionario "
                 . "FROM noticia "
