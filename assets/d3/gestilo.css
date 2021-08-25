@@ -13,6 +13,7 @@ span {
 }
 .column {
   background-color: green;
+  position: fixed;
 }
 .baseline { 
   background-color: #ccc;
@@ -28,6 +29,82 @@ span {
 .control-group {
 	background-color:#ccc;
 }
-.countdown{
-	background-color:#ccc;
+body {
+	background-color:#d3d3d3;
+	margin:0;
+}
+header {
+	background-color:#343a40;
+	position:fixed;
+	width:100%;
+	padding:0;
+}
+.navbar-brand {
+	color:#ffffff;
+}
+#Título_cabecera{
+	font-family: Verdana;
+	line-height:140%;
+	color:#ffffff;
+	font-size:14pt;
+	text-align:center;
+}
+.menu {
+	width:100%;
+	background-color:#7f182b;
+}
+.menu ul {
+	margin:0;
+	list-style:none;
+	padding:0;
+	display:flex;
+}
+.menu li :hover{
+	background:rgba(0,0,0,0.2);
+}
+.menu li a {
+	display:block;
+	padding: 15px 20px;
+	color: #ffffff;
+	text-decoration:none;
+}
+main {	
+	padding:0;
+	width:100%;
+	margin-top:30px;
+}
+.contenedor_graficas {
+	max-width:900px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.contenedor_superior{
+	border-top-left-radius:10px;
+	border-top-right-radius: 10px;
+	padding:20px 25px 15px 25px;
+}
+#reforma {
+	background-color:#8cc63f;
+}
+#bublemap {
+	background-color:#7f182b;
+}				
+.grafico{
+	background-color:#ffffff;
+	padding:20px 30px 25px 30px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius: 10px;
+}
+#table{
+	overflow-x:auto;
+
+}
+h5 {
+	color:#ffffff;
+	font-family:Helvetica;
+}
+@media (max-width:768px) {
+	.contenedor_gráficas{
+	column-count:1;
+	}
 }
