@@ -42,7 +42,7 @@ class Usuarios extends CI_Controller
 		$this->form_validation->set_rules('nombre', 'Nombre', 'required');
 		$this->form_validation->set_rules('apellido', 'Apellido', 'required');
 		$this->form_validation->set_rules('carnet', 'Carnet de Identidad', 'required|numeric');
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('password1', 'Confirmar Password', 'required|matches[password]');
 
