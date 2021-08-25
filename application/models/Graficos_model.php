@@ -55,7 +55,7 @@ class Graficos_model extends CI_Model
 	}
 	public function leerNumLeyes()
 	{
-		$q=$this->db->get("Leyes");
+		$q=$this->db->get("leyes");
 		return count($q->result());
 	}
 	public function leerNumCuestionarioDepartamento($idd,$idc)
