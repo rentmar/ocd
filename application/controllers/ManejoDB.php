@@ -883,6 +883,4 @@ class ManejoDB extends CI_Controller{
 
 
 
-
-
 }

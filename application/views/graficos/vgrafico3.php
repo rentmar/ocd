@@ -120,7 +120,7 @@
 				<br>
 				<div class="contenedor_gráficas">
 					<div class="contenedor_superior" id="institucional">
-						<h5><b> Grafico Barras Jerarquia </b></h5>
+						<h5><b> Grafico Radia Decreciente </b></h5>
 					</div>
 					<div class="gráfico">
 						<div>
@@ -129,7 +129,7 @@
 							<a href="<?php //echo site_url('formulario3/');?>" class="btn btn-info" role="button" style="background-color:#474142;">Opcion</a>
 						</div>
 						<div id="table">
-							<img src="<?php echo base_url().'assets/img/Grafica_dep.jpg'; ?>">
+							<img src="<?php echo base_url().'assets/img/radial.png'; ?>">
 						</div>
 						<br>
 						<h6> Descripción de gráfica </h6>

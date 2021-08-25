@@ -59,6 +59,18 @@ class SubTema_model extends CI_Model
 
 	}
 
+	//Rutina para extraer los subtemas del formulario leyes
+	public function leerSubtemasLeyes()
+	{
+		$sql = "SELECT *  "
+			."FROM subtema AS s  "
+			."LEFT JOIN tema ON s.rel_idtema = tema.idtema  "
+			."WHERE tema.rel_idcuestionario = 4 ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
 
 
 

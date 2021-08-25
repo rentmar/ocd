@@ -38,7 +38,7 @@
                             <br><br>
                             <label for="esumenLey" class="form-group"> Resumen de ley </label>
                             <br>
-                            <textarea name="esumenLey" rows="1" cols="10" readonly><?php echo $ly->resumen;?> </textarea>
+                            <textarea name="esumenLey" rows="5" cols="50" readonly><?php echo $ly->resumen;?> </textarea>
                             <a href="<?php echo site_url('Seguimientomonitores/actualizarLey/'.$ly->idleyes);?>"><i class="fas fa-edit"></i></a>
                             <br><br>
                             <?php }?>
