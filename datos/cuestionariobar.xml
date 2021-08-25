@@ -1,0 +1,320 @@
+<root>
+	<element>
+		<cant_cuest>4</cant_cuest>
+	</element>
+	<element>
+		<idcuestionario>1</idcuestionario>
+		<nombre_cuestionario>Reforma Electoral</nombre_cuestionario>
+		<numero_temas>10</numero_temas>
+		<cantidad>127</cantidad>
+		<valor>12</valor>
+	</element>
+	<element>
+		<idcuestionario>2</idcuestionario>
+		<nombre_cuestionario>Institucionalidad Democratica</nombre_cuestionario>
+		<numero_temas>5</numero_temas>
+		<cantidad>1062</cantidad>
+		<valor>100</valor>
+	</element>
+	<element>
+		<idcuestionario>3</idcuestionario>
+		<nombre_cuestionario>Censo</nombre_cuestionario>
+		<numero_temas>4</numero_temas>
+		<cantidad>22</cantidad>
+		<valor>2</valor>
+	</element>
+	<element>
+		<idcuestionario>4</idcuestionario>
+		<nombre_cuestionario>Leyes</nombre_cuestionario>
+		<numero_temas>22</numero_temas>
+		<cantidad>59</cantidad>
+		<valor>6</valor>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>1</idtema>
+		<nombre_tema>Presentacion de Estatutos de organizaciones politicas</nombre_tema>
+		<cantidadportema>11</cantidadportema>
+		<valorportema>19</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>2</idtema>
+		<nombre_tema>Competencias Jurisdicionales del TSE</nombre_tema>
+		<cantidadportema>57</cantidadportema>
+		<valorportema>100</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>3</idtema>
+		<nombre_tema>Redistribuicion de Escaños</nombre_tema>
+		<cantidadportema>2</cantidadportema>
+		<valorportema>4</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>4</idtema>
+		<nombre_tema>Circunscripciones uninominales</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>5</idtema>
+		<nombre_tema>Difusion de encuestas</nombre_tema>
+		<cantidadportema>5</cantidadportema>
+		<valorportema>9</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>6</idtema>
+		<nombre_tema>Inhabilitacion de candidatos</nombre_tema>
+		<cantidadportema>5</cantidadportema>
+		<valorportema>9</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>7</idtema>
+		<nombre_tema>Computo departamental</nombre_tema>
+		<cantidadportema>9</cantidadportema>
+		<valorportema>16</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>8</idtema>
+		<nombre_tema>Padron Electoral</nombre_tema>
+		<cantidadportema>9</cantidadportema>
+		<valorportema>16</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>9</idtema>
+		<nombre_tema>Procedimientos Tecnico Electorales</nombre_tema>
+		<cantidadportema>7</cantidadportema>
+		<valorportema>12</valorportema>
+	</element>
+	<element>
+		<idc>1</idc>
+		<idtema>10</idtema>
+		<nombre_tema>Financiamiento politico y partidario</nombre_tema>
+		<cantidadportema>4</cantidadportema>
+		<valorportema>7</valorportema>
+	</element>
+	<element>
+		<idc>2</idc>
+		<idtema>11</idtema>
+		<nombre_tema>Ejercicio en libertad de derechos políticos</nombre_tema>
+		<cantidadportema>405</cantidadportema>
+		<valorportema>100</valorportema>
+	</element>
+	<element>
+		<idc>2</idc>
+		<idtema>12</idtema>
+		<nombre_tema>Inclusión política</nombre_tema>
+		<cantidadportema>53</cantidadportema>
+		<valorportema>13</valorportema>
+	</element>
+	<element>
+		<idc>2</idc>
+		<idtema>13</idtema>
+		<nombre_tema>Participación en el ámbito electoral</nombre_tema>
+		<cantidadportema>150</cantidadportema>
+		<valorportema>37</valorportema>
+	</element>
+	<element>
+		<idc>2</idc>
+		<idtema>14</idtema>
+		<nombre_tema>Integración de los ciudadanos en la definición y gestión del Estado</nombre_tema>
+		<cantidadportema>185</cantidadportema>
+		<valorportema>46</valorportema>
+	</element>
+	<element>
+		<idc>2</idc>
+		<idtema>15</idtema>
+		<nombre_tema>Instituciones</nombre_tema>
+		<cantidadportema>141</cantidadportema>
+		<valorportema>35</valorportema>
+	</element>
+	<element>
+		<idc>3</idc>
+		<idtema>16</idtema>
+		<nombre_tema>Información a la población </nombre_tema>
+		<cantidadportema>8</cantidadportema>
+		<valorportema>80</valorportema>
+	</element>
+	<element>
+		<idc>3</idc>
+		<idtema>17</idtema>
+		<nombre_tema>Uso de los datos censales</nombre_tema>
+		<cantidadportema>3</cantidadportema>
+		<valorportema>30</valorportema>
+	</element>
+	<element>
+		<idc>3</idc>
+		<idtema>18</idtema>
+		<nombre_tema>Otros Censos</nombre_tema>
+		<cantidadportema>1</cantidadportema>
+		<valorportema>10</valorportema>
+	</element>
+	<element>
+		<idc>3</idc>
+		<idtema>19</idtema>
+		<nombre_tema>Etapa Pre Censal </nombre_tema>
+		<cantidadportema>10</cantidadportema>
+		<valorportema>100</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>20</idtema>
+		<nombre_tema>Educación</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>21</idtema>
+		<nombre_tema>Salud</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>22</idtema>
+		<nombre_tema>Administración De Justicia</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>23</idtema>
+		<nombre_tema>Seguridad Ciudadana</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>24</idtema>
+		<nombre_tema>Género</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>25</idtema>
+		<nombre_tema>Igualdad (Inclusión)</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>26</idtema>
+		<nombre_tema>Bonos</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>27</idtema>
+		<nombre_tema>Medio Ambiente</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>28</idtema>
+		<nombre_tema>Economía</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>29</idtema>
+		<nombre_tema>Pobreza Y Desarrollo</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>30</idtema>
+		<nombre_tema>Empleo</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>31</idtema>
+		<nombre_tema>Impuestos</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>32</idtema>
+		<nombre_tema>Industria</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>33</idtema>
+		<nombre_tema>Energía</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>34</idtema>
+		<nombre_tema>Recursos Naturales</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>35</idtema>
+		<nombre_tema>Descentralización Y Autonomía</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>36</idtema>
+		<nombre_tema>Narcotráfico</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>37</idtema>
+		<nombre_tema>Corrupción</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>38</idtema>
+		<nombre_tema>Turismo</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>39</idtema>
+		<nombre_tema>Arte Y Cultura</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>40</idtema>
+		<nombre_tema>Deportes</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+	<element>
+		<idc>4</idc>
+		<idtema>41</idtema>
+		<nombre_tema>Política Exterior</nombre_tema>
+		<cantidadportema>0</cantidadportema>
+		<valorportema>0</valorportema>
+	</element>
+</root>

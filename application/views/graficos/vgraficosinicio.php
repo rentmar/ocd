@@ -24,7 +24,7 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/Grafica_dep.jpg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('graficos/grafico/2') ?>" class="BOTON" role="button">Ver</a>
+						<a href="<?php echo site_url('Graficos/seleccionBar') ?>" class="BOTON" role="button">Ver</a>
 					</div>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/radial.png'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('graficos/grafico/3') ?>" class="BOTON" role="button">Ver</a>
+						<a href="<?php echo site_url('#') ?>" class="BOTON" role="button">Ver</a>
 					</div>
 				</div>
 			</div>
@@ -47,9 +47,9 @@
 						BUBLE MAPS
 						
 					</div>
-					<img class="card-img-top" src="<?php echo base_url().'assets/img/hexamap.png'; ?>" alt="Card image">
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/hexamap.svg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('graficos/grafico/4') ?>" class="BOTON" role="button">Ver</a>
+						<a href="<?php echo site_url('Graficos/seleccionBubble'); ?>" class="BOTON" role="button">Ver</a>
 					</div>
 				</div>
 			</div>

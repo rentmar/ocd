@@ -1,0 +1,38 @@
+<root>
+	<element>
+		<iddepartamento>10</iddepartamento>
+		<nombre_departamento>La Paz</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>20</iddepartamento>
+		<nombre_departamento>Santa Cruz</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>20</iddepartamento>
+		<nombre_departamento>Oruro</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>13</iddepartamento>
+		<nombre_departamento>Cochabamba</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>20</iddepartamento>
+		<nombre_departamento>Chuquisaca</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>8</iddepartamento>
+		<nombre_departamento>Tarija</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>20</iddepartamento>
+		<nombre_departamento>Beni</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>10</iddepartamento>
+		<nombre_departamento>Pando</nombre_departamento>
+	</element>
+	<element>
+		<iddepartamento>5</iddepartamento>
+		<nombre_departamento>Potosi</nombre_departamento>
+	</element>
+</root>
