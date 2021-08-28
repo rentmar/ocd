@@ -310,8 +310,8 @@ class ManejoDBL extends CI_Controller{
             $eje_y = 6;
             
             //Colocar el tipo de medio
-//            $universidadley = $this->Leyy_model->leeruniversidadlId($consulta->iduniversidad);
-//            $sheet->setCellValue('E3', $universidadley->nombre_universidad);
+            $universidadley = $this->Leyy_model->leeruniversidadlId($consulta->iduniversidad);
+            $sheet->setCellValue('E3', $universidadley->nombre_universidad);
             
             foreach ($universidadl as $n):
                 $sheet->setCellValue('A'.$eje_y, $n->idleyes);
