@@ -546,6 +546,15 @@ $('#formulario_ley').submit(function (e) {
 	}
 });
 
+//Validador de los subtemas
+
+/*$('#formulariosub_ley').submit(function (e) {
+	var numero_subtemas_seleccionados;
+	numero_subtemas_seleccionados = $('input[name="idtema[]"]:checked').length;
+	e.preventDefault();
+	$('#subtemasleyessinseleccion').modal("show");
+});*/
+
 
 
 

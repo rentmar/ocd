@@ -27,7 +27,7 @@ class Ley extends CI_Controller
     }
     public function index()
     {
-    	var_dump($this->session->userdata());
+    	//var_dump($this->session->userdata());
 		$usuario = $this->ion_auth->user()->row();
 		
 		$dt['leyes'] = $this->Ley_model->leerLeyesEstado($usuario->id);
@@ -64,7 +64,7 @@ class Ley extends CI_Controller
 			$data['ley'] = $ley;
 		}
 
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 
 		/*
 		 * DATOS PARA LLENADO DE FORMULARIO
@@ -123,7 +123,7 @@ class Ley extends CI_Controller
 		}else{
 			$ley = $this->session->ley_nueva;
 		}
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 
 		$data['ley'] = $ley;
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
@@ -212,7 +212,7 @@ class Ley extends CI_Controller
 		}else{
 			$ley = $this->session->ley_nueva;
 		}
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 
 
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
