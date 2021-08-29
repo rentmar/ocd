@@ -556,5 +556,3 @@ $('#formulario_ley').submit(function (e) {
 });*/
 
 
-
-

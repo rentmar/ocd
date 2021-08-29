@@ -21,13 +21,13 @@
 		<label for="fecha">Introduzca la fecha:</label><br>
 		<input type="date" id="fecha" name="fecha"
 			   value="<?php
-			   if(isset($ley) && !empty($ley->fecha_registro))
+			   if(isset($ley) && !empty($ley->fecha_ley))
 			   {
-				   echo mdate('%Y-%m-%d', $ley->fecha_registro);
+				   echo mdate('%Y-%m-%d', $ley->fecha_ley);
 			   };
 			   ?>" required >
-		<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
-		<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
+		<input type="text" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
+		<input type="text" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
 	</div>
 	<br>
 	<div class="contenedores">
