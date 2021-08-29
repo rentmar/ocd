@@ -247,7 +247,7 @@ class Graficos extends CI_Controller{
 		}
 		else
 		{
-			$this->load->view('graficos/vgraficoBar',$dt);
+			$this->load->view('graficos/vgraficobar',$dt);
 		}
 	}
 }

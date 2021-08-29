@@ -27,6 +27,7 @@ class Ley extends CI_Controller
     }
     public function index()
     {
+    	//var_dump($this->session->userdata());
 		$usuario = $this->ion_auth->user()->row();
 		
 		$dt['leyes'] = $this->Ley_model->leerLeyesEstado($usuario->id);
@@ -40,6 +41,7 @@ class Ley extends CI_Controller
 
 	public function crearley()
 	{
+
 		//Variables de sesion
 		//var_dump($this->session->userdata());
 		//echo "<br><br>";
@@ -57,10 +59,12 @@ class Ley extends CI_Controller
 			$ley = $this->session->ley_nueva;
 			$data['ley'] = $ley;
 		}else{
-			//Nueva noticia activa
+			//Nueva ley activa
 			$ley = $this->session->ley_nueva;
 			$data['ley'] = $ley;
 		}
+
+		//var_dump($this->session->userdata());
 
 		/*
 		 * DATOS PARA LLENADO DE FORMULARIO
@@ -88,6 +92,7 @@ class Ley extends CI_Controller
 	public function subtemas()
 	{
 		//Extraer la variable de session
+		//var_dump($this->session->userdata());
 		$ley = $this->session->ley_nueva;
 		//var_dump($ley);
 		if(!$ley->es_segundo_paso)
@@ -118,6 +123,8 @@ class Ley extends CI_Controller
 		}else{
 			$ley = $this->session->ley_nueva;
 		}
+		//var_dump($this->session->userdata());
+
 		$data['ley'] = $ley;
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
 		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
@@ -167,6 +174,7 @@ class Ley extends CI_Controller
 
 	public function preenvio()
 	{
+		//var_dump($this->session->userdata());
 		//Extraer la variable de session nueva noticia
 		$ley = $this->session->ley_nueva;
 		//var_dump($ley);
@@ -204,6 +212,9 @@ class Ley extends CI_Controller
 		}else{
 			$ley = $this->session->ley_nueva;
 		}
+		//var_dump($this->session->userdata());
+
+
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
 		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
 		$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
@@ -240,6 +251,7 @@ class Ley extends CI_Controller
 			$this->session->set_userdata('noticia_nueva2', []);
 			$this->session->set_userdata('es_nueva_ley', false);
 			$this->session->set_userdata('ley_nueva', []);
+			$this->session->set_userdata('ley_insert', []);
 			redirect('/');
 		}else{
 			echo "Error";
@@ -302,6 +314,7 @@ class Ley extends CI_Controller
 	{
 		$this->session->set_userdata('es_nueva_ley', false);
 		$this->session->set_userdata('ley_nueva', []);
+		$this->session->set_userdata('ley_insert', []);
 
 		//Limpiar las variables de session y colocar la bandera en su estado original
 		$this->session->set_userdata('nuevo_c1', false);
@@ -456,23 +469,7 @@ class Ley extends CI_Controller
 							'rel_idcuestionario'=>$this->input->post('idcuestionario'),
 							'rel_idusuario'=>$this->input->post('idusuario'));
 			}
-			/*echo "Numrero de Temas: ";
-			echo $this->input->post('cnttemas');
-			echo "<br><br>";
-			echo "Numero de otro Tema: ";
-			echo count($dtsotrotema);
-			echo "<br><br>";
-			var_dump($dtsotrotema);
-			echo "<br><br>";
-			echo "Numero de Sub Temas: ";
-			echo count($dtchkboxst);
-			echo "<br><br>";
-			var_dump($dtchkboxst);
-			echo "<br><br>";
-			echo "Numero de otro SubTemas: ";
-			echo count($dtotrosubtemas);
-			echo "<br><br>";
-			var_dump($dtotrosubtemas);*/
+
 			
 			$this->Ley_model->modificarSubTemasLey($idley,$dtchkboxst,$dtsotrotema,$dtotrosubtemas);
 			
@@ -512,5 +509,24 @@ class Ley extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/veditartema_ley',$dt);
 		$this->load->view('html/pie');
+	}
+
+	public function iniciarCreacion()
+	{
+		$this->session->set_userdata('nuevo_c1', false);
+		$this->session->set_userdata('reforma', []);
+		$this->session->set_userdata('nuevo_c2', false);
+		$this->session->set_userdata('inst', []);
+		$this->session->set_userdata('noticia_insert', []);
+		$this->session->set_userdata('es_nueva_noticia', false);
+		$this->session->set_userdata('noticia_nueva', []);
+		$this->session->set_userdata('es_nueva_noticia1', false);
+		$this->session->set_userdata('noticia_nueva1', []);
+		$this->session->set_userdata('es_nueva_noticia2', false);
+		$this->session->set_userdata('noticia_nueva2', []);
+		$this->session->set_userdata('es_nueva_ley', false);
+		$this->session->set_userdata('ley_nueva', []);
+		$this->session->set_userdata('ley_insert', []);
+		redirect('ley/crearLey');
 	}
 }
