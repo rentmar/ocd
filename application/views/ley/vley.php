@@ -5,10 +5,32 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
-						<a href="<?php echo site_url('Ley/crearLey');?>">
-							<input type="submit" class="BOTON" value="CREAR">
-						</a>
-						<a href="<?php echo site_url('/'); ?>">
+						<?php if($this->session->es_nueva_ley): ?>
+							<?php if($this->session->ley_nueva !== null){  ?>
+								<?php if($this->session->ley_nueva->es_preenvio && $this->session->ley_nueva->es_segundo_paso ){ ?>
+									<a href="<?php echo site_url('Ley/preenvio');?>">
+										<input type="submit" class="BOTON" value="CONTINUA" data-toggle="tooltip" title="Existe una registro pendiente" >
+									</a>
+								<?php } ?>
+								<?php if($this->session->ley_nueva->es_segundo_paso && !$this->session->ley_nueva->es_preenvio ){ ?>
+									<a href="<?php echo site_url('Ley/subtemas');?>">
+										<input type="submit" class="BOTON" value="CONTINUA" data-toggle="tooltip" title="Existe una registro pendiente" >
+									</a>
+								<?php } ?>
+								<?php if($this->session->es_nueva_ley && !$this->session->ley_nueva->es_segundo_paso && !$this->session->ley_nueva->es_preenvio ){ ?>
+									<a href="<?php echo site_url('Ley/crearLey');?>" data-toggle="tooltip" title="Existe una registro pendiente" >
+										<input type="submit" class="BOTON" value="CONTINUA">
+									</a>
+								<?php } ?>
+
+							<?php } ?>
+
+						<?php else: ?>
+							<a href="<?php echo site_url('Ley/iniciarCreacion');?>">
+								<input type="submit" class="BOTON" value="CREAR">
+							</a>
+						<?php endif; ?>
+						<a href="<?php echo site_url('Ley/cancelarNuevo'); ?>">
 							<input type="button" class="BOTONROJO" value="CANCELAR">
 						</a>
 					</div>
