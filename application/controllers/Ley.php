@@ -58,7 +58,7 @@ class Ley extends CI_Controller
 		}
 
 
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 		/*
 		 * DATOS PARA LLENADO DE FORMULARIO
 		 */
@@ -132,7 +132,7 @@ class Ley extends CI_Controller
 		$data['estado_ley'] = $this->Cuestionario_model->leerEstadosDeLeyID($ley->estado);
 		$data['fuente_ley'] = $this->Ley_model->leerFuentePorID($ley->fuente);
 
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 
 		/*
 		 * CARGA DE VISTAS
