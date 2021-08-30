@@ -1055,6 +1055,18 @@ class Ley_model extends CI_Model{
 
 	}
 
+	//Leer la fuente por identificador para impresion
+	public function leerFuentePorID($idfuente)
+	{
+		$sql = "SELECT *     "
+			."FROM fuente  "
+			."WHERE fuente.idfuente = ?  "
+			."  "
+			."   ";
+		$qry = $this->db->query($sql, [$idfuente, ]);
+		return $qry->row();
+	}
+
 
 
 

@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
 				<div class="card">
 					<div class="card-header cuest4" >
-						<h6 class="text-white" >Censo</h6>
+						<h6 class="text-white" >Ley</h6>
 					</div>
 					<div class="card-body" >
 						<div class="list-group">

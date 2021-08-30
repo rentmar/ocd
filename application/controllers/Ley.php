@@ -75,6 +75,7 @@ class Ley extends CI_Controller
 		$data['idformulario'] = $this->_idformulario;
 		$data['idusuario'] = $usuario->id;
 
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vleyes_form', $data);
@@ -86,34 +87,41 @@ class Ley extends CI_Controller
 		//Extraer la variable de session
 		$ley = $this->session->ley_nueva;
 
-		if(!$ley->es_segundo_paso)
-		{
-			//Capturar temas
-			$temas = $this->input->post('idtema[]');
-			$ley->temas = $temas;
-
-			//Datos generales
-			$ley->fecha_ley = $this->fecha_unix($this->input->post('fecha'));
-			$ley->fuente = $this->input->post('idfuente');
-			$ley->estado = $this->input->post('idestadoley');
-			$ley->codigo = $this->input->post('codigo_ley');
-			$ley->titulo = $this->input->post('nombreley');
-			$ley->resumen = $this->input->post('resumen');
-			$ley->url_ley = $this->input->post('url_ley');
-
-			$ley->rel_idusuario = $this->input->post('idusuario');
-			$ley->rel_idcuestionario = $this->input->post('idformulario');
-
-			$otro_tema = $this->input->post('tema0');
-			$ley->otro_tema = $otro_tema;
+		if(!$ley->es_segundo_paso){
 			$ley->es_segundo_paso= true;
-
-			//Actualizar la variable de session
-			$this->session->set_userdata('ley_nueva', []);
-			$this->session->set_userdata('ley_nueva', $ley);
-		}else{
-			$ley = $this->session->ley_nueva;
 		}
+		//Capturar temas
+		$temas = $this->input->post('idtema[]');
+		$ley->temas = $temas;
+		//Datos generales
+		$ley->fecha_ley = $this->fecha_unix($this->input->post('fecha'));
+		$ley->fuente = $this->input->post('idfuente');
+		$ley->estado = $this->input->post('idestadoley');
+		$ley->codigo = $this->input->post('codigo_ley');
+		$ley->titulo = $this->input->post('nombreley');
+		$ley->resumen = $this->input->post('resumen');
+		$ley->url_ley = $this->input->post('url_ley');
+
+		$ley->rel_idusuario = $this->input->post('idusuario');
+		$ley->rel_idcuestionario = $this->input->post('idformulario');
+
+		$otro_tema = $this->input->post('tema0');
+		$ley->otro_tema = $otro_tema;
+
+
+		//Actualizar la variable de session
+		$this->session->set_userdata('ley_nueva', []);
+		$this->session->set_userdata('ley_nueva', $ley);
+
+		if(empty($ley->temas))
+		{
+			$this->session->set_userdata('es_nueva_ley', false);
+			$this->session->set_userdata('ley_nueva', []);
+			$this->session->set_userdata('ley_insert', []);
+			$this->mensaje('Datos incompletos, termine el proceso una vez iniciado. Por favor intente llenar un nuevo formulario de leyes.', 'danger' );
+			redirect('inicio');
+		}
+
 
 		$data['ley'] = $ley;
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
@@ -122,6 +130,7 @@ class Ley extends CI_Controller
 		$data['temas_sel'] = $temas_sel;
 		$data['subtemas_sel'] = $subtemas_sel;
 		$data['estado_ley'] = $this->Cuestionario_model->leerEstadosDeLeyID($ley->estado);
+		$data['fuente_ley'] = $this->Ley_model->leerFuentePorID($ley->fuente);
 
 		var_dump($this->session->userdata());
 
@@ -169,51 +178,61 @@ class Ley extends CI_Controller
 		//Extraer la variable de session nueva noticia
 		$ley = $this->session->ley_nueva;
 		//var_dump($ley);
-		if(!$ley->es_preenvio)
-		{
-			//Definir la fecha de registro de la ley
-			$ley->fecha_registro = now();
-			//definir los identificadores de los subtemas
-			$idtemas = array_filter($ley->temas) ;
-			//Capturar subtemas
-			$subtemas = [];
-			foreach ($idtemas as $t)
-			{
-				$subtemas[$t] = $this->input->post('tema'.$t);
-			}
-			$ley->subtemas = $subtemas; //Guardar los subtemas
-			//Capturar otros subtemas
-			$otros_subtemas = [];
-			foreach ($idtemas as $t)
-			{
-				$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
-			}
-			$ley->otros_subtemas = $otros_subtemas; //Guardar otros subtemas
-			//Actualizar la bandera de cambio
+		if(!$ley->es_preenvio) {
 			$ley->es_preenvio = true;
-
-			//Colocar la ley en la pila de insercion
-			//Colocar la noticia en la pila de insercion
-			$this->session->set_userdata('ley_insert', []);
-			$this->session->set_userdata('ley_insert', $ley);
-
-			//Actualizar la variable de session
-			$this->session->set_userdata('ley_nueva', []);
-			$this->session->set_userdata('ley_nueva', $ley);
-		}else{
-			$ley = $this->session->ley_nueva;
 		}
-		var_dump($this->session->userdata());
+		//Definir la fecha de registro de la ley
+		$ley->fecha_registro = now();
+		//definir los identificadores de los subtemas
+		$idtemas = array_filter($ley->temas) ;
+		//Capturar subtemas
+		$subtemas = [];
+		foreach ($idtemas as $t)
+		{
+			$subtemas[$t] = $this->input->post('tema'.$t);
+		}
+		$ley->subtemas = $subtemas; //Guardar los subtemas
+		//Capturar otros subtemas
+		$otros_subtemas = [];
+		foreach ($idtemas as $t)
+		{
+			$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+		}
+		$ley->otros_subtemas = $otros_subtemas; //Guardar otros subtemas
+		//Actualizar la bandera de cambio
+		$ley->es_preenvio = true;
 
-		var_dump($subtemas);
+		//Colocar la ley en la pila de insercion
+		//Colocar la noticia en la pila de insercion
+		$this->session->set_userdata('ley_insert', []);
+		$this->session->set_userdata('ley_insert', $ley);
+
+		//Actualizar la variable de session
+		$this->session->set_userdata('ley_nueva', []);
+		$this->session->set_userdata('ley_nueva', $ley);
+
+		$ley = $this->session->ley_nueva;
+
+		//var_dump($this->session->userdata());
+
+		//var_dump($ley->subtemas);
+		//echo "<br><br>";
 
 		//Si no hay seleccion de subtemas
-		if(empty($ley->subtemas)){
-			$this->mensaje('Seleccione por lo menos un subtema', 'warning');
-			//redirect('ley/preenvio');
-			echo "No hay subtemas";
-
+		foreach ($ley->temas as $t)
+		{
+			$subtemas_de_tema = $ley->subtemas[$t];
+			//var_dump($subtemas_de_tema);
+			//echo "<br>";
+			if(empty($subtemas_de_tema)) {
+				$this->session->set_userdata('es_nueva_ley', false);
+				$this->session->set_userdata('ley_nueva', []);
+				$this->session->set_userdata('ley_insert', []);
+				$this->mensaje('Datos incompletos, debe seleccionar por lo menos un subtema por tema, antes del envio', 'danger' );
+				redirect('inicio', refresh);
+			}
 		}
+
 
 
 
