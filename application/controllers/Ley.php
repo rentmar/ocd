@@ -41,13 +41,8 @@ class Ley extends CI_Controller
 
 	public function crearley()
 	{
-
-		//Variables de sesion
-		//var_dump($this->session->userdata());
-		//echo "<br><br>";
-
 		/*
-		 * COMPROBAR SI SE CREA NUEVA NUEVA NOTICIA
+		 * COMPROBAR SI SE CREA NUEVA NUEVA LEY
 		 */
 		if(!$this->session->es_nueva_ley)
 		{
@@ -57,15 +52,13 @@ class Ley extends CI_Controller
 			$this->session->set_userdata('ley_nueva', []);
 			$this->session->set_userdata('ley_nueva', $ley_objeto);
 			$ley = $this->session->ley_nueva;
-			$data['ley'] = $ley;
 		}else{
 			//Nueva ley activa
 			$ley = $this->session->ley_nueva;
-			$data['ley'] = $ley;
 		}
 
-		//var_dump($this->session->userdata());
 
+		var_dump($this->session->userdata());
 		/*
 		 * DATOS PARA LLENADO DE FORMULARIO
 		 */
@@ -75,6 +68,7 @@ class Ley extends CI_Controller
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
+		$data['ley'] = $ley;
 		$data['tema'] = $tema;
 		$data['estado_ley'] = $this->Cuestionario_model->leerEstadosDeLey();
 		$data['fuente_ley'] = $this->Cuestionario_model->leerFuentesDeLey();
@@ -86,44 +80,48 @@ class Ley extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vleyes_form', $data);
 		$this->load->view('html/pie');
-
 	}
 
 	public function subtemas()
 	{
 		//Extraer la variable de session
-		//var_dump($this->session->userdata());
 		$ley = $this->session->ley_nueva;
-		//var_dump($ley);
-		if(!$ley->es_segundo_paso)
-		{
-			//Capturar temas
-			$temas = $this->input->post('idtema[]');
-			$ley->temas = $temas;
 
-			//Datos generales
-			$ley->fecha_ley = $this->fecha_unix($this->input->post('fecha'));
-			$ley->fuente = $this->input->post('idfuente');
-			$ley->estado = $this->input->post('idestadoley');
-			$ley->codigo = $this->input->post('codigo_ley');
-			$ley->titulo = $this->input->post('nombreley');
-			$ley->resumen = $this->input->post('resumen');
-			$ley->url_ley = $this->input->post('url_ley');
-
-			$ley->rel_idusuario = $this->input->post('idusuario');
-			$ley->rel_idcuestionario = $this->input->post('idformulario');
-
-			$otro_tema = $this->input->post('tema0');
-			$ley->otro_tema = $otro_tema;
+		if(!$ley->es_segundo_paso){
 			$ley->es_segundo_paso= true;
-
-			//Actualizar la variable de session
-			$this->session->set_userdata('ley_nueva', []);
-			$this->session->set_userdata('ley_nueva', $ley);
-		}else{
-			$ley = $this->session->ley_nueva;
 		}
-		//var_dump($this->session->userdata());
+		//Capturar temas
+		$temas = $this->input->post('idtema[]');
+		$ley->temas = $temas;
+		//Datos generales
+		$ley->fecha_ley = $this->fecha_unix($this->input->post('fecha'));
+		$ley->fuente = $this->input->post('idfuente');
+		$ley->estado = $this->input->post('idestadoley');
+		$ley->codigo = $this->input->post('codigo_ley');
+		$ley->titulo = $this->input->post('nombreley');
+		$ley->resumen = $this->input->post('resumen');
+		$ley->url_ley = $this->input->post('url_ley');
+
+		$ley->rel_idusuario = $this->input->post('idusuario');
+		$ley->rel_idcuestionario = $this->input->post('idformulario');
+
+		$otro_tema = $this->input->post('tema0');
+		$ley->otro_tema = $otro_tema;
+
+
+		//Actualizar la variable de session
+		$this->session->set_userdata('ley_nueva', []);
+		$this->session->set_userdata('ley_nueva', $ley);
+
+		if(empty($ley->temas))
+		{
+			$this->session->set_userdata('es_nueva_ley', false);
+			$this->session->set_userdata('ley_nueva', []);
+			$this->session->set_userdata('ley_insert', []);
+			$this->mensaje('Datos incompletos, termine el proceso una vez iniciado. Por favor intente llenar un nuevo formulario de leyes.', 'danger' );
+			redirect('inicio');
+		}
+
 
 		$data['ley'] = $ley;
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
@@ -132,6 +130,9 @@ class Ley extends CI_Controller
 		$data['temas_sel'] = $temas_sel;
 		$data['subtemas_sel'] = $subtemas_sel;
 		$data['estado_ley'] = $this->Cuestionario_model->leerEstadosDeLeyID($ley->estado);
+		$data['fuente_ley'] = $this->Ley_model->leerFuentePorID($ley->fuente);
+
+		var_dump($this->session->userdata());
 
 		/*
 		 * CARGA DE VISTAS
@@ -140,7 +141,6 @@ class Ley extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vley_subtemas', $data);
 		$this->load->view('html/pie');
-
 	}
 
 	private function objetoLey()
@@ -178,41 +178,62 @@ class Ley extends CI_Controller
 		//Extraer la variable de session nueva noticia
 		$ley = $this->session->ley_nueva;
 		//var_dump($ley);
-		if(!$ley->es_preenvio)
-		{
-			//Definir la fecha de registro de la ley
-			$ley->fecha_registro = now();
-			//definir los identificadores de los subtemas
-			$idtemas = array_filter($ley->temas) ;
-			//Capturar subtemas
-			$subtemas = [];
-			foreach ($idtemas as $t)
-			{
-				$subtemas[$t] = $this->input->post('tema'.$t);
-			}
-			$ley->subtemas = $subtemas; //Guardar los subtemas
-			//Capturar otros subtemas
-			$otros_subtemas = [];
-			foreach ($idtemas as $t)
-			{
-				$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
-			}
-			$ley->otros_subtemas = $otros_subtemas; //Guardar otros subtemas
-			//Actualizar la bandera de cambio
+		if(!$ley->es_preenvio) {
 			$ley->es_preenvio = true;
-
-			//Colocar la ley en la pila de insercion
-			//Colocar la noticia en la pila de insercion
-			$this->session->set_userdata('ley_insert', []);
-			$this->session->set_userdata('ley_insert', $ley);
-
-			//Actualizar la variable de session
-			$this->session->set_userdata('ley_nueva', []);
-			$this->session->set_userdata('ley_nueva', $ley);
-		}else{
-			$ley = $this->session->ley_nueva;
 		}
+		//Definir la fecha de registro de la ley
+		$ley->fecha_registro = now();
+		//definir los identificadores de los subtemas
+		$idtemas = array_filter($ley->temas) ;
+		//Capturar subtemas
+		$subtemas = [];
+		foreach ($idtemas as $t)
+		{
+			$subtemas[$t] = $this->input->post('tema'.$t);
+		}
+		$ley->subtemas = $subtemas; //Guardar los subtemas
+		//Capturar otros subtemas
+		$otros_subtemas = [];
+		foreach ($idtemas as $t)
+		{
+			$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+		}
+		$ley->otros_subtemas = $otros_subtemas; //Guardar otros subtemas
+		//Actualizar la bandera de cambio
+		$ley->es_preenvio = true;
+
+		//Colocar la ley en la pila de insercion
+		//Colocar la noticia en la pila de insercion
+		$this->session->set_userdata('ley_insert', []);
+		$this->session->set_userdata('ley_insert', $ley);
+
+		//Actualizar la variable de session
+		$this->session->set_userdata('ley_nueva', []);
+		$this->session->set_userdata('ley_nueva', $ley);
+
+		$ley = $this->session->ley_nueva;
+
 		//var_dump($this->session->userdata());
+
+		//var_dump($ley->subtemas);
+		//echo "<br><br>";
+
+		//Si no hay seleccion de subtemas
+		foreach ($ley->temas as $t)
+		{
+			$subtemas_de_tema = $ley->subtemas[$t];
+			//var_dump($subtemas_de_tema);
+			//echo "<br>";
+			if(empty($subtemas_de_tema)) {
+				$this->session->set_userdata('es_nueva_ley', false);
+				$this->session->set_userdata('ley_nueva', []);
+				$this->session->set_userdata('ley_insert', []);
+				$this->mensaje('Datos incompletos, debe seleccionar por lo menos un subtema por tema, antes del envio', 'danger' );
+				redirect('inicio', refresh);
+			}
+		}
+
+
 
 
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
@@ -235,8 +256,7 @@ class Ley extends CI_Controller
 	public function registrarley()
 	{
 		$ley = $this->session->ley_insert;
-		//$this->Noticia_model->crearNoticia($noticia);
-		if($this->Noticia_model->crearLey($ley))
+		if($this->Ley_model->crearLey($ley))
 		{
 			$this->session->set_userdata('nuevo_c1', false);
 			$this->session->set_userdata('reforma', []);
@@ -256,7 +276,6 @@ class Ley extends CI_Controller
 		}else{
 			echo "Error";
 		}
-
 	}
 
 
@@ -528,5 +547,14 @@ class Ley extends CI_Controller
 		$this->session->set_userdata('ley_nueva', []);
 		$this->session->set_userdata('ley_insert', []);
 		redirect('ley/crearLey');
+	}
+
+	//Despliegue de mensaje
+	public function mensaje($mensaje, $clase){
+		/** @noinspection PhpLanguageLevelInspection */
+		$this->session->set_flashdata([
+			'mensaje' => $mensaje,
+			'clase' => $clase,
+		]);
 	}
 }

@@ -32,6 +32,10 @@
 						<?php echo ' '.mdate('%m-%d-%Y', $ley->fecha_ley); ?>
 					</a>
 					<a href="#" class="list-group-item disabled">
+						Fuente:
+						<?php if(isset($fuente_ley)){ echo ' '.$fuente_ley->nombre_fuente;} ?>
+					</a>
+					<a href="#" class="list-group-item disabled">
 						Codigo:
 						<?php echo ' '.$ley->codigo; ?>
 					</a>
@@ -173,3 +177,5 @@
 		</div>
 	</div>
 </div>
+
+
