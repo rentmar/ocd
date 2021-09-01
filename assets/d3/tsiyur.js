@@ -42,7 +42,6 @@ function defineColores(colores)
 					return "#8F"+k+k+"85";
 				});
 			}	
-			labelet="Leyes";
 			ucolor="#8F7585";
 			break;
 		case "Actor":
@@ -52,16 +51,24 @@ function defineColores(colores)
 					return "#8F"+k+k+"85";
 				});
 			}	
-			labelet="Actor";
 			ucolor="#DF1C44";
-			//#39A275,#FECF6A,#194A8D,#795548,#607D8B
 			break;
-		
+		case "TipoMedio":
+			for (var k=1;k<=9;k++)
+			{
+				escalaColores=d3.range(9).map(function (k){
+					return "#60"+k+k+"8B";
+				});
+			}	
+			ucolor="#39A275";
+			break;
+		//#39A275,#FECF6A,#194A8D,#795548,#607D8B
 	}
 }
 
-function render(direccion,clor)
+function render(direccion,clor,et)
 {
+	labelet=et;
 	d3.selectAll("svg").remove();
 	defineColores(clor);
 	//var direccion="http://localhost/ocd/datos/departamentos.xml";
@@ -264,10 +271,10 @@ function bubbleChart ()
 			d3.select("svg").append("text")
 							.style("outline","3px solid "+_uncolor)
 							.attr("class","etiqueta")
-							.attr("font-size","1.5em")
-							.attr("font-family","Palatino")
-							.attr("x",500)
-							.attr("y",60)
+							.attr("font-size","1.2em")
+							.attr("font-family","Courier New")
+							.attr("x",20)
+							.attr("y",30)
 							.text(_etiqueta);
 			d3.select("svg").selectAll("text.nombre")
 							.data(d)
@@ -294,9 +301,9 @@ function bubbleChart ()
 function renderBarras(dir)
 {
 	d3.selectAll("svg").remove();
-	var xmlCuest=[],xmlTemas=[],xmlTemaRef=[],xmlTemaInst=[],xmlTemaCenso=[],xmlTemaLey=[],xmlSubTemas=[];
+	var xmlCuest=[],xmlTemas=[],xmlTemaRef=[],xmlTemaInst=[],xmlTemaCenso=[],xmlTemaLey=[],xmlST=[],xmlSubTemas=[];
 	var barrasChart = barChart()
-			.x(d3.scaleLinear([50,750]).domain([0,100]))
+			.x(d3.scaleLinear([0,750]).domain([0,100]))
 			.y(d3.scaleLinear([50,700]).domain([0,100]))
 			.colores(d3.scaleOrdinal(["#93C90F","#EF9600","#00A3E1","#7c5295"]).domain([0,1,2,3]));
 	d3.xml(dir).then(function (dtxml){
@@ -305,45 +312,72 @@ function renderBarras(dir)
 		const cantTemas=dtxml.documentElement.getElementsByTagName("numero_temas"); //array[10,5,4,22]
 		const i1=parseInt(cantTemas[0].textContent),i2=parseInt(cantTemas[1].textContent),
 				i3=parseInt(cantTemas[2].textContent),i4=parseInt(cantTemas[3].textContent);
+		var indice=0,cnt=0;
 		var nombreCuest,nombre_tema;
 		var numtemas,valorNum,idCuest,cant,idc,idtema,cantidadxtema,valorxtema;
+		//------------------------------- cuestionarios
 		idCuest=dtxml.documentElement.getElementsByTagName("idcuestionario");
 		nombreCuest=dtxml.documentElement.getElementsByTagName("nombre_cuestionario");
 		numtemas=dtxml.documentElement.getElementsByTagName("numero_temas");
 		cant = dtxml.documentElement.getElementsByTagName("cantidad");
 		valorNum = dtxml.documentElement.getElementsByTagName("valor");
+		xmlCuest=d3.range(0,cantCuestionarios).map(function (d,i){
+			return {id:parseInt(idCuest[i].textContent),n:nombreCuest[i].textContent,
+					nt:parseInt(numtemas[i].textContent),c:parseInt(cant[i].textContent),v:parseFloat(valorNum[i].textContent)};
+		});
+		//------------------------------- temas
 		idc=dtxml.documentElement.getElementsByTagName("idc");
 		idtema=dtxml.documentElement.getElementsByTagName("idtema");
 		nombre_tema=dtxml.documentElement.getElementsByTagName("nombre_tema");
+		cantsubtemas=dtxml.documentElement.getElementsByTagName("cant_subtemas");
 		cantidadxtema=dtxml.documentElement.getElementsByTagName("cantidadportema");
 		valorxtema=dtxml.documentElement.getElementsByTagName("valorportema");
-		xmlCuest=d3.range(0,cantCuestionarios).map(function (d,i){
-			return {id:parseInt(idCuest[i].textContent),u:nombreCuest[i].textContent,
-					nt:parseInt(numtemas[i].textContent),c:parseInt(cant[i].textContent),v:parseFloat(valorNum[i].textContent)};
-		});
 		xmlTemaRef=d3.range(0,i1).map(function (d,i){
-			return {id:parseInt(idc[i].textContent),idt:parseInt(idtema[i].textContent),n:nombre_tema[i].textContent,
+			return {id:parseInt(idc[i].textContent),idt:parseInt(idtema[i].textContent),
+					n:nombre_tema[i].textContent,cst:parseInt(cantsubtemas[i].textContent),
 					c:parseInt(cantidadxtema[i].textContent),v:parseFloat(valorxtema[i].textContent)};
 		});
-		xmlTemaInst=d3.range(i1,i1+i2).map(function (d,i){
-			return {id:parseInt(idc[i].textContent),idt:parseInt(idtema[i].textContent),n:nombre_tema[i].textContent,
-					c:parseInt(cantidadxtema[i].textContent),v:parseFloat(valorxtema[i].textContent)};
+		xmlTemaInst=d3.range(0,i2).map(function (d,i){
+			return {id:parseInt(idc[i+i1].textContent),idt:parseInt(idtema[i+i1].textContent),
+					n:nombre_tema[i+i1].textContent,cst:parseInt(cantsubtemas[i+i1].textContent),
+					c:parseInt(cantidadxtema[i+i1].textContent),v:parseFloat(valorxtema[i+i1].textContent)};
 		});
-		xmlTemaCenso=d3.range(i1+i2,i1+i2+i3).map(function (d,i){
-			return {id:parseInt(idc[i].textContent),idt:parseInt(idtema[i].textContent),n:nombre_tema[i].textContent,
-					c:parseInt(cantidadxtema[i].textContent),v:parseFloat(valorxtema[i].textContent)};
+		xmlTemaCenso=d3.range(0,i3).map(function (d,i){
+			return {id:parseInt(idc[i+i1+i2].textContent),idt:parseInt(idtema[i+i1+i2].textContent),
+					n:nombre_tema[i+i1+i2].textContent,cst:parseInt(cantsubtemas[i+i1+i2].textContent),
+					c:parseInt(cantidadxtema[i+i1+i2].textContent),v:parseFloat(valorxtema[i+i1+i2].textContent)};
 		});
-		xmlTemaLey=d3.range(i1+i2+i3,i1+i2+i3+i4).map(function (d,i){
-			return {id:parseInt(idc[i].textContent),idt:parseInt(idtema[i].textContent),n:nombre_tema[i].textContent,
-					c:parseInt(cantidadxtema[i].textContent),v:parseFloat(valorxtema[i].textContent)};
+		xmlTemaLey=d3.range(0,i4).map(function (d,i){
+			return {id:parseInt(idc[i+i1+i2+i3].textContent),idt:parseInt(idtema[i+i1+i2+i3].textContent),
+					n:nombre_tema[i+i1+i2+i3].textContent,cst:parseInt(cantsubtemas[i+i1+i2+i3].textContent),
+					c:parseInt(cantidadxtema[i+i1+i2+i3].textContent),v:parseFloat(valorxtema[i+i1+i2+i3].textContent)};
 		});
 		xmlTemas.push(xmlTemaRef);
 		xmlTemas.push(xmlTemaInst);
 		xmlTemas.push(xmlTemaCenso);
 		xmlTemas.push(xmlTemaLey);
-		//console.log(xmlTemas);
+		//------------------------------------- subtemas
+		idt=dtxml.documentElement.getElementsByTagName("idt");
+		idsubtema=dtxml.documentElement.getElementsByTagName("idsubtema");
+		nombre_subtema=dtxml.documentElement.getElementsByTagName("nombre_subtema");
+		cantidadxsubtema=dtxml.documentElement.getElementsByTagName("cantidadporsubtema");
+		valorxsubtema=dtxml.documentElement.getElementsByTagName("valorporsubtema");
+		for (var k=0;k<cantsubtemas.length;k++)
+		{
+			cnt=0;
+			xmlST=d3.range(0,parseInt(cantsubtemas[k].textContent)).map(function (d,i){
+				cnt=cnt+1;
+				return {idt:parseInt(idt[i+indice].textContent),idst:parseInt(idsubtema[i+indice].textContent),
+						n:nombre_subtema[i+indice].textContent,c:parseInt(cantidadxsubtema[i+indice].textContent),
+						v:parseFloat(valorxsubtema[i+indice].textContent)};
+			});
+			xmlSubTemas.push(xmlST);
+			indice=indice+cnt;
+		}
+		
 		barrasChart.datos(xmlCuest);
-		//barrasChart.datos1(xmlTemas);
+		barrasChart.datos1(xmlTemas);
+		barrasChart.datos2(xmlSubTemas);
 		barrasChart.render();
 	});
 	
@@ -354,7 +388,7 @@ function barChart ()
 	//----------------atributos
 	var _chart={};
 	var _datos=[],_datos1=[],_datos2=[],
-		_ancho=800, _alto=600,
+		_ancho=800, _alto=600, _barrasIni=20,
 		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
 		_x, _y, _nivel,
 		_colores,
@@ -401,12 +435,12 @@ function barChart ()
 		return _chart;
 	}
 	_chart.datos1 = function (dts){  
-		if(!arguments.length) return _datos; _datos=dts;
+		if(!arguments.length) return _datos1; _datos1=dts;
 		//_datos.push(dts);
 		return _chart;
 	}
 	_chart.datos2 = function (dts){  
-		if(!arguments.length) return _datos; _datos=dts;
+		if(!arguments.length) return _datos2; _datos2=dts;
 		//_datos.push(dts);
 		return _chart;
 	}
@@ -471,86 +505,37 @@ function barChart ()
 				.attr("height",_alto)
 				.attr("cursor","pointer")
 				.on("click",(event,d) => sube(_nivel));
-		barrasNivel1();
+		barrasCuest();
 	}
 	function sube(n)
 	{
-		if (_nivel==1) console.log("no sube");console.log("sebe a:"+n-1); 
+		if (n==1) 
+		{
+			console.log("no seube");
+		}
+		else 
+		{
+			_nivel=1;
+			_bodyG.selectAll("rect.selector")
+				.remove()
+			_bodyG.selectAll("rect.tema")
+				.remove()
+			_bodyG.selectAll("rect.subtema")
+				.remove()
+			_bodyG.selectAll(".etiqueta")
+				.remove()
+			barrasCuest();
+		}
 	}
-	function baja(d,n)
+	function barrasCuest()
 	{
+		_bodyG.selectAll("rect.selector")
+			.remove()
+		_bodyG.selectAll("rect.tema")
+			.remove()
 		_bodyG.selectAll(".etiqueta")
-			.remove();
-		_bodyG.selectAll(".selector")
-			.remove();
-		if (d.id==1)
-		{
-			_bodyG.selectAll(".cuest")
-				.filter(function (d,i){
-					return d.id != 1;
-				})
-				.remove();
-			_bodyG.selectAll(".cuest")
-				.transition().duration(3000)
-				.on("end",function (){
-					renderBarTemas();
-					return "";
-				})
-				.attr("x",450)
-				.attr("width",20)
-				.attr("height",function (d){
-					return (d.nt*20+d.nt*5);
-				});
-				
-		}
-		else if (d.id==2)
-		{
-			_bodyG.selectAll(".cuest")
-				.filter(function (d,i){
-					return d.id != 2;
-				})
-				.remove();
-			_bodyG.selectAll(".cuest")
-				.transition().duration(3000)
-				.attr("x",450)
-				.attr("width",20)
-				.attr("height",function (d){
-					return (d.nt*20+d.nt*5);
-				});
-		}
-		else if (d.id==3)
-		{
-			_bodyG.selectAll(".cuest")
-				.filter(function (d,i){
-					return d.id != 3;
-				})
-				.remove();
-			_bodyG.selectAll(".cuest")
-				.transition().duration(3000)
-				.attr("x",450)
-				.attr("width",20)
-				.attr("height",function (d){
-					return (d.nt*20+d.nt*5);
-				});
-		}
-		else if (d.id==4)
-		{
-			_bodyG.selectAll(".cuest")
-				.filter(function (d,i){
-					return d.id != 4;
-				})
-				.remove();
-			_bodyG.selectAll(".cuest")
-				.transition().duration(3000)
-				.attr("x",450)
-				.attr("width",20)
-				.attr("height",function (d){
-					return (d.nt*20+d.nt*5);
-				});
-		}
-	}
-	function barrasNivel1()
-	{
+			.remove()
+	
 		_bodyG.selectAll("rect.selector")
 			.data(_datos)
 			.enter()
@@ -561,13 +546,13 @@ function barChart ()
 				})
 			.attr("x",0)
 			.attr("y",function (d,i){
-				return (i*25);
+				return (_barrasIni+i*25);
 			})
 			.attr("height",20)
 			.attr("width",15)
 			.attr("pointer-events", "all")
-			.attr("cursor","zoom-in")
-			.on("click",(event,d)=>baja(d,_nivel+1));
+			.attr("cursor","pointer")
+			.on("click",(event,d)=>bajaTemas(d,_nivel+1));
 		_bodyG.selectAll("rect.cuest")
 			.data(_datos)
 			.enter()
@@ -578,7 +563,7 @@ function barChart ()
 				})
 			.attr("x",20)
 			.attr("y",function (d,i){
-				return (i*25);
+				return (_barrasIni+i*25);
 			})
 			.attr("height",20)
 			.transition().duration(3000)
@@ -587,44 +572,361 @@ function barChart ()
 			});
 		ponerEtiquetas(_datos);
 	}
-	function ponerEtiquetas(dte)
+	function bajaTemas(dt,n)
 	{
-		_bodyG.selectAll("text.etiqueta")
-							.data(dte)
-							.enter()
-							.append("text")
-							.attr("class","etiqueta")
-							.attr("font-size","1em")
-							.attr("x",20)
-							.attr("y",function (d,i){
-								return (15+25*i);
-							})
-							.text(function (d){
-								return d.u+":  "+d.c;
-							});
+		_bodyG.select(".titulo")
+			.remove();
+		_nivel=n;
+		_bodyG.selectAll(".etiqueta")
+			.remove();
+		_bodyG.selectAll(".selector")
+			.remove();
+		_bodyG.selectAll(".cuest")
+			.filter(function (d,i){
+				return d.id != dt.id;
+			})
+			.remove();
+		_bodyG.selectAll(".cuest")
+			.transition().duration(2000)
+			.on("end",function (d,i){
+				barrasTema(d.id);
+				return "";
+			})
+			.attr("x",0)
+			.attr("y",_barrasIni)
+			.attr("width",15)
+			.attr("height",function (d){
+				return (d.nt*20+d.nt*5);
+			});
 	}
-	function renderBarTemas()
+	function barrasTema(ident)
 	{
 		_bodyG.select(".cuest")
 			.remove();
 		_bodyG.selectAll("rect.selector")
-			.data(_datos)
+			.data(_datos1[ident-1])
 			.enter()
 			.append("rect")
 			.attr("class","selector")
-			.attr("fill",function (d,i){
-					return _colores(i);
-				})
-			.attr("x",450)
+			.attr("fill",_colores(ident-1))
+			.attr("pointer-events", "all")
+			.attr("cursor","pointer")
+			.on("click",(event,d)=>bajaSubTemas(d,_nivel+1,_colores(ident-1)))
+			.attr("x",0)
 			.attr("y",function (d,i){
-				return (i*25);
+				return (_barrasIni+i*25);
 			})
 			.attr("height",20)
 			.attr("width",15)
-			.attr("pointer-events", "all")
-			.attr("cursor","zoom-in")
-			.on("click",(event,d)=>baja(d,_nivel+1));
+			.transition().duration(2000)
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.attr("width",15)
+		_bodyG.selectAll("rect.tema")
+			.data(_datos1[ident-1])
+			.enter()
+			.append("rect")
+			.attr("class","tema")
+			.attr("fill",_colores(ident-1))
+			.attr("x",20)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.transition().duration(3000)
+			//.delay(2000)
+			.attr("width",function (d){
+				return _x(d.v);
+			});
+		ponerEtiquetas(_datos1[ident-1]);
+	}
+	function bajaSubTemas(dt,n,tcolor)
+	{
+		_bodyG.select(".titulo")
+			.remove();
+		_nivel=n;
+		_bodyG.selectAll(".etiqueta")
+			.remove();
+		_bodyG.selectAll(".selector")
+			.remove();
+		_bodyG.selectAll(".tema")
+			.filter(function (d,i){
+				return (d.idt!=dt.idt);
+			})
+			.remove();
+		_bodyG.selectAll(".tema")
+			.transition().duration(2000)
+			.on("end",function (d,i){
+				barrasSubTemas(d.idt,tcolor);
+				return "";
+			})
+			.attr("x",0)
+			.attr("y",_barrasIni)
+			.attr("width",15)
+			.attr("height",function (d){
+				return (d.cst*20+d.cst*5);
+			});
+	}
+	function barrasSubTemas(idt,barcolor)
+	{
+		_bodyG.select(".tema")
+			.remove();
+		_bodyG.selectAll("rect.selector")
+			.data(_datos2[idt-1])
+			.enter()
+			.append("rect")
+			.attr("class","selector")
+			.attr("fill",barcolor)
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.attr("width",15)
+			.transition().duration(2000)
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.attr("width",15)
+		_bodyG.selectAll("rect.subtema")
+			.data(_datos2[idt-1])
+			.enter()
+			.append("rect")
+			.attr("class","subtema")
+			.attr("fill",barcolor)
+			.attr("x",20)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.transition().duration(3000)
+			//.delay(2000)
+			.attr("width",function (d){
+				return _x(d.v);
+			});
+		ponerEtiquetas(_datos2[idt-1]);
+	}
+	function ponerEtiquetas(dte)
+	{
+		_bodyG.select(".titulo")
+			.remove();
+		if (_nivel==1)
+		{
+			_etiqueta="Cuetionarios";
+		}
+		else if(_nivel==2)
+		{
+			_etiqueta="Temas";
+		}
+		else 
+		{
+			_etiqueta="SubTemas";
+		}
+		_bodyG.append("text")
+			.attr("class","titulo")
+			.attr("font-size","1em")
+			.attr("font-family","Courier New")
+			.attr("x",_ancho/2-70)
+			.attr("y",12)
+			.text(_etiqueta);
+		_bodyG.selectAll("text.etiqueta")
+				.data(dte)
+				.enter()
+				.append("text")
+				.attr("class","etiqueta")
+				.attr("font-size","1em")
+				.attr("x",20)
+				.attr("y",function (d,i){
+					return (_barrasIni+15+25*i);
+				})
+				.text(function (d){
+					return d.c+":  "+d.n;
+				});
 	}
 	//--------------------------------- objeto
+	return _chart;
+}
+//-------------------------------------------------------- cuerdasChart
+//-------------------------------------------------
+//------------------------------------------
+function renderCuerdas(dir)
+{
+	var dts= Object.assign([[0,0,0,10,0,0],
+							[0,0,0,0,15,0],
+							[0,0,0,0,0,20],
+							[12,0,0,0,0,0],
+							[0,4,0,0,0,0],
+							[0,0,6,0,0,0]],
+							{n:["uno","dos","tres","cuatro","cinco","seis"],
+							c:["red","green","purple","red","green","purple"]});
+	var noms = dts.n === undefined ? d3.range(dts.length) : dts.n;
+	var clrs = dts.c === undefined ? d3.quantize(d3.interpolateRainbow,nombres.length) : dts.c;
+	//colr=d3.scaleOrdinal(clrs).domain(nombres);
+	console.log(noms);
+	var cChart = cuerdasChart();
+		cChart.datosCuerdas(dts);
+		cChart.colores(clrs);
+		cChart.nombres(noms);
+		cChart.render();
+}
+function cuerdasChart()
+{
+	var _chart={};
+	var _datosCuerdas,
+		_ancho=800, _alto=600,
+		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
+		_ri,_rx,
+		_nombres=[],
+		_colores=[],
+		_cintas,
+		_arcos,
+		_cuerdas,
+		_uncolor,
+		_etiqueta,
+		_svg,
+		_bodyG;
+		
+	_chart.ancho = function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if(!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.colores = function (c){
+		if(!arguments.length) return _colores; _colores=c;
+		return _chart;
+	}
+	_chart.uncolor = function (uc){
+		if(!arguments.length) return _uncolor; _uncolor=uc;
+		return _chart;
+	}
+	_chart.ri = function (r){
+		if(!arguments.length) return _ri; _ri=r;
+		return _chart;
+	}
+	_chart.re = function (r){
+		if(!arguments.length) return _re; _re=r;
+		return _chart;
+	}
+	_chart.etiqueta = function (e){
+		if (!arguments.length) return _etiqueta; _etiqueta=e;
+		return _chart;
+	}
+	_chart.datosCuerdas = function (m){  
+		if(!arguments.length) return _datosCuerdas; _datosCuerdas=m;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.cuerdas = function (c){  
+		if(!arguments.length) return _cuerdas; _cuerdas=c;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.nombres = function (n){  
+		if(!arguments.length) return _nombres; _nombres=n;
+		//_nombres.push();
+		return _chart;
+	}
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	//-------------------- funciones internas de clase
+	function defineVentana(svg)
+	{
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderChords();
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba-_margenes.abajo;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	
+	//-------------------------------------- Chord
+	function renderChords()
+	{
+		var mapNomColor=d3.scaleOrdinal(_nombres,_colores);
+		_re=Math.min((_ancho-100)/2,(_alto-100)/2);
+		_ri= _re-10;
+		//------------------ funciones grafico
+		cints = d3.ribbon() //-------------- f()
+					.radius(_ri-1)
+					.padAngle(1/_ri);
+		arcs = d3.arc()  //--------------f()
+					.innerRadius(_ri)
+					.outerRadius(_re);
+		chrd = d3.chord()  //-------------- f(c)
+					.padAngle(10/_ri)
+					.sortSubgroups(d3.descending)
+					.sortChords(d3.descending);
+		_cuerdas = chrd(_datosCuerdas);
+		console.log(_cuerdas);
+		const grupo = _bodyG.append("g")
+						.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
+						.attr("class","grupo")
+						.selectAll(".grupo")
+						.data(_cuerdas.groups)
+						.join("g")
+						.append("path")
+						.attr("fill",d=>mapNomColor(_nombres[d.index]))
+						.attr("d",arcs);
+		_bodyG.append("g")
+			.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
+			.attr("fill-opacity",0.7)
+			.selectAll("path")
+			.data(_cuerdas)
+			.join("path")
+			.style("mix-blend-mode","multiply")
+			//.attr("fill",d=>mapNomColor(_nombres[d.source.index]))
+			.attr("fill","orange")
+			.attr("d",cints);
+	}
+	//------------------------
 	return _chart;
 }

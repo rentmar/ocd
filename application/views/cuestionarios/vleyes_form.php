@@ -79,7 +79,7 @@
 			   {
 				   echo $ley->codigo;
 			   }
-			   ?>"
+			  ?>"
 		>
 	</div>
 	<br>

@@ -541,8 +541,14 @@ class Ley_model extends CI_Model{
 		$this->db->where('rel_idleyes',$idley);
 		$this->db->where('rel_idestadoley', $idestadoley);
 		$this->db->update('leyes_estadoley', $dtf);
+		$this->db->where('rel_idley',$idley);
+		$this->db->where('rel_idestadoley', $idestadoley);
 		$this->db->update('nombreley', $dtt);
+		$this->db->where('rel_idley',$idley);
+		$this->db->where('rel_idestadoley', $idestadoley);
 		$this->db->update('codigoley', $dtc);
+		$this->db->where('rel_idley',$idley);
+		$this->db->where('rel_idestadoley', $idestadoley);
 		$this->db->update('urlley', $dtu);
 		$this->db->trans_complete();
 	}

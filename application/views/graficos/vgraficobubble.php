@@ -45,7 +45,7 @@
 						<div>
 							<?php if($accion==1) { ?>
 							<?php foreach ($cuestionarios as $c) { ?>
-							<?php $direccion="render ('".base_url()."datos/cuestionario".$c->idcuestionario.".xml"."','".$c->nombre_cuestionario."')";?>
+							<?php $direccion="render ('".base_url()."datos/cuestionario".$c->idcuestionario.".xml"."','".$c->nombre_cuestionario."','".$c->nombre_cuestionario."')";?>
 							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;"><?php echo $c->nombre_cuestionario;?></button>
 							<?php } ?>
 							<?php } ?>
@@ -58,13 +58,22 @@
 							<button type="button" data-toggle="modal" data-target="#actormodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
 								Actores
 							</button>
-							<?php $direccion="render ('".base_url()."datos/actor.xml','Actor')";?>
+							<?php $direccion="render ('".base_url()."datos/actor.xml','Actor','".$actor->nombre_actor."')";?>
 							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
 							<?php } ?>
-							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBubble'); ?>">Atras</a>
-							<?php if ($actor!=null) { ?>
-							<text style="font-size:25px"><b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $actor->nombre_actor;?></b></text>
+							<?php if ($accion==4) {?>
+							<button type="button" data-toggle="modal" data-target="#tipomodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+								Tipo Medio
+							</button>
 							<?php } ?>
+							<?php if ($accion==5) {?>
+							<button type="button" data-toggle="modal" data-target="#tipomodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+								Tipo Medio
+							</button>
+							<?php $direccion="render ('".base_url()."datos/tipomedio.xml','TipoMedio','".$tipomedio->nombre_tipo."')";?>
+							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
+							<?php } ?>
+							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBubble'); ?>">Atras</a>		
 						</div>
 						<br>
 						<div id="contenedor-chart">
@@ -97,6 +106,37 @@
 			</div>
 			<div class="modal-footer">
 				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+					Elegir
+				</button>
+			<?php echo form_close();?>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal" id="tipomodal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Grafico Tipo Medio</h1>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+			<?php echo form_open('Graficos/llenarDatosBubbleXml');?>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="idtipomedio">
+						Seleccionar Tipo Medio
+					</label>
+					<select class="combo" id="cuadro" name="idtipomedio" required>
+						<option></option>
+						<?php foreach ($tiposmedio as $tm) {?>
+						<option value="<?php echo $tm->idtipomedio;?>"><?php echo $tm->nombre_tipo;?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" name="accion" value="5" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
 					Elegir
 				</button>
 			<?php echo form_close();?>

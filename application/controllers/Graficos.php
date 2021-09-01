@@ -35,6 +35,8 @@ class Graficos extends CI_Controller{
 		$departamentos = $this->Graficos_model->leerDepartamentos();
 		$dt['actores']=$this->Graficos_model->leerActores();
 		$dt['actor']=null;
+		$dt['tiposmedio']=$this->Graficos_model->leerTiposMedio();
+		$dt['tipomedio']=null;
 		$a=$this->input->post('accion');
 		$dt['accion']=$a;
 		if ($a==1)
@@ -132,6 +134,49 @@ class Graficos extends CI_Controller{
 				$cargado=true;
 			}		
 		}
+		else if ($a==4)
+		{
+			$titulo="Tipo Medio";
+			$cargado=true;
+		}
+		else if ($a==5)
+		{
+			$titulo="Tipo Medio";
+			$idtm=$this->input->post('idtipomedio');
+			$dt['tipomedio']=$this->Graficos_model->leerTipoMedioId($idtm);
+			$cantidades=array();
+			foreach ($departamentos as $d)
+			{
+				array_push($cantidades,$this->Graficos_model->leerNumTipoMedioDepartamento($d->iddepartamento,$idtm));
+			}
+			$docXml="<root>\n";
+			foreach($departamentos as $d)
+			{
+				$cant=$this->Graficos_model->leerNumTipoMedioDepartamento($d->iddepartamento,$idtm);
+				$docXml=$docXml."\t<element>\n\t\t<iddepartamento>".$d->iddepartamento."</iddepartamento>\n\t\t";
+				$docXml=$docXml."<nombre_departamento>".$d->nombre_departamento."</nombre_departamento>\n\t\t";
+				$docXml=$docXml."<cantidad>".$cant."</cantidad>\n\t\t";
+				if (max($cantidades)==0)
+				{
+					$valor=0;
+					$docXml=$docXml."<radio>".$valor."</radio>\n\t</element>\n";
+				}
+				else
+				{
+					$docXml=$docXml."<radio>".round(($cant*10/max($cantidades)))."</radio>\n\t</element>\n";
+				}
+				
+			}
+			$docXml=$docXml."</root>\n";
+			if (!write_file('datos/tipomedio.xml',$docXml))
+			{
+				$cargado=false;
+			}
+			else
+			{
+				$cargado=true;
+			}
+		}
 		$dt['titulo']=$titulo;
 		if ($cargado==false)
 		{
@@ -142,6 +187,7 @@ class Graficos extends CI_Controller{
 			$this->load->view('graficos/vgraficobubble',$dt);
 		}
 	}
+	//------------------------------------------- barras
 	public function seleccionBar()
 	{	
 		$this->load->view('html/encabezado');
@@ -152,16 +198,16 @@ class Graficos extends CI_Controller{
 	public function llenarDatosBarXml()
 	{
 		$titulo="";
-		$cantidades=array();
 		$cargado=false;
 		$a=$this->input->post('accion');
 		$dt['accion']=$a;
 		if ($a==1)
 		{	
 			$titulo="Cuestionario-Tema-Subtema";
-			$numleyes=$this->Graficos_model->leerNumLeyes();
-			$cuest=$this->Graficos_model->leerCuestionarios();
-			foreach($cuest as $c)
+			$docXml="<root>\n";
+			$cantidades=array();
+			$cuestionarios=$this->Graficos_model->leerCuestionarios();
+			foreach($cuestionarios as $c) //------------------- max cuestionarios
 			{
 				if ($c->nombre_cuestionario!="Leyes")
 				{
@@ -173,55 +219,157 @@ class Graficos extends CI_Controller{
 				}
 				array_push($cantidades,$num);
 			}
-			$docXml="<root>\n";
-			$docXml=$docXml."\t<element>\n\t\t<cant_cuest>".count($cuest)."</cant_cuest>\n\t</element>\n";
-			foreach ($cuest as $c)
+			$docXml=$docXml."\t<cuestionarios>\n";
+			$docXml=$docXml."\t\t<element>\n\t\t\t<cant_cuest>".count($cuestionarios)."</cant_cuest>\n\t\t</element>\n";
+			foreach ($cuestionarios as $c)
 			{
 				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				$num=$this->Graficos_model->leerNumCuestionarioNoticia($c->idcuestionario);
-				$docXml=$docXml."\t<element>\n\t\t<idcuestionario>".$c->idcuestionario."</idcuestionario>\n\t\t";
-				$docXml=$docXml."<nombre_cuestionario>".$c->nombre_cuestionario."</nombre_cuestionario>\n\t\t";
-				$docXml=$docXml."<numero_temas>".count($temas)."</numero_temas>\n\t\t";
+				
+				$docXml=$docXml."\t\t<element>\n\t\t\t<idcuestionario>".$c->idcuestionario."</idcuestionario>\n\t\t\t";
+				$docXml=$docXml."<nombre_cuestionario>".$c->nombre_cuestionario."</nombre_cuestionario>\n\t\t\t";
+				$docXml=$docXml."<numero_temas>".count($temas)."</numero_temas>\n\t\t\t";
 				if ($c->nombre_cuestionario!="Leyes")
 				{
-					$docXml=$docXml."<cantidad>".$num."</cantidad>\n\t\t";
-					$docXml=$docXml."<valor>".round(($num*100/max($cantidades)))."</valor>\n\t</element>\n";
+					$valor=0;
+					$num=$this->Graficos_model->leerNumCuestionarioNoticia($c->idcuestionario);
+					if (max($cantidades)!=0)
+					{
+						$valor=round($num*100/max($cantidades));
+					}
+					$docXml=$docXml."<cantidad>".$num."</cantidad>\n\t\t\t";
+					$docXml=$docXml."<valor>".$valor."</valor>\n\t\t</element>\n";
 				}
 				else
 				{
-					$docXml=$docXml."<cantidad>".$numleyes."</cantidad>\n\t\t";
-					$docXml=$docXml."<valor>".round(($numleyes*100/max($cantidades)))."</valor>\n\t</element>\n";
+					$valor=0;
+					$num=$this->Graficos_model->leerNumLeyes();
+					if (max($cantidades)!=0)
+					{
+						$valor=round($num*100/max($cantidades));
+					}
+					$docXml=$docXml."<cantidad>".$num."</cantidad>\n\t\t\t";
+					$docXml=$docXml."<valor>".$valor."</valor>\n\t\t</element>\n";
 				}
 			}
-			
-			foreach ($cuest as $c)
+			$docXml=$docXml."\t</cuestionarios>\n";
+			//---------------------------------------temas
+			$docXml=$docXml."\t<temas>\n";
+			foreach ($cuestionarios as $c)
 			{
 				$cantidadesTema=array();
 				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				foreach ($temas as $t)
+				
+				if ($c->nombre_cuestionario!="Leyes")
 				{
-					$num=$this->Graficos_model->leerNumTemaNoticia($t->idtema);
-					array_push($cantidadesTema,$num);
+					foreach ($temas as $t)
+					{
+						$num=$this->Graficos_model->leerNumTemaNoticia($t->idtema);
+						array_push($cantidadesTema,$num);
+					}
+					foreach ($temas as $t)
+					{
+						$num=$this->Graficos_model->leerNumTemaNoticia($t->idtema);
+						$cantsubtemas=$this->Graficos_model->leerCantSubTemasIdTema($t->idtema);
+						$valor=0;
+						if (max($cantidadesTema)!=0)
+						{
+							$valor=round($num*100/max($cantidadesTema));
+						}
+						$docXml=$docXml."\t\t<element>\n\t\t<idc>".$c->idcuestionario."</idc>\n\t\t\t";
+						$docXml=$docXml."<idtema>".$t->idtema."</idtema>\n\t\t\t";
+						$docXml=$docXml."<nombre_tema>".$t->nombre_tema."</nombre_tema>\n\t\t\t";
+						$docXml=$docXml."<cant_subtemas>".$cantsubtemas."</cant_subtemas>\n\t\t\t";
+						$docXml=$docXml."<cantidadportema>".$num."</cantidadportema>\n\t\t\t";
+						$docXml=$docXml."<valorportema>".$valor."</valorportema>\n\t\t</element>\n";	
+					}
 				}
+				else
+				{
+					foreach ($temas as $t)
+					{
+						$num=$this->Graficos_model->leerNumTemaLey($t->idtema);
+						array_push($cantidadesTema,$num);
+					}
+					foreach ($temas as $t)
+					{
+						$cantsubtemas=$this->Graficos_model->leerCantSubTemasIdTema($t->idtema);
+						$num=$this->Graficos_model->leerNumTemaLey($t->idtema);
+						$valor=0;
+						if (max($cantidadesTema)!=0)
+						{
+							$valor=round($num*100/max($cantidadesTema));
+						}
+						$docXml=$docXml."\t\t<element>\n\t\t<idc>".$c->idcuestionario."</idc>\n\t\t\t";
+						$docXml=$docXml."<idtema>".$t->idtema."</idtema>\n\t\t\t";
+						$docXml=$docXml."<nombre_tema>".$t->nombre_tema."</nombre_tema>\n\t\t\t";
+						$docXml=$docXml."<cant_subtemas>".$cantsubtemas."</cant_subtemas>\n\t\t\t";
+						$docXml=$docXml."<cantidadportema>".$num."</cantidadportema>\n\t\t\t";
+						$docXml=$docXml."<valorportema>".$valor."</valorportema>\n\t\t</element>\n";	
+					}
+				}
+			}
+			$docXml=$docXml."\t</temas>\n";
+			//-------------------------------------------subtemas
+			$docXml=$docXml."\t<subtemas>\n";
+			foreach ($cuestionarios as $c)
+			{
+				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
 				foreach ($temas as $t)
 				{
-					$num=$this->Graficos_model->leerNumTemaNoticia($t->idtema);
-					$docXml=$docXml."\t<element>\n\t\t<idc>".$c->idcuestionario."</idc>\n\t\t";
-					$docXml=$docXml."<idtema>".$t->idtema."</idtema>\n\t\t";
-					$docXml=$docXml."<nombre_tema>".$t->nombre_tema."</nombre_tema>\n\t\t";
+					$cantsubtemas=array();
 					if ($c->nombre_cuestionario!="Leyes")
 					{
-						$docXml=$docXml."<cantidadportema>".$num."</cantidadportema>\n\t\t";
-						$docXml=$docXml."<valorportema>".round($num*100/max($cantidadesTema))."</valorportema>\n\t</element>\n";
+						$subtemas=$this->Graficos_model->leerSubTemasIdTema($t->idtema);
+						foreach ($subtemas as $st)
+						{
+							$numsubtemas=$this->Graficos_model->leerNumSubTemaNoticia($st->idsubtema);
+							array_push($cantsubtemas,$numsubtemas);
+						}
+						foreach ($subtemas as $st)
+						{
+							$numsubtemas=$this->Graficos_model->leerNumSubTemaNoticia($st->idsubtema);
+							$docXml=$docXml."\t<element>\n\t\t<idt>".$st->rel_idtema."</idt>\n\t\t";
+							$docXml=$docXml."<idsubtema>".$st->idsubtema."</idsubtema>\n\t\t";
+							$docXml=$docXml."<nombre_subtema>".$st->nombre_subtema."</nombre_subtema>\n\t\t";
+							$docXml=$docXml."<cantidadporsubtema>".$numsubtemas."</cantidadporsubtema>\n\t\t";
+							if (max($cantsubtemas)!=0)
+							{
+								$docXml=$docXml."<valorporsubtema>".round($numsubtemas*100/max($cantsubtemas))."</valorporsubtema>\n\t</element>\n";	
+							}
+							else
+							{
+								$docXml=$docXml."<valorporsubtema>".max($cantsubtemas)."</valorporsubtema>\n\t</element>\n";	
+							}
+						}
 					}
 					else
 					{
-						$docXml=$docXml."<cantidadportema>".$num."</cantidadportema>\n\t\t";
-						$docXml=$docXml."<valorportema>".max($cantidadesTema)."</valorportema>\n\t</element>\n";
+						$subtemas=$this->Graficos_model->leerSubTemasIdTema($t->idtema);
+						foreach ($subtemas as $st)
+						{
+							$numsubtemas=$this->Graficos_model->leerNumSubTemaLey($st->idsubtema);
+							array_push($cantsubtemas,$numsubtemas);
+						}
+						foreach ($subtemas as $st)
+						{
+							$numsubtemas=$this->Graficos_model->leerNumSubTemaLey($st->idsubtema);
+							$docXml=$docXml."\t<element>\n\t\t<idt>".$st->rel_idtema."</idt>\n\t\t";
+							$docXml=$docXml."<idsubtema>".$st->idsubtema."</idsubtema>\n\t\t";
+							$docXml=$docXml."<nombre_subtema>".$st->nombre_subtema."</nombre_subtema>\n\t\t";
+							$docXml=$docXml."<cantidadporsubtema>".$numsubtemas."</cantidadporsubtema>\n\t\t";
+							if (max($cantsubtemas)!=0)
+							{
+								$docXml=$docXml."<valorporsubtema>".round($numsubtemas*100/max($cantsubtemas))."</valorporsubtema>\n\t</element>\n";	
+							}
+							else
+							{
+								$docXml=$docXml."<valorporsubtema>".max($cantsubtemas)."</valorporsubtema>\n\t</element>\n";	
+							}
+						}
 					}
-						
 				}
 			}
+			$docXml=$docXml."\t<subtemas>\n";
 			$docXml=$docXml."</root>\n";
 			if (!write_file('datos/cuestionariobar.xml',$docXml))
 			{
@@ -232,11 +380,30 @@ class Graficos extends CI_Controller{
 				$cargado=true;
 			}		
 		}
-		else if ($a==2)
+		$dt['titulo']=$titulo;
+		if ($cargado==false)
 		{
-			$cargado=true;
+			$this->load->view('graficos/vgraficosinicio');
 		}
-		else if ($a==3)
+		else
+		{
+			$this->load->view('graficos/vgraficobar',$dt);
+		}
+	}
+	public function seleccionCuerdas()
+	{	
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('graficos/vgraficoselectchord');
+		$this->load->view('html/pie');
+	}
+	public function llenarDatosChordXml()
+	{
+		$titulo="";
+		$cargado=false;
+		$a=$this->input->post('accion');
+		$dt['accion']=$a;
+		if ($a==1)
 		{
 			$cargado=true;
 		}
@@ -247,7 +414,7 @@ class Graficos extends CI_Controller{
 		}
 		else
 		{
-			$this->load->view('graficos/vgraficoBar',$dt);
+			$this->load->view('graficos/vgraficochord',$dt);
 		}
 	}
 }

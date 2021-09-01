@@ -246,9 +246,6 @@ class Ley extends CI_Controller
 		}
 
 	}
-
-
-
 	//Rutina de dd/mm/AA a unix timestamp
 	private function fecha_unix($fecha)
 	{
@@ -395,27 +392,27 @@ class Ley extends CI_Controller
 		}
 		elseif ($accion==3)
 		{	
-			$leyes_estado=$this->Ley_model->leerEstadosDeLey($idley);
-			foreach($leyes_estado as $el)
-			{
-				$dtestado=array(
-						'rel_idleyes'=>$idley,
-						'rel_idestadoley'=>$this->input->post('idestadoley'.$el->rel_idestadoley)
-						);
-				$dtfecha = array(
-						'fecha_estadoley'=>$this->fecha_unix($this->input->post('fecha'.$el->rel_idestadoley))
-						);
-				$dttitulo = array(
-						'nombre_ley'=>$this->input->post('tituloley'.$el->rel_idestadoley)
-						);
-				$dtcodigo = array(
-						'codigo_ley'=>$this->input->post('codigoley'.$el->rel_idestadoley)
-						);
-				$dturl = array(
-						'url_ley'=>$this->input->post('urlley'.$el->rel_idestadoley)
-						);
-				$this->Ley_model->modificarDatosLey($dtestado,$dtfecha,$dttitulo,$dtcodigo,$dturl);
-			}
+			$estley=$this->input->post("el");
+			$dtestado=array(
+					'rel_idleyes'=>$idley,
+					'rel_idestadoley'=>$this->input->post('idestadoley'.$estley)
+					);
+			$dtfecha = array(
+					'fecha_estadoley'=>$this->fecha_unix($this->input->post('fecha'.$estley))
+					);
+			$dttitulo = array(
+					'nombre_ley'=>$this->input->post('tituloley'.$estley)
+					);
+			$dtcodigo = array(
+					'codigo_ley'=>$this->input->post('codigoley'.$estley)
+					);
+			$dturl = array(
+					'url_ley'=>$this->input->post('urlley'.$estley)
+					);
+			var_dump($dtestado);
+			echo "<br>";
+			$this->Ley_model->modificarDatosLey($dtestado,$dtfecha,$dttitulo,$dtcodigo,$dturl);
+			
 		}
 		elseif ($accion==4)
 		{	
@@ -478,7 +475,7 @@ class Ley extends CI_Controller
 			
 		}
 		
-		redirect('/');
+		redirect('Ley/editar');
 	}
 	public function editarTemas()
 	{

@@ -13,7 +13,7 @@
 			<script type="text/javascript" src="<?php echo base_url().'assets/d3/d3.js';?>"></script>
 			<script type="text/javascript" src="<?php echo base_url().'assets/d3/tsiyur.js';?>"></script>
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/d3/gestilo.css';?>">
-			<title> Grafico Barras</title>
+			<title> Grafico Cuerdas </title>
 			
 		</head>
 		<body>
@@ -38,17 +38,16 @@
 				</nav>
 				<br>
 				<div class="contenedor_graficas">
-					<div class="contenedor_superior" id="bublemap">
+					<div class="contenedor_superior" id="cuerdas">
 						<h5><b> <?php echo "Grafico de ".$titulo;?> </b></h5>
 					</div>
 					<div class="grafico">
 						<div>
-							<?php if($accion==1) { ?>
-							<?php $direccion="renderBarras('".base_url()."datos/cuestionariobar.xml')";?>
-							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
-							<?php } ?>
 							
-							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBar'); ?>">Atras</a>
+								<?php $direccion="renderCuerdas('".base_url()."datos/cuerdas.xml')";?>
+								<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
+														
+							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionCuerdas'); ?>">Atras</a>
 						</div>
 						<br>
 						<div id="contenedor-chart">
@@ -58,37 +57,7 @@
 					</div>
 					<br>
 				</div>
-<div class="modal" id="actormodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">Grafico Actores</h1>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<?php echo form_open('Graficos/llenarDatosBubbleXml');?>
-			<div class="modal-body">
-				<div class="form-group">
-					<label for="idactor">
-						Seleccionar Actor
-					</label>
-					<select class="combo" id="cuadro" name="idactor" required>
-						<option></option>
-						<?php foreach ($actores as $a) {?>
-						<option value="<?php echo $a->idactor;?>"><?php echo $a->nombre_actor;?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Elegir
-				</button>
-			<?php echo form_close();?>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			</div>
-		</div>
-	</div>
-</div>
+
 			</main>
 
 		</body>
