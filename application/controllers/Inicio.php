@@ -37,6 +37,8 @@ class Inicio extends CI_Controller
 			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
 		}
 
+		//var_dump($this->session->userdata());
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('inicio/vinicio_index');

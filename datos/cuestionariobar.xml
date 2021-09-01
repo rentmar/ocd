@@ -371,6 +371,7 @@
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
+
 		<idt>2</idt>
 		<idsubtema>2</idsubtema>
 		<nombre_subtema>Competencias del TSE</nombre_subtema>
@@ -418,6 +419,7 @@
 		<nombre_subtema>Cartografía electoral</nombre_subtema>
 		<cantidadporsubtema>0</cantidadporsubtema>
 		<valorporsubtema>0</valorporsubtema>
+
 	</element>
 	<element>
 		<idt>4</idt>
@@ -427,6 +429,7 @@
 		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
+
 		<idt>5</idt>
 		<idsubtema>23</idsubtema>
 		<nombre_subtema>Sanciones por la difusión de encuestas electorales</nombre_subtema>
@@ -502,6 +505,7 @@
 		<nombre_subtema>Selección y capacitación de notarios</nombre_subtema>
 		<cantidadporsubtema>3</cantidadporsubtema>
 		<valorporsubtema>75</valorporsubtema>
+
 	</element>
 	<element>
 		<idt>9</idt>

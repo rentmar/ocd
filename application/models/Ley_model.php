@@ -915,5 +915,165 @@ class Ley_model extends CI_Model{
 	}
 
 
+	//Funcion para la creacion de nuevos registros de ley
+	public function crearLey($ley){
+		/*
+		 *
+		 * INICIAR LA TRANSACCION
+		 */
+		$this->db->trans_start();
+		//Insertar el registro en tabla leyes
+		/** @noinspection PhpLanguageLevelInspection */
+		$tabla_leyes = [
+			'fecha_registro' => $ley->fecha_registro ,
+			'resumen' => $ley->resumen,
+			'rel_idcuestionario' => $ley->rel_idcuestionario,
+			'rel_idusuario' => $ley->rel_idusuario,
+		];
+		$this->db->insert('leyes', $tabla_leyes);
+		$ley_id = $this->db->insert_id();
+
+		//insertar el codigo de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$tabla_codigo_ley = [
+			'codigo_ley' => $ley->codigo,
+			'rel_idley' => $ley_id,
+			'rel_idestadoley' => $ley->estado,
+		];
+		$this->db->insert('codigoley', $tabla_codigo_ley);
+		$codigo_id = $this->db->insert_id();
+
+		//Insertar el nombre de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$tabla_nombre_ley = [
+			'nombre_ley' => $ley->titulo,
+			'rel_idestadoley' => $ley->estado,
+			'rel_idley' => $ley_id,
+		];
+		$this->db->insert('nombreley', $tabla_nombre_ley);
+		$nombre_ley_id = $this->db->insert_id();
+
+
+		//insertar el estado en q se encuentra la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$tabla_leyes_estadoley = [
+			'rel_idleyes' => $ley_id,
+			'rel_idestadoley' => $ley->estado,
+			'fecha_estadoley ' => $ley->fecha_ley,
+		];
+		$this->db->insert('leyes_estadoley', $tabla_leyes_estadoley);
+
+		//Insertar la fuente de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$tabla_leyes_fuente = [
+			'rel_idleyes' => $ley_id,
+			'rel_idfuente' => $ley->fuente,
+		];
+		$this->db->insert('leyes_fuente', $tabla_leyes_fuente);
+
+		//Insertar la URL del estado de la ley
+		/** @noinspection PhpLanguageLevelInspection */
+		$tabla_urlley = [
+			'url_ley' => $ley->url_ley,
+			'rel_idley' => $ley_id,
+			'rel_idestadoley' => $ley->estado,
+		];
+		$this->db->insert('urlley', $tabla_urlley);
+
+
+		//Insertar otro tema
+		//Insertar subtema
+		//insertar otrosubtema
+		$temas = $ley->temas;
+		$subtemas = $ley->subtemas;
+		$otrossubtemas = $ley->otros_subtemas;
+		$otrotema = $ley->otro_tema;
+
+		foreach ($temas as $t)
+		{
+			$idtema = $t;
+			if($idtema!=0)
+			{
+				$sub_temas = $subtemas[$idtema];
+				foreach ($sub_temas as $st)
+				{
+					$idsubtema = $st;
+					if($idsubtema!=0){
+						//Insertar la relacion noticia subtema
+						/** @noinspection PhpLanguageLevelInspection */
+						$tabla_ley_subtema = [
+							'rel_idleyes' => $ley_id,
+							'rel_idsubtema' => $idsubtema,
+						];
+						$this->db->insert('ley_subtema', $tabla_ley_subtema);
+
+					}else{
+						//Insertar el otro subtema
+						/** @noinspection PhpLanguageLevelInspection */
+						$tabla_otrosubtema = [
+							'nombre_otrosubtema' => $otrossubtemas[$idtema],
+							'rel_idtema' => $idtema,
+						];
+						$this->db->insert('otrosubtema', $tabla_otrosubtema);
+						$otro_subtema_id = $this->db->insert_id();
+
+						//Relacion de otrosubtema con la ley
+						/** @noinspection PhpLanguageLevelInspection */
+						$tabla_ley_otrosubtema = [
+							'rel_idleyes' => $ley_id,
+							'rel_idotrosubtema '=>$otro_subtema_id,
+						];
+						$this->db->insert('ley_otrosubtema', $tabla_ley_otrosubtema);
+
+					}
+				}
+			}else{
+				//Insertar otro tema
+				/** @noinspection PhpLanguageLevelInspection */
+				$tabla_otrotema = [
+					'nombre_otrotema' => $otrotema,
+					'rel_idcuestionario' => $ley->rel_idcuestionario,
+					'rel_idusuario' => $ley->rel_idusuario,
+				];
+				$this->db->insert('otrotema', $tabla_otrotema);
+				$otro_tema_id = $this->db->insert_id();
+
+				//Relacion de otro con la ley
+				/** @noinspection PhpLanguageLevelInspection */
+				$tabla_ley_otrotema =[
+					'rel_idleyes' => $ley_id,
+					'rel_idotrotema' => $otro_tema_id,
+				];
+				$this->db->insert('ley_otrotema', $tabla_ley_otrotema);
+			}
+		}
+
+		$this->db->trans_complete();
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else{
+			$this->db->trans_commit();
+			return true;
+		}
+
+	}
+
+	//Leer la fuente por identificador para impresion
+	public function leerFuentePorID($idfuente)
+	{
+		$sql = "SELECT *     "
+			."FROM fuente  "
+			."WHERE fuente.idfuente = ?  "
+			."  "
+			."   ";
+		$qry = $this->db->query($sql, [$idfuente, ]);
+		return $qry->row();
+	}
+
+
+
 
 }
