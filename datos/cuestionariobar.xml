@@ -28,8 +28,8 @@
 			<idcuestionario>4</idcuestionario>
 			<nombre_cuestionario>Leyes</nombre_cuestionario>
 			<numero_temas>22</numero_temas>
-			<cantidad>140</cantidad>
-			<valor>8</valor>
+			<cantidad>155</cantidad>
+			<valor>9</valor>
 		</element>
 	</cuestionarios>
 	<temas>
@@ -190,16 +190,16 @@
 			<idtema>20</idtema>
 			<nombre_tema>Educación</nombre_tema>
 			<cant_subtemas>3</cant_subtemas>
-			<cantidadportema>3</cantidadportema>
-			<valorportema>9</valorportema>
+			<cantidadportema>11</cantidadportema>
+			<valorportema>32</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
 			<idtema>21</idtema>
 			<nombre_tema>Salud</nombre_tema>
 			<cant_subtemas>6</cant_subtemas>
-			<cantidadportema>1</cantidadportema>
-			<valorportema>3</valorportema>
+			<cantidadportema>2</cantidadportema>
+			<valorportema>6</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -222,8 +222,8 @@
 			<idtema>24</idtema>
 			<nombre_tema>Género</nombre_tema>
 			<cant_subtemas>2</cant_subtemas>
-			<cantidadportema>0</cantidadportema>
-			<valorportema>0</valorportema>
+			<cantidadportema>1</cantidadportema>
+			<valorportema>3</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -254,16 +254,16 @@
 			<idtema>28</idtema>
 			<nombre_tema>Economía</nombre_tema>
 			<cant_subtemas>14</cant_subtemas>
-			<cantidadportema>3</cantidadportema>
-			<valorportema>9</valorportema>
+			<cantidadportema>5</cantidadportema>
+			<valorportema>15</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
 			<idtema>29</idtema>
 			<nombre_tema>Pobreza Y Desarrollo</nombre_tema>
 			<cant_subtemas>8</cant_subtemas>
-			<cantidadportema>4</cantidadportema>
-			<valorportema>12</valorportema>
+			<cantidadportema>6</cantidadportema>
+			<valorportema>18</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -286,8 +286,8 @@
 			<idtema>32</idtema>
 			<nombre_tema>Industria</nombre_tema>
 			<cant_subtemas>11</cant_subtemas>
-			<cantidadportema>11</cantidadportema>
-			<valorportema>32</valorportema>
+			<cantidadportema>13</cantidadportema>
+			<valorportema>38</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -371,7 +371,6 @@
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
-
 		<idt>2</idt>
 		<idsubtema>2</idsubtema>
 		<nombre_subtema>Competencias del TSE</nombre_subtema>
@@ -419,7 +418,6 @@
 		<nombre_subtema>Cartografía electoral</nombre_subtema>
 		<cantidadporsubtema>0</cantidadporsubtema>
 		<valorporsubtema>0</valorporsubtema>
-
 	</element>
 	<element>
 		<idt>4</idt>
@@ -429,7 +427,6 @@
 		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
-
 		<idt>5</idt>
 		<idsubtema>23</idsubtema>
 		<nombre_subtema>Sanciones por la difusión de encuestas electorales</nombre_subtema>
@@ -505,7 +502,6 @@
 		<nombre_subtema>Selección y capacitación de notarios</nombre_subtema>
 		<cantidadporsubtema>3</cantidadporsubtema>
 		<valorporsubtema>75</valorporsubtema>
-
 	</element>
 	<element>
 		<idt>9</idt>
@@ -861,22 +857,22 @@
 		<idt>20</idt>
 		<idsubtema>71</idsubtema>
 		<nombre_subtema>Universalizar el acceso a la educación</nombre_subtema>
-		<cantidadporsubtema>2</cantidadporsubtema>
+		<cantidadporsubtema>6</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>20</idt>
 		<idsubtema>72</idsubtema>
 		<nombre_subtema>Instalar laboratorios de ciencia y tecnología con acceso a Internet en todas las Unidades Educativas del país.</nombre_subtema>
-		<cantidadporsubtema>0</cantidadporsubtema>
-		<valorporsubtema>0</valorporsubtema>
+		<cantidadporsubtema>2</cantidadporsubtema>
+		<valorporsubtema>33</valorporsubtema>
 	</element>
 	<element>
 		<idt>20</idt>
 		<idsubtema>73</idsubtema>
 		<nombre_subtema>Desarrollar programas nacionales que vinculen la educación superior con prácticas profesionales en el sector público y las empresas estatales.</nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>50</valorporsubtema>
+		<cantidadporsubtema>5</cantidadporsubtema>
+		<valorporsubtema>83</valorporsubtema>
 	</element>
 	<element>
 		<idt>21</idt>
@@ -910,8 +906,8 @@
 		<idt>21</idt>
 		<idsubtema>78</idsubtema>
 		<nombre_subtema>Instaurar en el país el chequeo médico obligatorio en el mes del cumpleaños de cada uno de los bolivianos</nombre_subtema>
-		<cantidadporsubtema>0</cantidadporsubtema>
-		<valorporsubtema>0</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>21</idt>
@@ -1001,8 +997,8 @@
 		<idt>24</idt>
 		<idsubtema>91</idsubtema>
 		<nombre_subtema>Promover la participación de la mujer dentro de la sociedad y la economía,</nombre_subtema>
-		<cantidadporsubtema>0</cantidadporsubtema>
-		<valorporsubtema>0</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>25</idt>
@@ -1092,8 +1088,8 @@
 		<idt>28</idt>
 		<idsubtema>104</idsubtema>
 		<nombre_subtema>Reactivar la economía y el aparato productivo </nombre_subtema>
-		<cantidadporsubtema>0</cantidadporsubtema>
-		<valorporsubtema>0</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
@@ -1107,7 +1103,7 @@
 		<idsubtema>106</idsubtema>
 		<nombre_subtema>ii. Dinamizar negocios basados en operaciones confiables y gestionadas con seguridad y soporte financiero regulado y normado.</nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>50</valorporsubtema>
+		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
@@ -1120,15 +1116,15 @@
 		<idt>28</idt>
 		<idsubtema>108</idsubtema>
 		<nombre_subtema>iv. Desarrollo de marcos normativos y mecanismos institucionales sobre incorporación de sistemas informáticos y tecnologías de información asociados a las inversiones y el comercio</nombre_subtema>
-		<cantidadporsubtema>0</cantidadporsubtema>
-		<valorporsubtema>0</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
 		<idsubtema>109</idsubtema>
 		<nombre_subtema>Fomentar el desarrollo económico y social, preservando la estabilidad macroeconómica,</nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>50</valorporsubtema>
+		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
@@ -1155,7 +1151,7 @@
 		<idt>28</idt>
 		<idsubtema>113</idsubtema>
 		<nombre_subtema>Desarrollar mecanismos de integración económica regional,  con una política de incentivos tributarios selectivos para la exportación de productos con valor agregado</nombre_subtema>
-		<cantidadporsubtema>2</cantidadporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -1190,7 +1186,7 @@
 		<idt>29</idt>
 		<idsubtema>118</idsubtema>
 		<nombre_subtema>Llegar, en 2025, a una pobreza extrema del 5%, es decir, lograr su reducción, en los próximos cinco años, en diez puntos porcentuales</nombre_subtema>
-		<cantidadporsubtema>2</cantidadporsubtema>
+		<cantidadporsubtema>3</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -1198,7 +1194,7 @@
 		<idsubtema>119</idsubtema>
 		<nombre_subtema>Incrementar la cobertura del servicio de agua potable al 96% y saneamiento básico al 80%, </nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>50</valorporsubtema>
+		<valorporsubtema>33</valorporsubtema>
 	</element>
 	<element>
 		<idt>29</idt>
@@ -1212,14 +1208,14 @@
 		<idsubtema>121</idsubtema>
 		<nombre_subtema>Implementar la Televisión Digital Abierta en ciudades intermedias</nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>50</valorporsubtema>
+		<valorporsubtema>33</valorporsubtema>
 	</element>
 	<element>
 		<idt>29</idt>
 		<idsubtema>122</idsubtema>
 		<nombre_subtema>Incrementar la cobertura del servicio de telefonía móvil e internet al 100% en todas las regiones y localidades del país, con tarifas reducidas.</nombre_subtema>
-		<cantidadporsubtema>0</cantidadporsubtema>
-		<valorporsubtema>0</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>33</valorporsubtema>
 	</element>
 	<element>
 		<idt>29</idt>
@@ -1274,8 +1270,8 @@
 		<idt>32</idt>
 		<idsubtema>130</idsubtema>
 		<nombre_subtema>Aumentar del tamaño de la producción por inversión pública - proyectos de industrialización con altos retornos</nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>17</valorporsubtema>
+		<cantidadporsubtema>2</cantidadporsubtema>
+		<valorporsubtema>33</valorporsubtema>
 	</element>
 	<element>
 		<idt>32</idt>
@@ -1337,8 +1333,8 @@
 		<idt>32</idt>
 		<idsubtema>139</idsubtema>
 		<nombre_subtema>Transformar las instituciones como SENASAG y SENAVEX </nombre_subtema>
-		<cantidadporsubtema>0</cantidadporsubtema>
-		<valorporsubtema>0</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>17</valorporsubtema>
 	</element>
 	<element>
 		<idt>32</idt>

@@ -2,9 +2,7 @@
 	<element>
 		<iddepartamento>1</iddepartamento>
 		<nombre_departamento>La Paz</nombre_departamento>
-
-		<cantidad>139</cantidad>
-
+		<cantidad>154</cantidad>
 		<radio>10</radio>
 	</element>
 	<element>
