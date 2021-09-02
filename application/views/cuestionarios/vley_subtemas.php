@@ -107,7 +107,7 @@
 					<div class="card-body">
 						<?php foreach ($subtemas_sel as $st): ?>
 							<?php if($st['idtema'] == $tm['idtema'] ): ?>
-
+								<?php if(!is_null($st['idsubtema'])): ?>
 								<div class="form-check">
 									<label class="form-check-label">
 										<input id="checkstema" name=" <?php echo "tema".$tm['idtema']."[]";?>" type="checkbox" class="form-check-input"
@@ -115,7 +115,7 @@
 										<?php echo $st['nombre_subtema']; ?>
 									</label>
 								</div>
-							
+								<?php endif; ?>
 							<?php endif; ?>
 						<?php endforeach; ?>
 						<div class="form-check">

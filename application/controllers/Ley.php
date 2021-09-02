@@ -222,15 +222,13 @@ class Ley extends CI_Controller
 
 		//var_dump($this->session->userdata());
 
-		/*var_dump($ley->subtemas);
+		var_dump($ley->subtemas);
 		echo "<br><br>";
-		var_dump($this->session->userdata());*/
+		var_dump($this->session->userdata());
 
 		//Si no hay seleccion de subtemas
-		foreach ($ley->temas as $t)
+		foreach (array_filter($ley->temas) as $t)
 		{
-			if(isset($ley->subtemas[$t]))
-			{
 				$subtemas_de_tema = $ley->subtemas[$t];
 				//var_dump($subtemas_de_tema);
 				//echo "<br>";
@@ -239,15 +237,8 @@ class Ley extends CI_Controller
 					$this->session->set_userdata('ley_nueva', []);
 					$this->session->set_userdata('ley_insert', []);
 					$this->mensaje('Datos incompletos, debe seleccionar por lo menos un subtema por tema, antes del envio', 'danger');
-					redirect('inicio', refresh);
+					redirect('inicio');
 				}
-			}else{
-				$this->session->set_userdata('es_nueva_ley', false);
-				$this->session->set_userdata('ley_nueva', []);
-				$this->session->set_userdata('ley_insert', []);
-				$this->mensaje('Datos incompletos, debe seleccionar por lo menos un subtema por tema, antes del envio', 'danger');
-				redirect('inicio', refresh);
-			}
 		}
 
 
