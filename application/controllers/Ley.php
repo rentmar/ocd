@@ -58,7 +58,7 @@ class Ley extends CI_Controller
 		}
 
 
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 		/*
 		 * DATOS PARA LLENADO DE FORMULARIO
 		 */
@@ -86,6 +86,13 @@ class Ley extends CI_Controller
 	{
 		//Extraer la variable de session
 		$ley = $this->session->ley_nueva;
+		if(is_null($ley->es_segundo_paso)){
+			$this->session->set_userdata('es_nueva_ley', false);
+			$this->session->set_userdata('ley_nueva', []);
+			$this->session->set_userdata('ley_insert', []);
+			$this->mensaje('Datos incompletos, termine el proceso una vez iniciado. Por favor intente llenar un nuevo formulario de leyes.', 'danger' );
+			redirect('inicio');
+		}
 
 		if(!$ley->es_segundo_paso){
 			$ley->es_segundo_paso= true;
@@ -132,7 +139,7 @@ class Ley extends CI_Controller
 		$data['estado_ley'] = $this->Cuestionario_model->leerEstadosDeLeyID($ley->estado);
 		$data['fuente_ley'] = $this->Ley_model->leerFuentePorID($ley->fuente);
 
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 
 		/*
 		 * CARGA DE VISTAS
@@ -215,20 +222,30 @@ class Ley extends CI_Controller
 
 		//var_dump($this->session->userdata());
 
-		//var_dump($ley->subtemas);
-		//echo "<br><br>";
+		/*var_dump($ley->subtemas);
+		echo "<br><br>";
+		var_dump($this->session->userdata());*/
 
 		//Si no hay seleccion de subtemas
 		foreach ($ley->temas as $t)
 		{
-			$subtemas_de_tema = $ley->subtemas[$t];
-			//var_dump($subtemas_de_tema);
-			//echo "<br>";
-			if(empty($subtemas_de_tema)) {
+			if(isset($ley->subtemas[$t]))
+			{
+				$subtemas_de_tema = $ley->subtemas[$t];
+				//var_dump($subtemas_de_tema);
+				//echo "<br>";
+				if(empty($subtemas_de_tema)) {
+					$this->session->set_userdata('es_nueva_ley', false);
+					$this->session->set_userdata('ley_nueva', []);
+					$this->session->set_userdata('ley_insert', []);
+					$this->mensaje('Datos incompletos, debe seleccionar por lo menos un subtema por tema, antes del envio', 'danger');
+					redirect('inicio', refresh);
+				}
+			}else{
 				$this->session->set_userdata('es_nueva_ley', false);
 				$this->session->set_userdata('ley_nueva', []);
 				$this->session->set_userdata('ley_insert', []);
-				$this->mensaje('Datos incompletos, debe seleccionar por lo menos un subtema por tema, antes del envio', 'danger' );
+				$this->mensaje('Datos incompletos, debe seleccionar por lo menos un subtema por tema, antes del envio', 'danger');
 				redirect('inicio', refresh);
 			}
 		}
