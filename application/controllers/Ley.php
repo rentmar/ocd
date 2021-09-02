@@ -323,7 +323,7 @@ class Ley extends CI_Controller
 						'fecha_estadoley'=>$this->fecha_unix($this->input->post('fechaestado'))
 						);
 			$dttitulo=array(
-						'nombre_ley'=>$this->input->post('titulo'),
+						'nombre_ley'=>trim($this->input->post('titulo')),
 						'rel_idestadoley'=>$this->input->post('idestadoley'),
 						'rel_idley'=>$idl
 						);
@@ -449,7 +449,7 @@ class Ley extends CI_Controller
 					'fecha_estadoley'=>$this->fecha_unix($this->input->post('fecha'.$estley))
 					);
 			$dttitulo = array(
-					'nombre_ley'=>$this->input->post('tituloley'.$estley)
+					'nombre_ley'=>trim($this->input->post('tituloley'.$estley))
 					);
 			$dtcodigo = array(
 					'codigo_ley'=>$this->input->post('codigoley'.$estley)
