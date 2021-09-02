@@ -756,14 +756,15 @@ function barChart ()
 //------------------------------------------
 function renderCuerdas(dir)
 {
-	var dts= Object.assign([[0,0,0,10,0,0],
-							[0,0,0,0,15,0],
-							[0,0,0,0,0,20],
-							[12,0,0,0,0,0],
-							[0,4,0,0,0,0],
-							[0,0,6,0,0,0]],
-							{n:["uno","dos","tres","cuatro","cinco","seis"],
-							c:["red","green","purple","red","green","purple"]});
+	var M = [[0,0,0,10,0,0],
+			 [0,0,0,0,15,0],
+			 [0,0,0,0,0,20],
+			 [12,0,0,0,0,0],
+			 [0,4,0,0,0,0],
+			 [0,0,6,0,0,0]];
+	var dts=Object.assign(M,
+						{n:["R0","I0","C0","R1","I1","C1"],
+						c:["#33C90F","#CC450F","#33A7F4","#33C90F","#CC450F","#33A7F4"]});
 	var noms = dts.n === undefined ? d3.range(dts.length) : dts.n;
 	var clrs = dts.c === undefined ? d3.quantize(d3.interpolateRainbow,nombres.length) : dts.c;
 	//colr=d3.scaleOrdinal(clrs).domain(nombres);
@@ -923,8 +924,8 @@ function cuerdasChart()
 			.data(_cuerdas)
 			.join("path")
 			.style("mix-blend-mode","multiply")
-			//.attr("fill",d=>mapNomColor(_nombres[d.source.index]))
-			.attr("fill","orange")
+			.attr("fill",d=>mapNomColor(_nombres[d.source.index]))
+			//.attr("fill","purple")
 			.attr("d",cints);
 	}
 	//------------------------

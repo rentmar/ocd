@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="col-sm-2">
 				<button type="submit" name="accion" value="1" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					ALgo
+					Actores
 				</button>
 			</div>
 			<!--<div class="col-sm-2">
