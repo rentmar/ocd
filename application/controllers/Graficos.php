@@ -10,6 +10,7 @@ class Graficos extends CI_Controller{
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('Graficos_model');
+		$this->load->model('Actor_model');
 		$this->load->helper('file');
 
 	}
@@ -408,6 +409,8 @@ class Graficos extends CI_Controller{
 			$cargado=true;
 		}
 		$dt['titulo']=$titulo;
+		$dt['actores'] = $this->Actor_model->leerActores();
+
 		if ($cargado==false)
 		{
 			$this->load->view('graficos/vgraficosinicio');
@@ -416,5 +419,43 @@ class Graficos extends CI_Controller{
 		{
 			$this->load->view('graficos/vgraficochord',$dt);
 		}
+	}
+
+	//Genera la matriz en el intervalo de fecha_inicial y fecha_final
+	public function matrizCuerdasActorFormulario($fecha_inicial, $fecha_final, $idactor)
+	{
+		//fecha_minima ------- fecha_inicial ------- $fecha_final
+		$fecha_minima = $this->Graficos_model->fechaMinimaNoticia();
+		$datoRef_t0 = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_inicial, $idactor, 1);
+		$datoIns_t0 = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_inicial, $idactor, 2);
+		$datoCenso_t0 = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_inicial, $idactor, 3);;
+		$datoRef_tf = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_final, $idactor, 1) - $datoRef_t0;
+		$datoIns_tf = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_final, $idactor, 2) - $datoIns_t0;
+		$datoCenso_tf = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_final, $idactor, 3) - $datoCenso_t0;
+
+		/** @noinspection PhpLanguageLevelInspection */
+		$matriz = [
+			[0, 0, 0, $datoRef_tf, 0, 0],
+			[0, 0, 0, 0, $datoIns_tf, 0],
+			[0, 0, 0, 0, 0, $datoCenso_tf],
+			[$datoRef_t0, 0, 0, 0, 0, 0],
+			[0, $datoIns_t0, 0, 0, 0, 0],
+			[0, 0, $datoCenso_t0, 0, 0, 0],
+		];
+
+		return $matriz;
+
+	}
+
+	//Procedimiento ajax para adquision de datos
+	//Matriz de adyacencia actor-formulario en un intervalo de tiempo
+	public function getmatrizactor()
+	{
+		$json = array();
+		$datos = json_decode($this->input->post('datos')) ;
+		$matriz = $this->matrizCuerdasActorFormulario($datos->fecha_inicio, $datos->fecha_fin, $datos->idactor);
+		header('Content-Type: application/json');
+		echo json_encode($matriz);
+		//$matriz = $this->matrizCuerdasActorFormulario();
 	}
 }

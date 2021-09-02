@@ -194,37 +194,143 @@ class Graficos_model extends CI_Model
 
 	}
 
+	/**
+	 * GRAFICO DE CUERDAS
+	 **/
+
+
+
 	//Grafico cuerdas - Dato Reforma electoral final
-	public function datoReff($fecha, $idactor)
+	public function datoActorCuestionario($fecha0, $fechaf, $actor, $formulario)
 	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+		$idactor = $actor;
+		$idformulario = $formulario;
 
-	}
-
-	//Grafico cuerdas - Dato Ins, Democratica inicial
-	public function datoIns0($fecha, $idactor)
-	{
-
-	}
-
-	//Grafico cuerdas - Dato Ins, Democratica final
-	public function datoInsf($fecha, $idactor)
-	{
-
-	}
-
-	//Grafico cuerdas - Dato Censo inicial
-	public function datoCenso0($fecha, $idactor)
-	{
-
-	}
-
-	//Grafico cuerdas - Dato Censo final
-	public function datoCensof($fecha, $idactor)
-	{
-
+		$sql = "SELECT COUNT(*) AS cuenta "
+			."FROM noticia AS n "
+			."LEFT JOIN noticia_actor ON n.idnoticia =  noticia_actor.rel_idnoticia  "
+			."LEFT JOIN actor ON noticia_actor.rel_idactor = actor.idactor  "
+			."WHERE n.esta_activa = 1  "
+			."AND actor.idactor = ?  "
+			."AND n.rel_idcuestionario = ?  "
+			."AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			." ";
+		$qry = $this->db->query($sql, [$idactor, $idformulario, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cuenta;
 	}
 
 
+
+	//Numero total de noticias activas
+	//Devuelve un entero no signado
+	public function numeroNoticiasActivas()
+	{
+		$this->db->select('idnoticia');
+		$this->db->from('noticia');
+		$this->db->where('esta_activa', true);
+		$resultado = $this->db->count_all_results();
+		return $resultado;
+	}
+
+	//Numero de noticias por id de formulario
+	public function numeroNoticiasPorFormulario($idformulario)
+	{
+		$sql = "SELECT COUNT(*) AS cuenta "
+			."FROM noticia AS n "
+			."LEFT JOIN cuestionario ON n.rel_idcuestionario = cuestionario.idcuestionario "
+			."WHERE n.esta_activa = 1  "
+			."AND cuestionario.idcuestionario = ? "
+			." ";
+		$qry = $this->db->query($sql, [$idformulario ]);
+		$result = $qry->row();
+		return (int)$result->cuenta;
+	}
+
+	//Fecha minima
+	public function fechaMinimaNoticia()
+	{
+		$sql = "SELECT MIN(n.fecha_noticia) AS fecha  "
+			."FROM noticia AS n  "
+			."WHERE n.esta_activa = 1  "
+			."  "
+			."  "
+			." ";
+		$qry = $this->db->query($sql);
+		$result = $qry->row();
+		return (int)$result->fecha;
+	}
+
+	//Fecha maxima
+	public function fechaMaximaNoticia()
+	{
+		$sql = "SELECT MAX(n.fecha_noticia) AS fecha  "
+			."FROM noticia AS n  "
+			."WHERE n.esta_activa = 1  "
+			."  "
+			."  "
+			." ";
+		$qry = $this->db->query($sql);
+		$result = $qry->row();
+		return (int)$result->fecha;
+	}
+
+	//Fecha minima
+	public function fechaMinimaRegistroNoticia()
+	{
+		$sql = "SELECT MIN(n.fecha_registro) AS fecha  "
+			."FROM noticia AS n  "
+			."WHERE n.esta_activa = 1  "
+			."  "
+			."  "
+			." ";
+		$qry = $this->db->query($sql);
+		$result = $qry->row();
+		return (int)$result->fecha;
+	}
+
+	//Fecha maxima
+	public function fechaMaximaRegistroNoticia()
+	{
+		$sql = "SELECT MAX(n.fecha_registro) AS fecha  "
+			."FROM noticia AS n  "
+			."WHERE n.esta_activa = 1  "
+			."  "
+			."  "
+			." ";
+		$qry = $this->db->query($sql);
+		$result = $qry->row();
+		return (int)$result->fecha;
+	}
+
+	//Cantidad de noticias totales activas
+	public function numeroTotalDeNoticiasActivas()
+	{
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia AS n   "
+			."WHERE n.esta_activa = 1  "
+			."  "
+			."  "
+			." ";
+		$qry = $this->db->query($sql);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+	//Rutina de dd/mm/AA a unix timestamp
+	private function fecha_unix($fecha)
+	{
+		$fecha_std = str_replace('/', '-', $fecha);
+		$fecha_unix = strtotime($fecha_std);
+		return $fecha_unix;
+	}
+
+
+	/**
+	 * FIN GRAFICO DE CUERDAS
+	 **/
 
 
 }
