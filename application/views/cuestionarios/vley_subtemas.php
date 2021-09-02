@@ -106,7 +106,7 @@
 					</div>
 					<div class="card-body">
 						<?php foreach ($subtemas_sel as $st): ?>
-							<?php if($st['idtema'] == $tm['idtema']): ?>
+							<?php if($st['idtema'] == $tm['idtema'] ): ?>
 								<?php if(!is_null($st['idsubtema'])): ?>
 								<div class="form-check">
 									<label class="form-check-label">
