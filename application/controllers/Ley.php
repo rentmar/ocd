@@ -27,7 +27,7 @@ class Ley extends CI_Controller
     }
     public function index()
     {
-    	var_dump($this->session->userdata());
+    	//var_dump($this->session->userdata());
 		$usuario = $this->ion_auth->user()->row();
 		
 		$dt['leyes'] = $this->Ley_model->leerLeyesEstado($usuario->id);
@@ -129,7 +129,7 @@ class Ley extends CI_Controller
 			//redirect('inicio');
 		}
 
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 		$data['ley'] = $ley;
 		$this->Cuestionario_model->setTemaIDs($ley->temas);
 		$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
@@ -225,9 +225,9 @@ class Ley extends CI_Controller
 
 		//var_dump($this->session->userdata());
 
-		var_dump($ley->subtemas);
+		/*var_dump($ley->subtemas);
 		echo "<br><br>";
-		var_dump($this->session->userdata());
+		var_dump($this->session->userdata());*/
 
 		//Si no hay seleccion de subtemas
 		foreach (array_filter($ley->temas) as $t)
