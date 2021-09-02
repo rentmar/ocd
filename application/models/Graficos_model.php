@@ -178,4 +178,53 @@ class Graficos_model extends CI_Model
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
+
+
+	//Grafico cuerdas - Dato Reforma electoral inicial
+	public function datoRef0($fecha, $idactor)
+	{
+		$sql = "SELECT *"
+			."FROM leyes AS l "
+			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes "
+			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley "
+			."WHERE l.rel_idusuario = ? "
+			."ORDER BY estadoley.porcentaje_estadoley ASC";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+
+	}
+
+	//Grafico cuerdas - Dato Reforma electoral final
+	public function datoReff($fecha, $idactor)
+	{
+
+	}
+
+	//Grafico cuerdas - Dato Ins, Democratica inicial
+	public function datoIns0($fecha, $idactor)
+	{
+
+	}
+
+	//Grafico cuerdas - Dato Ins, Democratica final
+	public function datoInsf($fecha, $idactor)
+	{
+
+	}
+
+	//Grafico cuerdas - Dato Censo inicial
+	public function datoCenso0($fecha, $idactor)
+	{
+
+	}
+
+	//Grafico cuerdas - Dato Censo final
+	public function datoCensof($fecha, $idactor)
+	{
+
+	}
+
+
+
+
 }
