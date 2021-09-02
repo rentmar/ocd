@@ -7,14 +7,14 @@
 			<idcuestionario>1</idcuestionario>
 			<nombre_cuestionario>Reforma Electoral</nombre_cuestionario>
 			<numero_temas>10</numero_temas>
-			<cantidad>173</cantidad>
+			<cantidad>184</cantidad>
 			<valor>10</valor>
 		</element>
 		<element>
 			<idcuestionario>2</idcuestionario>
 			<nombre_cuestionario>Institucionalidad Democratica</nombre_cuestionario>
 			<numero_temas>5</numero_temas>
-			<cantidad>1704</cantidad>
+			<cantidad>1837</cantidad>
 			<valor>100</valor>
 		</element>
 		<element>
@@ -28,8 +28,8 @@
 			<idcuestionario>4</idcuestionario>
 			<nombre_cuestionario>Leyes</nombre_cuestionario>
 			<numero_temas>22</numero_temas>
-			<cantidad>155</cantidad>
-			<valor>9</valor>
+			<cantidad>139</cantidad>
+			<valor>8</valor>
 		</element>
 	</cuestionarios>
 	<temas>
@@ -38,15 +38,15 @@
 			<idtema>1</idtema>
 			<nombre_tema>Presentacion de Estatutos de organizaciones politicas</nombre_tema>
 			<cant_subtemas>1</cant_subtemas>
-			<cantidadportema>19</cantidadportema>
-			<valorportema>27</valorportema>
+			<cantidadportema>21</cantidadportema>
+			<valorportema>28</valorportema>
 		</element>
 		<element>
 		<idc>1</idc>
 			<idtema>2</idtema>
 			<nombre_tema>Competencias Jurisdicionales del TSE</nombre_tema>
 			<cant_subtemas>3</cant_subtemas>
-			<cantidadportema>70</cantidadportema>
+			<cantidadportema>75</cantidadportema>
 			<valorportema>100</valorportema>
 		</element>
 		<element>
@@ -87,15 +87,15 @@
 			<nombre_tema>Computo departamental</nombre_tema>
 			<cant_subtemas>3</cant_subtemas>
 			<cantidadportema>9</cantidadportema>
-			<valorportema>13</valorportema>
+			<valorportema>12</valorportema>
 		</element>
 		<element>
 		<idc>1</idc>
 			<idtema>8</idtema>
 			<nombre_tema>Padron Electoral</nombre_tema>
 			<cant_subtemas>4</cant_subtemas>
-			<cantidadportema>10</cantidadportema>
-			<valorportema>14</valorportema>
+			<cantidadportema>11</cantidadportema>
+			<valorportema>15</valorportema>
 		</element>
 		<element>
 		<idc>1</idc>
@@ -110,15 +110,15 @@
 			<idtema>10</idtema>
 			<nombre_tema>Financiamiento politico y partidario</nombre_tema>
 			<cant_subtemas>1</cant_subtemas>
-			<cantidadportema>4</cantidadportema>
-			<valorportema>6</valorportema>
+			<cantidadportema>5</cantidadportema>
+			<valorportema>7</valorportema>
 		</element>
 		<element>
 		<idc>2</idc>
 			<idtema>11</idtema>
 			<nombre_tema>Ejercicio en libertad de derechos políticos</nombre_tema>
 			<cant_subtemas>6</cant_subtemas>
-			<cantidadportema>681</cantidadportema>
+			<cantidadportema>749</cantidadportema>
 			<valorportema>100</valorportema>
 		</element>
 		<element>
@@ -126,7 +126,7 @@
 			<idtema>12</idtema>
 			<nombre_tema>Inclusión política</nombre_tema>
 			<cant_subtemas>2</cant_subtemas>
-			<cantidadportema>85</cantidadportema>
+			<cantidadportema>90</cantidadportema>
 			<valorportema>12</valorportema>
 		</element>
 		<element>
@@ -134,23 +134,23 @@
 			<idtema>13</idtema>
 			<nombre_tema>Participación en el ámbito electoral</nombre_tema>
 			<cant_subtemas>5</cant_subtemas>
-			<cantidadportema>198</cantidadportema>
-			<valorportema>29</valorportema>
+			<cantidadportema>204</cantidadportema>
+			<valorportema>27</valorportema>
 		</element>
 		<element>
 		<idc>2</idc>
 			<idtema>14</idtema>
 			<nombre_tema>Integración de los ciudadanos en la definición y gestión del Estado</nombre_tema>
 			<cant_subtemas>8</cant_subtemas>
-			<cantidadportema>444</cantidadportema>
-			<valorportema>65</valorportema>
+			<cantidadportema>495</cantidadportema>
+			<valorportema>66</valorportema>
 		</element>
 		<element>
 		<idc>2</idc>
 			<idtema>15</idtema>
 			<nombre_tema>Instituciones</nombre_tema>
 			<cant_subtemas>3</cant_subtemas>
-			<cantidadportema>208</cantidadportema>
+			<cantidadportema>231</cantidadportema>
 			<valorportema>31</valorportema>
 		</element>
 		<element>
@@ -190,16 +190,16 @@
 			<idtema>20</idtema>
 			<nombre_tema>Educación</nombre_tema>
 			<cant_subtemas>3</cant_subtemas>
-			<cantidadportema>11</cantidadportema>
-			<valorportema>32</valorportema>
+			<cantidadportema>2</cantidadportema>
+			<valorportema>6</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
 			<idtema>21</idtema>
 			<nombre_tema>Salud</nombre_tema>
 			<cant_subtemas>6</cant_subtemas>
-			<cantidadportema>2</cantidadportema>
-			<valorportema>6</valorportema>
+			<cantidadportema>1</cantidadportema>
+			<valorportema>3</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -222,8 +222,8 @@
 			<idtema>24</idtema>
 			<nombre_tema>Género</nombre_tema>
 			<cant_subtemas>2</cant_subtemas>
-			<cantidadportema>1</cantidadportema>
-			<valorportema>3</valorportema>
+			<cantidadportema>0</cantidadportema>
+			<valorportema>0</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -254,16 +254,16 @@
 			<idtema>28</idtema>
 			<nombre_tema>Economía</nombre_tema>
 			<cant_subtemas>14</cant_subtemas>
-			<cantidadportema>5</cantidadportema>
-			<valorportema>15</valorportema>
+			<cantidadportema>3</cantidadportema>
+			<valorportema>9</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
 			<idtema>29</idtema>
 			<nombre_tema>Pobreza Y Desarrollo</nombre_tema>
 			<cant_subtemas>8</cant_subtemas>
-			<cantidadportema>6</cantidadportema>
-			<valorportema>18</valorportema>
+			<cantidadportema>4</cantidadportema>
+			<valorportema>12</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -286,8 +286,8 @@
 			<idtema>32</idtema>
 			<nombre_tema>Industria</nombre_tema>
 			<cant_subtemas>11</cant_subtemas>
-			<cantidadportema>13</cantidadportema>
-			<valorportema>38</valorportema>
+			<cantidadportema>11</cantidadportema>
+			<valorportema>32</valorportema>
 		</element>
 		<element>
 		<idc>4</idc>
@@ -367,7 +367,7 @@
 		<idt>1</idt>
 		<idsubtema>1</idsubtema>
 		<nombre_subtema>Estatutos de organizaciones políticas – Ley 1096</nombre_subtema>
-		<cantidadporsubtema>19</cantidadporsubtema>
+		<cantidadporsubtema>21</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -375,20 +375,20 @@
 		<idsubtema>2</idsubtema>
 		<nombre_subtema>Competencias del TSE</nombre_subtema>
 		<cantidadporsubtema>25</cantidadporsubtema>
-		<valorporsubtema>48</valorporsubtema>
+		<valorporsubtema>44</valorporsubtema>
 	</element>
 	<element>
 		<idt>2</idt>
 		<idsubtema>3</idsubtema>
 		<nombre_subtema>Tutela de derechos políticos</nombre_subtema>
 		<cantidadporsubtema>10</cantidadporsubtema>
-		<valorporsubtema>19</valorporsubtema>
+		<valorporsubtema>18</valorporsubtema>
 	</element>
 	<element>
 		<idt>2</idt>
 		<idsubtema>4</idsubtema>
 		<nombre_subtema>Juzgamiento de faltas y delitos electorales</nombre_subtema>
-		<cantidadporsubtema>52</cantidadporsubtema>
+		<cantidadporsubtema>57</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -472,7 +472,7 @@
 		<idt>8</idt>
 		<idsubtema>8</idsubtema>
 		<nombre_subtema>Irregularidades del padrón</nombre_subtema>
-		<cantidadporsubtema>10</cantidadporsubtema>
+		<cantidadporsubtema>11</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -528,63 +528,63 @@
 		<idt>10</idt>
 		<idsubtema>18</idsubtema>
 		<nombre_subtema>Financiamiento en etapas electorales y no electorales</nombre_subtema>
-		<cantidadporsubtema>4</cantidadporsubtema>
+		<cantidadporsubtema>5</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>11</idt>
 		<idsubtema>25</idsubtema>
 		<nombre_subtema>Garantías para el ejercicio de los derechos de los individuos frente a la arbitrariedad de los gobernantes</nombre_subtema>
-		<cantidadporsubtema>389</cantidadporsubtema>
+		<cantidadporsubtema>432</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>11</idt>
 		<idsubtema>26</idsubtema>
 		<nombre_subtema>Garantía del ejercicio de derechos políticos y su profundización</nombre_subtema>
-		<cantidadporsubtema>279</cantidadporsubtema>
-		<valorporsubtema>72</valorporsubtema>
+		<cantidadporsubtema>324</cantidadporsubtema>
+		<valorporsubtema>75</valorporsubtema>
 	</element>
 	<element>
 		<idt>11</idt>
 		<idsubtema>27</idsubtema>
 		<nombre_subtema>Progresiva realización de igualdad política, social y económica</nombre_subtema>
-		<cantidadporsubtema>57</cantidadporsubtema>
-		<valorporsubtema>15</valorporsubtema>
+		<cantidadporsubtema>75</cantidadporsubtema>
+		<valorporsubtema>17</valorporsubtema>
 	</element>
 	<element>
 		<idt>11</idt>
 		<idsubtema>28</idsubtema>
 		<nombre_subtema>Derecho a elegir, a ser elegido y a ocupar cargos públicos</nombre_subtema>
-		<cantidadporsubtema>47</cantidadporsubtema>
+		<cantidadporsubtema>52</cantidadporsubtema>
 		<valorporsubtema>12</valorporsubtema>
 	</element>
 	<element>
 		<idt>11</idt>
 		<idsubtema>29</idsubtema>
 		<nombre_subtema>Libertad de expresión</nombre_subtema>
-		<cantidadporsubtema>197</cantidadporsubtema>
-		<valorporsubtema>51</valorporsubtema>
+		<cantidadporsubtema>211</cantidadporsubtema>
+		<valorporsubtema>49</valorporsubtema>
 	</element>
 	<element>
 		<idt>11</idt>
 		<idsubtema>30</idsubtema>
 		<nombre_subtema>Acceso a la información</nombre_subtema>
-		<cantidadporsubtema>66</cantidadporsubtema>
+		<cantidadporsubtema>74</cantidadporsubtema>
 		<valorporsubtema>17</valorporsubtema>
 	</element>
 	<element>
 		<idt>12</idt>
 		<idsubtema>44</idsubtema>
 		<nombre_subtema>Participación de la mujer</nombre_subtema>
-		<cantidadporsubtema>32</cantidadporsubtema>
-		<valorporsubtema>58</valorporsubtema>
+		<cantidadporsubtema>35</cantidadporsubtema>
+		<valorporsubtema>61</valorporsubtema>
 	</element>
 	<element>
 		<idt>12</idt>
 		<idsubtema>45</idsubtema>
 		<nombre_subtema>Participación de poblaciones indígenas</nombre_subtema>
-		<cantidadporsubtema>55</cantidadporsubtema>
+		<cantidadporsubtema>57</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -598,7 +598,7 @@
 		<idt>13</idt>
 		<idsubtema>40</idsubtema>
 		<nombre_subtema>Elecciones libres, regulares y transparentes</nombre_subtema>
-		<cantidadporsubtema>172</cantidadporsubtema>
+		<cantidadporsubtema>174</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -612,63 +612,63 @@
 		<idt>13</idt>
 		<idsubtema>42</idsubtema>
 		<nombre_subtema>Libertad de asociación</nombre_subtema>
-		<cantidadporsubtema>9</cantidadporsubtema>
-		<valorporsubtema>5</valorporsubtema>
+		<cantidadporsubtema>11</cantidadporsubtema>
+		<valorporsubtema>6</valorporsubtema>
 	</element>
 	<element>
 		<idt>13</idt>
 		<idsubtema>43</idsubtema>
 		<nombre_subtema>Competencia igual por cargos públicos</nombre_subtema>
-		<cantidadporsubtema>19</cantidadporsubtema>
-		<valorporsubtema>11</valorporsubtema>
+		<cantidadporsubtema>21</cantidadporsubtema>
+		<valorporsubtema>12</valorporsubtema>
 	</element>
 	<element>
 		<idt>14</idt>
 		<idsubtema>31</idsubtema>
 		<nombre_subtema>Separación y equilibrio entre los órganos ejecutivo, legislativo y judicial</nombre_subtema>
-		<cantidadporsubtema>50</cantidadporsubtema>
-		<valorporsubtema>25</valorporsubtema>
+		<cantidadporsubtema>53</cantidadporsubtema>
+		<valorporsubtema>23</valorporsubtema>
 	</element>
 	<element>
 		<idt>14</idt>
 		<idsubtema>32</idsubtema>
 		<nombre_subtema>Parlamento representativo y con pluralismo político</nombre_subtema>
-		<cantidadporsubtema>18</cantidadporsubtema>
-		<valorporsubtema>9</valorporsubtema>
+		<cantidadporsubtema>19</cantidadporsubtema>
+		<valorporsubtema>8</valorporsubtema>
 	</element>
 	<element>
 		<idt>14</idt>
 		<idsubtema>33</idsubtema>
 		<nombre_subtema>Consolidación del estado de derecho o respeto a la ley</nombre_subtema>
-		<cantidadporsubtema>202</cantidadporsubtema>
+		<cantidadporsubtema>230</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>14</idt>
 		<idsubtema>34</idsubtema>
 		<nombre_subtema>Igualdad de todos los ciudadanos ante la ley</nombre_subtema>
-		<cantidadporsubtema>164</cantidadporsubtema>
-		<valorporsubtema>81</valorporsubtema>
+		<cantidadporsubtema>191</cantidadporsubtema>
+		<valorporsubtema>83</valorporsubtema>
 	</element>
 	<element>
 		<idt>14</idt>
 		<idsubtema>35</idsubtema>
 		<nombre_subtema>El poder judicial es efectivamente independiente</nombre_subtema>
-		<cantidadporsubtema>95</cantidadporsubtema>
+		<cantidadporsubtema>108</cantidadporsubtema>
 		<valorporsubtema>47</valorporsubtema>
 	</element>
 	<element>
 		<idt>14</idt>
 		<idsubtema>36</idsubtema>
 		<nombre_subtema>Participación de los ciudadanos en las decisiones políticas</nombre_subtema>
-		<cantidadporsubtema>89</cantidadporsubtema>
-		<valorporsubtema>44</valorporsubtema>
+		<cantidadporsubtema>96</cantidadporsubtema>
+		<valorporsubtema>42</valorporsubtema>
 	</element>
 	<element>
 		<idt>14</idt>
 		<idsubtema>37</idsubtema>
 		<nombre_subtema>Participación de los ciudadanos en el diseño de políticas públicas</nombre_subtema>
-		<cantidadporsubtema>52</cantidadporsubtema>
+		<cantidadporsubtema>60</cantidadporsubtema>
 		<valorporsubtema>26</valorporsubtema>
 	</element>
 	<element>
@@ -682,21 +682,21 @@
 		<idt>15</idt>
 		<idsubtema>46</idsubtema>
 		<nombre_subtema>La acción de lo representantes está jurídicamente limitada a los deseos de los representados</nombre_subtema>
-		<cantidadporsubtema>46</cantidadporsubtema>
-		<valorporsubtema>33</valorporsubtema>
+		<cantidadporsubtema>56</cantidadporsubtema>
+		<valorporsubtema>37</valorporsubtema>
 	</element>
 	<element>
 		<idt>15</idt>
 		<idsubtema>47</idsubtema>
 		<nombre_subtema>Los representantes disponen de recursos para exigir que se respeten sus decisiones</nombre_subtema>
-		<cantidadporsubtema>38</cantidadporsubtema>
-		<valorporsubtema>27</valorporsubtema>
+		<cantidadporsubtema>45</cantidadporsubtema>
+		<valorporsubtema>30</valorporsubtema>
 	</element>
 	<element>
 		<idt>15</idt>
 		<idsubtema>48</idsubtema>
 		<nombre_subtema>Rendición de cuentas del uso de recursos públicos</nombre_subtema>
-		<cantidadporsubtema>141</cantidadporsubtema>
+		<cantidadporsubtema>151</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -857,22 +857,22 @@
 		<idt>20</idt>
 		<idsubtema>71</idsubtema>
 		<nombre_subtema>Universalizar el acceso a la educación</nombre_subtema>
-		<cantidadporsubtema>6</cantidadporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>20</idt>
 		<idsubtema>72</idsubtema>
 		<nombre_subtema>Instalar laboratorios de ciencia y tecnología con acceso a Internet en todas las Unidades Educativas del país.</nombre_subtema>
-		<cantidadporsubtema>2</cantidadporsubtema>
-		<valorporsubtema>33</valorporsubtema>
+		<cantidadporsubtema>0</cantidadporsubtema>
+		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
 		<idt>20</idt>
 		<idsubtema>73</idsubtema>
 		<nombre_subtema>Desarrollar programas nacionales que vinculen la educación superior con prácticas profesionales en el sector público y las empresas estatales.</nombre_subtema>
-		<cantidadporsubtema>5</cantidadporsubtema>
-		<valorporsubtema>83</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
 		<idt>21</idt>
@@ -906,8 +906,8 @@
 		<idt>21</idt>
 		<idsubtema>78</idsubtema>
 		<nombre_subtema>Instaurar en el país el chequeo médico obligatorio en el mes del cumpleaños de cada uno de los bolivianos</nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>100</valorporsubtema>
+		<cantidadporsubtema>0</cantidadporsubtema>
+		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
 		<idt>21</idt>
@@ -997,8 +997,8 @@
 		<idt>24</idt>
 		<idsubtema>91</idsubtema>
 		<nombre_subtema>Promover la participación de la mujer dentro de la sociedad y la economía,</nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>100</valorporsubtema>
+		<cantidadporsubtema>0</cantidadporsubtema>
+		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
 		<idt>25</idt>
@@ -1088,8 +1088,8 @@
 		<idt>28</idt>
 		<idsubtema>104</idsubtema>
 		<nombre_subtema>Reactivar la economía y el aparato productivo </nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>100</valorporsubtema>
+		<cantidadporsubtema>0</cantidadporsubtema>
+		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
@@ -1103,7 +1103,7 @@
 		<idsubtema>106</idsubtema>
 		<nombre_subtema>ii. Dinamizar negocios basados en operaciones confiables y gestionadas con seguridad y soporte financiero regulado y normado.</nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>100</valorporsubtema>
+		<valorporsubtema>50</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
@@ -1116,15 +1116,15 @@
 		<idt>28</idt>
 		<idsubtema>108</idsubtema>
 		<nombre_subtema>iv. Desarrollo de marcos normativos y mecanismos institucionales sobre incorporación de sistemas informáticos y tecnologías de información asociados a las inversiones y el comercio</nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>100</valorporsubtema>
+		<cantidadporsubtema>0</cantidadporsubtema>
+		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
 		<idsubtema>109</idsubtema>
 		<nombre_subtema>Fomentar el desarrollo económico y social, preservando la estabilidad macroeconómica,</nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>100</valorporsubtema>
+		<valorporsubtema>50</valorporsubtema>
 	</element>
 	<element>
 		<idt>28</idt>
@@ -1151,7 +1151,7 @@
 		<idt>28</idt>
 		<idsubtema>113</idsubtema>
 		<nombre_subtema>Desarrollar mecanismos de integración económica regional,  con una política de incentivos tributarios selectivos para la exportación de productos con valor agregado</nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
+		<cantidadporsubtema>2</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -1186,7 +1186,7 @@
 		<idt>29</idt>
 		<idsubtema>118</idsubtema>
 		<nombre_subtema>Llegar, en 2025, a una pobreza extrema del 5%, es decir, lograr su reducción, en los próximos cinco años, en diez puntos porcentuales</nombre_subtema>
-		<cantidadporsubtema>3</cantidadporsubtema>
+		<cantidadporsubtema>2</cantidadporsubtema>
 		<valorporsubtema>100</valorporsubtema>
 	</element>
 	<element>
@@ -1194,7 +1194,7 @@
 		<idsubtema>119</idsubtema>
 		<nombre_subtema>Incrementar la cobertura del servicio de agua potable al 96% y saneamiento básico al 80%, </nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>33</valorporsubtema>
+		<valorporsubtema>50</valorporsubtema>
 	</element>
 	<element>
 		<idt>29</idt>
@@ -1208,14 +1208,14 @@
 		<idsubtema>121</idsubtema>
 		<nombre_subtema>Implementar la Televisión Digital Abierta en ciudades intermedias</nombre_subtema>
 		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>33</valorporsubtema>
+		<valorporsubtema>50</valorporsubtema>
 	</element>
 	<element>
 		<idt>29</idt>
 		<idsubtema>122</idsubtema>
 		<nombre_subtema>Incrementar la cobertura del servicio de telefonía móvil e internet al 100% en todas las regiones y localidades del país, con tarifas reducidas.</nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>33</valorporsubtema>
+		<cantidadporsubtema>0</cantidadporsubtema>
+		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
 		<idt>29</idt>
@@ -1270,8 +1270,8 @@
 		<idt>32</idt>
 		<idsubtema>130</idsubtema>
 		<nombre_subtema>Aumentar del tamaño de la producción por inversión pública - proyectos de industrialización con altos retornos</nombre_subtema>
-		<cantidadporsubtema>2</cantidadporsubtema>
-		<valorporsubtema>33</valorporsubtema>
+		<cantidadporsubtema>1</cantidadporsubtema>
+		<valorporsubtema>17</valorporsubtema>
 	</element>
 	<element>
 		<idt>32</idt>
@@ -1333,8 +1333,8 @@
 		<idt>32</idt>
 		<idsubtema>139</idsubtema>
 		<nombre_subtema>Transformar las instituciones como SENASAG y SENAVEX </nombre_subtema>
-		<cantidadporsubtema>1</cantidadporsubtema>
-		<valorporsubtema>17</valorporsubtema>
+		<cantidadporsubtema>0</cantidadporsubtema>
+		<valorporsubtema>0</valorporsubtema>
 	</element>
 	<element>
 		<idt>32</idt>

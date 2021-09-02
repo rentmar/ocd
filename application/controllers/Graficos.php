@@ -11,6 +11,7 @@ class Graficos extends CI_Controller{
 		$this->load->helper('form');
 		$this->load->model('Graficos_model');
 		$this->load->helper('file');
+		$this->load->model('Radial_model');
 
 	}
 	public function index()
@@ -416,5 +417,29 @@ class Graficos extends CI_Controller{
 		{
 			$this->load->view('graficos/vgraficochord',$dt);
 		}
+	}
+////////////////////////////will	
+		public function seleccionRadial()
+	{	
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('graficos/vgraficoselectradial');
+		$this->load->view('html/pie');
+	}
+		public function getactores()
+	{
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMactores($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
+	}
+		public function getMedioDcomunicacion()
+	{
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMmedioDcomunicacion($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
 	}
 }

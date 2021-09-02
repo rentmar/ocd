@@ -2,32 +2,32 @@
 	<element>
 		<iddepartamento>1</iddepartamento>
 		<nombre_departamento>La Paz</nombre_departamento>
-		<cantidad>499</cantidad>
+		<cantidad>531</cantidad>
 		<radio>9</radio>
 	</element>
 	<element>
 		<iddepartamento>2</iddepartamento>
 		<nombre_departamento>Santa Cruz</nombre_departamento>
-		<cantidad>289</cantidad>
+		<cantidad>312</cantidad>
 		<radio>5</radio>
 	</element>
 	<element>
 		<iddepartamento>3</iddepartamento>
 		<nombre_departamento>Oruro</nombre_departamento>
-		<cantidad>101</cantidad>
+		<cantidad>109</cantidad>
 		<radio>2</radio>
 	</element>
 	<element>
 		<iddepartamento>4</iddepartamento>
 		<nombre_departamento>Cochabamba</nombre_departamento>
-		<cantidad>534</cantidad>
+		<cantidad>586</cantidad>
 		<radio>10</radio>
 	</element>
 	<element>
 		<iddepartamento>5</iddepartamento>
 		<nombre_departamento>Chuquisaca</nombre_departamento>
-		<cantidad>187</cantidad>
-		<radio>4</radio>
+		<cantidad>205</cantidad>
+		<radio>3</radio>
 	</element>
 	<element>
 		<iddepartamento>6</iddepartamento>

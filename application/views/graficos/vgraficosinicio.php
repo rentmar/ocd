@@ -36,7 +36,7 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/radial.png'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('#') ?>" class="BOTON" role="button">Ver</a>
+						<a href="<?php echo site_url('Graficos/seleccionRadial') ?>" class="BOTON" role="button">Ver</a>
 					</div>
 				</div>
 			</div>
