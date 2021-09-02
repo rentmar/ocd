@@ -931,3 +931,72 @@ function cuerdasChart()
 	//------------------------
 	return _chart;
 }
+
+
+jQuery(document).on('click', '#graficar', function (e) {
+	e.preventDefault();
+	var datos_consulta = new Datos();
+	console.log("Boton presionado");
+	//Capturar el valor del primer input date
+	datos_consulta.fecha_inicio = $("input#fecha_inicio").val();
+	//Capturar el valor del segundo input date
+	datos_consulta.fecha_fin = $("input#fecha_fin").val();
+	//Capturar el id dell actor
+	datos_consulta.idactor = $('select#idactor').val();
+	//Validadores
+	if(datos_consulta.idactor == 0)
+	{
+		$('#actorsinseleccionar').modal("show");
+	}
+	else{
+		if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
+		{
+			$('#fechaintervalo').modal("show");
+		}
+		else{
+			console.log(datos_consulta);
+			console.log(JSON.stringify(datos_consulta));
+			graficaractorescuerda(datos_consulta)
+
+		}
+	}
+});
+
+//Definir el objeto fechas
+function Datos(){
+	this.fecha_inicio = '';
+	this.fecha_fin = '';
+	this.idactor = '';
+}
+
+//Transmision de datos
+//Funcion para extraer actores
+function graficaractorescuerda(datos) {
+	var idactor = datos.idactor;
+	$.ajax({
+		url: baseurl + "/graficos/getmatrizactor",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Exito matriz de adyacencia actores");
+			console.log("idactor:");
+			console.log(idactor);
+			console.log(json);
+			//Aqui va la rutina para grafica
+			//La variable json es la matriz
+
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+
+}

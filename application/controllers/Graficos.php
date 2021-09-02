@@ -10,6 +10,7 @@ class Graficos extends CI_Controller{
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('Graficos_model');
+		$this->load->model('Actor_model');
 		$this->load->helper('file');
 		$this->load->model('Radial_model');
 
@@ -409,6 +410,8 @@ class Graficos extends CI_Controller{
 			$cargado=true;
 		}
 		$dt['titulo']=$titulo;
+		$dt['actores'] = $this->Actor_model->leerActores();
+
 		if ($cargado==false)
 		{
 			$this->load->view('graficos/vgraficosinicio');
@@ -418,7 +421,6 @@ class Graficos extends CI_Controller{
 			$this->load->view('graficos/vgraficochord',$dt);
 		}
 	}
-////////////////////////////will	
 		public function seleccionRadial()
 	{	
 		$this->load->view('html/encabezado');
