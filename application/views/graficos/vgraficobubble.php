@@ -87,13 +87,13 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title">Grafico Actores</h1>
+				<h1 class="modal-title">Grafico Actor</h1>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 			</div>
 			<?php echo form_open('Graficos/llenarDatosBubbleXml');?>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="idactor">
+					<label for="idtipomedio">
 						Seleccionar Actor
 					</label>
 					<select class="combo" id="cuadro" name="idactor" required>

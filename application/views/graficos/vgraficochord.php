@@ -58,7 +58,11 @@
 								</option>
 								<?php endforeach; ?>
 							</select>
-							<button id="graficar" type="submit" class="btn btn-primary" style="background-color:#474142;" >Graficar</button>
+							<?php $direccion="dibujar()";//"renderCuerdas('".base_url()."datos/cuerdas.xml')";?>
+						
+							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
+								
+							<!--<button id="graficar" type="submit" class="btn btn-primary" style="background-color:#474142;" >Graficar</button>-->
 							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionCuerdas'); ?>">Atras</a>
 						</form>
 						<div>

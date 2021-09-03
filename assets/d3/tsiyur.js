@@ -1,6 +1,17 @@
 var escalaColores,ucolor;
 var xmlData=[];
 var labelet;
+var M = [[0,0,0,10,0,0],
+			 [0,0,0,0,15,0],
+			 [0,0,0,0,0,20],
+			 [12,0,0,0,0,0],
+			 [0,4,0,0,0,0],
+			 [0,0,6,0,0,0]];
+/*function renderBubbleMap(dir)
+{
+	var act = document.getElementById("cuadroactor").value;
+	render(dir,"Actor",act);
+}*/
 function defineColores(colores)
 {
 	switch (colores)
@@ -754,21 +765,20 @@ function barChart ()
 //-------------------------------------------------------- cuerdasChart
 //-------------------------------------------------
 //------------------------------------------
-function renderCuerdas(dir)
+function renderCuerdas(Mtrx)
 {
-	var M = [[0,0,0,10,0,0],
+	/*var M = [[0,0,0,10,0,0],
 			 [0,0,0,0,15,0],
 			 [0,0,0,0,0,20],
 			 [12,0,0,0,0,0],
 			 [0,4,0,0,0,0],
-			 [0,0,6,0,0,0]];
-	var dts=Object.assign(M,
+			 [0,0,6,0,0,0]];*/
+	var dts=Object.assign(Mtrx,
 						{n:["R0","I0","C0","R1","I1","C1"],
 						c:["#33C90F","#CC450F","#33A7F4","#33C90F","#CC450F","#33A7F4"]});
 	var noms = dts.n === undefined ? d3.range(dts.length) : dts.n;
 	var clrs = dts.c === undefined ? d3.quantize(d3.interpolateRainbow,nombres.length) : dts.c;
 	//colr=d3.scaleOrdinal(clrs).domain(nombres);
-	console.log(noms);
 	var cChart = cuerdasChart();
 		cChart.datosCuerdas(dts);
 		cChart.colores(clrs);
@@ -907,7 +917,7 @@ function cuerdasChart()
 					.sortSubgroups(d3.descending)
 					.sortChords(d3.descending);
 		_cuerdas = chrd(_datosCuerdas);
-		console.log(_cuerdas);
+		console.log(_cuerdas.groups);
 		const grupo = _bodyG.append("g")
 						.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
 						.attr("class","grupo")
@@ -918,6 +928,21 @@ function cuerdasChart()
 						.attr("fill",d=>mapNomColor(_nombres[d.index]))
 						.attr("d",arcs);
 		_bodyG.append("g")
+						.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
+						.attr("class","etiq")
+						.selectAll(".etiq")
+						.data(_cuerdas.groups)
+						.join("g")
+						.append("text")
+						.text(function (d,i){
+							return (_nombres[i]+":"+d.value);
+						})
+						.attr("transform",function (d){
+							return "translate ("+arcs.centroid(d)+")";
+						})
+						.style("text-anchor","middle");
+			
+		_bodyG.append("g")
 			.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
 			.attr("fill-opacity",0.7)
 			.selectAll("path")
@@ -925,8 +950,11 @@ function cuerdasChart()
 			.join("path")
 			.style("mix-blend-mode","multiply")
 			.attr("fill",d=>mapNomColor(_nombres[d.source.index]))
-			//.attr("fill","purple")
 			.attr("d",cints);
+	}
+	function etiquetarCuerdas()
+	{
+		
 	}
 	//------------------------
 	return _chart;
@@ -962,6 +990,12 @@ jQuery(document).on('click', '#graficar', function (e) {
 	}
 });
 
+
+function dibujar()
+{
+	
+	renderCuerdas(M);
+}
 //Definir el objeto fechas
 function Datos(){
 	this.fecha_inicio = '';
@@ -979,7 +1013,7 @@ function graficaractorescuerda(datos) {
 		data: {datos: JSON.stringify(datos) },
 		dataType: 'json',
 		beforeSend: function () {
-			jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+			jQuery('select#medio').find("option:eq(0)").html("Esperar..");
 		},
 		complete: function () {
 			// code
@@ -991,7 +1025,7 @@ function graficaractorescuerda(datos) {
 			console.log(json);
 			//Aqui va la rutina para grafica
 			//La variable json es la matriz
-
+			//renderCuerdas(Mtrx);
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
