@@ -765,7 +765,7 @@ function barChart ()
 //-------------------------------------------------------- cuerdasChart
 //-------------------------------------------------
 //------------------------------------------
-function renderCuerdas(Mtrx)
+function renderCuerdas(Mtrx,et)
 {
 	/*var M = [[0,0,0,10,0,0],
 			 [0,0,0,0,15,0],
@@ -774,7 +774,7 @@ function renderCuerdas(Mtrx)
 			 [0,4,0,0,0,0],
 			 [0,0,6,0,0,0]];*/
 	var dts=Object.assign(Mtrx,
-						{n:["R0","I0","C0","R1","I1","C1"],
+						{n:["RE-Inicial","ID-Inicial","CE-Inicial","RE-Final","ID-Final","CE-Final"],
 						c:["#33C90F","#CC450F","#33A7F4","#33C90F","#CC450F","#33A7F4"]});
 	var noms = dts.n === undefined ? d3.range(dts.length) : dts.n;
 	var clrs = dts.c === undefined ? d3.quantize(d3.interpolateRainbow,nombres.length) : dts.c;
@@ -783,6 +783,7 @@ function renderCuerdas(Mtrx)
 		cChart.datosCuerdas(dts);
 		cChart.colores(clrs);
 		cChart.nombres(noms);
+		cChart.etiqueta(et);
 		cChart.render();
 }
 function cuerdasChart()
@@ -919,7 +920,7 @@ function cuerdasChart()
 		_cuerdas = chrd(_datosCuerdas);
 		console.log(_cuerdas.groups);
 		const grupo = _bodyG.append("g")
-						.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
+						.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
 						.attr("class","grupo")
 						.selectAll(".grupo")
 						.data(_cuerdas.groups)
@@ -928,12 +929,13 @@ function cuerdasChart()
 						.attr("fill",d=>mapNomColor(_nombres[d.index]))
 						.attr("d",arcs);
 		_bodyG.append("g")
-						.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
+						.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
 						.attr("class","etiq")
 						.selectAll(".etiq")
 						.data(_cuerdas.groups)
 						.join("g")
 						.append("text")
+						.style("font-family","bold")
 						.text(function (d,i){
 							return (_nombres[i]+":"+d.value);
 						})
@@ -943,7 +945,7 @@ function cuerdasChart()
 						.style("text-anchor","middle");
 			
 		_bodyG.append("g")
-			.attr("transform", "translate(" + _ancho / 2 + "," + _alto / 2 + ")")
+			.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
 			.attr("fill-opacity",0.7)
 			.selectAll("path")
 			.data(_cuerdas)
@@ -951,10 +953,52 @@ function cuerdasChart()
 			.style("mix-blend-mode","multiply")
 			.attr("fill",d=>mapNomColor(_nombres[d.source.index]))
 			.attr("d",cints);
+			
+		etiquetarCuerdas();
 	}
 	function etiquetarCuerdas()
 	{
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("font-size","1.5em")
+				.attr("x",400)
+				.attr("y",25)
+				.text(_etiqueta)
+				.style("text-anchor","middle");
+		_bodyG.append("circle")
+				.attr("cx",8)
+				.attr("cy",50)
+				.attr("r",8)
+				.style("fill","#33C90F");
 		
+		_bodyG.append("circle")
+				.attr("cx",8)
+				.attr("cy",80)
+				.attr("r",8)
+				.style("fill","#CC450F");
+		
+		_bodyG.append("circle")
+				.attr("cx",8)
+				.attr("cy",110)
+				.attr("r",8)
+				.style("fill","#33A7F4");
+				
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("x",16)
+				.attr("y",55)
+				.text("Reforma Electoral (RE)");
+				
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("x",16)
+				.attr("y",85)
+				.text("Institucionalidad Democratica (ID)");
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("x",16)
+				.attr("y",115)
+				.text("Censo (CE)");
 	}
 	//------------------------
 	return _chart;
@@ -994,7 +1038,7 @@ jQuery(document).on('click', '#graficar', function (e) {
 function dibujar()
 {
 	
-	renderCuerdas(M);
+	renderCuerdas(M,"Pertenece al Organo Ejecutivo");
 }
 //Definir el objeto fechas
 function Datos(){
