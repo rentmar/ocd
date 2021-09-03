@@ -8,10 +8,10 @@ jQuery(document).on('click', '#mcomunicacion', function (e) {
 	fechas.fecha_fin = $("input#fecha_fin").val();
 	console.log(fechas);
 	console.log(JSON.stringify(fechas));
-	getActores(fechas);
+	getmedio(fechas);
 });
 //Funcion para extraer actores
-function getActores(fecha) {
+function getmedio(fecha) {
 	$.ajax({
 		url: baseurl + "/Graficos/getMedioDcomunicacion",
 		type: 'post',
@@ -24,7 +24,7 @@ function getActores(fecha) {
 			// code
 		},
 		success: function (json) {
-			console.log("Exito");
+			console.log("Exito medio de comunicacion");
 			console.log(json);
 			grafRadial(json);
 		},

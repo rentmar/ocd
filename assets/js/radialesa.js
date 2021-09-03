@@ -24,20 +24,20 @@ function getActores(fecha) {
 			// code
 		},
 		success: function (json) {
-			console.log("Exito");
+			console.log("Exito actores");
 			console.log(json);
-			grafRadial(json);
+			grafRadial1(json);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
 }
-function grafRadial(matriz)
+function grafRadial1(matriz)
 {
     $("#my_dataviz").empty();
     var matrix = matriz;
-    var dibujo = radialChart(matrix);
+    var dibujo = radialChart1(matrix);
     
     dibujo.lienzo();
 }
@@ -46,7 +46,7 @@ function Fechas(){
 	this.fecha_inicio = '';
 	this.fecha_fin = '';
 }
-function radialChart(matrix)
+function radialChart1(matrix)
 {
     var _chart = {};    //chart es un objeto
     var _b = 1050;       //b es la base de svg
