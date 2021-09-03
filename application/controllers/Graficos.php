@@ -12,6 +12,7 @@ class Graficos extends CI_Controller{
 		$this->load->model('Graficos_model');
 		$this->load->model('Actor_model');
 		$this->load->helper('file');
+		$this->load->model('Radial_model');
 
 	}
 	public function index()
@@ -420,42 +421,27 @@ class Graficos extends CI_Controller{
 			$this->load->view('graficos/vgraficochord',$dt);
 		}
 	}
-
-	//Genera la matriz en el intervalo de fecha_inicial y fecha_final
-	public function matrizCuerdasActorFormulario($fecha_inicial, $fecha_final, $idactor)
-	{
-		//fecha_minima ------- fecha_inicial ------- $fecha_final
-		$fecha_minima = $this->Graficos_model->fechaMinimaNoticia();
-		$datoRef_t0 = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_inicial, $idactor, 1);
-		$datoIns_t0 = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_inicial, $idactor, 2);
-		$datoCenso_t0 = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_inicial, $idactor, 3);;
-		$datoRef_tf = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_final, $idactor, 1) - $datoRef_t0;
-		$datoIns_tf = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_final, $idactor, 2) - $datoIns_t0;
-		$datoCenso_tf = $this->Graficos_model->datoActorCuestionario($fecha_minima, $fecha_final, $idactor, 3) - $datoCenso_t0;
-
-		/** @noinspection PhpLanguageLevelInspection */
-		$matriz = [
-			[0, 0, 0, $datoRef_tf, 0, 0],
-			[0, 0, 0, 0, $datoIns_tf, 0],
-			[0, 0, 0, 0, 0, $datoCenso_tf],
-			[$datoRef_t0, 0, 0, 0, 0, 0],
-			[0, $datoIns_t0, 0, 0, 0, 0],
-			[0, 0, $datoCenso_t0, 0, 0, 0],
-		];
-
-		return $matriz;
-
+		public function seleccionRadial()
+	{	
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('graficos/vgraficoselectradial');
+		$this->load->view('html/pie');
 	}
-
-	//Procedimiento ajax para adquision de datos
-	//Matriz de adyacencia actor-formulario en un intervalo de tiempo
-	public function getmatrizactor()
+		public function getactores()
 	{
-		$json = array();
-		$datos = json_decode($this->input->post('datos')) ;
-		$matriz = $this->matrizCuerdasActorFormulario($datos->fecha_inicio, $datos->fecha_fin, $datos->idactor);
-		header('Content-Type: application/json');
-		echo json_encode($matriz);
-		//$matriz = $this->matrizCuerdasActorFormulario();
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMactores($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
+	}
+		public function getMedioDcomunicacion()
+	{
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMmedioDcomunicacion($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
 	}
 }
