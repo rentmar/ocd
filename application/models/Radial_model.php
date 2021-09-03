@@ -23,12 +23,11 @@ class Radial_model extends CI_Model
     {
         $fecha_inicio = $fecha->fecha_inicio;
         $fecha_fin = $fecha->fecha_fin;
-                $sql = "SELECT idactor, nombre_actor, idcuestionario, nombre_cuestionario, COUNT(*) ncuestionario "
-                                . "FROM actor "
-                                . "LEFT JOIN noticia_actor ON noticia_actor.rel_idactor = actor.idactor "
-                                . "LEFT JOIN noticia ON noticia.idnoticia = noticia_actor.rel_idnoticia "
-                                . "LEFT JOIN cuestionario ON cuestionario.idcuestionario = noticia.rel_idcuestionario "
-                                . "GROUP BY idactor, idcuestionario";
+                $sql = "SELECT idmedio, nombre_medio, idcuestionario, nombre_cuestionario, COUNT(*) ncuestionario "
+                . "FROM noticia "
+                . "LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = noticia.rel_idmedio "
+                . "LEFT JOIN cuestionario ON cuestionario.idcuestionario = noticia.rel_idcuestionario "
+                . "GROUP BY idmedio, idcuestionario";
                 $qry = $this->db->query($sql);
         return $qry->result();
     }

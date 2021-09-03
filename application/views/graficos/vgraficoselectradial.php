@@ -2,7 +2,7 @@
 	<div class="container">
 
 			<div class="card-header">
-				<h4>Representacion Grafica Tipo Radiales Por:</h4>
+				<h4>Representacion Grafica Tipo Radial</h4>
 <!--			</div>
 			<div class="card-footer">-->
 				<input type="hidden" id="fecha_inicio" name="fecha_inicio" class="form-control" required>

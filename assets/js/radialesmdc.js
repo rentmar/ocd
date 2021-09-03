@@ -127,8 +127,10 @@ function radialChart(matrix)
         var colorID = '#EF9600';
         var colorC = '#00A3E1';
         var colorL = '#7c5295';
-        var nactor = (matrix[tamanoMatriz - 1 ].idactor-1);
+//        var nactor = 47;//numero de medios de comunicacion
 
+        var nmedio = [...new Set(matrix.map(function(d){return d.idmedio;}))].length;
+//        console.log(otro);
         var valorMax = Math.max(...matrix.map(function(d) {return d.ncuestionario;}));
 //        var porcentajeDvalorMax = 100/valorMax;
         
@@ -139,13 +141,13 @@ function radialChart(matrix)
         var radioInt = rI;
         var radioExt = radioInt + matrix[0].ncuestionario*escalado;
         var anguloIni = 0;
-        var anguloFin = (2*Math.PI)/(nactor);
+        var anguloFin = (2*Math.PI)/(nmedio);
         
         for (var i = 0; i < matrix.length-1 ; i++)
         {
             var n = i + 1;
             var arc = d3.arc().innerRadius(radioInt).outerRadius(radioExt).startAngle(anguloIni).endAngle(anguloFin-0.06);
-            myobj.actor = matrix[i].nombre_actor;
+            myobj.medioC = matrix[i].nombre_medio;
 
             if(matrix[i].nombre_cuestionario == "Reforma Electoral")
             {
@@ -162,10 +164,10 @@ function radialChart(matrix)
                 _bodyV.append('path').attr('transform','translate('+bc/2+','+hc/2+')').attr('d',arc()).attr('fill',colorC);
                 myobj.Censo = matrix[i].ncuestionario;
             }
-            if(matrix[i].idactor != matrix[n].idactor)
+            if(matrix[i].idmedio != matrix[n].idmedio)
             {
                 anguloIni = anguloFin;
-                anguloFin = anguloIni + (2*Math.PI)/nactor;
+                anguloFin = anguloIni + (2*Math.PI)/nmedio;
                 radioInt = rI;
                 radioExt = radioInt + matrix[n].ncuestionario*escalado
                 
@@ -181,7 +183,7 @@ function radialChart(matrix)
                 mymat[i] = myobj;
 
             }
-            console.log(myobj); 
+//            console.log(myobj); 
         }
 
         console.log(mymat);
@@ -196,7 +198,7 @@ function radialChart(matrix)
         var x = d3.scaleBand()
                     .range([0, 2 * Math.PI])
                     .align(0);
-        x.domain(mymat.map(function(d) { return d.actor; }));
+        x.domain(mymat.map(function(d) { return d.medioC; }));
 
         var label = _bodyV.append("g")
                         .selectAll("g")
@@ -204,8 +206,8 @@ function radialChart(matrix)
                         .enter().append("g")
                         .attr("transform","translate(" + bc/2 +"," + hc/2 + ")")
                         .append("text")
-                        .attr("transform", function(d) { return "rotate(" + ((x(d.actor) + x.bandwidth() / 2) * 180 / Math.PI - 90) + ")translate(" + radioInt + ",0)"; })
-                        .text(function(d) { return d.actor; });
+                        .attr("transform", function(d) { return "rotate(" + ((x(d.medioC) + x.bandwidth() / 2) * 180 / Math.PI - 90) + ")translate(" + radioInt + ",0)"; })
+                        .text(function(d) { return d.medioC; });
 
     }
         

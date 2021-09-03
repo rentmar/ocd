@@ -170,7 +170,7 @@ function radialChart(matrix)
                 radioExt = radioInt + matrix[n].ncuestionario*escalado
                 
                 mymat[i] = myobj;
-                console.log(myobj);
+//                console.log(myobj);
                 var myobj = {};
             }
             else
@@ -181,10 +181,10 @@ function radialChart(matrix)
                 mymat[i] = myobj;
 
             }
-            console.log(myobj); 
+//            console.log(myobj); 
         }
 
-        console.log(mymat);
+//        console.log(mymat);
 
         _bodyV.append("circle").attr("cx",(bc/2)-60).attr("cy",(hc/2)-20).attr("r", 6).style("fill", colorRE)
         _bodyV.append("circle").attr("cx",(bc/2)-60).attr("cy",(hc/2)).attr("r", 6).style("fill", colorID)
