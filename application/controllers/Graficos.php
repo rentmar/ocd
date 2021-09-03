@@ -371,7 +371,7 @@ class Graficos extends CI_Controller{
 					}
 				}
 			}
-			$docXml=$docXml."\t<subtemas>\n";
+			$docXml=$docXml."\t</subtemas>\n";
 			$docXml=$docXml."</root>\n";
 			if (!write_file('datos/cuestionariobar.xml',$docXml))
 			{
