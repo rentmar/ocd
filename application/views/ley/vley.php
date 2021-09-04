@@ -40,6 +40,7 @@
 				<p>
 				<table>
 					<tr id="datos">
+						<th>No</th>
 						<th>Descripcion Ley</th>
 						<th>En Tratamiento</th>
 						<th>Sancionada</th>
@@ -51,6 +52,7 @@
 					<?php if(isset($leyes)): ?>
 					<?php foreach ($leyes as $l):?>
 						<tr>
+							<td><?php echo $l['idley'];?></td>
 							<td><?php echo $l['descripcion'];?></td>
 							<td>
 								<?php if(empty($l['tratamiento'])): ?>
