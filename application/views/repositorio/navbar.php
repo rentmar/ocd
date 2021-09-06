@@ -79,6 +79,8 @@
 </div>
 <div class="nav-scroller ">
 	<nav class="nav nav-underline">
+		<a class="nav-link " href="<?php echo site_url('inicio')?>">Inicio</a>
+		<a class="nav-link " href="<?php echo site_url('repositorio/')?>">Nueva Busqueda</a>
 
 
 
