@@ -300,7 +300,7 @@ class Cuestionario_model extends CI_Model
 
 	public function leerLeyesEstadoIdUsuario()
 	{
-		$sql = "SELECT *"
+		$sql = "SELECT * "
 			."FROM leyes AS l "
 			."LEFT JOIN leyes_estadoley ON leyes_estadoley.rel_idleyes = l.idleyes "
 			."LEFT JOIN estadoley ON estadoley.idestadoley = leyes_estadoley.rel_idestadoley "
@@ -309,6 +309,5 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
 
 }

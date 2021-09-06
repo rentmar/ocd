@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/js/select2.min.js'); ?>" > </script>
 <script src="<?php echo base_url('assets/js')?>/offcanvas.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/cuestionarios.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/repositorio.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>

@@ -9,7 +9,7 @@
 				<div class="contenedor">
 					<div id="caja_boton">
 						<div id="contenedor-submit">
-							<a href=""><input type="submit" class="BOTON" value="GENERAR"></a>
+							<a href=""><input type="submit" class="BOTON" value="BUSCAR"></a>
 						</div><br>
 						<div id="contenedor-submit">
 							<a href="<?php echo site_url('manejoDB');?>"><input type="" class="BOTONROJO" value="CANCELAR"></a>
@@ -40,8 +40,8 @@
 								<input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required >
 							</div>
 							<div class="col">
-								<label for="fech_fin" >Final:</label>
-								<input type="date" class="form-control" id="fech_fin" name="fecha_fin" required >
+								<label for="fecha_fin" >Final:</label>
+								<input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required >
 							</div>
 						</div>
 					</div>
@@ -65,13 +65,9 @@
 					<br>
 					<h3>Tema </h3>
 					<div class="form-row">
-						<select id="idtema" name="idtema" class="form-control simple" >
+						<select id="tema" name="idtema" class="form-control simple" >
 							<option value="0" >Seleccione una opcion</option>
-							<?php foreach ($tema as $tm): ?>
-								<option value="<?php echo $tm->idtema; ?>" >
-									<?php echo $tm->nombre_tema;?>
-								</option>
-							<?php endforeach; ?>
+
 						</select>
 					</div>
 
@@ -79,7 +75,6 @@
 					<h3>Departamento </h3>
 
 					<div class="form-row">
-
 							<select id="iddepartamento" name="iddepartamento" class="form-control simple " >
 								<option value="0" >Seleccione una opcion</option>
 								<?php foreach ($dep as $d): ?>
@@ -105,5 +100,7 @@
 
 		</div>
 	</div>
+	<br>
+	<br>
 	<br>
 </main>
