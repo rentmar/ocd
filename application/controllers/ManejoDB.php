@@ -855,6 +855,16 @@ class ManejoDB extends CI_Controller{
 		//$usuario = $this->ion_auth->user()->row();
 		//$cantidad_noticia = $this->session->noticia_editable;
 
+		if(is_null($this->session->datos_formulario))
+		{
+			$dt['hay_cambio_pendiente'] = false;
+		}
+		else{
+			$dt['hay_cambio_pendiente'] = true;
+		}
+
+
+
 
 		$dt['noticias'] =$this->Noticia_model->leerTodasLasNoticias();
 		//$dt['cuestionario'] = $this->Cuestionario_model->leerCuestionario($this->_idformulario);
@@ -918,7 +928,7 @@ class ManejoDB extends CI_Controller{
 	public function cambiarFormulario()
 	{
 		//Extraer las variables de session
-		var_dump($this->session->userdata());
+		//var_dump($this->session->userdata());
 		$datos_formulario = $this->session->datos_formulario;
 		$noticia = $datos_formulario['noticia'];
 		$cuestionario = $this->Cuestionario_model->leerCuestionario($noticia->rel_idcuestionario);
@@ -967,26 +977,55 @@ class ManejoDB extends CI_Controller{
 			$datos['subtemas_sel'] = $subtemas_sel;
 		}
 
+		//Otro tema
+		if(isset($datos_formulario['otrotema_nuevo']))
+		{
+			$datos['otrotema_n'] = $datos_formulario['otrotema_nuevo'];
+		}
+
 		//Subtemas seleccionados
 		$subtemas_elegidos = [];
-		echo "<br><br>";
+
 		if(isset($datos_formulario['subtemas_nuevos']) && !empty($datos_formulario['subtemas_nuevos']) )
 		{
 			$temas = $datos_formulario['temas_nuevos'];
 			$subtemas = $datos_formulario['subtemas_nuevos'];
-			var_dump($subtemas);
-			echo "<br>";
+			//var_dump($subtemas);
+			//echo "<br>";
 			foreach ($temas as $t)
 			{
-				echo "tema: ".$t."<br>";
+				//echo "tema: ".$t."<br>";
 				$stemas = $subtemas[$t];
 				foreach ($stemas as $st)
 				{
-					echo "subtema:  ".$st."<br>";
+					//echo "subtema:  ".$st."<br>";
 					$subtemas_elegidos[] = $this->SubTema_model->leerSubtemaPorIDs($st);
 				}
 			}
 			$datos['subtemas_n'] = $subtemas_elegidos;
+		}
+
+
+
+		
+		//Otros subtemas
+		$otrossubtemas_despliegue = [];
+		if($datos_formulario['otros_subtemas_ajustados'])
+		{
+			if(!empty($datos_formulario['otrossubtemas_nuevos']))
+			{
+				$temas = $datos_formulario['temas_nuevos'];
+				$otrossubtemas = $datos_formulario['otrossubtemas_nuevos'];
+				foreach ($temas as $t)
+				{
+					$tema = $this->Tema_model->leerTemaPorId($t);
+					$otrosubtema = $otrossubtemas[$t];
+					if($otrosubtema != ''){
+						$otrossubtemas_despliegue[] = $otrosubtema." (".$tema->nombre_tema.")";
+					}
+				}
+			}
+			$datos['otrossubtemas_n'] = $otrossubtemas_despliegue;
 		}
 
 
@@ -1000,7 +1039,6 @@ class ManejoDB extends CI_Controller{
 		$this->load->view('manejodb/vmanejodb_cambioform', $datos);
 		$this->load->view('html/pie');
 	}
-
 	//Cambiar Ambito
 	public function cambiarAmbito()
 	{
@@ -1080,7 +1118,49 @@ class ManejoDB extends CI_Controller{
 		redirect('manejoDB/cambiarFormulario/');
 	}
 
+	public function cambiarOtroSubtema()
+	{
+		//Capturar los nuevos temas
+		$datos_formulario = $this->session->datos_formulario;
+		$datos_formulario['otros_subtemas_ajustados']= true;
+
+		$idtemas = $datos_formulario['temas_nuevos'];
 
 
+		//Capturar otros subtemas
+		$otros_subtemas = [];
+		foreach ($idtemas as $t)
+		{
+			$otros_subtemas[$t] = $this->input->post('otrosubtema'.$t);
+		}
+
+		$otros_subtemas = $otros_subtemas;
+
+
+
+		$datos_formulario['otrossubtemas_nuevos'] = $otros_subtemas;
+		//Actualizar la variable de estado
+		$this->session->set_userdata('datos_formulario', []);
+		$this->session->set_userdata('datos_formulario', $datos_formulario);
+		$this->mensaje('Otros subtemas Definidos', 'info');
+		redirect('manejoDB/cambiarFormulario/');
+	}
+
+	public function aplicarCambios()
+	{
+		$datos_formulario = $this->session->datos_formulario;
+		if($this->Noticia_model->cambioCuestionario($datos_formulario))
+		{
+			//Destruir variable de session datos_formulario
+			$this->session->set_userdata('datos_formulario', []);
+			$this->session->unset_userdata('datos_formulario');
+			//Mensaje de confirmacion
+			$this->mensaje('Cambio de ambito exitoso', 'success');
+			redirect('inicio/');
+		}else{
+			$this->mensaje('Error en el cambio de ambito', 'alert');
+			redirect('manejoDB/cambiarFormulario/');
+		}
+	}
 
 }

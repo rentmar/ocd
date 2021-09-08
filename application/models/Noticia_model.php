@@ -1128,4 +1128,152 @@ class Noticia_model extends CI_Model{
 		return $qry->result();
 	}
 
+	//Metodo para el cambio de cuestionario
+	public function cambioCuestionario($datos)
+	{
+		$datos_formulario = $datos;
+		$noticia = $datos_formulario['noticia'];
+		$nuevo_idcuestionario = $datos_formulario['nuevo_idcuestionario'];
+		$temas = $datos_formulario['temas_nuevos'];
+		$subtemas = $datos_formulario['subtemas_nuevos'];
+		$otrossubtemas = $datos_formulario['otrossubtemas_nuevos'] ;
+		$otrotema = $datos_formulario['otrotema_nuevo'];
+		$existe_otro_tema = $datos_formulario['otros_temas_ajustados'];
+		$existe_otro_subtema = $datos_formulario['otros_subtemas_ajustados'];
+		/*
+		 *
+		 * INICIAR LA TRANSACCION
+		 */
+
+		$this->db->trans_begin();
+
+		/*
+		 * Borrar los anteriores registros
+		 *
+		 */
+		//Borrar registro  de noticia_otrosubtema
+		$this->db->delete('noticia_otrosubtema', array('rel_idnoticia' => $noticia->idnoticia));
+
+		//Borrar registro de noticia_otrotema
+		$this->db->delete('noticia_otrotema', array('rel_idnoticia' => $noticia->idnoticia));
+
+		//Borrar registro de noticia_subtema
+		$this->db->delete('noticia_subtema', array('rel_idnoticia' => $noticia->idnoticia));
+
+		/*
+		 * Actualizar el campo rel_idcuestionario de la Tabla Noticia
+		 *
+		 */
+		/** @noinspection PhpLanguageLevelInspection */
+		$data_noticia = [
+			'rel_idcuestionario' => $nuevo_idcuestionario,
+		];
+		$this->db->where('idnoticia', $noticia->idnoticia);
+		$this->db->update('noticia', $data_noticia);
+
+		/*
+		 * Insertar los nuevos registros
+		 *
+		 */
+
+		//Insertar temas y subtemas
+		foreach ($temas as $t)
+		{
+			$idtema = $t;
+			if($idtema!=0)
+			{
+				$stemas = $subtemas[$idtema];
+				foreach ($stemas as $st)
+				{
+					$idsubtema = $st;
+					if($idsubtema!=0)
+					{
+						//Insertar la relacion noticia subtema
+						//echo $idsubtema." / ";
+						/** @noinspection PhpLanguageLevelInspection */
+						$not_subt = [
+							'rel_idnoticia' => $noticia->idnoticia,
+							'rel_idsubtema' => $idsubtema,
+						];
+						$this->db->insert('noticia_subtema', $not_subt);
+					}
+				}
+			}
+		}
+
+		/*
+		 * Insertar Otro tema
+		 *
+		 */
+		if($existe_otro_tema) //Comprobar si existe un otro tema definido
+		{
+			//Insertar otro tema
+			//echo "Registrar otro tema: ".$otrotema;
+			/** @noinspection PhpLanguageLevelInspection */
+			$ot = [
+				'nombre_otrotema' => $otrotema,
+				'rel_idcuestionario' => $noticia->rel_idcuestionario,
+				'rel_idusuario' => $noticia->rel_idusuario,
+			];
+			$this->db->insert('otrotema', $ot);
+			$otro_tema_id = $this->db->insert_id();
+			//Relacion de otro con la noticia
+			/** @noinspection PhpLanguageLevelInspection */
+			$not_ot =[
+				'rel_idnoticia' => $noticia->idnoticia,
+				'rel_idotrotema' => $otro_tema_id,
+			];
+			$this->db->insert('noticia_otrotema', $not_ot);
+		}
+		//insertar otrosubtema
+		if($existe_otro_subtema)
+		{
+			foreach ($temas as $t){
+				$idtema = $t;
+				if($idtema!=0)
+				{
+					$stemas = $subtemas[$idtema];
+					foreach ($stemas as $st)
+					{
+
+						/** @noinspection PhpLanguageLevelInspection */
+						$ot_st = [
+							'nombre_otrosubtema' => $otrossubtemas[$idtema],
+							'rel_idtema' => $idtema,
+						];
+
+						if($otrossubtemas[$idtema]!=''){
+							$this->db->insert('otrosubtema', $ot_st);
+							$otro_st_id = $this->db->insert_id();
+						}
+
+						//Relacion de otrosubtema con la noticia
+						/** @noinspection PhpLanguageLevelInspection */
+						$not_ost = [
+							'rel_idnoticia' => $noticia->idnoticia,
+							'rel_idotrosubtema '=>$otro_st_id,
+						];
+						if($otrossubtemas[$idtema]!=''){
+							$this->db->insert('noticia_otrosubtema', $not_ost);
+						}
+					}
+				}
+			}
+		}
+
+
+
+
+
+
+		if ($this->db->trans_status() === FALSE){
+			//Hubo errores en la consulta, entonces se cancela la transacción.
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			//Todas las consultas se hicieron correctamente.
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 }

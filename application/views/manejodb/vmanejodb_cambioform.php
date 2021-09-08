@@ -136,15 +136,15 @@
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#cambiasubtemas">
 									Ajustar SubTemas</a>
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#cambiaotrosubtema" >
 									Ajustar Otro SubTemas
 								</a>
 							</div>
 						</div>
 						<?php endif; ?>
 
-						<?php if($subtemas_ajustados && $otros_subtemas_ajustados): ?>
-						<a href="#" class="btn btn-info" role="button" style="background-color:#474142;" >
+						<?php if($subtemas_ajustados && $temas_ajustados): ?>
+						<a href="#" class="btn btn-info" role="button" style="background-color:#474142;" data-toggle="modal" data-target="#confirmarcambio" >
 							Aplicar Cambios
 						</a>
 						<?php endif; ?>
@@ -190,11 +190,11 @@
 									<?php endif; ?>
 
 								</ul>
-								<?php if(isset($otrotema_n) && !empty($otrotema_n->nombre_otrotema) ): ?>
+								<?php if(isset($otrotema_n) ): ?>
 									<h7>Otro Tema:</h7>
 									<p>
 									<ul>
-										<li type="circle" > <?php echo $otrotema->nombre_otrotema; ?> </li>
+										<li type="circle" > <?php echo $otrotema_n; ?> </li>
 									</ul>
 									</p>
 								<?php endif; ?>
@@ -213,11 +213,13 @@
 								<?php if(isset($otrossubtemas_n)): ?>
 									<h7>Otro Subtema:</h7>
 									<p>
+									<?php foreach ($otrossubtemas_n as $ost): ?>
 									<ul>
-										<?php foreach ($otrossubtemas_n as $os): ?>
-											<li type="circle" > <?php echo $os->nombre_otrosubtema." (".$os->nombre_tema.")"; ?>  </li>
-										<?php endforeach; ?>
+										<li type="circle" >
+											<?php echo $ost;?>
+										</li>
 									</ul>
+									<?php endforeach; ?>
 									</p>
 								<?php endif; ?>
 
@@ -349,19 +351,18 @@
 
 			<!-- Modal Header -->
 			<div class="modal-header">
-				<h4 class="modal-title">Cambiar: Otro Tema</h4>
+				<h4 class="modal-title">Cambia: Otro Tema</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
 			<!-- Modal body -->
 			<div class="modal-body">
 				<?php echo form_open('manejoDB/cambiarOtroTema/'); ?>
-				<div class="form-check">
-					<label class="form-check-label">
-						<input id="otrotema" name="otrotema" type="text" class="form-check-input"
-							    required  >
-					</label>
+				<div class="form-group">
+					<label for="otrotema">Otro Tema:</label>
+					<input id="otrotema" name="otrotema" type="text" class="form-control" placeholder="Otro tema" required>
 				</div>
+
 
 			</div>
 			<!-- Modal footer -->
@@ -479,6 +480,100 @@
 </div>
 
 
+<!-- Modal para el cambio de temas -->
+<div class="modal fade" id="cambiaotrosubtema">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
 
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Cambia: Otros Subtema</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<?php
+				/** @noinspection PhpLanguageLevelInspection */
+				$attibst = [
+					'id' => 'nuevos_otrosubtemas',
+				];
+
+				?>
+				<?php echo form_open('manejoDB/cambiarOtroSubtema/', $attibst); ?>
+
+				<?php if (isset($temas_n)): ?>
+					<?php foreach ($temas_n as $tm): ?>
+						<div class="card">
+							<div class="card-header">
+								<h4>
+									<?php echo $tm['nombre_tema'] ?>
+								</h4>
+							</div>
+							<div class="card-body">
+								<div class="form-group">
+									<input type="text" id="<?php echo "otrosubtema".$tm['idtema'];?>"
+										   name="<?php echo "otrosubtema".$tm['idtema']; ?>"
+										   placeholder="Otro subtema" class="form-control"
+									>
+								</div>
+
+							</div>
+						</div>
+						<br>
+					<?php endforeach;?>
+				<?php endif; ?>
+
+
+			</div>
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" style="background-color:#474142;" class="btn btn-secondary" >
+					Cambiar
+				</button>
+				<?php echo form_close(); ?>
+				<button type="button" style="background-color:#474142;" class="btn btn-secondary" data-dismiss="modal">
+					Cancelar
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- Modal para Aplicar cambio de formulario -->
+<div class="modal fade" id="confirmarcambio">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header alert alert-danger">
+				<h4 class="modal-title">Confirmar Cambio</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+
+				<?php echo form_open('manejoDB/aplicarCambios/'); ?>
+				El cambio de ambito es irreversible, esta seguro?
+
+
+
+			</div>
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" style="background-color:#474142;" class="btn btn-secondary" >
+					SI
+				</button>
+				<?php echo form_close(); ?>
+				<button type="button" style="background-color:#474142;" class="btn btn-secondary" data-dismiss="modal">
+					NO
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 
 
