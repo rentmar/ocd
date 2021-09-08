@@ -1128,4 +1128,60 @@ class Noticia_model extends CI_Model{
 		return $qry->result();
 	}
 
+
+	public function repositorioNoticias($parametros)
+	{
+		//Solo la fecha de la noticia
+		$consulta = $parametros;
+
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT *  "
+			."FROM noticia AS n  "
+			."LEFT JOIN users ON n.rel_idusuario = users.id  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio "
+			."LEFT JOIN cuestionario ON n.rel_idcuestionario = cuestionario.idcuestionario  "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia   "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema  "
+			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema  "
+			."WHERE n.esta_activa = 1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+		//Añadir el resto de los discriminantes
+		if($consulta->idcuestionario !=0)
+		{
+			$sql .= "AND cuestionario.idcuestionario = ?  ";
+			array_push($placeholder, $consulta->idcuestionario);
+		}
+		if ($consulta->idtema != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tema.idtema = ?   ";
+			array_push($placeholder, $consulta->idtema);
+		}
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+		$sql .= 'ORDER BY n.fecha_noticia ASC   ';
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+
+	}
+
 }

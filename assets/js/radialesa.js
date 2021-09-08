@@ -1,13 +1,13 @@
 //Detectar la presion del boton
 jQuery(document).on('click', '#actores', function (e) {
 	var fechas = new Fechas();
-	console.log("Boton presionado");
+	console.log("Boton presionado actores");
 	//Capturar el valor del primer input date
 	fechas.fecha_inicio = $("input#fecha_inicio").val();
 	//Capturar el valor del segundo input date
 	fechas.fecha_fin = $("input#fecha_fin").val();
-	console.log(fechas);
-	console.log(JSON.stringify(fechas));
+//	console.log(fechas);
+//	console.log(JSON.stringify(fechas));
 	getActores(fechas);
 });
 //Funcion para extraer actores
@@ -24,20 +24,20 @@ function getActores(fecha) {
 			// code
 		},
 		success: function (json) {
-			console.log("Exito actores");
-			console.log(json);
-			grafRadial1(json);
+			console.log("Consulta actores OK");
+//			console.log(json);
+			grafRadiali(json);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
-			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+//			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
 }
-function grafRadial1(matriz)
+function grafRadiali(matriz)
 {
     $("#my_dataviz").empty();
     var matrix = matriz;
-    var dibujo = radialChart1(matrix);
+    var dibujo = radialCharti(matrix);
     
     dibujo.lienzo();
 }
@@ -46,7 +46,7 @@ function Fechas(){
 	this.fecha_inicio = '';
 	this.fecha_fin = '';
 }
-function radialChart1(matrix)
+function radialCharti(matrix)
 {
     var _chart = {};    //chart es un objeto
     var _b = 1050;       //b es la base de svg
@@ -96,7 +96,7 @@ function radialChart1(matrix)
     _chart.lienzo = function()
     {
 //        console.log(matrix);
-        console.log("estoy en lienzo");
+        console.log("estoy en lienzo actores");
         _svg = d3.select("#my_dataviz")     //d3.select("body")
                 .append("svg")
                 .attr("width",_b)
@@ -114,12 +114,12 @@ function radialChart1(matrix)
                 .attr("class","body")
                 .attr("transform","translate("+_margen.izquierda+","+_margen.arriba+")")
                 .attr("clip-path","url(#ventana)");
-        grafica(_b,_h,matrix);
+        graficai(_b,_h,matrix);
         
     }
-    function grafica(bc,hc,matrix)
+    function graficai(bc,hc,matrix)
     {
-        console.log('estoy graficando');
+        console.log('estoy graficando actores');
         var mymat = [];
         var myobj = {};//new Object();
         var tamanoMatriz = matrix.length;
