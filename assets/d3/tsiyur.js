@@ -1,147 +1,192 @@
-var escalaColores,ucolor;
+var escalaColores;
 var xmlData=[];
-var labelet;
-var M = [[0,0,0,10,0,0],
-			 [0,0,0,0,15,0],
-			 [0,0,0,0,0,20],
-			 [12,0,0,0,0,0],
-			 [0,4,0,0,0,0],
-			 [0,0,6,0,0,0]];
-/*function renderBubbleMap(dir)
-{
-	var act = document.getElementById("cuadroactor").value;
-	render(dir,"Actor",act);
-}*/
-function defineColores(colores)
-{
-	switch (colores)
-	{
-		case "Reforma Electoral":
-			for (var k=1;k<=9;k++)
-			{
-				escalaColores=d3.range(9).map(function (k){
-					return "#"+k+k+"C90F";
-				});
-			}
-			labelet="Reforma Electoral";
-			ucolor="#33C90F";
-			break;
-		case "Institucionalidad Democratica":
-			for (var k=1;k<=9;k++)
-			{
-				escalaColores=d3.range(9).map(function (k){
-					return "#CC"+k+k+"0F";
-				});
-			}
-			labelet="Institucionalidad Democratica";
-			ucolor="#CC450F";
-			break;
-		case "Censo":
-			for (var k=1;k<=9;k++)
-			{
-				escalaColores=d3.range(9).map(function (k){
-					return "#03A"+k+"F4";
-				});
-			}		
-			labelet="Censo";
-			ucolor="#33A7F4";
-			break;
-		case "Leyes":
-			for (var k=1;k<=9;k++)
-			{
-				escalaColores=d3.range(9).map(function (k){
-					return "#8F"+k+k+"85";
-				});
-			}	
-			ucolor="#8F7585";
-			break;
-		case "Actor":
-			for (var k=1;k<=9;k++)
-			{
-				escalaColores=d3.range(9).map(function (k){
-					return "#8F"+k+k+"85";
-				});
-			}	
-			ucolor="#DF1C44";
-			break;
-		case "TipoMedio":
-			for (var k=1;k<=9;k++)
-			{
-				escalaColores=d3.range(9).map(function (k){
-					return "#60"+k+k+"8B";
-				});
-			}	
-			ucolor="#39A275";
-			break;
-		//#39A275,#FECF6A,#194A8D,#795548,#607D8B
-	}
+var labelet = d3.scaleOrdinal(["Reforma Electoral","Institucionalidad Democratica","Censo","Leyes","Actor","Tipo Medio Comunicacion"]).domain([1,2,3,4,5,6]);
+var ucolor = d3.scaleOrdinal(["#33C90F","#CC450F","#33A7F4","#8F7585","#DF1C44","#39A275"]).domain([1,2,3,4,5,6]);
+var lpX= d3.scaleOrdinal([1.5,1.2,1.6,2.0,2.0,1.3,2.0,1.3,1.5,1.4,2.0,1.6]).domain(d3.range(0,11)),
+	lpY= d3.scaleOrdinal([4.7,5.2,5.2,5.0,4.5,4.0,4.0,3.5,3.3,2.8,2.5,2.2]).domain(d3.range(0,11));
+var orX= d3.scaleOrdinal([1.8,1.3,1.9,2.2,1.8,1.5,1.3,2.0,2.6,1.8,1.6,1.9]).domain(d3.range(0,11)),
+	orY= d3.scaleOrdinal([6.2,6.2,5.7,5.9,6.1,6.5,6.2,6.3,6.4,6.4,6.4,6.4]).domain(d3.range(0,11));
+var ptsiX= d3.scaleOrdinal([2.3,2.9,3.1,2.4,1.7,3.0,1.8,2.1,2.5,3.0,3.1,2.8]).domain(d3.range(0,11)),
+	ptsiY= d3.scaleOrdinal([7.6,6.0,6.6,7.0,7.2,7.3,7.8,8.4,8.0,7.8,8.1,8.3]).domain(d3.range(0,11));
+var cbbaX= d3.scaleOrdinal([3.1,3.1,2.6,3.6,2.6,2.7,3.7,3.4,3.5,3.8,3.0,3.0]).domain(d3.range(0,11)),
+	cbbaY= d3.scaleOrdinal([5.2,4.8,4.8,4.6,5.2,5.5,5.3,5.5,5.8,5.9,4.0,5.4]).domain(d3.range(0,11));
+var chuX= d3.scaleOrdinal([4.0,3.5,4,3.6,4.2,3.6,3.4,3.9,4.3,4.6,4.8,5.0]).domain(d3.range(0,11)),
+	chuY= d3.scaleOrdinal([6.8,6.3,6.5,7.0,7.0,7.3,7.6,7.5,7.4,7.4,7.4,7.4]).domain(d3.range(0,11));
+var tjaX= d3.scaleOrdinal([4.0,6.3,4.0,4.5,5.0,3.5,4.5,5.0,4.9,4.0,4.6,3.8]).domain(d3.range(0,11)),
+	tjaY= d3.scaleOrdinal([8.0,7.7,7.8,7.8,7.8,8.0,8.0,8.0,8.2,8.5,8.2,8.2]).domain(d3.range(0,11));
+var pdoX= d3.scaleOrdinal([1.8,1,1.1,1.3,2.2,2.0,2.4,2.6,2.7,3.2,2.9,2.2]).domain(d3.range(0,11)),
+	pdoY= d3.scaleOrdinal([1.4,1.5,1.7,1.9,1.8,1.1,0.8,1.3,0.6,0.7,0.8,1.0]).domain(d3.range(0,11));
+var bniX= d3.scaleOrdinal([3.3,3.0,2.6,4.0,4.4,5.1,4.6,3.7,3.3,3.1,2.6,2.6]).domain(d3.range(0,11)),
+	bniY= d3.scaleOrdinal([3.2,4.3,4.0,4.1,3.3,2.9,2.6,2.4,2.1,1.4,2.1,2.4]).domain(d3.range(0,11));
+var sczX= d3.scaleOrdinal([5.7,5,6.5,7.5,7.0,4.5,4.5,5.5,6.2,4.8,5.8,5.8]).domain(d3.range(0,11)),
+	sczY= d3.scaleOrdinal([5.4,6.5,6.5,6.0,5.2,5.8,4.8,4.8,4.3,3.9,4.0,3.3]).domain(d3.range(0,11));
+function colorRandom(min, max) {
+	var numero=Math.round(Math.random() * (max - min) + min);
+  return numero.toString();
 }
-
-function render(direccion,clor,et)
+function opcionBubbleCuest(dir,mp)
 {
-	labelet=et;
-	d3.selectAll("svg").remove();
-	defineColores(clor);
-	//var direccion="http://localhost/ocd/datos/departamentos.xml";
+	var cuest = document.getElementById("idcuest").value;
+	renderBubbleChart(dir,cuest,mp);
+}
+function opcionBubbleTemas(dir,mp)
+{
+	var cuest = document.getElementById("idcuesttema").value;
+	renderMultiBubbleChart(dir,cuest,mp);
+}
+function renderBubbleChart(direccion,op,mp)
+{
+	var opcion=op.toString();
 	d3.xml(direccion).then(function (dtxml){
 			xmlData=d3.range(0,9).map(function (d,i){
-				var nombreDpto;
+				var nombredpto;
 				var valorX,valorY,valorRadio;
-				nombreDpto=dtxml.documentElement.getElementsByTagName("nombre_departamento")[i].textContent;
-				valorRadio=parseFloat(dtxml.documentElement.getElementsByTagName("radio")[i].textContent);
-				valorNum = parseFloat(dtxml.documentElement.getElementsByTagName("cantidad")[i].textContent);
-				switch (nombreDpto)
+				nombredpto=dtxml.documentElement.getElementsByTagName("nombre_departamento"+opcion)[i].textContent;
+				valorRadio=parseInt(dtxml.documentElement.getElementsByTagName("radio"+opcion)[i].textContent);
+				valorNum = parseInt(dtxml.documentElement.getElementsByTagName("cantidad"+opcion)[i].textContent);
+				switch (nombredpto)
 				{
 					case "La Paz":
-						valorX=1.5;
-						valorY=4.7;
+						valorX=lpX(0);
+						valorY=lpY(0);
 						break;
 					case "Oruro":
-						valorX=1.8;
-						valorY=6.2;
+						valorX=orX(0);
+						valorY=orY(0);
 						break;
 					case "Potosi":
-						valorX=2.3;
-						valorY=7.6;
+						valorX=ptsiX(0);
+						valorY=ptsiY(0);
 						break;
 					case "Cochabamba":
-						valorX=3.1;
-						valorY=5.2;
+						valorX=cbbaX(0);
+						valorY=cbbaY(0);
 						break;
 					case "Chuquisaca":
-						valorX=4.0;
-						valorY=6.8;
+						valorX=chuX(0);
+						valorY=chuY(0);
 						break;
 					case "Tarija":
-						valorX=4.0;
-						valorY=8.0;
+						valorX=tjaX(0);
+						valorY=tjaY(0);
 						break;
 					case "Pando":
-						valorX=1.8;
-						valorY=1.4;
+						valorX=pdoX(0);
+						valorY=pdoY(0);
 						break;
 					case "Beni":
-						valorX=3.3;
-						valorY=3.2;
+						valorX=bniX(0);
+						valorY=bniY(0);
 						break;
 					case "Santa Cruz":
-						valorX=5.7;
-						valorY=5.4;
+						valorX=sczX(0);
+						valorY=sczY(0);
 						break;
 				}
-			return {u:nombreDpto,x:valorX,y:valorY,v:valorNum,r:valorRadio};
+			return {u:nombredpto,x:valorX,y:valorY,v:valorNum,r:valorRadio};
 			});
 			d3.selectAll("svg").remove();
 			var bChart = bubbleChart()
 			.x(d3.scaleLinear().domain([0,10]).range([0,500]))
 			.y(d3.scaleLinear().domain([0,10]).range([0,500]))
 			.r(d3.scaleLinear().domain([0,10]).range([0,40]))
-			.etiqueta(labelet)
+			.mapa(mp)
+			.etiqueta(labelet(opcion))
 			.colores(escalaColores)
-			.uncolor(ucolor);
+			.uncolor(ucolor(opcion));
 			bChart.datos(xmlData);
 			bChart.render();
-		});	
+		});	//*/
+}
+function renderMultiBubbleChart(direccion,op,mpbo)
+{
+	xmlData=[];
+	var opcion=op.toString();
+	d3.xml(direccion).then(function (dtxml){
+		//-------------------------------- et
+		var numtemas=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_nomtema").length;
+		if (numtemas<=10)
+		{
+			var colorestema=d3.schemeCategory10; 
+		}
+		else
+		{
+			let colorestema=[].concat(d3.schemeCategory10,d3.schemeDark2);
+		}
+		var xmlNomTemas=d3.range(0,numtemas).map(function (d,i){
+			var elemento=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_nomtema")[i].textContent;
+			return {nt:elemento};
+		});
+		//----------------------- dat
+		var nombredpto,nombretema,canttema,radiotema,valorX,valorY;
+		var dtstema=[];
+		for (var k=0;k<numtemas;k++)
+		{
+			dtstema=d3.range(0,9).map(function (d,i){
+				nombredpto=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_departamento")[i+9*k].textContent;
+				nombretema=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_tema")[i+9*k].textContent;
+				canttema=parseInt(dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_canttema")[i+9*k].textContent);
+				radiotema=parseInt(dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_radiotema")[i+9*k].textContent);
+				switch (nombredpto)
+				{
+					case "La Paz":
+						valorX=lpX(k);
+						valorY=lpY(k);
+						break;
+					case "Oruro":
+						valorX=orX(k);
+						valorY=orY(k);
+						break;
+					case "Potosi":
+						valorX=ptsiX(k);
+						valorY=ptsiY(k);
+						break;
+					case "Cochabamba":
+						valorX=cbbaX(k);
+						valorY=cbbaY(k);
+						break;
+					case "Chuquisaca":
+						valorX=chuX(k);
+						valorY=chuY(k);
+						break;
+					case "Tarija":
+						valorX=tjaX(k);
+						valorY=tjaY(k);
+						break;
+					case "Pando":
+						valorX=pdoX(k);
+						valorY=pdoY(k);
+						break;
+					case "Beni":
+						valorX=bniX(k);
+						valorY=bniY(k);
+						break;
+					case "Santa Cruz":
+						valorX=sczX(k);
+						valorY=sczY(k);
+						break;
+				}
+				return {nd:nombredpto,nt:nombretema,x:valorX,y:valorY,v:canttema,rdio:radiotema};
+			});
+			xmlData.push(dtstema);
+		}
+		//console.log(xmlData);
+		d3.selectAll("svg").remove();
+			var mbChart = multiBubbleChart()
+			.x(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.y(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.r(d3.scaleLinear().domain([0,10]).range([0,17]))//escala bubble
+			.mapa(mpbo)
+			.etiquetaTit(labelet(opcion+1))
+			.etiqueta(xmlNomTemas)
+			.colores(colorestema)
+			.uncolor(ucolor(opcion))
+			.datos(xmlData);
+			mbChart.render();
+			mbChart.ponerEtiquetas();//*/
+	});
+	
+	
 }
 function bubbleChart ()
 {
@@ -151,7 +196,7 @@ function bubbleChart ()
 		_ancho=800, _alto=500,
 		_margenes={arriba:20,derecha:30,abajo:20,izquierda:30},
 		_x,_y,_r,
-		//_colores=d3.schemeSet1,
+		_mapa,
 		_colores,
 		_uncolor,
 		_etiqueta,
@@ -169,7 +214,11 @@ function bubbleChart ()
 	_chart.margenes = function (m){
 		if (!arguments.length) return _margenes; _margenes=m;
 		return _chart;
-	};
+	}
+	_chart.mapa= function (mp){
+		if(!arguments.length) return _mapa; _mapa=mp;
+		return _chart;
+	}
 	_chart.colores = function (c) {
 		if (!arguments.length) return _colores; _colores=c;
 		return _chart;
@@ -203,7 +252,7 @@ function bubbleChart ()
 		if (!_svg){
 			_svg = d3.select("body").select("#contenedor-chart")
 					.append("svg")
-					.style("background-image","url('http://localhost/ocd/assets/d3/mapaBoliviablanco.svg')")
+					.style("background-image","url('"+_mapa+"')")
 					.style("background-repeat","no-repeat")
 					.attr("width",_ancho)
 					.attr("height",_alto);
@@ -306,43 +355,234 @@ function bubbleChart ()
 	//-------------------- objeto _chart
 	return _chart;
 }
+
+function multiBubbleChart()
+{
+	//----------------atributos
+	var _chart={};
+	var _datos=[],
+		_ancho=800, _alto=500,
+		_margenes={arriba:20,derecha:30,abajo:20,izquierda:30},
+		_x,_y,_r,
+		_mapa,
+		_colores,
+		_uncolor,
+		_etiquetaTit,
+		_etiqueta=[],
+		_svg,
+		_bodyG;
+	//----------------set,get atributos del objeto chart
+	_chart.ancho= function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if (!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.mapa= function (mp){
+		if(!arguments.length) return _mapa; _mapa=mp;
+		return _chart;
+	}
+	_chart.colores = function (c) {
+		if (!arguments.length) return _colores; _colores=c;
+		return _chart;
+	}
+	_chart.uncolor= function (uc){
+		if (!arguments.length) return _uncolor; _uncolor=uc;
+		return _chart;
+	}
+	_chart.x = function (x){
+		if(!arguments.length) return _x; _x=x;
+		return _chart;
+	}
+	_chart.y = function (y){
+		if(!arguments.length) return _y; _y=y;
+		return _chart;
+	}
+	_chart.r = function (r){
+		if(!arguments.length) return _r; _r=r;
+		return _chart;
+	}
+	_chart.datos = function (dts){  
+		if(!arguments.length) return _datos; _datos=dts;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.etiqueta = function (e){
+		if (!arguments.length) return _etiqueta; _etiqueta=e;
+		return _chart;
+	}
+	_chart.etiquetaTit = function (et){
+		if (!arguments.length) return _etiquetaTit; _etiquetaTit=et;
+		return _chart;
+	}
+	//------------------ metodos del objeto chart
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.style("background-image","url('"+_mapa+"')")
+					.style("background-repeat","no-repeat")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	_chart.ponerEtiquetas = function (){
+		d3.select("svg").append("text")
+							.style("outline","3px solid "+_uncolor)
+							.attr("class","etiqueta")
+							.attr("font-size","1.2em")
+							.attr("font-family","Courier New")
+							.attr("x",20)
+							.attr("y",30)
+							.text(_etiquetaTit);
+		d3.select("svg").selectAll("text.nombre")
+							.data(_etiqueta)
+							.enter()
+							.append("text")
+							.attr("class","nombre")
+							.attr("font-family","Courier New")
+							.attr("font-size","1em")
+							.attr("x",370)
+							.attr("y",function (d,i){
+								return (50+20*i);
+							})
+							.text(function (d){
+								return d.nt;
+							});//*/
+		d3.select("svg").selectAll("rect.indicador")
+							.data(_etiqueta)
+							.enter()
+							.append("rect")
+							.attr("class","indicador")
+							.style("fill",function (d,i){
+								return _colores[i];
+							})
+							.attr("x",365)
+							.attr("y",function (d,i){
+								return (37+20*i);
+							})
+							.attr("width",5)
+							.attr("height",16);
+	}
+	//-------------------- funciones internas de clase
+	function defineVentana(svg)
+	{
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						.style("fill-opacity",0.8)
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderBubbles();
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	function renderBubbles()
+	{
+		var numtemas=_datos.length;
+		for (var k=0;k<numtemas;k++)
+		{
+			_bodyG.append("g")
+				.style("stroke",_colores[k])
+				.style("fill",_colores[k])
+				.style("fill-opacity",0.7)
+				.attr("class","bubble")
+				.selectAll("circle")
+				.data(_datos[k])
+				.enter()
+				.append("circle")
+				.attr("cx",function (d,i){
+					return _x(d.x);
+				})
+				.attr("cy", function (d,i){
+					return _y(d.y);
+				})
+				.attr("r",function (d,i){
+					return _r(d.rdio);
+				});
+		}
+	}
+	//-------------------- objeto _chart
+	return _chart;
+}
 //-------------------------------------------------------- barrasChart
 //-------------------------------------------------
 //------------------------------------------
-function renderBarras(dir)
+function opcionElegida(dir)
 {
+	var idd=document.getElementById("iddepartamento").value;
+	renderBarras(dir,idd)
+}
+function renderBarras(dir,op)
+{
+	var opcion=op.toString();
 	d3.selectAll("svg").remove();
 	var xmlCuest=[],xmlTemas=[],xmlTemaRef=[],xmlTemaInst=[],xmlTemaCenso=[],xmlTemaLey=[],xmlST=[],xmlSubTemas=[];
 	var barrasChart = barChart()
 			.x(d3.scaleLinear([0,750]).domain([0,100]))
 			.y(d3.scaleLinear([50,700]).domain([0,100]))
-			.colores(d3.scaleOrdinal(["#93C90F","#EF9600","#00A3E1","#7c5295"]).domain([0,1,2,3]));
+			.colores(d3.scaleOrdinal(["#93C90F","#EF9600","#00A3E1","#7c5295"]).domain([0,1,2,3]));//*/
 	d3.xml(dir).then(function (dtxml){
-		//console.log(dtxml.documentElement.getElementsByTagName("cant_cuest")[0].textContent);
-		const cantCuestionarios=dtxml.documentElement.getElementsByTagName("cant_cuest")[0].textContent; //array[4]
-		const cantTemas=dtxml.documentElement.getElementsByTagName("numero_temas"); //array[10,5,4,22]
+		//console.log(dtxml.documentElement.getElementsByTagName("cant_cuest1")[0].textContent);
+		const cantCuestionarios=dtxml.documentElement.getElementsByTagName("cant_cuest"+opcion)[0].textContent; //array[4]
+		const cantTemas=dtxml.documentElement.getElementsByTagName("numero_temas"+opcion); //array[10,5,4,22]
 		const i1=parseInt(cantTemas[0].textContent),i2=parseInt(cantTemas[1].textContent),
 				i3=parseInt(cantTemas[2].textContent),i4=parseInt(cantTemas[3].textContent);
 		var indice=0,cnt=0;
 		var nombreCuest,nombre_tema;
 		var numtemas,valorNum,idCuest,cant,idc,idtema,cantidadxtema,valorxtema;
 		//------------------------------- cuestionarios
-		idCuest=dtxml.documentElement.getElementsByTagName("idcuestionario");
-		nombreCuest=dtxml.documentElement.getElementsByTagName("nombre_cuestionario");
-		numtemas=dtxml.documentElement.getElementsByTagName("numero_temas");
-		cant = dtxml.documentElement.getElementsByTagName("cantidad");
-		valorNum = dtxml.documentElement.getElementsByTagName("valor");
+		idCuest=dtxml.documentElement.getElementsByTagName("idcuestionario"+opcion);
+		nombreCuest=dtxml.documentElement.getElementsByTagName("nombre_cuestionario"+opcion);
+		numtemas=dtxml.documentElement.getElementsByTagName("numero_temas"+opcion);
+		cant = dtxml.documentElement.getElementsByTagName("cantidad"+opcion);
+		valorNum = dtxml.documentElement.getElementsByTagName("valor"+opcion);
 		xmlCuest=d3.range(0,cantCuestionarios).map(function (d,i){
 			return {id:parseInt(idCuest[i].textContent),n:nombreCuest[i].textContent,
 					nt:parseInt(numtemas[i].textContent),c:parseInt(cant[i].textContent),v:parseFloat(valorNum[i].textContent)};
 		});
 		//------------------------------- temas
-		idc=dtxml.documentElement.getElementsByTagName("idc");
-		idtema=dtxml.documentElement.getElementsByTagName("idtema");
-		nombre_tema=dtxml.documentElement.getElementsByTagName("nombre_tema");
-		cantsubtemas=dtxml.documentElement.getElementsByTagName("cant_subtemas");
-		cantidadxtema=dtxml.documentElement.getElementsByTagName("cantidadportema");
-		valorxtema=dtxml.documentElement.getElementsByTagName("valorportema");
+		idc=dtxml.documentElement.getElementsByTagName("idc"+opcion);
+		idtema=dtxml.documentElement.getElementsByTagName("idtema"+opcion);
+		nombre_tema=dtxml.documentElement.getElementsByTagName("nombre_tema"+opcion);
+		cantsubtemas=dtxml.documentElement.getElementsByTagName("cant_subtemas"+opcion);
+		cantidadxtema=dtxml.documentElement.getElementsByTagName("cantidadportema"+opcion);
+		valorxtema=dtxml.documentElement.getElementsByTagName("valorportema"+opcion);
 		xmlTemaRef=d3.range(0,i1).map(function (d,i){
 			return {id:parseInt(idc[i].textContent),idt:parseInt(idtema[i].textContent),
 					n:nombre_tema[i].textContent,cst:parseInt(cantsubtemas[i].textContent),
@@ -368,11 +608,11 @@ function renderBarras(dir)
 		xmlTemas.push(xmlTemaCenso);
 		xmlTemas.push(xmlTemaLey);
 		//------------------------------------- subtemas
-		idt=dtxml.documentElement.getElementsByTagName("idt");
-		idsubtema=dtxml.documentElement.getElementsByTagName("idsubtema");
-		nombre_subtema=dtxml.documentElement.getElementsByTagName("nombre_subtema");
-		cantidadxsubtema=dtxml.documentElement.getElementsByTagName("cantidadporsubtema");
-		valorxsubtema=dtxml.documentElement.getElementsByTagName("valorporsubtema");
+		idt=dtxml.documentElement.getElementsByTagName("idt"+opcion);
+		idsubtema=dtxml.documentElement.getElementsByTagName("idsubtema"+opcion);
+		nombre_subtema=dtxml.documentElement.getElementsByTagName("nombre_subtema"+opcion);
+		cantidadxsubtema=dtxml.documentElement.getElementsByTagName("cantidadporsubtema"+opcion);
+		valorxsubtema=dtxml.documentElement.getElementsByTagName("valorporsubtema"+opcion);
 		for (var k=0;k<cantsubtemas.length;k++)
 		{
 			cnt=0;
@@ -389,10 +629,8 @@ function renderBarras(dir)
 		barrasChart.datos(xmlCuest);
 		barrasChart.datos1(xmlTemas);
 		barrasChart.datos2(xmlSubTemas);
-		barrasChart.render();
+		barrasChart.render();//*/
 	});
-	
-	
 }
 function barChart ()
 {

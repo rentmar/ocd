@@ -44,34 +44,37 @@
 					<div class="grafico">
 						<div>
 							<?php if($accion==1) { ?>
-							<?php foreach ($cuestionarios as $c) { ?>
-							<?php $direccion="render ('".base_url()."datos/cuestionario".$c->idcuestionario.".xml"."','".$c->nombre_cuestionario."','".$c->nombre_cuestionario."')";?>
-							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;"><?php echo $c->nombre_cuestionario;?></button>
+							<?php $direccion="opcionBubbleCuest('".base_url()."datos/cuestionariobubble.xml','".base_url()."datos/mBb.svg')";?>
+							<select onchange="<?php echo $direccion;?>" id="idcuest" name="idcuest"  required >
+								<option value="" selected >Seleccione Ambito</option>
+								<?php foreach ($cuestionarios as $c): ?>
+								<option value="<?php echo $c->idcuestionario;?>" >
+									<?php echo $c->nombre_cuestionario;?>
+								</option>
+								<?php endforeach; ?>
+							</select>
 							<?php } ?>
+							<?php if($accion==2) { ?>
+								<?php $direccion="opcionBubbleTemas('".base_url()."datos/temabubble.xml','".base_url()."datos/mBb.svg')";?>
+								<select onchange="<?php echo $direccion;?>" id="idcuesttema" name="idcuesttema"  required >
+									<option value="" selected >Seleccione Ambito</option>
+									<?php foreach ($cuestionarios as $c): ?>
+									<option value="<?php echo $c->idcuestionario;?>" >
+										<?php echo $c->nombre_cuestionario;?>
+									</option>
+									<?php endforeach; ?>
+								</select>
 							<?php } ?>
-							<?php if ($accion==2) {?>
-							<button type="button" data-toggle="modal" data-target="#actormodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-								Actores
-							</button>
-							<?php } ?>
-							<?php if ($accion==3) {?>
-							<button type="button" data-toggle="modal" data-target="#actormodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-								Actores
-							</button>
-							<?php $direccion="render ('".base_url()."datos/actor.xml','Actor','".$actor->nombre_actor."')";?>
-							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
-							<?php } ?>
-							<?php if ($accion==4) {?>
-							<button type="button" data-toggle="modal" data-target="#tipomodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-								Tipo Medio
-							</button>
-							<?php } ?>
-							<?php if ($accion==5) {?>
-							<button type="button" data-toggle="modal" data-target="#tipomodal" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-								Tipo Medio
-							</button>
-							<?php $direccion="render ('".base_url()."datos/tipomedio.xml','TipoMedio','".$tipomedio->nombre_tipo."')";?>
-							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
+							<?php if($accion==3) { ?>
+								<?php $direccion="opcionBubbleActor('".base_url()."datos/actor.xml','".base_url()."datos/mBb.svg')";?>
+								<select onchange="<?php echo $direccion;?>" id="idcuestactor" name="idcuestactor"  required >
+									<option value="" selected >Seleccione Actor</option>
+									<?php foreach ($actores as $a): ?>
+									<option value="<?php echo $a->idactor;?>" >
+										<?php echo $a->nombre_actor;?>
+									</option>
+									<?php endforeach; ?>
+								</select>
 							<?php } ?>
 							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBubble'); ?>">Atras</a>		
 						</div>
@@ -83,69 +86,5 @@
 					</div>
 					<br>
 				</div>
-<div class="modal" id="actormodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">Grafico Actor</h1>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<?php echo form_open('Graficos/llenarDatosBubbleXml');?>
-			<div class="modal-body">
-				<div class="form-group">
-					<label for="idtipomedio">
-						Seleccionar Actor
-					</label>
-					<select class="combo" id="cuadro" name="idactor" required>
-						<option></option>
-						<?php foreach ($actores as $a) {?>
-						<option value="<?php echo $a->idactor;?>"><?php echo $a->nombre_actor;?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Elegir
-				</button>
-			<?php echo form_close();?>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="modal" id="tipomodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title">Grafico Tipo Medio</h1>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-			<?php echo form_open('Graficos/llenarDatosBubbleXml');?>
-			<div class="modal-body">
-				<div class="form-group">
-					<label for="idtipomedio">
-						Seleccionar Tipo Medio
-					</label>
-					<select class="combo" id="cuadro" name="idtipomedio" required>
-						<option></option>
-						<?php foreach ($tiposmedio as $tm) {?>
-						<option value="<?php echo $tm->idtipomedio;?>"><?php echo $tm->nombre_tipo;?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" name="accion" value="5" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Elegir
-				</button>
-			<?php echo form_close();?>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-			</div>
-		</div>
-	</div>
-</div>
-			</main>
-
 		</body>
 </html>
