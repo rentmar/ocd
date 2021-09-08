@@ -444,4 +444,36 @@ class Graficos extends CI_Controller{
 //		header('Content-Type: application/json');
 		echo json_encode($respuesta);
 	}
+		public function getMCcanalDtv()
+	{
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMCcanalDtv($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
+	}
+		public function getMCemisoraRadial()
+	{
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMCemisoraRadial($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
+	}
+		public function getMCprensaEscrita()
+	{
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMCprensaEscrita($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
+	}
+		public function getMCtvRural()
+	{
+//		$json = array();
+		$fecha = json_decode($this->input->post('fecha')) ;
+		$respuesta = $this->Radial_model->leerMCtvRural($fecha);
+//		header('Content-Type: application/json');
+		echo json_encode($respuesta);
+	}
 }

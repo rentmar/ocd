@@ -1,19 +1,21 @@
 //Detectar la presion del boton
-jQuery(document).on('click', '#mcomunicacion', function (e) {
+jQuery(document).on('click', '#cdtv', function (e) {
 	var fechas = new Fechas();
-	console.log("Boton presionado mediosDcomunicacion");
+	console.log("Boton presionado canalDtelevision");
 	//Capturar el valor del primer input date
 	fechas.fecha_inicio = $("input#fecha_inicio").val();
 	//Capturar el valor del segundo input date
 	fechas.fecha_fin = $("input#fecha_fin").val();
+//    valorrrr = $("input#cdtv").val();
 //	console.log(fechas);
 //	console.log(JSON.stringify(fechas));
-    getmedio0(fechas);
+//    console.log(valorrrr);
+	getmedio1(fechas);
 });
 //Funcion para extraer actores
-function getmedio0(fecha) {
+function getmedio1(fecha) {
 	$.ajax({
-		url: baseurl + "/Graficos/getMedioDcomunicacion",
+		url: baseurl + "/Graficos/getMCcanalDtv",
 		type: 'post',
 		data: {fecha: JSON.stringify(fecha) },
 		dataType: 'json',
@@ -24,29 +26,144 @@ function getmedio0(fecha) {
 			// code
 		},
 		success: function (json) {
-			console.log("Consulta mediosDcomunicacion OK");
+			console.log("Consulta canalDtelevision OK");
 //			console.log(json);
-			grafRadial0(json);
+			grafRadial1(json);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 //			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
 }
-function grafRadial0(matriz)
+
+//Detectar la presion del boton
+jQuery(document).on('click', '#eradial', function (e) {
+    var fechas = new Fechas();
+    console.log("Boton presionado EstacionRadial");
+    //Capturar el valor del primer input date
+    fechas.fecha_inicio = $("input#fecha_inicio").val();
+    //Capturar el valor del segundo input date
+    fechas.fecha_fin = $("input#fecha_fin").val();
+//    valorrrr = $("input#cdtv").val();
+//  console.log(fechas);
+//  console.log(JSON.stringify(fechas));
+//    console.log(valorrrr);
+    getmedio2(fechas);
+});
+//Funcion para extraer actores
+function getmedio2(fecha) {
+    $.ajax({
+        url: baseurl + "/Graficos/getMCemisoraRadial",
+        type: 'post',
+        data: {fecha: JSON.stringify(fecha) },
+        dataType: 'json',
+        beforeSend: function () {
+            jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+        },
+        complete: function () {
+            // code
+        },
+        success: function (json) {
+            console.log("Consulta emisoraRadial OK");
+//          console.log(json);
+            grafRadial1(json);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+//          console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
+//Detectar la presion del boton
+jQuery(document).on('click', '#pescrita', function (e) {
+    var fechas = new Fechas();
+    console.log("Boton presionado prensaEscrita");
+    //Capturar el valor del primer input date
+    fechas.fecha_inicio = $("input#fecha_inicio").val();
+    //Capturar el valor del segundo input date
+    fechas.fecha_fin = $("input#fecha_fin").val();
+//    valorrrr = $("input#cdtv").val();
+//  console.log(fechas);
+//  console.log(JSON.stringify(fechas));
+//    console.log(valorrrr);
+    getmedio3(fechas);
+});
+//Funcion para extraer actores
+function getmedio3(fecha) {
+    $.ajax({
+        url: baseurl + "/Graficos/getMCprensaEscrita",
+        type: 'post',
+        data: {fecha: JSON.stringify(fecha) },
+        dataType: 'json',
+        beforeSend: function () {
+            jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+        },
+        complete: function () {
+            // code
+        },
+        success: function (json) {
+            console.log("Consulta prensaEscrita OK");
+//          console.log(json);
+            grafRadial1(json);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+//          console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
+//Detectar la presion del boton
+jQuery(document).on('click', '#tvrural', function (e) {
+    var fechas = new Fechas();
+    console.log("Boton presionado tvRural");
+    //Capturar el valor del primer input date
+    fechas.fecha_inicio = $("input#fecha_inicio").val();
+    //Capturar el valor del segundo input date
+    fechas.fecha_fin = $("input#fecha_fin").val();
+//    valorrrr = $("input#cdtv").val();
+//  console.log(fechas);
+//  console.log(JSON.stringify(fechas));
+//    console.log(valorrrr);
+    getmedio4(fechas);
+});
+//Funcion para extraer actores
+function getmedio4(fecha) {
+    $.ajax({
+        url: baseurl + "/Graficos/getMCtvRural",
+        type: 'post',
+        data: {fecha: JSON.stringify(fecha) },
+        dataType: 'json',
+        beforeSend: function () {
+            jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+        },
+        complete: function () {
+            // code
+        },
+        success: function (json) {
+            console.log("Consulta tvRural OK");
+          console.log(json);
+            grafRadial1(json);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+//          console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+}
+
+function grafRadial1(matriz)
 {
     $("#my_dataviz").empty();
     var matrix = matriz;
-    var dibujo = radialChart0(matrix);
+    var dibujo = radialChart1(matrix);
     
     dibujo.lienzo();
 }
 //Definir el objeto fechas
-function Fechas(){
+/*function Fechas(){
 	this.fecha_inicio = '';
 	this.fecha_fin = '';
-}
-function radialChart0(matrix)
+}*/
+function radialChart1(matrix)
 {
     var _chart = {};    //chart es un objeto
     var _b = 1050;       //b es la base de svg
@@ -96,7 +213,7 @@ function radialChart0(matrix)
     _chart.lienzo = function()
     {
 //        console.log(matrix);
-        console.log("estoy en lienzo mediosDcomunicacion");
+        console.log("estoy en lienzo canalDtelevision");
         _svg = d3.select("#my_dataviz")     //d3.select("body")
                 .append("svg")
                 .attr("width",_b)
@@ -114,11 +231,11 @@ function radialChart0(matrix)
                 .attr("class","body")
                 .attr("transform","translate("+_margen.izquierda+","+_margen.arriba+")")
                 .attr("clip-path","url(#ventana)");
-        ordenarMatriz0(_b,_h,matrix);
+        ordenarMatriz1(_b,_h,matrix);
     }
-    function ordenarMatriz0(b,h,matrix)
+    function ordenarMatriz1(b,h,matrix)
     {
-        console.log('Ordenando Matriz mediosDcomunicacion');
+        console.log('Ordenando Matriz canalDtelevision');
         var mymat = [];
         var myobj = {medioC:0,RE:0,ID:0,Censo:0,Total:0};
         var cont = 0;
@@ -153,12 +270,12 @@ function radialChart0(matrix)
             }
         }
         mymat = mymat.sort((a, b) => b.Total - a.Total);
-        console.log(mymat);
-        dibujarMatriz0(b,h,mymat);
+//        console.log(mymat);
+        dibujarMatriz1(b,h,mymat);
     }
-    function dibujarMatriz0(bc,hc,mymat)
+    function dibujarMatriz1(bc,hc,mymat)
     {
-        console.log('dibujando mediosDcomunicacion');
+        console.log('dibujando canalDtelevision');
         var tamanoMatriz = mymat.length;
         var colores = {colorRE:'#93C90F', colorID:'#EF9600', colorC:'#00A3E1', colorL:'#7c5295'};
         var escalaDgrafica = 3.2;
@@ -192,11 +309,11 @@ function radialChart0(matrix)
                 anguloFin = anguloIni + (2 * Math.PI) / (tamanoMatriz);
             }
         }
-        etiqueta0(bc,hc,radio0,mymat,escalaDgrafica);
+        etiqueta1(bc,hc,radio0,mymat,escalaDgrafica);
     }
-    function etiqueta0(bc,hc,radio0,mimat,escalaDgrafica)
+    function etiqueta1(bc,hc,radio0,mimat,escalaDgrafica)
     {
-        console.log('Poniendo etiquetas mediosDcomunicacion');
+        console.log('Poniendo etiquetas canalDtelevision');
         var color = {RE:'#93C90F', ID:'#EF9600', C:'#00A3E1', L:'#7c5295'};
         _bodyV.append("circle").attr("cx",(bc/2)-70).attr("cy",(hc/2)-20).attr("r", 6).style("fill", color.RE);
         _bodyV.append("circle").attr("cx",(bc/2)-70).attr("cy",(hc/2)).attr("r", 6).style("fill", color.ID);
