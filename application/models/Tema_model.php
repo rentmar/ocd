@@ -68,6 +68,18 @@ class Tema_model extends CI_Model
 		return $qry->result();
 	}
 
+	//Leer temas por identificador de formulario
+	public function leerTemasPorFormulario($identificador)
+	{
+		$sql = "SELECT *  "
+			."FROM tema as t  "
+			."WHERE t.rel_idcuestionario = ?  "
+			."ORDER by t.idtema ";
+
+		$qry = $this->db->query($sql, [$identificador, ]);
+		return $qry->result();
+	}
+
 
 
 
