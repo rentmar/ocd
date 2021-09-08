@@ -140,6 +140,8 @@
 	<div>-->
 		<br>
 		<div id="esquinas_redondeadas">
+			
+
 			<div id="Caja_principal">
 				<h3 id="Título_central"> Observatorio de la Alianza OCD Bolivia </h3>
 				<p>

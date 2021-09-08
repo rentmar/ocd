@@ -1015,6 +1015,9 @@ jQuery(document).on('click', '#graficar', function (e) {
 	datos_consulta.fecha_fin = $("input#fecha_fin").val();
 	//Capturar el id dell actor
 	datos_consulta.idactor = $('select#idactor').val();
+	//Capturar el nombre del actor
+	datos_consulta.nombre_actor = $('select#idactor option:selected').text();
+
 	//Validadores
 	if(datos_consulta.idactor == 0)
 	{
@@ -1028,6 +1031,7 @@ jQuery(document).on('click', '#graficar', function (e) {
 		else{
 			console.log(datos_consulta);
 			console.log(JSON.stringify(datos_consulta));
+			$("#contenedor-chart").empty();
 			graficaractorescuerda(datos_consulta)
 
 		}
@@ -1045,12 +1049,14 @@ function Datos(){
 	this.fecha_inicio = '';
 	this.fecha_fin = '';
 	this.idactor = '';
+	this.nombre_actor = '';
 }
 
 //Transmision de datos
 //Funcion para extraer actores
 function graficaractorescuerda(datos) {
 	var idactor = datos.idactor;
+	var nombre_actor = datos.nombre_actor;
 	$.ajax({
 		url: baseurl + "/graficos/getmatrizactor",
 		type: 'post',
@@ -1070,6 +1076,7 @@ function graficaractorescuerda(datos) {
 			//Aqui va la rutina para grafica
 			//La variable json es la matriz
 			//renderCuerdas(Mtrx);
+			renderCuerdas(json,nombre_actor);
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
