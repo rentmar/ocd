@@ -62,18 +62,21 @@
 								}
 
 							?>
-								<a href="<?php echo site_url($urledit); ?>">
+								<a href="<?php echo site_url($urledit); ?>" data-toggle="tooltip" title="Editar Noticia" >
 									<i class="fas fa-edit"></i>
 								</a>
 								<?php if($n->esta_activa): ?>
-									<a href="<?php echo site_url('manejoDB/cambiarEstado/'.$n->idnoticia);?>">
+									<a href="<?php echo site_url('manejoDB/cambiarEstado/'.$n->idnoticia);?>" data-toggle="tooltip" title="Activa/Desactiva">
 										<i class="fas fa-toggle-on"></i>
 									</a>
 								<?php else: ?>
-									<a href="<?php echo site_url('manejoDB/cambiarEstado/'.$n->idnoticia);?>">
+									<a href="<?php echo site_url('manejoDB/cambiarEstado/'.$n->idnoticia);?>" data-toggle="tooltip" title="Activa/Desactiva" >
 										<i class="fas fa-toggle-off"></i>
 									</a>
 								<?php endif; ?>
+								<a href="<?php echo site_url('manejoDB/iniciarCambioFormulario/'.$n->idnoticia);?>" data-toggle="tooltip" title="Cambio de Formulario" >
+									<i class="fas fa-exchange-alt"></i>
+								</a>
 							</td>
 						</tr>
 					<?php endforeach; ?>

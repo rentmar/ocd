@@ -881,6 +881,206 @@ class ManejoDB extends CI_Controller{
 		redirect('manejoDB/noticiasAdministrador');
 	}
 
+	//Crear las variables de session para el proceso
+	public function iniciarCambioFormulario($identificador)
+	{
+		//Crear las variables de session
+		$noticia = $this->Noticia_model->leerNoticiaPorId($identificador);
+		$cambio_iniciado = true;
+		$formulario_cambiado = false;
+
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_formulario = [
+			'noticia' => $noticia,
+			'cambio_iniciado' => $cambio_iniciado,
+			'formulario_cambiado' => $formulario_cambiado,
+			'temas_ajustados' => false,
+			'otros_temas_ajustados' => false,
+			'subtemas_ajustados' => false,
+			'otros_subtemas_ajustados' => false,
+			'nuevo_idcuestionario' => 0,
+		];
+
+		//Crear la variable de session
+		$this->session->set_userdata('datos_formulario', []);
+		$this->session->set_userdata('datos_formulario', $datos_formulario);
+		redirect('manejoDB/cambiarFormulario/');
+	}
+	public function cancelarCambioFormulario()
+	{
+		//Destruir las variables de session para el cambio de formulario
+		$this->session->unset_userdata('datos_formulario');
+		$this->mensaje('Cambio de Ambito cancelado', 'info');
+		redirect('inicio');
+	}
+
+	//Rutina para el cambio de formulario
+	public function cambiarFormulario()
+	{
+		//Extraer las variables de session
+		var_dump($this->session->userdata());
+		$datos_formulario = $this->session->datos_formulario;
+		$noticia = $datos_formulario['noticia'];
+		$cuestionario = $this->Cuestionario_model->leerCuestionario($noticia->rel_idcuestionario);
+		$medio = $this->MedioComunicacion_model->leerMedioPorId($noticia->rel_idmedio);
+		$tipo_medio = $this->MedioComunicacion_model->leerTipoMedioPorId($medio->rel_idtipomedio);
+		$actores = $this->Actor_model->leerActoresNoticia($noticia->idnoticia);
+		$temas = $this->Tema_model->leerTemasDeUnaNoticia($noticia->idnoticia);
+		$subtemas = $this->SubTema_model->leerSubtemasDeUnaNoticia($noticia->idnoticia);
+		$otrotema = $this->Tema_model->leerOtrotemaDeUnaNoticia($noticia->idnoticia);
+		$otrossubtemas = $this->SubTema_model->leerOtrossubtemasDeUnaNoticia($noticia->idnoticia);
+		$cambio_iniciado = $datos_formulario['cambio_iniciado'];
+		$formulario_cambiado = $datos_formulario['formulario_cambiado'];
+		$temas_ajustados = $datos_formulario['temas_ajustados'];
+		$otros_temas_ajustados = $datos_formulario['otros_temas_ajustados'];
+		$subtemas_ajustados = $datos_formulario['subtemas_ajustados'];
+		$otros_subtemas_ajustados = $datos_formulario['otros_subtemas_ajustados'];
+		$nuevo_idcuestionario = $datos_formulario['nuevo_idcuestionario'];
+		$nuevo_cuestionario = $this->Cuestionario_model->leerCuestionario($nuevo_idcuestionario);
+
+		$datos['noticia'] = $noticia;
+		$datos['cuestionario'] = $cuestionario;
+		$datos['medio'] = $medio;
+		$datos['tipo_medio'] = $tipo_medio;
+		$datos['actores'] = $actores;
+		$datos['temas'] = $temas;
+		$datos['subtemas'] = $subtemas;
+		$datos['otrotema'] = $otrotema;
+		$datos['otrossubtemas'] = $otrossubtemas;
+		$datos['cambio_inciado'] = $cambio_iniciado;
+		$datos['formulario_cambiado'] = $formulario_cambiado;
+		$datos['temas_ajustados'] = $temas_ajustados;
+		$datos['otros_temas_ajustados'] = $otros_temas_ajustados;
+		$datos['subtemas_ajustados'] = $subtemas_ajustados;
+		$datos['otros_subtemas_ajustados'] = $otros_subtemas_ajustados;
+		$datos['nuevo_idcuestionario'] = $nuevo_idcuestionario;
+		$datos['nuevo_cuestionario'] = $nuevo_cuestionario;
+		$datos['forms'] = $this->Formulario_model->leerCuestionarios();
+
+		//Temas seleccionados
+		if(isset($datos_formulario['temas_nuevos']) && !empty($datos_formulario['temas_nuevos']) )
+		{
+			$this->Cuestionario_model->setTemaIDs($datos_formulario['temas_nuevos']);
+			$temas_sel = $this->Cuestionario_model->leerTemasPorIDs();
+			$subtemas_sel = $this->Cuestionario_model->leerSubtemasPorIDs();
+			$datos['temas_n'] = $temas_sel;
+			$datos['subtemas_sel'] = $subtemas_sel;
+		}
+
+		//Subtemas seleccionados
+		$subtemas_elegidos = [];
+		echo "<br><br>";
+		if(isset($datos_formulario['subtemas_nuevos']) && !empty($datos_formulario['subtemas_nuevos']) )
+		{
+			$temas = $datos_formulario['temas_nuevos'];
+			$subtemas = $datos_formulario['subtemas_nuevos'];
+			var_dump($subtemas);
+			echo "<br>";
+			foreach ($temas as $t)
+			{
+				echo "tema: ".$t."<br>";
+				$stemas = $subtemas[$t];
+				foreach ($stemas as $st)
+				{
+					echo "subtema:  ".$st."<br>";
+					$subtemas_elegidos[] = $this->SubTema_model->leerSubtemaPorIDs($st);
+				}
+			}
+			$datos['subtemas_n'] = $subtemas_elegidos;
+		}
+
+
+		//Temas para rellenado
+		$this->Cuestionario_model->setCuestionarioID($nuevo_idcuestionario);
+		$datos['temas_nuevos'] = $this->Cuestionario_model->leerTema();
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_cambioform', $datos);
+		$this->load->view('html/pie');
+	}
+
+	//Cambiar Ambito
+	public function cambiarAmbito()
+	{
+		//Define el nuevo formulario
+		$datos_formulario = $this->session->datos_formulario;
+		$datos_formulario['formulario_cambiado']= true;
+		$datos_formulario['nuevo_idcuestionario'] = $this->input->post('idcuestionario');
+		//Actualizar la variable de estado
+		$this->session->set_userdata('datos_formulario', []);
+		$this->session->set_userdata('datos_formulario', $datos_formulario);
+		$this->mensaje('Cambio de Ambito exitoso', 'info');
+		redirect('manejoDB/cambiarFormulario/');
+	}
+
+
+	//Capturar nuevos temas
+	public function cambiarTemas()
+	{
+		//Capturar los nuevos temas
+		$datos_formulario = $this->session->datos_formulario;
+		$datos_formulario['temas_ajustados']= true;
+		//Capturar temas
+		$datos_formulario['temas_nuevos'] = $this->input->post('idtema[]');
+		//Actualizar la variable de estado
+		$this->session->set_userdata('datos_formulario', []);
+		$this->session->set_userdata('datos_formulario', $datos_formulario);
+		$this->mensaje('Nuevos Temas Definidos', 'info');
+		redirect('manejoDB/cambiarFormulario/');
+	}
+
+	//Capturar Otro tema
+	public function cambiarOtroTema()
+	{
+		//Capturar los nuevos temas
+		$datos_formulario = $this->session->datos_formulario;
+		$datos_formulario['otros_temas_ajustados']= true;
+		//Capturar temas
+		$datos_formulario['otrotema_nuevo'] = $this->input->post('otrotema');
+		//Actualizar la variable de estado
+		$this->session->set_userdata('datos_formulario', []);
+		$this->session->set_userdata('datos_formulario', $datos_formulario);
+		$this->mensaje('Otro Tema Definidos', 'info');
+		redirect('manejoDB/cambiarFormulario/');
+	}
+
+	//Cambiar subtemas
+	public function cambiarSubtemas()
+	{
+		//Capturar los nuevos temas
+		$datos_formulario = $this->session->datos_formulario;
+		$datos_formulario['subtemas_ajustados']= true;
+
+
+		$idtemas = $datos_formulario['temas_nuevos'];
+
+		//Comprobar si hay subtemas nulos
+		foreach ($idtemas as $t)
+		{
+			if(is_null($this->input->post('tema'.$t)))
+			{
+				$this->mensaje('Seleccione un subtema por tema', 'warning');
+				redirect('manejoDB/cambiarFormulario/');
+			}
+		}
+
+		//Capturar subtemas
+		$subtemas = [];
+		foreach ($idtemas as $t)
+		{
+			$subtemas[$t] = $this->input->post('tema'.$t);
+		}
+		$datos_formulario['subtemas_nuevos'] = $subtemas;
+		//Actualizar la variable de estado
+		$this->session->set_userdata('datos_formulario', []);
+		$this->session->set_userdata('datos_formulario', $datos_formulario);
+		$this->mensaje('Nuevos subtemas Definidos', 'info');
+		redirect('manejoDB/cambiarFormulario/');
+	}
+
+
 
 
 }
