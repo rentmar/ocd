@@ -546,91 +546,19 @@ function multiBubbleChart()
 function opcionElegida(dir)
 {
 	var idd=document.getElementById("iddepartamento").value;
-	renderBarras(dir,idd)
+	//renderBarras(dir,idd)
 }
-function renderBarras(dir,op)
+function renderBarras(MC,MT,MST)
 {
-	var opcion=op.toString();
 	d3.selectAll("svg").remove();
-	var xmlCuest=[],xmlTemas=[],xmlTemaRef=[],xmlTemaInst=[],xmlTemaCenso=[],xmlTemaLey=[],xmlST=[],xmlSubTemas=[];
 	var barrasChart = barChart()
-			.x(d3.scaleLinear([0,750]).domain([0,100]))
-			.y(d3.scaleLinear([50,700]).domain([0,100]))
-			.colores(d3.scaleOrdinal(["#93C90F","#EF9600","#00A3E1","#7c5295"]).domain([0,1,2,3]));//*/
-	d3.xml(dir).then(function (dtxml){
-		//console.log(dtxml.documentElement.getElementsByTagName("cant_cuest1")[0].textContent);
-		const cantCuestionarios=dtxml.documentElement.getElementsByTagName("cant_cuest"+opcion)[0].textContent; //array[4]
-		const cantTemas=dtxml.documentElement.getElementsByTagName("numero_temas"+opcion); //array[10,5,4,22]
-		const i1=parseInt(cantTemas[0].textContent),i2=parseInt(cantTemas[1].textContent),
-				i3=parseInt(cantTemas[2].textContent),i4=parseInt(cantTemas[3].textContent);
-		var indice=0,cnt=0;
-		var nombreCuest,nombre_tema;
-		var numtemas,valorNum,idCuest,cant,idc,idtema,cantidadxtema,valorxtema;
-		//------------------------------- cuestionarios
-		idCuest=dtxml.documentElement.getElementsByTagName("idcuestionario"+opcion);
-		nombreCuest=dtxml.documentElement.getElementsByTagName("nombre_cuestionario"+opcion);
-		numtemas=dtxml.documentElement.getElementsByTagName("numero_temas"+opcion);
-		cant = dtxml.documentElement.getElementsByTagName("cantidad"+opcion);
-		valorNum = dtxml.documentElement.getElementsByTagName("valor"+opcion);
-		xmlCuest=d3.range(0,cantCuestionarios).map(function (d,i){
-			return {id:parseInt(idCuest[i].textContent),n:nombreCuest[i].textContent,
-					nt:parseInt(numtemas[i].textContent),c:parseInt(cant[i].textContent),v:parseFloat(valorNum[i].textContent)};
-		});
-		//------------------------------- temas
-		idc=dtxml.documentElement.getElementsByTagName("idc"+opcion);
-		idtema=dtxml.documentElement.getElementsByTagName("idtema"+opcion);
-		nombre_tema=dtxml.documentElement.getElementsByTagName("nombre_tema"+opcion);
-		cantsubtemas=dtxml.documentElement.getElementsByTagName("cant_subtemas"+opcion);
-		cantidadxtema=dtxml.documentElement.getElementsByTagName("cantidadportema"+opcion);
-		valorxtema=dtxml.documentElement.getElementsByTagName("valorportema"+opcion);
-		xmlTemaRef=d3.range(0,i1).map(function (d,i){
-			return {id:parseInt(idc[i].textContent),idt:parseInt(idtema[i].textContent),
-					n:nombre_tema[i].textContent,cst:parseInt(cantsubtemas[i].textContent),
-					c:parseInt(cantidadxtema[i].textContent),v:parseFloat(valorxtema[i].textContent)};
-		});
-		xmlTemaInst=d3.range(0,i2).map(function (d,i){
-			return {id:parseInt(idc[i+i1].textContent),idt:parseInt(idtema[i+i1].textContent),
-					n:nombre_tema[i+i1].textContent,cst:parseInt(cantsubtemas[i+i1].textContent),
-					c:parseInt(cantidadxtema[i+i1].textContent),v:parseFloat(valorxtema[i+i1].textContent)};
-		});
-		xmlTemaCenso=d3.range(0,i3).map(function (d,i){
-			return {id:parseInt(idc[i+i1+i2].textContent),idt:parseInt(idtema[i+i1+i2].textContent),
-					n:nombre_tema[i+i1+i2].textContent,cst:parseInt(cantsubtemas[i+i1+i2].textContent),
-					c:parseInt(cantidadxtema[i+i1+i2].textContent),v:parseFloat(valorxtema[i+i1+i2].textContent)};
-		});
-		xmlTemaLey=d3.range(0,i4).map(function (d,i){
-			return {id:parseInt(idc[i+i1+i2+i3].textContent),idt:parseInt(idtema[i+i1+i2+i3].textContent),
-					n:nombre_tema[i+i1+i2+i3].textContent,cst:parseInt(cantsubtemas[i+i1+i2+i3].textContent),
-					c:parseInt(cantidadxtema[i+i1+i2+i3].textContent),v:parseFloat(valorxtema[i+i1+i2+i3].textContent)};
-		});
-		xmlTemas.push(xmlTemaRef);
-		xmlTemas.push(xmlTemaInst);
-		xmlTemas.push(xmlTemaCenso);
-		xmlTemas.push(xmlTemaLey);
-		//------------------------------------- subtemas
-		idt=dtxml.documentElement.getElementsByTagName("idt"+opcion);
-		idsubtema=dtxml.documentElement.getElementsByTagName("idsubtema"+opcion);
-		nombre_subtema=dtxml.documentElement.getElementsByTagName("nombre_subtema"+opcion);
-		cantidadxsubtema=dtxml.documentElement.getElementsByTagName("cantidadporsubtema"+opcion);
-		valorxsubtema=dtxml.documentElement.getElementsByTagName("valorporsubtema"+opcion);
-		for (var k=0;k<cantsubtemas.length;k++)
-		{
-			cnt=0;
-			xmlST=d3.range(0,parseInt(cantsubtemas[k].textContent)).map(function (d,i){
-				cnt=cnt+1;
-				return {idt:parseInt(idt[i+indice].textContent),idst:parseInt(idsubtema[i+indice].textContent),
-						n:nombre_subtema[i+indice].textContent,c:parseInt(cantidadxsubtema[i+indice].textContent),
-						v:parseFloat(valorxsubtema[i+indice].textContent)};
-			});
-			xmlSubTemas.push(xmlST);
-			indice=indice+cnt;
-		}
-		
-		barrasChart.datos(xmlCuest);
-		barrasChart.datos1(xmlTemas);
-		barrasChart.datos2(xmlSubTemas);
-		barrasChart.render();//*/
-	});
+		.x(d3.scaleLinear([0,750]).domain([0,100]))
+		.y(d3.scaleLinear([50,700]).domain([0,100]))
+		.colores(d3.scaleOrdinal(["#93C90F","#EF9600","#00A3E1","#7c5295"]).domain([0,1,2,3]));
+	barrasChart.datos(xmlCuest);
+	barrasChart.datos1(xmlTemas);
+	barrasChart.datos2(xmlSubTemas);
+	barrasChart.render();//*/
 }
 function barChart ()
 {
@@ -1276,12 +1204,6 @@ jQuery(document).on('click', '#graficar', function (e) {
 	}
 });
 
-
-function dibujar()
-{
-	
-	renderCuerdas(M,"Pertenece al Organo Ejecutivo");
-}
 //Definir el objeto fechas
 function Datos(){
 	this.fecha_inicio = '';
