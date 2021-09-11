@@ -36,5 +36,19 @@ class Actor_model extends CI_Model
 		$q=$this->db->get('actor');
 		return $q->result();
 	}
+
+	public function leerActoresNoticia($idnoticia)
+	{
+		$sql = "SELECT *  "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia   "
+			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
+			."WHERE n.idnoticia = ?  "
+			."  "
+			."  "
+			."  ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->result();
+	}
 	
 }

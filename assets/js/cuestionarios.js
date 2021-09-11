@@ -546,6 +546,16 @@ $('#formulario_ley').submit(function (e) {
 	}
 });
 
+$('#nuevos_temas').submit(function (e) {
+	var numero_temas_seleccionados;
+	numero_temas_seleccionados = $('input[name="idtema[]"]:checked').length;
+	if(numero_temas_seleccionados==0){
+		e.preventDefault();
+		$('#temasinseleccionar').modal("show");
+	}
+});
+
+
 //Validador de los subtemas
 
 /*$('#formulariosub_ley').submit(function (e) {
@@ -554,5 +564,7 @@ $('#formulario_ley').submit(function (e) {
 	e.preventDefault();
 	$('#subtemasleyessinseleccion').modal("show");
 });*/
+
+
 
 

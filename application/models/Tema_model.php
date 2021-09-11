@@ -68,6 +68,7 @@ class Tema_model extends CI_Model
 		return $qry->result();
 	}
 
+
 	//Leer temas por identificador de formulario
 	public function leerTemasPorFormulario($identificador)
 	{
@@ -79,6 +80,40 @@ class Tema_model extends CI_Model
 		$qry = $this->db->query($sql, [$identificador, ]);
 		return $qry->result();
 	}
+
+
+	//Lee todos los temas de una noticia
+	public function leerTemasDeUnaNoticia($idnoticia)
+	{
+		$sql = "SELECT tema.idtema, tema.nombre_tema  "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema  "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
+			."WHERE n.idnoticia = ?  "
+			."GROUP BY tema.idtema  "
+			."  ";
+
+		$qry = $this->db->query($sql, [$idnoticia,]);
+		return $qry->result();
+	}
+
+	//Lee otro tema de una noticia
+	public function leerOtrotemaDeUnaNoticia($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n    "
+			."LEFT JOIN noticia_otrotema ON noticia_otrotema.rel_idnoticia = n.idnoticia   "
+			."LEFT JOIN otrotema ON otrotema.idotrotema = noticia_otrotema.rel_idotrotema  "
+			."WHERE n.idnoticia = ?  "
+			."  "
+			." "
+			."  ";
+
+		$qry = $this->db->query($sql, [$idnoticia,]);
+		return $qry->row();
+	}
+
 
 
 
