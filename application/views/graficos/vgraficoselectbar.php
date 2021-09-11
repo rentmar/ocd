@@ -10,14 +10,14 @@
 		<div class="row">
 			<div class="col-sm-2">
 				<button type="submit" name="accion" value="1" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Cuestionarios
+					Nacional
 				</button>
 			</div>
-			<!--<div class="col-sm-2">
+			<div class="col-sm-2">
 				<button type="submit" name="accion" value="2" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					NO definido
+					Departamental
 				</button>
-			</div>-->
+			</div>
 			<div class="col-sm-2">
 				<a class="btn btn-danger" href="<?php echo site_url('Graficos'); ?>">Atras</a>
 			</div>

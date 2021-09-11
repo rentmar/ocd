@@ -69,6 +69,15 @@ class Graficos_model extends CI_Model
 		$q=$this->db->get("leyes");
 		return count($q->result());
 	}
+	public function leerNumLeyesDpto($idd)
+	{$sql="SELECT leyes.idleyes
+			FROM leyes
+			LEFT JOIN cuestionario ON leyes.rel_idcuestionario=cuestionario.idcuestionario 
+			LEFT JOIN users ON leyes.rel_idusuario = users.id "
+			."WHERE users.rel_iddepartamento = ".$idd;
+		$q = $this->db->query($sql);
+		return count($q->result());
+	}
 	public function leerNumCuestionarioDepartamento($idd,$idc)
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,cuestionario.nombre_cuestionario
@@ -78,6 +87,20 @@ class Graficos_model extends CI_Model
 			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
 			."WHERE departamento.iddepartamento=".$idd
 			." AND cuestionario.idcuestionario=".$idc;
+		$q = $this->db->query($sql);
+		return count($q->result());
+	}
+	public function leerNumTemaDepartamento($idd,$idt)
+	{
+		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,tema.idtema,tema.nombre_tema
+			FROM noticia_subtema
+			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
+			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema
+			LEFT JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
+			LEFT JOIN users ON noticia.rel_idusuario = users.id
+			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			."WHERE departamento.iddepartamento=".$idd
+			." AND tema.idtema=".$idt;
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
@@ -93,7 +116,7 @@ class Graficos_model extends CI_Model
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
-	public function leerNumActorDepartamento($idd,$ida)
+	public function leerNumActorDepartamento($idd)
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,actor.idactor,actor.nombre_actor
 			FROM noticia_actor
@@ -101,8 +124,7 @@ class Graficos_model extends CI_Model
 			LEFT JOIN noticia ON noticia_actor.rel_idnoticia=noticia.idnoticia
 			LEFT JOIN users ON noticia.rel_idusuario = users.id
 			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
-			."WHERE departamento.iddepartamento=".$idd
-			." AND actor.idactor=".$ida;
+			."WHERE departamento.iddepartamento=".$idd;
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
@@ -128,6 +150,17 @@ class Graficos_model extends CI_Model
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
+	public function leerNumCuestionarioNoticiaDepto($idc,$idd)
+	{
+		$sql="SELECT cuestionario.idcuestionario,cuestionario.nombre_cuestionario
+			FROM noticia
+			LEFT JOIN cuestionario ON noticia.rel_idcuestionario=cuestionario.idcuestionario 
+			LEFT JOIN users ON noticia.rel_idusuario = users.id "
+			."WHERE cuestionario.idcuestionario=".$idc
+			." AND users.rel_iddepartamento = ".$idd;
+		$q = $this->db->query($sql);
+		return count($q->result());
+	}
 	public function leerNumTemaNoticia($idt)
 	{
 		$sql="SELECT DISTINCT noticia_subtema.rel_idnoticia,tema.idtema 
@@ -138,6 +171,19 @@ class Graficos_model extends CI_Model
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
+	public function leerNumTemaNoticiaDepto($idt,$idd)
+	{
+		$sql="SELECT DISTINCT noticia_subtema.rel_idnoticia,tema.idtema 
+			FROM noticia_subtema
+			LEFT JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
+			LEFT JOIN users ON noticia.rel_idusuario=users.id
+			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
+			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
+			."WHERE tema.idtema=".$idt
+			." AND users.rel_iddepartamento=".$idd;
+		$q = $this->db->query($sql);
+		return count($q->result());
+	}
 	public function leerNumTemaLey($idt)
 	{
 		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,tema.idtema 
@@ -145,6 +191,19 @@ class Graficos_model extends CI_Model
 			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema
 			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
 			."WHERE tema.idtema=".$idt;
+		$q = $this->db->query($sql);
+		return count($q->result());
+	}
+	public function leerNumTemaLeyDpto($idt,$idd)
+	{
+		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,tema.idtema 
+			FROM ley_subtema
+			LEFT JOIN leyes ON ley_subtema.rel_idleyes=leyes.idleyes
+			LEFT JOIN users ON leyes.rel_idusuario=users.id
+			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema
+			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
+			."WHERE tema.idtema=".$idt
+			." AND users.rel_iddepartamento=".$idd;
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
@@ -169,12 +228,36 @@ class Graficos_model extends CI_Model
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
+	public function leerNumSubTemaNoticiaDpto($idst,$idd)
+	{
+		$sql="SELECT DISTINCT noticia_subtema.rel_idnoticia,subtema.idsubtema,subtema.nombre_subtema,subtema.rel_idtema 
+			FROM noticia_subtema
+			LEFT JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
+			LEFT JOIN users ON noticia.rel_idusuario=users.id
+			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema "
+			."WHERE subtema.idsubtema=".$idst
+			." AND users.rel_iddepartamento=".$idd;
+		$q = $this->db->query($sql);
+		return count($q->result());
+	}
 	public function leerNumSubTemaLey($idst)
 	{
 		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,subtema.idsubtema,subtema.nombre_subtema,subtema.rel_idtema 
 			FROM ley_subtema
 			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema "
 			."WHERE subtema.idsubtema=".$idst;
+		$q = $this->db->query($sql);
+		return count($q->result());
+	}
+	public function leerNumSubTemaLeyDepto($idst,$idd)
+	{
+		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,subtema.idsubtema,subtema.nombre_subtema,subtema.rel_idtema 
+			FROM ley_subtema
+			LEFT JOIN leyes ON ley_subtema.rel_idleyes=leyes.idleyes
+			LEFT JOIN users ON leyes.rel_idusuario=users.id
+			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema "
+			."WHERE subtema.idsubtema=".$idst
+			." AND users.rel_iddepartamento=".$idd;
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}

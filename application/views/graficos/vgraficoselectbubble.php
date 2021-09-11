@@ -15,12 +15,12 @@
 			</div>
 			<div class="col-sm-2">
 				<button type="submit" name="accion" value="2" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Actores
+					Temas
 				</button>
 			</div>
 			<div class="col-sm-2">
-				<button type="submit" name="accion" value="4" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
-					Tipo Medio
+				<button type="submit" name="accion" value="3" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
+					Actores
 				</button>
 			</div>
 			<div class="col-sm-2">

@@ -71,6 +71,58 @@ class SubTema_model extends CI_Model
 		return $qry->result();
 	}
 
+	//Extraer los subtemas de una noticia
+	public function leerSubtemasDeUnaNoticia($idnoticia)
+	{
+		$sql = "SELECT *  "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema  "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
+			."WHERE n.idnoticia = ?  "
+			."  "
+			."  "
+			." ";
+
+		$qry = $this->db->query($sql, [$idnoticia,]);
+		return $qry->result();
+	}
+
+	//Leer los otros subtemas de una noticia
+	public function  leerOtrossubtemasDeUnaNoticia($idnoticia)
+	{
+		$sql = "SELECT *  "
+			."FROM noticia AS n    "
+			."LEFT JOIN noticia_otrosubtema ON n.idnoticia = noticia_otrosubtema.rel_idnoticia   "
+			."LEFT JOIN otrosubtema ON otrosubtema.idotrosubtema = noticia_otrosubtema.rel_idotrosubtema  "
+			."LEFT JOIN tema ON tema.idtema = otrosubtema.rel_idtema  "
+			."WHERE n.idnoticia = ?  "
+			."  "
+			."  "
+			." ";
+
+		$qry = $this->db->query($sql, [$idnoticia,]);
+		return $qry->result();
+	}
+
+	//Subtema - tema por identificador de subtema
+	public function  leerSubtemaPorIDs($idsubtema)
+	{
+		$sql = "SELECT *  "
+			."FROM subtema AS st     "
+			."LEFT JOIN tema ON st.rel_idtema = tema.idtema   "
+			."WHERE st.idsubtema = ?  "
+			."  "
+			."  "
+			."  "
+			."  "
+			." ";
+
+		$qry = $this->db->query($sql, [$idsubtema,]);
+		return $qry->row();
+	}
+
+
 
 
 
