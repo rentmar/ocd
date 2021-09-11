@@ -44,8 +44,8 @@
 	<element>
 		<iddepartamento>8</iddepartamento>
 		<nombre_departamento>Pando</nombre_departamento>
-		<cantidad>1</cantidad>
-		<radio>1</radio>
+		<cantidad>2</cantidad>
+		<radio>3</radio>
 	</element>
 	<element>
 		<iddepartamento>9</iddepartamento>
