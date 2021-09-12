@@ -1,168 +1,172 @@
-<main role="main"><br>
-	<div class="container">
+<main role="main">
+<br><br>
+	<div class="container-fluid">
 		<div class="row">
-
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-				<div id="caja_boton">
-					<div id="contenedor-submit">
-						<a href="<?php echo site_url('Ley/crearLey');?>">
-							<input type="submit" class="BOTON" value="CREAR">
-						</a>
-						<a href="<?php echo site_url('/'); ?>">
-							<input type="button" class="BOTONROJO" value="CANCELAR">
-						</a>
-					</div>
-				</div>
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
+				<h3 class="text-center" >
+					Leyes Registradas
+				</h3>
 			</div>
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-				<p>
-				<table>
-					<tr id="datos">
-						<th>Descripcion Ley</th>
-						<th>En Tratamiento</th>
-						<th>Sancionada</th>
-						<th>Aprobada</th>
-						<th>Con Modificacion</th>
-						<th>Promulgada</th>
-						<th>Accion</th>
-					</tr>
-					<?php if(isset($leyes)): ?>
-						<?php foreach ($leyes as $l):?>
-							<tr>
-								<td><?php echo $l['descripcion'];?></td>
-								<td>
-									<?php if(empty($l['tratamiento'])): ?>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-square"></i>
-												S/N
-											</label>
-										</div>
-									<?php else: ?>
-										<?php $estado = $l['tratamiento'];  ?>
-										<div class="form-check">
-											<label>
-												Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
-											</label>
-										</div>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-check-square"></i>
-												<!--											<input disabled checked type="checkbox" class="form-check-input" value="">-->
-												<?php echo $estado->codigo_ley; ?>
-											</label>
-											<hr style="height:20px; background-color: red;"  />
-										</div>
-									<?php endif; ?>
-								</td>
-								<td>
-									<?php if(empty($l['sancionado'])): ?>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-square"></i>
-												S/N
-											</label>
-										</div>
-									<?php else: ?>
-										<?php $estado = $l['sancionado'];  ?>
-										<div class="form-check">
-											<label>
-												Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
-											</label>
-										</div>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-check-square"></i>
-												<?php echo $estado->codigo_ley; ?>
-											</label>
-											<hr class="bg-primary" />
-										</div>
-									<?php endif; ?>
-								</td>
-								<td>
-									<?php if(empty($l['aprobado'])): ?>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-square"></i>
-												S/N
-											</label>
-										</div>
-									<?php else: ?>
-										<?php $estado = $l['aprobado'];  ?>
-										<div class="form-check">
-											<label>
-												Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
-											</label>
-										</div>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-check-square"></i>
-												<?php echo $estado->codigo_ley; ?>
-											</label>
-											<hr class="bg-primary" />
-										</div>
-									<?php endif; ?>
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores ">
+				<div>
+					<table id="leyes-tabla" class="table table-striped table-hoover">
+						<thead>
+						<tr id="datos">
+							<th>No</th>
+							<th>Descripcion Ley</th>
+							<th>En Tratamiento</th>
+							<th>Sancionada</th>
+							<th>Aprobada</th>
+							<th>Con Modificacion</th>
+							<th>Promulgada</th>
+							<th>Accion</th>
+						</tr>
+						</thead>
 
-								</td>
-								<td>
-									<?php if(empty($l['modificacion'])): ?>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-square"></i>
-												S/N
-											</label>
-										</div>
-									<?php else: ?>
-										<?php $estado = $l['modificacion'];  ?>
-										<div class="form-check">
-											<label>
-												Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
-											</label>
-										</div>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-check-square"></i>
-												<?php echo $estado->codigo_ley; ?>
-											</label>
-											<hr style="height:20px; background-color: #00CC00;" />
-										</div>
-									<?php endif; ?>
-								</td>
-								<td>
-									<?php if(empty($l['promulgada'])): ?>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-square"></i>
-												S/N
-											</label>
-										</div>
-									<?php else: ?>
-										<?php $estado = $l['promulgada'];  ?>
-										<div class="form-check">
-											<label>
-												Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
-											</label>
-										</div>
-										<div class="form-check">
-											<label class="form-check-label">
-												<i class="far fa-check-square"></i>
-												<?php echo $estado->codigo_ley; ?>
-											</label>
-											<hr  />
-										</div>
-									<?php endif; ?>
+						<tbody>
+						<?php if(isset($leyes)): ?>
+							<?php foreach ($leyes as $l):?>
+								<tr>
+									<td><?php echo $l['idley'];?></td>
+									<td><?php echo $l['descripcion'];?></td>
+									<td>
+										<?php if(empty($l['tratamiento'])): ?>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-square"></i>
+													S/N
+												</label>
+											</div>
+										<?php else: ?>
+											<?php $estado = $l['tratamiento'];  ?>
+											<div class="form-check">
+												<label>
+													Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+												</label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-check-square"></i>
+													<!--											<input disabled checked type="checkbox" class="form-check-input" value="">-->
+													<?php echo $estado->codigo_ley; ?>
+												</label>
+												<hr class="hrrojooscuro" >
+											</div>
+										<?php endif; ?>
+									</td>
+									<td>
+										<?php if(empty($l['sancionado'])): ?>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-square"></i>
+													S/N
+												</label>
+											</div>
+										<?php else: ?>
+											<?php $estado = $l['sancionado'];  ?>
+											<div class="form-check">
+												<label>
+													Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+												</label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-check-square"></i>
+													<?php echo $estado->codigo_ley; ?>
+												</label>
+												<hr class="hrrojo" >
+											</div>
+										<?php endif; ?>
+									</td>
+									<td>
+										<?php if(empty($l['aprobado'])): ?>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-square"></i>
+													S/N
+												</label>
+											</div>
+										<?php else: ?>
+											<?php $estado = $l['aprobado'];  ?>
+											<div class="form-check">
+												<label>
+													Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+												</label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-check-square"></i>
+													<?php echo $estado->codigo_ley; ?>
+												</label>
+												<hr class="hramarillo">
+											</div>
+										<?php endif; ?>
 
-								</td>
-								<td>
-									<a href="<?php ?>" >
-										<i class="fas fa-info"></i>
-										Info
-									</a>
-								</td>
-							</tr>
-						<?php endforeach; ?>
-					<?php endif; ?>
-				</table>
+									</td>
+									<td>
+										<?php if(empty($l['modificacion'])): ?>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-square"></i>
+													S/N
+												</label>
+											</div>
+										<?php else: ?>
+											<?php $estado = $l['modificacion'];  ?>
+											<div class="form-check">
+												<label>
+													Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+												</label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-check-square"></i>
+													<?php echo $estado->codigo_ley; ?>
+												</label>
+												<hr class="hrverde" >
+											</div>
+										<?php endif; ?>
+									</td>
+									<td>
+										<?php if(empty($l['promulgada'])): ?>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-square"></i>
+													S/N
+												</label>
+											</div>
+										<?php else: ?>
+											<?php $estado = $l['promulgada'];  ?>
+											<div class="form-check">
+												<label>
+													Fecha: <?php echo mdate('%m-%d-%Y', $estado->fecha_estadoley); ?>
+												</label>
+											</div>
+											<div class="form-check">
+												<label class="form-check-label">
+													<i class="far fa-check-square"></i>
+													<?php echo $estado->codigo_ley; ?>
+												</label>
+												<hr class="hrverdeoscuro">
+											</div>
+										<?php endif; ?>
+
+									</td>
+									<td>
+										<a href="<?php echo site_url('Seguimientomonitores/leyInformacion/'.$l['idley']); ?>" data-toggle="tooltip" title="Ver informacion del Registro" >
+											<i class="fas fa-book"></i>
+										</a>
+										<a href="<?php echo site_url('ley/editarLey/'.$l['idley']); ?>"  data-toggle="tooltip" title="Editar Registro" >
+											<i class="fas fa-edit"></i>
+										</a>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						<?php endif; ?>
+						</tbody>
+					</table>
+
+				</div>
 			</div>
 		</div>
 	</div>

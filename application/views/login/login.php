@@ -140,6 +140,22 @@
 	<div>-->
 		<br>
 		<div id="esquinas_redondeadas">
+			
+
+			<div id="Caja_principal">
+				<h3 id="Título_central" > REPOSITORIO DE NOTICIAS </h3>
+				<p>
+					Ingresa a nuestro repositorio de noticias (No necesita registro)
+				</p>
+				<p>
+					<a style="background-color:#474142;" href="<?php echo site_url('repositorio');?>" class="btn btn-info " role="button">
+						Continua al Repositorio
+					</a>
+				</p>
+			</div>
+
+			<br>
+
 			<div id="Caja_principal">
 				<h3 id="Título_central"> Observatorio de la Alianza OCD Bolivia </h3>
 				<p>

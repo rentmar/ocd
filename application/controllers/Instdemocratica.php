@@ -363,11 +363,20 @@ class Instdemocratica extends CI_Controller
 		$dt['otrotema']=$this->Noticia_model->leerOtroTemaNoticia($idnoticia);
 		$dt['otrosubtema']=$this->Noticia_model->leerOtroSubTemaNoticia($idnoticia);
 		$dt['subtemase']=$this->Noticia_model->leerSubtemasNoticia($idnoticia);
-		foreach ($dt['temase'] as $te)
+		if(count($dt['temase'])!=0)
 		{
-			$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
+			foreach ($dt['temase'] as $te)
+			{
+				$subtemas[$te->idtema]=$this->Noticia_model->leerSubtemasPorTema($te->idtema);
+			}
+			$dt['subtemas']=$subtemas;
 		}
-		$dt['subtemas']=$subtemas;
+		else 
+		{
+			$dt['subtemas']=null;
+		}
+		
+		
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vnoticia_editar_inst', $dt);

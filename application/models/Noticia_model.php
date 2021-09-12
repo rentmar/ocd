@@ -387,8 +387,8 @@ class Noticia_model extends CI_Model{
 				$not=count($this->db->get('noticia_otrotema')->result());
 				if ($not==0)
 				{
-					echo "inserta otro tema";
-					echo "<br><br>";
+					//echo "inserta otro tema";
+					//echo "<br><br>";
 					$this->db->insert('otrotema',$dtsotrotema);
 					$idotrotema=$this->db->insert_id();
 					$dtot=array('rel_idnoticia'=>$idn,
@@ -398,8 +398,8 @@ class Noticia_model extends CI_Model{
 				}
 				else
 				{
-					echo "edita otro tema";
-					echo "<br><br>";
+					//echo "edita otro tema";
+					//echo "<br><br>";
 					$this->db->where('rel_idnoticia',$idn);
 					$ot=$this->db->get('noticia_otrotema')->row();
 					$this->db->set('nombre_otrotema',$dtsotrotema['nombre_otrotema']);
@@ -413,8 +413,8 @@ class Noticia_model extends CI_Model{
 				$not=count($this->db->get('noticia_otrotema')->result());
 				if ($not!=0)
 				{
-					echo "borra otro tema";
-					echo "<br><br>";
+					//echo "borra otro tema";
+					//echo "<br><br>";
 					$this->db->where('rel_idnoticia',$idn);
 					$ot=$this->db->get('noticia_otrotema')->row();
 					$idot=$ot->rel_idotrotema;
@@ -425,15 +425,15 @@ class Noticia_model extends CI_Model{
 				}
 				else
 				{
-					echo "sin accion en otro tema";
-					echo "<br><br>";
+					//echo "sin accion en otro tema";
+					//echo "<br><br>";
 				}
 			}
 		
 			if (count($dtchkboxst)!=0)
 			{
-				echo "remplaza subtemas";
-				echo "<br><br>";
+				//echo "remplaza subtemas";
+				//echo "<br><br>";
 				$this->db->where('rel_idnoticia',$idn);
 				$this->db->delete('noticia_subtema');
 				foreach ($dtchkboxst as $idst)
@@ -446,8 +446,8 @@ class Noticia_model extends CI_Model{
 			}
 			else 
 			{
-				echo "borra subtemas";
-				echo "<br><br>";
+				//echo "borra subtemas";
+				//echo "<br><br>";
 				$this->db->where('rel_idnoticia',$idn);
 				$nst=count($this->db->get('noticia_subtema')->result());
 				if ($nst!=0)
@@ -462,8 +462,8 @@ class Noticia_model extends CI_Model{
 				$nost=count($this->db->get('noticia_otrosubtema')->result());
 				if ($nost!=0)
 				{
-					echo "replaza otro subtemas";
-					echo "<br><br>";
+					//echo "replaza otro subtemas";
+					//echo "<br><br>";
 					$this->db->where('rel_idnoticia',$idn);
 					$otrost=$this->db->get('noticia_otrosubtema')->result();
 					foreach ($otrost as $ost)
@@ -485,8 +485,8 @@ class Noticia_model extends CI_Model{
 				}
 				else
 				{
-					echo "inserta otro subtemas";
-					echo "<br><br>";
+					//echo "inserta otro subtemas";
+					//echo "<br><br>";
 					foreach ($dtotrosubtemas as $dtost)
 					{
 						$this->db->insert('otrosubtema',$dtost);
@@ -518,8 +518,8 @@ class Noticia_model extends CI_Model{
 				}
 				else
 				{
-					echo "sin accion subtemas";
-					echo "<br><br>";
+					//echo "sin accion subtemas";
+					//echo "<br><br>";
 				}
 			}
 		$this->db->trans_complete();
@@ -637,7 +637,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
 			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia  "
 			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
-			."WHERE n.esta_activa = 1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			."WHERE n.esta_activa=1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
 			."  ";
 
 		/** @noinspection PhpLanguageLevelInspection */
@@ -647,6 +647,11 @@ class Noticia_model extends CI_Model{
 		array_push($placeholder, $consulta->fecha_fin);
 
 		//Añadir el resto de los discriminantes
+		if($consulta->idcuestionario !=0)
+		{
+			$sql .= "AND cuestionario.idcuestionario = ?  ";
+			array_push($placeholder, $consulta->idcuestionario);
+		}
 		if($consulta->iddepartamento !=0)
 		{
 			//Agregar el discriminante a la sentencia SQL
@@ -858,7 +863,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$idtipomedio = $consulta->idtipomedio;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -866,7 +871,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE tipo_medio.idtipomedio = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE n.esta_activa = 1 AND tipo_medio.idtipomedio = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
 			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$idtipomedio, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -878,7 +883,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$idcuestionario = $consulta->idcuestionario;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -886,7 +891,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE cuestionario.idcuestionario = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
+			."WHERE n.esta_activa = 1 AND  cuestionario.idcuestionario = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
 		$qry = $this->db->query($sql, [$idcuestionario, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
 	}
@@ -896,7 +901,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$iddepartamento = $consulta->iddepartamento;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -904,7 +909,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE departamento.iddepartamento = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE n.esta_activa=1 AND departamento.iddepartamento = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
 			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$iddepartamento, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -915,7 +920,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$iduniversidad = $consulta->iduniversidad;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -923,7 +928,7 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-			."WHERE universidad.iduniversidad = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE n.esta_activa=1 AND  universidad.iduniversidad = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   "
 			."ORDER BY n.fecha_noticia ASC ";
 		$qry = $this->db->query($sql, [$iduniversidad, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -935,12 +940,12 @@ class Noticia_model extends CI_Model{
 		$fecha_inicio = $consulta->fecha_inicio;
 		$fecha_fin = $consulta->fecha_fin;
 		$idtema = $consulta->idtema;
-		$sql = "SELECT t.nombre_tema, t.idtema, subtema.rel_idtema, subtema.idsubtema, subtema.nombre_subtema, noticia_subtema.rel_idsubtema, noticia_subtema.rel_idnoticia, noticia.idnoticia, noticia.titular     "
+		$sql = "SELECT t.nombre_tema, t.idtema, subtema.rel_idtema, subtema.idsubtema, subtema.nombre_subtema, noticia_subtema.rel_idsubtema, noticia_subtema.rel_idnoticia, noticia.idnoticia, noticia.titular, noticia.esta_activa     "
 			."FROM tema AS t     "
 			."LEFT JOIN subtema ON t.idtema = subtema.rel_idtema   "
 			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema   "
 			."LEFT JOIN noticia ON noticia_subtema.rel_idnoticia = noticia.idnoticia   "
-			."WHERE t.idtema = ? AND (noticia.fecha_noticia BETWEEN ? AND ?)   "
+			."WHERE noticia.esta_activa = 1 AND t.idtema = ? AND (noticia.fecha_noticia BETWEEN ? AND ?)   "
 			."GROUP BY noticia.idnoticia   "
 			."     "
 			."   "
@@ -972,7 +977,7 @@ class Noticia_model extends CI_Model{
 		$fecha_fin = $consulta->fecha_fin;
 		$idactor = $consulta->idactor;
 
-		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento   "
+		$sql = "SELECT n.idnoticia, n.fecha_registro, n.fecha_noticia, n.titular, n.resumen, n.url_noticia, medio_comunicacion.idmedio, medio_comunicacion.nombre_medio, tipo_medio.idtipomedio, tipo_medio.nombre_tipo, cuestionario.idcuestionario, cuestionario.nombre_cuestionario, users.id, users.username, universidad.iduniversidad, universidad.nombre_universidad, universidad.sigla_universidad, departamento.iddepartamento, departamento.nombre_departamento, n.esta_activa   "
 			."FROM noticia AS n   "
 			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario   "
 			."LEFT JOIN users ON users.id = n.rel_idusuario   "
@@ -980,9 +985,9 @@ class Noticia_model extends CI_Model{
 			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad   "
 			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio   "
 			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio     "
-                        . "LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia "
-                        . "LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor "
-			."WHERE actor.idactor = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
+			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia "
+            ."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor "
+			."WHERE n.esta_activa=1 AND actor.idactor = ?  AND (n.fecha_noticia BETWEEN ? AND ?)   ";
 		$qry = $this->db->query($sql, [$idactor, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
 	}
@@ -1013,6 +1018,353 @@ class Noticia_model extends CI_Model{
 	}
 
 
-	
+	public function leerTodasLasNoticias()
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN medio_comunicacion ON n.rel_idmedio = medio_comunicacion.idmedio   "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio   "
+			."LEFT JOIN cuestionario ON n.rel_idcuestionario = cuestionario.idcuestionario   "
+			."LEFT JOIN users ON users.id = n.rel_idusuario   "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad   "
+			."     "
+			."ORDER BY n.idnoticia ASC  "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql );
+		return $qry->result();
+	}
+
+	public function cambiarEstado($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'esta_activa' => $estado,
+		];
+		$this->db->where('idnoticia', $identificador);
+		$this->db->update('noticia', $data);
+	}
+
+	public function otroTemaNoticiaPorId($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_otrotema ON n.idnoticia = noticia_otrotema.rel_idnoticia   "
+			."LEFT JOIN otrotema ON noticia_otrotema.rel_idotrotema = otrotema.idotrotema   "
+			."LEFT JOIN cuestionario ON otrotema.rel_idcuestionario = cuestionario.idcuestionario   "
+			."WHERE n.idnoticia = ?  "
+			."ORDER BY n.fecha_noticia ASC   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->row();
+	}
+
+	public function otroSubtemaNoticiaPorId($idnoticia)
+	{
+		$sql = "SELECT *   "
+			."FROM noticia AS n   "
+			."LEFT JOIN noticia_otrosubtema ON n.idnoticia = noticia_otrosubtema.rel_idnoticia   "
+			."LEFT JOIN otrosubtema ON noticia_otrosubtema.rel_idotrosubtema = otrosubtema.idotrosubtema   "
+			."LEFT JOIN tema ON otrosubtema.rel_idtema = tema.idtema   "
+			."LEFT JOIN cuestionario ON tema.rel_idcuestionario = cuestionario.idcuestionario  "
+			."WHERE n.idnoticia = ?   "
+			."ORDER BY n.fecha_noticia ASC   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idnoticia,  ]);
+		return $qry->result();
+
+	}
+
+	public function reportesNoticiasDatosID($parametros)
+	{
+		//Solo la fecha de la noticia
+
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT DISTINCT n.idnoticia, n.esta_activa  "
+			."FROM noticia AS n  "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = n.rel_idcuestionario  "
+			."LEFT JOIN users ON users.id = n.rel_idusuario  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio  "
+			."LEFT JOIN tipo_medio ON tipo_medio.idtipomedio = medio_comunicacion.rel_idtipomedio  "
+			."LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad  "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema  "
+			."LEFT JOIN tema ON tema.idtema = subtema.rel_idtema  "
+			."LEFT JOIN noticia_actor ON noticia_actor.rel_idnoticia = n.idnoticia  "
+			."LEFT JOIN actor ON actor.idactor = noticia_actor.rel_idactor  "
+			."WHERE n.esta_activa=1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			."  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+		//Añadir el resto de los discriminantes
+		if($consulta->idcuestionario !=0)
+		{
+			$sql .= "AND cuestionario.idcuestionario = ?  ";
+			array_push($placeholder, $consulta->idcuestionario);
+		}
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+		if ($consulta->idtipomedio != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tipo_medio.idtipomedio = ?  ";
+			array_push($placeholder, $consulta->idtipomedio);
+		}
+		if ($consulta->idmedio != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND medio_comunicacion.idmedio = ?  ";
+			array_push($placeholder, $consulta->idmedio);
+		}
+		if ($consulta->idactor != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND actor.idactor = ?  ";
+			array_push($placeholder, $consulta->idactor);
+		}
+		if ($consulta->iduniversidad != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND universidad.iduniversidad = ?  ";
+			array_push($placeholder, $consulta->iduniversidad);
+		}
+		if ($consulta->idtema != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tema.idtema = ?   ";
+			array_push($placeholder, $consulta->idtema);
+		}
+		if ($consulta->idsubtema !=0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND subtema.idsubtema = ?  ";
+			array_push($placeholder, $consulta->idsubtema);
+		}
+
+		$sql .= 'ORDER BY n.fecha_noticia ASC   ';
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
+
+
+	public function repositorioNoticias($parametros)
+	{
+		//Solo la fecha de la noticia
+		$consulta = $parametros;
+
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT *  "
+			."FROM noticia AS n  "
+			."LEFT JOIN users ON n.rel_idusuario = users.id  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = users.rel_iddepartamento  "
+			."LEFT JOIN medio_comunicacion ON medio_comunicacion.idmedio = n.rel_idmedio "
+			."LEFT JOIN cuestionario ON n.rel_idcuestionario = cuestionario.idcuestionario  "
+			."LEFT JOIN noticia_subtema ON noticia_subtema.rel_idnoticia = n.idnoticia   "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema  "
+			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema  "
+			."WHERE n.esta_activa = 1 AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+		//Añadir el resto de los discriminantes
+		if($consulta->idcuestionario !=0)
+		{
+			$sql .= "AND cuestionario.idcuestionario = ?  ";
+			array_push($placeholder, $consulta->idcuestionario);
+		}
+		if ($consulta->idtema != 0 )
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND tema.idtema = ?   ";
+			array_push($placeholder, $consulta->idtema);
+		}
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+		$sql .= 'ORDER BY n.fecha_noticia ASC   ';
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+
+	}
+
+
+	//Metodo para el cambio de cuestionario
+	public function cambioCuestionario($datos)
+	{
+		$datos_formulario = $datos;
+		$noticia = $datos_formulario['noticia'];
+		$nuevo_idcuestionario = $datos_formulario['nuevo_idcuestionario'];
+		$temas = $datos_formulario['temas_nuevos'];
+		$subtemas = $datos_formulario['subtemas_nuevos'];
+		$otrossubtemas = $datos_formulario['otrossubtemas_nuevos'] ;
+		$otrotema = $datos_formulario['otrotema_nuevo'];
+		$existe_otro_tema = $datos_formulario['otros_temas_ajustados'];
+		$existe_otro_subtema = $datos_formulario['otros_subtemas_ajustados'];
+		/*
+		 *
+		 * INICIAR LA TRANSACCION
+		 */
+
+		$this->db->trans_begin();
+
+		/*
+		 * Borrar los anteriores registros
+		 *
+		 */
+		//Borrar registro  de noticia_otrosubtema
+		$this->db->delete('noticia_otrosubtema', array('rel_idnoticia' => $noticia->idnoticia));
+
+		//Borrar registro de noticia_otrotema
+		$this->db->delete('noticia_otrotema', array('rel_idnoticia' => $noticia->idnoticia));
+
+		//Borrar registro de noticia_subtema
+		$this->db->delete('noticia_subtema', array('rel_idnoticia' => $noticia->idnoticia));
+
+		/*
+		 * Actualizar el campo rel_idcuestionario de la Tabla Noticia
+		 *
+		 */
+		/** @noinspection PhpLanguageLevelInspection */
+		$data_noticia = [
+			'rel_idcuestionario' => $nuevo_idcuestionario,
+		];
+		$this->db->where('idnoticia', $noticia->idnoticia);
+		$this->db->update('noticia', $data_noticia);
+
+		/*
+		 * Insertar los nuevos registros
+		 *
+		 */
+
+		//Insertar temas y subtemas
+		foreach ($temas as $t)
+		{
+			$idtema = $t;
+			if($idtema!=0)
+			{
+				$stemas = $subtemas[$idtema];
+				foreach ($stemas as $st)
+				{
+					$idsubtema = $st;
+					if($idsubtema!=0)
+					{
+						//Insertar la relacion noticia subtema
+						//echo $idsubtema." / ";
+						/** @noinspection PhpLanguageLevelInspection */
+						$not_subt = [
+							'rel_idnoticia' => $noticia->idnoticia,
+							'rel_idsubtema' => $idsubtema,
+						];
+						$this->db->insert('noticia_subtema', $not_subt);
+					}
+				}
+			}
+		}
+
+		/*
+		 * Insertar Otro tema
+		 *
+		 */
+		if($existe_otro_tema) //Comprobar si existe un otro tema definido
+		{
+			//Insertar otro tema
+			//echo "Registrar otro tema: ".$otrotema;
+			/** @noinspection PhpLanguageLevelInspection */
+			$ot = [
+				'nombre_otrotema' => $otrotema,
+				'rel_idcuestionario' => $noticia->rel_idcuestionario,
+				'rel_idusuario' => $noticia->rel_idusuario,
+			];
+			$this->db->insert('otrotema', $ot);
+			$otro_tema_id = $this->db->insert_id();
+			//Relacion de otro con la noticia
+			/** @noinspection PhpLanguageLevelInspection */
+			$not_ot =[
+				'rel_idnoticia' => $noticia->idnoticia,
+				'rel_idotrotema' => $otro_tema_id,
+			];
+			$this->db->insert('noticia_otrotema', $not_ot);
+		}
+		//insertar otrosubtema
+		if($existe_otro_subtema)
+		{
+			foreach ($temas as $t){
+				$idtema = $t;
+				if($idtema!=0)
+				{
+					$stemas = $subtemas[$idtema];
+					foreach ($stemas as $st)
+					{
+
+						/** @noinspection PhpLanguageLevelInspection */
+						$ot_st = [
+							'nombre_otrosubtema' => $otrossubtemas[$idtema],
+							'rel_idtema' => $idtema,
+						];
+
+						if($otrossubtemas[$idtema]!=''){
+							$this->db->insert('otrosubtema', $ot_st);
+							$otro_st_id = $this->db->insert_id();
+						}
+
+						//Relacion de otrosubtema con la noticia
+						/** @noinspection PhpLanguageLevelInspection */
+						$not_ost = [
+							'rel_idnoticia' => $noticia->idnoticia,
+							'rel_idotrosubtema '=>$otro_st_id,
+						];
+						if($otrossubtemas[$idtema]!=''){
+							$this->db->insert('noticia_otrosubtema', $not_ost);
+						}
+					}
+				}
+			}
+		}
+
+		if ($this->db->trans_status() === FALSE){
+			//Hubo errores en la consulta, entonces se cancela la transacción.
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			//Todas las consultas se hicieron correctamente.
+			$this->db->trans_commit();
+			return true;
+		}
+	}
 
 }

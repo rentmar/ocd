@@ -21,15 +21,17 @@
 		<label for="fecha">Introduzca la fecha:</label><br>
 		<input type="date" id="fecha" name="fecha"
 			   value="<?php
-			   if(isset($ley) && !empty($ley->fecha_registro))
+			   if(isset($ley) && !empty($ley->fecha_ley))
 			   {
-				   echo mdate('%Y-%m-%d', $ley->fecha_registro);
+				   echo mdate('%Y-%m-%d', $ley->fecha_ley);
 			   };
 			   ?>" required >
 		<input type="hidden" id="idformulario" name="idformulario" value="<?php echo $idformulario; ?>" >
 		<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $idusuario;?>" >
 	</div>
 	<br>
+
+	<?php if(isset($ley) && empty($ley->fuente) ): ?>
 	<div class="contenedores">
 		<label>Escoja la fuente:</label><br>
 		<select id="idfuente" name="idfuente" class="form-control" required >
@@ -42,7 +44,27 @@
 		</select>
 	</div>
 	<br>
+	<?php else: ?>
+	<div class="contenedores">
+		<label>Escoja la fuente:</label><br>
+		<select id="idfuente" name="idfuente" class="form-control" required >
+			<option value="" >Seleccione fuente</option>
+			<?php foreach ($fuente_ley as $f): ?>
+				<?php if($f->idfuente == $ley->fuente): ?>
+				<option selected value="<?php echo $f->idfuente;?>" >
+					<?php echo $f->nombre_fuente;?>
+				</option>
+				<?php else: ?>
+				<option value="<?php echo $f->idfuente;?>" >
+					<?php echo $f->nombre_fuente;?>
+				</option>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</select>
+	</div>
+	<?php endif; ?>
 
+	<?php if(isset($ley)&&empty($ley->estado)): ?>
 	<div class="contenedores">
 		<label>Estado actual de la ley pertenece a:</label>
 		<div class="card">
@@ -70,6 +92,33 @@
 		</div>
 	</div>
 	<br>
+	<?php else: ?>
+	<div class="contenedores">
+		<label>Estado actual de la ley pertenece a:</label>
+		<div class="card">
+			<div class="card-body">
+				<?php foreach ($estado_ley as $el): ?>
+					<?php if($el->idestadoley == $ley->estado): ?>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input id="idestadoley" name="idestadoley" checked type="radio" class="form-check-input" value="<?php echo $el->idestadoley;?>">
+								<?php echo $el->nombre_estadoley." - ".$el->porcentaje_estadoley."%"; 	   ?>
+							</label>
+						</div>
+					<?php else: ?>
+						<div class="form-check">
+							<label class="form-check-label">
+								<input id="idestadoley" name="idestadoley" type="radio" class="form-check-input" value="<?php echo $el->idestadoley;?>">
+								<?php echo $el->nombre_estadoley." - ".$el->porcentaje_estadoley."%"; 	   ?>
+							</label>
+						</div>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+	<br>
+	<?php endif; ?>
 
 	<div class="contenedores">
 		<label for="titular">Escriba el codigo de la ley:</label><br>
@@ -79,7 +128,7 @@
 			   {
 				   echo $ley->codigo;
 			   }
-			   ?>"
+			  ?>"
 		>
 	</div>
 	<br>
@@ -123,6 +172,7 @@
 	<br>
 
 
+	<?php if(isset($ley) && empty($ley->temas)): ?>
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest4">
@@ -151,11 +201,80 @@
 			</div>
 		</div>
 	</div>
+	<?php else: ?>
+	<div class="contenedores">
+		<div class="card">
+			<div class="card-header cuest4">
+				<h4 class="text-white">
+					TEMAS
+				</h4>
+			</div>
+			<div class="card-body">
+				<label>Escoge el tema al que está referida la ley :</label><br>
+				<?php foreach ($tema as $a): ?>
+					<?php if(in_array($a['idtema'], $ley->temas)){ ?>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input id="checktema" name="idtema[]" type="checkbox" class="form-check-input"
+								   value="<?php echo $a['idtema']; ?>"  checked  >
+							<?php echo $a['nombre_tema']; ?>
+						</label>
+					</div>
+					<?php }else{ ?>
+					<div class="form-check">
+						<label class="form-check-label">
+							<input id="checktema" name="idtema[]" type="checkbox" class="form-check-input"
+								   value="<?php echo $a['idtema']; ?>"   >
+							<?php echo $a['nombre_tema']; ?>
+						</label>
+					</div>
+
+					<?php } ?>
+
+				<?php endforeach; ?>
+
+				<?php if(in_array(0, $ley->temas)): ?>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="checktema" name="idtema[]" type="checkbox" class="form-check-input"
+							   value="0" checked  >
+						Otro
+					</label>
+				</div>
+				<?php else: ?>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="checktema" name="idtema[]" type="checkbox" class="form-check-input"
+							   value="0"   >
+						Otro
+					</label>
+				</div>
+				<?php endif; ?>
+
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
 
 	<br>
-	<div id="otrotemac">
-
+	<?php if(in_array(0, $ley->temas)): ?>
+	<div id="otrotemac" class="contenedores">
+		<label for="otrotema" >Especifique  otra :</label><br>
+		<input type="text" id="otrotema" name="tema0" placeholder="Otro tema"
+			   class="form-control" required
+			   value="<?php
+			   if(isset($ley) && !empty($ley->otro_tema) )
+			   {
+				   echo $ley->otro_tema;
+			   }
+			   ?>"
+		>
 	</div>
+	<?php else: ?>
+		<div id="otrotemac">
+
+		</div>
+	<?php endif; ?>
 
 	<br>
 	<div id="contenedor-submit">

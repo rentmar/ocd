@@ -32,6 +32,10 @@
 						<?php echo ' '.mdate('%m-%d-%Y', $ley->fecha_ley); ?>
 					</a>
 					<a href="#" class="list-group-item disabled">
+						Fuente:
+						<?php if(isset($fuente_ley)){ echo ' '.$fuente_ley->nombre_fuente;} ?>
+					</a>
+					<a href="#" class="list-group-item disabled">
 						Codigo:
 						<?php echo ' '.$ley->codigo; ?>
 					</a>
@@ -103,15 +107,18 @@
 					<div class="card-body">
 						<?php foreach ($subtemas_sel as $st): ?>
 							<?php if($st['idtema'] == $tm['idtema'] ): ?>
+								<?php if(!is_null($st['idsubtema'])): ?>
 								<div class="form-check">
 									<label class="form-check-label">
-										<input id="checkstema" name=" <?php echo "tema".$tm['idtema']."[]";?>" type="checkbox" class="form-check-input"
-											   value="<?php echo $st['idsubtema']; ?>"   >
+										<input id="checkstema" name="<?php echo "tema".$tm['idtema']."[]"; ?>" type="checkbox" class="form-check-input"
+											   value="<?php echo $st['idsubtema']; ?>" >
 										<?php echo $st['nombre_subtema']; ?>
 									</label>
 								</div>
+								<?php endif; ?>
 							<?php endif; ?>
 						<?php endforeach; ?>
+
 						<div class="form-check">
 							<label class="form-check-label">
 								<input id="checkstema" name=" <?php echo "tema".$tm['idtema']."[]";?>" type="checkbox" class="form-check-input"
@@ -147,3 +154,31 @@
 	</div>
 	<?php echo form_close();?>
 </main>
+
+
+<!-- The Modal de alerta TEMAS SIN SELECCIONAR -->
+<div class="modal fade" id="subtemasleyessinseleccion">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-warning">
+				<h4 class="modal-title text-white ">Alerta</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				Seleccionar por lo menos un subtema
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+

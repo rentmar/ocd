@@ -12,6 +12,7 @@
 				<table class="table table-striped table-hover ">
 					<thead>
 						<tr>
+							<th>No</th>
 							<th>Fecha de Registro</th>
 							<th>Resumen</th>
 							<th>Fuente</th>
@@ -22,6 +23,7 @@
 					<?php if(isset($leyes)): ?>
 						<?php foreach ($leyes as $l): ?>
 						<tr>
+							<td><?php echo $l->idleyes; ?></td>
 							<td><?php echo mdate('%d-%m-%Y', $l->fecha_registro); ?></td>
 							<td><?php echo $l->resumen; ?></td>
 							<td><?php echo $l->nombre_fuente;?></td>

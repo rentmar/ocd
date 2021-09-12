@@ -1,46 +1,1344 @@
-//----------------------------------definicion datos
-var a=400,h=400,fullAngle=2*Math.PI,
-	colores =  d3.schemeCategory10;
-//----------------------------------metodos
-function load ()
-{	
-	d3.select("body").select("h1").text("Iniciando");
+var escalaColores;
+var xmlData=[];
+var labelet = d3.scaleOrdinal(["Reforma Electoral","Institucionalidad Democratica","Censo","Leyes","Actor","Tipo Medio Comunicacion"]).domain([1,2,3,4,5,6]);
+var ucolor = d3.scaleOrdinal(["#33C90F","#CC450F","#33A7F4","#8F7585","#DF1C44","#39A275"]).domain([1,2,3,4,5,6]);
+var lpX= d3.scaleOrdinal([1.5,1.2,1.6,2.0,2.0,1.3,2.0,1.3,1.5,1.4,2.0,1.6]).domain(d3.range(0,11)),
+	lpY= d3.scaleOrdinal([4.7,5.2,5.2,5.0,4.5,4.0,4.0,3.5,3.3,2.8,2.5,2.2]).domain(d3.range(0,11));
+var orX= d3.scaleOrdinal([1.8,1.3,1.9,2.2,1.8,1.5,1.3,2.0,2.6,1.8,1.6,1.9]).domain(d3.range(0,11)),
+	orY= d3.scaleOrdinal([6.2,6.2,5.7,5.9,6.1,6.5,6.2,6.3,6.4,6.4,6.4,6.4]).domain(d3.range(0,11));
+var ptsiX= d3.scaleOrdinal([2.3,2.9,3.1,2.4,1.7,3.0,1.8,2.1,2.5,3.0,3.1,2.8]).domain(d3.range(0,11)),
+	ptsiY= d3.scaleOrdinal([7.6,6.0,6.6,7.0,7.2,7.3,7.8,8.4,8.0,7.8,8.1,8.3]).domain(d3.range(0,11));
+var cbbaX= d3.scaleOrdinal([3.1,3.1,2.6,3.6,2.6,2.7,3.7,3.4,3.5,3.8,3.0,3.0]).domain(d3.range(0,11)),
+	cbbaY= d3.scaleOrdinal([5.2,4.8,4.8,4.6,5.2,5.5,5.3,5.5,5.8,5.9,4.0,5.4]).domain(d3.range(0,11));
+var chuX= d3.scaleOrdinal([4.0,3.5,4,3.6,4.2,3.6,3.4,3.9,4.3,4.6,4.8,5.0]).domain(d3.range(0,11)),
+	chuY= d3.scaleOrdinal([6.8,6.3,6.5,7.0,7.0,7.3,7.6,7.5,7.4,7.4,7.4,7.4]).domain(d3.range(0,11));
+var tjaX= d3.scaleOrdinal([4.0,6.3,4.0,4.5,5.0,3.5,4.5,5.0,4.9,4.0,4.6,3.8]).domain(d3.range(0,11)),
+	tjaY= d3.scaleOrdinal([8.0,7.7,7.8,7.8,7.8,8.0,8.0,8.0,8.2,8.5,8.2,8.2]).domain(d3.range(0,11));
+var pdoX= d3.scaleOrdinal([1.8,1,1.1,1.3,2.2,2.0,2.4,2.6,2.7,3.2,2.9,2.2]).domain(d3.range(0,11)),
+	pdoY= d3.scaleOrdinal([1.4,1.5,1.7,1.9,1.8,1.1,0.8,1.3,0.6,0.7,0.8,1.0]).domain(d3.range(0,11));
+var bniX= d3.scaleOrdinal([3.3,3.0,2.6,4.0,4.4,5.1,4.6,3.7,3.3,3.1,2.6,2.6]).domain(d3.range(0,11)),
+	bniY= d3.scaleOrdinal([3.2,4.3,4.0,4.1,3.3,2.9,2.6,2.4,2.1,1.4,2.1,2.4]).domain(d3.range(0,11));
+var sczX= d3.scaleOrdinal([5.7,5,6.5,7.5,7.0,4.5,4.5,5.5,6.2,4.8,5.8,5.8]).domain(d3.range(0,11)),
+	sczY= d3.scaleOrdinal([5.4,6.5,6.5,6.0,5.2,5.8,4.8,4.8,4.3,3.9,4.0,3.3]).domain(d3.range(0,11));
+function colorRandom(min, max) {
+	var numero=Math.round(Math.random() * (max - min) + min);
+  return numero.toString();
+}
+function opcionBubbleCuest(dir,mp)
+{
+	var cuest = document.getElementById("idcuest").value;
+	renderBubbleChart(dir,cuest,mp);
+}
+function opcionBubbleTemas(dir,mp)
+{
+	var cuest = document.getElementById("idcuesttema").value;
+	renderMultiBubbleChart(dir,cuest,mp);
+}
+function renderBubbleChart(direccion,op,mp)
+{
+	var opcion=op.toString();
+	d3.xml(direccion).then(function (dtxml){
+			xmlData=d3.range(0,9).map(function (d,i){
+				var nombredpto;
+				var valorX,valorY,valorRadio;
+				nombredpto=dtxml.documentElement.getElementsByTagName("nombre_departamento"+opcion)[i].textContent;
+				valorRadio=parseInt(dtxml.documentElement.getElementsByTagName("radio"+opcion)[i].textContent);
+				valorNum = parseInt(dtxml.documentElement.getElementsByTagName("cantidad"+opcion)[i].textContent);
+				switch (nombredpto)
+				{
+					case "La Paz":
+						valorX=lpX(0);
+						valorY=lpY(0);
+						break;
+					case "Oruro":
+						valorX=orX(0);
+						valorY=orY(0);
+						break;
+					case "Potosi":
+						valorX=ptsiX(0);
+						valorY=ptsiY(0);
+						break;
+					case "Cochabamba":
+						valorX=cbbaX(0);
+						valorY=cbbaY(0);
+						break;
+					case "Chuquisaca":
+						valorX=chuX(0);
+						valorY=chuY(0);
+						break;
+					case "Tarija":
+						valorX=tjaX(0);
+						valorY=tjaY(0);
+						break;
+					case "Pando":
+						valorX=pdoX(0);
+						valorY=pdoY(0);
+						break;
+					case "Beni":
+						valorX=bniX(0);
+						valorY=bniY(0);
+						break;
+					case "Santa Cruz":
+						valorX=sczX(0);
+						valorY=sczY(0);
+						break;
+				}
+			return {u:nombredpto,x:valorX,y:valorY,v:valorNum,r:valorRadio};
+			});
+			d3.selectAll("svg").remove();
+			var bChart = bubbleChart()
+			.x(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.y(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.r(d3.scaleLinear().domain([0,10]).range([0,40]))
+			.mapa(mp)
+			.etiqueta(labelet(opcion))
+			.colores(escalaColores)
+			.uncolor(ucolor(opcion));
+			bChart.datos(xmlData);
+			bChart.render();
+		});	//*/
+}
+function renderMultiBubbleChart(direccion,op,mpbo)
+{
+	xmlData=[];
+	var opcion=op.toString();
+	d3.xml(direccion).then(function (dtxml){
+		//-------------------------------- et
+		var numtemas=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_nomtema").length;
+		if (numtemas<=10)
+		{
+			var colorestema=d3.schemeCategory10; 
+		}
+		else
+		{
+			let colorestema=[].concat(d3.schemeCategory10,d3.schemeDark2);
+		}
+		var xmlNomTemas=d3.range(0,numtemas).map(function (d,i){
+			var elemento=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_nomtema")[i].textContent;
+			return {nt:elemento};
+		});
+		//----------------------- dat
+		var nombredpto,nombretema,canttema,radiotema,valorX,valorY;
+		var dtstema=[];
+		for (var k=0;k<numtemas;k++)
+		{
+			dtstema=d3.range(0,9).map(function (d,i){
+				nombredpto=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_departamento")[i+9*k].textContent;
+				nombretema=dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_tema")[i+9*k].textContent;
+				canttema=parseInt(dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_canttema")[i+9*k].textContent);
+				radiotema=parseInt(dtxml.documentElement.getElementsByTagName("cuest"+opcion+"_radiotema")[i+9*k].textContent);
+				switch (nombredpto)
+				{
+					case "La Paz":
+						valorX=lpX(k);
+						valorY=lpY(k);
+						break;
+					case "Oruro":
+						valorX=orX(k);
+						valorY=orY(k);
+						break;
+					case "Potosi":
+						valorX=ptsiX(k);
+						valorY=ptsiY(k);
+						break;
+					case "Cochabamba":
+						valorX=cbbaX(k);
+						valorY=cbbaY(k);
+						break;
+					case "Chuquisaca":
+						valorX=chuX(k);
+						valorY=chuY(k);
+						break;
+					case "Tarija":
+						valorX=tjaX(k);
+						valorY=tjaY(k);
+						break;
+					case "Pando":
+						valorX=pdoX(k);
+						valorY=pdoY(k);
+						break;
+					case "Beni":
+						valorX=bniX(k);
+						valorY=bniY(k);
+						break;
+					case "Santa Cruz":
+						valorX=sczX(k);
+						valorY=sczY(k);
+						break;
+				}
+				return {nd:nombredpto,nt:nombretema,x:valorX,y:valorY,v:canttema,rdio:radiotema};
+			});
+			xmlData.push(dtstema);
+		}
+		//console.log(xmlData);
+		d3.selectAll("svg").remove();
+			var mbChart = multiBubbleChart()
+			.x(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.y(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.r(d3.scaleLinear().domain([0,10]).range([0,17]))//escala bubble
+			.mapa(mpbo)
+			.etiquetaTit(labelet(opcion+1))
+			.etiqueta(xmlNomTemas)
+			.colores(colorestema)
+			.uncolor(ucolor(opcion))
+			.datos(xmlData);
+			mbChart.render();
+			mbChart.ponerEtiquetas();//*/
+	});
+	
 	
 }
-function render() 
+function bubbleChart ()
 {
-	//console.log(colores);
-	var misvg = d3.select("body").append("svg").attr("class","pie").attr("width",a).attr("height",h);
-	function dona(radioInterno,finAngulo)
+	//----------------atributos
+	var _chart={};
+	var _datos=[],
+		_ancho=800, _alto=500,
+		_margenes={arriba:20,derecha:30,abajo:20,izquierda:30},
+		_x,_y,_r,
+		_mapa,
+		_colores,
+		_uncolor,
+		_etiqueta,
+		_svg,
+		_bodyG;
+	//----------------set,get atributos del objeto chart
+	_chart.ancho= function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if (!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.mapa= function (mp){
+		if(!arguments.length) return _mapa; _mapa=mp;
+		return _chart;
+	}
+	_chart.colores = function (c) {
+		if (!arguments.length) return _colores; _colores=c;
+		return _chart;
+	}
+	_chart.uncolor= function (uc){
+		if (!arguments.length) return _uncolor; _uncolor=uc;
+		return _chart;
+	}
+	_chart.x = function (x){
+		if(!arguments.length) return _x; _x=x;
+		return _chart;
+	}
+	_chart.y = function (y){
+		if(!arguments.length) return _y; _y=y;
+		return _chart;
+	}
+	_chart.r = function (r){
+		if(!arguments.length) return _r; _r=r;
+		return _chart;
+	}
+	_chart.datos = function (dts){  
+		_datos.push(dts);
+		return _chart;
+	}
+	_chart.etiqueta = function (e){
+		if (!arguments.length) return _etiqueta; _etiqueta=e;
+		return _chart;
+	}
+	//------------------ metodos del objeto chart
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.style("background-image","url('"+_mapa+"')")
+					.style("background-repeat","no-repeat")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	//-------------------- funciones internas de clase
+	function defineVentana(svg)
 	{
-		if (!finAngulo) finAngulo = fullAngle;
-		var data =[
-			{startAngle:0,endAngle: 0.1*finAngulo},
-			{startAngle:0.1,endAngle: 0.2*finAngulo},
-			{startAngle:0.2,endAngle: 0.4*finAngulo},
-			{startAngle:0.4,endAngle: 0.6*finAngulo},
-			{startAngle:0.6,endAngle: 0.7*finAngulo},
-			{startAngle:0.7,endAngle: 0.9*finAngulo},
-			{startAngle:2,endAngle: finAngulo}
-		];
-		var arco = d3.arc().innerRadius(radioInterno).outerRadius(200);
-		misvg.select("g").remove();
-		misvg.append("g").attr("transform","translate(200,200)")
-			.selectAll("path.arc")
-			.data(data)
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						.style("fill-opacity",0.8)
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderBubbles();
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	function renderBubbles()
+	{
+		_datos.forEach(function (d,i){
+			_bodyG.selectAll("circle")
+					.data(d)
+					.enter()
+					.append("circle")
+					.attr("class","bubble")
+					.style("stroke",_uncolor)
+					.style("fill",_uncolor);
+			_bodyG.selectAll("circle")
+					.data(d)
+					/*.style("stroke",function (d,j){
+						return _colores[j];
+					})
+					.style("fill",function (d,j){
+						return _colores[j];
+					})*/
+					.transition().duration(3000)
+					.attr("cx",function (d){
+					return _x(d.x);
+					})
+					.attr("cy",function (d){
+						return _y(d.y);
+					})
+					.attr("r",function (d){
+						return _r(d.r);
+					});
+			d3.select("svg").append("text")
+							.style("outline","3px solid "+_uncolor)
+							.attr("class","etiqueta")
+							.attr("font-size","1.2em")
+							.attr("font-family","Courier New")
+							.attr("x",20)
+							.attr("y",30)
+							.text(_etiqueta);
+			d3.select("svg").selectAll("text.nombre")
+							.data(d)
+							.enter()
+							.append("text")
+							.attr("class","nombre")
+							.attr("font-size","1em")
+							.attr("x",500)
+							.attr("y",function (d,i){
+								return (100+20*i);
+							})
+							.text(function (d){
+								return d.u+":  "+d.v;
+							});
+		});
+	}
+	
+	//-------------------- objeto _chart
+	return _chart;
+}
+
+function multiBubbleChart()
+{
+	//----------------atributos
+	var _chart={};
+	var _datos=[],
+		_ancho=800, _alto=500,
+		_margenes={arriba:20,derecha:30,abajo:20,izquierda:30},
+		_x,_y,_r,
+		_mapa,
+		_colores,
+		_uncolor,
+		_etiquetaTit,
+		_etiqueta=[],
+		_svg,
+		_bodyG;
+	//----------------set,get atributos del objeto chart
+	_chart.ancho= function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if (!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.mapa= function (mp){
+		if(!arguments.length) return _mapa; _mapa=mp;
+		return _chart;
+	}
+	_chart.colores = function (c) {
+		if (!arguments.length) return _colores; _colores=c;
+		return _chart;
+	}
+	_chart.uncolor= function (uc){
+		if (!arguments.length) return _uncolor; _uncolor=uc;
+		return _chart;
+	}
+	_chart.x = function (x){
+		if(!arguments.length) return _x; _x=x;
+		return _chart;
+	}
+	_chart.y = function (y){
+		if(!arguments.length) return _y; _y=y;
+		return _chart;
+	}
+	_chart.r = function (r){
+		if(!arguments.length) return _r; _r=r;
+		return _chart;
+	}
+	_chart.datos = function (dts){  
+		if(!arguments.length) return _datos; _datos=dts;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.etiqueta = function (e){
+		if (!arguments.length) return _etiqueta; _etiqueta=e;
+		return _chart;
+	}
+	_chart.etiquetaTit = function (et){
+		if (!arguments.length) return _etiquetaTit; _etiquetaTit=et;
+		return _chart;
+	}
+	//------------------ metodos del objeto chart
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.style("background-image","url('"+_mapa+"')")
+					.style("background-repeat","no-repeat")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	_chart.ponerEtiquetas = function (){
+		d3.select("svg").append("text")
+							.style("outline","3px solid "+_uncolor)
+							.attr("class","etiqueta")
+							.attr("font-size","1.2em")
+							.attr("font-family","Courier New")
+							.attr("x",20)
+							.attr("y",30)
+							.text(_etiquetaTit);
+		d3.select("svg").selectAll("text.nombre")
+							.data(_etiqueta)
+							.enter()
+							.append("text")
+							.attr("class","nombre")
+							.attr("font-family","Courier New")
+							.attr("font-size","1em")
+							.attr("x",370)
+							.attr("y",function (d,i){
+								return (50+20*i);
+							})
+							.text(function (d){
+								return d.nt;
+							});//*/
+		d3.select("svg").selectAll("rect.indicador")
+							.data(_etiqueta)
+							.enter()
+							.append("rect")
+							.attr("class","indicador")
+							.style("fill",function (d,i){
+								return _colores[i];
+							})
+							.attr("x",365)
+							.attr("y",function (d,i){
+								return (37+20*i);
+							})
+							.attr("width",5)
+							.attr("height",16);
+	}
+	//-------------------- funciones internas de clase
+	function defineVentana(svg)
+	{
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						.style("fill-opacity",0.8)
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderBubbles();
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	function renderBubbles()
+	{
+		var numtemas=_datos.length;
+		for (var k=0;k<numtemas;k++)
+		{
+			_bodyG.append("g")
+				.style("stroke",_colores[k])
+				.style("fill",_colores[k])
+				.style("fill-opacity",0.7)
+				.attr("class","bubble")
+				.selectAll("circle")
+				.data(_datos[k])
+				.enter()
+				.append("circle")
+				.attr("cx",function (d,i){
+					return _x(d.x);
+				})
+				.attr("cy", function (d,i){
+					return _y(d.y);
+				})
+				.attr("r",function (d,i){
+					return _r(d.rdio);
+				});
+		}
+	}
+	//-------------------- objeto _chart
+	return _chart;
+}
+//-------------------------------------------------------- barrasChart
+//-------------------------------------------------
+//------------------------------------------
+function opcionElegida(dir)
+{
+	var idd=document.getElementById("iddepartamento").value;
+	//renderBarras(dir,idd)
+}
+function renderBarras(MC,MT,MST)
+{
+	d3.selectAll("svg").remove();
+	var barrasChart = barChart()
+		.x(d3.scaleLinear([0,750]).domain([0,100]))
+		.y(d3.scaleLinear([50,700]).domain([0,100]))
+		.colores(d3.scaleOrdinal(["#93C90F","#EF9600","#00A3E1","#7c5295"]).domain([0,1,2,3]));
+	barrasChart.datos(xmlCuest);
+	barrasChart.datos1(xmlTemas);
+	barrasChart.datos2(xmlSubTemas);
+	barrasChart.render();//*/
+}
+function barChart ()
+{
+	//----------------atributos
+	var _chart={};
+	var _datos=[],_datos1=[],_datos2=[],
+		_ancho=800, _alto=600, _barrasIni=20,
+		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
+		_x, _y, _nivel,
+		_colores,
+		_uncolor,
+		_etiqueta,
+		_svg,
+		_bodyG;
+	//-------------------- objeto _chart
+	_chart.ancho = function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if(!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.x = function (x){
+		if(!arguments.length) return _x; _x=x;
+		return _chart;
+	}
+	_chart.y = function (y){
+		if(!arguments.length) return _y; _y=y;
+		return _chart;
+	}
+	_chart.colores = function (c){
+		if(!arguments.length) return _colores; _colores=c;
+		return _chart;
+	}
+	_chart.uncolor = function (uc){
+		if(!arguments.length) return _uncolor; _uncolor=uc;
+		return _chart;
+	}
+	_chart.etiqueta = function (e){
+		if (!arguments.length) return _etiqueta; _etiqueta=e;
+		return _chart;
+	}
+	_chart.datos = function (dts){  
+		if(!arguments.length) return _datos; _datos=dts;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.datos1 = function (dts){  
+		if(!arguments.length) return _datos1; _datos1=dts;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.datos2 = function (dts){  
+		if(!arguments.length) return _datos2; _datos2=dts;
+		//_datos.push(dts);
+		return _chart;
+	}
+	//---------------------- metodo objeto chart
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	//-------------------- funciones internas de clase
+	function defineVentana(svg)
+	{
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderBars();
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	function renderBars()
+	{
+		_nivel=1;
+		_bodyG.append("rect")
+				.attr("class","fondo")
+				.attr("fill","none")
+				.attr("pointer-events","all")
+				.attr("width",_ancho)
+				.attr("height",_alto)
+				.attr("cursor","pointer")
+				.on("click",(event,d) => sube(_nivel));
+		barrasCuest();
+	}
+	function sube(n)
+	{
+		if (n==1) 
+		{
+			console.log("no seube");
+		}
+		else 
+		{
+			_nivel=1;
+			_bodyG.selectAll("rect.selector")
+				.remove()
+			_bodyG.selectAll("rect.tema")
+				.remove()
+			_bodyG.selectAll("rect.subtema")
+				.remove()
+			_bodyG.selectAll(".etiqueta")
+				.remove()
+			barrasCuest();
+		}
+	}
+	function barrasCuest()
+	{
+		_bodyG.selectAll("rect.selector")
+			.remove()
+		_bodyG.selectAll("rect.tema")
+			.remove()
+		_bodyG.selectAll(".etiqueta")
+			.remove()
+	
+		_bodyG.selectAll("rect.selector")
+			.data(_datos)
 			.enter()
-			.append("path")
-			.attr("class","arc")
-			.attr("fill", function (d,i){
-				return colores[i];
+			.append("rect")
+			.attr("class","selector")
+			.attr("fill",function (d,i){
+					return _colores(i);
+				})
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
 			})
-			.attr("d", function (d,i){
-				return arco(d,i);
+			.attr("height",20)
+			.attr("width",15)
+			.attr("pointer-events", "all")
+			.attr("cursor","pointer")
+			.on("click",(event,d)=>bajaTemas(d,_nivel+1));
+		_bodyG.selectAll("rect.cuest")
+			.data(_datos)
+			.enter()
+			.append("rect")
+			.attr("class","cuest")
+			.attr("fill",function (d,i){
+					return _colores(i);
+				})
+			.attr("x",20)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.transition().duration(3000)
+			.attr("width",function (d,i){
+				return _x(d.v);
+			});
+		ponerEtiquetas(_datos);
+	}
+	function bajaTemas(dt,n)
+	{
+		_bodyG.select(".titulo")
+			.remove();
+		_nivel=n;
+		_bodyG.selectAll(".etiqueta")
+			.remove();
+		_bodyG.selectAll(".selector")
+			.remove();
+		_bodyG.selectAll(".cuest")
+			.filter(function (d,i){
+				return d.id != dt.id;
+			})
+			.remove();
+		_bodyG.selectAll(".cuest")
+			.transition().duration(2000)
+			.on("end",function (d,i){
+				barrasTema(d.id);
+				return "";
+			})
+			.attr("x",0)
+			.attr("y",_barrasIni)
+			.attr("width",15)
+			.attr("height",function (d){
+				return (d.nt*20+d.nt*5);
 			});
 	}
-	dona(100);
+	function barrasTema(ident)
+	{
+		_bodyG.select(".cuest")
+			.remove();
+		_bodyG.selectAll("rect.selector")
+			.data(_datos1[ident-1])
+			.enter()
+			.append("rect")
+			.attr("class","selector")
+			.attr("fill",_colores(ident-1))
+			.attr("pointer-events", "all")
+			.attr("cursor","pointer")
+			.on("click",(event,d)=>bajaSubTemas(d,_nivel+1,_colores(ident-1)))
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.attr("width",15)
+			.transition().duration(2000)
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.attr("width",15)
+		_bodyG.selectAll("rect.tema")
+			.data(_datos1[ident-1])
+			.enter()
+			.append("rect")
+			.attr("class","tema")
+			.attr("fill",_colores(ident-1))
+			.attr("x",20)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.transition().duration(3000)
+			//.delay(2000)
+			.attr("width",function (d){
+				return _x(d.v);
+			});
+		ponerEtiquetas(_datos1[ident-1]);
+	}
+	function bajaSubTemas(dt,n,tcolor)
+	{
+		_bodyG.select(".titulo")
+			.remove();
+		_nivel=n;
+		_bodyG.selectAll(".etiqueta")
+			.remove();
+		_bodyG.selectAll(".selector")
+			.remove();
+		_bodyG.selectAll(".tema")
+			.filter(function (d,i){
+				return (d.idt!=dt.idt);
+			})
+			.remove();
+		_bodyG.selectAll(".tema")
+			.transition().duration(2000)
+			.on("end",function (d,i){
+				barrasSubTemas(d.idt,tcolor);
+				return "";
+			})
+			.attr("x",0)
+			.attr("y",_barrasIni)
+			.attr("width",15)
+			.attr("height",function (d){
+				return (d.cst*20+d.cst*5);
+			});
+	}
+	function barrasSubTemas(idt,barcolor)
+	{
+		_bodyG.select(".tema")
+			.remove();
+		_bodyG.selectAll("rect.selector")
+			.data(_datos2[idt-1])
+			.enter()
+			.append("rect")
+			.attr("class","selector")
+			.attr("fill",barcolor)
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.attr("width",15)
+			.transition().duration(2000)
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.attr("width",15)
+		_bodyG.selectAll("rect.subtema")
+			.data(_datos2[idt-1])
+			.enter()
+			.append("rect")
+			.attr("class","subtema")
+			.attr("fill",barcolor)
+			.attr("x",20)
+			.attr("y",function (d,i){
+				return (_barrasIni+i*25);
+			})
+			.attr("height",20)
+			.transition().duration(3000)
+			//.delay(2000)
+			.attr("width",function (d){
+				return _x(d.v);
+			});
+		ponerEtiquetas(_datos2[idt-1]);
+	}
+	function ponerEtiquetas(dte)
+	{
+		_bodyG.select(".titulo")
+			.remove();
+		if (_nivel==1)
+		{
+			_etiqueta="Cuetionarios";
+		}
+		else if(_nivel==2)
+		{
+			_etiqueta="Temas";
+		}
+		else 
+		{
+			_etiqueta="SubTemas";
+		}
+		_bodyG.append("text")
+			.attr("class","titulo")
+			.attr("font-size","1em")
+			.attr("font-family","Courier New")
+			.attr("x",_ancho/2-70)
+			.attr("y",12)
+			.text(_etiqueta);
+		_bodyG.selectAll("text.etiqueta")
+				.data(dte)
+				.enter()
+				.append("text")
+				.attr("class","etiqueta")
+				.attr("font-size","1em")
+				.attr("x",20)
+				.attr("y",function (d,i){
+					return (_barrasIni+15+25*i);
+				})
+				.text(function (d){
+					return d.c+":  "+d.n;
+				});
+	}
+	//--------------------------------- objeto
+	return _chart;
+}
+//-------------------------------------------------------- cuerdasChart
+//-------------------------------------------------
+//------------------------------------------
+function renderCuerdas(Mtrx,et)
+{
+	/*var M = [[0,0,0,10,0,0],
+			 [0,0,0,0,15,0],
+			 [0,0,0,0,0,20],
+			 [12,0,0,0,0,0],
+			 [0,4,0,0,0,0],
+			 [0,0,6,0,0,0]];*/
+	var dts=Object.assign(Mtrx,
+						{n:["RE-Inicial","ID-Inicial","CE-Inicial","RE-Final","ID-Final","CE-Final"],
+						c:["#33C90F","#CC450F","#33A7F4","#33C90F","#CC450F","#33A7F4"]});
+	var noms = dts.n === undefined ? d3.range(dts.length) : dts.n;
+	var clrs = dts.c === undefined ? d3.quantize(d3.interpolateRainbow,nombres.length) : dts.c;
+	//colr=d3.scaleOrdinal(clrs).domain(nombres);
+	var cChart = cuerdasChart();
+		cChart.datosCuerdas(dts);
+		cChart.colores(clrs);
+		cChart.nombres(noms);
+		cChart.etiqueta(et);
+		cChart.render();
+}
+function cuerdasChart()
+{
+	var _chart={};
+	var _datosCuerdas,
+		_ancho=800, _alto=600,
+		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
+		_ri,_rx,
+		_nombres=[],
+		_colores=[],
+		_cintas,
+		_arcos,
+		_cuerdas,
+		_uncolor,
+		_etiqueta,
+		_svg,
+		_bodyG;
+		
+	_chart.ancho = function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if(!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.colores = function (c){
+		if(!arguments.length) return _colores; _colores=c;
+		return _chart;
+	}
+	_chart.uncolor = function (uc){
+		if(!arguments.length) return _uncolor; _uncolor=uc;
+		return _chart;
+	}
+	_chart.ri = function (r){
+		if(!arguments.length) return _ri; _ri=r;
+		return _chart;
+	}
+	_chart.re = function (r){
+		if(!arguments.length) return _re; _re=r;
+		return _chart;
+	}
+	_chart.etiqueta = function (e){
+		if (!arguments.length) return _etiqueta; _etiqueta=e;
+		return _chart;
+	}
+	_chart.datosCuerdas = function (m){  
+		if(!arguments.length) return _datosCuerdas; _datosCuerdas=m;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.cuerdas = function (c){  
+		if(!arguments.length) return _cuerdas; _cuerdas=c;
+		//_datos.push(dts);
+		return _chart;
+	}
+	_chart.nombres = function (n){  
+		if(!arguments.length) return _nombres; _nombres=n;
+		//_nombres.push();
+		return _chart;
+	}
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	//-------------------- funciones internas de clase
+	function defineVentana(svg)
+	{
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderChords();
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba-_margenes.abajo;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	
+	//-------------------------------------- Chord
+	function renderChords()
+	{
+		var mapNomColor=d3.scaleOrdinal(_nombres,_colores);
+		_re=Math.min((_ancho-100)/2,(_alto-100)/2);
+		_ri= _re-10;
+		//------------------ funciones grafico
+		cints = d3.ribbon() //-------------- f()
+					.radius(_ri-1)
+					.padAngle(1/_ri);
+		arcs = d3.arc()  //--------------f()
+					.innerRadius(_ri)
+					.outerRadius(_re);
+		chrd = d3.chord()  //-------------- f(c)
+					.padAngle(10/_ri)
+					.sortSubgroups(d3.descending)
+					.sortChords(d3.descending);
+		_cuerdas = chrd(_datosCuerdas);
+		console.log(_cuerdas.groups);
+		const grupo = _bodyG.append("g")
+						.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
+						.attr("class","grupo")
+						.selectAll(".grupo")
+						.data(_cuerdas.groups)
+						.join("g")
+						.append("path")
+						.attr("fill",d=>mapNomColor(_nombres[d.index]))
+						.attr("d",arcs);
+		_bodyG.append("g")
+						.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
+						.attr("class","etiq")
+						.selectAll(".etiq")
+						.data(_cuerdas.groups)
+						.join("g")
+						.append("text")
+						.style("font-family","bold")
+						.text(function (d,i){
+							return (_nombres[i]+":"+d.value);
+						})
+						.attr("transform",function (d){
+							return "translate ("+arcs.centroid(d)+")";
+						})
+						.style("text-anchor","middle");
+			
+		_bodyG.append("g")
+			.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
+			.attr("fill-opacity",0.7)
+			.selectAll("path")
+			.data(_cuerdas)
+			.join("path")
+			.style("mix-blend-mode","multiply")
+			.attr("fill",d=>mapNomColor(_nombres[d.source.index]))
+			.attr("d",cints);
+			
+		etiquetarCuerdas();
+	}
+	function etiquetarCuerdas()
+	{
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("font-size","1.5em")
+				.attr("x",400)
+				.attr("y",25)
+				.text(_etiqueta)
+				.style("text-anchor","middle");
+		_bodyG.append("circle")
+				.attr("cx",8)
+				.attr("cy",50)
+				.attr("r",8)
+				.style("fill","#33C90F");
+		
+		_bodyG.append("circle")
+				.attr("cx",8)
+				.attr("cy",80)
+				.attr("r",8)
+				.style("fill","#CC450F");
+		
+		_bodyG.append("circle")
+				.attr("cx",8)
+				.attr("cy",110)
+				.attr("r",8)
+				.style("fill","#33A7F4");
+				
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("x",16)
+				.attr("y",55)
+				.text("Reforma Electoral (RE)");
+				
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("x",16)
+				.attr("y",85)
+				.text("Institucionalidad Democratica (ID)");
+		_bodyG.attr("class","titulo")
+				.append("text")
+				.attr("x",16)
+				.attr("y",115)
+				.text("Censo (CE)");
+	}
+	//------------------------
+	return _chart;
 }
 
 
+jQuery(document).on('click', '#graficar', function (e) {
+	e.preventDefault();
+	var datos_consulta = new Datos();
+	console.log("Boton presionado");
+	//Capturar el valor del primer input date
+	datos_consulta.fecha_inicio = $("input#fecha_inicio").val();
+	//Capturar el valor del segundo input date
+	datos_consulta.fecha_fin = $("input#fecha_fin").val();
+	//Capturar el id dell actor
+	datos_consulta.idactor = $('select#idactor').val();
+	//Capturar el nombre del actor
+	datos_consulta.nombre_actor = $('select#idactor option:selected').text();
 
+	//Validadores
+	if(datos_consulta.idactor == 0)
+	{
+		$('#actorsinseleccionar').modal("show");
+	}
+	else{
+		if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
+		{
+			$('#fechaintervalo').modal("show");
+		}
+		else{
+			console.log(datos_consulta);
+			console.log(JSON.stringify(datos_consulta));
+			$("#contenedor-chart").empty();
+			graficaractorescuerda(datos_consulta)
+
+		}
+	}
+});
+
+//Definir el objeto fechas
+function Datos(){
+	this.fecha_inicio = '';
+	this.fecha_fin = '';
+	this.idactor = '';
+	this.nombre_actor = '';
+}
+
+//Transmision de datos
+//Funcion para extraer actores
+function graficaractorescuerda(datos) {
+	var idactor = datos.idactor;
+	var nombre_actor = datos.nombre_actor;
+	$.ajax({
+		url: baseurl + "/graficos/getmatrizactor",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Esperar..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Exito matriz de adyacencia actores");
+			console.log("idactor:");
+			console.log(idactor);
+			console.log(json);
+			//Aqui va la rutina para grafica
+			//La variable json es la matriz
+			//renderCuerdas(Mtrx);
+			renderCuerdas(json,nombre_actor);
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+
+}
+
+
+/** Rutina para Generar datos y grafica de cuerdas ***/
+jQuery(document).on('click', '#graficar', function (e) {
+	e.preventDefault();
+	var datos_consulta = new Datos();
+	console.log("Boton presionado");
+	//Capturar el valor del primer input date
+	datos_consulta.fecha_inicio = $("input#fecha_inicio").val();
+	//Capturar el valor del segundo input date
+	datos_consulta.fecha_fin = $("input#fecha_fin").val();
+	//Capturar el id dell actor
+	datos_consulta.idactor = $('select#idactor').val();
+	//Capturar el nombre del actor
+	datos_consulta.nombre_actor = $('select#idactor option:selected').text();
+
+	//Validadores
+	if(datos_consulta.idactor == 0)
+	{
+		$('#actorsinseleccionar').modal("show");
+	}
+	else{
+		if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
+		{
+			$('#fechaintervalo').modal("show");
+		}
+		else{
+			console.log(datos_consulta);
+			console.log(JSON.stringify(datos_consulta));
+			$("#contenedor-chart").empty();
+			graficaractorescuerda(datos_consulta)
+
+		}
+	}
+});
+
+
+/** Rutina para Generar datos y grafica de barras nacional ***/
+jQuery(document).on('click', '#graficarbn', function (e) {
+	e.preventDefault();
+	var datos_consulta = new Datos();
+	console.log("Boton graficar barra nacional presionado");
+	//Capturar el valor del primer input date
+	datos_consulta.fecha_inicio = $("input#fecha_inicio_bn").val();
+	//Capturar el valor del segundo input date
+	datos_consulta.fecha_fin = $("input#fecha_fin_bn").val();
+
+	if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
+	{
+		$('#fechaintervalo').modal("show");
+	}
+	else{
+		console.log(datos_consulta);
+		console.log(JSON.stringify(datos_consulta));
+		$("#contenedor-chart").empty();
+		graficarbarras(datos_consulta)
+
+	}
+});
+
+//Transmision de datos
+//Funcion para extraer actores
+function graficarbarras(datos) {
+	$.ajax({
+		url: baseurl + "/graficos/getmatrizbarras",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Esperar..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Exito matriz para barras jerarquicas");
+			//Aqui va la rutina para grafica
+			console.log(json);
+			var mc = json['mc'];
+			var mt = json['mt'];
+			var mst = json['mst'];
+
+			console.log(mc);
+			console.log(mt);
+			console.log(mst);
+
+			renderBarras(mc, mt, mst);
+
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+
+}
 

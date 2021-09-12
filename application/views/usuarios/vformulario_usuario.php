@@ -89,6 +89,7 @@
 								Universidad/Institucion del Usuario
 							</label>
 							<select id="iduniversidad" name="iduniversidad" class="form-control" required>
+								<option value="" >Seleccione Universidad</option>
 								<?php foreach ($universidades as $u): ?>
 									<?php if($grupo==1 && $u->iduniversidad==1) { ?>
 										<option disabled="true" selected="true" value="<?php echo 1; ?>"  >
@@ -96,7 +97,6 @@
 										</option>
 									<?php } ?>
 									<?php if($grupo!=1 && $u->iduniversidad!=1) { ?>
-										<option value="" >Seleccione Universidad</option>
 										<option value="<?php echo $u->iduniversidad; ?>"  >
 										<?php echo $u->nombre_universidad; ?>
 										</option>

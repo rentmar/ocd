@@ -17,8 +17,6 @@ class Inicio extends CI_Controller
 
 	public function index()
 	{
-		//var_dump($this->session->userdata());
-
 
 		if($this->session->edicion_activa)
 		{
@@ -36,6 +34,8 @@ class Inicio extends CI_Controller
 			$this->session->set_userdata('nueva_noticia_ids', [ ]);
 			//redirect('reformaelectoral/editarNoticia/'.$idnoticia);
 		}
+
+		//var_dump($this->session->userdata());
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');

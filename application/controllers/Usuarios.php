@@ -42,7 +42,7 @@ class Usuarios extends CI_Controller
 		$this->form_validation->set_rules('nombre', 'Nombre', 'required');
 		$this->form_validation->set_rules('apellido', 'Apellido', 'required');
 		$this->form_validation->set_rules('carnet', 'Carnet de Identidad', 'required|numeric');
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('password1', 'Confirmar Password', 'required|matches[password]');
 
@@ -91,6 +91,7 @@ class Usuarios extends CI_Controller
 
 	public function editarUsuario($idusuario)
 	{
+		$data['enleyes']=count($this->Departamento_model->leerUsuarioPerteneceGrupo($idusuario,4));
 		$data['grupo']=$this->Departamento_model->leerGrupoPorIdUser($idusuario);
 		$usuario = $this->ion_auth->user($idusuario)->row();
 		$data['usuario'] = $usuario;
@@ -172,7 +173,9 @@ class Usuarios extends CI_Controller
 
 	public function procesarEditar()
 	{
+		$grupocuestionario=$this->input->post('grupoleyes');
 		$idusuario = $this->input->post('idusuario');
+		$idgrupo=$this->input->post('idgrupo');
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('nombre', 'Nombre', 'required');
 		$this->form_validation->set_rules('apellido', 'Apellido', 'required');
@@ -186,25 +189,27 @@ class Usuarios extends CI_Controller
 			$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
 			$this->load->view('usuarios/vformulario_usuario_editar', $data);
 		}else{
-			/** @noinspection PhpLanguageLevelInspection */
+		
 			$datos_extra = [
 				'first_name' => $this->input->post('nombre'),
 				'last_name' => $this->input->post('apellido'),
 				'carnet_identidad' => $this->input->post('carnet'),
 				'geolocalizacion' => $this->input->post('ubicacion'),
-				'rel_iddepartamento' => $this->input->post('departamento'),
+				'rel_iddepartamento' => $this->input->post('iddepartamento'),
 				'direccion' => $this->input->post('direccion'),
+				'rel_iduniversidad'=>$this->input->post('iduniversidad')
 			];
-
-			if($this->ion_auth->update($idusuario, $datos_extra)){
-				//echo "Usuario modificado";
-				redirect('inicio');
-			}else{
-				//echo "Usuario no modificado";
-				redirect('inicio');
+			$this->Departamento_model->modificarUsuario($idusuario,$datos_extra);
+			if ($grupocuestionario!=NULL)
+			{
+				$engrupo=count($this->Departamento_model->leerUsuarioPerteneceGrupo($idusuario,$grupocuestionario));
+				if ($engrupo==0)
+				{
+					$this->Departamento_model->agregarUsuarioAGrupo($idusuario,$grupocuestionario);
+				}
 			}
+			$this->listar($idgrupo);
 		}
-
 
 	}
 

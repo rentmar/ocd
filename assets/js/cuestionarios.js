@@ -484,6 +484,39 @@ $(document).ready(function() {
 		}
 	});
 	$('.simple').select2();
+	$('#noticias-tabla').DataTable({
+		responsive: true,
+		language: {
+			"zeroRecords": "No se encontró ninguna noticia",
+			"lengthMenu":     "Mostrar _MENU_ registros",
+			'search': 'Buscar:',
+			"info": "Mostrando la página _PAGE_ de _PAGES_",
+			"infoEmpty": "No hay registros disponibles",
+			"infoFiltered": "(filtrado de _MAX_ registros totales)",
+			'paginate':{
+				'next': 'Siguiente',
+				'previous': 'Anterior'
+			}
+		}
+	});
+	$('#leyes-tabla').DataTable({
+		responsive: true,
+		language: {
+			"zeroRecords": "No se encontró ninguna noticia",
+			"lengthMenu":     "Mostrar _MENU_ registros",
+			'search': 'Buscar:',
+			"info": "Mostrando la página _PAGE_ de _PAGES_",
+			"infoEmpty": "No hay registros disponibles",
+			"infoFiltered": "(filtrado de _MAX_ registros totales)",
+			'paginate':{
+				'next': 'Siguiente',
+				'previous': 'Anterior'
+			}
+		}
+	});
+
+	$('[data-toggle="tooltip"]').tooltip();
+
 });
 
 //Validador del formulario noticia
@@ -512,6 +545,25 @@ $('#formulario_ley').submit(function (e) {
 		$('#temasinseleccionar').modal("show");
 	}
 });
+
+$('#nuevos_temas').submit(function (e) {
+	var numero_temas_seleccionados;
+	numero_temas_seleccionados = $('input[name="idtema[]"]:checked').length;
+	if(numero_temas_seleccionados==0){
+		e.preventDefault();
+		$('#temasinseleccionar').modal("show");
+	}
+});
+
+
+//Validador de los subtemas
+
+/*$('#formulariosub_ley').submit(function (e) {
+	var numero_subtemas_seleccionados;
+	numero_subtemas_seleccionados = $('input[name="idtema[]"]:checked').length;
+	e.preventDefault();
+	$('#subtemasleyessinseleccion').modal("show");
+});*/
 
 
 
