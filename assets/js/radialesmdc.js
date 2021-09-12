@@ -1,5 +1,9 @@
 //Detectar la presion del boton
 jQuery(document).on('click', '#mcomunicacion', function (e) {
+    $('#actoreS').css("visibility", "hidden");
+    $('#mediosDc').css("visibility", "visible");
+//    document.getElementById("elemento").style.visibility = 'visible';
+ //   $('#elemento').hide();
 	var fechas = new Fechas();
 	console.log("Boton presionado mediosDcomunicacion");
 	//Capturar el valor del primer input date

@@ -681,49 +681,45 @@ class Graficos extends CI_Controller{
 	}
 		public function getactores()
 	{
-//		$json = array();
-		$fecha = json_decode($this->input->post('fecha')) ;
-		$respuesta = $this->Radial_model->leerMactores($fecha);
-//		header('Content-Type: application/json');
+		$fecha = json_decode($this->input->post('fecha'));
+		$fecha_i =$this->fecha_unix($fecha->fecha_inicio);
+        $fecha_f = $this->fecha_unix($fecha->fecha_fin);
+		$respuesta = $this->Radial_model->leerMactores($fecha_i,$fecha_f);
 		echo json_encode($respuesta);
 	}
 		public function getMedioDcomunicacion()
 	{
-//		$json = array();
-		$fecha = json_decode($this->input->post('fecha')) ;
-		$respuesta = $this->Radial_model->leerMmedioDcomunicacion($fecha);
-//		header('Content-Type: application/json');
+		$fecha = json_decode($this->input->post('fecha'));
+		$fecha_i =$this->fecha_unix($fecha->fecha_inicio);
+        $fecha_f = $this->fecha_unix($fecha->fecha_fin);
+		$respuesta = $this->Radial_model->leerMmedioDcomunicacion($fecha_i,$fecha_f);
 		echo json_encode($respuesta);
 	}
 		public function getMCcanalDtv()
 	{
-//		$json = array();
-		$fecha = json_decode($this->input->post('fecha')) ;
-		$respuesta = $this->Radial_model->leerMCcanalDtv($fecha);
-//		header('Content-Type: application/json');
+		$fecha = json_decode($this->input->post('fecha'));
+		$fecha_i =$this->fecha_unix($fecha->fecha_inicio);
+        $fecha_f = $this->fecha_unix($fecha->fecha_fin);
+		$respuesta = $this->Radial_model->leerMCcanalDtv($fecha_i,$fecha_f);
 		echo json_encode($respuesta);
 	}
 		public function getMCemisoraRadial()
 	{
 //		$json = array();
-		$fecha = json_decode($this->input->post('fecha')) ;
-		$respuesta = $this->Radial_model->leerMCemisoraRadial($fecha);
+		$fecha = json_decode($this->input->post('fecha'));
+		$fecha_i =$this->fecha_unix($fecha->fecha_inicio);
+        $fecha_f = $this->fecha_unix($fecha->fecha_fin);
+		$respuesta = $this->Radial_model->leerMCemisoraRadial($fecha_i,$fecha_f);
 //		header('Content-Type: application/json');
 		echo json_encode($respuesta);
 	}
 		public function getMCprensaEscrita()
 	{
 //		$json = array();
-		$fecha = json_decode($this->input->post('fecha')) ;
-		$respuesta = $this->Radial_model->leerMCprensaEscrita($fecha);
-//		header('Content-Type: application/json');
-		echo json_encode($respuesta);
-	}
-		public function getMCtvRural()
-	{
-//		$json = array();
-		$fecha = json_decode($this->input->post('fecha')) ;
-		$respuesta = $this->Radial_model->leerMCtvRural($fecha);
+		$fecha = json_decode($this->input->post('fecha'));
+		$fecha_i =$this->fecha_unix($fecha->fecha_inicio);
+        $fecha_f = $this->fecha_unix($fecha->fecha_fin);
+		$respuesta = $this->Radial_model->leerMCprensaEscrita($fecha_i,$fecha_f);
 //		header('Content-Type: application/json');
 		echo json_encode($respuesta);
 	}
@@ -764,6 +760,12 @@ class Graficos extends CI_Controller{
 		header('Content-Type: application/json');
 		echo json_encode($matriz);
 		//$matriz = $this->matrizCuerdasActorFormulario();
+	}
+		private function fecha_unix($fecha)
+	{
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
 	}
 
 }

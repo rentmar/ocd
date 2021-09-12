@@ -6,10 +6,8 @@ jQuery(document).on('click', '#cdtv', function (e) {
 	fechas.fecha_inicio = $("input#fecha_inicio").val();
 	//Capturar el valor del segundo input date
 	fechas.fecha_fin = $("input#fecha_fin").val();
-//    valorrrr = $("input#cdtv").val();
 //	console.log(fechas);
 //	console.log(JSON.stringify(fechas));
-//    console.log(valorrrr);
 	getmedio1(fechas);
 });
 //Funcion para extraer actores
