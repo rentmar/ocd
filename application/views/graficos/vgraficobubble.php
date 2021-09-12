@@ -37,6 +37,7 @@
 					</ul>
 				</nav>
 				<br>
+				<?php echo form_open('Graficos/llenarDatosBubbleXml');?>
 				<div class="contenedor_graficas">
 					<div class="contenedor_superior" id="bublemap">
 						<h5><b> <?php echo "Grafico de ".$titulo;?> </b></h5>
@@ -66,7 +67,7 @@
 								</select>
 							<?php } ?>
 							<?php if($accion==3) { ?>
-								<?php $direccion="opcionBubbleActor('".base_url()."datos/actor.xml','".base_url()."datos/mBb.svg')";?>
+								<?php $direccion="opcionBubbleActor('".base_url()."datos/actorbubble.xml','".base_url()."datos/mBb.svg')";?>
 								<select onchange="<?php echo $direccion;?>" id="idcuestactor" name="idcuestactor"  required >
 									<option value="" selected >Seleccione Actor</option>
 									<?php foreach ($actores as $a): ?>
@@ -76,7 +77,9 @@
 									<?php endforeach; ?>
 								</select>
 							<?php } ?>
-							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBubble'); ?>">Atras</a>		
+							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBubble'); ?>">Atras</a>
+							<br>
+							<h4><?php echo $fi.' al '.$ff;?></h4>
 						</div>
 						<br>
 						<div id="contenedor-chart">
@@ -86,5 +89,6 @@
 					</div>
 					<br>
 				</div>
+				<?php echo form_close();?>
 		</body>
 </html>

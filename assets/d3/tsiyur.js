@@ -34,6 +34,11 @@ function opcionBubbleTemas(dir,mp)
 	var cuest = document.getElementById("idcuesttema").value;
 	renderMultiBubbleChart(dir,cuest,mp);
 }
+function opcionBubbleActor(dir,mp)
+{
+	var act = document.getElementById("idcuestactor").value;
+	renderBubbleChartActor(dir,act,mp);
+}
 function renderBubbleChart(direccion,op,mp)
 {
 	var opcion=op.toString();
@@ -96,6 +101,71 @@ function renderBubbleChart(direccion,op,mp)
 			.uncolor(ucolor(opcion));
 			bChart.datos(xmlData);
 			bChart.render();
+		});	//*/
+}
+function renderBubbleChartActor(direccion,op,mp)
+{
+	var opcion=op.toString();
+	d3.xml(direccion).then(function (dtxml){
+			xmlData=d3.range(0,9).map(function (d,i){
+				var nombredpto;
+				var valorX,valorY,valorRadio;
+				nombredpto=dtxml.documentElement.getElementsByTagName("nombre_departamento"+opcion)[i].textContent;
+				valorRadio=parseInt(dtxml.documentElement.getElementsByTagName("radio"+opcion)[i].textContent);
+				valorNum = parseInt(dtxml.documentElement.getElementsByTagName("cantidad"+opcion)[i].textContent);
+				switch (nombredpto)
+				{
+					case "La Paz":
+						valorX=lpX(0);
+						valorY=lpY(0);
+						break;
+					case "Oruro":
+						valorX=orX(0);
+						valorY=orY(0);
+						break;
+					case "Potosi":
+						valorX=ptsiX(0);
+						valorY=ptsiY(0);
+						break;
+					case "Cochabamba":
+						valorX=cbbaX(0);
+						valorY=cbbaY(0);
+						break;
+					case "Chuquisaca":
+						valorX=chuX(0);
+						valorY=chuY(0);
+						break;
+					case "Tarija":
+						valorX=tjaX(0);
+						valorY=tjaY(0);
+						break;
+					case "Pando":
+						valorX=pdoX(0);
+						valorY=pdoY(0);
+						break;
+					case "Beni":
+						valorX=bniX(0);
+						valorY=bniY(0);
+						break;
+					case "Santa Cruz":
+						valorX=sczX(0);
+						valorY=sczY(0);
+						break;
+				}
+			return {u:nombredpto,x:valorX,y:valorY,v:valorNum,r:valorRadio};
+			});
+			conosle.log(xmlData);
+			/*d3.selectAll("svg").remove();
+			var bChart = bubbleChart()
+			.x(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.y(d3.scaleLinear().domain([0,10]).range([0,500]))
+			.r(d3.scaleLinear().domain([0,10]).range([0,40]))
+			.mapa(mp)
+			.etiqueta(labelet(5))
+			.colores(escalaColores)
+			.uncolor(ucolor(5));
+			bChart.datos(xmlData);
+			bChart.render();//*/
 		});	//*/
 }
 function renderMultiBubbleChart(direccion,op,mpbo)
@@ -312,12 +382,6 @@ function bubbleChart ()
 					.style("fill",_uncolor);
 			_bodyG.selectAll("circle")
 					.data(d)
-					/*.style("stroke",function (d,j){
-						return _colores[j];
-					})
-					.style("fill",function (d,j){
-						return _colores[j];
-					})*/
 					.transition().duration(3000)
 					.attr("cx",function (d){
 					return _x(d.x);
@@ -350,6 +414,8 @@ function bubbleChart ()
 								return d.u+":  "+d.v;
 							});
 		});
+		
+		
 	}
 	
 	//-------------------- objeto _chart
@@ -434,7 +500,7 @@ function multiBubbleChart()
 		}
 		renderBodyChart(_svg);
 	}
-	_chart.ponerEtiquetas = function (){
+	_chart.ponerEtiquetas = function (){//--------------------etiquetas indicadores
 		d3.select("svg").append("text")
 							.style("outline","3px solid "+_uncolor)
 							.attr("class","etiqueta")
@@ -555,9 +621,9 @@ function renderBarras(MC,MT,MST)
 		.x(d3.scaleLinear([0,750]).domain([0,100]))
 		.y(d3.scaleLinear([50,700]).domain([0,100]))
 		.colores(d3.scaleOrdinal(["#93C90F","#EF9600","#00A3E1","#7c5295"]).domain([0,1,2,3]));
-	barrasChart.datos(xmlCuest);
-	barrasChart.datos1(xmlTemas);
-	barrasChart.datos2(xmlSubTemas);
+	barrasChart.datos(MC);
+	barrasChart.datos1(MT);
+	barrasChart.datos2(MST);
 	barrasChart.render();//*/
 }
 function barChart ()
@@ -1086,7 +1152,7 @@ function cuerdasChart()
 		_cuerdas = chrd(_datosCuerdas);
 		console.log(_cuerdas.groups);
 		const grupo = _bodyG.append("g")
-						.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
+						.attr("transform", "translate(" + (_ancho / 2+50) + "," + (_alto / 2) + ")")
 						.attr("class","grupo")
 						.selectAll(".grupo")
 						.data(_cuerdas.groups)
@@ -1095,7 +1161,7 @@ function cuerdasChart()
 						.attr("fill",d=>mapNomColor(_nombres[d.index]))
 						.attr("d",arcs);
 		_bodyG.append("g")
-						.attr("transform", "translate(" + (_ancho / 2+50) + "," + _alto / 2 + ")")
+						.attr("transform", "translate(" + (_ancho / 2+50) + "," + (_alto / 2) + ")")
 						.attr("class","etiq")
 						.selectAll(".etiq")
 						.data(_cuerdas.groups)
@@ -1106,7 +1172,7 @@ function cuerdasChart()
 							return (_nombres[i]+":"+d.value);
 						})
 						.attr("transform",function (d){
-							return "translate ("+arcs.centroid(d)+")";
+							return "translate ("+arcs.centroid(d)+"), rotate("+angulo(d)+")";
 						})
 						.style("text-anchor","middle");
 			
@@ -1122,12 +1188,17 @@ function cuerdasChart()
 			
 		etiquetarCuerdas();
 	}
+	function angulo(d)
+	{
+		var a = (d.startAngle + d.endAngle)*90/Math.PI - 90;
+		return a > 90 ? a-180:a;
+	}
 	function etiquetarCuerdas()
 	{
 		_bodyG.attr("class","titulo")
 				.append("text")
 				.attr("font-size","1.5em")
-				.attr("x",400)
+				.attr("x",200)
 				.attr("y",25)
 				.text(_etiqueta)
 				.style("text-anchor","middle");
