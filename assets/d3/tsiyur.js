@@ -1245,3 +1245,100 @@ function graficaractorescuerda(datos) {
 	});
 
 }
+
+
+/** Rutina para Generar datos y grafica de cuerdas ***/
+jQuery(document).on('click', '#graficar', function (e) {
+	e.preventDefault();
+	var datos_consulta = new Datos();
+	console.log("Boton presionado");
+	//Capturar el valor del primer input date
+	datos_consulta.fecha_inicio = $("input#fecha_inicio").val();
+	//Capturar el valor del segundo input date
+	datos_consulta.fecha_fin = $("input#fecha_fin").val();
+	//Capturar el id dell actor
+	datos_consulta.idactor = $('select#idactor').val();
+	//Capturar el nombre del actor
+	datos_consulta.nombre_actor = $('select#idactor option:selected').text();
+
+	//Validadores
+	if(datos_consulta.idactor == 0)
+	{
+		$('#actorsinseleccionar').modal("show");
+	}
+	else{
+		if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
+		{
+			$('#fechaintervalo').modal("show");
+		}
+		else{
+			console.log(datos_consulta);
+			console.log(JSON.stringify(datos_consulta));
+			$("#contenedor-chart").empty();
+			graficaractorescuerda(datos_consulta)
+
+		}
+	}
+});
+
+
+/** Rutina para Generar datos y grafica de barras nacional ***/
+jQuery(document).on('click', '#graficarbn', function (e) {
+	e.preventDefault();
+	var datos_consulta = new Datos();
+	console.log("Boton graficar barra nacional presionado");
+	//Capturar el valor del primer input date
+	datos_consulta.fecha_inicio = $("input#fecha_inicio_bn").val();
+	//Capturar el valor del segundo input date
+	datos_consulta.fecha_fin = $("input#fecha_fin_bn").val();
+
+	if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
+	{
+		$('#fechaintervalo').modal("show");
+	}
+	else{
+		console.log(datos_consulta);
+		console.log(JSON.stringify(datos_consulta));
+		$("#contenedor-chart").empty();
+		graficarbarras(datos_consulta)
+
+	}
+});
+
+//Transmision de datos
+//Funcion para extraer actores
+function graficarbarras(datos) {
+	$.ajax({
+		url: baseurl + "/graficos/getmatrizbarras",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Esperar..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Exito matriz para barras jerarquicas");
+			//Aqui va la rutina para grafica
+			console.log(json);
+			var mc = json['mc'];
+			var mt = json['mt'];
+			var mst = json['mst'];
+
+			console.log(mc);
+			console.log(mt);
+			console.log(mst);
+
+			renderBarras(mc, mt, mst);
+
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+
+}
+

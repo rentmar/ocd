@@ -10,6 +10,7 @@
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+			<script>var baseurl = "<?php echo site_url(); ?>";</script>
 			<script type="text/javascript" src="<?php echo base_url().'assets/d3/d3.js';?>"></script>
 			<script type="text/javascript" src="<?php echo base_url().'assets/d3/tsiyur.js';?>"></script>
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/d3/gestilo.css';?>">
@@ -43,10 +44,18 @@
 					</div>
 					<div class="grafico">
 						<div>
-							<?php if($accion==1) { ?>
+							<?php if($accion==1): ?>
 							<?php $direccion="renderBarras('".base_url()."datos/cuestionariobar.xml',0)";?>
-							<button onclick="<?php echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>
-							<?php } ?>
+							<form class="form-inline">
+								<label for="fecha_inicio_bn">Fecha Inicio:</label>
+								<input type="date" id="fecha_inicio_bn" name="fecha_inicio_bn"  class="form-control" required >
+								<label for="fecha_fin_bn">Fecha Fin:</label>
+								<input type="date" id="fecha_fin_bn" name="fecha_fin_bn"  class="form-control" required >
+								<button id="graficarbn" class="btn btn-info" style="background-color:#474142;">Graficar</button>
+								<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBar'); ?>">Atras</a>
+							</form>
+
+							<?php endif; ?>
 							
 							<?php if($accion==2) { ?>
 							<?php $direccion="opcionElegida('".base_url()."datos/cuestionariobar.xml')";?>
@@ -60,7 +69,6 @@
 								<?php endforeach; ?>
 							</select>
 							<?php } ?>
-							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBar'); ?>">Atras</a>
 						</div>
 						<br>
 						<div id="contenedor-chart">
@@ -75,3 +83,28 @@
 
 		</body>
 </html>
+
+<!-- The Modal de alerta ACTOR SIN SELECCIONAR -->
+<div class="modal fade" id="fechaintervalo">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-warning">
+				<h4 class="modal-title text-white ">Alerta</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				Intervalo de fechas incorrecto
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+
+		</div>
+	</div>
+</div>

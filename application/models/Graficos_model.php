@@ -415,5 +415,208 @@ class Graficos_model extends CI_Model
 	 * FIN GRAFICO DE CUERDAS
 	 **/
 
+	/**
+	 * GRAFICO DE Barras
+	 **/
+
+	//Cantidad de temas por cuestionario
+	public function leerCantidadTemasPorCuestionario()
+	{
+		$sql = "SELECT cuestionario.idcuestionario AS id, cuestionario.nombre_cuestionario AS n, COUNT(*) AS nt  "
+			."FROM tema as t   "
+			."LEFT JOIN cuestionario ON t.rel_idcuestionario = cuestionario.idcuestionario  "
+			."GROUP BY cuestionario.idcuestionario  "
+			."  "
+			."  "
+			."  "
+			."  ";
+
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	//Leer cantidad de subtemas por tema
+
+
+	//temas por cuestionario
+	public function leerCantidadSubtemasPorTema($idcuestionario)
+	{
+		$sql = "SELECT tema.rel_idcuestionario AS id, tema.idtema AS idt, tema.nombre_tema AS n, COUNT(subtema.idsubtema) AS cst  "
+			."FROM subtema     "
+			."RIGHT JOIN tema ON subtema.rel_idtema = tema.idtema   "
+			."WHERE tema.rel_idcuestionario = ?  "
+			."GROUP BY tema.idtema  "
+			."  "
+			."  "
+			."  "
+			."  ";
+
+		$qry = $this->db->query($sql, [$idcuestionario,]);
+		return $qry->result();
+	}
+
+	//Temas por subtemas
+	public function leerSubtemasPorTema($idtema)
+	{
+		$sql = "SELECT tema.idtema AS idt, subtema.idsubtema AS idst, subtema.nombre_subtema AS n  "
+			."FROM subtema    "
+			."RIGHT JOIN tema ON subtema.rel_idtema = tema.idtema    "
+			."WHERE tema.idtema = ?  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  ";
+
+		$qry = $this->db->query($sql, [$idtema,]);
+		return $qry->result();
+	}
+
+	//Cantidad de noticias dentro de un intervalo
+	public function cantidadNoticiasIntervaloFechas($fecha0, $fechaf)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia AS n   "
+			."WHERE n.esta_activa = 1  "
+			."AND (n.fecha_noticia BETWEEN ? AND ?) "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+	//Cantidad total de noticias
+
+	//Cantidad de noticias por cuestionario dentro de un intervalo
+	public function cantidadNoticiasFormIntervaloFechas($fecha0, $fechaf, $idcuestionario)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia AS n   "
+			."WHERE n.esta_activa = 1  "
+			."AND n.rel_idcuestionario = ? "
+			."AND (n.fecha_noticia BETWEEN ? AND ?) "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idcuestionario, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+	public function cantidadLeyesPorIntervaloFecha($fecha0, $fechaf)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM leyes   "
+			."WHERE leyes.esta_activa = 1  "
+			."AND (leyes.fecha_registro BETWEEN ? AND ?) "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+
+	}
+
+	//Cantidad de noticias referidas a un tema
+	public function cantidadTemasNoticiaPorIntervaloFechas($fecha0, $fechaf, $idtema)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia    "
+			."LEFT JOIN noticia_subtema ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
+			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
+			."WHERE noticia.esta_activa = 1  "
+			."AND tema.idtema = ? "
+			."AND (noticia.fecha_noticia BETWEEN ? AND ?) "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idtema, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+	//Cantidad de leyes referidas a un tema
+	public function cantidadTemasLeyPorIntervaloFechas($fecha0, $fechaf, $idtema)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM leyes AS l     "
+			."LEFT JOIN ley_subtema ON l.idleyes = ley_subtema.rel_idleyes  "
+			."LEFT JOIN subtema ON ley_subtema.rel_idsubtema = subtema.idsubtema  "
+			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
+			."WHERE l.esta_activa = 1  "
+			."AND tema.idtema = ? "
+			."AND (l.fecha_registro BETWEEN ? AND ?) "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idtema, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+	//Cantidad de noticias referidas a un subtema
+	public function cantidadSubtemasNoticiaPorIntervaloFechas($fecha0, $fechaf, $idsubtema)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia AS n    "
+			."LEFT JOIN noticia_subtema ON n.idnoticia = noticia_subtema.rel_idnoticia "
+			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
+			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
+			."WHERE n.esta_activa = 1  "
+			."AND subtema.idsubtema = ?  "
+			."AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			." "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idsubtema, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+	//Cantidad de noticias referidas a un subtema
+	public function cantidadSubtemasLeyesPorIntervaloFechas($fecha0, $fechaf, $idsubtema)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM leyes    "
+			."LEFT JOIN ley_subtema ON leyes.idleyes = ley_subtema.rel_idleyes "
+			."LEFT JOIN subtema ON ley_subtema.rel_idsubtema = subtema.idsubtema "
+			."WHERE leyes.esta_activa = 1 "
+			."AND subtema.idsubtema = ?  "
+			."AND (leyes.fecha_registro BETWEEN ? AND ?)  "
+			."  "
+			." "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idsubtema, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+
+
+
+	/**
+	 * FIN GRAFICO DE Barras
+	 **/
+
 
 }

@@ -10,6 +10,7 @@ class Graficos extends CI_Controller{
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('Graficos_model');
+		$this->load->model('Tema_model');
 		$this->load->model('Actor_model');
 		$this->load->helper('file');
 		$this->load->model('Radial_model');
@@ -237,386 +238,27 @@ class Graficos extends CI_Controller{
 	}
 	public function llenarDatosBarXml()
 	{
-		$titulo="";
-		$cargado=false;
-		$a=$this->input->post('accion');
-		$dt['accion']=$a;
-		if ($a==1)
-		{	
-			$titulo="Nacional";
-			$opcion=0;
-			$docXml="<root>\n";
-			$cantidades=array();
-			$cuestionarios=$this->Graficos_model->leerCuestionarios();
-			foreach($cuestionarios as $c) //------------------- max cuestionarios
-			{
-				if ($c->nombre_cuestionario!="Leyes")
-				{
-					$num=$this->Graficos_model->leerNumCuestionarioNoticia($c->idcuestionario);
-				}
-				else
-				{
-					$num=$this->Graficos_model->leerNumLeyes();
-				}
-				array_push($cantidades,$num);
-			}
-			$docXml=$docXml."\t<cuestionarios".$opcion.">\n";
-			$docXml=$docXml."\t\t<element>\n\t\t\t<cant_cuest".$opcion.">".count($cuestionarios)."</cant_cuest".$opcion.">\n\t\t</element>\n";
-			foreach ($cuestionarios as $c)
-			{
-				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				
-				$docXml=$docXml."\t\t<element>\n\t\t\t<idcuestionario".$opcion.">".$c->idcuestionario."</idcuestionario".$opcion.">\n\t\t\t";
-				$docXml=$docXml."<nombre_cuestionario".$opcion.">".$c->nombre_cuestionario."</nombre_cuestionario".$opcion.">\n\t\t\t";
-				$docXml=$docXml."<numero_temas".$opcion.">".count($temas)."</numero_temas".$opcion.">\n\t\t\t";
-				if ($c->nombre_cuestionario!="Leyes")
-				{
-					$valor=0;
-					$num=$this->Graficos_model->leerNumCuestionarioNoticia($c->idcuestionario);
-					if (max($cantidades)!=0)
-					{
-						$valor=round($num*100/max($cantidades));
-					}
-					$docXml=$docXml."<cantidad".$opcion.">".$num."</cantidad".$opcion.">\n\t\t\t";
-					$docXml=$docXml."<valor".$opcion.">".$valor."</valor".$opcion.">\n\t\t</element>\n";
-				}
-				else
-				{
-					$valor=0;
-					$num=$this->Graficos_model->leerNumLeyes();
-					if (max($cantidades)!=0)
-					{
-						$valor=round($num*100/max($cantidades));
-					}
-					$docXml=$docXml."<cantidad".$opcion.">".$num."</cantidad".$opcion.">\n\t\t\t";
-					$docXml=$docXml."<valor".$opcion.">".$valor."</valor".$opcion.">\n\t\t</element>\n";
-				}
-			}
-			$docXml=$docXml."\t</cuestionarios".$opcion.">\n";
-			//---------------------------------------temas
-			$docXml=$docXml."\t<temas".$opcion.">\n";
-			foreach ($cuestionarios as $c)
-			{
-				$cantidadesTema=array();
-				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				
-				if ($c->nombre_cuestionario!="Leyes")
-				{
-					foreach ($temas as $t)
-					{
-						$num=$this->Graficos_model->leerNumTemaNoticia($t->idtema);
-						array_push($cantidadesTema,$num);
-					}
-					foreach ($temas as $t)
-					{
-						$num=$this->Graficos_model->leerNumTemaNoticia($t->idtema);
-						$cantsubtemas=$this->Graficos_model->leerCantSubTemasIdTema($t->idtema);
-						$valor=0;
-						if (max($cantidadesTema)!=0)
-						{
-							$valor=round($num*100/max($cantidadesTema));
-						}
-						$docXml=$docXml."\t\t<element>\n\t\t<idc".$opcion.">".$c->idcuestionario."</idc".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<idtema".$opcion.">".$t->idtema."</idtema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<nombre_tema".$opcion.">".$t->nombre_tema."</nombre_tema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cant_subtemas".$opcion.">".$cantsubtemas."</cant_subtemas".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cantidadportema".$opcion.">".$num."</cantidadportema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<valorportema".$opcion.">".$valor."</valorportema".$opcion.">\n\t\t</element>\n";	
-					}
-				}
-				else
-				{
-					foreach ($temas as $t)
-					{
-						$num=$this->Graficos_model->leerNumTemaLey($t->idtema);
-						array_push($cantidadesTema,$num);
-					}
-					foreach ($temas as $t)
-					{
-						$cantsubtemas=$this->Graficos_model->leerCantSubTemasIdTema($t->idtema);
-						$num=$this->Graficos_model->leerNumTemaLey($t->idtema);
-						$valor=0;
-						if (max($cantidadesTema)!=0)
-						{
-							$valor=round($num*100/max($cantidadesTema));
-						}
-						$docXml=$docXml."\t\t<element>\n\t\t<idc".$opcion.">".$c->idcuestionario."</idc".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<idtema".$opcion.">".$t->idtema."</idtema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<nombre_tema".$opcion.">".$t->nombre_tema."</nombre_tema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cant_subtemas".$opcion.">".$cantsubtemas."</cant_subtemas".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cantidadportema".$opcion.">".$num."</cantidadportema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<valorportema".$opcion.">".$valor."</valorportema".$opcion.">\n\t\t</element>\n";	
-					}
-				}
-			}
-			$docXml=$docXml."\t</temas".$opcion.">\n";
-			//-------------------------------------------subtemas
-			$docXml=$docXml."\t<subtemas".$opcion.">\n";
-			foreach ($cuestionarios as $c)
-			{
-				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				foreach ($temas as $t)
-				{
-					$cantsubtemas=array();
-					if ($c->nombre_cuestionario!="Leyes")
-					{
-						$subtemas=$this->Graficos_model->leerSubTemasIdTema($t->idtema);
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaNoticia($st->idsubtema);
-							array_push($cantsubtemas,$numsubtemas);
-						}
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaNoticia($st->idsubtema);
-							$docXml=$docXml."\t<element>\n\t\t<idt".$opcion.">".$st->rel_idtema."</idt".$opcion.">\n\t\t";
-							$docXml=$docXml."<idsubtema".$opcion.">".$st->idsubtema."</idsubtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<nombre_subtema".$opcion.">".$st->nombre_subtema."</nombre_subtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<cantidadporsubtema".$opcion.">".$numsubtemas."</cantidadporsubtema".$opcion.">\n\t\t";
-							if (max($cantsubtemas)!=0)
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".round($numsubtemas*100/max($cantsubtemas))."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-							else
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".max($cantsubtemas)."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-						}
-					}
-					else
-					{
-						$subtemas=$this->Graficos_model->leerSubTemasIdTema($t->idtema);
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaLey($st->idsubtema);
-							array_push($cantsubtemas,$numsubtemas);
-						}
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaLey($st->idsubtema);
-							$docXml=$docXml."\t<element>\n\t\t<idt".$opcion.">".$st->rel_idtema."</idt".$opcion.">\n\t\t";
-							$docXml=$docXml."<idsubtema".$opcion.">".$st->idsubtema."</idsubtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<nombre_subtema".$opcion.">".$st->nombre_subtema."</nombre_subtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<cantidadporsubtema".$opcion.">".$numsubtemas."</cantidadporsubtema".$opcion.">\n\t\t";
-							if (max($cantsubtemas)!=0)
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".round($numsubtemas*100/max($cantsubtemas))."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-							else
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".max($cantsubtemas)."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-						}
-					}
-				}
-			}
-			$docXml=$docXml."\t</subtemas".$opcion.">\n";
-			$docXml=$docXml."</root>\n";
-			if (!write_file('datos/cuestionariobar.xml',$docXml))
-			{
-				$cargado=false;
-			}
-			else
-			{
-				$cargado=true;
-			}
-		}
-		else //--------------------------------------------------------------------- departamental datos
+		$accion = $this->input->post('accion');
+		if($accion == 1)
 		{
-			$titulo="Departamental";
-			$cargado=true;
-			$dptos = $this->Graficos_model->leerDepartamentos();
-			$dt['departamentos'] = $dptos;
-			$docXml="<root>\n";
-			foreach ($dptos as $d)
-			{//---------------------------------inicio
-			$opcion=$d->iddepartamento;
-			$cantidades=array();
-			$cuestionarios=$this->Graficos_model->leerCuestionarios();
-			foreach($cuestionarios as $c) //------------------- max cuestionarios
-			{
-				if ($c->nombre_cuestionario!="Leyes")
-				{
-					$num=$this->Graficos_model->leerNumCuestionarioNoticiaDepto($c->idcuestionario,$d->iddepartamento);
-				}
-				else
-				{
-					$num=$this->Graficos_model->leerNumLeyesDpto($d->iddepartamento);
-				}
-				array_push($cantidades,$num);
-			}
-			$docXml=$docXml."\t<cuestionarios".$opcion.">\n";
-			$docXml=$docXml."\t\t<element>\n\t\t\t<cant_cuest".$opcion.">".count($cuestionarios)."</cant_cuest".$opcion.">\n\t\t</element>\n";
-			foreach ($cuestionarios as $c)
-			{
-				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				
-				$docXml=$docXml."\t\t<element>\n\t\t\t<idcuestionario".$opcion.">".$c->idcuestionario."</idcuestionario".$opcion.">\n\t\t\t";
-				$docXml=$docXml."<nombre_cuestionario".$opcion.">".$c->nombre_cuestionario."</nombre_cuestionario".$opcion.">\n\t\t\t";
-				$docXml=$docXml."<numero_temas".$opcion.">".count($temas)."</numero_temas".$opcion.">\n\t\t\t";
-				if ($c->nombre_cuestionario!="Leyes")
-				{
-					$valor=0;
-					$num=$this->Graficos_model->leerNumCuestionarioNoticiaDepto($c->idcuestionario,$d->iddepartamento);
-					if (max($cantidades)!=0)
-					{
-						$valor=round($num*100/max($cantidades));
-					}
-					$docXml=$docXml."<cantidad".$opcion.">".$num."</cantidad".$opcion.">\n\t\t\t";
-					$docXml=$docXml."<valor".$opcion.">".$valor."</valor".$opcion.">\n\t\t</element>\n";
-				}
-				else
-				{
-					$valor=0;
-					$num=$this->Graficos_model->leerNumLeyesDpto($d->iddepartamento);
-					if (max($cantidades)!=0)
-					{
-						$valor=round($num*100/max($cantidades));
-					}
-					$docXml=$docXml."<cantidad".$opcion.">".$num."</cantidad".$opcion.">\n\t\t\t";
-					$docXml=$docXml."<valor".$opcion.">".$valor."</valor".$opcion.">\n\t\t</element>\n";
-				}
-			}
-			$docXml=$docXml."\t</cuestionarios".$opcion.">\n";
-			//---------------------------------------temas
-			$docXml=$docXml."\t<temas".$opcion.">\n";
-			foreach ($cuestionarios as $c)
-			{
-				$cantidadesTema=array();
-				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				
-				if ($c->nombre_cuestionario!="Leyes")
-				{
-					foreach ($temas as $t)
-					{
-						$num=$this->Graficos_model->leerNumTemaNoticiaDepto($t->idtema,$d->iddepartamento); 
-						array_push($cantidadesTema,$num);
-					}
-					foreach ($temas as $t)
-					{
-						$num=$this->Graficos_model->leerNumTemaNoticiaDepto($t->idtema,$d->iddepartamento);
-						$cantsubtemas=$this->Graficos_model->leerCantSubTemasIdTema($t->idtema);
-						$valor=0;
-						if (max($cantidadesTema)!=0)
-						{
-							$valor=round($num*100/max($cantidadesTema));
-						}
-						$docXml=$docXml."\t\t<element>\n\t\t<idc".$opcion.">".$c->idcuestionario."</idc".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<idtema".$opcion.">".$t->idtema."</idtema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<nombre_tema".$opcion.">".$t->nombre_tema."</nombre_tema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cant_subtemas".$opcion.">".$cantsubtemas."</cant_subtemas".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cantidadportema".$opcion.">".$num."</cantidadportema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<valorportema".$opcion.">".$valor."</valorportema".$opcion.">\n\t\t</element>\n";	
-					}
-				}
-				else
-				{
-					foreach ($temas as $t)
-					{
-						$num=$this->Graficos_model->leerNumTemaLeyDpto($t->idtema,$d->iddepartamento);
-						array_push($cantidadesTema,$num);
-					}
-					foreach ($temas as $t)
-					{
-						$cantsubtemas=$this->Graficos_model->leerCantSubTemasIdTema($t->idtema);
-						$num=$this->Graficos_model->leerNumTemaLeyDpto($t->idtema,$d->iddepartamento);
-						$valor=0;
-						if (max($cantidadesTema)!=0)
-						{
-							$valor=round($num*100/max($cantidadesTema));
-						}
-						$docXml=$docXml."\t\t<element>\n\t\t<idc".$opcion.">".$c->idcuestionario."</idc".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<idtema".$opcion.">".$t->idtema."</idtema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<nombre_tema".$opcion.">".$t->nombre_tema."</nombre_tema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cant_subtemas".$opcion.">".$cantsubtemas."</cant_subtemas".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<cantidadportema".$opcion.">".$num."</cantidadportema".$opcion.">\n\t\t\t";
-						$docXml=$docXml."<valorportema".$opcion.">".$valor."</valorportema".$opcion.">\n\t\t</element>\n";	
-					}
-				}
-			}
-			$docXml=$docXml."\t</temas".$opcion.">\n";
-			//-------------------------------------------subtemas
-			$docXml=$docXml."\t<subtemas".$opcion.">\n";
-			foreach ($cuestionarios as $c)
-			{
-				$temas=$this->Graficos_model->leerTemasIdCuestionaro($c->idcuestionario);
-				foreach ($temas as $t)
-				{
-					$cantsubtemas=array();
-					if ($c->nombre_cuestionario!="Leyes")
-					{
-						$subtemas=$this->Graficos_model->leerSubTemasIdTema($t->idtema);
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaNoticiaDpto($st->idsubtema,$d->iddepartamento);
-							array_push($cantsubtemas,$numsubtemas);
-						}
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaNoticiaDpto($st->idsubtema,$d->iddepartamento);
-							$docXml=$docXml."\t<element>\n\t\t<idt".$opcion.">".$st->rel_idtema."</idt".$opcion.">\n\t\t";
-							$docXml=$docXml."<idsubtema".$opcion.">".$st->idsubtema."</idsubtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<nombre_subtema".$opcion.">".$st->nombre_subtema."</nombre_subtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<cantidadporsubtema".$opcion.">".$numsubtemas."</cantidadporsubtema".$opcion.">\n\t\t";
-							if (max($cantsubtemas)!=0)
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".round($numsubtemas*100/max($cantsubtemas))."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-							else
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".max($cantsubtemas)."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-						}
-					}
-					else
-					{
-						$subtemas=$this->Graficos_model->leerSubTemasIdTema($t->idtema);
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaLeyDepto($st->idsubtema,$d->iddepartamento);
-							array_push($cantsubtemas,$numsubtemas);
-						}
-						foreach ($subtemas as $st)
-						{
-							$numsubtemas=$this->Graficos_model->leerNumSubTemaLeyDepto($st->idsubtema,$d->iddepartamento);
-							$docXml=$docXml."\t<element>\n\t\t<idt".$opcion.">".$st->rel_idtema."</idt".$opcion.">\n\t\t";
-							$docXml=$docXml."<idsubtema".$opcion.">".$st->idsubtema."</idsubtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<nombre_subtema".$opcion.">".$st->nombre_subtema."</nombre_subtema".$opcion.">\n\t\t";
-							$docXml=$docXml."<cantidadporsubtema".$opcion.">".$numsubtemas."</cantidadporsubtema".$opcion.">\n\t\t";
-							if (max($cantsubtemas)!=0)
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".round($numsubtemas*100/max($cantsubtemas))."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-							else
-							{
-								$docXml=$docXml."<valorporsubtema".$opcion.">".max($cantsubtemas)."</valorporsubtema".$opcion.">\n\t</element>\n";	
-							}
-						}
-					}
-				}
-			}
-			$docXml=$docXml."\t</subtemas".$opcion.">\n";
-			}//---------------------------------fin
-			$docXml=$docXml."</root>\n";
-			if (!write_file('datos/cuestionariobar.xml',$docXml))
-			{
-				$cargado=false;
-			}
-			else
-			{
-				$cargado=true;
-			}//*/
+			$data['titulo'] = '';
+			$data['accion'] = $accion;
+			$this->load->view('graficos/vgraficobar', $data);
+		}elseif ($accion==2){
+			$data['titulo'] = '';
+			$data['accion'] = $accion;
+			$this->load->view('graficos/vgraficobar', $data);
 		}
-		$dt['titulo']=$titulo;
-		if ($cargado==false)
-		{
-			$this->load->view('graficos/vgraficosinicio');
-		}
-		else
-		{
-			$this->load->view('graficos/vgraficobar',$dt);
-		}
+
+		//Si la accion es 1 Nacional
+
+		//Si la accion es 2 Departamental
+
+		//vgraficobar.php
+		//
+
 	}
+
 	public function seleccionCuerdas()
 	{	
 		$this->load->view('html/encabezado');
@@ -739,5 +381,280 @@ class Graficos extends CI_Controller{
 		echo json_encode($matriz);
 		//$matriz = $this->matrizCuerdasActorFormulario();
 	}
+
+	//Procedimiento ajax para generar matriz json para barras
+	public function getmatrizbarras()
+	{
+		$datos = json_decode($this->input->post('datos'));
+		$f0 = $datos->fecha_inicio;
+		$ff = $datos->fecha_fin;
+
+		//Datos principal
+		$pre_mc = $this->Graficos_model->leerCantidadTemasPorCuestionario();
+
+		foreach ($pre_mc as $pmc)
+		{
+			if($pmc->id != 4)
+			{
+				$pmc->c = $this->Graficos_model->cantidadNoticiasFormIntervaloFechas($f0, $ff, $pmc->id);
+			}else{
+				$pmc->c = $this->Graficos_model->cantidadLeyesPorIntervaloFecha($f0, $ff);
+			}
+		}
+		//Cantidades
+		$cnt_mayor = [];
+		foreach ($pre_mc as $pmc)
+		{
+			$cnt_mayor[] = $pmc->c;
+		}
+		$mayor = max($cnt_mayor);
+
+		foreach ($pre_mc as $pmc)
+		{
+			$pmc->y = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+		}
+
+		//Matriz de cuestionarios
+		$mc = $pre_mc;
+
+		/*
+		* Matriz  MT (Matriz de Temas)
+		* Matrz MST (Matriz de Subtemas)
+		*/
+		$mt =[];
+		$mst = [];
+		foreach ($mc as $m)
+		{
+			$tm = $this->Graficos_model->leerCantidadSubtemasPorTema($m->id);
+			//Calculo de noticias referidas a un tema
+			foreach ($tm as $t)
+			{
+				if($t->id !=4){
+					$t->c = $this->Graficos_model->cantidadTemasNoticiaPorIntervaloFechas($f0, $ff, $t->idt) ;
+				}else{
+					$t->c = $this->Graficos_model->cantidadTemasLeyPorIntervaloFechas($f0, $ff, $t->idt);
+				}
+			}
+			//Calculo de los porcentajes
+			//Calculo del mayor
+			$cnt_mayor_t = [];
+			foreach ($tm as $t)
+			{
+				$cnt_mayor_t[] = $t->c;
+			}
+			$mayor_t = max($cnt_mayor_t);
+			$cnt_mayor_t = [];
+			//Ajuste de los porcentajes
+			foreach ($tm as $t)
+			{
+				$t->c = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+			}
+
+			//Subtemas
+			foreach ($tm as $t)
+			{
+				//Calculo de las noticias y leyes referidas a un subtema
+				if($t->id != 4)
+				{
+					$st = $this->Graficos_model->leerSubtemasPorTema($t->idt);
+					//Calculo de las noticias referidas a un subtema
+					foreach ($st as $s)
+					{
+						$s->c = $this->Graficos_model->cantidadSubtemasNoticiaPorIntervaloFechas($f0, $ff, $s->idst);
+					}
+				}else{
+					$st = $this->Graficos_model->leerSubtemasPorTema($t->idt);
+					//Calculo de las noticias referidas a un subtema
+					foreach ($st as $s)
+					{
+						$s->c = $this->Graficos_model->cantidadSubtemasLeyesPorIntervaloFechas($f0, $ff, $s->idst);
+					}
+				}
+				//Calculo de la cantidad mayor
+				$cnt_mayor_st = [];
+				foreach ($st as $s)
+				{
+					$cnt_mayor_st[] =  $s->c;
+				}
+				$mayor_st = max($cnt_mayor_st);
+
+				//Ajuste de los porcentajes
+				foreach ($st as $s)
+				{
+					if($mayor_st!=0)
+					{
+						$s->c = round(($s->c/$mayor_st)*100, 0, PHP_ROUND_HALF_UP);
+					}
+					if(is_null($s->idst))
+					{
+						unset($s->idt);
+						unset($s->idst);
+						unset($s->n);
+						unset($s->c);
+					}
+				}
+				$mst[] = $st;
+			}
+			$mt[] = $tm;
+		}
+
+		//Matriz de resultados
+		/** @noinspection PhpLanguageLevelInspection */
+		$resultados = [
+			'mc' => $mc,
+			'mt' => $mt,
+			'mst' => $mst,
+		];
+		header('Content-Type: application/json');
+		echo json_encode($resultados);
+
+
+	}
+
+	public function matrices()
+	{
+		$f0 = $this->fecha_unix('2021-08-01');
+		$ff = $this->fecha_unix('2021-08-31');
+
+		//Datos principal
+		$pre_mc = $this->Graficos_model->leerCantidadTemasPorCuestionario();
+
+		foreach ($pre_mc as $pmc)
+		{
+			if($pmc->id != 4)
+			{
+				$pmc->c = $this->Graficos_model->cantidadNoticiasFormIntervaloFechas($f0, $ff, $pmc->id);
+			}else{
+				$pmc->c = $this->Graficos_model->cantidadLeyesPorIntervaloFecha($f0, $ff);
+			}
+		}
+		//Cantidades
+		$cnt_mayor = [];
+		foreach ($pre_mc as $pmc)
+		{
+			$cnt_mayor[] = $pmc->c;
+		}
+		$mayor = max($cnt_mayor);
+
+		foreach ($pre_mc as $pmc)
+		{
+			$pmc->y = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+		}
+
+		//Matriz de cuestionarios
+		$mc = $pre_mc;
+		var_dump($mc);
+
+		echo "<br><br><br>";
+
+		/*
+		* Matriz  MT (Matriz de Temas)
+		* Matrz MST (Matriz de Subtemas)
+		*/
+		$mt =[];
+		$mst = [];
+		foreach ($mc as $m)
+		{
+			$tm = $this->Graficos_model->leerCantidadSubtemasPorTema($m->id);
+			//Calculo de noticias referidas a un tema
+			foreach ($tm as $t)
+			{
+				if($t->id !=4){
+					$t->c = $this->Graficos_model->cantidadTemasNoticiaPorIntervaloFechas($f0, $ff, $t->idt) ;
+				}else{
+					$t->c = $this->Graficos_model->cantidadTemasLeyPorIntervaloFechas($f0, $ff, $t->idt);
+				}
+			}
+			//Calculo de los porcentajes
+			//Calculo del mayor
+			$cnt_mayor_t = [];
+			foreach ($tm as $t)
+			{
+				$cnt_mayor_t[] = $t->c;
+			}
+			$mayor_t = max($cnt_mayor_t);
+			$cnt_mayor_t = [];
+			//Ajuste de los porcentajes
+			foreach ($tm as $t)
+			{
+				$t->c = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+			}
+
+			//Subtemas
+			foreach ($tm as $t)
+			{
+				//Calculo de las noticias y leyes referidas a un subtema
+				if($t->id != 4)
+				{
+					$st = $this->Graficos_model->leerSubtemasPorTema($t->idt);
+
+					echo "<br><br>";
+					//Calculo de las noticias referidas a un subtema
+					foreach ($st as $s)
+					{
+						$s->c = $this->Graficos_model->cantidadSubtemasNoticiaPorIntervaloFechas($f0, $ff, $s->idst);
+					}
+					//var_dump($st);
+				}else{
+					$st = $this->Graficos_model->leerSubtemasPorTema($t->idt);
+					echo "<br><br>";
+					//Calculo de las noticias referidas a un subtema
+					foreach ($st as $s)
+					{
+						$s->c = $this->Graficos_model->cantidadSubtemasLeyesPorIntervaloFechas($f0, $ff, $s->idst);
+					}
+					//var_dump($st);
+
+				}
+				//Calculo de la cantidad mayor
+				$cnt_mayor_st = [];
+				foreach ($st as $s)
+				{
+					$cnt_mayor_st[] =  $s->c;
+				}
+				$mayor_st = max($cnt_mayor_st);
+
+				//Ajuste de los porcentajes
+				foreach ($st as $s)
+				{
+					if($mayor_st!=0)
+					{
+						$s->c = round(($s->c/$mayor_st)*100, 0, PHP_ROUND_HALF_UP);
+					}
+					if(is_null($s->idst))
+					{
+						unset($s->idt);
+						unset($s->idst);
+						unset($s->n);
+						unset($s->c);
+					}
+				}
+				//echo "<br><br>";
+				//var_dump($st);
+				$mst[] = $st;
+
+			}
+
+			$mt[] = $tm;
+		}
+
+		//Matriz de resultados
+		/** @noinspection PhpLanguageLevelInspection */
+		$resultados = [
+			'mc' => $mc,
+			'mt' => $mt,
+			'mst' => $mst,
+		];
+	}
+
+	private function fecha_unix($fecha)
+	{
+		$fecha_std = str_replace('/', '-', $fecha);
+		$fecha_unix = strtotime($fecha_std);
+		return $fecha_unix;
+	}
+
+
+
 
 }
