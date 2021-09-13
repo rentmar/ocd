@@ -504,10 +504,13 @@ class Graficos_model extends CI_Model
 		$fecha_minima = $this->fecha_unix($fecha0) ;
 		$fecha_maxima = $this->fecha_unix($fechaf) ;
 
-		$sql = "SELECT COUNT(*) AS cantidad  "
-			."FROM noticia AS n   "
-			."WHERE n.esta_activa = 1  "
-			."AND n.rel_idcuestionario = ? "
+		$sql = "SELECT  COUNT(*)  "
+			."FROM noticia_subtema    "
+			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
+			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema "
+			."INNER JOIN tema ON tema.idtema = subtema.rel_idtema "
+			."WHERE noticia.esta_activa = 1  "
+			."AND noticia.rel_idcuestionario = ? "
 			."AND (n.fecha_noticia BETWEEN ? AND ?) "
 			."  "
 			." ";
@@ -539,11 +542,11 @@ class Graficos_model extends CI_Model
 		$fecha_minima = $this->fecha_unix($fecha0) ;
 		$fecha_maxima = $this->fecha_unix($fechaf) ;
 
-		$sql = "SELECT COUNT(*) AS cantidad  "
-			."FROM noticia    "
-			."INNER JOIN noticia_subtema ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
-			."INNER JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
-			."INNER JOIN tema ON subtema.rel_idtema = tema.idtema "
+		$sql = "SELECT  COUNT(*)  "
+			."FROM noticia_subtema    "
+			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
+			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema "
+			."INNER JOIN tema ON tema.idtema = subtema.rel_idtema "
 			."WHERE noticia.esta_activa = 1  "
 			."AND tema.idtema = ? "
 			."AND (noticia.fecha_noticia BETWEEN ? AND ?) "
@@ -580,17 +583,17 @@ class Graficos_model extends CI_Model
 		$fecha_minima = $this->fecha_unix($fecha0) ;
 		$fecha_maxima = $this->fecha_unix($fechaf) ;
 
-		$sql = "SELECT COUNT(*) AS cantidad  "
-			."FROM noticia AS n    "
-			."LEFT JOIN noticia_subtema ON n.idnoticia = noticia_subtema.rel_idnoticia "
-			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
-			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
-			."WHERE n.esta_activa = 1  "
-			."AND subtema.idsubtema = ?  "
-			."AND (n.fecha_noticia BETWEEN ? AND ?)  "
-			." "
+		$sql = "SELECT  COUNT(*)  "
+			."FROM noticia_subtema    "
+			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
+			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema "
+			."INNER JOIN tema ON tema.idtema = subtema.rel_idtema "
+			."WHERE noticia.esta_activa = 1  "
+			."AND subtema.idsubtema = ? "
+			."AND (noticia.fecha_noticia BETWEEN ? AND ?) "
 			."  "
 			." ";
+
 		$qry = $this->db->query($sql, [$idsubtema, $fecha_minima, $fecha_maxima, ]);
 		$result = $qry->row();
 		return (int)$result->cantidad;
