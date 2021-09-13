@@ -23,6 +23,12 @@ class Graficos extends CI_Controller{
 		$this->load->view('html/pie');
 		//$this->load->view('graficos/vgraficop');
 	}
+	private function fecha_unix($fecha)
+	{
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
+	}
 	public function seleccionBubble()
 	{	
 		$this->load->view('html/encabezado');
@@ -35,12 +41,15 @@ class Graficos extends CI_Controller{
 		$titulo="";
 		$cargado=false;
 		$departamentos = $this->Graficos_model->leerDepartamentos();
-		$dt['actores']=$this->Graficos_model->leerActores();
+		$actores=$this->Graficos_model->leerActores();
+		$dt['actores']=$actores;
 		$cuestionarios=$this->Graficos_model->leerCuestionarios();
 		$dt['cuestionarios']=$cuestionarios;
-		$dt['actor']=null;
 		$dt['tiposmedio']=$this->Graficos_model->leerTiposMedio();
-		$dt['tipomedio']=null;
+		$fi=$this->fecha_unix($this->input->post('fecha_inicio'));
+		$ff=$this->fecha_unix($this->input->post('fecha_fin'));
+		$dt['fi']=$this->input->post("fecha_inicio");
+		$dt['ff']=$this->input->post("fecha_fin");
 		$a=$this->input->post('accion');
 		$dt['accion']=$a;
 		if ($a==1)
@@ -55,15 +64,20 @@ class Graficos extends CI_Controller{
 					$cantidades=array();
 					foreach ($departamentos as $d)
 					{
-						array_push($cantidades,$this->Graficos_model->leerNumCuestionarioDepartamento($d->iddepartamento,$c->idcuestionario));
+						array_push($cantidades,$this->Graficos_model->leerNumCuestionarioDepartamento($fi,$ff,$d->iddepartamento,$c->idcuestionario));
 					}
 					foreach($departamentos as $d)
 					{
-						$cant=$this->Graficos_model->leerNumCuestionarioDepartamento($d->iddepartamento,$c->idcuestionario);
+						$cant=$this->Graficos_model->leerNumCuestionarioDepartamento($fi,$ff,$d->iddepartamento,$c->idcuestionario);
+						$val=0;
+						if (max($cantidades)!=0)
+						{
+							$val=round(($cant*10/max($cantidades)));
+						}
 						$docXml=$docXml."\t<element>\n\t\t<iddepartamento".$opcion.">".$d->iddepartamento."</iddepartamento".$opcion.">\n\t\t";
 						$docXml=$docXml."<nombre_departamento".$opcion.">".$d->nombre_departamento."</nombre_departamento".$opcion.">\n\t\t";
 						$docXml=$docXml."<cantidad".$opcion.">".$cant."</cantidad".$opcion.">\n\t\t";
-						$docXml=$docXml."<radio".$opcion.">".round(($cant*10/max($cantidades)))."</radio".$opcion.">\n\t</element>\n";
+						$docXml=$docXml."<radio".$opcion.">".$val."</radio".$opcion.">\n\t</element>\n";
 					}
 				}
 				else
@@ -71,15 +85,20 @@ class Graficos extends CI_Controller{
 					$cantidades=array();
 					foreach ($departamentos as $d)
 					{
-						array_push($cantidades,$this->Graficos_model->leerNumLeyDepartamento($d->iddepartamento,$c->idcuestionario));
+						array_push($cantidades,$this->Graficos_model->leerNumLeyDepartamento($fi,$ff,$d->iddepartamento,$c->idcuestionario));
 					}
 					foreach($departamentos as $d)
 					{
-						$cant=$this->Graficos_model->leerNumLeyDepartamento($d->iddepartamento,$c->idcuestionario);
+						$cant=$this->Graficos_model->leerNumLeyDepartamento($fi,$ff,$d->iddepartamento,$c->idcuestionario);
+						$val=0;
+						if (max($cantidades)!=0)
+						{
+							$val=round(($cant*10/max($cantidades)));
+						}
 						$docXml=$docXml."\t<element>\n\t\t<iddepartamento".$opcion.">".$d->iddepartamento."</iddepartamento".$opcion.">\n\t\t";
 						$docXml=$docXml."<nombre_departamento".$opcion.">".$d->nombre_departamento."</nombre_departamento".$opcion.">\n\t\t";
 						$docXml=$docXml."<cantidad".$opcion.">".$cant."</cantidad".$opcion.">\n\t\t";
-						$docXml=$docXml."<radio".$opcion.">".round(($cant*10/max($cantidades)))."</radio".$opcion.">\n\t</element>\n";
+						$docXml=$docXml."<radio".$opcion.">".$val."</radio".$opcion.">\n\t</element>\n";
 					}
 				}
 			}
@@ -113,11 +132,11 @@ class Graficos extends CI_Controller{
 						$cantidades=array();
 						foreach ($departamentos as $d)
 						{
-							array_push($cantidades,$this->Graficos_model->leerNumTemaDepartamento($d->iddepartamento,$t->idtema));
+							array_push($cantidades,$this->Graficos_model->leerNumTemaDepartamento($fi,$ff,$d->iddepartamento,$t->idtema));
 						}
 						foreach($departamentos as $d)
 						{
-							$cant=$this->Graficos_model->leerNumTemaDepartamento($d->iddepartamento,$t->idtema);
+							$cant=$this->Graficos_model->leerNumTemaDepartamento($fi,$ff,$d->iddepartamento,$t->idtema);
 							$valor=0;
 							if (max($cantidades)!=0)
 							{
@@ -144,33 +163,38 @@ class Graficos extends CI_Controller{
 		}
 		else if ($a==3)
 		{
-			$cargado=true;
-			/*$titulo="Actores";
-			//$ida=$this->input->post('idactor');
-			//$dt['actor']=$this->Graficos_model->leerActorId($ida);
-			$cantidades=array();
-			foreach ($departamentos as $d)
-			{
-				array_push($cantidades,$this->Graficos_model->leerNumActorDepartamento($d->iddepartamento));
-			}
+			$titulo="Actores";
 			$docXml="<root>\n";
-			foreach($departamentos as $d)
+			foreach ($actores as $a)
 			{
-				$cant=$this->Graficos_model->leerNumActorDepartamento($d->iddepartamento);
-				$docXml=$docXml."\t<element>\n\t\t<actor".$d->idactor.">".$d->iddepartamento."</actor".$d->idactor.">\n\t\t";
-				$docXml=$docXml."<nombre_departamento>".$d->nombre_departamento."</nombre_departamento>\n\t\t";
-				$docXml=$docXml."<cantidad>".$cant."</cantidad>\n\t\t";
-				$docXml=$docXml."<radio>".round(($cant*10/max($cantidades)))."</radio>\n\t</element>\n";
+				$cantidades=array();
+				foreach ($departamentos as $d)
+				{
+					array_push($cantidades,$this->Graficos_model->leerNumActorDepartamento($fi,$ff,$d->iddepartamento,$a->idactor));
+				}
+				foreach($departamentos as $d)
+				{
+					$cant=$this->Graficos_model->leerNumActorDepartamento($fi,$ff,$d->iddepartamento,$a->idactor);
+					$val=0;
+					if (max($cantidades)!=0)
+					{
+						$val=round(($cant*10/max($cantidades)));
+					}
+					$docXml=$docXml."\t<element>\n\t\t<actor".$a->idactor.">".$a->nombre_actor."</actor".$a->idactor.">\n\t\t";
+					$docXml=$docXml."<nombre_departamento".$a->idactor.">".$d->nombre_departamento."</nombre_departamento".$a->idactor.">\n\t\t";
+					$docXml=$docXml."<cantidad".$a->idactor.">".$cant."</cantidad".$a->idactor.">\n\t\t";
+					$docXml=$docXml."<radio".$a->idactor.">".$val."</radio".$a->idactor.">\n\t</element>\n";
+				}
 			}
 			$docXml=$docXml."</root>\n";
-			if (!write_file('datos/actor.xml',$docXml))
+			if (!write_file('datos/actorbubble.xml',$docXml))
 			{
 				$cargado=false;
 			}
 			else
 			{
 				$cargado=true;
-			}	*/	
+			}	
 		}
 		/*else if ($a==4)
 		{
@@ -214,8 +238,10 @@ class Graficos extends CI_Controller{
 				}
 			}
 		}*/
-		
-		$cargado=true;
+		else 
+		{
+			
+		}
 		//------------------------------------------------ carga datos
 		$dt['titulo']=$titulo;
 		if ($cargado==false)
