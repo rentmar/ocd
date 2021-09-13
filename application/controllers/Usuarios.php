@@ -81,8 +81,10 @@ class Usuarios extends CI_Controller
 			}
 
 			if(!$this->ion_auth->register($usuario, $password, $email, $datos_extra, $grupo)){
-
+				$this->mensaje('Usuario no creado, intente de nuevo', 'warning');
+				redirect('inicio');
 			}else{
+				$this->mensaje('Nuevo usuario creado', 'success');
 				redirect('inicio/');
 			}
 		}
@@ -282,5 +284,39 @@ class Usuarios extends CI_Controller
 		$this->load->view('usuarios/vusuarios_lista', $data);
 		$this->load->view('html/pie');
 	}
-	
+
+	//Cambiar el estado de un usuario
+	public function cambiarEstadoUsuario($identificador)
+	{
+		$idusuario = $identificador;
+		$usuario = $this->ion_auth->user($idusuario)->row();
+		if($usuario->active)
+		{
+			//Funcion complementaria
+			$estado = 0;
+			$mensaje = "Usuario ".$usuario->username." Inhabilitado";
+			$this->mensaje($mensaje, 'info');
+		}else{
+			//Funcion complementaria
+			$estado = 1;
+			$mensaje = "Usuario ".$usuario->username." Habilitado";
+			$this->mensaje($mensaje, 'info');
+		}
+		//Actualizar estado
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos = [
+			'active' => $estado,
+		];
+		$this->ion_auth->update($idusuario, $datos);
+		redirect('inicio');
+	}
+
+	//Despliegue de mensaje
+	public function mensaje($mensaje, $clase){
+		/** @noinspection PhpLanguageLevelInspection */
+		$this->session->set_flashdata([
+			'mensaje' => $mensaje,
+			'clase' => $clase,
+		]);
+	}
 }

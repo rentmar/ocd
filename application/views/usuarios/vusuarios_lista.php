@@ -39,9 +39,20 @@
 							<td><?php echo $u->nombre_departamento;?></td>
 							<td><?php echo $u->nombre_universidad ?></td>
 							<td>
-								<a  href="<?php echo site_url('Usuarios/editarUsuario/'.$u->idusuario);?>">
+								<a  href="<?php echo site_url('Usuarios/editarUsuario/'.$u->idusuario);?>" data-toggle="tooltip" title="Editar Usuario">
 									<i class="fas fa-user-edit"></i>
 								</a>
+
+								<?php if($u->active): ?>
+									<a href="<?php echo site_url('usuarios/cambiarEstadoUsuario/'.$u->idusuario);?>" data-toggle="tooltip" title="Activa/Desactiva">
+										<i class="fas fa-toggle-on"></i>
+									</a>
+								<?php else: ?>
+									<a href="<?php echo site_url('usuarios/cambiarEstadoUsuario/'.$u->idusuario);?>" data-toggle="tooltip" title="Activa/Desactiva" >
+										<i class="fas fa-toggle-off"></i>
+									</a>
+								<?php endif; ?>
+
 							</td>
 						</tr>
 					<?php endforeach; ?>
