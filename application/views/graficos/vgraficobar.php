@@ -64,7 +64,7 @@
 								<label for="fecha_fin_bd">Fecha Fin:</label>
 								<input type="date" id="fecha_fin_bd" name="fecha_fin_bd"  class="form-control" required >
 								<select class="form-control" id="iddepartamentobarra" name="iddepartamentobarra"  required >
-									<option value="" >Seleccione Departamento</option>
+									<option value="0" >Seleccione Departamento</option>
 									<?php foreach ($departamentos as $d): ?>
 										<option value="<?php echo $d->iddepartamento ?>" >
 											<?php echo $d->nombre_departamento;?>
@@ -103,6 +103,31 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				Intervalo de fechas incorrecto
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- The Modal de alerta ACTOR SIN SELECCIONAR -->
+<div class="modal fade" id="departamentomsg">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-warning">
+				<h4 class="modal-title text-white ">Alerta</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				Seleccione un Departamento
 			</div>
 
 			<!-- Modal footer -->

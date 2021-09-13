@@ -1413,3 +1413,36 @@ function graficarbarras(datos) {
 
 }
 
+
+//Deteccion de cambio del selector de departamentos
+jQuery(document).on('change', 'select#iddepartamentobarra', function (e) {
+	e.preventDefault();
+	var datos_consulta = new Datos();
+	console.log("Departamento seleccionado");
+	//Capturar el valor del primer input date
+	datos_consulta.fecha_inicio = $("input#fecha_inicio_bd").val();
+	//Capturar el valor del segundo input date
+	datos_consulta.fecha_fin = $("input#fecha_fin_bd").val();
+	datos_consulta.iddepartamento = jQuery(this).val();
+	var iddepartamento = jQuery(this).val();
+
+
+	if(iddepartamento != 0)
+	{
+		if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
+		{
+			$('#fechaintervalo').modal("show");
+		}
+		else{
+			console.log(datos_consulta);
+			console.log(JSON.stringify(datos_consulta));
+			$("#contenedor-chart").empty();
+			//graficarbarras(datos_consulta)
+
+		}
+	}
+	else{
+		$('#departamentomsg').modal("show");
+	}
+});
+
