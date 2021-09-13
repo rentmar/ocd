@@ -72,8 +72,8 @@ class Graficos_model extends CI_Model
 	public function leerNumLeyesDpto($idd)
 	{$sql="SELECT leyes.idleyes
 			FROM leyes
-			LEFT JOIN cuestionario ON leyes.rel_idcuestionario=cuestionario.idcuestionario 
-			LEFT JOIN users ON leyes.rel_idusuario = users.id "
+			INNER JOIN cuestionario ON leyes.rel_idcuestionario=cuestionario.idcuestionario 
+			INNER JOIN users ON leyes.rel_idusuario = users.id "
 			."WHERE users.rel_iddepartamento = ".$idd;
 		$q = $this->db->query($sql);
 		return count($q->result());
@@ -82,9 +82,9 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,cuestionario.nombre_cuestionario
 			FROM noticia
-			LEFT JOIN users ON noticia.rel_idusuario = users.id
-			LEFT JOIN cuestionario ON noticia.rel_idcuestionario = cuestionario.idcuestionario
-			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			INNER JOIN users ON noticia.rel_idusuario = users.id
+			INNER JOIN cuestionario ON noticia.rel_idcuestionario = cuestionario.idcuestionario
+			INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
 			."WHERE noticia.fecha_registro BETWEEN ".$fi." AND ".$ff
 			." AND departamento.iddepartamento=".$idd
 			." AND cuestionario.idcuestionario=".$idc
@@ -96,11 +96,11 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,tema.idtema,tema.nombre_tema
 			FROM noticia_subtema
-			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
-			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema
-			LEFT JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
-			LEFT JOIN users ON noticia.rel_idusuario = users.id
-			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			INNER JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
+			INNER JOIN tema ON subtema.rel_idtema=tema.idtema
+			INNER JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
+			INNER JOIN users ON noticia.rel_idusuario = users.id
+			INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
 			."WHERE noticia.fecha_registro BETWEEN ".$fi." AND ".$ff
 			." AND departamento.iddepartamento=".$idd
 			." AND tema.idtema=".$idt
@@ -112,9 +112,9 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,cuestionario.nombre_cuestionario
 			FROM leyes
-			LEFT JOIN users ON leyes.rel_idusuario = users.id
-			LEFT JOIN cuestionario ON leyes.rel_idcuestionario = cuestionario.idcuestionario
-			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			INNER JOIN users ON leyes.rel_idusuario = users.id
+			INNER JOIN cuestionario ON leyes.rel_idcuestionario = cuestionario.idcuestionario
+			INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
 			." WHERE leyes.fecha_registro BETWEEN ".$fi." AND ".$ff
 			." AND departamento.iddepartamento=".$idd
 			." AND cuestionario.idcuestionario=".$idc;//------activo?
@@ -125,10 +125,10 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,actor.idactor,actor.nombre_actor
 			FROM noticia_actor
-			LEFT JOIN actor on noticia_actor.rel_idactor=actor.idactor
-			LEFT JOIN noticia ON noticia_actor.rel_idnoticia=noticia.idnoticia
-			LEFT JOIN users ON noticia.rel_idusuario = users.id
-			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			INNER JOIN actor on noticia_actor.rel_idactor=actor.idactor
+			INNER JOIN noticia ON noticia_actor.rel_idnoticia=noticia.idnoticia
+			INNER JOIN users ON noticia.rel_idusuario = users.id
+			INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
 			." WHERE leyes.fecha_registro BETWEEN ".$fi." AND ".$ff
 			." AND departamento.iddepartamento=".$idd
 			." AND actor.idactor=".$ida;
@@ -139,10 +139,10 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,tipo_medio.idtipomedio,tipo_medio.nombre_tipo
 			FROM noticia
-			LEFT JOIN medio_comunicacion ON noticia.rel_idmedio=medio_comunicacion.idmedio
-			LEFT JOIN tipo_medio ON medio_comunicacion.rel_idtipomedio=tipo_medio.idtipomedio
-			LEFT JOIN users ON noticia.rel_idusuario = users.id
-			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			INNER JOIN medio_comunicacion ON noticia.rel_idmedio=medio_comunicacion.idmedio
+			INNER JOIN tipo_medio ON medio_comunicacion.rel_idtipomedio=tipo_medio.idtipomedio
+			INNER JOIN users ON noticia.rel_idusuario = users.id
+			INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
 			."WHERE departamento.iddepartamento=".$idd
 			." AND tipo_medio.idtipomedio=".$idtm;
 		$q = $this->db->query($sql);
@@ -152,7 +152,7 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT cuestionario.idcuestionario,cuestionario.nombre_cuestionario
 			FROM noticia
-			LEFT JOIN cuestionario on noticia.rel_idcuestionario=cuestionario.idcuestionario "
+			INNER JOIN cuestionario on noticia.rel_idcuestionario=cuestionario.idcuestionario "
 			."WHERE cuestionario.idcuestionario=".$idc;
 		$q = $this->db->query($sql);
 		return count($q->result());
@@ -161,8 +161,8 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT cuestionario.idcuestionario,cuestionario.nombre_cuestionario
 			FROM noticia
-			LEFT JOIN cuestionario ON noticia.rel_idcuestionario=cuestionario.idcuestionario 
-			LEFT JOIN users ON noticia.rel_idusuario = users.id "
+			INNER JOIN cuestionario ON noticia.rel_idcuestionario=cuestionario.idcuestionario 
+			INNER JOIN users ON noticia.rel_idusuario = users.id "
 			."WHERE cuestionario.idcuestionario=".$idc
 			." AND users.rel_iddepartamento = ".$idd;
 		$q = $this->db->query($sql);
@@ -172,8 +172,8 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT noticia_subtema.rel_idnoticia,tema.idtema 
 			FROM noticia_subtema
-			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
-			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
+			INNER JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
+			INNER JOIN tema ON subtema.rel_idtema=tema.idtema "
 			."WHERE tema.idtema=".$idt;
 		$q = $this->db->query($sql);
 		return count($q->result());
@@ -182,10 +182,10 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT noticia_subtema.rel_idnoticia,tema.idtema 
 			FROM noticia_subtema
-			LEFT JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
-			LEFT JOIN users ON noticia.rel_idusuario=users.id
-			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
-			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
+			INNER JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
+			INNER JOIN users ON noticia.rel_idusuario=users.id
+			INNER JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema
+			INNER JOIN tema ON subtema.rel_idtema=tema.idtema "
 			."WHERE tema.idtema=".$idt
 			." AND users.rel_iddepartamento=".$idd;
 		$q = $this->db->query($sql);
@@ -195,8 +195,8 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,tema.idtema 
 			FROM ley_subtema
-			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema
-			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
+			INNER JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema
+			INNER JOIN tema ON subtema.rel_idtema=tema.idtema "
 			."WHERE tema.idtema=".$idt;
 		$q = $this->db->query($sql);
 		return count($q->result());
@@ -205,10 +205,10 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,tema.idtema 
 			FROM ley_subtema
-			LEFT JOIN leyes ON ley_subtema.rel_idleyes=leyes.idleyes
-			LEFT JOIN users ON leyes.rel_idusuario=users.id
-			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema
-			LEFT JOIN tema ON subtema.rel_idtema=tema.idtema "
+			INNER JOIN leyes ON ley_subtema.rel_idleyes=leyes.idleyes
+			INNER JOIN users ON leyes.rel_idusuario=users.id
+			INNER JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema
+			INNER JOIN tema ON subtema.rel_idtema=tema.idtema "
 			."WHERE tema.idtema=".$idt
 			." AND users.rel_iddepartamento=".$idd;
 		$q = $this->db->query($sql);
@@ -230,7 +230,7 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT noticia_subtema.rel_idnoticia,subtema.idsubtema,subtema.nombre_subtema,subtema.rel_idtema 
 			FROM noticia_subtema
-			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema "
+			INNER JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema "
 			."WHERE subtema.idsubtema=".$idst;
 		$q = $this->db->query($sql);
 		return count($q->result());
@@ -239,9 +239,9 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT noticia_subtema.rel_idnoticia,subtema.idsubtema,subtema.nombre_subtema,subtema.rel_idtema 
 			FROM noticia_subtema
-			LEFT JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
-			LEFT JOIN users ON noticia.rel_idusuario=users.id
-			LEFT JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema "
+			INNER JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
+			INNER JOIN users ON noticia.rel_idusuario=users.id
+			INNER JOIN subtema ON noticia_subtema.rel_idsubtema=subtema.idsubtema "
 			."WHERE subtema.idsubtema=".$idst
 			." AND users.rel_iddepartamento=".$idd;
 		$q = $this->db->query($sql);
@@ -251,7 +251,7 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,subtema.idsubtema,subtema.nombre_subtema,subtema.rel_idtema 
 			FROM ley_subtema
-			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema "
+			INNER JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema "
 			."WHERE subtema.idsubtema=".$idst;
 		$q = $this->db->query($sql);
 		return count($q->result());
@@ -260,9 +260,9 @@ class Graficos_model extends CI_Model
 	{
 		$sql="SELECT DISTINCT ley_subtema.rel_idleyes,subtema.idsubtema,subtema.nombre_subtema,subtema.rel_idtema 
 			FROM ley_subtema
-			LEFT JOIN leyes ON ley_subtema.rel_idleyes=leyes.idleyes
-			LEFT JOIN users ON leyes.rel_idusuario=users.id
-			LEFT JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema "
+			INNER JOIN leyes ON ley_subtema.rel_idleyes=leyes.idleyes
+			INNER JOIN users ON leyes.rel_idusuario=users.id
+			INNER JOIN subtema ON ley_subtema.rel_idsubtema=subtema.idsubtema "
 			."WHERE subtema.idsubtema=".$idst
 			." AND users.rel_iddepartamento=".$idd;
 		$q = $this->db->query($sql);
