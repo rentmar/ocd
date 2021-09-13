@@ -526,6 +526,135 @@ class Graficos extends CI_Controller{
 
 	}
 
+	public function getmatrizbarrasdepartamento()
+	{
+		$datos = json_decode($this->input->post('datos'));
+		$f0 = $datos->fecha_inicio;
+		$ff = $datos->fecha_fin;
+		$iddepartamento = $datos->iddepartamento;
+
+		//Datos principal
+		$pre_mc = $this->Graficos_model->leerCantidadTemasPorCuestionario();
+
+		//calculo de noticias
+		foreach ($pre_mc as $pmc)
+		{
+			if($pmc->id != 4)
+			{
+				$pmc->c = $this->Graficos_model->cantidadNoticiasFormIntervaloFechasDep($f0, $ff, $pmc->id, $iddepartamento);
+			}else{
+				$pmc->c = $this->Graficos_model->cantidadLeyesPorIntervaloFecha($f0, $ff);
+			}
+		}
+		//Cantidades
+		$cnt_mayor = [];
+		foreach ($pre_mc as $pmc)
+		{
+			$cnt_mayor[] = $pmc->c;
+		}
+		$mayor = max($cnt_mayor);
+
+		foreach ($pre_mc as $pmc)
+		{
+			$pmc->v = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+		}
+
+		//Matriz de cuestionarios
+		$mc = $pre_mc;
+
+		/*
+		* Matriz  MT (Matriz de Temas)
+		* Matrz MST (Matriz de Subtemas)
+		*/
+		$mt =[];
+		$mst = [];
+		foreach ($mc as $m)
+		{
+			$tm = $this->Graficos_model->leerCantidadSubtemasPorTema($m->id);
+			//Calculo de noticias referidas a un tema
+			foreach ($tm as $t)
+			{
+				if($t->id !=4){
+					$t->c = $this->Graficos_model->cantidadTemasNoticiaPorIntervaloFechas($f0, $ff, $t->idt) ;
+				}else{
+					$t->c = $this->Graficos_model->cantidadTemasLeyPorIntervaloFechas($f0, $ff, $t->idt);
+				}
+			}
+			//Calculo de los porcentajes
+			//Calculo del mayor
+			$cnt_mayor_t = [];
+			foreach ($tm as $t)
+			{
+				$cnt_mayor_t[] = $t->c;
+			}
+			$mayor_t = max($cnt_mayor_t);
+			$cnt_mayor_t = [];
+			//Ajuste de los porcentajes
+			foreach ($tm as $t)
+			{
+				$t->v = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+			}
+
+			//Subtemas
+			foreach ($tm as $t)
+			{
+				//Calculo de las noticias y leyes referidas a un subtema
+				if($t->id != 4)
+				{
+					$st = $this->Graficos_model->leerSubtemasPorTema($t->idt);
+					//Calculo de las noticias referidas a un subtema
+					foreach ($st as $s)
+					{
+						$s->c = $this->Graficos_model->cantidadSubtemasNoticiaPorIntervaloFechasDep($f0, $ff, $s->idst, $iddepartamento);
+					}
+				}else{
+					$st = $this->Graficos_model->leerSubtemasPorTema($t->idt);
+					//Calculo de las leyes referidas a un subtema
+					foreach ($st as $s)
+					{
+						$s->c = $this->Graficos_model->cantidadSubtemasLeyesPorIntervaloFechas($f0, $ff, $s->idst);
+					}
+				}
+				//Calculo de la cantidad mayor
+				$cnt_mayor_st = [];
+				foreach ($st as $s)
+				{
+					$cnt_mayor_st[] =  $s->c;
+				}
+				$mayor_st = max($cnt_mayor_st);
+
+				//Ajuste de los porcentajes
+				foreach ($st as $s)
+				{
+					if($mayor_st!=0)
+					{
+						$s->v = round(($s->c/$mayor_st)*100, 0, PHP_ROUND_HALF_UP);
+					}
+					if(is_null($s->idst))
+					{
+						unset($s->idt);
+						unset($s->idst);
+						unset($s->n);
+						unset($s->c);
+						unset($s->v);
+					}
+				}
+				$mst[] = $st;
+			}
+			$mt[] = $tm;
+		}
+
+		//Matriz de resultados
+		/** @noinspection PhpLanguageLevelInspection */
+		$resultados = [
+			'mc' => $mc,
+			'mt' => $mt,
+			'mst' => $mst,
+		];
+		header('Content-Type: application/json');
+		echo json_encode($resultados);
+	}
+
 	public function matrices()
 	{
 		$f0 = $this->fecha_unix('2021-08-01');

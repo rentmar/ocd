@@ -541,9 +541,9 @@ class Graficos_model extends CI_Model
 
 		$sql = "SELECT COUNT(*) AS cantidad  "
 			."FROM noticia    "
-			."LEFT JOIN noticia_subtema ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
-			."LEFT JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
-			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
+			."INNER JOIN noticia_subtema ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
+			."INNER JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
+			."INNER JOIN tema ON subtema.rel_idtema = tema.idtema "
 			."WHERE noticia.esta_activa = 1  "
 			."AND tema.idtema = ? "
 			."AND (noticia.fecha_noticia BETWEEN ? AND ?) "
@@ -561,9 +561,9 @@ class Graficos_model extends CI_Model
 
 		$sql = "SELECT COUNT(*) AS cantidad  "
 			."FROM leyes AS l     "
-			."LEFT JOIN ley_subtema ON l.idleyes = ley_subtema.rel_idleyes  "
-			."LEFT JOIN subtema ON ley_subtema.rel_idsubtema = subtema.idsubtema  "
-			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
+			."INNER JOIN ley_subtema ON l.idleyes = ley_subtema.rel_idleyes  "
+			."INNER JOIN subtema ON ley_subtema.rel_idsubtema = subtema.idsubtema  "
+			."INNER JOIN tema ON subtema.rel_idtema = tema.idtema "
 			."WHERE l.esta_activa = 1  "
 			."AND tema.idtema = ? "
 			."AND (l.fecha_registro BETWEEN ? AND ?) "
@@ -604,8 +604,8 @@ class Graficos_model extends CI_Model
 
 		$sql = "SELECT COUNT(*) AS cantidad  "
 			."FROM leyes    "
-			."LEFT JOIN ley_subtema ON leyes.idleyes = ley_subtema.rel_idleyes "
-			."LEFT JOIN subtema ON ley_subtema.rel_idsubtema = subtema.idsubtema "
+			."INNER JOIN ley_subtema ON leyes.idleyes = ley_subtema.rel_idleyes "
+			."INNER JOIN subtema ON ley_subtema.rel_idsubtema = subtema.idsubtema "
 			."WHERE leyes.esta_activa = 1 "
 			."AND subtema.idsubtema = ?  "
 			."AND (leyes.fecha_registro BETWEEN ? AND ?)  "
@@ -623,6 +623,82 @@ class Graficos_model extends CI_Model
 
 	/**
 	 * FIN GRAFICO DE Barras
+	 **/
+
+	/**
+	 * GRAFICO DE Barras Departamento
+	 **/
+	//Cantidad de noticias por cuestionario dentro de un intervalo
+	public function cantidadNoticiasFormIntervaloFechasDep($fecha0, $fechaf, $idcuestionario, $iddepartamento)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia AS n   "
+			."INNER JOIN users ON n.rel_idusuario = users.id  "
+			."INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."WHERE n.esta_activa = 1  "
+			."AND n.rel_idcuestionario = ? "
+			."AND departamento.iddepartamento = ?  "
+			."AND (n.fecha_noticia BETWEEN ? AND ?) "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idcuestionario, $iddepartamento, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+	//Cantidad de noticias referidas a un tema
+	public function cantidadTemasNoticiaPorIntervaloFechasDep($fecha0, $fechaf, $idtema, $iddepartamento)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia    "
+			."INNER JOIN users ON noticia.rel_idusuario = users.id "
+			."INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			."INNER JOIN noticia_subtema ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
+			."INNER JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
+			."INNER JOIN tema ON subtema.rel_idtema = tema.idtema "
+			."WHERE noticia.esta_activa = 1  "
+			."AND tema.idtema = ? "
+			."AND departamento.iddepartamento = ? "
+			."AND (noticia.fecha_noticia BETWEEN ? AND ?) "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idtema, $iddepartamento, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+	//Cantidad de noticias referidas a un subtema
+	public function cantidadSubtemasNoticiaPorIntervaloFechasDep($fecha0, $fechaf, $idsubtema, $iddepartamento)
+	{
+		$fecha_minima = $this->fecha_unix($fecha0) ;
+		$fecha_maxima = $this->fecha_unix($fechaf) ;
+
+		$sql = "SELECT COUNT(*) AS cantidad  "
+			."FROM noticia AS n    "
+			."INNER JOIN users ON n.rel_idusuario = users.id  "
+			."INNER JOIN departamento ON users.rel_iddepartamento =  departamento.iddepartamento  "
+			."INNER JOIN noticia_subtema ON n.idnoticia = noticia_subtema.rel_idnoticia "
+			."INNER JOIN subtema ON noticia_subtema.rel_idsubtema = subtema.idsubtema "
+			."INNER JOIN tema ON subtema.rel_idtema = tema.idtema "
+			."WHERE n.esta_activa = 1  "
+			."AND subtema.idsubtema = ?  "
+			."AND departamento.iddepartamento = ? "
+			."AND (n.fecha_noticia BETWEEN ? AND ?)  "
+			." "
+			."  "
+			." ";
+		$qry = $this->db->query($sql, [$idsubtema, $iddepartamento, $fecha_minima, $fecha_maxima, ]);
+		$result = $qry->row();
+		return (int)$result->cantidad;
+	}
+
+	/**
+	 * Fin GRAFICO DE Barras Departamento
 	 **/
 
 

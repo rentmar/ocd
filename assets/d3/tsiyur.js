@@ -1426,6 +1426,15 @@ jQuery(document).on('change', 'select#iddepartamentobarra', function (e) {
 	datos_consulta.iddepartamento = jQuery(this).val();
 	var iddepartamento = jQuery(this).val();
 
+	if(datos_consulta.fecha_inicio == "" || datos_consulta.fecha_inicio == null )
+	{
+		$('#faltafechasmsg').modal("show");
+	}
+	if(datos_consulta.fecha_fin == "" || datos_consulta.fecha_fin == null )
+	{
+		$('#faltafechasmsg').modal("show");
+	}
+
 
 	if(iddepartamento != 0)
 	{
@@ -1437,7 +1446,7 @@ jQuery(document).on('change', 'select#iddepartamentobarra', function (e) {
 			console.log(datos_consulta);
 			console.log(JSON.stringify(datos_consulta));
 			$("#contenedor-chart").empty();
-			//graficarbarras(datos_consulta)
+			graficarbarrasdepartamentos(datos_consulta)
 
 		}
 	}
@@ -1445,4 +1454,43 @@ jQuery(document).on('change', 'select#iddepartamentobarra', function (e) {
 		$('#departamentomsg').modal("show");
 	}
 });
+
+//Transmision de datos
+//Funcion para extraer actores
+function graficarbarrasdepartamentos(datos) {
+	$.ajax({
+		url: baseurl + "/graficos/getmatrizbarrasdepartamento",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Esperar..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Exito matriz depas para barras jerarquicas");
+			//Aqui va la rutina para grafica
+			console.log(json);
+			var mc = json['mc'];
+			var mt = json['mt'];
+			var mst = json['mst'];
+
+			console.log(mc);
+			console.log(mt);
+			console.log(mst);
+
+			renderBarras(mc, mt, mst);
+
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+
+}
+
+
 
