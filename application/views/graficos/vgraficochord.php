@@ -40,10 +40,11 @@
 				<br>
 				<div class="contenedor_graficas">
 					<div class="contenedores">
-					<div class="contenedor_superior" id="cuerdas">
-						<h5><b> <?php echo "Grafico de ".$titulo;?> </b></h5>
-					</div>
+
 					<div class="grafico">
+						<div class=" text-dark" id="">
+							<h4> <?php echo "Grafico de ".$titulo;?> </h4>
+						</div>
 						<form class="" >
 							<label for="fecha_inicio">Fecha Inicio:</label>
 							<input type="date" id="fecha_inicio" name="fecha_inicio"  class="form-control" required >

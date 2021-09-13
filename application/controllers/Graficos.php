@@ -285,7 +285,7 @@ class Graficos extends CI_Controller{
 	}
 	public function llenarDatosChordXml()
 	{
-		$titulo="";
+		$titulo="Cuerdas - Actor por Ambito";
 		$cargado=false;
 		$a=$this->input->post('accion');
 		$dt['accion']=$a;
