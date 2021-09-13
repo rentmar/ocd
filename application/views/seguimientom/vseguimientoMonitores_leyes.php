@@ -1,5 +1,4 @@
 <main role="main">
-<br><br>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
@@ -159,6 +158,19 @@
 										<a href="<?php echo site_url('ley/editarLey/'.$l['idley']); ?>"  data-toggle="tooltip" title="Editar Registro" >
 											<i class="fas fa-edit"></i>
 										</a>
+
+										<?php if($l['esta_activa']): ?>
+											<a href="<?php echo site_url('Seguimientomonitores/cambiarEstadoLey/'.$l['idley']);?>" data-toggle="tooltip" title="Activa/Desactiva" >
+												<i class="fas fa-toggle-on"></i>
+											</a>
+										<?php else: ?>
+											<a href="<?php echo site_url('Seguimientomonitores/cambiarEstadoLey/'.$l['idley']);?>" data-toggle="tooltip" title="Activa/Desactiva">
+												<i class="fas fa-toggle-off"></i>
+											</a>
+										<?php endif; ?>
+
+
+
 									</td>
 								</tr>
 							<?php endforeach; ?>

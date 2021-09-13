@@ -194,6 +194,7 @@ class Ley_model extends CI_Model{
 			'resumen' => ' ',
 			'rel_idcuestionario' => ' ',
 			'rel_idusuario' => ' ',
+			'esta_activa ' => ' ',
 			'tratamiento' => [],
 			'sancionado' => [],
 			'aprobado' => [],
@@ -343,6 +344,7 @@ class Ley_model extends CI_Model{
 		{
 			$ley['idley'] = $l->idleyes;
 			$ley['resumen'] = $l->resumen;
+			$ley['esta_activa'] = $l->esta_activa;
 			$ley['descripcion'] = '';
 
 			//$idley, $idestado
@@ -1072,6 +1074,19 @@ class Ley_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idfuente, ]);
 		return $qry->row();
 	}
+
+	//Cambiar el estado de una ley
+	public function cambiarEstadoLey($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'esta_activa' => $estado,
+		];
+		$this->db->where('idleyes', $identificador);
+		$this->db->update('leyes', $data);
+	}
+
+
 
 
 

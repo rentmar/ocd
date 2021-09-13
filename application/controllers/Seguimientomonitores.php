@@ -367,4 +367,20 @@ class Seguimientomonitores extends CI_Controller
 		$this->load->view('html/pie');
 
 	}
+	public function cambiarEstadoLey($identificador)
+	{
+		$idleyes = $identificador;
+		$ley = $this->Ley_model->leerLeyPorId($idleyes);
+		var_dump($ley);
+		if($ley->esta_activa)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Ley_model->cambiarEstadoLey($idleyes, $estado);
+		redirect('Seguimientomonitores/leyesTabla/');
+	}
 }
