@@ -504,7 +504,7 @@ class Graficos_model extends CI_Model
 		$fecha_minima = $this->fecha_unix($fecha0) ;
 		$fecha_maxima = $this->fecha_unix($fechaf) ;
 
-		$sql = "SELECT  COUNT(*)  "
+		$sql = "SELECT  COUNT(*) AS cantidad "
 			."FROM noticia_subtema    "
 			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
 			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema "
@@ -542,7 +542,7 @@ class Graficos_model extends CI_Model
 		$fecha_minima = $this->fecha_unix($fecha0) ;
 		$fecha_maxima = $this->fecha_unix($fechaf) ;
 
-		$sql = "SELECT  COUNT(*)  "
+		$sql = "SELECT  COUNT(*) AS cantidad  "
 			."FROM noticia_subtema    "
 			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
 			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema "
@@ -583,7 +583,7 @@ class Graficos_model extends CI_Model
 		$fecha_minima = $this->fecha_unix($fecha0) ;
 		$fecha_maxima = $this->fecha_unix($fechaf) ;
 
-		$sql = "SELECT  COUNT(*)  "
+		$sql = "SELECT  COUNT(*) AS cantidad "
 			."FROM noticia_subtema    "
 			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia "
 			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema "
