@@ -511,7 +511,7 @@ class Graficos_model extends CI_Model
 			."INNER JOIN tema ON tema.idtema = subtema.rel_idtema "
 			."WHERE noticia.esta_activa = 1  "
 			."AND noticia.rel_idcuestionario = ? "
-			."AND (n.fecha_noticia BETWEEN ? AND ?) "
+			."AND (noticia.fecha_noticia BETWEEN ? AND ?) "
 			."  "
 			." ";
 		$qry = $this->db->query($sql, [$idcuestionario, $fecha_minima, $fecha_maxima, ]);
