@@ -78,19 +78,21 @@ class Graficos_model extends CI_Model
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
-	public function leerNumCuestionarioDepartamento($idd,$idc)
+	public function leerNumCuestionarioDepartamento($fi,$ff,$idd,$idc)
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,cuestionario.nombre_cuestionario
 			FROM noticia
 			LEFT JOIN users ON noticia.rel_idusuario = users.id
 			LEFT JOIN cuestionario ON noticia.rel_idcuestionario = cuestionario.idcuestionario
 			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
-			."WHERE departamento.iddepartamento=".$idd
-			." AND cuestionario.idcuestionario=".$idc;
+			."WHERE noticia.fecha_registro BETWEEN ".$fi." AND ".$ff
+			." AND departamento.iddepartamento=".$idd
+			." AND cuestionario.idcuestionario=".$idc
+			." AND noticia.esta_activa = 1";
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
-	public function leerNumTemaDepartamento($idd,$idt)
+	public function leerNumTemaDepartamento($fi,$ff,$idd,$idt)
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,tema.idtema,tema.nombre_tema
 			FROM noticia_subtema
@@ -99,24 +101,27 @@ class Graficos_model extends CI_Model
 			LEFT JOIN noticia ON noticia_subtema.rel_idnoticia=noticia.idnoticia
 			LEFT JOIN users ON noticia.rel_idusuario = users.id
 			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
-			."WHERE departamento.iddepartamento=".$idd
-			." AND tema.idtema=".$idt;
+			."WHERE noticia.fecha_registro BETWEEN ".$fi." AND ".$ff
+			." AND departamento.iddepartamento=".$idd
+			." AND tema.idtema=".$idt
+			." AND noticia.esta_activa = 1";
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
-	public function leerNumLeyDepartamento($idd,$idc)
+	public function leerNumLeyDepartamento($fi,$ff,$idd,$idc)
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,cuestionario.nombre_cuestionario
 			FROM leyes
 			LEFT JOIN users ON leyes.rel_idusuario = users.id
 			LEFT JOIN cuestionario ON leyes.rel_idcuestionario = cuestionario.idcuestionario
 			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
-			."WHERE departamento.iddepartamento=".$idd
-			." AND cuestionario.idcuestionario=".$idc;
+			." WHERE leyes.fecha_registro BETWEEN ".$fi." AND ".$ff
+			." AND departamento.iddepartamento=".$idd
+			." AND cuestionario.idcuestionario=".$idc;//------activo?
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}
-	public function leerNumActorDepartamento($idd)
+	public function leerNumActorDepartamento($fi,$ff,$idd,$ida)
 	{
 		$sql="SELECT departamento.iddepartamento,departamento.nombre_departamento,actor.idactor,actor.nombre_actor
 			FROM noticia_actor
@@ -124,7 +129,9 @@ class Graficos_model extends CI_Model
 			LEFT JOIN noticia ON noticia_actor.rel_idnoticia=noticia.idnoticia
 			LEFT JOIN users ON noticia.rel_idusuario = users.id
 			LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
-			."WHERE departamento.iddepartamento=".$idd;
+			." WHERE leyes.fecha_registro BETWEEN ".$fi." AND ".$ff
+			." AND departamento.iddepartamento=".$idd
+			." AND actor.idactor=".$ida;
 		$q = $this->db->query($sql);
 		return count($q->result());
 	}

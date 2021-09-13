@@ -1,5 +1,7 @@
 //Detectar la presion del boton
 jQuery(document).on('click', '#actores', function (e) {
+    $('#mediosDc').css("visibility", "hidden");
+//    $('#actoreS').css("visibility", "visible");
 	var fechas = new Fechas();
 	console.log("Boton presionado actores");
 	//Capturar el valor del primer input date
@@ -96,7 +98,7 @@ function radialCharti(matrix)
     _chart.lienzo = function()
     {
 //        console.log(matrix);
-        console.log("estoy en lienzo actores");
+        console.log("estoy en lienzo mediosDcomunicacion");
         _svg = d3.select("#my_dataviz")     //d3.select("body")
                 .append("svg")
                 .attr("width",_b)
@@ -114,100 +116,207 @@ function radialCharti(matrix)
                 .attr("class","body")
                 .attr("transform","translate("+_margen.izquierda+","+_margen.arriba+")")
                 .attr("clip-path","url(#ventana)");
-        graficai(_b,_h,matrix);
-        
+        ordenarMatriz0(_b,_h,matrix);
     }
-    function graficai(bc,hc,matrix)
+    function ordenarMatriz0(b,h,matrix)
     {
-        console.log('estoy graficando actores');
+        console.log('Ordenando Matriz mediosDcomunicacion');
         var mymat = [];
-        var myobj = {};//new Object();
-        var tamanoMatriz = matrix.length;
-        var colorRE = '#93C90F';
-        var colorID = '#EF9600';
-        var colorC = '#00A3E1';
-        var colorL = '#7c5295';
-        var nactor = (matrix[tamanoMatriz - 1 ].idactor-1);
-
-        var valorMax = Math.max(...matrix.map(function(d) {return d.ncuestionario;}));
-//        var porcentajeDvalorMax = 100/valorMax;
-        
-        var escalaDgrafica = 3;//para escalar grafica en area de dibujo
-        var escalado =escalaDgrafica * (100/valorMax);
-
-        var rI = 100;//radio interno
-        var radioInt = rI;
-        var radioExt = radioInt + matrix[0].ncuestionario*escalado;
-        var anguloIni = 0;
-        var anguloFin = (2*Math.PI)/(nactor);
-        
-        for (var i = 0; i < matrix.length-1 ; i++)
+        var myobj = {medioC:0,RE:0,ID:0,Censo:0,Total:0};
+        var cont = 0;
+        for (var i = 0; i < matrix.length ; i++)
         {
             var n = i + 1;
-            var arc = d3.arc().innerRadius(radioInt).outerRadius(radioExt).startAngle(anguloIni).endAngle(anguloFin-0.06);
-            myobj.actor = matrix[i].nombre_actor;
-
             if(matrix[i].nombre_cuestionario == "Reforma Electoral")
             {
-                _bodyV.append('path').attr('transform','translate('+bc/2+','+hc/2+')').attr('d',arc()).attr('fill',colorRE);
                 myobj.RE = matrix[i].ncuestionario;
             }
             if(matrix[i].nombre_cuestionario == "Institucionalidad Democratica")
             {
-                _bodyV.append('path').attr('transform','translate('+bc/2+','+hc/2+')').attr('d',arc()).attr('fill',colorID);
                 myobj.ID = matrix[i].ncuestionario;
             }
             if(matrix[i].nombre_cuestionario == "Censo")
             {
-                _bodyV.append('path').attr('transform','translate('+bc/2+','+hc/2+')').attr('d',arc()).attr('fill',colorC);
                 myobj.Censo = matrix[i].ncuestionario;
             }
+
+            if(matrix.length-1 <= i)
+            {
+                n = n - Object.keys(myobj).length; //enganando a siguiente if
+            };
+
             if(matrix[i].idactor != matrix[n].idactor)
             {
-                anguloIni = anguloFin;
-                anguloFin = anguloIni + (2*Math.PI)/nactor;
-                radioInt = rI;
-                radioExt = radioInt + matrix[n].ncuestionario*escalado
-                
-                mymat[i] = myobj;
-//                console.log(myobj);
-                var myobj = {};
+                myobj.medioC = matrix[i].nombre_actor;
+                myobj.Total = parseInt(myobj.RE) + parseInt(myobj.ID) + parseInt(myobj.Censo);
+                mymat[cont] = myobj
+                myobj = {medioC:0,RE:0,ID:0,Censo:0,Total:0};
+                cont = cont + 1;
             }
-            else
-            {
-                radioInt = radioExt;
-                radioExt = radioInt + matrix[n].ncuestionario*escalado;
-
-                mymat[i] = myobj;
-
-            }
-//            console.log(myobj); 
         }
-
-//        console.log(mymat);
-
-        _bodyV.append("circle").attr("cx",(bc/2)-60).attr("cy",(hc/2)-20).attr("r", 6).style("fill", colorRE)
-        _bodyV.append("circle").attr("cx",(bc/2)-60).attr("cy",(hc/2)).attr("r", 6).style("fill", colorID)
-        _bodyV.append("circle").attr("cx",(bc/2)-60).attr("cy",(hc/2)+20).attr("r", 6).style("fill", colorC)
-        _bodyV.append("text").attr("x", (bc/2)-45).attr("y", (hc/2)-20).text("Reforma Electoral").style("font-size", "15px").attr("alignment-baseline","middle")
-        _bodyV.append("text").attr("x", (bc/2)-45).attr("y", (hc/2)).text("Inst. Democratica").style("font-size", "15px").attr("alignment-baseline","middle")
-        _bodyV.append("text").attr("x", (bc/2)-45).attr("y", (hc/2)+20).text("Censo").style("font-size", "15px").attr("alignment-baseline","middle")
-
-        var x = d3.scaleBand()
-                    .range([0, 2 * Math.PI])
-                    .align(0);
-        x.domain(mymat.map(function(d) { return d.actor; }));
-
-        var label = _bodyV.append("g")
-                        .selectAll("g")
-                        .data(mymat)
-                        .enter().append("g")
-                        .attr("transform","translate(" + bc/2 +"," + hc/2 + ")")
-                        .append("text")
-                        .attr("transform", function(d) { return "rotate(" + ((x(d.actor) + x.bandwidth() / 2) * 180 / Math.PI - 90) + ")translate(" + radioInt + ",0)"; })
-                        .text(function(d) { return d.actor; });
-
+        mymat = mymat.sort((a, b) => b.Total - a.Total);
+        console.log(mymat);
+        dibujarMatriz0(b,h,mymat);
     }
-        
+    function dibujarMatriz0(bc,hc,mymat)
+    {
+        console.log('dibujando mediosDcomunicacion');
+        var tamanoMatriz = mymat.length;
+        var colores = {colorRE:'#93C90F', colorID:'#EF9600', colorC:'#00A3E1', colorL:'#7c5295'};
+        var escalaDgrafica = 3.2;
+        var espacio = 0.02;
+        var valorMax = Math.max(...mymat.map(function(d) {return d.Total;}));
+        var radio0 = 100;
+        var radioInt = radio0;
+        var radioExt = radioInt + mymat[0].RE * (escalaDgrafica * (100 / valorMax));
+        var anguloIni = 0;
+        var anguloFin = (2 * Math.PI) / (tamanoMatriz);
+        for(var i = 0 ; i < tamanoMatriz; i++)
+        {
+            var n = i + 1;
+            var arc = d3.arc().innerRadius(radioInt).outerRadius(radioExt).startAngle(anguloIni).endAngle(anguloFin - espacio);
+            _bodyV.append('path').attr('transform','translate(' + bc / 2 + ',' + hc / 2 + ')').attr('d',arc()).attr('fill',colores.colorRE);
+            radioInt = radioExt;
+            radioExt = radioInt + mymat[i].ID * (escalaDgrafica * (100 / valorMax));
+
+            var arc = d3.arc().innerRadius(radioInt).outerRadius(radioExt).startAngle(anguloIni).endAngle(anguloFin - espacio);
+            _bodyV.append('path').attr('transform','translate(' + bc / 2 + ',' + hc / 2 + ')').attr('d',arc()).attr('fill',colores.colorID);
+            radioInt = radioExt;
+            radioExt = radioInt + mymat[i].Censo * (escalaDgrafica * (100 / valorMax));
+
+            var arc = d3.arc().innerRadius(radioInt).outerRadius(radioExt).startAngle(anguloIni).endAngle(anguloFin - espacio);
+            _bodyV.append('path').attr('transform','translate(' + bc / 2 + ',' + hc / 2 + ')').attr('d',arc()).attr('fill',colores.colorC);
+            radioInt = radio0;
+            if(mymat.length - 1 > i)
+            {
+                radioExt = radioInt + mymat[n].RE * (escalaDgrafica * (100 / valorMax));
+                anguloIni = anguloFin;
+                anguloFin = anguloIni + (2 * Math.PI) / (tamanoMatriz);
+            }
+        }
+        etiqueta0(bc,hc,radio0,mymat,escalaDgrafica);
+    }
+    function etiqueta0(bc,hc,radio0,mimat,escalaDgrafica)
+    {
+        console.log('Poniendo etiquetas mediosDcomunicacion');
+        var color = {RE:'#93C90F', ID:'#EF9600', C:'#00A3E1', L:'#7c5295'};
+        _bodyV.append("circle").attr("cx",(bc/2)-70).attr("cy",(hc/2)-20).attr("r", 6).style("fill", color.RE);
+        _bodyV.append("circle").attr("cx",(bc/2)-70).attr("cy",(hc/2)).attr("r", 6).style("fill", color.ID);
+        _bodyV.append("circle").attr("cx",(bc/2)-70).attr("cy",(hc/2)+20).attr("r", 6).style("fill", color.C);
+        _bodyV.append("text").attr("x", (bc/2)-60).attr("y", (hc/2)-20).text("Reforma Electoral").style("font-size", "15px").attr("alignment-baseline","middle");
+        _bodyV.append("text").attr("x", (bc/2)-60).attr("y", (hc/2)).text("Inst. Democratica").style("font-size", "15px").attr("alignment-baseline","middle");
+        _bodyV.append("text").attr("x", (bc/2)-60).attr("y", (hc/2)+20).text("Censo").style("font-size", "15px").attr("alignment-baseline","middle");
+//Dibujando circulos Negros
+        var radioReal2 = mimat[0].Total;
+        var radioReal1 = ((2 / 3) * mimat[0].Total);
+        var radioReal0 = ((1 / 3) * mimat[0].Total);
+/*        var valorMax = Math.max(...mimat.map(function(d) {return d.Total;}));*/
+        var radioExt = 100 + radioReal2 * (escalaDgrafica * (100 / mimat[0].Total));
+        var radioExt2 = 100 + radioReal1 * (escalaDgrafica * (100 / mimat[0].Total));
+        var radioExt1 = 100 + radioReal0 * (escalaDgrafica * (100 / mimat[0].Total));
+        _bodyV.append("circle")
+            .attr("transform","translate(" + bc/2 +"," + hc/2 + ")") //moviendo el centro
+            .attr("fill", "none")
+            .attr("stroke", "#000")
+            .attr("stroke-opacity", 0.1)
+            .attr("r", radioExt);
+        _bodyV.append("circle")
+            .attr("transform","translate(" + bc/2 +"," + hc/2 + ")") //moviendo el centro
+            .attr("fill", "none")
+            .attr("stroke", "#000")
+            .attr("stroke-opacity", 0.1)
+            .attr("r", radioExt2);
+        _bodyV.append("circle")
+            .attr("transform","translate(" + bc/2 +"," + hc/2 + ")") //moviendo el centro
+            .attr("fill", "none")
+            .attr("stroke", "#000")
+            .attr("stroke-opacity", 0.1)
+            .attr("r", radioExt1);
+//inserta valores en circulos negros
+        _bodyV.append("text")
+            .attr("transform","translate(" + bc/2 +"," + hc/2 + ")") //moviendo el centro
+            .attr("x", -35)
+            .attr("y", -radioExt1)
+            .attr("dy", "0.35em")
+            .style("font-size", "10px")
+            .text(Math.round(radioReal0));
+        _bodyV.append("text")
+            .attr("transform","translate(" + bc/2 +"," + hc/2 + ")") //moviendo el centro
+            .attr("x", -35)
+            .attr("y", -radioExt2)
+            .attr("dy", "0.35em")
+            .style("font-size", "10px")
+            .text(Math.round(radioReal1));
+        _bodyV.append("text")
+            .attr("transform","translate(" + bc/2 +"," + hc/2 + ")") //moviendo el centro
+            .attr("x", -35)
+            .attr("y", -radioExt)
+            .attr("dy", "0.35em")
+            .style("font-size", "10px")
+            .text(Math.round(radioReal2));
+//insertando texto "Cuestionario"
+        _bodyV.append("text")
+            .attr("transform","translate(" + bc/2 +"," + hc/2 + ")") //moviendo el centro
+            .attr("x", -70)
+            .attr("y", -radioExt-20)
+            .attr("dy", "0.35em")
+            .text("Noticias");
+//etiquetas de colores
+        var matrixn=[];
+        var tamanoMatriz = mimat.length;
+        for(var i = 0 ; i < tamanoMatriz; i++)
+        {
+            matrixn[i]=(mimat[i].medioC);
+        }
+        var color = d3.scaleOrdinal()
+            .domain(matrixn)
+            .range(d3.schemeSet1);
+
+        _bodyV.append("g")
+            .selectAll("g")
+            .data(matrixn)
+            .enter()
+            .append("g")
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", function(d,i){ return 90 + i*25})
+            .attr("width", 15)
+            .attr("height", 10)
+            .style("fill", function(d){ return color(d)});
+
+        _bodyV.append("g")
+            .selectAll("g")
+            .data(matrixn)
+            .enter()
+            .append("g")
+            .append("text")
+            .attr("x",20)
+            .attr("y",function(d,i){return 100+i*25})
+            .style("fill",function(d){return color(d)})
+            .text(function(d){return d})
+            .attr("text-anchor","left")
+            .style("aligment-baseline","middle")
+//cubos de colores dentro la circunferencia
+        var tamanoMatriz = mimat.length;
+        var escalaDgrafica = 3.2;
+        var espacio = 0.02;
+        var valorMax = Math.max(...mimat.map(function(d) {return d.Total;}));
+        var radio0 = 100;
+        var radioInt = radio0;
+        var radioExt = radioInt + mimat[0].RE * (escalaDgrafica * (100 / valorMax));
+        var anguloIni = 0;
+        var anguloFin = (2 * Math.PI) / (tamanoMatriz);
+        for(var i = 0 ; i < tamanoMatriz; i++)
+        {
+            var n = i + 1;
+            var arc = d3.arc().innerRadius(radio0-15).outerRadius(radio0-5).startAngle(anguloIni).endAngle(anguloFin - espacio);
+            _bodyV.append('path').attr('transform','translate(' + bc / 2 + ',' + hc / 2 + ')').attr('d',arc()).attr('fill',color(mimat[i].medioC));
+            if(mimat.length - 1 > i)
+            {
+                anguloIni = anguloFin;
+                anguloFin = anguloIni + (2 * Math.PI) / (tamanoMatriz);
+            }
+        }
+    }
     return _chart;
 }
