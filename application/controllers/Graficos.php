@@ -24,12 +24,7 @@ class Graficos extends CI_Controller{
 		$this->load->view('html/pie');
 		//$this->load->view('graficos/vgraficop');
 	}
-	private function fecha_unix($fecha)
-	{
-		list($anio, $mes, $dia) = explode('-', $fecha);
-		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
-		return $fecha_unix;
-	}
+
 	public function seleccionBubble()
 	{	
 		$this->load->view('html/encabezado');
@@ -403,12 +398,7 @@ class Graficos extends CI_Controller{
 		echo json_encode($matriz);
 		//$matriz = $this->matrizCuerdasActorFormulario();
 	}
-		private function fecha_unix($fecha)
-	{
-		list($anio, $mes, $dia) = explode('-', $fecha);
-		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
-		return $fecha_unix;
-	}
+
 
 	//Procedimiento ajax para generar matriz json para barras
 	public function getmatrizbarras()
