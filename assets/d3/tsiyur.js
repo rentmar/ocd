@@ -1242,38 +1242,6 @@ function cuerdasChart()
 }
 
 
-jQuery(document).on('click', '#graficar', function (e) {
-	e.preventDefault();
-	var datos_consulta = new Datos();
-	console.log("Boton presionado");
-	//Capturar el valor del primer input date
-	datos_consulta.fecha_inicio = $("input#fecha_inicio").val();
-	//Capturar el valor del segundo input date
-	datos_consulta.fecha_fin = $("input#fecha_fin").val();
-	//Capturar el id dell actor
-	datos_consulta.idactor = $('select#idactor').val();
-	//Capturar el nombre del actor
-	datos_consulta.nombre_actor = $('select#idactor option:selected').text();
-
-	//Validadores
-	if(datos_consulta.idactor == 0)
-	{
-		$('#actorsinseleccionar').modal("show");
-	}
-	else{
-		if(Date.parse(datos_consulta.fecha_inicio) >= Date.parse(datos_consulta.fecha_fin) )
-		{
-			$('#fechaintervalo').modal("show");
-		}
-		else{
-			console.log(datos_consulta);
-			console.log(JSON.stringify(datos_consulta));
-			$("#contenedor-chart").empty();
-			graficaractorescuerda(datos_consulta)
-
-		}
-	}
-});
 
 //Definir el objeto fechas
 function Datos(){
