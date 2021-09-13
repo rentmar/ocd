@@ -14,6 +14,7 @@ class Graficos extends CI_Controller{
 		$this->load->model('Actor_model');
 		$this->load->helper('file');
 		$this->load->model('Radial_model');
+		$this->load->model('Departamento_model');
 
 	}
 	public function index()
@@ -262,21 +263,16 @@ class Graficos extends CI_Controller{
 		$accion = $this->input->post('accion');
 		if($accion == 1)
 		{
-			$data['titulo'] = '';
+			$data['titulo'] = 'Barras Nacional';
 			$data['accion'] = $accion;
 			$this->load->view('graficos/vgraficobar', $data);
 		}elseif ($accion==2){
-			$data['titulo'] = '';
+			$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
+			$data['titulo'] = 'Barras Departamental';
 			$data['accion'] = $accion;
 			$this->load->view('graficos/vgraficobar', $data);
 		}
 
-		//Si la accion es 1 Nacional
-
-		//Si la accion es 2 Departamental
-
-		//vgraficobar.php
-		//
 
 	}
 
@@ -429,7 +425,7 @@ class Graficos extends CI_Controller{
 
 		foreach ($pre_mc as $pmc)
 		{
-			$pmc->y = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+			$pmc->v = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
 		}
 
 		//Matriz de cuestionarios
@@ -465,7 +461,7 @@ class Graficos extends CI_Controller{
 			//Ajuste de los porcentajes
 			foreach ($tm as $t)
 			{
-				$t->c = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+				$t->v = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
 			}
 
 			//Subtemas
@@ -501,7 +497,7 @@ class Graficos extends CI_Controller{
 				{
 					if($mayor_st!=0)
 					{
-						$s->c = round(($s->c/$mayor_st)*100, 0, PHP_ROUND_HALF_UP);
+						$s->v = round(($s->c/$mayor_st)*100, 0, PHP_ROUND_HALF_UP);
 					}
 					if(is_null($s->idst))
 					{
@@ -509,6 +505,7 @@ class Graficos extends CI_Controller{
 						unset($s->idst);
 						unset($s->n);
 						unset($s->c);
+						unset($s->v);
 					}
 				}
 				$mst[] = $st;

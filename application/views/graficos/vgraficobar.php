@@ -57,18 +57,23 @@
 
 							<?php endif; ?>
 							
-							<?php if($accion==2) { ?>
-							<?php $direccion="opcionElegida('".base_url()."datos/cuestionariobar.xml')";?>
-							<!--<button onclick="<?php //echo $direccion;?>" class="btn btn-info" style="background-color:#474142;">Graficar</button>-->
-							<select onchange="<?php echo $direccion;?>" id="iddepartamento" name="iddepartamento"  required >
-								<option value="" selected >Seleccione Departamento</option>
-								<?php foreach ($departamentos as $d): ?>
-								<option value="<?php echo $d->iddepartamento ?>" >
-									<?php echo $d->nombre_departamento;?>
-								</option>
-								<?php endforeach; ?>
-							</select>
-							<?php } ?>
+							<?php if($accion==2) : ?>
+							<form class="form-inline">
+								<label for="fecha_inicio_bd">Fecha Inicio:</label>
+								<input type="date" id="fecha_inicio_bd" name="fecha_inicio_bd"  class="form-control" required >
+								<label for="fecha_fin_bd">Fecha Fin:</label>
+								<input type="date" id="fecha_fin_bd" name="fecha_fin_bd"  class="form-control" required >
+								<select class="form-control" id="iddepartamentobarra" name="iddepartamentobarra"  required >
+									<option value="" >Seleccione Departamento</option>
+									<?php foreach ($departamentos as $d): ?>
+										<option value="<?php echo $d->iddepartamento ?>" >
+											<?php echo $d->nombre_departamento;?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+								<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionBar'); ?>">Atras</a>
+							</form>
+							<?php endif; ?>
 						</div>
 						<br>
 						<div id="contenedor-chart">
