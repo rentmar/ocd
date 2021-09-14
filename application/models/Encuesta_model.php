@@ -77,4 +77,30 @@ class  Encuesta_model extends CI_Model
 		return $qry->result();
 	}
 
+	//Insertar la encuesta
+	public function crearNuevaEncuesta($nombre_encuesta)
+	{
+
+		$this->db->trans_begin();
+
+		$data = array(
+			'uinombre_encuesta' => $nombre_encuesta,
+			'encuesta_activa ' => 1,
+		);
+
+		$this->db->insert('uiencuesta', $data);
+
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
 }
