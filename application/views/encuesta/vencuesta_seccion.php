@@ -18,7 +18,7 @@
 				<table>
 					<thead>
 					<tr id="datos">
-						<th>Nro</th>
+						<th>Nro Seccion</th>
 						<th>Modulo</th>
 						<th>Encuesta</th>
 						<th>Accion</th>

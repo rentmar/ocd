@@ -63,7 +63,7 @@ class Encuesta extends CI_Controller
 		$datos['respuestas'] = $this->Encuesta_model->leerTodasLasRespuestas();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('encuesta/vencuesta_respuesta');
+		$this->load->view('encuesta/vencuesta_respuesta', $datos);
 		$this->load->view('html/pie');
 	}
 
