@@ -103,4 +103,35 @@ class  Encuesta_model extends CI_Model
 		}
 	}
 
+	//
+	public function leerEncuestaPorID($idencuesta)
+	{
+		$this->db->where('iduiencuesta',$idencuesta);
+		$q=$this->db->get ('uiencuesta');
+		return $q->row();
+	}
+
+	public function actualizarEncuesta($idencuesta, $nombre)
+	{
+		$this->db->trans_begin();
+
+		$data = array(
+			'uinombre_encuesta' => $nombre,
+		);
+
+		$this->db->where('iduiencuesta', $idencuesta);
+		$this->db->update('uiencuesta ', $data);
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
 }

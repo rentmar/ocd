@@ -85,8 +85,34 @@ class Encuesta extends CI_Controller
 			redirect('inicio');
 		}else{
 			$this->mensaje('No se creo la encuesta, intente otra vez', 'warning');
+			redirect('inicio');
 		}
+	}
 
+	public function editarEncuesta($id)
+	{
+		$idencuesta = $id;
+		$encuesta = $this->Encuesta_model->leerEncuestaPorID($idencuesta);
+		$datos['encuesta'] = $encuesta;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_editarencuesta', $datos );
+		$this->load->view('html/pie');
+
+	}
+
+	public function procesarEditarEncuesta()
+	{
+		$iduiencuesta = $this->input->post('iduiencuesta');
+		$nombre_encuesta = $this->input->post('nombre_cuestionario');
+
+		if($this->Encuesta_model->actualizarEncuesta($iduiencuesta, $nombre_encuesta)){
+			$this->mensaje('Encuesta editada', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se pudo editar, intente otra vez', 'warning');
+			redirect('inicio');
+		}
 
 	}
 
