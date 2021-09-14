@@ -60,6 +60,21 @@
 			</li>
 			<?php endif; ?>
 
+			<?php if($this->ion_auth->is_admin()): ?>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Encuestas/UI
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dropdown02">
+						<a class="dropdown-item" href="<?php echo site_url('encuesta');?>">Encuesta</a>
+						<a class="dropdown-item" href="<?php echo site_url('encuesta/moduloUI');?>">Modulo</a>
+						<a class="dropdown-item" href="<?php echo site_url('encuesta/seccionUI');?>">Seccion</a>
+						<a class="dropdown-item" href="<?php echo site_url('encuesta/preguntaUI');?>">Pregunta</a>
+						<a class="dropdown-item" href="<?php echo site_url('encuesta/respuestaUI');?>">Respuesta</a>
+					</div>
+				</li>
+			<?php endif; ?>
+
 		</ul>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item dropdown">
