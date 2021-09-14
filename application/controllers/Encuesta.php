@@ -150,4 +150,35 @@ class Encuesta extends CI_Controller
 		}
 	}
 
+	public function editarModulo($id)
+	{
+		$idmodulo = $id;
+		$datos['encuestas'] = $this->Encuesta_model->leerTodasLasEncuestas();
+
+		$modulo = $this->Encuesta_model->leerModuloPorID($idmodulo);
+		$datos['modulo'] = $modulo;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_editarmodulo', $datos );
+		$this->load->view('html/pie');
+
+	}
+
+	public function procesarEditarModulo()
+	{
+		$idmodulo = $this->input->post('idmodulo');
+		$nombre_modulo = $this->input->post('nombre_modulo');
+		$orden_modulo = $this->input->post('orden_modulo');
+		$idencuesta = $this->input->post('idencuesta');;
+
+		if($this->Encuesta_model->actualizarModulo($idmodulo, $nombre_modulo, $orden_modulo, $idencuesta)){
+			$this->mensaje('Modulo editado', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se pudo editar, intente otra vez', 'warning');
+			redirect('inicio');
+		}
+
+	}
+
 }

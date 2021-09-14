@@ -161,4 +161,35 @@ class  Encuesta_model extends CI_Model
 
 	}
 
+	public function leerModuloPorID($idmodulo)
+	{
+		$this->db->where('iduimodulo',$idmodulo);
+		$q=$this->db->get ('uimodulo');
+		return $q->row();
+	}
+
+	public function actualizarModulo($idmodulo, $nombre, $orden, $idencuesta)
+	{
+		$this->db->trans_begin();
+
+		$data = array(
+			'uinombre_modulo' => $nombre,
+			'uiorden_modulo' => $orden,
+			'rel_iduiencuesta' => $idencuesta,
+		);
+		$this->db->where('iduimodulo', $idmodulo);
+		$this->db->update('uimodulo ', $data);
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
 }
