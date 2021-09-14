@@ -783,7 +783,8 @@ class Ley_model extends CI_Model{
 			."LEFT JOIN tema ON subtema.rel_idtema = tema.idtema  "
 			."LEFT JOIN leyes_fuente ON leyes_fuente.rel_idleyes = l.idleyes "
 			."LEFT JOIN fuente ON fuente.idfuente = leyes_fuente.rel_idfuente "
-			."WHERE l.fecha_registro BETWEEN ? AND ?  ";
+			."WHERE l.fecha_registro BETWEEN ? AND ?  "
+			."AND l.esta_activa = 1  " ;
 
 		/** @noinspection PhpLanguageLevelInspection */
 
@@ -839,7 +840,8 @@ class Ley_model extends CI_Model{
 			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
 			."LEFT JOIN ley_otrotema ON ley_otrotema.rel_idleyes = l.idleyes  "
 			."LEFT JOIN otrotema ON otrotema.idotrotema = ley_otrotema.rel_idotrotema  "
-			."WHERE l.fecha_registro BETWEEN ? AND ?  ";
+			."WHERE l.fecha_registro BETWEEN ? AND ?  "
+			."AND l.esta_activa = 1 ";
 
 		/** @noinspection PhpLanguageLevelInspection */
 
@@ -885,7 +887,8 @@ class Ley_model extends CI_Model{
 			."LEFT JOIN ley_otrosubtema ON ley_otrosubtema.rel_idleyes = l.idleyes  "
 			."LEFT JOIN otrosubtema ON otrosubtema.idotrosubtema = ley_otrosubtema.rel_idotrosubtema  "
 			."LEFT JOIN tema ON otrosubtema.rel_idtema = tema.idtema  "
-			."WHERE l.fecha_registro BETWEEN ? AND ?  ";
+			."WHERE l.fecha_registro BETWEEN ? AND ?  "
+			."AND l.esta_activa = 1  ";
 
 		/** @noinspection PhpLanguageLevelInspection */
 

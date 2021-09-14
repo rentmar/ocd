@@ -35,6 +35,7 @@ class Leyy_model extends CI_Model{
                         . "LEFT JOIN subtema ON subtema.idsubtema = ley_subtema.rel_idsubtema "
                         . "LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
 						. "WHERE (l.fecha_registro BETWEEN ? AND ?)  "
+						. "AND l.esta_activa = 1  "
 						. "AND  estadoley.idestadoley = ? ";
 		$qry = $this->db->query($sql, [$fecha_inicio, $fecha_fin, $idestadosley  ]);
 		return $qry->result();
@@ -68,8 +69,9 @@ class Leyy_model extends CI_Model{
                         . "LEFT JOIN users ON users.id = le.rel_idusuario "
                         . "LEFT JOIN urlley ON urlley.rel_idley = le.idleyes "
                         . "LEFT JOIN tema ON tema.rel_idcuestionario = le.rel_idcuestionario "
-                    . "LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad "
+                   		. "LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad "
                         . "WHERE universidad.iduniversidad = ?  AND (le.fecha_registro BETWEEN ? AND ?) "
+						. "AND le.esta_activa = 1  "
                         . "GROUP BY le.idleyes ASC ";
 		$qry = $this->db->query($sql, [$iduniversidad, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -100,6 +102,7 @@ class Leyy_model extends CI_Model{
                         . "LEFT JOIN tema ON tema.rel_idcuestionario = le.rel_idcuestionario "
 //                    . "LEFT JOIN universidad ON universidad.iduniversidad = users.rel_iduniversidad "
                         . "WHERE tema.idtema = ?  AND (le.fecha_registro BETWEEN ? AND ?) "
+						. "AND le.esta_activa = 1 "
                         . "GROUP BY fuente.nombre_fuente ";
 		$qry = $this->db->query($sql, [$idtema, $fecha_inicio, $fecha_fin,  ]);
 		return $qry->result();
@@ -132,6 +135,7 @@ class Leyy_model extends CI_Model{
 				. "LEFT JOIN subtema ON subtema.idsubtema = ley_subtema.rel_idsubtema "
 				. "LEFT JOIN tema ON subtema.rel_idtema = tema.idtema "
 				. "WHERE (l.fecha_registro BETWEEN ? AND ?)  "
+				. "AND l.esta_activa = 1   "
 				. "AND subtema.idsubtema = ? ";
 
 		$qry = $this->db->query($sql, [$fecha_inicio, $fecha_fin, $idsubtema  ]);
