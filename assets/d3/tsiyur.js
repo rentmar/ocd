@@ -960,7 +960,7 @@ function barChart ()
 			.remove();
 		if (_nivel==1)
 		{
-			_etiqueta="Cuetionarios";
+			_etiqueta="Cuestionarios";
 		}
 		else if(_nivel==2)
 		{

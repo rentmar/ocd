@@ -568,7 +568,14 @@ class Graficos extends CI_Controller{
 
 		foreach ($pre_mc as $pmc)
 		{
-			$pmc->v = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+			if($mayor!=0)
+			{
+				$pmc->v = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+			}
+			else{
+				$pmc->v = 0;
+			}
+
 			if($pmc->v >0 && $pmc->v <= 1)
 			{
 				$pmc->v = 1;
@@ -608,7 +615,13 @@ class Graficos extends CI_Controller{
 			//Ajuste de los porcentajes
 			foreach ($tm as $t)
 			{
-				$t->v = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+				if($mayor_t!=0)
+				{
+					$t->v = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+				}
+				else{
+					$t->v = 0;
+				}
 				if($t->v >0 && $t->v <= 1)
 				{
 					$t->v = 1;
