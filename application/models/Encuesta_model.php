@@ -60,7 +60,21 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	public function agregarPreguntaUI($dts)
+	{
+		$this->db->insert("uipregunta",$dts);
+	}
+	public function leerPreguntaId($idp)
+	{
+		$this->db->where("iduipregunta",$idp);
+		$q=$this->db->get("uipregunta");
+		return $q->row();
+	}
+	public function modificarPreguntaUI($dts,$idp)
+	{
+		$this->db->where("iduipregunta",$idp);
+		$this->db->update("uipregunta",$dts);
+	}
 	//Leer todas las respuestas
 	public  function  leerTodasLasRespuestas()
 	{

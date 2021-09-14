@@ -57,7 +57,41 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_pregunta', $datos);
 		$this->load->view('html/pie');
 	}
-
+	public function crearPregunta()
+	{
+		$datos['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vcrearpregunta', $datos);
+		$this->load->view('html/pie');
+	}
+	public function agregarPreguntaUI()
+	{
+		$dts=array(
+			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
+			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
+			"rel_iduiseccion"=>$this->input->post("idseccion"));
+		$this->Encuesta_model->agregarPreguntaUI($dts);
+		redirect('Encuesta/preguntaUI');
+	}
+	public function editarPreguntaUI($idp)
+	{
+		$dt['pregunta']=$this->Encuesta_model->leerPreguntaId($idp);
+		$dt['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/veditarpregunta', $dt);
+		$this->load->view('html/pie');
+	}
+	public function modificarPreguntaUI($idp)
+	{
+		$dts=array(
+			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
+			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
+			"rel_iduiseccion"=>$this->input->post("idseccion"));
+		$this->Encuesta_model->modificarPreguntaUI($dts,$idp);
+		redirect('Encuesta/preguntaUI');
+	}
 	public function respuestaUI()
 	{
 		//Leer Todas las respuestas
