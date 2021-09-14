@@ -134,4 +134,31 @@ class  Encuesta_model extends CI_Model
 		}
 	}
 
+	public function crearModulo($nombre, $orden, $encuesta)
+	{
+		$this->db->trans_begin();
+
+		$data = array(
+			'uinombre_modulo' => $nombre,
+			'uiorden_modulo' => $orden,
+			'rel_iduiencuesta' => $encuesta,
+		);
+
+		$this->db->insert('uimodulo', $data);
+
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+
+
+	}
+
 }

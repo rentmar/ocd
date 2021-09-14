@@ -125,4 +125,29 @@ class Encuesta extends CI_Controller
 		]);
 	}
 
+	public function crearModulo()
+	{
+		$data['encuestas'] = $this->Encuesta_model->leerTodasLasEncuestas();
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_crearmodulo', $data);
+		$this->load->view('html/pie');
+	}
+
+	public function procesarCrearModulo()
+	{
+		$nombre_modulo = $this->input->post('nombre_modulo');
+		$orden_modulo = $this->input->post('orden_modulo');
+		$idencuesta = $this->input->post('idencuesta');
+
+		if($this->Encuesta_model->crearModulo($nombre_modulo, $orden_modulo, $idencuesta)){
+			$this->mensaje('Modulo creado', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se pudo crear modulo, intente otra vez', 'warning');
+			redirect('inicio');
+		}
+	}
+
 }
