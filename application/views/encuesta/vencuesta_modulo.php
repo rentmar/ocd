@@ -20,6 +20,7 @@
 					<tr id="datos">
 						<th>Nro</th>
 						<th>Modulo</th>
+						<th>Orden</th>
 						<th>Encuesta</th>
 						<th>Accion</th>
 					</tr>
@@ -29,6 +30,7 @@
 						<tr>
 							<td><?php echo $e->iduimodulo;?></td>
 							<td><?php echo $e->uinombre_modulo;?></td>
+							<td><?php echo $e->uiorden_modulo; ?></td>
 							<td><?php echo $e->uinombre_encuesta; ?></td>
 							<td>
 								<a href="<?php echo site_url('encuesta/editarModulo/'.$e->iduimodulo);?>">
