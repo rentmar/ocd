@@ -426,6 +426,10 @@ class Graficos extends CI_Controller{
 		foreach ($pre_mc as $pmc)
 		{
 			$pmc->v = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+			if($pmc->v >0 && $pmc->v <= 1)
+			{
+				$pmc->v = 1;
+			}
 		}
 
 		//Matriz de cuestionarios
@@ -462,6 +466,10 @@ class Graficos extends CI_Controller{
 			foreach ($tm as $t)
 			{
 				$t->v = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+				if($t->v >0 && $t->v <= 1)
+				{
+					$t->v = 1;
+				}
 			}
 
 			//Subtemas
@@ -498,6 +506,10 @@ class Graficos extends CI_Controller{
 					if($mayor_st!=0)
 					{
 						$s->v = round(($s->c/$mayor_st)*100, 0, PHP_ROUND_HALF_UP);
+						if($s->v >0 && $s->v <= 1)
+						{
+							$s->v = 1;
+						}
 					}
 					if(is_null($s->idst))
 					{
@@ -557,6 +569,10 @@ class Graficos extends CI_Controller{
 		foreach ($pre_mc as $pmc)
 		{
 			$pmc->v = round(($pmc->c/$mayor)*100, 0, PHP_ROUND_HALF_UP);
+			if($pmc->v >0 && $pmc->v <= 1)
+			{
+				$pmc->v = 1;
+			}
 		}
 
 		//Matriz de cuestionarios
@@ -593,6 +609,10 @@ class Graficos extends CI_Controller{
 			foreach ($tm as $t)
 			{
 				$t->v = round(($t->c/$mayor_t)*100, 0, PHP_ROUND_HALF_UP);
+				if($t->v >0 && $t->v <= 1)
+				{
+					$t->v = 1;
+				}
 			}
 
 			//Subtemas
@@ -629,6 +649,10 @@ class Graficos extends CI_Controller{
 					if($mayor_st!=0)
 					{
 						$s->v = round(($s->c/$mayor_st)*100, 0, PHP_ROUND_HALF_UP);
+						if($s->v >0 && $s->v <= 1)
+						{
+							$s->v = 1;
+						}
 					}
 					if(is_null($s->idst))
 					{
