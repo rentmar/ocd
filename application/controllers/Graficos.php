@@ -575,7 +575,7 @@ class Graficos extends CI_Controller{
 			foreach ($tm as $t)
 			{
 				if($t->id !=4){
-					$t->c = $this->Graficos_model->cantidadTemasNoticiaPorIntervaloFechas($f0, $ff, $t->idt) ;
+					$t->c = $this->Graficos_model->cantidadTemasNoticiaPorIntervaloFechasDep($f0, $ff, $t->idt, $iddepartamento) ;
 				}else{
 					$t->c = $this->Graficos_model->cantidadTemasLeyPorIntervaloFechas($f0, $ff, $t->idt);
 				}

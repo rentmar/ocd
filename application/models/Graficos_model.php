@@ -667,16 +667,17 @@ class Graficos_model extends CI_Model
 
 		$sql = "SELECT  COUNT(*) AS cantidad   "
 			."FROM noticia_subtema       "
-			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia   "
-			."INNER JOIN users ON users.id = noticia.rel_idusuario  "
-			."INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
-			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema  "
-			."INNER JOIN tema ON tema.idtema = subtema.rel_idtema   "
+			."INNER JOIN noticia ON noticia.idnoticia = noticia_subtema.rel_idnoticia      "
+			."INNER JOIN users ON users.id = noticia.rel_idusuario    "
+			."INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento    "
+			."INNER JOIN subtema ON subtema.idsubtema = noticia_subtema.rel_idsubtema    "
+			."INNER JOIN tema ON tema.idtema = subtema.rel_idtema      "
+			."   "
 			."WHERE noticia.esta_activa = 1  "
 			."AND tema.idtema = ? "
 			."AND departamento.iddepartamento = ?  "
 			."AND (noticia.fecha_noticia BETWEEN ? AND ?) "
-			."  "
+			." "
 			." ";
 
 
