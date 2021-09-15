@@ -21,7 +21,8 @@
 							<label for="grupo" >
 								Seleccionar Modulo:
 							</label>
-							<select required id="modulo" name="modulo" class="form-control" required>
+							<select id="modulo" name="modulo"  class="form-control simple" required>
+								<option value="" >Seleccionar Modulo</option>
 								<?php foreach ($modulos as $e): ?>
 									<option value="<?php echo $e->iduimodulo;?>" ><?php echo $e->uinombre_modulo;  ?></option>
 								<?php endforeach; ?>
@@ -31,7 +32,8 @@
 							<label for="grupo" >
 								Seleccionar Subtema:
 							</label>
-							<select required id="subtema" name="subtema" class="form-control" required>
+							<select required id="subtema" name="subtema" class="form-control simple" required>
+								<option value="" >Seleccionar Subtema</option>
 								<?php foreach ($subtemas as $e): ?>
 									<option value="<?php echo $e->idsubtema;?>" ><?php echo $e->nombre_subtema;  ?></option>
 								<?php endforeach; ?>

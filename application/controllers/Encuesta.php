@@ -316,12 +316,34 @@ class Encuesta extends CI_Controller
 	public function verFormEncuesta($identificador)
 	{
 		$iduiencuesta = $identificador;
+		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
+		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
+
+		//Array de orden
+		$orden_modulos = [];
+		foreach ($modulos as $m)
+		{
+			$orden_modulos[] = $m->uiorden_modulo;
+		}
+		$orden_modulos_min = min($orden_modulos);
+		$orden_modulos_max = max($orden_modulos);
+
+		//Extraer las secciones de una encuesta
+		$secciones = $this->Encuesta_model->leerSeccionesDeUnaEncuesta($iduiencuesta);
+
+		$datos['encuesta'] = $encuesta;
+		$datos['modulos'] = $modulos;
+		$datos['secciones'] = $secciones;
+		$datos['orden_mod_min'] = $orden_modulos_min;
+		$datos['orden_mod_max'] = $orden_modulos_max;
+
+		$this->load->view('encuesta/vencuesta_plantilla', $datos);
 
 	}
 
 	public function cambiarEstado($identificador)
 	{
-		
+
 		$iduiencuesta = $identificador;
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$datos['encuesta'] = $encuesta;
@@ -337,6 +359,17 @@ class Encuesta extends CI_Controller
 		}
 		$this->Encuesta_model->cambiarEstado($iduiencuesta, $estado);
 		redirect('encuesta/formulariosEncuesta');
+	}
+
+	public function capturarDatosEncuesta()
+	{
+		$n = $this->input->post('nombre');
+		$a = $this->input->post('apellido');
+		$e = $this->input->post('edad');
+
+		echo "Nombre: ".$n." ".$a."<br>";
+		echo "Edad: ".$e;
+
 	}
 
 }

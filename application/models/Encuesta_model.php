@@ -304,4 +304,40 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		$this->db->update('uiencuesta ', $data);
 	}
 
+	//Lee los modulos que pertenecen a una encuesta en orden ascendente
+	public function leerModulosPorIdEncuesta($idencuesta)
+	{
+		$sql = "SELECT *   "
+			."FROM uimodulo   "
+			."WHERE uimodulo.rel_iduiencuesta = ?   "
+			."   "
+			."   "
+			."  "
+			."   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idencuesta,  ]);
+		return $qry->result();
+	}
+
+	//Leer las secciones de un modulo
+	public function leerSeccionesDeUnaEncuesta($idencuesta)
+	{
+		$sql = "SELECT *   "
+			."FROM uiseccion   "
+			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
+			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta   "
+			."WHERE uiencuesta.iduiencuesta = 3   "
+			."ORDER BY uimodulo.uiorden_modulo, uiseccion.uiorden_seccion  "
+			."   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idencuesta,  ]);
+		return $qry->result();
+	}
+
 }
