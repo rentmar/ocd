@@ -112,12 +112,7 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 			."SET uiorden_seccion = ?, rel_iduimodulo = ?, rel_idsubtema = ? "
 			."WHERE iduiseccion = ? ";
 			$qry = $this->db->query($sql, [$uiorden_seccion, $rel_iduimodulo, $rel_idsubtema, $iduiseccion ]);
-//		$qry = $this->db->query($sql);
-		return; //$qry->result();
-
-
-
-
+		return;
 	}
 
 	//Leer todas las preguntas
