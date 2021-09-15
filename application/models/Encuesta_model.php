@@ -192,4 +192,15 @@ class  Encuesta_model extends CI_Model
 		}
 	}
 
+	//Habilitar/Deshabilitar Encuesta
+	public function cambiarEstado($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'encuesta_activa' => $estado,
+		];
+		$this->db->where('iduiencuesta', $identificador);
+		$this->db->update('uiencuesta ', $data);
+	}
+
 }

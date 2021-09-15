@@ -17,7 +17,7 @@
 						<input type="hidden" name="iduiencuesta" id="iduiencuesta"
 								value="<?php echo $encuesta->iduiencuesta; ?>" >
 						<br><br>
-						<input type="submit" id="BOTON" value="CREAR">
+						<input type="submit" id="BOTON" value="APLICAR">
 						<a href="<?php echo site_url('encuesta/');?>"><input type="button" class="BOTONROJO" value="CANCELAR"></a>
 						<?php echo form_close(); ?>
 					</div>

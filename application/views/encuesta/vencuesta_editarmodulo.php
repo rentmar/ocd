@@ -54,7 +54,7 @@
 						</div>
 
 						<div class="form-group">
-							<input type="submit" id="BOTON" value="ENVIAR">
+							<input type="submit" id="BOTON" value="APLICAR">
 							<a href="<?php echo site_url('inicio');?>">
 								<input type="button" class="BOTONROJO" value="CANCELAR">
 							</a>

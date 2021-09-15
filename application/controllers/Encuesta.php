@@ -181,4 +181,58 @@ class Encuesta extends CI_Controller
 
 	}
 
+	//Despliegue de tarjetas
+	public function encuestaInicio()
+	{
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_inicio');
+		$this->load->view('html/pie');
+	}
+
+	//Vista de los formularios
+	public function formulariosEncuesta()
+	{
+		$datos['encuestas'] = $this->Encuesta_model->leerTodasLasEncuestas();
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_lista', $datos);
+		$this->load->view('html/pie');
+	}
+
+	//generar la vista de un formulario
+	public function verFormEncuesta($identificador)
+	{
+		$iduiencuesta = $identificador;
+
+	}
+
+	public function cambiarEstado($identificador)
+	{
+		/*$iduiencuesta = $identificador;
+		$encuesta = $this->Noticia_model->noticiaPorId($idnoticia);*/
+
+		$iduiencuesta = $identificador;
+		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
+		$datos['encuesta'] = $encuesta;
+
+
+		if($encuesta->encuesta_activa)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Encuesta_model->cambiarEstado($iduiencuesta, $estado);
+		redirect('encuesta/formulariosEncuesta');
+	}
+
+
+
+
+
+
 }
