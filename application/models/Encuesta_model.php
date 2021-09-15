@@ -60,9 +60,21 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-	public function agregarPreguntaUI($dts)
+	public function agregarPreguntaUI($dts,$dtcheck)
 	{
-		$this->db->insert("uipregunta",$dts);
+		$this->db->trans_start();
+			$this->db->insert("uipregunta",$dts);
+			$id=$this->db->insert_id();
+			foreach ($dtcheck as $r)
+			{
+				$dt= array(
+						'rel_iduipregunta'=>$id,
+						'rel_iduirespuesta'=>$r,
+						'uiorden_respuesta'=>1);
+				$this->db->insert('uirespuesta_pregunta',$dt);
+			}
+		$this->db->trans_complete();
+		
 	}
 	public function leerPreguntaId($idp)
 	{
@@ -90,7 +102,10 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	public function agregarRespuestaUI($dts)
+	{
+		$this->db->insert("uirespuesta",$dts);
+	}
 	//Insertar la encuesta
 	public function crearNuevaEncuesta($nombre_encuesta)
 	{

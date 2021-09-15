@@ -60,6 +60,7 @@ class Encuesta extends CI_Controller
 	public function crearPregunta()
 	{
 		$datos['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+		$datos['respuestas'] = $this->Encuesta_model->leerTodasLasRespuestas();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vcrearpregunta', $datos);
@@ -67,12 +68,24 @@ class Encuesta extends CI_Controller
 	}
 	public function agregarPreguntaUI()
 	{
+		$dtcheck=[];
+		$respuestas=$this->Encuesta_model->leerTodasLasRespuestas();
 		$dts=array(
 			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
 			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
 			"rel_iduiseccion"=>$this->input->post("idseccion"));
-		$this->Encuesta_model->agregarPreguntaUI($dts);
-		redirect('Encuesta/preguntaUI');
+		foreach ($respuestas as $r)
+		{
+			if ($this->input->post("resp".$r->iduirespuesta)!=null)
+			{
+				array_push($dtcheck,$this->input->post("resp".$r->iduirespuesta));
+			}
+		}
+		if (count($dtcheck)!=0)
+		{
+			$this->Encuesta_model->agregarPreguntaUI($dts,$dtcheck);
+			redirect('Encuesta/preguntaUI');
+		}
 	}
 	public function editarPreguntaUI($idp)
 	{
@@ -101,7 +114,20 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_respuesta', $datos);
 		$this->load->view('html/pie');
 	}
-
+	public function crearRespuestaUI()
+	{
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vcrearrespuesta');
+		$this->load->view('html/pie');
+	}
+	public function agregarRespuestaUI()
+	{
+		$dts=array(
+			"uinombre_respuesta"=>$this->input->post("nombre_respuesta"));
+		$this->Encuesta_model->agregarRespuestaUI($dts);
+		redirect('Encuesta/respuestaUI');
+	}
 	//Rutina para creacion de encuestas
 	public function crearEncuesta()
 	{

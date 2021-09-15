@@ -31,6 +31,15 @@
 							<br>
 							<input type="number" id="cuadro" name="ordenpregunta"  required>
 							<br><br>
+							<label class="form-group"> Asignar Respuestas </label>
+							<span class="rojo"> * </span>
+							<br>
+							<?php foreach($respuestas as $r) {?>
+								<input type="checkbox" id="resp<?php echo $r->iduirespuesta;?>" name="resp<?php echo $r->iduirespuesta;?>" required 
+								value="<?php echo $r->iduirespuesta;?>">
+								<label for="resp<?php echo $r->iduirespuesta;?>"><?php echo $r->uinombre_respuesta;?> </label><br>
+							<?php } ?>
+							<br><br>
 							<input type="submit" id="BOTON" value="CREAR">
 							<a href="<?php echo site_url('Encuesta/preguntaUI');?>"><input type="button" class="BOTONROJO" value="CANCELAR"></a>
 						</form>
