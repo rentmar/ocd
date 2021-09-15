@@ -58,7 +58,41 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_pregunta', $datos);
 		$this->load->view('html/pie');
 	}
-
+	public function crearPregunta()
+	{
+		$datos['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vcrearpregunta', $datos);
+		$this->load->view('html/pie');
+	}
+	public function agregarPreguntaUI()
+	{
+		$dts=array(
+			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
+			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
+			"rel_iduiseccion"=>$this->input->post("idseccion"));
+		$this->Encuesta_model->agregarPreguntaUI($dts);
+		redirect('Encuesta/preguntaUI');
+	}
+	public function editarPreguntaUI($idp)
+	{
+		$dt['pregunta']=$this->Encuesta_model->leerPreguntaId($idp);
+		$dt['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/veditarpregunta', $dt);
+		$this->load->view('html/pie');
+	}
+	public function modificarPreguntaUI($idp)
+	{
+		$dts=array(
+			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
+			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
+			"rel_iduiseccion"=>$this->input->post("idseccion"));
+		$this->Encuesta_model->modificarPreguntaUI($dts,$idp);
+		redirect('Encuesta/preguntaUI');
+	}
 	public function respuestaUI()
 	{
 		//Leer Todas las respuestas
@@ -166,6 +200,7 @@ class Encuesta extends CI_Controller
 		$modulo = $this->input->post('modulo');
 		$subtema = $this->input->post('subtema');
 
+
 		if($this->Encuesta_model->crearSeccion($orden_seccion, $modulo, $subtema)){
 			$this->mensaje('Seccion creado', 'success');
 			redirect('inicio');
@@ -200,5 +235,33 @@ class Encuesta extends CI_Controller
 //echo "<pre>";var_dump($ordenDseccion0,$orden_seccion,$modulo,$subtema);echo "</pre>";
 		$this->Encuesta_model->actualizarSeccion($ordenDseccion0,$orden_seccion, $modulo, $subtema);
 		redirect('inicio');
+	}
+	public function editarModulo($id)
+	{
+		$idmodulo = $id;
+		$datos['encuestas'] = $this->Encuesta_model->leerTodasLasEncuestas();
+
+		$modulo = $this->Encuesta_model->leerModuloPorID($idmodulo);
+		$datos['modulo'] = $modulo;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_editarmodulo', $datos );
+		$this->load->view('html/pie');
+	}
+	public function procesarEditarModulo()
+	{
+		$idmodulo = $this->input->post('idmodulo');
+		$nombre_modulo = $this->input->post('nombre_modulo');
+		$orden_modulo = $this->input->post('orden_modulo');
+		$idencuesta = $this->input->post('idencuesta');;
+
+		if($this->Encuesta_model->actualizarModulo($idmodulo, $nombre_modulo, $orden_modulo, $idencuesta)){
+			$this->mensaje('Modulo editado', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se pudo editar, intente otra vez', 'warning');
+			redirect('inicio');
+		}
+
 	}
 }

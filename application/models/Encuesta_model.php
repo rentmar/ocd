@@ -135,7 +135,21 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	public function agregarPreguntaUI($dts)
+	{
+		$this->db->insert("uipregunta",$dts);
+	}
+	public function leerPreguntaId($idp)
+	{
+		$this->db->where("iduipregunta",$idp);
+		$q=$this->db->get("uipregunta");
+		return $q->row();
+	}
+	public function modificarPreguntaUI($dts,$idp)
+	{
+		$this->db->where("iduipregunta",$idp);
+		$this->db->update("uipregunta",$dts);
+	}
 	//Leer todas las respuestas
 	public  function  leerTodasLasRespuestas()
 	{
@@ -234,6 +248,37 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		}
 
 
+	}
+
+	public function leerModuloPorID($idmodulo)
+	{
+		$this->db->where('iduimodulo',$idmodulo);
+		$q=$this->db->get ('uimodulo');
+		return $q->row();
+	}
+
+	public function actualizarModulo($idmodulo, $nombre, $orden, $idencuesta)
+	{
+		$this->db->trans_begin();
+
+		$data = array(
+			'uinombre_modulo' => $nombre,
+			'uiorden_modulo' => $orden,
+			'rel_iduiencuesta' => $idencuesta,
+		);
+		$this->db->where('iduimodulo', $idmodulo);
+		$this->db->update('uimodulo ', $data);
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
 	}
 
 }
