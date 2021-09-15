@@ -19,8 +19,10 @@
 					<thead>
 					<tr id="datos">
 						<th>Nro Seccion</th>
+						<th>Orden de Seccion</th>
 						<th>Modulo</th>
 						<th>Encuesta</th>
+						<th>Subtema</th>
 						<th>Accion</th>
 					</tr>
 					</thead>
@@ -28,13 +30,11 @@
 					<?php foreach ($secciones as $e) {?>
 						<tr>
 							<td><?php echo $e->iduiseccion;?></td>
+							<td><?php echo $e->uiorden_seccion;?></td>
 							<td><?php echo $e->uinombre_modulo;?></td>
 							<td><?php echo $e->uinombre_encuesta; ?></td>
-							<td>
-								<a href="<?php echo site_url('encuesta/editarModulo/'.$e->iduiseccion);?>">
-									<i class="fas fa-edit"></i>
-								</a>
-							</td>
+							<td><?php echo $e->nombre_subtema;?></td>
+							<td><a href="<?php echo site_url('encuesta/editarSeccion/'.$e->iduiseccion);?>"><i class="fas fa-edit"></i></a></td>
 						</tr>
 					<?php } ?>
 					</tbody>
