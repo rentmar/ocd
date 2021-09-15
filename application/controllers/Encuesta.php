@@ -42,6 +42,7 @@ class Encuesta extends CI_Controller
 	{
 		//Leer todas las secciones
 		$datos['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+//		echo "<pre>";var_dump($datos);echo "</pre>";
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_seccion', $datos);
@@ -209,7 +210,58 @@ class Encuesta extends CI_Controller
 			redirect('inicio');
 		}
 	}
+	public function crearSeccion()
+	{
+		$data['modulos'] = $this->Encuesta_model->leerModulos();
+		$data['subtemas'] = $this->Encuesta_model->leerSubtemas();
 
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vcrearseccion', $data);
+		$this->load->view('html/pie');
+	}
+	public function escrituraEnUiseccion()
+	{
+		$orden_seccion = $this->input->post('ordenDseccion');
+		$modulo = $this->input->post('modulo');
+		$subtema = $this->input->post('subtema');
+
+
+		if($this->Encuesta_model->crearSeccion($orden_seccion, $modulo, $subtema)){
+			$this->mensaje('Seccion creado', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se pudo crear seccion, intente otra vez', 'warning');
+			redirect('inicio');
+		}
+	}
+	public function editarSeccion($id)
+	{
+		$iduiseccion = $id;
+		$seccion0 = $this->Encuesta_model->leerUiseccion($iduiseccion);
+		$seccion1 = $this->Encuesta_model->leerModulo($seccion0[0]->rel_iduimodulo);
+		$seccion2 = $this->Encuesta_model->leerSubtema($seccion0[0]->rel_idsubtema);
+//echo "<pre>";var_dump($seccion0,$seccion1, $seccion2);echo "</pre>";
+		$datos['seccion0'] = $seccion0;
+		$datos['seccion1'] = $seccion1;
+		$datos['seccion2'] = $seccion2;
+		$datos['modulos'] = $this->Encuesta_model->leerModulos();
+		$datos['subtemas'] = $this->Encuesta_model->leerSubtemas();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/veditarseccion', $datos );
+		$this->load->view('html/pie');
+	}
+	public function edicionEnUiseccion()
+	{
+		$ordenDseccion0 = $this->input->post('ordenDseccion0');
+		$orden_seccion = $this->input->post('ordenDseccion');
+		$modulo = $this->input->post('modulo');
+		$subtema = $this->input->post('subtema');
+//echo "<pre>";var_dump($ordenDseccion0,$orden_seccion,$modulo,$subtema);echo "</pre>";
+		$this->Encuesta_model->actualizarSeccion($ordenDseccion0,$orden_seccion, $modulo, $subtema);
+		redirect('inicio');
+	}
 	public function editarModulo($id)
 	{
 		$idmodulo = $id;
@@ -221,9 +273,7 @@ class Encuesta extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_editarmodulo', $datos );
 		$this->load->view('html/pie');
-
 	}
-
 	public function procesarEditarModulo()
 	{
 		$idmodulo = $this->input->post('idmodulo');
@@ -240,5 +290,4 @@ class Encuesta extends CI_Controller
 		}
 
 	}
-
 }
