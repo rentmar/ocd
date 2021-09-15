@@ -128,6 +128,11 @@
 		</a>
 		<?php endif; ?>
 
+		<!-- Administradores -->
+		<?php if($this->ion_auth->is_admin()):  ?>
+			<a class="nav-link" href="<?php echo site_url('encuesta/encuestaInicio');?>">Encuestas</a>
+		<?php endif;  ?>
+
 		<!-- Administradores-->
 		<?php /*if($this->ion_auth->is_admin()): */?><!--
 		<a class="nav-link" href="#">Analisis</a>

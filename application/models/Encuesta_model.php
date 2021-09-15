@@ -130,9 +130,23 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-	public function agregarPreguntaUI($dts)
+	public function agregarPreguntaUI($dts,$dtcheck)
 	{
-		$this->db->insert("uipregunta",$dts);
+		$orden=1;
+		$this->db->trans_start();
+			$this->db->insert("uipregunta",$dts);
+			$id=$this->db->insert_id();
+			foreach ($dtcheck as $r)
+			{
+				$dt= array(
+						'rel_iduipregunta'=>$id,
+						'rel_iduirespuesta'=>$r,
+						'uiorden_respuesta'=>$orden);
+				$this->db->insert('uirespuesta_pregunta',$dt);
+				$orden=$orden+1;
+			}
+		$this->db->trans_complete();
+		
 	}
 	public function leerPreguntaId($idp)
 	{
@@ -160,7 +174,10 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	public function agregarRespuestaUI($dts)
+	{
+		$this->db->insert("uirespuesta",$dts);
+	}
 	//Insertar la encuesta
 	public function crearNuevaEncuesta($nombre_encuesta)
 	{
@@ -274,6 +291,17 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 			$this->db->trans_commit();
 			return true;
 		}
+	}
+
+	//Habilitar/Deshabilitar Encuesta
+	public function cambiarEstado($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'encuesta_activa' => $estado,
+		];
+		$this->db->where('iduiencuesta', $identificador);
+		$this->db->update('uiencuesta ', $data);
 	}
 
 }
