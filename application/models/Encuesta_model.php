@@ -36,13 +36,88 @@ class  Encuesta_model extends CI_Model
 			."FROM uiseccion     "
 			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
 			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta  "
-			."  "
+			."LEFT JOIN subtema ON subtema.idsubtema = uiseccion.rel_idsubtema "
 			."  "
 			." "
 			."  ";
 
 		$qry = $this->db->query($sql);
 		return $qry->result();
+	}
+	public  function  leerModulos()
+	{
+		$sql = "SELECT * "
+			."FROM uimodulo ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+	public  function  leerSubtemas()
+	{
+		$sql = "SELECT * "
+			."FROM subtema ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+	public function crearSeccion($ordenSeccion, $modulo, $subtema)
+	{
+		$this->db->trans_begin();
+
+		$data = array(
+			'uiorden_seccion' => $ordenSeccion,
+			'rel_iduimodulo' => $modulo,
+			'rel_idsubtema' => $subtema,
+		);
+
+		$this->db->insert('uiseccion', $data);
+
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	public function leerUiseccion($iduiseccion)
+	{
+		$sql = "SELECT * "
+			."FROM uiseccion "
+			."WHERE $iduiseccion = iduiseccion ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+	public function leerModulo($iduimodulo)
+	{
+		$sql = "SELECT * "
+			."FROM uimodulo "
+			."WHERE $iduimodulo = iduimodulo ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+public function leerSubtema($idsubtema)
+	{
+		$sql = "SELECT * "
+			."FROM subtema "
+			."WHERE $idsubtema = idsubtema ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,$rel_idsubtema)
+	{
+		$sql = "UPDATE uiseccion "
+			."SET uiorden_seccion = ?, rel_iduimodulo = ?, rel_idsubtema = ? "
+			."WHERE iduiseccion = ? ";
+			$qry = $this->db->query($sql, [$uiorden_seccion, $rel_iduimodulo, $rel_idsubtema, $iduiseccion ]);
+//		$qry = $this->db->query($sql);
+		return; //$qry->result();
+
+
+
+
 	}
 
 	//Leer todas las preguntas
@@ -60,7 +135,35 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	public function agregarPreguntaUI($dts,$dtcheck)
+	{
+		$orden=1;
+		$this->db->trans_start();
+			$this->db->insert("uipregunta",$dts);
+			$id=$this->db->insert_id();
+			foreach ($dtcheck as $r)
+			{
+				$dt= array(
+						'rel_iduipregunta'=>$id,
+						'rel_iduirespuesta'=>$r,
+						'uiorden_respuesta'=>$orden);
+				$this->db->insert('uirespuesta_pregunta',$dt);
+				$orden=$orden+1;
+			}
+		$this->db->trans_complete();
+		
+	}
+	public function leerPreguntaId($idp)
+	{
+		$this->db->where("iduipregunta",$idp);
+		$q=$this->db->get("uipregunta");
+		return $q->row();
+	}
+	public function modificarPreguntaUI($dts,$idp)
+	{
+		$this->db->where("iduipregunta",$idp);
+		$this->db->update("uipregunta",$dts);
+	}
 	//Leer todas las respuestas
 	public  function  leerTodasLasRespuestas()
 	{
@@ -76,7 +179,10 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-
+	public function agregarRespuestaUI($dts)
+	{
+		$this->db->insert("uirespuesta",$dts);
+	}
 	//Insertar la encuesta
 	public function crearNuevaEncuesta($nombre_encuesta)
 	{

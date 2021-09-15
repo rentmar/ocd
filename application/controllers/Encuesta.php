@@ -42,6 +42,7 @@ class Encuesta extends CI_Controller
 	{
 		//Leer todas las secciones
 		$datos['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+//		echo "<pre>";var_dump($datos);echo "</pre>";
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_seccion', $datos);
@@ -57,7 +58,54 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_pregunta', $datos);
 		$this->load->view('html/pie');
 	}
-
+	public function crearPregunta()
+	{
+		$datos['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+		$datos['respuestas'] = $this->Encuesta_model->leerTodasLasRespuestas();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vcrearpregunta', $datos);
+		$this->load->view('html/pie');
+	}
+	public function agregarPreguntaUI()
+	{
+		$dtcheck=[];
+		$respuestas=$this->Encuesta_model->leerTodasLasRespuestas();
+		$dts=array(
+			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
+			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
+			"rel_iduiseccion"=>$this->input->post("idseccion"));
+		foreach ($respuestas as $r)
+		{
+			if ($this->input->post("resp".$r->iduirespuesta)!=null)
+			{
+				array_push($dtcheck,$this->input->post("resp".$r->iduirespuesta));
+			}
+		}
+		if (count($dtcheck)!=0)
+		{
+			$this->Encuesta_model->agregarPreguntaUI($dts,$dtcheck);
+			redirect('Encuesta/preguntaUI');
+		}
+	}
+	public function editarPreguntaUI($idp)
+	{
+		$dt['pregunta']=$this->Encuesta_model->leerPreguntaId($idp);
+		$dt['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/veditarpregunta', $dt);
+		$this->load->view('html/pie');
+	}
+	public function modificarPreguntaUI($idp)
+	{
+		$dts=array(
+			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
+			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
+			"rel_iduiseccion"=>$this->input->post("idseccion"));
+		$this->Encuesta_model->modificarPreguntaUI($dts,$idp);
+		redirect('Encuesta/preguntaUI');
+	}
 	public function respuestaUI()
 	{
 		//Leer Todas las respuestas
@@ -67,7 +115,20 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_respuesta', $datos);
 		$this->load->view('html/pie');
 	}
-
+	public function crearRespuestaUI()
+	{
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vcrearrespuesta');
+		$this->load->view('html/pie');
+	}
+	public function agregarRespuestaUI()
+	{
+		$dts=array(
+			"uinombre_respuesta"=>$this->input->post("nombre_respuesta"));
+		$this->Encuesta_model->agregarRespuestaUI($dts);
+		redirect('Encuesta/respuestaUI');
+	}
 	//Rutina para creacion de encuestas
 	public function crearEncuesta()
 	{
@@ -149,7 +210,58 @@ class Encuesta extends CI_Controller
 			redirect('inicio');
 		}
 	}
+	public function crearSeccion()
+	{
+		$data['modulos'] = $this->Encuesta_model->leerModulos();
+		$data['subtemas'] = $this->Encuesta_model->leerSubtemas();
 
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vcrearseccion', $data);
+		$this->load->view('html/pie');
+	}
+	public function escrituraEnUiseccion()
+	{
+		$orden_seccion = $this->input->post('ordenDseccion');
+		$modulo = $this->input->post('modulo');
+		$subtema = $this->input->post('subtema');
+
+
+		if($this->Encuesta_model->crearSeccion($orden_seccion, $modulo, $subtema)){
+			$this->mensaje('Seccion creado', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se pudo crear seccion, intente otra vez', 'warning');
+			redirect('inicio');
+		}
+	}
+	public function editarSeccion($id)
+	{
+		$iduiseccion = $id;
+		$seccion0 = $this->Encuesta_model->leerUiseccion($iduiseccion);
+		$seccion1 = $this->Encuesta_model->leerModulo($seccion0[0]->rel_iduimodulo);
+		$seccion2 = $this->Encuesta_model->leerSubtema($seccion0[0]->rel_idsubtema);
+//echo "<pre>";var_dump($seccion0,$seccion1, $seccion2);echo "</pre>";
+		$datos['seccion0'] = $seccion0;
+		$datos['seccion1'] = $seccion1;
+		$datos['seccion2'] = $seccion2;
+		$datos['modulos'] = $this->Encuesta_model->leerModulos();
+		$datos['subtemas'] = $this->Encuesta_model->leerSubtemas();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/veditarseccion', $datos );
+		$this->load->view('html/pie');
+	}
+	public function edicionEnUiseccion()
+	{
+		$ordenDseccion0 = $this->input->post('ordenDseccion0');
+		$orden_seccion = $this->input->post('ordenDseccion');
+		$modulo = $this->input->post('modulo');
+		$subtema = $this->input->post('subtema');
+//echo "<pre>";var_dump($ordenDseccion0,$orden_seccion,$modulo,$subtema);echo "</pre>";
+		$this->Encuesta_model->actualizarSeccion($ordenDseccion0,$orden_seccion, $modulo, $subtema);
+		redirect('inicio');
+	}
 	public function editarModulo($id)
 	{
 		$idmodulo = $id;
@@ -161,9 +273,7 @@ class Encuesta extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_editarmodulo', $datos );
 		$this->load->view('html/pie');
-
 	}
-
 	public function procesarEditarModulo()
 	{
 		$idmodulo = $this->input->post('idmodulo');
@@ -180,6 +290,7 @@ class Encuesta extends CI_Controller
 		}
 
 	}
+
 
 	//Despliegue de tarjetas
 	public function encuestaInicio()
@@ -210,9 +321,7 @@ class Encuesta extends CI_Controller
 
 	public function cambiarEstado($identificador)
 	{
-		/*$iduiencuesta = $identificador;
-		$encuesta = $this->Noticia_model->noticiaPorId($idnoticia);*/
-
+		
 		$iduiencuesta = $identificador;
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$datos['encuesta'] = $encuesta;
@@ -229,10 +338,5 @@ class Encuesta extends CI_Controller
 		$this->Encuesta_model->cambiarEstado($iduiencuesta, $estado);
 		redirect('encuesta/formulariosEncuesta');
 	}
-
-
-
-
-
 
 }

@@ -5,7 +5,7 @@
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
-						<a href="<?php echo site_url('encuesta/crearRespuesta');?>">
+						<a href="<?php echo site_url('Encuesta/crearRespuestaUI');?>">
 							<input type="submit" class="BOTON" value="CREAR">
 						</a>
 						<a href="<?php echo site_url('/');?>">
@@ -28,11 +28,11 @@
 						<tr>
 							<td><?php echo $e->iduirespuesta;?></td>
 							<td><?php echo $e->uinombre_respuesta ?></td>
-							<td>
-								<a href="<?php echo site_url('encuesta/editarPregunta/'.$e->iduirespuesta);?>">
+							<!--<td>
+								<a href="<?php //echo site_url('Encuesta/editarPregunta/'.$e->iduirespuesta);?>">
 									<i class="fas fa-edit"></i>
 								</a>
-							</td>
+							</td>-->
 						</tr>
 					<?php } ?>
 					</tbody>
