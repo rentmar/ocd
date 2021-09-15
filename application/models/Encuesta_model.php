@@ -137,6 +137,7 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 	}
 	public function agregarPreguntaUI($dts,$dtcheck)
 	{
+		$orden=1;
 		$this->db->trans_start();
 			$this->db->insert("uipregunta",$dts);
 			$id=$this->db->insert_id();
@@ -145,8 +146,9 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 				$dt= array(
 						'rel_iduipregunta'=>$id,
 						'rel_iduirespuesta'=>$r,
-						'uiorden_respuesta'=>1);
+						'uiorden_respuesta'=>$orden);
 				$this->db->insert('uirespuesta_pregunta',$dt);
+				$orden=$orden+1;
 			}
 		$this->db->trans_complete();
 		
