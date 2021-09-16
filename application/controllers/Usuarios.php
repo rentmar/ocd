@@ -102,21 +102,6 @@ class Usuarios extends CI_Controller
 		$data['departamentos'] = $this->Departamento_model->leerDepartamentos();
 		$data['universidades']=$this->Departamento_model->leerUniversidades();
 
-		/*if($this->ion_auth->in_group(1, $idusuario))
-		{
-			echo "Es administrador";
-			echo "<br>";
-		}
-		if($this->ion_auth->in_group(2, $idusuario))
-		{
-			echo "Es docente";
-			echo "<br>";
-		}
-		if($this->ion_auth->in_group(3, $idusuario))
-		{
-			echo "Es monitor";
-			echo "<br>";
-		}*/
 
 
 		$this->load->view('html/encabezado');

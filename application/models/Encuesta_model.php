@@ -396,4 +396,7 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		return $qry->result();
 	}
 
+	//Leer a todos los usuarios encuestadores
+
+
 }
