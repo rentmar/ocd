@@ -334,9 +334,45 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 			."FROM uiseccion   "
 			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
 			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta   "
-			."WHERE uiencuesta.iduiencuesta = 3   "
+			."WHERE uiencuesta.iduiencuesta = ?   "
 			."ORDER BY uimodulo.uiorden_modulo, uiseccion.uiorden_seccion  "
 			."   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idencuesta,  ]);
+		return $qry->result();
+	}
+
+	//Leer las respuestas de una encuesta
+	public function leerRespuestasDeUnaEncuesta($idencuesta)
+	{
+		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta, uirespuesta.iduirespuesta, uirespuesta.uinombre_respuesta   "
+			."FROM uipregunta   "
+			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion   "
+			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
+			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta   "
+			."LEFT JOIN uirespuesta_pregunta ON uirespuesta_pregunta.rel_iduipregunta = uipregunta.iduipregunta  "
+			."LEFT JOIN uirespuesta ON uirespuesta_pregunta.rel_iduirespuesta = uirespuesta.iduirespuesta   "
+			."WHERE uiencuesta.iduiencuesta = ?   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idencuesta,  ]);
+		return $qry->result();
+	}
+
+	//Leer las respuestas de una pregunta
+	public function leerPreguntasDeUnaEncuesta($idencuesta)
+	{
+		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uimodulo.uiorden_modulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta   "
+			."FROM uipregunta   "
+			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion   "
+			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
+			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta   "
+			."WHERE uiencuesta.iduiencuesta = 3  "
+			."ORDER BY uimodulo.uiorden_modulo, uiseccion.uiorden_seccion, uipregunta.uiorden_pregunta   "
 			."   "
 			."   "
 			."   "

@@ -331,9 +331,17 @@ class Encuesta extends CI_Controller
 		//Extraer las secciones de una encuesta
 		$secciones = $this->Encuesta_model->leerSeccionesDeUnaEncuesta($iduiencuesta);
 
+		//Extraer las preguntas de una encuesta
+		$preguntas = $this->Encuesta_model->leerPreguntasDeUnaEncuesta($iduiencuesta);
+		//Extraer las respuestas de una encuesta
+		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
+
+
 		$datos['encuesta'] = $encuesta;
 		$datos['modulos'] = $modulos;
 		$datos['secciones'] = $secciones;
+		$datos['preguntas'] = $preguntas;
+		$datos['respuestas'] = $respuestas;
 		$datos['orden_mod_min'] = $orden_modulos_min;
 		$datos['orden_mod_max'] = $orden_modulos_max;
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Bootstrap Example</title>
+	<title>Formulario Encuesta</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -44,174 +44,97 @@
 				<?php foreach ($modulos as $m): ?>
 					<?php if($m->uiorden_modulo == $orden_mod_min): ?>
 						<div id="<?php echo 'modulo'.$m->iduimodulo; ?>" class="container tab-pane active"><br>
-							<div class="acordeon">
+							<div class="accordion<?php echo $m->iduimodulo;?>">
 							<?php foreach ($secciones as $s): ?>
 							<?php if($s->iduimodulo==$m->iduimodulo):  ?>
 								<h3><?php echo $s->iduiseccion; ?></h3>
+									<div class="card">
+										<?php foreach ($preguntas as $p): ?>
+											<?php if($p->iduiseccion==$s->iduiseccion): ?>
+												<div class="card-header">
+													<a class="card-link" data-toggle="collapse" href="#<?php echo 'pregunta'.$p->iduiseccion; ?>">
+														<?php echo $p->uipregunta_nombre; ?>
+													</a>
+												</div>
+												<div id="<?php echo 'pregunta'.$p->iduiseccion;?>" class="collapse show" data-parent="#accordion<?php echo $m->iduimodulo;?>">
+													<div class="card-body">
+														<div class="form-group">
+														<?php foreach ($respuestas as $r): ?>
+															<?php if($r->iduipregunta==$p->iduipregunta): ?>
+															<div class="form-check">
+																<label class="form-check-label" for="radio">
+																	<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>" value="<?php $r->iduirespuesta ?>">
+																	<?php echo $r->uinombre_respuesta; ?>
+																</label>
+															</div>
+															<?php endif; ?>
+														<?php endforeach; ?>
+														</div>
 
-
+													</div>
+												</div>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									</div>
 							<?php endif; ?>
 							<?php endforeach; ?>
 							</div>
 						</div>
 					<?php else:  ?>
 						<div id="<?php echo 'modulo'.$m->iduimodulo; ?>" class="container tab-pane fade"><br>
-							<?php foreach ($secciones as $s): ?>
-								<?php if($s->iduimodulo==$m->iduimodulo):  ?>
-									<h3><?php echo $s->iduiseccion;?>  </h3>
+							<div class="accordion<?php echo $m->iduimodulo;?>">
+								<?php foreach ($secciones as $s): ?>
+									<?php if($s->iduimodulo==$m->iduimodulo):  ?>
+										<h3><?php echo $s->iduiseccion; ?></h3>
+										<div class="card">
+											<?php foreach ($preguntas as $p): ?>
+												<?php if($p->iduiseccion==$s->iduiseccion): ?>
+												<div class="card-header">
+													<a class="card-link" data-toggle="collapse" href="#<?php echo 'pregunta'.$p->iduiseccion; ?>">
+														<?php echo $p->uipregunta_nombre; ?>
+													</a>
+												</div>
+												<div id="<?php echo 'pregunta'.$p->iduiseccion; ?>" class="collapse show" data-parent="#accordion<?php echo $m->iduimodulo;?>">
+													<div class="card-body">
+														<div class="form-group">
+															<?php foreach ($respuestas as $r): ?>
+																<?php if($r->iduipregunta==$p->iduipregunta): ?>
+																	<div class="form-check">
+																		<label class="form-check-label" for="radio">
+																			<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>" value="<?php $r->iduirespuesta ?>">
+																			<?php echo $r->uinombre_respuesta; ?>
+																		</label>
+																	</div>
+																<?php endif; ?>
+															<?php endforeach; ?>
+														</div>
+													</div>
+												</div>
+												<?php endif; ?>
+											<?php endforeach; ?>
+										</div>
 
-
-
-								<?php endif; ?>
-							<?php endforeach; ?>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</div>
 						</div>
 					<?php endif;  ?>
 				<?php endforeach; ?>
 			</div>
 			<!-- Fin Despliegue de Modulos -->
-
-
-			<?php echo form_close(); ?>
-
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<?php echo form_open('encuesta/capturarDatosEncuesta'); ?>
-			<!-- Nav tabs -->
-			<ul class="nav nav-tabs" role="tablist">
-				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#home">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
-				</li>
-			</ul>
-
-			<!-- Tab panes -->
-			<div class="tab-content">
-				<div id="home" class="container tab-pane active"><br>
-					<h3>HOME</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					<div class="form-group">
-						<input type="text" id="nombre" name="nombre" placeholder="nombre" >
-					</div>
-
-					<div id="accordion">
-
-						<div class="card">
-							<div class="card">
-								<div class="card-header">
-									<a class="card-link" data-toggle="collapse" href="#collapseOne">
-										Collapsible Group Item #1
-									</a>
-								</div>
-								<div id="collapseOne" class="collapse show" data-parent="#accordion">
-									<div class="card-body">
-										Lorem ipsum..
-									</div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-
-					<div id="accordion">
-
-						<div class="card">
-							<div class="card-header">
-								<a class="card-link" data-toggle="collapse" href="#collapseOne">
-									Collapsible Group Item #1
-								</a>
-							</div>
-							<div id="collapseOne" class="collapse show" data-parent="#accordion">
-								<div class="card-body">
-									Lorem ipsum..
-								</div>
-							</div>
-						</div>
-
-						<div class="card">
-							<div class="card-header">
-								<a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-									Collapsible Group Item #2
-								</a>
-							</div>
-							<div id="collapseTwo" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-									Lorem ipsum..
-								</div>
-							</div>
-						</div>
-
-						<div class="card">
-							<div class="card-header">
-								<a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-									Collapsible Group Item #3
-								</a>
-							</div>
-							<div id="collapseThree" class="collapse" data-parent="#accordion">
-								<div class="card-body">
-									Lorem ipsum..
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
-
-					<div class="panel-group" id="panels">
-						<div class="panel panel-default">
-							<div class="collapsed" data-toggle="collapse" data-parent="#panels" data-target="#firstPanel">
-								<h4>First header</h4>
-							</div>
-							<div id="firstPanel" class="panel-collapse collapse">
-								<div>Content.</div>
-							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="collapsed" data-toggle="collapse" data-parent="#panels" data-target="#secondPanel">
-								<h4>Second header</h4>
-
-							</div>
-							<div id="secondPanel" class="panel-collapse collapse">
-								<div>Other content.</div>
-							</div>
-						</div>
-					</div>
-
-
-
-				</div>
-				<div id="menu1" class="container tab-pane fade"><br>
-					<h3>Menu 1</h3>
-					<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<div class="form-group">
-						<input type="text" id="apellido" name="apellido" placeholder="apellido" >
-					</div>
-
-				</div>
-				<div id="menu2" class="container tab-pane fade"><br>
-					<h3>Menu 2</h3>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-					<div class="form-group">
-						<input type="text" id="edad" name="edad" placeholder="edad" >
-					</div>
-				</div>
-				<div>
-					<hr>
-				</div>
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Enviar</button>
-					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#salirencuesta">
-						Salir
-					</button>
-				</div>
+			<div>
+				<hr>
 			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Enviar</button>
+				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#salirencuesta">
+					Salir
+				</button>
+			</div>
+
+
 			<?php echo form_close(); ?>
+
 		</div>
 
 
