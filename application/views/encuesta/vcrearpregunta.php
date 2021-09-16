@@ -12,7 +12,7 @@
 							<label for="idseccion" class="form-group"> Elegir Seccion </label>
 							<span class="rojo"> * </span>
 							<br>
-							<select name="idseccion" id="idseccion">
+							<select name="idseccion" id="idseccion" class="form-control simple" >
 								<option value="">Elegir Seccion</option>
 								<?php foreach ($secciones as $s) {?>
 									<option value="<?php echo $s->iduiseccion;?>">
@@ -35,7 +35,7 @@
 							<span class="rojo"> * </span>
 							<br>
 							<?php foreach($respuestas as $r) {?>
-								<input type="checkbox" id="resp<?php echo $r->iduirespuesta;?>" name="resp<?php echo $r->iduirespuesta;?>" required 
+								<input type="checkbox" id="resp<?php echo $r->iduirespuesta;?>" name="resp<?php echo $r->iduirespuesta;?>"
 								value="<?php echo $r->iduirespuesta;?>">
 								<label for="resp<?php echo $r->iduirespuesta;?>"><?php echo $r->uinombre_respuesta;?> </label><br>
 							<?php } ?>
