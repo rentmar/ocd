@@ -390,8 +390,12 @@ class Encuesta extends CI_Controller
 	}
 	public function asignarEncuesta($identificador)
 	{
-		echo "en construccion";
-
+		$usuario=$this->Encuesta_model->leerUsuarioID($identificador);
+		$datos['usuario']=$usuario;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vasignar_encuesta', $datos);
+		$this->load->view('html/pie');
 /*		$iduiencuesta = $identificador;
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$datos['encuesta'] = $encuesta;

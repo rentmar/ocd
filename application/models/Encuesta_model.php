@@ -350,6 +350,15 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		return $qry->result();
 
 	}
+	public function leerUsuarioID($id)
+	{
+		$sql = "SELECT users.id, users.username, users.carnet_identidad,departamento.nombre_departamento,users.geolocalizacion "
+			."FROM users "
+			."INNER JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento "
+			."WHERE id =".$id;
+		$qry = $this->db->query($sql);
+		return $qry->row();
+	}
 
 	//Leer las respuestas de una encuesta
 	public function leerRespuestasDeUnaEncuesta($idencuesta)
