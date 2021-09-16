@@ -371,5 +371,33 @@ class Encuesta extends CI_Controller
 		echo "Edad: ".$e;
 
 	}
+	public function encuestaAusuarios()
+	{
+		//Leer todos los modulos
+		$datos['usuariose'] = $this->Encuesta_model->leerTodosLosUsuarios();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_ausuarios', $datos);
+		$this->load->view('html/pie');
+	}
+	public function asignarEncuesta($identificador)
+	{
+		echo "en construccion";
 
+/*		$iduiencuesta = $identificador;
+		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
+		$datos['encuesta'] = $encuesta;
+
+
+		if($encuesta->encuesta_activa)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Encuesta_model->cambiarEstado($iduiencuesta, $estado);
+		redirect('encuesta/formulariosEncuesta');*/
+	}
 }

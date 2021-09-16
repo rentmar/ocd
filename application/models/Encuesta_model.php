@@ -339,5 +339,16 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		$qry = $this->db->query($sql, [$idencuesta,  ]);
 		return $qry->result();
 	}
+	public function leerTodosLosUsuarios()
+	{
+		$sql = "SELECT users.id, first_name, last_name "
+			."FROM users "
+			."LEFT JOIN users_groups ON users_groups.user_id = users.id "
+			."LEFT JOIN groups ON groups.id = users_groups.group_id "
+			."WHERE name = 'monitores'";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+
+	}
 
 }
