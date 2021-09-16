@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-09-2021 a las 12:21:43
+-- Tiempo de generación: 16-09-2021 a las 16:45:47
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -318,6 +318,33 @@ INSERT INTO `departamento` (`iddepartamento`, `nombre_departamento`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `encuesta`
+--
+
+CREATE TABLE `encuesta` (
+  `idencuesta` int(11) UNSIGNED NOT NULL,
+  `fecha_encuesta` int(11) UNSIGNED NOT NULL,
+  `hash_text` text NOT NULL,
+  `usado` tinyint(1) NOT NULL,
+  `rel_idusuario` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `encuesta_respuesta`
+--
+
+CREATE TABLE `encuesta_respuesta` (
+  `idencrspta` int(11) NOT NULL,
+  `rel_idencuesta` int(11) UNSIGNED NOT NULL,
+  `rel_idpregunta` int(11) UNSIGNED NOT NULL,
+  `rel_idrespuesta` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estadoley`
 --
 
@@ -377,7 +404,8 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
 (2, 'docentes', 'Usuarios generales, docentes'),
 (3, 'monitores', 'Alumnos registrados'),
-(4, 'leyes', 'Usuarios autorizados al formulario ley');
+(4, 'leyes', 'Usuarios autorizados al formulario ley'),
+(5, 'encuestadores', 'Registro para los encuestadores');
 
 -- --------------------------------------------------------
 
@@ -12527,7 +12555,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`, `direccion`, `rel_iduniversidad`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1631623047, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 1),
+(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1631823577, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 1),
 (2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, 1629487513, 0, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', 'GEOLOCALIZACION', 1, 'Mariano Colodro #1447', 1),
 (3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, 1625414291, 1, 'Julia Carmen', 'Misericordia Morales', NULL, NULL, '7298782', '', 3, '', 0),
 (4, '127.0.0.1', 'jcarlos', '$2y$10$xj7vhmTVFZOMLHbKfrhz.O2l37pN7cssOOBM0mGsXZ1A9B4S3se.W', 'almeyda@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625358200, NULL, 1, 'Juan Carlos', 'Almeyda', NULL, NULL, '48693587', '45465456456456454', 4, 'Calle Alberto #4323', 0),
@@ -12784,6 +12812,21 @@ ALTER TABLE `cuestionario`
 --
 ALTER TABLE `departamento`
   ADD PRIMARY KEY (`iddepartamento`);
+
+--
+-- Indices de la tabla `encuesta`
+--
+ALTER TABLE `encuesta`
+  ADD PRIMARY KEY (`idencuesta`),
+  ADD KEY `fk_encuesta_usuario_encuestador` (`rel_idusuario`);
+
+--
+-- Indices de la tabla `encuesta_respuesta`
+--
+ALTER TABLE `encuesta_respuesta`
+  ADD PRIMARY KEY (`idencrspta`),
+  ADD KEY `fk_respuesta_encuesta` (`rel_idencuesta`),
+  ADD KEY `fk_encuesta_respuesta` (`rel_idpregunta`);
 
 --
 -- Indices de la tabla `estadoley`
@@ -13061,6 +13104,18 @@ ALTER TABLE `departamento`
   MODIFY `iddepartamento` smallint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `encuesta`
+--
+ALTER TABLE `encuesta`
+  MODIFY `idencuesta` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `encuesta_respuesta`
+--
+ALTER TABLE `encuesta_respuesta`
+  MODIFY `idencrspta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `estadoley`
 --
 ALTER TABLE `estadoley`
@@ -13076,7 +13131,7 @@ ALTER TABLE `fuente`
 -- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `leyes`
@@ -13268,6 +13323,12 @@ ALTER TABLE `users_groups`
 ALTER TABLE `codigoley`
   ADD CONSTRAINT `fk_codigo_a_estadoley` FOREIGN KEY (`rel_idestadoley`) REFERENCES `estadoley` (`idestadoley`),
   ADD CONSTRAINT `fk_codigo_a_ley` FOREIGN KEY (`rel_idley`) REFERENCES `leyes` (`idleyes`);
+
+--
+-- Filtros para la tabla `encuesta`
+--
+ALTER TABLE `encuesta`
+  ADD CONSTRAINT `fk_encuesta_usuario_encuestador` FOREIGN KEY (`rel_idusuario`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `leyes_estadoley`
