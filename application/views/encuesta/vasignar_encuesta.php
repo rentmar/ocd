@@ -5,34 +5,42 @@
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores Caja_de_datos">
 				<div id="esquinas_redondeadas">
-					<div id="Caja_de_orden" class="Caja_de_datos">
-						<h3 id="Título_central"> Asignacion Encuestas a Usuario </h3>
+					<div id="Caja_de_orden" class="Caja_de_datos"><br>
+						<h3 id="Título_central"> Asignacion de Encuesta a Usuario </h3>
 					</div>
 					<div id="Caja_de_datos" class="Caja_de_datos">
 						<?php echo form_open('#')?>
 						<input type="hidden" id="cuadro" class="form-control" name="idusuario" value="<?php echo $usuario->id;?>">
 						<div class="form-group">
-							<label for="usuario" >
-								Nombre de usuario
-								<span class="text-danger"> * </span>
-							</label>
-							<input type="text" id="cuadro" class="form-control" name="usuario" value="<?php echo $usuario->username;?>">
+							<p>Nombre de Usuario: <input type="text" id="nombre1" name="nombre1" value="<?php echo $usuario->username;?>" readonly></p>
 						</div>
 						<div class="form-group">
-							<label for="carnet" >
-								Carnet de identidad
-								<span class="text-danger"> * </span>
-							</label>
-							<input type="text" id="cuadro" name="carnet"  class="form-control" value="<?php echo $usuario->carnet_identidad;?>">
+							<p>Carnet de identidad: <input type="text" id="carnetid" name="carnetid" value="<?php echo $usuario->carnet_identidad;?>" readonly></p>
 						</div>
 						<div class="form-group">
-							<label for="departamento" >Departamento</label>
-							<input type="text" id="cuadro" class="form-control" name="usuario" value="<?php echo $usuario->nombre_departamento;?>">
+							<p>Departamento: <input type="text" id="depto1" name="depto1" value="<?php echo $usuario->nombre_departamento;?>" readonly></p>
+						</div>
+<!--						<div class="form-group">
+							<label for="ubicacion" >Ubicacion </label>
+							<input type="text" id="ubicacion" name="ubicacion"  class="form-control" value="<?php echo $usuario->geolocalizacion;?>" readonly>
+						</div>
+-->						<div class="form-group">
+							<label for="ubicacion">Asignar encuesta</label><span class="text-danger"> * </span>
+							<select required id="modulo" name="modulo" class="form-control cuadro" required>
+								<option value="" selected disabled hidden></option>
+								<?php foreach ($encuestas as $e): ?>
+									<option value="<?php echo $e->iduiencuesta;?>" ><?php echo $e->uinombre_encuesta;  ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 						<div class="form-group">
-							<label for="ubicacion">Ubicacion </label>
-							<input type="text" id="ubicacion" name="ubicacion"  class="form-control cuadro" value="<?php echo $usuario->geolocalizacion;?>">
-								    
+							<label for="ubicacion">Asignar Nro de Encuestas</label><span class="text-danger"> * </span>
+							<input type="number" id="nencuestas" name="nencuestas"  class="form-control cuadro" min="1" required="">
+						</div>
+						<div class="form-group">
+							<label for="ubicacion">Asignar Area de trabajo (geolocalizacion)</label><span class="text-danger"> * </span>
+							<input type="text" id="ubicacionlttd" name="ubicacionlttd"  class="form-control cuadro" placeholder="Ingresar Latitud" required=""><br>
+							<input type="text" id="ubicacionlgtd" name="ubicacionlgtd"  class="form-control cuadro" placeholder="Ingresar Longitud" required="">
 						</div>
 						<div class="form-group">
 							<input type="submit" id="BOTON" value="ASIGNAR">

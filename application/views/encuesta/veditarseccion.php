@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores Caja_de_datos">
-				<div id="esquinas_redondeadas">
+				<div id="esquinas_redondeadas"><br>
 					<div id="Caja_de_orden" class="Caja_de_datos">
 						<h3 id="Título_central"> Editar Seccion </h3>
 					</div>
