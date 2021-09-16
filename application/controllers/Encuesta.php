@@ -381,8 +381,8 @@ class Encuesta extends CI_Controller
 	}
 	public function encuestaAusuarios()
 	{
-		//Leer todos los modulos
-		$datos['usuariose'] = $this->Encuesta_model->leerTodosLosUsuarios();
+		//Leer a todos los usuarios en el grupo encuestadores
+		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_ausuarios', $datos);
