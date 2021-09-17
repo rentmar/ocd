@@ -9,7 +9,7 @@
 						<h3 id="Título_central"> Asignacion Encuestas a Usuario </h3>
 					</div>
 					<div id="Caja_de_datos" class="Caja_de_datos">
-						<?php echo form_open('#')?>
+						<?php echo form_open('Encuesta/agregarAsignacion/'.$usuario->id)?>
 						<input type="hidden" id="cuadro" class="form-control" name="idusuario" value="<?php echo $usuario->id;?>">
 						<div class="form-group">
 							<label for="usuario" >

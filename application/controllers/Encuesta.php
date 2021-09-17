@@ -8,6 +8,7 @@ class Encuesta extends CI_Controller
 		$this->load->library('session');
 		$this->load->library('ion_auth');
 		$this->load->model('Encuesta_model');
+		$this->load->library('encryption');
 		$this->load->helper('form');
 
 		if($this->session->sesion_activa ===  null){
@@ -149,7 +150,6 @@ class Encuesta extends CI_Controller
 			redirect('inicio');
 		}
 	}
-
 	public function editarEncuesta($id)
 	{
 		$idencuesta = $id;
@@ -388,6 +388,11 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_ausuarios', $datos);
 		$this->load->view('html/pie');
 	}
+	public function agregarAsignacion($idu)
+	{
+		$dt="mon_claudia|20|4837195"; //nombre usuario | numero encuestas asignadas | carnet identidad
+		echo $this->cifrar($dt);
+	}
 	public function asignarEncuesta($identificador)
 	{
 		$usuario=$this->Encuesta_model->leerUsuarioID($identificador);
@@ -411,5 +416,44 @@ class Encuesta extends CI_Controller
 		}
 		$this->Encuesta_model->cambiarEstado($iduiencuesta, $estado);
 		redirect('encuesta/formulariosEncuesta');*/
+	}
+	public function cifrar($cdt)
+	{
+		$r=rand(10,99);
+		$dt=strval($r).$cdt;
+		$num=strlen($dt);
+		$inicio=round($num/2)-1;
+		$cant=$num;
+		if (fmod($num,2)==0)
+		{
+			$cant=$num-1;
+		}
+		$encnom="";
+		$j=-1;
+		$cad="";
+		for ($i=0;$i<=$cant;$i++)
+		{	
+			$inicio=$inicio+$j*$i;
+			$cad=substr($dt,$inicio,1);
+			switch ($cad)
+			{
+				case 'a':$encnom=$encnom.'v4';break;
+				case 'A':$encnom=$encnom.'%4';break;
+				case 'e':$encnom=$encnom.'w3';break;
+				case 'E':$encnom=$encnom.'%3';break;
+				case 'i':$encnom=$encnom.'x1';break;
+				case 'I':$encnom=$encnom.'_%';break;
+				case 'o':$encnom=$encnom.'y0';break;
+				case '0':$encnom=$encnom.'%0';break;
+				case 'u':$encnom=$encnom.'%1';break;
+				case 'U':$encnom=$encnom.'U_';break;
+				case '-':$encnom=$encnom.'+';break;
+				case '_':$encnom=$encnom.'(';break;
+				default:$encnom=$encnom.$cad;
+			}
+			
+			$j=$j*(-1);
+		}
+		return $encnom;
 	}
 }
