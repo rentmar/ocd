@@ -455,7 +455,7 @@ class Encuesta extends CI_Controller
 			$j=$j*(-1);
 		}
 		return $encnom;
-
+	}
 	public function codificar()
 	{
 		echo urlencode('enc-alfredo');
