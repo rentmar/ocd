@@ -424,4 +424,8 @@ class Encuesta extends CI_Controller
 			redirect('inicio');
 		}*/
 	}
+	public function codificar()
+	{
+		echo urlencode('enc-alfredo');
+	}
 }
