@@ -11,7 +11,11 @@
 					<div id="Caja_de_datos" class="Caja_de_datos">
 						<?php echo form_open('encuesta/guardarAsignacionDencuesta');?>
 						<input type="text" id="idusuario1" class="form-control" name="idusuario1" value="<?php echo $usuario->id;?>" hidden>
-						<div class="form-group">
+<!--=======
+						<?php echo form_open('Encuesta/agregarAsignacion/'.$usuario->id)?>
+						<input type="hidden" id="cuadro" class="form-control" name="idusuario" value="<?php echo $usuario->id;?>">
+>>>>>>> 6ec75d17d067307f40422918a3a33669fc0a54cd
+-->						<div class="form-group">
 							<p>Nombre de Usuario: <input type="text" id="usuario1" name="usuario1" value="<?php echo $usuario->username;?>" readonly></p>
 						</div>
 						<div class="form-group">
