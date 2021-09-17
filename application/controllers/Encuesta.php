@@ -430,9 +430,15 @@ class Encuesta extends CI_Controller
 			$dt = $encuestador."|".$i."|".$carnet;
 			$cifrado->$i = $this->cifrar($dt);
 		}
-		$hola[]=$cifrado;
-		$hola = $this->Encuesta_model->actualizarEncuestas($datos,$cifrado);
-		echo "realizado";
+//		$hola[]=$cifrado;
+//		$this->Encuesta_model->actualizarEncuestas($datos,$cifrado);
+		if($this->Encuesta_model->actualizarEncuestas($datos,$cifrado)){
+			$this->mensaje('Encuestas asignadas', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se pudo asignar encuestas', 'warning');
+			redirect('inicio');
+		}
 	}
 	public function cifrar($cdt)
 	{
