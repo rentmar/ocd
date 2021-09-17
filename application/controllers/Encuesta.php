@@ -383,6 +383,7 @@ class Encuesta extends CI_Controller
 	{
 		//Leer a todos los usuarios en el grupo encuestadores
 		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
+//		echo "<pre>";var_dump($datos);echo "</pre>";
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_ausuarios', $datos);
@@ -399,5 +400,28 @@ class Encuesta extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vasignar_encuesta', $datos);
 		$this->load->view('html/pie');
+	}
+	public function guardarAsignacionDencuesta()
+	{
+		$idencuestador = $this->input->post('idusuario1');
+		$idencuesta = $this->input->post('idencuesta1');
+		$nencuestas = $this->input->post('nencuestas1');
+		$latitud = $this->input->post('ubicacionlttd');
+		$longitud = $this->input->post('ubicacionlgtd');
+		$datos['idencuestador'] = $idencuestador;
+		$datos['idencuesta'] = $idencuesta;
+		$datos['nencuestas'] = $nencuestas;
+		$datos['latitud'] = $latitud;
+		$datos['longitud'] = $longitud;
+
+
+		echo "<pre>";var_dump($datos);echo "</pre>";
+/*		if($this->Encuesta_model->crearNuevaEncuesta($nombre_encuesta)){
+			$this->mensaje('Encuesta creada', 'success');
+			redirect('inicio');
+		}else{
+			$this->mensaje('No se creo la encuesta, intente otra vez', 'warning');
+			redirect('inicio');
+		}*/
 	}
 }

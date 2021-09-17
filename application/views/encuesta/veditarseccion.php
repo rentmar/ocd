@@ -20,6 +20,7 @@
 							<label for="grupo">Modulo:</label>
 							<input type="text" id="ordenDseccion8" class="form-control" name="ordenDseccion8" value="<?php echo $seccion1[0]->uinombre_modulo;?>" readonly>
 							<select required id="modulo" name="modulo" class="form-control" required>
+								<option value="" selected disabled hidden></option>
 								<?php foreach ($modulos as $e): ?>
 									<option value="<?php echo $e->iduimodulo;?>" ><?php echo $e->uinombre_modulo;  ?></option>
 								<?php endforeach; ?>
@@ -29,6 +30,7 @@
 							<label for="grupo">Subtema:</label>
 							<input type="text" id="ordenDseccion7" class="form-control" name="ordenDseccion7" value="<?php echo $seccion2[0]->nombre_subtema;?>" readonly>
 							<select required id="subtema" name="subtema" class="form-control" required>
+								<option value="" selected disabled hidden></option>
 								<?php foreach ($subtemas as $e): ?>
 									<option value="<?php echo $e->idsubtema;?>" ><?php echo $e->nombre_subtema;  ?></option>
 								<?php endforeach; ?>
