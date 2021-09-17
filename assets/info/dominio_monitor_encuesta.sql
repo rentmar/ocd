@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-09-2021 a las 21:41:36
+-- Tiempo de generación: 16-09-2021 a las 23:16:50
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -409,11 +409,10 @@ INSERT INTO `departamento` (`iddepartamento`, `nombre_departamento`) VALUES
 CREATE TABLE `encuesta` (
   `idencuesta` int(11) UNSIGNED NOT NULL,
   `fecha_encuesta` int(11) UNSIGNED NOT NULL,
-  `hash_text` text NOT NULL,
+  `hash_text` varchar(50) NOT NULL,
   `usado` tinyint(1) NOT NULL DEFAULT 0,
-  `cantidad_encuestas` int(10) UNSIGNED NOT NULL,
-  `latitud` text NOT NULL,
-  `longitud` text NOT NULL,
+  `latitud` float NOT NULL,
+  `longitud` float NOT NULL,
   `rel_idusuario` int(11) UNSIGNED NOT NULL,
   `rel_iduiencuesta` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
