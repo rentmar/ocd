@@ -395,14 +395,27 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql, [$idencuesta,  ]);
 		return $qry->result();
 	}
-	public function actualizarEncuestas($datos,$cifrado)
+	public function escribirEncuestaAsignada($datos,$cifrado)
 	{
 		foreach($cifrado as $row)
 		{
-			$sql = "UPDATE encuesta "
-				."SET fecha_encuesta = ?, hash_text = ?, usado = 1, latitud = ?, longitud = ?, rel_idusuario = ?, rel_iduiencuesta = ? ";
-			$qry = $this->db->query($sql, [$datos['fechaactual'],$row, $datos['latitud'], $datos['longitud'], $datos['idencuestador'], $datos['idencuesta'] ]);
+			$sql = "INSERT INTO encuesta (fecha_encuesta, hash_text, usado, latitud, longitud, rel_idusuario, rel_iduiencuesta)  "
+				."VALUES (?, ?, 1, ?, ?, ?, ?)";
+			$qry = $this->db->query($sql,[$datos['fechaactual'], $row, $datos['latitud'], $datos['longitud'], $datos['idencuestador'], $datos['idencuesta']]);
 		}
 		return;
+	}
+	public function encuestasAusuarios()
+	{
+		$sql = "SELECT users.id, first_name, last_name, uinombre_encuesta "
+			."FROM users "
+			."LEFT JOIN encuesta ON encuesta.rel_idusuario = users.id "
+			."LEFT JOIN uiencuesta ON uiencuesta.iduiencuesta = encuesta.rel_iduiencuesta "
+			."LEFT JOIN users_groups ON  users_groups.user_id = users.id "
+			."WHERE group_id = 5 "
+			."GROUP BY uinombre_encuesta, id "
+			."ORDER BY id";
+		$qry = $this->db->query($sql);
+		return $qry->result();
 	}
 }

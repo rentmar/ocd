@@ -382,7 +382,9 @@ class Encuesta extends CI_Controller
 	public function encuestaAusuarios()
 	{
 		//Leer a todos los usuarios en el grupo encuestadores
-		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
+//		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
+//		$datos['encuestasAsignadas'] = $this->Encuesta_model->consultaEncuesta($datos);
+$datos['usuariose'] = $this->Encuesta_model->encuestasAusuarios();
 //		echo "<pre>";var_dump($datos);echo "</pre>";
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -430,15 +432,9 @@ class Encuesta extends CI_Controller
 			$dt = $encuestador."|".$i."|".$carnet;
 			$cifrado->$i = $this->cifrar($dt);
 		}
-//		$hola[]=$cifrado;
-//		$this->Encuesta_model->actualizarEncuestas($datos,$cifrado);
-		if($this->Encuesta_model->actualizarEncuestas($datos,$cifrado)){
-			$this->mensaje('Encuestas asignadas', 'success');
-			redirect('inicio');
-		}else{
-			$this->mensaje('No se pudo asignar encuestas', 'warning');
-			redirect('inicio');
-		}
+		$this->Encuesta_model->escribirEncuestaAsignada($datos,$cifrado);
+//		$this->mensaje('Encuesta asignada', 'success');
+		redirect('encuesta/encuestaAusuarios');
 	}
 	public function cifrar($cdt)
 	{
