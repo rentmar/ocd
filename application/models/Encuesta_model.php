@@ -386,7 +386,7 @@ class  Encuesta_model extends CI_Model
 			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion   "
 			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
 			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta   "
-			."WHERE uiencuesta.iduiencuesta = 3  "
+			."WHERE uiencuesta.iduiencuesta = ?  "
 			."ORDER BY uimodulo.uiorden_modulo, uiseccion.uiorden_seccion, uipregunta.uiorden_pregunta   "
 			."   "
 			."   "
@@ -397,12 +397,48 @@ class  Encuesta_model extends CI_Model
 	}
 	public function actualizarEncuestas($datos,$cifrado)
 	{
-		foreach($cifrado as $row)
-		{
-			$sql = "UPDATE encuesta "
-				."SET fecha_encuesta = ?, hash_text = ?, usado = 1, latitud = ?, longitud = ?, rel_idusuario = ?, rel_iduiencuesta = ? ";
-			$qry = $this->db->query($sql, [$datos['fechaactual'],$row, $datos['latitud'], $datos['longitud'], $datos['idencuestador'], $datos['idencuesta'] ]);
+		$this->db->trans_begin();
+
+		foreach ($cifrado as $c){
+			$data = array(
+				'fecha_encuesta' => $datos['fechaactual'],
+				'hash_text' => $c,
+				'latitud' => $datos['latitud'],
+				'longitud' => $datos['longitud'],
+				'rel_idusuario' => $datos['idencuestador'],
+				'rel_iduiencuesta' => $datos['idencuesta'],
+			);
+			$this->db->insert('encuesta', $data);
 		}
-		return;
+
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
+	//Leer las encuestas asignadas a un usuario
+	public function leerEncuestasAsignadasUsuario($idusuario)
+	{
+		$sql = "SELECT *    "
+			."FROM encuesta   "
+			."LEFT JOIN users ON encuesta.rel_idusuario = users.id   "
+			."LEFT JOIN uiencuesta ON encuesta.rel_iduiencuesta = uiencuesta.iduiencuesta   "
+			."WHERE users.id = ?   "
+			."  "
+			."   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$idusuario,  ]);
+		return $qry->result();
 	}
 }
