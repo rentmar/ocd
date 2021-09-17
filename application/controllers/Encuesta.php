@@ -428,7 +428,7 @@ class Encuesta extends CI_Controller
 		for($i=1;$i<=$nencuestas;$i++)
 		{
 			$dt = $encuestador."|".$i."|".$carnet;
-			$cifrado->$i = $this->cifrar($dt);
+			$cifrado->$i = substr(md5(uniqid(Rand(), true)), 16, 16);
 		}
 
 		if($this->Encuesta_model->actualizarEncuestas($datos,$cifrado)){

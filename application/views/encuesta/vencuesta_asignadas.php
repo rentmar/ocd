@@ -38,11 +38,11 @@
 							<td><?php echo $e->uinombre_encuesta; ?></td>
 							<?php if(!$e->usado): ?>
 								<td class="text-success">
-									<?php echo site_url($e->hash_text); ?>
+									<?php echo site_url('read/url/'.$e->hash_text); ?>
 								</td>
 							<?php else: ?>
 								<td class="text-danger">
-									<?php echo site_url($e->hash_text); ?>
+									<?php echo site_url('read/url/'.$e->hash_text); ?>
 								</td>
 							<?php endif; ?>
 
