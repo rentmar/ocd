@@ -409,25 +409,30 @@ class Encuesta extends CI_Controller
 	public function guardarAsignacionDencuesta()
 	{
 		$idencuestador = $this->input->post('idusuario1');
+		$encuestador = $this->input->post('usuario1');
+		$carnet = $this->input->post('carnetid1');
 		$idencuesta = $this->input->post('idencuesta1');
 		$nencuestas = $this->input->post('nencuestas1');
 		$latitud = $this->input->post('ubicacionlttd');
 		$longitud = $this->input->post('ubicacionlgtd');
+		$fechaActual=$this->fecha_unix(date('Y-m-d'));
 		$datos['idencuestador'] = $idencuestador;
 		$datos['idencuesta'] = $idencuesta;
+		$datos['encuestador'] = $encuestador;
+		$datos['carnet'] = $carnet;
 		$datos['nencuestas'] = $nencuestas;
 		$datos['latitud'] = $latitud;
 		$datos['longitud'] = $longitud;
-
-
-		echo "<pre>";var_dump($datos);echo "</pre>";
-/*		if($this->Encuesta_model->crearNuevaEncuesta($nombre_encuesta)){
-			$this->mensaje('Encuesta creada', 'success');
-			redirect('inicio');
-		}else{
-			$this->mensaje('No se creo la encuesta, intente otra vez', 'warning');
-			redirect('inicio');
-		}*/
+		$datos['fechaactual'] = $fechaActual;
+		$cifrado = new stdClass();
+		for($i=1;$i<=$nencuestas;$i++)
+		{
+			$dt = $encuestador."|".$i."|".$carnet;
+			$cifrado->$i = $this->cifrar($dt);
+		}
+		$hola[]=$cifrado;
+		$hola = $this->Encuesta_model->actualizarEncuestas($datos,$cifrado);
+		echo "realizado";
 	}
 	public function cifrar($cdt)
 	{
@@ -468,9 +473,11 @@ class Encuesta extends CI_Controller
 		}
 		return $encnom;
 	}
-	public function codificar()
+		private function fecha_unix($fecha)
 	{
-		echo urlencode('enc-alfredo');
-
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
 	}
+
 }

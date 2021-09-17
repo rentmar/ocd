@@ -98,7 +98,7 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-public function leerSubtema($idsubtema)
+	public function leerSubtema($idsubtema)
 	{
 		$sql = "SELECT * "
 			."FROM subtema "
@@ -106,7 +106,7 @@ public function leerSubtema($idsubtema)
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
-public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,$rel_idsubtema)
+	public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,$rel_idsubtema)
 	{
 		$sql = "UPDATE uiseccion "
 			."SET uiorden_seccion = ?, rel_iduimodulo = ?, rel_idsubtema = ? "
@@ -395,6 +395,14 @@ public function actualizarSeccion($iduiseccion,$uiorden_seccion,$rel_iduimodulo,
 		$qry = $this->db->query($sql, [$idencuesta,  ]);
 		return $qry->result();
 	}
-
-
+	public function actualizarEncuestas($datos,$cifrado)
+	{
+		foreach($cifrado as $row)
+		{
+			$sql = "UPDATE encuesta "
+				."SET fecha_encuesta = ?, hash_text = ?, usado = 1, latitud = ?, longitud = ?, rel_idusuario = ?, rel_iduiencuesta = ? ";
+			$qry = $this->db->query($sql, [$datos['fechaactual'],$row, $datos['latitud'], $datos['longitud'], $datos['idencuestador'], $datos['idencuesta'] ]);
+		}
+		return;
+	}
 }
