@@ -412,4 +412,8 @@ class Encuesta extends CI_Controller
 		$this->Encuesta_model->cambiarEstado($iduiencuesta, $estado);
 		redirect('encuesta/formulariosEncuesta');*/
 	}
+	public function codificar()
+	{
+		echo urlencode('enc-alfredo');
+	}
 }
