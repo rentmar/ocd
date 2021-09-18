@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores Caja_de_datos">
-				<div id="esquinas_redondeadas">
+				<div id="esquinas_redondeadas"><br>
 					<div id="Caja_de_orden" class="Caja_de_datos">
 						<h3 id="Título_central"> Editar Seccion </h3>
 					</div>
@@ -20,6 +20,7 @@
 							<label for="grupo">Modulo:</label>
 							<input type="text" id="ordenDseccion8" class="form-control" name="ordenDseccion8" value="<?php echo $seccion1[0]->uinombre_modulo;?>" readonly>
 							<select required id="modulo" name="modulo" class="form-control" required>
+								<option value="" selected disabled hidden></option>
 								<?php foreach ($modulos as $e): ?>
 									<option value="<?php echo $e->iduimodulo;?>" ><?php echo $e->uinombre_modulo;  ?></option>
 								<?php endforeach; ?>
@@ -29,6 +30,7 @@
 							<label for="grupo">Subtema:</label>
 							<input type="text" id="ordenDseccion7" class="form-control" name="ordenDseccion7" value="<?php echo $seccion2[0]->nombre_subtema;?>" readonly>
 							<select required id="subtema" name="subtema" class="form-control" required>
+								<option value="" selected disabled hidden></option>
 								<?php foreach ($subtemas as $e): ?>
 									<option value="<?php echo $e->idsubtema;?>" ><?php echo $e->nombre_subtema;  ?></option>
 								<?php endforeach; ?>

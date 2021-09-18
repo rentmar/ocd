@@ -382,7 +382,10 @@ class Encuesta extends CI_Controller
 	public function encuestaAusuarios()
 	{
 		//Leer a todos los usuarios en el grupo encuestadores
-		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
+//		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
+//		$datos['encuestasAsignadas'] = $this->Encuesta_model->consultaEncuesta($datos);
+$datos['usuariose'] = $this->Encuesta_model->encuestasAusuarios();
+//		echo "<pre>";var_dump($datos);echo "</pre>";
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_ausuarios', $datos);
@@ -400,11 +403,44 @@ class Encuesta extends CI_Controller
 	public function asignarEncuesta($identificador)
 	{
 		$usuario=$this->Encuesta_model->leerUsuarioID($identificador);
+		$encuestass=$this->Encuesta_model->leerTodasLasEncuestas();
 		$datos['usuario']=$usuario;
+		$datos['encuestas']=$encuestass;
+//		echo "<pre>";var_dump($datos);echo "</pre>";
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vasignar_encuesta', $datos);
 		$this->load->view('html/pie');
+
+	}
+	public function guardarAsignacionDencuesta()
+	{
+		$idencuestador = $this->input->post('idusuario1');
+		$encuestador = $this->input->post('usuario1');
+		$carnet = $this->input->post('carnetid1');
+		$idencuesta = $this->input->post('idencuesta1');
+		$nencuestas = $this->input->post('nencuestas1');
+		$latitud = $this->input->post('ubicacionlttd');
+		$longitud = $this->input->post('ubicacionlgtd');
+		$fechaActual=$this->fecha_unix(date('Y-m-d'));
+		$datos['idencuestador'] = $idencuestador;
+		$datos['idencuesta'] = $idencuesta;
+		$datos['encuestador'] = $encuestador;
+		$datos['carnet'] = $carnet;
+		$datos['nencuestas'] = $nencuestas;
+		$datos['latitud'] = $latitud;
+		$datos['longitud'] = $longitud;
+		$datos['fechaactual'] = $fechaActual;
+		$cifrado = new stdClass();
+		for($i=1;$i<=$nencuestas;$i++)
+		{
+			$dt = $encuestador."|".$i."|".$carnet;
+			$cifrado->$i = $this->cifrar($dt);
+		}
+		$this->Encuesta_model->escribirEncuestaAsignada($datos,$cifrado);
+//		$this->mensaje('Encuesta asignada', 'success');
+		redirect('encuesta/encuestaAusuarios');
+
 	}
 	public function cifrar($cdt)
 	{
@@ -516,4 +552,12 @@ class Encuesta extends CI_Controller
 		return substr($dtdecif,2,-2);
 	}
 	
+
+		private function fecha_unix($fecha)
+	{
+		list($anio, $mes, $dia) = explode('-', $fecha);
+		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
+		return $fecha_unix;
+	}
+
 }

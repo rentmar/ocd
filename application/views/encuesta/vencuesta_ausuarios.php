@@ -20,7 +20,7 @@
 					<tr id="datos">
 						<th>Nro</th>
 						<th>Usuario</th>
-						<th>Encuesta</th>
+						<th>Encuesta Asignada</th>
 						<th>Asignar</th>
 					</tr>
 					</thead>
@@ -29,8 +29,8 @@
 						<tr>
 							<td><?php echo $e->id;?></td>
 							<td><?php echo $e->first_name.' '.$e->last_name;?></td>
-							<td><?php //echo $e->uinombre_modulo;?></td>
-							<td><a href="<?php echo site_url('encuesta/asignarEncuesta/'.$e->id);?>"><i class="fas fa-edit"></i></a></td>
+							<td><?php echo $e->uinombre_encuesta;?></td>
+							<td><a href="<?php echo site_url('Encuesta/asignarEncuesta/'.$e->id);?>"><i class="fas fa-edit"></i></a></td>
 						</tr>
 					<?php } ?>
 					</tbody>
