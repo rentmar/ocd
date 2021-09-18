@@ -292,7 +292,26 @@ class  Encuesta_model extends CI_Model
 			return true;
 		}
 	}
-
+    public function leerLocalizaciones()
+	{
+		$q=$this->db->get("geolocalizacion");
+		return $q->result();
+	}
+	public function agregarLocalizacion($dts)
+	{
+		$this->db->insert("geolocalizacion",$dts);
+	}
+	public function leerLocalizacionId($idl)
+	{
+		$this->db->where('idgeolocal',$idl);
+		$q=$this->db->get("geolocalizacion");
+		return $q->row();
+	}
+	public function modificarLocalizacion($idl,$dts)
+	{
+		$this->db->where('idgeolocal',$idl);
+		$this->db->update("geolocalizacion",$dts);
+	}
 	//Habilitar/Deshabilitar Encuesta
 	public function cambiarEstado($identificador, $estado)
 	{

@@ -72,6 +72,7 @@
 						<a class="dropdown-item" href="<?php echo site_url('encuesta/seccionUI');?>">Seccion</a>
 						<a class="dropdown-item" href="<?php echo site_url('encuesta/preguntaUI');?>">Pregunta</a>
 						<a class="dropdown-item" href="<?php echo site_url('encuesta/respuestaUI');?>">Respuesta</a>
+						<a class="dropdown-item" href="<?php echo site_url('encuesta/geolocalizacionUI');?>">Localizacion</a>
 					</div>
 				</li>
 			<?php endif; ?>

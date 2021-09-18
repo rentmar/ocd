@@ -290,8 +290,47 @@ class Encuesta extends CI_Controller
 		}
 
 	}
-
-
+	public function geolocalizacionUI()
+	{
+		$datos['localizaciones'] = $this->Encuesta_model->leerLocalizaciones();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_localizacion', $datos);
+		$this->load->view('html/pie');
+	}
+	public function crearLocalizacion()
+	{
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_crearlocalizacion');
+		$this->load->view('html/pie');
+	}
+	public function agregarLocalizacion()
+	{
+		$dts=array(
+		'nombre_geolocal'=>$this->input->post('nombrelocalizacion'),
+		'latitud_geolocal'=>$this->input->post('latitud'),
+		'longitud_geolocal'=>$this->input->post('longitud'));
+		$this->Encuesta_model->agregarLocalizacion($dts);
+		redirect('encuesta/geolocalizacionUI');
+	}
+	public function editarLocalizacion($idl)
+	{
+		$datos['localizacion'] = $this->Encuesta_model->leerLocalizacionId($idl);
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_editarlocalizacion',$datos);
+		$this->load->view('html/pie');
+	}
+	public function modificarLocalizacion($idl)
+	{
+		$dts=array(
+		'nombre_geolocal'=>$this->input->post('nombrelocalizacion'),
+		'latitud_geolocal'=>$this->input->post('latitud'),
+		'longitud_geolocal'=>$this->input->post('longitud'));
+		$this->Encuesta_model->modificarLocalizacion($idl,$dts);
+		redirect('encuesta/geolocalizacionUI');
+	}
 	//Despliegue de tarjetas
 	public function encuestaInicio()
 	{
