@@ -390,8 +390,12 @@ class Encuesta extends CI_Controller
 	}
 	public function agregarAsignacion($idu)
 	{
-		$dt="mon_claudia|20|4837195"; //nombre usuario | numero encuestas asignadas | carnet identidad
-		echo $this->cifrar($dt);
+		$dt="ecuestador-alfredoRamos|3|4837195"; //nombre usuario | numero encuestas asignadas | carnet identidad
+		$dtcif=$this->cifrar($dt);
+		echo $dtcif;
+		echo "<br>";
+		echo $this->decifrar($dtcif);
+		
 	}
 	public function asignarEncuesta($identificador)
 	{
@@ -401,26 +405,12 @@ class Encuesta extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vasignar_encuesta', $datos);
 		$this->load->view('html/pie');
-/*		$iduiencuesta = $identificador;
-		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
-		$datos['encuesta'] = $encuesta;
-
-
-		if($encuesta->encuesta_activa)
-		{
-			//Esta activa, funcion complementaria
-			$estado = 0;
-		}else{
-			//No esta activa, funcion complementaria
-			$estado = 1;
-		}
-		$this->Encuesta_model->cambiarEstado($iduiencuesta, $estado);
-		redirect('encuesta/formulariosEncuesta');*/
 	}
 	public function cifrar($cdt)
 	{
-		$r=rand(10,99);
-		$dt=strval($r).$cdt;
+		$ri=rand(10,99);
+		$ro=rand(10,99);
+		$dt=strval($ri).$cdt.strval($ro);
 		$num=strlen($dt);
 		$inicio=round($num/2)-1;
 		$cant=$num;
@@ -435,30 +425,95 @@ class Encuesta extends CI_Controller
 		{	
 			$inicio=$inicio+$j*$i;
 			$cad=substr($dt,$inicio,1);
+			//$encnom=$encnom.$cad;
 			switch ($cad)
 			{
-				case 'a':$encnom=$encnom.'v4';break;
-				case 'A':$encnom=$encnom.'%4';break;
-				case 'e':$encnom=$encnom.'w3';break;
-				case 'E':$encnom=$encnom.'%3';break;
-				case 'i':$encnom=$encnom.'x1';break;
-				case 'I':$encnom=$encnom.'_%';break;
-				case 'o':$encnom=$encnom.'y0';break;
-				case '0':$encnom=$encnom.'%0';break;
-				case 'u':$encnom=$encnom.'%1';break;
-				case 'U':$encnom=$encnom.'U_';break;
+				case 'a':$encnom=$encnom.'u';break;
+				case 'A':$encnom=$encnom.'U';break;
+				case 'e':$encnom=$encnom.'o';break;
+				case 'E':$encnom=$encnom.'O';break;
+				case 'o':$encnom=$encnom.'e';break;
+				case 'O':$encnom=$encnom.'E';break;
+				case 'u':$encnom=$encnom.'a';break;
+				case 'U':$encnom=$encnom.'A';break;
 				case '-':$encnom=$encnom.'+';break;
 				case '_':$encnom=$encnom.'(';break;
 				default:$encnom=$encnom.$cad;
 			}
-			
 			$j=$j*(-1);
 		}
 		return $encnom;
 	}
-	public function codificar()
+	public function decifrar($dtcif)
 	{
-		echo urlencode('enc-alfredo');
-
+		$dtdecif="";
+		$num=strlen($dtcif);
+		if (fmod($num,2)==0)
+		{
+			$num=$num-1;
+			$n=round($num/2);
+			for ($i=0;$i<=$n-1;$i++)
+			{
+				$cad=$dtcif[$num-(2*$i+1)];
+				switch ($cad)
+				{
+				case 'u':$dtdecif=$dtdecif.'a';break;
+				case 'U':$dtdecif=$dtdecif.'A';break;
+				case 'o':$dtdecif=$dtdecif.'e';break;
+				case 'O':$dtdecif=$dtdecif.'E';break;
+				case 'e':$dtdecif=$dtdecif.'o';break;
+				case 'E':$dtdecif=$dtdecif.'O';break;
+				case 'a':$dtdecif=$dtdecif.'u';break;
+				case 'A':$dtdecif=$dtdecif.'U';break;
+				case '+':$dtdecif=$dtdecif.'-';break;
+				case '(':$dtdecif=$dtdecif.'_';break;
+				default:$dtdecif=$dtdecif.$cad;
+				}
+				
+			}
+		}
+		else
+		{
+			$n=round($num/2)-1;
+			for ($i=0;$i<=$n;$i++)
+			{
+				$cad=$dtcif[$num-(2*$i+1)];
+				switch ($cad)
+				{
+				case 'u':$dtdecif=$dtdecif.'a';break;
+				case 'U':$dtdecif=$dtdecif.'A';break;
+				case 'o':$dtdecif=$dtdecif.'e';break;
+				case 'O':$dtdecif=$dtdecif.'E';break;
+				case 'e':$dtdecif=$dtdecif.'o';break;
+				case 'E':$dtdecif=$dtdecif.'O';break;
+				case 'a':$dtdecif=$dtdecif.'u';break;
+				case 'A':$dtdecif=$dtdecif.'U';break;
+				case '+':$dtdecif=$dtdecif.'-';break;
+				case '(':$dtdecif=$dtdecif.'_';break;
+				default:$dtdecif=$dtdecif.$cad;
+				}
+			}
+		}
+		
+		for ($i=0;$i<=$n-1;$i++)
+		{
+			$cad=$dtcif[(2*$i+1)];
+			switch ($cad)
+				{
+				case 'u':$dtdecif=$dtdecif.'a';break;
+				case 'U':$dtdecif=$dtdecif.'A';break;
+				case 'o':$dtdecif=$dtdecif.'e';break;
+				case 'O':$dtdecif=$dtdecif.'E';break;
+				case 'e':$dtdecif=$dtdecif.'o';break;
+				case 'E':$dtdecif=$dtdecif.'O';break;
+				case 'a':$dtdecif=$dtdecif.'u';break;
+				case 'A':$dtdecif=$dtdecif.'U';break;
+				case '+':$dtdecif=$dtdecif.'-';break;
+				case '(':$dtdecif=$dtdecif.'_';break;
+				default:$dtdecif=$dtdecif.$cad;
+				}
+		}
+		return substr($dtdecif,2,-2);
 	}
+	
 }
