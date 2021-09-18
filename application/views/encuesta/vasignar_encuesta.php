@@ -44,8 +44,12 @@
 						</div>
 						<div class="form-group">
 							<label for="geolocalizacion">Asignar Area de trabajo (geolocalizacion)</label><span class="text-danger"> * </span>
-							<input type="text" id="ubicacionlttd" name="ubicacionlttd"  class="form-control cuadro" placeholder="Ingresar Latitud" required=""><br>
-							<input type="text" id="ubicacionlgtd" name="ubicacionlgtd"  class="form-control cuadro" placeholder="Ingresar Longitud" required="">
+							<select required id="idgeolocal" name="idgeolocal" class="form-control cuadro" required>
+								<option value="">Seleccione un area de trabajo</option>
+								<?php foreach ($geolocal as $e): ?>
+									<option value="<?php echo $e->idgeolocal;?>" ><?php echo $e->nombre_geolocal ;  ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 						<div class="form-group">
 							<input type="submit" id="BOTON" value="ASIGNAR">
