@@ -256,10 +256,15 @@ class Usuarios extends CI_Controller
 		{
 			$data['titulo'] = 'Docentes';
 		}
-		else
+		elseif($g==3)
 		{
 			$data['titulo'] = 'Monitores';
 		}
+		elseif ($g==5)
+		{
+			$data['titulo'] = 'Encuestadores';
+		}
+
 		$data['grupo']=$g;
 		//Solo administradores
 		//$data['usuarios']= $this->ion_auth->users($g)->result();

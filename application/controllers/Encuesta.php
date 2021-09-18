@@ -382,10 +382,9 @@ class Encuesta extends CI_Controller
 	public function encuestaAusuarios()
 	{
 		//Leer a todos los usuarios en el grupo encuestadores
-//		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
-//		$datos['encuestasAsignadas'] = $this->Encuesta_model->consultaEncuesta($datos);
-$datos['usuariose'] = $this->Encuesta_model->encuestasAusuarios();
-//		echo "<pre>";var_dump($datos);echo "</pre>";
+
+		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_ausuarios', $datos);
@@ -435,11 +434,16 @@ $datos['usuariose'] = $this->Encuesta_model->encuestasAusuarios();
 		for($i=1;$i<=$nencuestas;$i++)
 		{
 			$dt = $encuestador."|".$i."|".$carnet;
-			$cifrado->$i = $this->cifrar($dt);
+			$cifrado->$i = substr(md5(uniqid(Rand(), true)), 16, 16);
 		}
-		$this->Encuesta_model->escribirEncuestaAsignada($datos,$cifrado);
-//		$this->mensaje('Encuesta asignada', 'success');
-		redirect('encuesta/encuestaAusuarios');
+
+		if($this->Encuesta_model->actualizarEncuestas($datos,$cifrado)){
+			$this->mensaje('Encuestas asignadas', 'success');
+			redirect('encuesta/encuestaAusuarios');
+		}else{
+			$this->mensaje('No se pudo asignar encuestas', 'warning');
+			redirect('encuesta/encuestaAusuarios');
+		}
 
 	}
 	public function cifrar($cdt)
@@ -558,6 +562,18 @@ $datos['usuariose'] = $this->Encuesta_model->encuestasAusuarios();
 		list($anio, $mes, $dia) = explode('-', $fecha);
 		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
 		return $fecha_unix;
+	}
+
+	public function verEncuestasAsignadas($identificador)
+	{
+		$idusuario = $identificador;
+		$datos['encuestas'] = $this->Encuesta_model->leerEncuestasAsignadasUsuario($idusuario);
+		$datos['usuario'] = $user = $this->ion_auth->user($idusuario)->row();
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_asignadas', $datos);
+		$this->load->view('html/pie');
 	}
 
 }

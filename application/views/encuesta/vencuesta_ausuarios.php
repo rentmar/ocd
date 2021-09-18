@@ -2,6 +2,16 @@
 	<br>
 	<div class="container">
 		<div class="row">
+			<?php if(!empty($this->session->flashdata())): ?>
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
+
+				<div id="mensaje-error">
+					<div class="alert alert-<?php echo $this->session->flashdata('clase')?>">
+						<?php echo $this->session->flashdata('mensaje') ?>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
 				<div id="caja_boton">
 					<div id="contenedor-submit">
@@ -20,17 +30,27 @@
 					<tr id="datos">
 						<th>Nro</th>
 						<th>Usuario</th>
-						<th>Encuesta Asignada</th>
-						<th>Asignar</th>
+						<th>Nombre</th>
+						<th>Accion</th>
+
 					</tr>
 					</thead>
 					<tbody>
 					<?php foreach ($usuariose as $e) {?>
 						<tr>
 							<td><?php echo $e->id;?></td>
+							<td><?php echo $e->username; ?></td>
 							<td><?php echo $e->first_name.' '.$e->last_name;?></td>
-							<td><?php echo $e->uinombre_encuesta;?></td>
-							<td><a href="<?php echo site_url('Encuesta/asignarEncuesta/'.$e->id);?>"><i class="fas fa-edit"></i></a></td>
+
+							<td>
+								<a href="<?php echo site_url('encuesta/asignarEncuesta/'.$e->id);?>" data-toggle="tooltip" title="Asignar encuesta(s)" >
+									<i class="fas fa-tasks"></i>
+								</a>
+								<a href="<?php echo site_url('encuesta/verEncuestasAsignadas/'.$e->id);?>" data-toggle="tooltip" title="Ver encuestas asignadas" >
+									<i class="fas fa-clipboard-list"></i>
+								</a>
+							</td>
+
 						</tr>
 					<?php } ?>
 					</tbody>
