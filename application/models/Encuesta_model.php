@@ -420,12 +420,10 @@ class  Encuesta_model extends CI_Model
 
 		foreach ($cifrado as $c){
 			$data = array(
-				'fecha_encuesta' => $datos['fechaactual'],
 				'hash_text' => $c,
-				'latitud' => $datos['latitud'],
-				'longitud' => $datos['longitud'],
 				'rel_idusuario' => $datos['idencuestador'],
 				'rel_iduiencuesta' => $datos['idencuesta'],
+				'rel_idgeolocal' => $datos['idgeolocal'],
 			);
 			$this->db->insert('encuesta', $data);
 		}
@@ -471,6 +469,20 @@ class  Encuesta_model extends CI_Model
 			."WHERE group_id = 5 "
 			."GROUP BY uinombre_encuesta, id "
 			."ORDER BY id";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	public function leerTodasLasAreasTrabajo()
+	{
+		$sql = "SELECT * "
+			."FROM geolocalizacion "
+			." "
+			." "
+			." "
+			." "
+			." "
+			." ";
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}

@@ -442,8 +442,10 @@ class Encuesta extends CI_Controller
 	{
 		$usuario=$this->Encuesta_model->leerUsuarioID($identificador);
 		$encuestass=$this->Encuesta_model->leerTodasLasEncuestas();
+		$geolocal = $this->Encuesta_model->leerTodasLasAreasTrabajo();
 		$datos['usuario']=$usuario;
 		$datos['encuestas']=$encuestass;
+		$datos['geolocal'] = $geolocal;
 //		echo "<pre>";var_dump($datos);echo "</pre>";
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -458,17 +460,15 @@ class Encuesta extends CI_Controller
 		$carnet = $this->input->post('carnetid1');
 		$idencuesta = $this->input->post('idencuesta1');
 		$nencuestas = $this->input->post('nencuestas1');
-		$latitud = $this->input->post('ubicacionlttd');
-		$longitud = $this->input->post('ubicacionlgtd');
-		$fechaActual=$this->fecha_unix(date('Y-m-d'));
+		$idgeolocal = $this->input->post('idgeolocal');
+
 		$datos['idencuestador'] = $idencuestador;
 		$datos['idencuesta'] = $idencuesta;
 		$datos['encuestador'] = $encuestador;
 		$datos['carnet'] = $carnet;
 		$datos['nencuestas'] = $nencuestas;
-		$datos['latitud'] = $latitud;
-		$datos['longitud'] = $longitud;
-		$datos['fechaactual'] = $fechaActual;
+		$datos['idgeolocal'] = $idgeolocal;
+
 		$cifrado = new stdClass();
 		for($i=1;$i<=$nencuestas;$i++)
 		{
@@ -476,7 +476,7 @@ class Encuesta extends CI_Controller
 			$cifrado->$i = substr(md5(uniqid(Rand(), true)), 16, 16);
 		}
 
-		if($this->Encuesta_model->actualizarEncuestas($datos,$cifrado)){
+		if($this->Encuesta_model->escribirEncuestaAsignada($datos,$cifrado)){
 			$this->mensaje('Encuestas asignadas', 'success');
 			redirect('encuesta/encuestaAusuarios');
 		}else{
