@@ -395,7 +395,7 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql, [$idencuesta,  ]);
 		return $qry->result();
 	}
-	public function actualizarEncuestas($datos,$cifrado)
+	public function escribirEncuestaAsignada($datos,$cifrado)
 	{
 		$this->db->trans_begin();
 
@@ -416,6 +416,7 @@ class  Encuesta_model extends CI_Model
 		{
 			$this->db->trans_rollback();
 			return false;
+
 		}
 		else
 		{
@@ -439,6 +440,19 @@ class  Encuesta_model extends CI_Model
 			."   "
 			."   ";
 		$qry = $this->db->query($sql, [$idusuario,  ]);
+		return $qry->result();
+	}
+	public function encuestasAusuarios()
+	{
+		$sql = "SELECT users.id, first_name, last_name, uinombre_encuesta "
+			."FROM users "
+			."LEFT JOIN encuesta ON encuesta.rel_idusuario = users.id "
+			."LEFT JOIN uiencuesta ON uiencuesta.iduiencuesta = encuesta.rel_iduiencuesta "
+			."LEFT JOIN users_groups ON  users_groups.user_id = users.id "
+			."WHERE group_id = 5 "
+			."GROUP BY uinombre_encuesta, id "
+			."ORDER BY id";
+		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
 }

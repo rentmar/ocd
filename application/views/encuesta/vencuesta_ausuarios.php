@@ -32,6 +32,7 @@
 						<th>Usuario</th>
 						<th>Nombre</th>
 						<th>Accion</th>
+
 					</tr>
 					</thead>
 					<tbody>
@@ -40,6 +41,7 @@
 							<td><?php echo $e->id;?></td>
 							<td><?php echo $e->username; ?></td>
 							<td><?php echo $e->first_name.' '.$e->last_name;?></td>
+
 							<td>
 								<a href="<?php echo site_url('encuesta/asignarEncuesta/'.$e->id);?>" data-toggle="tooltip" title="Asignar encuesta(s)" >
 									<i class="fas fa-tasks"></i>
@@ -48,6 +50,7 @@
 									<i class="fas fa-clipboard-list"></i>
 								</a>
 							</td>
+
 						</tr>
 					<?php } ?>
 					</tbody>
