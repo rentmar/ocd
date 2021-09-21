@@ -63,6 +63,7 @@ class Encuesta extends CI_Controller
 	{
 		$datos['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
 		$datos['respuestas'] = $this->Encuesta_model->leerTodasLasRespuestas();
+		$datos['tipo_pregunta'] = $this->Encuesta_model->leerTiposDePregunta();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vcrearpregunta', $datos);
@@ -75,7 +76,8 @@ class Encuesta extends CI_Controller
 		$dts=array(
 			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
 			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
-			"rel_iduiseccion"=>$this->input->post("idseccion"));
+			"rel_iduiseccion"=>$this->input->post("idseccion"),
+			"rel_iduitipopregunta"=>$this->input->post('idtipopregunta'));
 		foreach ($respuestas as $r)
 		{
 			if ($this->input->post("resp".$r->iduirespuesta)!=null)
@@ -375,6 +377,17 @@ class Encuesta extends CI_Controller
 		//Extraer las respuestas de una encuesta
 		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
 
+		//Subvista para la Seleccion de modulos
+		$datos_modulo['modulos'] = $modulos;
+		$datos_modulo['orden_mod_min'] = $orden_modulos_min;
+		$datos_modulo['secciones'] = $secciones;
+		$datos_modulo['preguntas'] = $preguntas;
+		$datos_modulo['respuestas'] = $respuestas;
+		$sel_modulos = $this->load->view('encuesta/svencuesta_plantilla_selmodulo', $datos_modulo, TRUE);
+
+
+		//Subvista para los modulos
+		$cont_modulos = $this->load->view('encuesta/svencuesta_plantilla_contmodulo', '', TRUE);
 
 		$datos['encuesta'] = $encuesta;
 		$datos['modulos'] = $modulos;
@@ -383,6 +396,12 @@ class Encuesta extends CI_Controller
 		$datos['respuestas'] = $respuestas;
 		$datos['orden_mod_min'] = $orden_modulos_min;
 		$datos['orden_mod_max'] = $orden_modulos_max;
+
+		//Datos del formulario
+		$datos['sel_modulos'] = $sel_modulos;
+		$datos['cont_modulo'] = $cont_modulos;
+
+
 
 		$this->load->view('encuesta/vencuesta_plantilla', $datos);
 

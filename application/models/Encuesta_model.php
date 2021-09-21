@@ -123,7 +123,7 @@ class  Encuesta_model extends CI_Model
 			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion   "
 			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo  "
 			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta  "
-			."  "
+			."LEFT JOIN uitipopregunta ON uitipopregunta.iduitipopregunta = uipregunta.rel_iduitipopregunta  "
 			." "
 			."  ";
 
@@ -400,14 +400,14 @@ class  Encuesta_model extends CI_Model
 	//Leer las respuestas de una pregunta
 	public function leerPreguntasDeUnaEncuesta($idencuesta)
 	{
-		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uimodulo.uiorden_modulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta   "
-			."FROM uipregunta   "
-			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion   "
-			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
+		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uimodulo.uiorden_modulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta, uipregunta.rel_iduitipopregunta, uitipopregunta.iduitipopregunta, uitipopregunta.nombre_tipopregunta   "
+			."FROM uipregunta     "
+			."LEFT JOIN uitipopregunta ON uipregunta.rel_iduitipopregunta = uitipopregunta.iduitipopregunta   "
+			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion      "
+			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo    "
 			."LEFT JOIN uiencuesta ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta   "
-			."WHERE uiencuesta.iduiencuesta = ?  "
-			."ORDER BY uimodulo.uiorden_modulo, uiseccion.uiorden_seccion, uipregunta.uiorden_pregunta   "
-			."   "
+			."WHERE uiencuesta.iduiencuesta = ?   "
+			."ORDER BY uimodulo.uiorden_modulo, uiseccion.uiorden_seccion, uipregunta.uiorden_pregunta      "
 			."   "
 			."   "
 			."   ";
@@ -477,6 +477,20 @@ class  Encuesta_model extends CI_Model
 	{
 		$sql = "SELECT * "
 			."FROM geolocalizacion "
+			." "
+			." "
+			." "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	public function leerTiposDePregunta()
+	{
+		$sql = "SELECT * "
+			."FROM uitipopregunta "
 			." "
 			." "
 			." "

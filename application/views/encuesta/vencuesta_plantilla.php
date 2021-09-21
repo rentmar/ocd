@@ -21,108 +21,13 @@
 			<?php echo form_open('read/capturar'); ?>
 
 			<!-- Seleccion de Modulos -->
-			<ul class="nav nav-tabs" role="tablist" >
-				<?php foreach ($modulos as $m): ?>
-					<?php if($m->uiorden_modulo == $orden_mod_min): ?>
-						<li class="nav-item">
-							<a class="nav-link active" data-toggle="tab" href="#<?php echo 'modulo'.$m->iduimodulo; ?>">
-								<?php echo $m->uinombre_modulo; ?>
-							</a>
-						</li>
-					<?php else: ?>
-						<li class="nav-item">
-							<a class="nav-link" data-toggle="tab" href="#<?php echo 'modulo'.$m->iduimodulo; ?>">
-								<?php echo $m->uinombre_modulo; ?>
-							</a>
-						</li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</ul>
-			<!-- Seleccion de Modulos -->
+			<?php echo $sel_modulos; ?>
+			<!-- Fin Seleccion de Modulos -->
 
 			<!-- Despliegue de Modulos -->
-			<div class="tab-content">
-				<?php foreach ($modulos as $m): ?>
-					<?php if($m->uiorden_modulo == $orden_mod_min): ?>
-						<div id="<?php echo 'modulo'.$m->iduimodulo; ?>" class="container tab-pane active"><br>
-							<div class="accordion<?php echo $m->iduimodulo;?>">
-							<?php foreach ($secciones as $s): ?>
-							<?php if($s->iduimodulo==$m->iduimodulo):  ?>
-								<h3><?php echo $s->iduiseccion; ?></h3>
-									<div class="card">
-										<?php foreach ($preguntas as $p): ?>
-											<?php if($p->iduiseccion==$s->iduiseccion): ?>
-												<div class="card-header">
-													<a class="card-link" data-toggle="collapse" href="#<?php echo 'pregunta'.$p->iduiseccion; ?>">
-														<?php echo $p->uipregunta_nombre; ?>
-													</a>
-												</div>
-												<div id="<?php echo 'pregunta'.$p->iduiseccion;?>" class="collapse show" data-parent="#accordion<?php echo $m->iduimodulo;?>">
-													<div class="card-body">
-														<div class="form-group">
-														<?php foreach ($respuestas as $r): ?>
-															<?php if($r->iduipregunta==$p->iduipregunta): ?>
-															<div class="form-check">
-																<label class="form-check-label" for="radio">
-																	<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>[]" value="<?php echo $r->iduirespuesta; ?>">
-																	<?php echo $r->uinombre_respuesta; ?>
-																</label>
-															</div>
-															<?php endif; ?>
-														<?php endforeach; ?>
-														</div>
-
-													</div>
-												</div>
-											<?php endif; ?>
-										<?php endforeach; ?>
-									</div>
-							<?php endif; ?>
-							<?php endforeach; ?>
-							</div>
-						</div>
-					<?php else:  ?>
-						<div id="<?php echo 'modulo'.$m->iduimodulo; ?>" class="container tab-pane fade"><br>
-							<div class="accordion<?php echo $m->iduimodulo;?>">
-								<?php foreach ($secciones as $s): ?>
-									<?php if($s->iduimodulo==$m->iduimodulo):  ?>
-										<h3><?php echo $s->iduiseccion; ?></h3>
-										<div class="card">
-											<?php foreach ($preguntas as $p): ?>
-												<?php if($p->iduiseccion==$s->iduiseccion): ?>
-												<div class="card-header">
-													<a class="card-link" data-toggle="collapse" href="#<?php echo 'pregunta'.$p->iduiseccion; ?>">
-														<?php echo $p->uipregunta_nombre; ?>
-													</a>
-												</div>
-												<div id="<?php echo 'pregunta'.$p->iduiseccion; ?>" class="collapse show" data-parent="#accordion<?php echo $m->iduimodulo;?>">
-													<div class="card-body">
-														<div class="form-group">
-															<?php foreach ($respuestas as $r): ?>
-																<?php if($r->iduipregunta==$p->iduipregunta): ?>
-																	<div class="form-check">
-																		<label class="form-check-label" for="radio">
-																			<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>[]" value="<?php echo $r->iduirespuesta; ?>">
-																			<?php echo $r->uinombre_respuesta; ?>
-																		</label>
-																	</div>
-																<?php endif; ?>
-															<?php endforeach; ?>
-														</div>
-													</div>
-												</div>
-												<?php endif; ?>
-											<?php endforeach; ?>
-										</div>
-
-									<?php endif; ?>
-								<?php endforeach; ?>
-							</div>
-						</div>
-					<?php endif;  ?>
-				<?php endforeach; ?>
-			</div>
+			<?php echo $cont_modulo; ?>
 			<!-- Fin Despliegue de Modulos -->
+			<?php if(isset($datos_generales)): ?>
 			<div>
 				<input type="hidden" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
 				<input type="hidden" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
@@ -131,8 +36,8 @@
 				<input type="hidden" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
 				<input type="hidden" name="latitud_f" id="latitud_f">
 				<input type="hidden" name="longitud_f" id="longitud_f" >
-
 			</div>
+			<?php endif; ?>
 			<div>
 				<hr>
 			</div>
