@@ -16,8 +16,9 @@
 
 <div class="container">
 	<div class="row">
+
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<?php echo form_open('encuesta/capturarDatosEncuesta'); ?>
+			<?php echo form_open('read/capturar'); ?>
 
 			<!-- Seleccion de Modulos -->
 			<ul class="nav nav-tabs" role="tablist" >
@@ -63,7 +64,7 @@
 															<?php if($r->iduipregunta==$p->iduipregunta): ?>
 															<div class="form-check">
 																<label class="form-check-label" for="radio">
-																	<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>" value="<?php $r->iduirespuesta ?>">
+																	<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>[]" value="<?php echo $r->iduirespuesta; ?>">
 																	<?php echo $r->uinombre_respuesta; ?>
 																</label>
 															</div>
@@ -101,7 +102,7 @@
 																<?php if($r->iduipregunta==$p->iduipregunta): ?>
 																	<div class="form-check">
 																		<label class="form-check-label" for="radio">
-																			<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>" value="<?php $r->iduirespuesta ?>">
+																			<input type="radio" class="form-check-input" id="radio" name="pregunta<?php echo $p->iduipregunta; ?>[]" value="<?php echo $r->iduirespuesta; ?>">
 																			<?php echo $r->uinombre_respuesta; ?>
 																		</label>
 																	</div>
@@ -122,6 +123,16 @@
 				<?php endforeach; ?>
 			</div>
 			<!-- Fin Despliegue de Modulos -->
+			<div>
+				<input type="text" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
+				<input lotype="text" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
+				<input type="text" name="idusuario" id="idusuario" value="<?php echo $datos_generales->rel_idusuario;?>">
+				<input type="text" name="idencuesta_asignada" id="idencuesta_asignada" value="<?php echo $datos_generales->idencuesta?>"  >
+				<input type="text" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
+				<input type="text" name="latitud_f" id="latitud_f">
+				<input type="text" name="longitud_f" id="longitud_f" >
+
+			</div>
 			<div>
 				<hr>
 			</div>
