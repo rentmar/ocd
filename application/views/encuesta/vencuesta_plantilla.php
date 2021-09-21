@@ -124,13 +124,13 @@
 			</div>
 			<!-- Fin Despliegue de Modulos -->
 			<div>
-				<input type="text" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
-				<input lotype="text" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
-				<input type="text" name="idusuario" id="idusuario" value="<?php echo $datos_generales->rel_idusuario;?>">
-				<input type="text" name="idencuesta_asignada" id="idencuesta_asignada" value="<?php echo $datos_generales->idencuesta?>"  >
-				<input type="text" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
-				<input type="text" name="latitud_f" id="latitud_f">
-				<input type="text" name="longitud_f" id="longitud_f" >
+				<input type="hidden" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
+				<input type="hidden" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
+				<input type="hidden" name="idusuario" id="idusuario" value="<?php echo $datos_generales->rel_idusuario;?>">
+				<input type="hidden" name="idencuesta_asignada" id="idencuesta_asignada" value="<?php echo $datos_generales->idencuesta?>"  >
+				<input type="hidden" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
+				<input type="hidden" name="latitud_f" id="latitud_f">
+				<input type="hidden" name="longitud_f" id="longitud_f" >
 
 			</div>
 			<div>
@@ -190,6 +190,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url('assets/js/geo.js'); ?>"></script>
 </body>
 </html>
 
