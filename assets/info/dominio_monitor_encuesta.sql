@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-09-2021 a las 16:59:18
+-- Tiempo de generación: 21-09-2021 a las 17:26:55
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -63,6 +63,14 @@ CREATE TABLE `ci_sessions` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('06db0c32b615e4c686bf19f92b102d020f7a9481', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313633323235383836343b6964656e746974797c733a353a2261646d696e223b757365726e616d657c733a353a2261646d696e223b656d61696c7c733a31353a2261646d696e4061646d696e2e636f6d223b757365725f69647c733a313a2231223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363332323332393337223b6c6173745f636865636b7c693a313633323235383836343b),
+('65428316536d5f888e6d15c8abf43d12f6b178d4', '127.0.0.1', '0000-00-00 00:00:00', 0x5f5f63695f6c6173745f726567656e65726174657c693a313633323235383836343b6964656e746974797c733a353a2261646d696e223b757365726e616d657c733a353a2261646d696e223b656d61696c7c733a31353a2261646d696e4061646d696e2e636f6d223b757365725f69647c733a313a2231223b6f6c645f6c6173745f6c6f67696e7c733a31303a2231363332323332393337223b6c6173745f636865636b7c693a313633323235383836343b736573696f6e5f6163746976617c623a313b6964646570617274616d656e746f7c733a313a2231223b646570617274616d656e746f7c733a363a224c612050617a223b65646963696f6e5f6163746976617c623a303b65735f6e756576615f6e6f74696369617c623a303b65735f6e756576615f6e6f7469636961317c623a303b65735f6e756576615f6e6f7469636961327c623a303b65735f6e756576615f6c65797c623a303b6e7565766f5f666f726d7c693a303b6e6f74696369615f6e756576617c613a303a7b7d6e6f74696369615f6e75657661317c613a303a7b7d6e6f74696369615f6e75657661327c613a303a7b7d6c65795f6e756576617c613a303a7b7d6e6f74696369615f6564697461626c657c693a31303b636f6e73756c74617c613a303a7b7d);
 
 -- --------------------------------------------------------
 
@@ -12289,6 +12297,8 @@ CREATE TABLE `uirespuesta_pregunta` (
 
 CREATE TABLE `uiseccion` (
   `iduiseccion` int(11) UNSIGNED NOT NULL,
+  `etiqueta_seccion` varchar(20) NOT NULL,
+  `codigo_seccion` int(11) NOT NULL,
   `uiorden_seccion` smallint(5) NOT NULL,
   `rel_iduimodulo` int(11) UNSIGNED NOT NULL,
   `rel_idsubtema` smallint(5) UNSIGNED NOT NULL
@@ -12618,7 +12628,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `carnet_identidad`, `geolocalizacion`, `rel_iddepartamento`, `direccion`, `rel_iduniversidad`) VALUES
-(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1632232937, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 1),
+(1, '127.0.0.1', 'admin', '$2y$12$bGXrgAr0ErDJt2ICW/f2v.6M1LOI2l6KqFvj9Ot0rLPGdYy8h2sle', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1632258864, 1, 'Admin', 'istrator', 'ADMIN', '0', '0', 'geolocalizacion', 1, NULL, 1),
 (2, '127.0.0.1', 'marcelo', '$2y$10$cvMbrdm9qpYyudrwhq3mu.yimTBsIywbbXoNEu4bRo4oRm82RGtye', 'MRolqueza@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062770, 1629487513, 0, 'Marcelo', 'Rolqueza', NULL, NULL, '4834568', 'GEOLOCALIZACION', 1, 'Mariano Colodro #1447', 1),
 (3, '127.0.0.1', 'albert', '$2y$10$viKV5QXqqrNbc5MMPx8kyuXLOWDMjYU5uLBlgGhjwqM3C0H9vFtT6', 'albert@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625062902, 1625414291, 1, 'Julia Carmen', 'Misericordia Morales', NULL, NULL, '7298782', '', 3, '', 0),
 (4, '127.0.0.1', 'jcarlos', '$2y$10$xj7vhmTVFZOMLHbKfrhz.O2l37pN7cssOOBM0mGsXZ1A9B4S3se.W', 'almeyda@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1625358200, NULL, 1, 'Juan Carlos', 'Almeyda', NULL, NULL, '48693587', '45465456456456454', 4, 'Calle Alberto #4323', 0),
