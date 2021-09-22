@@ -20,6 +20,7 @@
 					<tr id="datos">
 						<th>Nro</th>
 						<th>Pregunta</th>
+						<th>Tipo</th>
 						<th>Encuesta</th>
 						<th>Modulo</th>
 						<th>Seccion</th>
@@ -31,7 +32,8 @@
 					<?php foreach ($preguntas as $e) {?>
 						<tr>
 							<td><?php echo $e->iduipregunta;?></td>
-							<td><?php echo $e->uipregunta_nombre ?></td>
+							<td><?php echo $e->uipregunta_nombre; ?></td>
+							<td><?php echo $e->nombre_tipopregunta; ?></td>
 							<td><?php echo $e->uinombre_encuesta; ?></td>
 							<td><?php echo $e->uinombre_modulo;?></td>
 							<td><?php echo $e->iduiseccion; ?></td>

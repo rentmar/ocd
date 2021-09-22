@@ -110,7 +110,7 @@
 						  <a class="navbar-brand" href="#">OCD</a>
 						</div>
 						<div class="visible-xs">
-							<a href="">	<span id="label" class="text-info">Bienvenido, <b>Alejandro</b></span></a>
+							<a href="">	</a>
 						</div>
 					</div>
 				</nav>
@@ -118,12 +118,12 @@
 			<br>
 			<main>
 				<div id="header">
-					<img src="/img/OCD-bolivia-2.svg" alt="Logo CD">
-					<h4 id="Título_cabecera"> <b>Monitor de Medios</b> </h4>
+					<img src="<?php echo base_url('assets/img/logo/logo-sin-fondo.png'); ?>" alt="Logo CD">
+					<h4 id="Título_cabecera"> <b>Encuesta no Completada</b> </h4>
 				</div>
 				<nav class="menu">
 					<ul>
-						<li><a href="">Inicio</a></li>
+						<li><a href=""></a></li>
 					</ul>
 				</nav>
 				<br>
@@ -132,12 +132,11 @@
 						<h5 id="Título_formulario"> <b>Error de envío</b> </h5>
 					</div>
 					<div class="contenedor_inferior">
-						<img src="/img/icono-error.svg" alt="">
+						<img src="<?php echo base_url('assets/img/de_error.svg') ?>" alt="">
 						<div class="text">
-							<p>Hubo un error intentando enviar los datos.<br>
-							Por favor, verifique que los datos sean correctos.</p>
-							<br>
-							<a href=""> Revisar datos </a>
+							<p>Hubo un error intentando enviar los datos.</p>
+
+							<a href="">  </a>
 						</div>
 					</div>
 				</div>

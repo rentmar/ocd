@@ -12,11 +12,23 @@
 							<label for="idseccion" class="form-group"> Elegir Seccion </label>
 							<span class="rojo"> * </span>
 							<br>
-							<select name="idseccion" id="idseccion" class="form-control simple" >
+							<select name="idseccion" id="idseccion" class="form-control simple" required >
 								<option value="">Elegir Seccion</option>
 								<?php foreach ($secciones as $s) {?>
 									<option value="<?php echo $s->iduiseccion;?>">
 										<?php echo "Encuesta: ".$s->uinombre_encuesta.",Modulo:".$s->rel_iduimodulo.",Seccion".$s->iduiseccion;?>
+									</option>
+								<?php } ?>
+							</select>
+							<br><br>
+							<label for="idseccion" class="form-group"> Elegir Tipo de pregunta </label>
+							<span class="rojo"> * </span>
+							<br>
+							<select name="idtipopregunta" id="idtipopregunta" class="form-control simple" required >
+								<option value="">Seleccionar el tipo de pregunta</option>
+								<?php foreach ($tipo_pregunta as $s) {?>
+									<option value="<?php echo $s->iduitipopregunta;?>">
+										<?php echo $s->nombre_tipopregunta;?>
 									</option>
 								<?php } ?>
 							</select>
@@ -29,7 +41,7 @@
 							<label for="ordenpregunta" class="form-group"> Orden de Pregunta en la Seccion</label>
 							<span class="rojo"> * </span>
 							<br>
-							<input type="number" id="cuadro" name="ordenpregunta"  required>
+							<input min="0" type="number" id="cuadro" name="ordenpregunta"  required>
 							<br><br>
 							<label class="form-group"> Asignar Respuestas </label>
 							<span class="rojo"> * </span>
