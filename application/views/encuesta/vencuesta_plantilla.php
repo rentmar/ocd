@@ -79,7 +79,9 @@
 				<hr>
 			</div>
 			<div class="form-group">
+				<?php if($no_es_vista_previa):?>
 				<button type="submit" class="btn btn-primary">Enviar</button>
+				<?php endif; ?>
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#salirencuesta">
 					Salir
 				</button>

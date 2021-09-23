@@ -35,7 +35,7 @@ class Read extends CI_Controller
 		$encuesta = $this->Readurl_model->autenticar($hash);
 		$datos_generales = $encuesta;
 		$iduiencuesta = $encuesta->rel_iduiencuesta;
-		
+
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
 
