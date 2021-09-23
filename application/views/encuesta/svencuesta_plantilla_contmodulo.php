@@ -56,7 +56,7 @@
 						<?php if($p->iduiseccion==$s->iduiseccion): ?>
 						<div class="card-header">
 							<a class="card-link" data-toggle="collapse" href="#pregunta<?php echo $s->iduiseccion;?>" >
-								<?php echo $p->uipregunta_nombre; ?>
+								<?php echo $s->etiqueta_seccion; ?><?php echo $p->uipregunta_nombre; ?>
 							</a>
 						</div>
 						<div id="pregunta<?php echo $s->iduiseccion;?>" class="collapse"  >

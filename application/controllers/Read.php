@@ -34,6 +34,61 @@ class Read extends CI_Controller
 	public function encuesta($hash){
 		$encuesta = $this->Readurl_model->autenticar($hash);
 		$iduiencuesta = $encuesta->rel_iduiencuesta;
+		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
+		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
+
+		//Array de orden
+		$orden_modulos = [];
+		foreach ($modulos as $m)
+		{
+			$orden_modulos[] = $m->uiorden_modulo;
+		}
+		$orden_modulos_min = min($orden_modulos);
+		$orden_modulos_max = max($orden_modulos);
+
+		//Extraer las secciones de una encuesta
+		$secciones = $this->Encuesta_model->leerSeccionesDeUnaEncuesta($iduiencuesta);
+
+		//Extraer las preguntas de una encuesta
+		$preguntas = $this->Encuesta_model->leerPreguntasDeUnaEncuesta($iduiencuesta);
+		//Extraer las respuestas de una encuesta
+		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
+
+		//Subvista para la Seleccion de modulos
+		$datos_modulo['modulos'] = $modulos;
+		$datos_modulo['orden_mod_min'] = $orden_modulos_min;
+		$datos_modulo['secciones'] = $secciones;
+		$datos_modulo['preguntas'] = $preguntas;
+		$datos_modulo['respuestas'] = $respuestas;
+		$sel_modulos = $this->load->view('encuesta/svencuesta_plantilla_selmodulo', $datos_modulo, TRUE);
+
+
+		//Subvista para los modulos
+		$cont_modulos = $this->load->view('encuesta/svencuesta_plantilla_contmodulo', '', TRUE);
+
+		$datos['encuesta'] = $encuesta;
+		$datos['modulos'] = $modulos;
+		$datos['secciones'] = $secciones;
+		$datos['preguntas'] = $preguntas;
+		$datos['respuestas'] = $respuestas;
+		$datos['orden_mod_min'] = $orden_modulos_min;
+		$datos['orden_mod_max'] = $orden_modulos_max;
+
+		//Datos del formulario
+		$datos['sel_modulos'] = $sel_modulos;
+		$datos['cont_modulo'] = $cont_modulos;
+
+
+
+		$this->load->view('encuesta/vencuesta_plantilla', $datos);
+
+
+
+
+
+
+
+		/*$iduiencuesta = $encuesta->rel_iduiencuesta;
 		$datos_generales = $encuesta;
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
@@ -71,7 +126,7 @@ class Read extends CI_Controller
 		$datos['datos_generales'] = $datos_generales;
 
 
-		$this->load->view('encuesta/vencuesta_plantilla', $datos);
+		$this->load->view('encuesta/vencuesta_plantilla', $datos);*/
 	}
 
 	public function encuestaExpirada()
@@ -122,6 +177,12 @@ class Read extends CI_Controller
 		$datos->latitud = $this->input->post('latitud_f'); //Latitud donde el formulario es llenado
 		$datos->longitud = $this->input->post('longitud_f'); //Longitud donde el formulario es llenado
 		$datos->idencuesta = $this->input->post('idencuesta_asignada'); //Identificador de la encuesta asigmafa
+
+		//Informacion General
+		$datos->edad = $this->input->post('edad');
+		$datos->sexo = $this->input->post('sexo');
+		$datos->ciudad = $this->input->post('ciudad');
+		$datos->zona = $this->input->post('zona');
 
 		return $datos;
 	}
