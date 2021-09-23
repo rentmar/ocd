@@ -154,10 +154,35 @@ class  Encuesta_model extends CI_Model
 		$q=$this->db->get("uipregunta");
 		return $q->row();
 	}
-	public function modificarPreguntaUI($dts,$idp)
+	public function modificarPreguntaUI($dts,$dtcheck,$idp)
 	{
-		$this->db->where("iduipregunta",$idp);
-		$this->db->update("uipregunta",$dts);
+		$orden=0;
+		$this->db->trans_start();
+			$this->db->where("rel_iduipregunta",$idp);
+			$this->db->delete("uirespuesta_pregunta");
+			foreach ($dtcheck as $check)
+			{
+				$orden=$orden+1;
+				$dtck=array('rel_iduirespuesta'=>$check,
+							'rel_iduipregunta'=>$idp,
+							'uiorden_respuesta'=>$orden);
+				$this->db->where("iduipregunta",$idp);
+				$this->db->insert("uirespuesta_pregunta",$dtck);
+			}
+			$this->db->where("iduipregunta",$idp);
+			$this->db->update("uipregunta",$dts);
+		$this->db->trans_complete();
+	}
+	public function leerTiposPreguntas()
+	{
+		$q=$this->db->get("uitipopregunta");
+		return $q->result();
+	}
+	public function leerTipoPreguntaId($idp)
+	{
+		$this->db->where('iduipregunta',$idp);
+		$q=$this->db->get("uipregunta");
+		return $q->row();
 	}
 	//Leer todas las respuestas
 	public  function  leerTodasLasRespuestas()
@@ -173,6 +198,12 @@ class  Encuesta_model extends CI_Model
 
 		$qry = $this->db->query($sql);
 		return $qry->result();
+	}
+	public function leerRespuestasPreguntaId($idp)
+	{
+		$this->db->where('rel_iduipregunta',$idp);
+		$q=$this->db->get("uirespuesta_pregunta");
+		return $q->result();
 	}
 	public function agregarRespuestaUI($dts)
 	{

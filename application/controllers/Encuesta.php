@@ -93,7 +93,11 @@ class Encuesta extends CI_Controller
 	}
 	public function editarPreguntaUI($idp)
 	{
+		$dt['tipos']=$this->Encuesta_model->leerTiposPreguntas();
+		$dt['tipo']=$this->Encuesta_model->leerTipoPreguntaId($idp);
 		$dt['pregunta']=$this->Encuesta_model->leerPreguntaId($idp);
+		$dt['respuestas'] = $this->Encuesta_model->leerTodasLasRespuestas();
+		$dt['respuestas_pregunta']=$this->Encuesta_model->leerRespuestasPreguntaId($idp);
 		$dt['secciones'] = $this->Encuesta_model->leerTodasLasSecciones();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -102,11 +106,21 @@ class Encuesta extends CI_Controller
 	}
 	public function modificarPreguntaUI($idp)
 	{
+		$dtcheck=[];
+		$respuestas=$this->Encuesta_model->leerTodasLasRespuestas();
+		foreach ($respuestas as $r)
+		{
+			if ($this->input->post("resp".$r->iduirespuesta)!=null)
+			{
+				array_push($dtcheck,$this->input->post("resp".$r->iduirespuesta));
+			}
+		}
 		$dts=array(
 			"uipregunta_nombre"=>$this->input->post("nombre_pregunta"),
 			"uiorden_pregunta"=>$this->input->post("ordenpregunta"),
-			"rel_iduiseccion"=>$this->input->post("idseccion"));
-		$this->Encuesta_model->modificarPreguntaUI($dts,$idp);
+			"rel_iduiseccion"=>$this->input->post("idseccion"),
+			"rel_iduitipopregunta"=>$this->input->post("idtipo"));
+		$this->Encuesta_model->modificarPreguntaUI($dts,$dtcheck,$idp);
 		redirect('Encuesta/preguntaUI');
 	}
 	public function respuestaUI()
