@@ -414,6 +414,7 @@ class Encuesta extends CI_Controller
 		//Datos del formulario
 		$datos['sel_modulos'] = $sel_modulos;
 		$datos['cont_modulo'] = $cont_modulos;
+		$datos['no_es_vista_previa'] = false;
 
 
 

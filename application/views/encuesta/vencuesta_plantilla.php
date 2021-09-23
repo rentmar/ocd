@@ -19,6 +19,43 @@
 
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<?php echo form_open('read/capturar'); ?>
+			<h3>Informacion General</h3>
+			<div class="form-group">
+				<label for="edad">Edad:</label>
+				<input type="number" name="edad" class="form-control" id="edad" min="0" max="100" required>
+			</div>
+			<div><hr></div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input checked id="sexo" name="sexo" type="radio" class="form-check-input" value="F">
+					Femenino
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sexo" name="sexo" type="radio" class="form-check-input" value="M">
+					Masculino
+				</label>
+			</div>
+			<div>
+				<hr>
+			</div>
+
+			<div class="form-group">
+				<label for="edad">Ciudad/Poblacion:</label>
+				<input type="text" name="ciudad" class="form-control" id="ciudad" required >
+			</div>
+
+			<div class="form-group">
+				<label for="zona">Zona:</label>
+				<input type="text" name="zona" class="form-control" id="zona" required >
+			</div>
+
+
+
+			<div>
+				<hr>
+			</div>
 
 			<!-- Seleccion de Modulos -->
 			<?php echo $sel_modulos; ?>
@@ -27,7 +64,7 @@
 			<!-- Despliegue de Modulos -->
 			<?php echo $cont_modulo; ?>
 			<!-- Fin Despliegue de Modulos -->
-			<?php if(isset($datos_generales)): ?>
+			<?php if($no_es_vista_previa): ?>
 			<div>
 				<input type="hidden" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
 				<input type="hidden" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
@@ -42,7 +79,9 @@
 				<hr>
 			</div>
 			<div class="form-group">
+				<?php if($no_es_vista_previa):?>
 				<button type="submit" class="btn btn-primary">Enviar</button>
+				<?php endif; ?>
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#salirencuesta">
 					Salir
 				</button>

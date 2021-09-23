@@ -45,10 +45,14 @@ class Readurl_model extends CI_Model
 			'hash_fc' => $info_general->hash,
 			'latidud_fc' => $info_general->latitud,
 			'longitud_fc' => $info_general->longitud,
+			'edad'=> $info_general->edad,
+			'sexo'=>$info_general->sexo,
+			'ciudad'=>$info_general->ciudad,
+			'zona'=>$info_general->zona,
 			'rel_idusuario' => $info_general->idusuario,
 			'rel_iduiencuesta' => $info_general->iduiencuesta,
 		];
-		$this->db->insert(' formulariocompletado', $form_comp_datos);
+		$this->db->insert('formulariocompletado', $form_comp_datos);
 		$idformcomp = $this->db->insert_id();
 		//Insertar el identificador del formulario completado
 		//Junto a los identificadores de preguntas y respuestas correspondientes
