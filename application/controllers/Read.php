@@ -33,7 +33,9 @@ class Read extends CI_Controller
 
 	public function encuesta($hash){
 		$encuesta = $this->Readurl_model->autenticar($hash);
+		$datos_generales = $encuesta;
 		$iduiencuesta = $encuesta->rel_iduiencuesta;
+		
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
 
@@ -77,6 +79,8 @@ class Read extends CI_Controller
 		//Datos del formulario
 		$datos['sel_modulos'] = $sel_modulos;
 		$datos['cont_modulo'] = $cont_modulos;
+		$datos['no_es_vista_previa'] = true;
+		$datos['datos_generales'] = $datos_generales;
 
 
 
