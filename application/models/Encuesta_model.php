@@ -480,6 +480,7 @@ class  Encuesta_model extends CI_Model
 			."FROM encuesta   "
 			."LEFT JOIN users ON encuesta.rel_idusuario = users.id   "
 			."LEFT JOIN uiencuesta ON encuesta.rel_iduiencuesta = uiencuesta.iduiencuesta   "
+			."LEFT JOIN geolocalizacion ON encuesta.rel_idgeolocal= geolocalizacion.idgeolocal  "
 			."WHERE users.id = ?   "
 			."  "
 			."   ";

@@ -640,7 +640,7 @@ class Encuesta extends CI_Controller
 	{
 		$idusuario = $identificador;
 		$datos['encuestas'] = $this->Encuesta_model->leerEncuestasAsignadasUsuario($idusuario);
-		$datos['usuario'] = $user = $this->ion_auth->user($idusuario)->row();
+		$datos['usuario'] = $this->ion_auth->user($idusuario)->row();
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
