@@ -454,22 +454,21 @@ class Encuesta extends CI_Controller
 	public function encuestaAusuarios()
 	{
 		//Leer a todos los usuarios en el grupo encuestadores
-
-		$datos['usuariose'] = $this->ion_auth->users('encuestadores')->result();
-
+		$encuestadores= $this->ion_auth->users('encuestadores')->result();
+		$datos['usuariose']=[];
+		foreach ($encuestadores as $e)
+		{
+			$encuest=array(
+					'id'=>$e->id,
+					'username'=>$e->username,
+					'numero_encuestas'=>count($this->Encuesta_model->leerEncuestasAsignadasUsuario($e->id)),
+					'usadas'=>count($this->Encuesta_model->leerEncuestasUsadasUsuario($e->id)));
+			array_push($datos['usuariose'],$encuest);
+		}
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_ausuarios', $datos);
 		$this->load->view('html/pie');
-	}
-	public function agregarAsignacion($idu)
-	{
-		$dt="ecuestador-alfredoRamos|3|4837195"; //nombre usuario | numero encuestas asignadas | carnet identidad
-		$dtcif=$this->cifrar($dt);
-		echo $dtcif;
-		echo "<br>";
-		echo $this->decifrar($dtcif);
-		
 	}
 	public function asignarEncuesta($identificador)
 	{

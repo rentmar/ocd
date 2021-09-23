@@ -12,10 +12,6 @@
 
 						<?php echo form_open('encuesta/guardarAsignacionDencuesta');?>
 						<input type="text" id="idusuario1" class="form-control" name="idusuario1" value="<?php echo $usuario->id;?>" hidden>
-<!--
-						<?php echo form_open('Encuesta/agregarAsignacion/'.$usuario->id)?>
-						<input type="hidden" id="cuadro" class="form-control" name="idusuario" value="<?php echo $usuario->id;?>">
--->
 						<div class="form-group">
 							<p>Nombre de Usuario: <input type="text" id="usuario1" name="usuario1" value="<?php echo $usuario->username;?>" readonly></p>
 						</div>
@@ -25,11 +21,7 @@
 						<div class="form-group">
 							<p>Departamento: <input type="text" id="depto1" name="depto1" value="<?php echo $usuario->nombre_departamento;?>" readonly></p>
 						</div>
-<!--						<div class="form-group">
-							<label for="ubicacion" >Ubicacion </label>
-							<input type="text" id="ubicacion" name="ubicacion"  class="form-control" value="<?php echo $usuario->geolocalizacion;?>" readonly>
-						</div>
--->						<div class="form-group">
+					<div class="form-group">
 							<label for="aencuesta">Asignar encuesta</label><span class="text-danger"> * </span>
 							<select required id="idencuesta1" name="idencuesta1" class="form-control cuadro" required>
 								<option value="" selected disabled hidden></option>
