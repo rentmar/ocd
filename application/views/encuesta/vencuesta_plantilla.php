@@ -64,7 +64,7 @@
 			<!-- Despliegue de Modulos -->
 			<?php echo $cont_modulo; ?>
 			<!-- Fin Despliegue de Modulos -->
-			<?php if(isset($datos_generales)): ?>
+			<?php if($no_es_vista_previa): ?>
 			<div>
 				<input type="hidden" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
 				<input type="hidden" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
@@ -79,7 +79,9 @@
 				<hr>
 			</div>
 			<div class="form-group">
+				<?php if($no_es_vista_previa):?>
 				<button type="submit" class="btn btn-primary">Enviar</button>
+				<?php endif; ?>
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#salirencuesta">
 					Salir
 				</button>

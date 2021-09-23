@@ -29,6 +29,7 @@
 						<th>Nro</th>
 						<th>Encuesta</th>
 						<th>URL</th>
+						<th>Revisar</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -45,7 +46,6 @@
 									<?php echo site_url('read/url/'.$e->hash_text); ?>
 								</td>
 							<?php endif; ?>
-
 						</tr>
 					<?php } ?>
 					</tbody>
