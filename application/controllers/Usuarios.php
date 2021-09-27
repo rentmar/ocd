@@ -73,10 +73,8 @@ class Usuarios extends CI_Controller
 			$grupo_leyes = $this->input->post('grupoleyes');
 			if(empty($grupo_leyes))
 			{
-				echo "No cuarto formulario";
 				$grupo = [$g, ];
 			}else{
-				echo "Ingreso a cuarto formulario";
 				$grupo = [$g, $grupo_leyes];
 			}
 
@@ -150,9 +148,9 @@ class Usuarios extends CI_Controller
 			];
 
 			if($this->ion_auth->update($idusuario, $datos_extra)){
-				echo "Usuario modificado";
+				//echo "Usuario modificado";
 			}else{
-				echo "Usuario no modificado";
+				//echo "Usuario no modificado";
 			}
 		}
 
