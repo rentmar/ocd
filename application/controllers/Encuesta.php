@@ -8,6 +8,7 @@ class Encuesta extends CI_Controller
 		$this->load->library('session');
 		$this->load->library('ion_auth');
 		$this->load->model('Encuesta_model');
+		$this->load->model('Departamento_model');
 		$this->load->library('encryption');
 		$this->load->helper('form');
 
@@ -647,5 +648,43 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_asignadas', $datos);
 		$this->load->view('html/pie');
 	}
+
+	public function reportesEncuesta()
+	{
+		$encuesta = $this->Encuesta_model->leerTodasLasEncuestas();
+		$departamento = $this->Departamento_model->leerDepartamentos();
+
+		$datos['encuesta'] = $encuesta;
+		$datos['departamento'] = $departamento;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_reportes', $datos);
+		$this->load->view('html/pie');
+
+	}
+
+	public function procesarConsulta()
+	{
+		$consulta = $this->consulta();
+		var_dump($consulta);
+
+	}
+
+	private function consulta()
+	{
+		$consulta = new stdClass();
+		$consulta->fecha_inicio = $this->input->post('fecha_inicio');
+		$consulta->fecha_fin = $this->input->post('fecha_fin');
+		$consulta->iduiencuesta = $this->input->post('iduiencuesta');
+		$consulta->edad_inicial = $this->input->post('edadinicial');
+		$consulta->edad_final = $this->input->post('edadfinal');
+		$consulta->sexo = $this->input->post('sexo');
+		$consulta->area = $this->input->post('area');
+		$consulta->iddepartamento = $this->input->post('iddepartamento');
+
+		return $consulta;
+	}
+
 
 }

@@ -10,6 +10,7 @@ class  Encuesta_model extends CI_Model
 	//Leer todas las encuestas
 	public function leerTodasLasEncuestas()
 	{
+		$this->db->where('encuesta_activa', 1);
 		$q=$this->db->get('uiencuesta');
 		return $q->result();
 	}
