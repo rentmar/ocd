@@ -68,13 +68,13 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">De:</span>
 							</div>
-							<input id="edadinicial" name="edadinicial" type="number" min="0" max="100" class="form-control" >
+							<input id="edadinicial" name="edadinicial" type="number" min="0" max="200" class="form-control" >
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">A:</span>
 							</div>
-							<input id="edadfinal" name="edadfinal" type="number" min="0" max="100" class="form-control" >
+							<input id="edadfinal" name="edadfinal" type="number" min="0" max="200" class="form-control" >
 						</div>
 
 					</div>
