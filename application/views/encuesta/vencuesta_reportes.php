@@ -12,7 +12,7 @@
 							<a href=""><input type="submit" class="BOTON" value="GENERAR"></a>
 						</div><br>
 						<div id="contenedor-submit">
-							<a href="<?php echo site_url('manejoDB');?>"><input type="" class="BOTONROJO" value="CANCELAR"></a>
+							<a href="<?php echo site_url('encuesta');?>"><input type="" class="BOTONROJO" value="CANCELAR"></a>
 						</div>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 
 
 					<div>
-						<h3>Intervalo de fecha </h3>
+						<!--<h3>Intervalo de fecha </h3>
 						<div class="form-row">
 							<div class="col">
 								<label for="fecha_inicio" >Inicial:</label>
@@ -43,15 +43,15 @@
 								<label for="fech_fin" >Final:</label>
 								<input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required >
 							</div>
-						</div>
+						</div>-->
 					</div>
 
 					<br>
 
 					<h3>Encuesta </h3>
 					<div class="form-row">
-						<select id="iduiencuesta" name="iduiencuesta" class="form-control simple"  >
-							<option value="0" >Seleccione una opcion</option>
+						<select id="iduiencuesta" name="iduiencuesta" class="form-control simple" required >
+							<option value="" >Seleccione una opcion</option>
 							<?php foreach ($encuesta as $fm): ?>
 									<option value="<?php echo $fm->iduiencuesta; ?>" >
 										<?php echo $fm->uinombre_encuesta; ?>
@@ -84,8 +84,8 @@
 					<div class="form-row">
 						<select id="sexo" name="sexo" class="form-control simple"  >
 							<option value="0" >Seleccione una opcion</option>
-							<option value="M" >MASCULINO</option>
-							<option value="F" >FEMENINO</option>
+							<option value="1" >MASCULINO</option>
+							<option value="2" >FEMENINO</option>
 
 						</select>
 					</div>
@@ -95,8 +95,8 @@
 					<div class="form-row">
 						<select id="area" name="area" class="form-control simple"  >
 							<option value="0">Seleccione una opcion</option>
-							<option value="urbana">Urbana</option>
-							<option value="rural">Rural</option>
+							<option value="1">Urbana</option>
+							<option value="2">Rural</option>
 
 						</select>
 					</div>

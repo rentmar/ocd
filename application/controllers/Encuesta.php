@@ -667,7 +667,23 @@ class Encuesta extends CI_Controller
 	public function procesarConsulta()
 	{
 		$consulta = $this->consulta();
-		var_dump($consulta);
+
+
+		if($consulta->edad_inicial > $consulta->edad_final )
+		{
+			$this->mensaje('Intervalo de edad incorrecto', 'warning');
+			redirect('encuesta/reportesEncuesta');
+		}
+		else{
+			var_dump($consulta);
+			echo "<br><br>";
+			$encuestas = $this->Encuesta_model->leerFormulariosLlenosPorConsulta($consulta);
+			var_dump($encuestas);
+		}
+
+
+
+
 
 	}
 
