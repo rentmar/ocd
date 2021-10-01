@@ -834,8 +834,17 @@ class Graficos extends CI_Controller{
 		$fecha_unix = strtotime($fecha_std);
 		return $fecha_unix;
 	}
-
-
-
-
+	public function seleccionDistribucion()
+	{
+		$dt['encuestas']=$this->Graficos_model->leerTodasLasEncuestas();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('graficos/vgraficoselectdistribucion',$dt);
+		$this->load->view('html/pie');
+	}
+	public function llenarDatosDistribucion()
+	{
+		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
+		$this->load->view('graficos/vgraficodistribucion',$dt);
+	}
 }

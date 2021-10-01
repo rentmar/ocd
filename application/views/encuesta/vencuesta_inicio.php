@@ -34,11 +34,6 @@
 					</div>
 				</div>
 			<?php endif; ?>
-
-
-
-
-
 		</div>
 	</div>
 	<br>
