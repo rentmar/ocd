@@ -10,6 +10,7 @@ class  Encuesta_model extends CI_Model
 	//Leer todas las encuestas
 	public function leerTodasLasEncuestas()
 	{
+		$this->db->where('encuesta_activa', 1);
 		$q=$this->db->get('uiencuesta');
 		return $q->result();
 	}
@@ -538,6 +539,202 @@ class  Encuesta_model extends CI_Model
 			." "
 			." ";
 		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	//Rutina para extraer los formularios de las encuestas llenadas segun los criterios
+	// ENCUESTA, RANGO DE EDAD, SEXO, AREA, DEPARTAMENTO
+	public function leerFormulariosLlenosPorConsulta($parametros)
+	{
+		//Solo la fecha de la noticia
+
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT *  "
+			."FROM formulariocompletado  "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id  "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			." "
+			."  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Didcriminante del formulario
+		array_push($placeholder, $consulta->iduiencuesta);
+
+		//Añadir el rango de edades
+		if($consulta->edad_inicial !=0 && $consulta->edad_final !=0)
+		{
+			$sql .= "AND (formulariocompletado.edad BETWEEN ? AND ? )  ";
+			array_push($placeholder, $consulta->edad_inicial);
+			array_push($placeholder, $consulta->edad_final);
+		}
+		if((int)$consulta->sexo != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.sexo = ?  ";
+			array_push($placeholder, (int)$consulta->sexo);
+		}
+		if ((int)$consulta->area != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.area = ?  ";
+			array_push($placeholder, (int)$consulta->area);
+		}
+		if ($consulta->iddepartamento != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
+	//Rutina para extraer los formularios de las encuestas llenadas segun los criterios
+	// ENCUESTA, RANGO DE EDAD, SEXO, AREA, DEPARTAMENTO
+	public function leerFormulariosLlenosPorConsultaID($parametros)
+	{
+		//Solo la fecha de la noticia
+
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT formulariocompletado.idformcomp  "
+			."FROM formulariocompletado  "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id  "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			." "
+			."  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Didcriminante del formulario
+		array_push($placeholder, $consulta->iduiencuesta);
+
+		//Añadir el rango de edades
+		if($consulta->edad_inicial !=0 && $consulta->edad_final !=0)
+		{
+			$sql .= "AND (formulariocompletado.edad BETWEEN ? AND ? )  ";
+			array_push($placeholder, $consulta->edad_inicial);
+			array_push($placeholder, $consulta->edad_final);
+		}
+		if((int)$consulta->sexo != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.sexo = ?  ";
+			array_push($placeholder, (int)$consulta->sexo);
+		}
+		if ((int)$consulta->area != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.area = ?  ";
+			array_push($placeholder, (int)$consulta->area);
+		}
+		if ($consulta->iddepartamento != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
+	public function resultadosEncuesta($parametros)
+	{
+		//Solo la fecha de la noticia
+
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT * "
+			."FROM formulariocomp_respuestas AS fcr  "
+			."INNER JOIN formulariocompletado ON fcr.rel_idformcomp = formulariocompletado.idformcomp   "
+			."INNER JOIN users ON formulariocompletado.rel_idusuario = users.id  "
+			."INNER JOIN uipregunta ON fcr.rel_idpregunta = uipregunta.iduipregunta  "
+			."INNER JOIN uirespuesta ON fcr.rel_idrespuesta = uirespuesta.iduirespuesta  "
+			."INNER JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion  "
+			."INNER JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo"
+			."  "
+			."WHERE formulariocompletado.idformcomp  "
+			." IN "
+			."( "
+			."SELECT formulariocompletado.idformcomp  "
+			."FROM formulariocompletado  "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id  "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			." "
+			."  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Didcriminante del formulario
+		array_push($placeholder, $consulta->iduiencuesta);
+
+		//Añadir el rango de edades
+		if($consulta->edad_inicial !=0 && $consulta->edad_final !=0)
+		{
+			$sql .= "AND (formulariocompletado.edad BETWEEN ? AND ? )  ";
+			array_push($placeholder, $consulta->edad_inicial);
+			array_push($placeholder, $consulta->edad_final);
+		}
+		if((int)$consulta->sexo != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.sexo = ?  ";
+			array_push($placeholder, (int)$consulta->sexo);
+		}
+		if ((int)$consulta->area != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.area = ?  ";
+			array_push($placeholder, (int)$consulta->area);
+		}
+		if ($consulta->iddepartamento != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+
+			$sql .=" ) ";
+
+
+		$qry = $this->db->query($sql, $placeholder);
 		return $qry->result();
 	}
 }

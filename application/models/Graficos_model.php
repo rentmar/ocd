@@ -709,7 +709,17 @@ class Graficos_model extends CI_Model
 		$result = $qry->row();
 		return (int)$result->cantidad;
 	}
-
+	public function leerTodasLasEncuestas()
+	{
+		$q=$this->db->get('uiencuesta');
+		return $q->result();
+	}
+	public function leerEncuestId($ide)
+	{
+		$this->db->where('iduiencuesta',$ide);
+		$q=$this->db->get('uiencuesta');
+		return $q->row();
+	}
 	/**
 	 * Fin GRAFICO DE Barras Departamento
 	 **/
