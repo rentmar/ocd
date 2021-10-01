@@ -92,7 +92,7 @@
 								<option value="" >Seleccione Universidad</option>
 								<?php foreach ($universidades as $u): ?>
 									<?php if($grupo==1 && $u->iduniversidad==1) { ?>
-										<option disabled="true" selected="true" value="<?php echo 1; ?>"  >
+										<option selected value="<?php echo 1; ?>"  >
 										<?php echo "administrador"; ?>
 										</option>
 									<?php } ?>
