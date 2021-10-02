@@ -18,7 +18,13 @@
 	<div class="row">
 
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<?php echo form_open('read/capturar'); ?>
+			<?php
+			/** @noinspection PhpLanguageLevelInspection */
+			$form_enc = [
+				'id' => 'formencuesta',
+			];
+			?>
+			<?php echo form_open('read/capturar', $form_enc); ?>
 			<h3>Informacion General</h3>
 			<div class="form-group">
 				<label for="edad">Edad:</label>
@@ -40,6 +46,22 @@
 			<div>
 				<hr>
 			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input checked id="area" name="area" type="radio" class="form-check-input" value="urbana">
+					Urbana
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="area" name="area" type="radio" class="form-check-input" value="rural">
+					Rural
+				</label>
+			</div>
+			<div>
+				<hr>
+			</div>
+
 
 			<div class="form-group">
 				<label for="edad">Ciudad/Poblacion:</label>
@@ -125,8 +147,9 @@
 		</div>
 	</div>
 </div>
-
-
+<script>
+	var preguntas = <?php echo json_encode($preguntas_validar); ?>
+</script>
 
 
 
@@ -135,6 +158,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url('assets/js/geo.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/formulario.js'); ?>"></script>
 </body>
 </html>
 

@@ -56,6 +56,15 @@ class Read extends CI_Controller
 		//Extraer las respuestas de una encuesta
 		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
 
+		//var_dump($preguntas);
+		$preguntas_validar = [];
+		foreach ($preguntas as $pr)
+		{
+			$preguntas_validar[] = $pr->iduipregunta;
+		}
+		//echo "<br><br><br><br>";
+		//var_dump($preguntas_validar);
+
 		//Subvista para la Seleccion de modulos
 		$datos_modulo['modulos'] = $modulos;
 		$datos_modulo['orden_mod_min'] = $orden_modulos_min;
@@ -81,6 +90,9 @@ class Read extends CI_Controller
 		$datos['cont_modulo'] = $cont_modulos;
 		$datos['no_es_vista_previa'] = true;
 		$datos['datos_generales'] = $datos_generales;
+
+		//Dato para validar formulario
+		$datos['preguntas_validar'] = $preguntas_validar;
 
 
 
@@ -181,6 +193,7 @@ class Read extends CI_Controller
 		$datos->latitud = $this->input->post('latitud_f'); //Latitud donde el formulario es llenado
 		$datos->longitud = $this->input->post('longitud_f'); //Longitud donde el formulario es llenado
 		$datos->idencuesta = $this->input->post('idencuesta_asignada'); //Identificador de la encuesta asigmafa
+		$datos->area = $this->input->post('area');
 
 		//Informacion General
 		$datos->edad = $this->input->post('edad');
