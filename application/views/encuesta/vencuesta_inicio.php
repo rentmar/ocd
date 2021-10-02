@@ -34,7 +34,6 @@
 					</div>
 				</div>
 			<?php endif; ?>
-
 			<?php if($this->ion_auth->is_admin()): ?>
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
@@ -50,11 +49,6 @@
 				</div>
 			</div>
 			<?php endif; ?>
-
-
-
-
-
 		</div>
 	</div>
 	<br>
