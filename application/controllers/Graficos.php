@@ -845,6 +845,7 @@ class Graficos extends CI_Controller{
 	public function llenarDatosDistribucion()
 	{
 		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
+		echo "<pre>";var_dump($dt);echo "</pre>";
 		$this->load->view('graficos/vgraficodistribucion',$dt);
 	}
 }

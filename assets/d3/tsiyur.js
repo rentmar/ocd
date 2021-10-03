@@ -259,7 +259,7 @@ function renderMultiBubbleChart(direccion,op,mpbo)
 function renderDistribucionChart(h,m,r,t)
 {
 	//-------------------datos
-	var h=[[10,15,45,20],[20,30,55,7],[10,12,20,19],[8,8,8,8]],m=[[12,45,12,30],[5,5,5,35],[5,8,22,5],[9,10,7,8]];
+	var h=[[10,15,45],[20,30,55],[10,12,20],[8,8,8],[10,10,10]],m=[[12,45,12,30],[5,5,5,35],[5,8,22,5],[9,10,7,8]];
 	var r=[{r:"Si"},{r:"No"},{r:"Talvez"},{r:"No Sabe"}];
 	var t="Pregunta numero 1";
 	//--------------------
