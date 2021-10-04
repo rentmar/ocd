@@ -19,7 +19,6 @@ class Read extends CI_Controller
 		if(!$encuesta){
 			echo "No existe encuesta";
 		}else{
-			var_dump($encuesta);
 			if(!$encuesta->usado){
 				//Encuesta vigente
 				redirect('read/encuesta/'.$hash);
@@ -56,14 +55,13 @@ class Read extends CI_Controller
 		//Extraer las respuestas de una encuesta
 		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
 
-		//var_dump($preguntas);
+
 		$preguntas_validar = [];
 		foreach ($preguntas as $pr)
 		{
 			$preguntas_validar[] = $pr->iduipregunta;
 		}
-		//echo "<br><br><br><br>";
-		//var_dump($preguntas_validar);
+
 
 		//Subvista para la Seleccion de modulos
 		$datos_modulo['modulos'] = $modulos;
