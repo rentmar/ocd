@@ -737,4 +737,41 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql, $placeholder);
 		return $qry->result();
 	}
+
+	public function leerEncuestaAsignadaPorID($idencuesta)
+	{
+		$this->db->where('idencuesta',$idencuesta);
+		$q=$this->db->get ('encuesta');
+		return $q->row();
+	}
+
+	public function actualizarAsignacion($datos)
+	{
+		$consulta = $datos;
+		$this->db->trans_begin();
+
+		$data = array(
+			'rel_idusuario' => $consulta->nuevo_usuario,
+			'rel_idgeolocal' => $consulta->idgeolocalizacion,
+		);
+		$this->db->where('idencuesta', $consulta->idencuesta);
+		$this->db->update('encuesta', $data);
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+	public function geolocalizacionPorID($identificador)
+	{
+		$this->db->where('idgeolocal',$identificador);
+		$q=$this->db->get ('geolocalizacion ');
+		return $q->row();
+	}
 }

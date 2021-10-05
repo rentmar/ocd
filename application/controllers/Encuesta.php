@@ -843,5 +843,65 @@ class Encuesta extends CI_Controller
 
 	}
 
+	public function reasignarEncuesta($identificador)
+	{
+		$idencuesta = $identificador;
+
+
+		$encuesta = $this->Encuesta_model->leerEncuestaAsignadaPorID($idencuesta);
+		$usuario_actual = $this->Encuesta_model->leerUsuarioID($encuesta->rel_idusuario);
+
+		$area_trabajo = $this->Encuesta_model->geolocalizacionPorID($encuesta->rel_idgeolocal);
+
+
+
+
+		$encuestadores = $this->ion_auth->users(5)->result();
+		$geolocal = $this->Encuesta_model->leerTodasLasAreasTrabajo();
+
+		$datos['usuario_actual']=$usuario_actual;
+		$datos['encuesta']=$encuesta;
+		$datos['encuestadores'] = $encuestadores;
+		$datos['geolocal'] = $geolocal;
+		$datos['area_trabajo'] = $area_trabajo;
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_reasignar', $datos);
+		$this->load->view('html/pie');
+
+
+	}
+
+	public function procesarReasignacion()
+	{
+		$consulta = $this->consultaReasignar();
+
+
+		if($this->Encuesta_model->actualizarAsignacion($consulta))
+		{
+			$this->mensaje('Encuestas re asignada', 'success');
+			redirect('encuesta/encuestaAusuarios');
+
+		}else{
+			$this->mensaje('No se pudo reasignar la encuesta', 'warning');
+			redirect('encuesta/encuestaAusuarios');
+
+		}
+
+	}
+
+	private function consultaReasignar()
+	{
+		$consulta = new stdClass();
+		$consulta->idencuesta = $this->input->post('idencuesta');
+		$consulta->idusuario = $this->input->post('idusuario1');
+		$consulta->nuevo_usuario = $this->input->post('idusuario');
+		$consulta->idgeolocalizacion = $this->input->post('idgeolocal');
+
+		return $consulta;
+	}
+
 
 }
