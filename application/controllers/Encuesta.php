@@ -652,6 +652,7 @@ class Encuesta extends CI_Controller
 		$this->load->view('encuesta/vencuesta_asignadas', $datos);
 		$this->load->view('html/pie');
 	}
+	
 
 	public function reportesEncuesta()
 	{

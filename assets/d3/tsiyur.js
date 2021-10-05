@@ -255,8 +255,258 @@ function renderMultiBubbleChart(direccion,op,mpbo)
 			mbChart.render();
 			mbChart.ponerEtiquetas();//*/
 	});
-	
-	
+}
+function renderDistribucionChart(h,m,r,t)
+{
+	//-------------------datos
+	var h=[[10,15,45,20],[20,30,55,7],[10,12,20,19],[8,8,8,8]],m=[[12,45,12,30],[5,5,5,35],[5,8,22,5],[9,10,7,8]];
+	var r=[{r:"Si"},{r:"No"},{r:"Talvez"},{r:"No Sabe"}];
+	var t="Pregunta numero 1";
+	//--------------------
+	d3.select("svg").remove();
+	var coloresrespta=d3.schemeCategory10; 
+	var edades=d3.scaleOrdinal([0,1,2,3,4,5,6,7,8,9],["20-25","26-30","31-35","36-40","41-45","46-50","51-55","56-60","61-65","66-70"]);
+	var distChart = distribucionChart()
+					.etiquetasEdad(edades)
+					.titulo(t)
+					.colores(coloresrespta)
+					.x(d3.scaleLinear().domain([0,100]).range([0,300]))
+					.y(d3.scaleLinear().domain([0,100]).range([0,500]))
+					.respuestas(r)
+					.datosm(m)
+					.datosh(h);//*/
+	//console.log(coloresrespta);
+	distChart.render();
+}
+function distribucionChart()
+{
+	var _chart={};
+	var _datosh=[],_datosm=[],
+		_ancho=800,_alto=500,
+		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
+		_x,_y,
+		_respuestas,
+		_colores,
+		_etiquetasEdad,
+		_ettitulo,
+		_svg,
+		_bodyG;
+	_chart.ancho= function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if (!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.x = function (c) {
+		if (!arguments.length) return _x; _x=c;
+		return _chart;
+	}
+	_chart.y = function (c) {
+		if (!arguments.length) return _y; _y=c;
+		return _chart;
+	}
+	_chart.respuestas = function (r) {
+		if (!arguments.length) return _respuestas; _respuestas=r;
+		return _chart;
+	}
+	_chart.colores = function (c) {
+		if (!arguments.length) return _colores; _colores=c;
+		return _chart;
+	}
+	_chart.uncolor= function (uc){
+		if (!arguments.length) return _uncolor; _uncolor=uc;
+		return _chart;
+	}
+	_chart.etiquetasEdad = function (e){
+		if (!arguments.length) return _etiquetasEdad; _etiquetasEdad=e;
+		return _chart;
+	}
+	_chart.titulo = function (e){
+		if (!arguments.length) return _ettitulo; _ettitulo=e;
+		return _chart;
+	}
+	_chart.datosh = function (dts){  
+		if(!arguments.length) return _datosh; _datosh=dts;
+		return _chart;
+	}
+	_chart.datosm = function (dts){  
+		if(!arguments.length) return _datosm; _datosm=dts;
+		return _chart;
+	}
+	_chart.datosm = function (dts){  
+		if(!arguments.length) return _datosm; _datosm=dts;
+		return _chart;
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	function defineVentana(svg)
+	{
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						//.style("fill-opacity",0.8)
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderBarrasDist();
+	}
+	function renderBarrasDist()
+	{
+		var valX,valXant;
+		var numresp=0;
+		for (var i in _respuestas)
+		{
+			numresp++
+		}
+		for (var i=0;i<_datosh.length;i++)
+		{
+			var valX=0,valXant=0,xini=_ancho/2-54;
+			for (var j=0;j<numresp;j++)
+			{
+				valX=_datosh[i][j];
+				_bodyG.append("rect")
+					.attr("fill",_colores[j+1])
+					.attr("x",xini-_x(valX))
+					.attr("y",60+25*numresp+25*i)
+					.attr("width",_x(valX))
+					.attr("height",20);
+				xini=xini-_x(valX);
+			}
+		}
+		for (var i=0;i<_datosm.length;i++)
+		{
+			valX=0;
+			for (var j=0;j<numresp;j++)
+			{
+				_bodyG.append("rect")
+					.attr("fill",_colores[j+1])
+					.attr("x",_ancho/2+_x(valX)-12)
+					.attr("y",60+25*numresp+25*i)
+					.attr("width",_x(_datosm[i][j]))
+					.attr("height",20);
+				valX=valX+_datosm[i][j];
+			}
+		}
+		//*/
+		etiquetar()
+	}
+	function etiquetar()
+	{
+		var valY=0;
+		var numresp=0;
+		for (var i in _respuestas)
+		{
+			numresp++
+		}
+		_bodyG.append("text")
+			.attr("class","titulo")
+			.attr("font-size","1em")
+			.attr("x",0)
+			.attr("y",20)
+			.text(_ettitulo);
+		_bodyG.append("text")
+			.attr("class","titulo")
+			.attr("font-size","1em")
+			.attr("text-anchor","middle")
+			.attr("x",_ancho/2-100)
+			.attr("y",valY=50+25*numresp)
+			.text("hombre");
+		_bodyG.append("text")
+			.attr("class","titulo")
+			.attr("font-size","1em")
+			.attr("text-anchor","middle")
+			.attr("x",_ancho/2-33)
+			.attr("y",valY=50+25*numresp)
+			.text("Edad");
+		_bodyG.append("text")
+			.attr("class","titulo")
+			.attr("font-size","1em")
+			.attr("text-anchor","middle")
+			.attr("x",_ancho/2+30)
+			.attr("y",valY=50+25*numresp)
+			.text("mujer");
+		_bodyG.selectAll("rect.indicador")
+			.data(_respuestas)
+			.enter()
+			.append("rect")
+			.attr("class","indicador")
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return 30+22*i;
+			})
+			.attr("width",20)
+			.attr("height",20)
+			.style("fill",function (d,i){
+				return _colores[i+1];
+			});
+		_bodyG.selectAll("text.resp")
+			.data(_respuestas)
+			.enter()
+			.append("text")
+			.attr("class","resp")
+			.attr("x",25)
+			.attr("y",function (d,i){
+				return 45+22*i;
+			})
+			.text(function (d){
+				return d.r;
+			});
+		for (var i=0;i<=9;i++)
+		{
+			valY=75+25*numresp+25*i;
+			_bodyG.append("text")
+			.attr("class","nombre")
+			.attr("font-size","1em")
+			.attr("text-anchor","middle")
+			.attr("x",_ancho/2-33)
+			.attr("y",valY)
+			.text(_etiquetasEdad(i));
+		}
+	}
+	//-------------------------
+	return _chart;
 }
 function bubbleChart ()
 {
