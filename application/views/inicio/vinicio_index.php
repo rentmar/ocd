@@ -121,15 +121,9 @@
 				</div>
 			<?php endif; ?>
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
-				<div id="caja_boton">
-					<div id="contenedor-submit">
-						<a href="<?php echo site_url('encuesta/encuestaAusuarios');?>">
-							<input type="submit" class="BOTONROJO" value="SALIR">
-						</a>
-					</div>
-				</div>
+
 			</div>
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores">
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores table-responsive">
 				<h4>Usuario: <?php echo $usuario->username; ?></h4>
 				<table>
 					<thead>
@@ -138,7 +132,7 @@
 						<th>Encuesta</th>
 						<th>URL</th>
 						<th>Estado</th>
-						<!--<th>Accion</th>-->
+						<th>Accion</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -147,10 +141,9 @@
 							<td><?php echo $e->idencuesta;?></td>
 							<td><?php echo $e->uinombre_encuesta; ?></td>
 							<td>
-								<a href="<?php echo site_url('read/url/'.$e->hash_text); ?>">
+								<a href="<?php echo site_url('read/url/'.$e->hash_text); ?>" target="_blank" >
 									<?php echo site_url('read/url/'.$e->hash_text); ?>
 								</a>
-								<input type="hidden" id="<?php echo 'encuesta'.$e->idencuesta;?>" value="<?php echo site_url('read/url/'.$e->hash_text); ?>">
 							</td>
 							<?php if(!$e->usado): ?>
 								<td class="text-success">
@@ -161,11 +154,11 @@
 									<p>Expirado</p>
 								</td>
 							<?php endif; ?>
-							<!--<td>
-								<button class="btn" data-clipboard-target="#<?php /*echo 'encuesta'.$e->idencuesta;*/?>" >
+							<td>
+								<button class="btn btn-light clipboard " data-clipboard-text="<?php echo site_url('read/url/'.$e->hash_text); ?>" >
 									<i class="far fa-copy"></i>
 								</button>
-							</td>-->
+							</td>
 						</tr>
 					<?php } ?>
 					</tbody>
