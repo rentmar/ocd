@@ -12,7 +12,7 @@
 							<a href=""><input type="submit" class="BOTON" value="GENERAR"></a>
 						</div><br>
 						<div id="contenedor-submit">
-							<a href="<?php echo site_url('encuesta');?>"><input type="" class="BOTONROJO" value="CANCELAR"></a>
+							<a href="<?php echo site_url('encuesta/encuestaInicio');?>"><input type="" class="BOTONROJO" value="CANCELAR"></a>
 						</div>
 					</div>
 				</div>

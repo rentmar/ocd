@@ -47,6 +47,7 @@ class Readurl_model extends CI_Model
 			'longitud_fc' => $info_general->longitud,
 			'edad'=> $info_general->edad,
 			'sexo'=>$info_general->sexo,
+			'area '=>$info_general->area,
 			'ciudad'=>$info_general->ciudad,
 			'zona'=>$info_general->zona,
 			'rel_idusuario' => $info_general->idusuario,

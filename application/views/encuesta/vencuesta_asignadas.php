@@ -29,7 +29,7 @@
 						<th>Nro</th>
 						<th>Encuesta</th>
 						<th>URL</th>
-						<th>Revisar</th>
+						<th>Accion</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -46,6 +46,19 @@
 									<?php echo site_url('read/url/'.$e->hash_text); ?>
 								</td>
 							<?php endif; ?>
+							<?php if(!$e->usado): ?>
+								<td>
+									<a href="<?php echo site_url('encuesta/reasignarEncuesta/'.$e->idencuesta);?>" data-toggle="tooltip" title="Reasignar encuesta" >
+										<i class="fas fa-exchange-alt"></i>
+									</a>
+
+								</td>
+							<?php else: ?>
+								<td>
+
+								</td>
+							<?php endif; ?>
+
 						</tr>
 					<?php } ?>
 					</tbody>
