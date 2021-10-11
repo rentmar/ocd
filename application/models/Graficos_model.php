@@ -723,6 +723,47 @@ class Graficos_model extends CI_Model
 	/**
 	 * Fin GRAFICO DE Barras Departamento
 	 **/
-
-
+/////////////////////GRAFICO BARRAS WILL////////////////////////////
+	public function leerPreguntasDencuesta($idencuesta)
+	{
+		$que = $idencuesta;
+		$sql = "SELECT iduiencuesta, uinombre_encuesta, iduipregunta, uipregunta_nombre "
+			."FROM uiencuesta "
+			."LEFT JOIN uimodulo ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta "
+			."LEFT JOIN uiseccion ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo "
+			."LEFT JOIN uipregunta ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion "
+			."WHERE iduiencuesta = ?";
+		$qry = $this->db->query($sql,[$que]);
+		return $qry->result();
+	}
+	public function leerRespuestasDpregunta($encuesta,$pregunta)
+	{
+		$sql = "SELECT iduiencuesta, uinombre_encuesta encuesta, iduipregunta, uipregunta_nombre pregunta, iduirespuesta, uinombre_respuesta respuesta "
+			."FROM uiencuesta "
+			."LEFT JOIN uimodulo ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta "
+			."LEFT JOIN uiseccion ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo "
+			."LEFT JOIN uipregunta ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion "
+			."LEFT JOIN uirespuesta_pregunta ON uirespuesta_pregunta.rel_iduipregunta = uipregunta.iduipregunta "
+			."LEFT JOIN uirespuesta ON uirespuesta.iduirespuesta = uirespuesta_pregunta.rel_iduirespuesta "
+			."WHERE iduiencuesta = ? AND iduipregunta = ? ";
+		$qry = $this->db->query($sql,[$encuesta, $pregunta]);
+		return $qry->result();
+	}
+	public function leerEncuestasHM($encuesta, $pregunta, $sexo, $edadinicial, $edadfinal)
+	{
+		$sql = "SELECT iduiencuesta, uinombre_encuesta encuesta, iduipregunta, uipregunta_nombre pregunta, iduirespuesta, uinombre_respuesta respuesta, COUNT(*) cantidad "
+			."FROM uiencuesta "
+			."LEFT JOIN uimodulo ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta "
+			."LEFT JOIN uiseccion ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo "
+			."LEFT JOIN uipregunta ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion "
+			."LEFT JOIN formulariocomp_respuestas ON formulariocomp_respuestas.rel_idpregunta = uipregunta.iduipregunta "
+			."LEFT JOIN formulariocompletado ON formulariocompletado.idformcomp = formulariocomp_respuestas.rel_idformcomp "
+			."LEFT JOIN uirespuesta ON uirespuesta.iduirespuesta = formulariocomp_respuestas.rel_idrespuesta "
+			."WHERE iduiencuesta = ? AND iduipregunta = ? AND sexo = ? AND (edad BETWEEN ? AND ?) "
+			."GROUP BY respuesta "
+			."ORDER BY iduirespuesta ";
+        $qry = $this->db->query($sql,[$encuesta, $pregunta, $sexo, $edadinicial, $edadfinal]);
+        return $qry->result();
+	}
+//////////////////////////////////////////////////////////////////////
 }

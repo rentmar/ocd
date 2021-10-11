@@ -13,6 +13,13 @@
 			<script>var baseurl = "<?php echo site_url(); ?>";</script>
 			<script type="text/javascript" src="<?php echo base_url().'assets/d3/d3.js';?>"></script>
 			<script type="text/javascript" src="<?php echo base_url().'assets/d3/tsiyur.js';?>"></script>
+
+	        <script src="https://d3js.org/d3.v7.min.js"></script>
+		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   		    <script src="<?php echo base_url('assets/js/barrashm.js') ?>"></script>
+
 			<link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/d3/gestilo.css';?>">
 			<title> Grafico Distribucion</title>
 			
@@ -43,9 +50,22 @@
 						<h5><b> <?php echo "Grafico ".$encuesta->uinombre_encuesta;?> </b></h5>
 					</div>
 					<div class="grafico">
-						<div>
-							<button id="encuesta" name="encuesta" onclick="renderDistribucionChart()" type="button" class="btn btn-secondary">Ver</button>
-							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionDistribucion'); ?>">Atras</a>
+						<div class="row">
+							<div class="col-sm-2">
+								<select class="form-control" id="iduipregunta" name="iduipregunta"  required >
+									<option value="0" selected disabled>Seleccione Pregunta</option>
+									<?php foreach ($preguntas as $e): ?>
+										<option value="<?php echo $e->iduipregunta;?>" data-idencuesta="<?php echo $e->iduiencuesta;?>" >
+											<?php echo $e->uipregunta_nombre;?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div>
+<!--				<button id="graficas" name="graficas" onclick="renderDistribucionChart()" type="button" class="btn btn-secondary">Ver</button>-->
+<!--								<button id="graficas" name="graficas" type="button" class="btn btn-secondary">Ver</button>-->
+								<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionDistribucion'); ?>">Atras</a>
+							</div>
 						</div>
 						<br>
 						<div id="contenedor-chart">

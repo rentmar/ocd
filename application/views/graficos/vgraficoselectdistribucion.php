@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="col-sm-2">
 				<select class="form-control" id="idencuesta" name="idencuesta"  required >
-					<option value="0" >Seleccione Encuesta</option>
+					<option value="0" selected disabled>Seleccione Encuesta</option>
 					<?php foreach ($encuestas as $e): ?>
 					<option value="<?php echo $e->iduiencuesta;?>" >
 						<?php echo $e->uinombre_encuesta;?>

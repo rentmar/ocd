@@ -842,10 +842,88 @@ class Graficos extends CI_Controller{
 		$this->load->view('graficos/vgraficoselectdistribucion',$dt);
 		$this->load->view('html/pie');
 	}
+	////////////211006 will////////////////////
 	public function llenarDatosDistribucion()
 	{
+		$dt['idencuesta'] = $this->input->post('idencuesta');
 		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
-		echo "<pre>";var_dump($dt);echo "</pre>";
+		$dt['preguntas']=$this->Graficos_model->leerPreguntasDencuesta($this->input->post('idencuesta'));
 		$this->load->view('graficos/vgraficodistribucion',$dt);
 	}
+	public function getRespuestasHM()
+	{
+		$datos = json_decode($this->input->post('datos'));
+		$encuesta = $datos->idencuesta;
+		$pregunta = $datos->idpregunta;
+		$respuestas = $this->Graficos_model->leerRespuestasDpregunta($encuesta,$pregunta);//respuestasA
+
+/*$respuestas = 
+[ {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '1', …}
+  {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '2', …}
+  {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '3', …}
+  {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '4', …}
+]*/
+		$sumpru = 0;
+		$edadfinal = 19;
+		for ($i = 1; $i < 11; $i++)
+		{
+			foreach($respuestas as $aa)
+			{
+				$dato[$aa->iduirespuesta] = '0';			//idrespuesta y ceros
+				$tee = $aa->pregunta;						//pregunta
+				$r[$aa->iduirespuesta] = $aa->respuesta;	//idrespuesta y respuestas
+			}
+//			$ere[] = $r;
+			$sexo = 'M';
+			$edadinicial = $edadfinal + 1;
+			$edadfinal = $edadinicial + 5;
+			$cantidad = $this->Graficos_model->leerEncuestasHM($encuesta, $pregunta, $sexo, $edadinicial, $edadfinal);//cantidad
+			foreach($cantidad as $ee)						//inserta valores "cantidad" en algunas columnas de ceros
+			{
+				foreach($respuestas as $uu)
+				{
+					if($ee->iduirespuesta == $uu->iduirespuesta)
+					{
+						$dato[$uu->iduirespuesta] = $ee->cantidad;//idrespuesta y cantidad (objeto de objetos)
+					}
+				}
+			}
+
+			
+			foreach($dato as $sip)				//convierte "objeto de matrices" en "matriz de matrices"
+			{
+				$pru[] = $sip;
+			}
+			$npru[] = $pru;
+			if(array_sum($pru) > $sumpru)//filtro para determinar el valor mayor
+			{
+				$sumpru = array_sum($pru);
+			}
+			$pru = array();//limpia la matriz $pru sin elementos
+		}
+		$ere[] = $r;
+		foreach($npru as $lin)			//calculo de porcentajes en matriz
+		{
+			foreach($lin as $newlin)
+			{
+				$porcent[] = round(($newlin * 100) / ($sumpru + 0.001));
+			}
+			$npru1[] = $porcent;
+			$porcent = array();
+		}
+
+
+
+
+		
+
+		$dt['h'] = $npru1;
+		$dt['r'] = $ere;
+		$dt['t'] = $tee;
+		echo json_encode($dt);
+	}
+/*	var h=[[10,15,45,4],[20,30,55,7],[10,12,20,47],[8,8,8,8],[10,10,10,10]],m=[[12,45,12,30],[5,5,5,35],[5,8,22,5],[9,10,7,8]];
+	var r=[{r:"Si"},{r:"No"},{r:"Talvez"},{r:"No Sabe"}];
+	var t="Pregunta numero 1";*/
+	////////////////////////////////////////////
 }
