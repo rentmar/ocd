@@ -1,4 +1,4 @@
-jQuery(function() {
+/*jQuery(function() {
     jQuery('#iduipregunta').change(function() {
         var pregunta = $("#iduipregunta option:selected").val();
         var enc = $('option:selected', this).data('idencuesta');
@@ -28,13 +28,14 @@ function getRespuestasA(datos) {
 		success: function (json) {
 			console.log("Consulta a pregunta, OK");
 			console.log(json);
+            renderDistribucionChart(json);
 //			grafRadial1(json);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 //			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
 	});
-}
+}*/
 
 function grafRadial1(matriz)
 {

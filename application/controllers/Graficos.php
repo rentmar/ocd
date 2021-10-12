@@ -856,13 +856,8 @@ class Graficos extends CI_Controller{
 		$encuesta = $datos->idencuesta;
 		$pregunta = $datos->idpregunta;
 		$respuestas = $this->Graficos_model->leerRespuestasDpregunta($encuesta,$pregunta);//respuestasA
+		$respuestas1 = $this->Graficos_model->leerRespuestas1($encuesta,$pregunta);
 
-/*$respuestas = 
-[ {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '1', …}
-  {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '2', …}
-  {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '3', …}
-  {iduiencuesta: '1', encuesta: 'ENCUESTA OCD', iduipregunta: '1', pregunta: 'Ud. considera que el gobierno...', iduirespuesta: '4', …}
-]*/
 		$sumpru = 0;
 		$edadfinal = 19;
 		for ($i = 1; $i < 11; $i++)
@@ -871,9 +866,7 @@ class Graficos extends CI_Controller{
 			{
 				$dato[$aa->iduirespuesta] = '0';			//idrespuesta y ceros
 				$tee = $aa->pregunta;						//pregunta
-				$r[$aa->iduirespuesta] = $aa->respuesta;	//idrespuesta y respuestas
 			}
-//			$ere[] = $r;
 			$sexo = 'M';
 			$edadinicial = $edadfinal + 1;
 			$edadfinal = $edadinicial + 5;
@@ -888,8 +881,6 @@ class Graficos extends CI_Controller{
 					}
 				}
 			}
-
-			
 			foreach($dato as $sip)				//convierte "objeto de matrices" en "matriz de matrices"
 			{
 				$pru[] = $sip;
@@ -901,7 +892,6 @@ class Graficos extends CI_Controller{
 			}
 			$pru = array();//limpia la matriz $pru sin elementos
 		}
-		$ere[] = $r;
 		foreach($npru as $lin)			//calculo de porcentajes en matriz
 		{
 			foreach($lin as $newlin)
@@ -911,19 +901,52 @@ class Graficos extends CI_Controller{
 			$npru1[] = $porcent;
 			$porcent = array();
 		}
-
-
-
-
-		
-
+		$sumpru2 = 0;
+		$edadfinal2 = 19;
+		for ($i = 1; $i < 11; $i++)
+		{
+			foreach($respuestas as $aa)
+			{
+				$dato2[$aa->iduirespuesta] = '0';			//idrespuesta y ceros
+			}
+			$sexo2 = 'F';
+			$edadinicial2 = $edadfinal2 + 1;
+			$edadfinal2 = $edadinicial2 + 5;
+			$cantidad2 = $this->Graficos_model->leerEncuestasHM($encuesta, $pregunta, $sexo2, $edadinicial2, $edadfinal2);//cantidad
+			foreach($cantidad2 as $ee2)						//inserta valores "cantidad" en algunas columnas de ceros
+			{
+				foreach($respuestas as $uu2)
+				{
+					if($ee2->iduirespuesta == $uu2->iduirespuesta)
+					{
+						$dato2[$uu2->iduirespuesta] = $ee2->cantidad;//idrespuesta y cantidad (objeto de objetos)
+					}
+				}
+			}
+			foreach($dato2 as $sip2)				//convierte "objeto de matrices" en "matriz de matrices"
+			{
+				$pru2[] = $sip2;
+			}
+			$npru2[] = $pru2;
+			if(array_sum($pru2) > $sumpru2)//filtro para determinar el valor mayor
+			{
+				$sumpru2 = array_sum($pru2);
+			}
+			$pru2 = array();//limpia la matriz $pru sin elementos
+		}
+		foreach($npru2 as $lin2)			//calculo de porcentajes en matriz
+		{
+			foreach($lin2 as $newlin2)
+			{
+				$porcent2[] = round(($newlin2 * 100) / ($sumpru2 + 0.001));
+			}
+			$npru3[] = $porcent2;
+			$porcent2 = array();
+		}
+		$dt['m']=$npru3;
 		$dt['h'] = $npru1;
-		$dt['r'] = $ere;
+		$dt['r'] = $respuestas1;
 		$dt['t'] = $tee;
 		echo json_encode($dt);
 	}
-/*	var h=[[10,15,45,4],[20,30,55,7],[10,12,20,47],[8,8,8,8],[10,10,10,10]],m=[[12,45,12,30],[5,5,5,35],[5,8,22,5],[9,10,7,8]];
-	var r=[{r:"Si"},{r:"No"},{r:"Talvez"},{r:"No Sabe"}];
-	var t="Pregunta numero 1";*/
-	////////////////////////////////////////////
 }

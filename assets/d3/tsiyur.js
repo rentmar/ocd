@@ -256,12 +256,17 @@ function renderMultiBubbleChart(direccion,op,mpbo)
 			mbChart.ponerEtiquetas();//*/
 	});
 }
-function renderDistribucionChart(h,m,r,t)
+function renderDistribucionChart(objj)
 {
+	var hh=Object.values(objj);
+	var m=hh[0];
+	var h=hh[1];
+	var r=hh[2];
+	var t=hh[3];
 	//-------------------datos
-	var h=[[10,15,45,4],[20,30,55,7],[10,12,20,47],[8,8,8,8],[10,10,10,10]],m=[[12,45,12,30],[5,5,5,35],[5,8,22,5],[9,10,7,8]];
-	var r=[{r:"Si"},{r:"No"},{r:"Talvez"},{r:"No Sabe"}];
-	var t="Pregunta numero 1";
+//	var h=[[10,15,45,4],[20,30,55,7],[10,12,20,47],[8,8,8,8],[10,10,10,10]],m=[[12,45,12,30],[5,5,5,35],[5,8,22,5],[9,10,7,8]];
+//	var r=[{'1':"Si"},{r:"No"},{p:"Talvez"},{r:"No Sabe"}];
+//	var t="Pregunta numero 1";
 	//--------------------
 	d3.select("svg").remove();
 	var coloresrespta=d3.schemeCategory10; 
@@ -1712,3 +1717,67 @@ function graficarbarrasdepartamentos(datos) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+jQuery(function() {
+    jQuery('#iduipregunta').change(function() {
+        var pregunta = $("#iduipregunta option:selected").val();
+        var enc = $('option:selected', this).data('idencuesta');
+        var encuesta = enc.toString();
+        console.log('En js con encuesta', encuesta, 'y pregunta', pregunta);
+        var datos = {
+                "idencuesta" : encuesta,
+                "idpregunta" : pregunta
+        };
+        getRespuestasA(datos);
+    });
+});
+//Funcion para extraer respuestas
+function getRespuestasA(datos) {
+    console.log('Consultando respuestas a pregunta',datos);
+	$.ajax({
+		url: baseurl + "/Graficos/getRespuestasHM",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Consulta a pregunta, OK");
+//			console.log(json);
+            renderDistribucionChart(json);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+//			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}

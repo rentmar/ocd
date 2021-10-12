@@ -749,6 +749,19 @@ class Graficos_model extends CI_Model
 		$qry = $this->db->query($sql,[$encuesta, $pregunta]);
 		return $qry->result();
 	}
+	public function leerRespuestas1($encuesta,$pregunta)
+	{
+		$sql = "SELECT uinombre_respuesta r "
+			."FROM uiencuesta "
+			."LEFT JOIN uimodulo ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta "
+			."LEFT JOIN uiseccion ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo "
+			."LEFT JOIN uipregunta ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion "
+			."LEFT JOIN uirespuesta_pregunta ON uirespuesta_pregunta.rel_iduipregunta = uipregunta.iduipregunta "
+			."LEFT JOIN uirespuesta ON uirespuesta.iduirespuesta = uirespuesta_pregunta.rel_iduirespuesta "
+			."WHERE iduiencuesta = ? AND iduipregunta = ? ";
+		$qry = $this->db->query($sql,[$encuesta, $pregunta]);
+		return $qry->result();
+	}
 	public function leerEncuestasHM($encuesta, $pregunta, $sexo, $edadinicial, $edadfinal)
 	{
 		$sql = "SELECT iduiencuesta, uinombre_encuesta encuesta, iduipregunta, uipregunta_nombre pregunta, iduirespuesta, uinombre_respuesta respuesta, COUNT(*) cantidad "
