@@ -847,4 +847,17 @@ class Graficos extends CI_Controller{
 		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
 		$this->load->view('graficos/vgraficodistribucion',$dt);
 	}
+	public function seleccionSankey()
+	{
+		$dt['encuestas']=$this->Graficos_model->leerTodasLasEncuestas();
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('graficos/vgraficoselectsankey',$dt);
+		$this->load->view('html/pie');
+	}
+	public function llenarDatosSankey()
+	{
+		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
+		$this->load->view('graficos/vgraficosankey',$dt);
+	}
 }

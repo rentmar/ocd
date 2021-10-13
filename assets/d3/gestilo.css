@@ -1,16 +1,23 @@
 svg {
 	background-color: #ccc;
 }
-/*.rect{
-	background-color: blue;
+/*.node rect{
+	cursor: move;
+	fill-opacity: .9;
+	shape-rendering: crispEdges;
 }
-.dot{
-	stroke: black;
-	fill: blue;
+.node text{
+	pointer-events: none;
+	text-shadow: 0 1px 0 #fff;
 }
-span {
-	color: white;	
+.link {
+	fill: none;
+	stroke: #000;
+	stroke-opacity:.2;
 }
+.link:hover {
+	stroke-opacity:.5;
+}*/
 .column {
   background-color: green;
   position: fixed;
@@ -18,7 +25,7 @@ span {
 .baseline { 
   background-color: #ccc;
   height: 10px;
-}*/
+}
 .box {
 	margin-top:2px;
 	text-align:center;

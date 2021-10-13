@@ -278,6 +278,237 @@ function renderDistribucionChart(h,m,r,t)
 	//console.log(coloresrespta);
 	distChart.render();
 }
+function renderSankeyChart()
+{
+	var a=[[20,80]];
+	var resp=[{r:"Si",v:25},
+			{r:"No",v:15},
+			{r:"no se",v:10},
+			{r:"Otro",v:20}]; // repsuestas total
+	var t="Pregunta uno";
+	//----------------------------------- 
+	var nds1=[];
+	var lnks=[];
+	var pos=0;
+	var n=["La Paz","Cochabamba","Santa Cruz","Chuquisaca","Potosi","Tarija","Oruro","Beni","Pando"];
+	for (var i=0;i<n.length;i++)
+	{
+		nds1[i]={nomnodo:n[i]};
+	}
+	var snkyChart = sankeyChart()
+						.titulo(t)
+						.nodos1(nds1)
+						.nodos3(resp)
+						.enlacea(a);
+		snkyChart.render();//*/
+}
+function sankeyChart()
+{
+	var _chart={};
+	var _ancho=800,_alto=700,
+		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
+		_etiquetas,
+		_titulo,
+		_nodos1=[],_nodos2=[],_nodos3=[],
+		_enlacea=[],
+		_enlaceb=[],
+		_largoNodo1=d3.scaleLinear().domain([0,100]).range([0,65]),
+		_largoNodo2=d3.scaleLinear().domain([0,100]).range([0,_alto-100]),
+		_largoNodo3=d3.scaleLinear().domain([0,100]).range([0,_alto-100]),
+		_svg,
+		_bodyG;
+	_chart.ancho= function (a){
+		if(!arguments.length) return _ancho; _ancho=a;
+		return _chart;
+	}
+	_chart.alto = function (h){
+		if(!arguments.length) return _alto; _alto=h;
+		return _chart;
+	}
+	_chart.margenes = function (m){
+		if (!arguments.length) return _margenes; _margenes=m;
+		return _chart;
+	}
+	_chart.etiquetas = function (e){
+		if (!arguments.length) return _etiquetas; _etiquetas=e;
+		return _chart;
+	}
+	_chart.titulo = function (e){
+		if (!arguments.length) return _titulo; _titulo=e;
+		return _chart;
+	}
+	_chart.nodos1= function (dts){  
+		if(!arguments.length) return _nodos1; _nodos1=dts;
+		return _chart;
+	}
+	_chart.nodos2= function (dts){  
+		if(!arguments.length) return _nodos2; _nodos2=dts;
+		return _chart;
+	}
+	_chart.nodos3= function (dts){  
+		if(!arguments.length) return _nodos3; _nodos3=dts;
+		return _chart;
+	}
+	_chart.enlacea= function (dts){  
+		if(!arguments.length) return _enlacea; _enlacea=dts;
+		return _chart;
+	}
+	_chart.enlaceb= function (dts){  
+		if(!arguments.length) return _enlaceb; _enlaceb=dts;
+		return _chart;
+	}
+	function xInicio()
+	{
+		return _margenes.izquierda;
+	}
+	function xFin()
+	{
+		return _margenes.derecha;
+	}
+	function yInicio()
+	{
+		return _margenes.arriba;
+	}
+	function yFin()
+	{
+		return _margenes.abajo;
+	}
+	_chart.render = function () {
+		if (!_svg){
+			_svg = d3.select("body").select("#contenedor-chart")
+					.append("svg")
+					.attr("width",_ancho)
+					.attr("height",_alto);
+			defineVentana(_svg);
+		}
+		renderBodyChart(_svg);
+	}
+	function defineVentana(svg)
+	{
+		svg.append("defs")
+			.append("clipPath")
+			.attr("id","ventana")
+			.append("rect")
+			.attr("x",0)
+			.attr("y",0)
+			.attr("width",_ancho-_margenes.izquierda-_margenes.derecha)
+			.attr("height",_alto-_margenes.arriba-_margenes.abajo);
+	}
+	function renderBodyChart(svg)
+	{
+		if (!_bodyG)
+		{
+			_bodyG = svg.append("g")
+						//.style("fill-opacity",0.8)
+						.attr("class","body")
+						.attr("transform","translate("+xInicio()+","+yInicio()+")")
+						.attr("clip-path","url(#ventana)");
+		}
+		renderSankeyDiagrama();
+	}
+	function renderSankeyDiagrama() //-------------------- render samkey
+	{
+		var _enlacea=[[15,85],[75,25],[50,50],[50,50],[50,50],[50,50],[50,50],[50,50],[50,50]],
+			_enlaceb=[];
+		var enlace=d3.linkHorizontal();
+		var coloresdpto=d3.scaleOrdinal(d3.schemeSet1),
+			coloressx=["#FF00FF","blue"],
+			coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
+		var ea=[],st,nivel2=10,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,valM=0,valH=0,valAnt=0;
+		for (var i=0;i<_enlacea.length;i++)
+		{
+			iniNodoY3=iniNodoY3+_largoNodo1(_enlacea[i][0]);
+		}
+		valM=iniNodoY3;
+		iniNodoY3=iniNodoY3+10;
+		for (var j=0;j<_enlacea.length;j++)
+		{
+			st={source:[20,iniNodoY1+_largoNodo1(_enlacea[j][0])/2],
+				target:[_ancho/2-nivel2,iniNodoY2+_largoNodo1(_enlacea[j][0])/2],
+				v:_largoNodo1(_enlacea[j][0]),c:coloresdpto(j)};
+			ea.push(st);
+			st={source:[20,iniNodoY1+_largoNodo1(_enlacea[j][0])+_largoNodo1(_enlacea[j][1])/2],
+				target:[_ancho/2-nivel2,iniNodoY3+_largoNodo1(_enlacea[j][1])/2],
+				v:_largoNodo1(_enlacea[j][1]),c:coloresdpto(j)};
+			ea.push(st);
+			iniNodoY1=iniNodoY1+_largoNodo1(100)+2;
+			iniNodoY2=iniNodoY2+_largoNodo1(_enlacea[j][0]);
+			iniNodoY3=iniNodoY3+_largoNodo1(_enlacea[j][1]);
+		}//*/
+		valH=iniNodoY3-valM;
+		_nodos2=[{s:"Mujer",v:valM},{s:"Hombre",v:valH}];
+		//---------------- nodos nivel 1
+		_bodyG.selectAll(".nodos1")
+				.data(_nodos1)
+				.enter()
+				.append("rect")
+				.attr("class","nodos1")
+				.attr("fill",function (d,i){
+					return coloresdpto(i);
+				})
+				.attr("x",0)
+				.attr("y",function (d,i){
+					return (_largoNodo1(100)+2)*i;
+				})
+				.attr("width",20)
+				.attr("height",_largoNodo1(100));
+		//----------------- enlaces nivel 1
+		_bodyG.selectAll(".linkA")
+				.data(ea)
+				.enter()
+				.append("path")
+				.attr("class","linkA")
+				.attr("d",function (d,i){
+					return enlace(d);
+				})
+				.style("opacity",0.5)
+				.attr("fill","none")
+				.attr("stroke",function (d) {
+					return d.c;
+				})
+				.attr("stroke-width",function (d,i) {
+					return d.v;
+				});
+		//----------------- nodos nivel 2
+		for (var i=0;i<_nodos2.length;i++)
+		{
+			_bodyG.append("rect")
+				.attr("class","nodos2")
+				.attr("fill",coloressx[i])
+				.attr("x",_ancho/2-nivel2)
+				.attr("y",valAnt+10*i)
+				.attr("width",20)
+				.attr("height",_nodos2[i].v-10*i);
+			valAnt=valAnt+_nodos2[i].v;
+		}//*/
+		valAnt=0;
+		for (var i=0;i<_nodos3.length;i++)
+		{
+			_bodyG.append("rect")
+				.attr("class","nodos3")
+				.attr("fill",coloresrespta(i))
+				.attr("x",_ancho-60)
+				.attr("y",_largoNodo3(valAnt))
+				.attr("width",20)
+				.attr("height",_largoNodo3(_nodos3[i].v));
+			valAnt=valAnt+_nodos3[i].v;
+		}//*/
+		
+		
+		//etiquetar();
+	}
+	function etiquetar()
+	{
+		_bodyG.append("text")
+			.attr("class","titulo")
+			.attr("font-size","1em")
+			.attr("x",0)
+			.attr("y",20)
+			.text(_titulo);
+	}
+	//-------------------- chart
+	return _chart;
+}
 function distribucionChart()
 {
 	var _chart={};
