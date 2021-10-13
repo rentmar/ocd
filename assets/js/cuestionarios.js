@@ -532,6 +532,8 @@ $(document).ready(function() {
 
 	$('[data-toggle="tooltip"]').tooltip();
 
+	new ClipboardJS('.btn');
+
 });
 
 //Validador del formulario noticia

@@ -7,6 +7,7 @@ class Inicio extends CI_Controller
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->library('ion_auth');
+		$this->load->model('Encuesta_model');
 		
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -17,7 +18,6 @@ class Inicio extends CI_Controller
 
 	public function index()
 	{
-
 		if($this->session->edicion_activa)
 		{
 
@@ -36,10 +36,14 @@ class Inicio extends CI_Controller
 		}
 
 		//var_dump($this->session->userdata());
+		$usuario = $this->ion_auth->user()->row();
+		$idusuario = $usuario->id;
+		$datos['encuestas'] = $this->Encuesta_model->leerEncuestasAsignadasUsuario($idusuario);
+		$datos['usuario'] = $usuario;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('inicio/vinicio_index');
+		$this->load->view('inicio/vinicio_index', $datos);
 		$this->load->view('html/pie');
 	}
 
@@ -53,9 +57,7 @@ class Inicio extends CI_Controller
 
 	public function fracaso()
 	{
-		//$this->load->view('html/encabezado');
-		//$this->load->view('html/navbar');
 		$this->load->view('mensajes/vde_error');
-		//$this->load->view('html/pie');
+
 	}
 }

@@ -842,11 +842,15 @@ class Graficos extends CI_Controller{
 		$this->load->view('graficos/vgraficoselectdistribucion',$dt);
 		$this->load->view('html/pie');
 	}
+	////////////211006 will////////////////////
 	public function llenarDatosDistribucion()
 	{
+		$dt['idencuesta'] = $this->input->post('idencuesta');
 		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
+		$dt['preguntas']=$this->Graficos_model->leerPreguntasDencuesta($this->input->post('idencuesta'));
 		$this->load->view('graficos/vgraficodistribucion',$dt);
 	}
+
 	public function seleccionSankey()
 	{
 		$dt['encuestas']=$this->Graficos_model->leerTodasLasEncuestas();
@@ -861,3 +865,104 @@ class Graficos extends CI_Controller{
 		$this->load->view('graficos/vgraficosankey',$dt);
 	}
 }
+	public function getRespuestasHM()
+	{
+		$datos = json_decode($this->input->post('datos'));
+		$encuesta = $datos->idencuesta;
+		$pregunta = $datos->idpregunta;
+		$respuestas = $this->Graficos_model->leerRespuestasDpregunta($encuesta,$pregunta);//respuestasA
+		$respuestas1 = $this->Graficos_model->leerRespuestas1($encuesta,$pregunta);
+
+		$sumpru = 0;
+		$edadfinal = 19;
+		for ($i = 1; $i < 11; $i++)
+		{
+			foreach($respuestas as $aa)
+			{
+				$dato[$aa->iduirespuesta] = '0';			//idrespuesta y ceros
+				$tee = $aa->pregunta;						//pregunta
+			}
+			$sexo = 'M';
+			$edadinicial = $edadfinal + 1;
+			$edadfinal = $edadinicial + 5;
+			$cantidad = $this->Graficos_model->leerEncuestasHM($encuesta, $pregunta, $sexo, $edadinicial, $edadfinal);//cantidad
+			foreach($cantidad as $ee)						//inserta valores "cantidad" en algunas columnas de ceros
+			{
+				foreach($respuestas as $uu)
+				{
+					if($ee->iduirespuesta == $uu->iduirespuesta)
+					{
+						$dato[$uu->iduirespuesta] = $ee->cantidad;//idrespuesta y cantidad (objeto de objetos)
+					}
+				}
+			}
+			foreach($dato as $sip)				//convierte "objeto de matrices" en "matriz de matrices"
+			{
+				$pru[] = $sip;
+			}
+			$npru[] = $pru;
+			if(array_sum($pru) > $sumpru)//filtro para determinar el valor mayor
+			{
+				$sumpru = array_sum($pru);
+			}
+			$pru = array();//limpia la matriz $pru sin elementos
+		}
+		foreach($npru as $lin)			//calculo de porcentajes en matriz
+		{
+			foreach($lin as $newlin)
+			{
+				$porcent[] = round(($newlin * 100) / ($sumpru + 0.001));
+			}
+			$npru1[] = $porcent;
+			$porcent = array();
+		}
+		$sumpru2 = 0;
+		$edadfinal2 = 19;
+		for ($i = 1; $i < 11; $i++)
+		{
+			foreach($respuestas as $aa)
+			{
+				$dato2[$aa->iduirespuesta] = '0';			//idrespuesta y ceros
+			}
+			$sexo2 = 'F';
+			$edadinicial2 = $edadfinal2 + 1;
+			$edadfinal2 = $edadinicial2 + 5;
+			$cantidad2 = $this->Graficos_model->leerEncuestasHM($encuesta, $pregunta, $sexo2, $edadinicial2, $edadfinal2);//cantidad
+			foreach($cantidad2 as $ee2)						//inserta valores "cantidad" en algunas columnas de ceros
+			{
+				foreach($respuestas as $uu2)
+				{
+					if($ee2->iduirespuesta == $uu2->iduirespuesta)
+					{
+						$dato2[$uu2->iduirespuesta] = $ee2->cantidad;//idrespuesta y cantidad (objeto de objetos)
+					}
+				}
+			}
+			foreach($dato2 as $sip2)				//convierte "objeto de matrices" en "matriz de matrices"
+			{
+				$pru2[] = $sip2;
+			}
+			$npru2[] = $pru2;
+			if(array_sum($pru2) > $sumpru2)//filtro para determinar el valor mayor
+			{
+				$sumpru2 = array_sum($pru2);
+			}
+			$pru2 = array();//limpia la matriz $pru sin elementos
+		}
+		foreach($npru2 as $lin2)			//calculo de porcentajes en matriz
+		{
+			foreach($lin2 as $newlin2)
+			{
+				$porcent2[] = round(($newlin2 * 100) / ($sumpru2 + 0.001));
+			}
+			$npru3[] = $porcent2;
+			$porcent2 = array();
+		}
+		$dt['m']=$npru3;
+		$dt['h'] = $npru1;
+		$dt['r'] = $respuestas1;
+		$dt['t'] = $tee;
+		echo json_encode($dt);
+	}
+}
+
