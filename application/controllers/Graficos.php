@@ -864,7 +864,7 @@ class Graficos extends CI_Controller{
 		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
 		$this->load->view('graficos/vgraficosankey',$dt);
 	}
-}
+
 	public function getRespuestasHM()
 	{
 		$datos = json_decode($this->input->post('datos'));

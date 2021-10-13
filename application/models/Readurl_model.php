@@ -50,6 +50,7 @@ class Readurl_model extends CI_Model
 			'area '=>$info_general->area,
 			'ciudad'=>$info_general->ciudad,
 			'zona'=>$info_general->zona,
+			'tiempo' => $info_general->tiempo,
 			'rel_idusuario' => $info_general->idusuario,
 			'rel_iduiencuesta' => $info_general->iduiencuesta,
 		];

@@ -35,6 +35,9 @@ class Read extends CI_Controller
 		$datos_generales = $encuesta;
 		$iduiencuesta = $encuesta->rel_iduiencuesta;
 
+		//Temporizador
+		$fecha = new DateTime();
+
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
 
@@ -88,6 +91,7 @@ class Read extends CI_Controller
 		$datos['cont_modulo'] = $cont_modulos;
 		$datos['no_es_vista_previa'] = true;
 		$datos['datos_generales'] = $datos_generales;
+		$datos['tiempo'] = $fecha->getTimestamp();
 
 		//Dato para validar formulario
 		$datos['preguntas_validar'] = $preguntas_validar;
@@ -182,6 +186,7 @@ class Read extends CI_Controller
 
 	private function datos()
 	{
+		$fecha = new DateTime();
 		$datos = new stdClass();
 		$datos->fecha = '';
 		$datos->iduiencuesta = $this->input->post('iduiencuesta'); //El identificador del formulario vacio
@@ -198,7 +203,8 @@ class Read extends CI_Controller
 		$datos->sexo = $this->input->post('sexo');
 		$datos->ciudad = $this->input->post('ciudad');
 		$datos->zona = $this->input->post('zona');
-
+		$tiempo_calculado = ($fecha->getTimestamp()-$this->input->post('tiempoinicio'))/60;
+		$datos->tiempo = round($tiempo_calculado, 0, PHP_ROUND_HALF_UP);
 		return $datos;
 	}
 

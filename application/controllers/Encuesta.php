@@ -26,23 +26,17 @@ class Encuesta extends CI_Controller
 	public function index()
 	{
 		//Leer todas las encuestas
-		$fecha = new DateTime();
-		$dt['tiempo']=$fecha->getTimestamp();
-		$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('encuesta/vtiempo',$dt);
-		$this->load->view('html/pie');
-		/*$data['encuestas'] = $this->Encuesta_model->leerTodasLasEncuestas();
+		$data['encuestas'] = $this->Encuesta_model->leerTodasLasEncuestas();
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_index', $data);
-		$this->load->view('html/pie');*/
+		$this->load->view('html/pie');
 	}
 	public function verTiempo()
 	{
 		$fecha = new DateTime();
 		$min = ($fecha->getTimestamp()-$this->input->post('inicio'))/60;
-		echo "tiempo encuesta: ".$min." minutos";
+		return $min;
 	}
 	//Vista para los Modulos
 	public function moduloUI()

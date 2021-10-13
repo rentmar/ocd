@@ -95,6 +95,7 @@
 				<input type="hidden" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
 				<input type="hidden" name="latitud_f" id="latitud_f">
 				<input type="hidden" name="longitud_f" id="longitud_f" >
+				<input type="hidden" id="tiempoinicio" name="tiempoinicio" value="<?php echo $tiempo;?>">
 			</div>
 			<?php endif; ?>
 			<div>
