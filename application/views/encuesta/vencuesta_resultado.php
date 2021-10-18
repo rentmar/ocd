@@ -1,6 +1,6 @@
 <main role="main">
 	<br><br>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
 				<div class="contenedor">
@@ -52,24 +52,33 @@
 							<th>Fecha</th>
 							<th>Codigo</th>
 							<th>Usuario</th>
-							<th>Modulo</th>
-							<th>No Pregunta</th>
-							<th>Pregunta</th>
-							<th>Respuesta</th>
+							<th>Lat</th>
+							<th>Lon</th>
+							<th>Edad</th>
+							<th>Sexo</th>
+							<th>Area</th>
+							<th>Ciudad</th>
+							<th>Zona</th>
+							<th>Duracion[min]</th>
+
 						</tr>
 						</thead>
 						<tbody>
-						<?php if(isset($encuesta_resultado)): ?>
-							<?php foreach ($encuesta_resultado as $n): ?>
+						<?php if(isset($encuesta_datos_generales)): ?>
+							<?php foreach ($encuesta_datos_generales as $n): ?>
 								<tr>
 									<td><?php echo $n->idformcomp; ?></td>
-									<td><?php echo mdate('%m-%d-%Y', $n->fecha_fc); ?></td>
+									<td><?php echo mdate('%m-%d-%Y %h:%i %a', $n->fecha_fc); ?></td>
 									<td><?php echo $n->hash_fc; ?></td>
 									<td><?php echo $n->username; ?></td>
-									<td><?php echo $n->uinombre_modulo; ?></td>
-									<td><?php echo $n->etiqueta_seccion; ?></td>
-									<td><?php echo $n->uipregunta_nombre; ?></td>
-									<td><?php echo $n->uinombre_respuesta; ?></td>
+									<td><?php echo number_format($n->latidud_fc,3, ",",""); ?></td>
+									<td><?php echo number_format($n->longitud_fc, 3, ",", ""); ?></td>
+									<td><?php echo $n->edad; ?></td>
+									<td><?php echo $n->sexo; ?></td>
+									<td><?php echo $n->area; ?></td>
+									<td><?php echo $n->ciudad; ?></td>
+									<td><?php echo $n->zona ?></td>
+									<td><?php echo $n->tiempo ?></td>
 								</tr>
 							<?php endforeach; ?>
 						<?php endif; ?>

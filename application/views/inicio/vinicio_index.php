@@ -168,6 +168,13 @@
 		</div>
 	</div>
 	<br>
+
+	<script type="text/javascript">
+		function actualizar() {
+			location.reload(true);
+        }
+        setInterval("actualizar()", 10000);
+	</script>
 <?php endif; ?>
 </main>
 

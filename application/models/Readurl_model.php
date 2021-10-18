@@ -95,4 +95,17 @@ class Readurl_model extends CI_Model
 		}
 	}
 
+	public function autenticarSegundo($token)
+	{
+		$this->db->where('hash_fc', $token);
+		$this->db->from('formulariocompletado');
+		$num_resultados = $this->db->count_all_results();
+		if($num_resultados==0)
+		{
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 }
