@@ -283,18 +283,18 @@ function renderDistribucionChart(objj)
 	//console.log(coloresrespta);
 	distChart.render();
 }
-function renderSankeyChart()
+function renderSankeyChart(a,b,resp,t)
 {
-	var a=[[20,80]];
-	var resp=[{r:"Si",v:25},
-			{r:"No",v:15},
-			{r:"no se",v:10},
-			{r:"Otro",v:20}]; // repsuestas total
+	//------------------------- argumentos
+	var a=[[45,55],[75,25],[50,50],[0,0],[30,70],[0,0],[0,0],[0,0],[0,0]],
+		b=[{m:[30,15],h:[40,15]},{m:[25,50],h:[15,10]},{m:[30,20],h:[15,35]},
+		   {m:[0,0],h:[0,0]},{m:[15,15],h:[35,35]},{m:[0,0],h:[0,0]},
+			{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]}];
+	var resp=[{r:"Si",v:0},
+			{r:"No",v:0}]; 
 	var t="Pregunta uno";
 	//----------------------------------- 
 	var nds1=[];
-	var lnks=[];
-	var pos=0;
 	var n=["La Paz","Cochabamba","Santa Cruz","Chuquisaca","Potosi","Tarija","Oruro","Beni","Pando"];
 	for (var i=0;i<n.length;i++)
 	{
@@ -304,7 +304,8 @@ function renderSankeyChart()
 						.titulo(t)
 						.nodos1(nds1)
 						.nodos3(resp)
-						.enlacea(a);
+						.enlacea(a)
+						.enlaceb(b);
 		snkyChart.render();//*/
 }
 function sankeyChart()
@@ -317,9 +318,7 @@ function sankeyChart()
 		_nodos1=[],_nodos2=[],_nodos3=[],
 		_enlacea=[],
 		_enlaceb=[],
-		_largoNodo1=d3.scaleLinear().domain([0,100]).range([0,65]),
-		_largoNodo2=d3.scaleLinear().domain([0,100]).range([0,_alto-100]),
-		_largoNodo3=d3.scaleLinear().domain([0,100]).range([0,_alto-100]),
+		_largoNodo=d3.scaleLinear().domain([0,100]).range([0,65]),
 		_svg,
 		_bodyG;
 	_chart.ancho= function (a){
@@ -413,32 +412,84 @@ function sankeyChart()
 	}
 	function renderSankeyDiagrama() //-------------------- render samkey
 	{
-		var _enlacea=[[15,85],[75,25],[50,50],[50,50],[50,50],[50,50],[50,50],[50,50],[50,50]],
-			_enlaceb=[];
+		/*_enlacea=[[45,55],[75,25],[50,50],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
+		_enlaceb=[{m:[30,15],h:[40,15]},{m:[25,50],h:[15,10]},{m:[30,20],h:[15,35]},
+					 {m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},
+					 {m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]}];*/
+		//--------------------------------------
 		var enlace=d3.linkHorizontal();
 		var coloresdpto=d3.scaleOrdinal(d3.schemeSet1),
 			coloressx=["#FF00FF","blue"],
 			coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
-		var ea=[],st,nivel2=10,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,valM=0,valH=0,valAnt=0;
+		var ea=[],st,eb=[],stb,nivel2=70,nivel3=60,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],valM=0,valH=0,valAnt=0;
+		for (var j=0;j<9;j++)
+		{
+			iniNodom.push(0);
+		}
+		for (var j=0;j<9;j++)
+		{
+			iniNodoh.push(0);
+		}
+		for (var i=0;i<_enlaceb[0].m.length;i++)
+		{
+			for (var j=0;j<9;j++)
+			{
+				stb={source:[_ancho/2-nivel2+20,iniNodom[i]+iniNodoY1+_largoNodo(_enlaceb[j].m[i])/2],
+				target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[j].m[i])/2],
+				v:_largoNodo(_enlaceb[j].m[i]),
+				c:coloresdpto(j)};
+				eb.push(stb);
+				for (var k=0;k<_enlaceb[0].m.length;k++)
+				{
+					iniNodoY1=iniNodoY1+_largoNodo(_enlaceb[j].m[k])
+				}
+				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[j].m[i]);
+			}
+			iniNodoY1=iniNodoY1+10
+			for (var j=0;j<9;j++)
+			{
+				stb={source:[_ancho/2-nivel2+20,iniNodoh[i]+iniNodoY1+_largoNodo(_enlaceb[j].h[i])/2],
+				target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[j].h[i])/2],
+				v:_largoNodo(_enlaceb[j].h[i]),
+				c:coloresdpto(j)};
+				eb.push(stb);
+				for (var k=0;k<_enlaceb[0].h.length;k++)
+				{
+					iniNodoY1=iniNodoY1+_largoNodo(_enlaceb[j].h[k])
+				}
+				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[j].h[i]);
+			}
+			for (var j=0;j<9;j++)
+			{
+				iniNodom[j]=iniNodom[j]+_largoNodo(_enlaceb[j].m[i]);
+			}
+			for (var j=0;j<9;j++)
+			{
+				iniNodoh[j]=iniNodoh[j]+_largoNodo(_enlaceb[j].h[i]);
+			}
+			iniNodoY1=0;
+			_nodos3[i].v=iniNodoY2;
+		}//*/
+		iniNodoY2=0;
 		for (var i=0;i<_enlacea.length;i++)
 		{
-			iniNodoY3=iniNodoY3+_largoNodo1(_enlacea[i][0]);
+			iniNodoY3=iniNodoY3+_largoNodo(_enlacea[i][0]);
 		}
 		valM=iniNodoY3;
 		iniNodoY3=iniNodoY3+10;
 		for (var j=0;j<_enlacea.length;j++)
 		{
-			st={source:[20,iniNodoY1+_largoNodo1(_enlacea[j][0])/2],
-				target:[_ancho/2-nivel2,iniNodoY2+_largoNodo1(_enlacea[j][0])/2],
-				v:_largoNodo1(_enlacea[j][0]),c:coloresdpto(j)};
+			st={source:[20,iniNodoY1+_largoNodo(_enlacea[j][0])/2],
+				target:[_ancho/2-nivel2,iniNodoY2+_largoNodo(_enlacea[j][0])/2],
+				v:_largoNodo(_enlacea[j][0]),c:coloresdpto(j)};
 			ea.push(st);
-			st={source:[20,iniNodoY1+_largoNodo1(_enlacea[j][0])+_largoNodo1(_enlacea[j][1])/2],
-				target:[_ancho/2-nivel2,iniNodoY3+_largoNodo1(_enlacea[j][1])/2],
-				v:_largoNodo1(_enlacea[j][1]),c:coloresdpto(j)};
+			st={source:[20,iniNodoY1+_largoNodo(_enlacea[j][0])+_largoNodo(_enlacea[j][1])/2],
+				target:[_ancho/2-nivel2,iniNodoY3+_largoNodo(_enlacea[j][1])/2],
+				v:_largoNodo(_enlacea[j][1]),c:coloresdpto(j)};
 			ea.push(st);
-			iniNodoY1=iniNodoY1+_largoNodo1(100)+2;
-			iniNodoY2=iniNodoY2+_largoNodo1(_enlacea[j][0]);
-			iniNodoY3=iniNodoY3+_largoNodo1(_enlacea[j][1]);
+			iniNodoY1=iniNodoY1+_largoNodo(100)+2;
+			iniNodoY2=iniNodoY2+_largoNodo(_enlacea[j][0]);
+			iniNodoY3=iniNodoY3+_largoNodo(_enlacea[j][1]);
 		}//*/
 		valH=iniNodoY3-valM;
 		_nodos2=[{s:"Mujer",v:valM},{s:"Hombre",v:valH}];
@@ -453,10 +504,10 @@ function sankeyChart()
 				})
 				.attr("x",0)
 				.attr("y",function (d,i){
-					return (_largoNodo1(100)+2)*i;
+					return (_largoNodo(100)+2)*i;
 				})
 				.attr("width",20)
-				.attr("height",_largoNodo1(100));
+				.attr("height",_largoNodo(100));
 		//----------------- enlaces nivel 1
 		_bodyG.selectAll(".linkA")
 				.data(ea)
@@ -486,6 +537,23 @@ function sankeyChart()
 				.attr("height",_nodos2[i].v-10*i);
 			valAnt=valAnt+_nodos2[i].v;
 		}//*/
+		//----------------- enlaces nivel 3
+		_bodyG.selectAll(".linkB")
+				.data(eb)
+				.enter()
+				.append("path")
+				.attr("class","linkB")
+				.attr("d",function (d,i){
+					return enlace(d);
+				})
+				.style("opacity",0.5)
+				.attr("fill","none")
+				.attr("stroke",function (d) {
+					return d.c;
+				})
+				.attr("stroke-width",function (d,i) {
+					return d.v;
+				});
 		valAnt=0;
 		for (var i=0;i<_nodos3.length;i++)
 		{
@@ -493,9 +561,9 @@ function sankeyChart()
 				.attr("class","nodos3")
 				.attr("fill",coloresrespta(i))
 				.attr("x",_ancho-60)
-				.attr("y",_largoNodo3(valAnt))
+				.attr("y",_largoNodo(valAnt))
 				.attr("width",20)
-				.attr("height",_largoNodo3(_nodos3[i].v));
+				.attr("height",_nodos3[i].v);
 			valAnt=valAnt+_nodos3[i].v;
 		}//*/
 		
