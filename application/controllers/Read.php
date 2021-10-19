@@ -31,9 +31,20 @@ class Read extends CI_Controller
 	}
 
 	public function encuesta($hash){
+		if(!$this->Readurl_model->autenticar($hash))
+		{
+			redirect('read/encuestaExpirada');
+		}
+		$bandera = $this->Readurl_model->autenticarSegundo($hash);
+		if(!$bandera){
+			redirect('read/encuestaExpirada');
+		}
 		$encuesta = $this->Readurl_model->autenticar($hash);
 		$datos_generales = $encuesta;
 		$iduiencuesta = $encuesta->rel_iduiencuesta;
+
+		//Temporizador
+		$fecha = new DateTime();
 
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
@@ -88,59 +99,13 @@ class Read extends CI_Controller
 		$datos['cont_modulo'] = $cont_modulos;
 		$datos['no_es_vista_previa'] = true;
 		$datos['datos_generales'] = $datos_generales;
+		$datos['tiempo'] = $fecha->getTimestamp();
 
 		//Dato para validar formulario
 		$datos['preguntas_validar'] = $preguntas_validar;
 
-
-
 		$this->load->view('encuesta/vencuesta_plantilla', $datos);
 
-
-
-
-
-
-
-		/*$iduiencuesta = $encuesta->rel_iduiencuesta;
-		$datos_generales = $encuesta;
-		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
-		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
-
-		if($datos_generales->usado)
-		{
-			redirect('encuestaExpirada');
-		}
-
-		//Array de orden
-		$orden_modulos = [];
-		foreach ($modulos as $m)
-		{
-			$orden_modulos[] = $m->uiorden_modulo;
-		}
-		$orden_modulos_min = min($orden_modulos);
-		$orden_modulos_max = max($orden_modulos);
-
-		//Extraer las secciones de una encuesta
-		$secciones = $this->Encuesta_model->leerSeccionesDeUnaEncuesta($iduiencuesta);
-
-		//Extraer las preguntas de una encuesta
-		$preguntas = $this->Encuesta_model->leerPreguntasDeUnaEncuesta($iduiencuesta);
-		//Extraer las respuestas de una encuesta
-		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
-
-
-		$datos['encuesta'] = $encuesta;
-		$datos['modulos'] = $modulos;
-		$datos['secciones'] = $secciones;
-		$datos['preguntas'] = $preguntas;
-		$datos['respuestas'] = $respuestas;
-		$datos['orden_mod_min'] = $orden_modulos_min;
-		$datos['orden_mod_max'] = $orden_modulos_max;
-		$datos['datos_generales'] = $datos_generales;
-
-
-		$this->load->view('encuesta/vencuesta_plantilla', $datos);*/
 	}
 
 	public function encuestaExpirada()
@@ -182,6 +147,7 @@ class Read extends CI_Controller
 
 	private function datos()
 	{
+		$fecha = new DateTime();
 		$datos = new stdClass();
 		$datos->fecha = '';
 		$datos->iduiencuesta = $this->input->post('iduiencuesta'); //El identificador del formulario vacio
@@ -198,7 +164,8 @@ class Read extends CI_Controller
 		$datos->sexo = $this->input->post('sexo');
 		$datos->ciudad = $this->input->post('ciudad');
 		$datos->zona = $this->input->post('zona');
-
+		$tiempo_calculado = ($fecha->getTimestamp()-$this->input->post('tiempoinicio'))/60;
+		$datos->tiempo = round($tiempo_calculado, 0, PHP_ROUND_HALF_UP);
 		return $datos;
 	}
 

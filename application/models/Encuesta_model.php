@@ -705,7 +705,7 @@ class  Encuesta_model extends CI_Model
 		//Didcriminante del formulario
 		array_push($placeholder, $consulta->iduiencuesta);
 
-		//Añadir el rango de edades
+		//A単adir el rango de edades
 		if($consulta->edad_inicial !=0 && $consulta->edad_final !=0)
 		{
 			$sql .= "AND (formulariocompletado.edad BETWEEN ? AND ? )  ";
@@ -731,7 +731,7 @@ class  Encuesta_model extends CI_Model
 			array_push($placeholder, $consulta->iddepartamento);
 		}
 
-			$sql .=" ) ";
+		$sql .=" ) ";
 
 
 		$qry = $this->db->query($sql, $placeholder);
@@ -773,5 +773,60 @@ class  Encuesta_model extends CI_Model
 		$this->db->where('idgeolocal',$identificador);
 		$q=$this->db->get ('geolocalizacion ');
 		return $q->row();
+	}
+
+	public function resultadosEncuestaDatosGenerales($parametros)
+	{
+		//Solo la fecha de la noticia
+
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT * "
+			."FROM formulariocompletado  "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id   "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?  "
+			." "
+			." "
+			." ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Didcriminante del formulario
+		array_push($placeholder, $consulta->iduiencuesta);
+
+		//Añadir el rango de edades
+		if($consulta->edad_inicial !=0 && $consulta->edad_final !=0)
+		{
+			$sql .= "AND (formulariocompletado.edad BETWEEN ? AND ? )  ";
+			array_push($placeholder, $consulta->edad_inicial);
+			array_push($placeholder, $consulta->edad_final);
+		}
+		if((int)$consulta->sexo != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.sexo = ?  ";
+			array_push($placeholder, (int)$consulta->sexo);
+		}
+		if ((int)$consulta->area != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.area = ?  ";
+			array_push($placeholder, (int)$consulta->area);
+		}
+		if ($consulta->iddepartamento != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+
+
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
 	}
 }

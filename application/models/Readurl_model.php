@@ -50,6 +50,7 @@ class Readurl_model extends CI_Model
 			'area '=>$info_general->area,
 			'ciudad'=>$info_general->ciudad,
 			'zona'=>$info_general->zona,
+			'tiempo' => $info_general->tiempo,
 			'rel_idusuario' => $info_general->idusuario,
 			'rel_iduiencuesta' => $info_general->iduiencuesta,
 		];
@@ -91,6 +92,19 @@ class Readurl_model extends CI_Model
 		{
 			$this->db->trans_commit();
 			return true;
+		}
+	}
+
+	public function autenticarSegundo($token)
+	{
+		$this->db->where('hash_fc', $token);
+		$this->db->from('formulariocompletado');
+		$num_resultados = $this->db->count_all_results();
+		if($num_resultados==0)
+		{
+			return true;
+		}else{
+			return false;
 		}
 	}
 

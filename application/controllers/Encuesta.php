@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/La_Paz');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -31,6 +32,12 @@ class Encuesta extends CI_Controller
 		$this->load->view('html/navbar');
 		$this->load->view('encuesta/vencuesta_index', $data);
 		$this->load->view('html/pie');
+	}
+	public function verTiempo()
+	{
+		$fecha = new DateTime();
+		$min = ($fecha->getTimestamp()-$this->input->post('inicio'))/60;
+		return $min;
 	}
 	//Vista para los Modulos
 	public function moduloUI()
@@ -710,6 +717,7 @@ class Encuesta extends CI_Controller
 			}
 
 			$encuesta_resultado = $this->Encuesta_model->resultadosEncuesta($consulta);
+			$encuesta_datos_generales = $this->Encuesta_model->resultadosEncuestaDatosGenerales($consulta);
 			$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
 			$datos['sexo'] = $sexo;
@@ -720,6 +728,7 @@ class Encuesta extends CI_Controller
 			$datos['edad_final'] = $consulta->edad_final;
 			$datos['consulta'] = $consulta;
 			$datos['departamento'] = $departamento;
+			$datos['encuesta_datos_generales'] = $encuesta_datos_generales;
 
 
 			$this->load->view('html/encabezado');
@@ -784,6 +793,7 @@ class Encuesta extends CI_Controller
 		}
 
 		$encuesta_resultado = $this->Encuesta_model->resultadosEncuesta($consulta);
+		$encuesta_resultado_general = $this->Encuesta_model->resultadosEncuestaDatosGenerales($consulta);
 		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
 		if(!empty($consulta))
@@ -796,7 +806,7 @@ class Encuesta extends CI_Controller
 			header('Cache-Control: max-age=0');
 
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-			$sheet = $spreadsheet->getActiveSheet();
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Encuestas');
 			$worksheet = $spreadsheet->getActiveSheet();
 			$eje_y = 11;
 			$sheet->setCellValue('E3', $nombre_encuesta->uinombre_encuesta);
@@ -814,22 +824,63 @@ class Encuesta extends CI_Controller
 				$sheet->setCellValue('C8', $departamento->nombre_departamento);
 			}
 
+			foreach ($encuesta_resultado_general as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
+				$sheet->setCellValue('D'.$eje_y, $n->username);
+				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
+				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
+				$sheet->setCellValue('G'.$eje_y, $n->edad);
+				$sheet->setCellValue('H'.$eje_y, $n->sexo);
+				$sheet->setCellValue('I'.$eje_y, $n->area);
+				$sheet->setCellValue('J'.$eje_y, $n->ciudad);
+				$sheet->setCellValue('K'.$eje_y, $n->zona);
+				$sheet->setCellValue('L'.$eje_y, $n->tiempo);
+
+				$eje_y++;
+			endforeach;
+
+			$sheet = $spreadsheet->getSheet(1)->setTitle('Respuestas');
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 11;
+			$sheet->setCellValue('E3', $nombre_encuesta->uinombre_encuesta);
+			if($edad_inicial!=0 && $edad_final !=0){
+				$sheet->setCellValue('C5', $consulta->edad_inicial);
+				$sheet->setCellValue('D5', $consulta->edad_final);
+			}
+			if($consulta->sexo) {
+				$sheet->setCellValue('C6', $sexo);
+			}
+			if($consulta->area){
+				$sheet->setCellValue('C7', $area);
+			}
+			if($consulta->iddepartamento){
+				$sheet->setCellValue('C8', $departamento->nombre_departamento);
+			}
 			foreach ($encuesta_resultado as $n):
 				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
 				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
 				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
-				$sheet->setCellValue('D'.$eje_y, $n->latidud_fc);
-				$sheet->setCellValue('E'.$eje_y, $n->longitud_fc);
-				$sheet->setCellValue('F'.$eje_y, $n->ciudad);
-				$sheet->setCellValue('G'.$eje_y, $n->zona);
-				$sheet->setCellValue('H'.$eje_y, $n->username);
-				$sheet->setCellValue('I'.$eje_y, $n->uinombre_modulo);
-				$sheet->setCellValue('J'.$eje_y, $n->etiqueta_seccion );
-				$sheet->setCellValue('K'.$eje_y, $n->uipregunta_nombre );
-				$sheet->setCellValue('L'.$eje_y, $n->uinombre_respuesta );
+				$sheet->setCellValue('D'.$eje_y, number_format($n->latidud_fc,3, ",",""));
+				$sheet->setCellValue('E'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
+				$sheet->setCellValue('F'.$eje_y, $n->edad);
+				$sheet->setCellValue('G'.$eje_y, $n->sexo);
+				$sheet->setCellValue('H'.$eje_y, $n->area);
+				$sheet->setCellValue('I'.$eje_y, $n->ciudad);
+				$sheet->setCellValue('J'.$eje_y, $n->zona);
+				$sheet->setCellValue('K'.$eje_y, $n->tiempo);
+				$sheet->setCellValue('L'.$eje_y, $n->username);
+				$sheet->setCellValue('M'.$eje_y, $n->uinombre_modulo);
+				$sheet->setCellValue('N'.$eje_y, $n->etiqueta_seccion );
+				$sheet->setCellValue('O'.$eje_y, $n->uipregunta_nombre );
+				$sheet->setCellValue('P'.$eje_y, $n->uinombre_respuesta );
 
 				$eje_y++;
 			endforeach;
+
+
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
 
 			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
 			$writer->save("php://output");

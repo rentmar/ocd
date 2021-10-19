@@ -18,6 +18,7 @@ function mostrarPosicion(position){
 	var lon = $("input#longitud_f");
 	lat.val(position.coords.latitude);
 	lon.val(position.coords.longitude);
+	alert("Localizacion actual: " + lat.val() + "  " + lon.val());
 
 }
 function mostrarError(error){

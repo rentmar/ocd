@@ -95,6 +95,7 @@
 				<input type="hidden" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
 				<input type="hidden" name="latitud_f" id="latitud_f">
 				<input type="hidden" name="longitud_f" id="longitud_f" >
+				<input type="hidden" id="tiempoinicio" name="tiempoinicio" value="<?php echo $tiempo;?>">
 			</div>
 			<?php endif; ?>
 			<div>
@@ -102,7 +103,7 @@
 			</div>
 			<div class="form-group">
 				<?php if($no_es_vista_previa):?>
-				<button type="submit" class="btn btn-primary">Enviar</button>
+				<button id="enviarencuesta" type="submit" class="btn btn-primary">Enviar</button>
 				<?php endif; ?>
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#salirencuesta">
 					Salir
@@ -133,7 +134,11 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<?php echo form_open('encuesta/formulariosEncuesta/');?>
+				<?php if($no_es_vista_previa):?>
+					<?php echo form_open('inicio/');?>
+				<?php else: ?>
+					<?php echo form_open('encuesta/formulariosEncuesta/');?>
+				<?php endif; ?>
 				Esta Seguro?. Toda la informacion se perdera.
 			</div>
 
