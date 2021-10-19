@@ -716,14 +716,14 @@ class Encuesta extends CI_Controller
 				$area = 'Rural';
 			}
 
-			$encuesta_resultado = $this->Encuesta_model->resultadosEncuesta($consulta);
-			$encuesta_datos_generales = $this->Encuesta_model->resultadosEncuestaDatosGenerales($consulta);
+			//$encuesta_resultado = $this->Encuesta_model->resultadosEncuesta($consulta);
+			$encuesta_datos_generales = $this->Encuesta_model->resultadosEncuestaDatosGeneralesActivos($consulta);
 			$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
 			$datos['sexo'] = $sexo;
 			$datos['area'] = $area;
 			$datos['encuesta_nombre'] = $nombre_encuesta;
-			$datos['encuesta_resultado'] = $encuesta_resultado;
+			//$datos['encuesta_resultado'] = $encuesta_resultado;
 			$datos['edad_inicial'] = $consulta->edad_inicial;
 			$datos['edad_final'] = $consulta->edad_final;
 			$datos['consulta'] = $consulta;
@@ -793,7 +793,7 @@ class Encuesta extends CI_Controller
 		}
 
 		$encuesta_resultado = $this->Encuesta_model->resultadosEncuesta($consulta);
-		$encuesta_resultado_general = $this->Encuesta_model->resultadosEncuestaDatosGenerales($consulta);
+		$encuesta_resultado_general = $this->Encuesta_model->resultadosEncuestaDatosGeneralesActivos($consulta);
 		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
 		if(!empty($consulta))
@@ -952,6 +952,84 @@ class Encuesta extends CI_Controller
 		$consulta->idgeolocalizacion = $this->input->post('idgeolocal');
 
 		return $consulta;
+	}
+
+	public function administrar($identificador)
+	{
+		$idencuesta = $identificador;
+
+		//Crear la variable de session para la administracion
+		if(!isset($this->session->admin_encuesta))
+		{
+			$this->session->set_userdata('admin_encuesta', []);
+			$this->session->set_userdata('admin_encuesta', $idencuesta);
+		}
+
+
+
+		$datos['encuesta_datos_generales'] = $this->Encuesta_model->listarFormulariosLlenos($idencuesta);
+		$datos['idencuesta'] = $idencuesta;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_administrador', $datos);
+		$this->load->view('html/pie');
+	}
+
+	public function cambiarEstadoRegistro($identificador)
+	{
+		$idformcomp = $identificador;
+		$form_encuesta = $this->Encuesta_model->formularioCompletadoPorID($identificador);
+		$idencuesta = $this->session->admin_encuesta;
+		if($form_encuesta->es_valida)
+		{
+			$estado = 0;
+		}else{
+			$estado = 1;
+		}
+		$this->Encuesta_model->cambiarEstadoFormulario($idformcomp, $estado);
+		redirect('encuesta/administrar/'.$idencuesta);
+	}
+
+	public function finalizarAdministrador()
+	{
+		$this->session->unset_userdata('admin_encuesta');
+		redirect('encuesta/formulariosEncuesta');
+	}
+
+	public function editarRegistroEncuesta($identificador)
+	{
+		$idencuesta_completada = $identificador;
+		$form_completado = $this->Encuesta_model->formularioCompletadoPorID($idencuesta_completada);
+		$datos['form'] = $form_completado;
+		$datos['idencuesta'] = $idencuesta_completada;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('encuesta/vencuesta_editarreg', $datos);
+		$this->load->view('html/pie');
+
+	}
+
+	public function procesarModificarRegistro()
+	{
+		$nuevo_registro = $this->capturarRegistro();
+		$this->Encuesta_model->actualizarRegistro($nuevo_registro);
+		redirect('encuesta/administrar/'.$nuevo_registro->idencuesta);
+	}
+
+	private function capturarRegistro()
+	{
+		$registro = new stdClass();
+
+		$registro->idformcomp = $this->input->post('idformcomp');
+		$registro->ciudad = $this->input->post('nombreciudad');
+		$registro->zona = $this->input->post('nombrezona');
+		$registro->latitud = $this->input->post('latitud');
+		$registro->longitud = $this->input->post('longitud');
+		$registro->idencuesta = $this->input->post('idencuesta');
+
+		return $registro;
 	}
 
 
