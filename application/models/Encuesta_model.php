@@ -931,6 +931,7 @@ class  Encuesta_model extends CI_Model
 			'zona' => $registro->zona ,
 			'latidud_fc' => $registro->latitud ,
 			'longitud_fc ' => $registro->longitud ,
+			'area' => $registro->area,
 		];
 		$this->db->where('idformcomp', $registro->idformcomp);
 		$this->db->update(' formulariocompletado', $data);
