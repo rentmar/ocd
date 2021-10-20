@@ -15,6 +15,25 @@
 						</div>
 
 						<div class="form-group">
+							<label for="nombrearea">
+								Area:
+								<span class="text-danger"> * </span>
+							</label>
+							<select id="nombrearea" name="nombrearea" class="form-control" required>
+								<option value="">Selecciones un Area</option>
+								<?php if($form->area == "urbana"):  ?>
+									<option value="urbana" selected>Urbana</option>
+									<option value="rural">Rural</option>
+								<?php elseif ($form->area == "rural"):  ?>
+									<option value="urbana">Urbana</option>
+									<option value="rural" selected>Rural</option>
+								<?php endif; ?>
+
+
+							</select>
+						</div>
+
+						<div class="form-group">
 							<label for="nombrelocalizacion" >
 								Ciudad:
 								<span class="text-danger"> * </span>
@@ -23,7 +42,7 @@
 								   id="nombreciudad" class="form-control" name="nombreciudad">
 						</div>
 						<div class="form-group">
-							<label for="nombrelocalizacion" >
+							<label for="nombrezona" >
 								Zona:
 								<span class="text-danger"> * </span>
 							</label>

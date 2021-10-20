@@ -1001,6 +1001,7 @@ class Encuesta extends CI_Controller
 	{
 		$idencuesta_completada = $identificador;
 		$form_completado = $this->Encuesta_model->formularioCompletadoPorID($idencuesta_completada);
+
 		$datos['form'] = $form_completado;
 		$datos['idencuesta'] = $idencuesta_completada;
 
@@ -1028,6 +1029,7 @@ class Encuesta extends CI_Controller
 		$registro->latitud = $this->input->post('latitud');
 		$registro->longitud = $this->input->post('longitud');
 		$registro->idencuesta = $this->input->post('idencuesta');
+		$registro->area = $this->input->post('nombrearea');
 
 		return $registro;
 	}
