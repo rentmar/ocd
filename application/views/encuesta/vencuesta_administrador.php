@@ -27,7 +27,7 @@
 
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores ">
 				<div class="table-responsive">
-					<table id="encuestas-tabla" class="table table-striped table-hoover">
+					<table id="encuestas-tabla" class="table table-striped table-hoover" >
 						<thead>
 						<tr id="datos">
 							<th>No</th>

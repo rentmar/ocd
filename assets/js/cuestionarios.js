@@ -515,7 +515,7 @@ $(document).ready(function() {
 		}
 	});
 	$('#encuestas-tabla').DataTable({
-		responsive: true,
+		lengthMenu: [[100, 500, -1], [100, 500, "Todo"]],
 		language: {
 			"zeroRecords": "No se encontró ninguna encuesta",
 			"lengthMenu":     "Mostrar _MENU_ registros",
