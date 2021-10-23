@@ -44,23 +44,22 @@
 			</div>
 
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores ">
-				<div>
+				<div class="table-responsive">
 					<table id="encuestas-tabla" class="table table-striped table-hoover">
 						<thead>
 						<tr id="datos">
 							<th>No</th>
 							<th>Fecha</th>
-							<th>Codigo</th>
-							<th>Usuario</th>
+							<th>Cod</th>
+							<th>Usr</th>
 							<th>Lat</th>
 							<th>Lon</th>
-							<th>Edad</th>
-							<th>Sexo</th>
+							<th>Ed</th>
+							<th>Sx</th>
 							<th>Area</th>
-							<th>Ciudad</th>
-							<th>Zona</th>
-							<th>Duracion[min]</th>
-
+							<th>Ciu</th>
+							<th>Zn</th>
+							<th>Dur.[min]</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -68,7 +67,7 @@
 							<?php foreach ($encuesta_datos_generales as $n): ?>
 								<tr>
 									<td><?php echo $n->idformcomp; ?></td>
-									<td><?php echo mdate('%m-%d-%Y %h:%i %a', $n->fecha_fc); ?></td>
+									<td><?php echo mdate('%m-%d-%Y', $n->fecha_fc); ?></td>
 									<td><?php echo $n->hash_fc; ?></td>
 									<td><?php echo $n->username; ?></td>
 									<td><?php echo number_format($n->latidud_fc,3, ",",""); ?></td>
@@ -79,6 +78,7 @@
 									<td><?php echo $n->ciudad; ?></td>
 									<td><?php echo $n->zona ?></td>
 									<td><?php echo $n->tiempo ?></td>
+
 								</tr>
 							<?php endforeach; ?>
 						<?php endif; ?>
