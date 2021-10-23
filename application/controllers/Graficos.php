@@ -861,7 +861,9 @@ class Graficos extends CI_Controller{
 	}
 	public function llenarDatosSankey()
 	{
-		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuesta'));
+		$dt['idencuesta'] = $this->input->post('idencuestaSank');
+		$dt['encuesta']=$this->Graficos_model->leerEncuestId($this->input->post('idencuestaSank'));
+		$dt['preguntas']=$this->Graficos_model->leerPreguntasDencuesta($this->input->post('idencuestaSank'));
 		$this->load->view('graficos/vgraficosankey',$dt);
 	}
 	public function getRespuestasHM()
@@ -963,5 +965,76 @@ class Graficos extends CI_Controller{
 		$dt['t'] = $tee;
 		echo json_encode($dt);
 	}
-}
+	public function getRespuestasHMSank()
+	{
+		$datos = json_decode($this->input->post('datos'));
+		$encuesta = $datos->idencuesta;
+		$pregunta = $datos->idpregunta;
 
+		$respuestasPosibles = $this->Graficos_model->leerRespuestasDpreguntaS($encuesta,$pregunta);
+		$respuestasPosiblesCantidad = $this->Graficos_model->leerCantidadArespuestasPosibles($encuesta,$pregunta);
+
+		foreach($respuestasPosibles as $posicion)
+		{
+			$answer1['r']=$posicion->respuesta;
+			$answer1['v']=0;
+			$answer2[] = $answer1;
+		}
+
+		for($depto = 1; $depto < 10; $depto++)
+		{
+			$sexo = 'M';
+			for($mf = 1; $mf < 3; $mf++)//para M y F
+			{
+				$respuestasPosiblesCantidadM1=$this->Graficos_model->leerCantidadArespuestasPosiblesM1($encuesta,$pregunta,$sexo,$depto);
+				foreach($respuestasPosibles as $i)//creamos obj "$paquete0" con valores ceros
+				{
+					$paquete0[$i->iduirespuesta] = '0';
+					$tee = $i->pregunta;
+				}
+				foreach($respuestasPosiblesCantidadM1 as $ee)//insertamos valores en "$paquete0"
+				{
+					foreach($respuestasPosibles as $uu)
+					{
+						if($ee->iduirespuesta == $uu->iduirespuesta)
+						{
+							$paquete0[$uu->iduirespuesta] = $ee->cantidad;
+						}
+					}
+				}
+				foreach($paquete0 as $sip)//convierte "objeto" en "array"
+				{
+					if($sexo == 'M')
+					{
+						$paquetem[] = $sip;
+						$paquetemsum = array_sum($paquetem);
+					}
+					if($sexo == 'F')
+					{
+						$paquetef[] = $sip;
+						$paquetefsum = array_sum($paquetef);
+					}
+				}
+				$sexo = 'F';
+			}
+			$paquete['m'] = $paquetem;//encierra array entre llaves (obj)
+			$paquete['h'] = $paquetef;//encierra array entre llaves
+
+			$be[] = $paquete;//encierra obj entre corchetes (array)
+
+			$paquetea[]=$paquetemsum;
+			$paquetea[]=$paquetefsum;
+			$aa[]=$paquetea;
+			$paquetea = array();
+
+			$paquetem = array();
+			$paquetef = array();
+		}
+		
+		$dt['a0']=$aa;
+		$dt['a1']=$be;
+		$dt['a2']=$answer2;
+		$dt['a3']=$tee;
+		echo json_encode($dt);
+	}
+}

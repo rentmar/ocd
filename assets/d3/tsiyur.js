@@ -283,17 +283,24 @@ function renderDistribucionChart(objj)
 	//console.log(coloresrespta);
 	distChart.render();
 }
-function renderSankeyChart(a,b,resp,t)
+function renderSankeyChart(objjj)
 {
+	console.log('estoy dibujando');
+	var hh = Object.values(objjj);
+	var a = hh[0];
+	var b = hh[1];
+	var resp = hh[2];
+	var t = hh[3];
+console.log(a,b,resp,t);
 	//------------------------- argumentos
-	var a=[[45,55],[75,25],[50,50],[0,0],[30,70],[0,0],[0,0],[0,0],[0,0]],
+/*	var a=[[45,55],[75,25],[50,50],[0,0],[30,70],[0,0],[0,0],[0,0],[0,0]],
 		b=[{m:[30,15],h:[40,15]},{m:[25,50],h:[15,10]},{m:[30,20],h:[15,35]},
 		   {m:[0,0],h:[0,0]},{m:[15,15],h:[35,35]},{m:[0,0],h:[0,0]},
 			{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]}];
 	var resp=[{r:"Si",v:0},
 			{r:"No",v:0}]; 
 	var t="Pregunta uno";
-	//----------------------------------- 
+*/	//----------------------------------- 
 	var nds1=[];
 	var n=["La Paz","Cochabamba","Santa Cruz","Chuquisaca","Potosi","Tarija","Oruro","Beni","Pando"];
 	for (var i=0;i<n.length;i++)
@@ -2074,6 +2081,69 @@ function getRespuestasA(datos) {
 			console.log("Consulta a pregunta, OK");
 //			console.log(json);
             renderDistribucionChart(json);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+//			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+jQuery(function() {
+    jQuery('#iduipreguntasank').change(function() {
+        var pregunta = $("#iduipreguntasank option:selected").val();
+        var enc = $('option:selected', this).data('idencuesta');
+        var encuesta = enc.toString();
+        console.log('Llegamos a js');
+        var datos = {
+                "idencuesta" : encuesta,
+                "idpregunta" : pregunta
+        };
+        getRespuestasSankey(datos);
+    });
+});
+//Funcion para extraer respuestas
+function getRespuestasSankey(datos) {
+    console.log('Consultas sankey',datos);
+	$.ajax({
+		url: baseurl + "/Graficos/getRespuestasHMSank",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Consulta Sankey, OK");
+//			console.log(json);
+            renderSankeyChart(json);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 //			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
