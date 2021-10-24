@@ -43,10 +43,27 @@
 						<h5><b> <?php echo "Grafico ".$encuesta->uinombre_encuesta;?> </b></h5>
 					</div>
 					<div class="grafico">
-						<div>
-							<button id="encuesta" name="encuesta" onclick="renderSankeyChart()" type="button" class="btn btn-secondary">Ver</button>
-							<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionSankey'); ?>">Atras</a>
+
+						<div class="row">
+							<div class="col-sm-4">
+								<select class="form-control" id="iduipreguntasank" name="iduipreguntasank"  required >
+									<option value="0" selected disabled>Seleccione Pregunta</option>
+									<?php foreach ($preguntas as $e): ?>
+										<option value="<?php echo $e->iduipregunta;?>" data-idencuesta="<?php echo $e->iduiencuesta;?>" >
+											<?php echo $e->uipregunta_nombre;?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div>
+								<a class="btn btn-danger" href="<?php echo site_url('Graficos/seleccionSankey'); ?>">Atras</a>
+							</div>
 						</div>
+
+<!--						<div>
+							<button id="encuesta" name="encuesta" onclick="renderSankeyChart()" type="button" class="btn btn-secondary">Ver</button>
+							<a class="btn btn-danger" href="<?php //echo site_url('Graficos/seleccionSankey'); ?>">Atras</a>
+						</div>-->
 						<br>
 						<div id="contenedor-chart">
 							<!-- aqui el chart -->

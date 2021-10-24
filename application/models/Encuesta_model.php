@@ -689,7 +689,7 @@ class  Encuesta_model extends CI_Model
 			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id  "
 			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
 			."WHERE formulariocompletado.rel_iduiencuesta = ?  "
-			."  "
+			."AND formulariocompletado.es_valida = 1  "
 			."  "
 			."  "
 			."  "
@@ -829,4 +829,111 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql, $placeholder);
 		return $qry->result();
 	}
+
+	public function formularioCompletadoPorID($identificador)
+	{
+		$this->db->where("idformcomp",$identificador);
+		$q=$this->db->get("formulariocompletado");
+		return $q->row();
+	}
+
+	public function cambiarEstadoFormulario($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'es_valida' => $estado,
+		];
+		$this->db->where('idformcomp', $identificador);
+		$this->db->update(' formulariocompletado', $data);
+	}
+
+	public function resultadosEncuestaDatosGeneralesActivos($parametros)
+	{
+		//Solo la fecha de la noticia
+
+		$consulta = $parametros;
+		//Array de placeholders
+		$placeholder = [];
+
+		$sql = "SELECT * "
+			."FROM formulariocompletado  "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id   "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?  "
+			."AND formulariocompletado.es_valida = 1 "
+			." "
+			." ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Didcriminante del formulario
+		array_push($placeholder, $consulta->iduiencuesta);
+
+		//Añadir el rango de edades
+		if($consulta->edad_inicial !=0 && $consulta->edad_final !=0)
+		{
+			$sql .= "AND (formulariocompletado.edad BETWEEN ? AND ? )  ";
+			array_push($placeholder, $consulta->edad_inicial);
+			array_push($placeholder, $consulta->edad_final);
+		}
+		if((int)$consulta->sexo != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.sexo = ?  ";
+			array_push($placeholder, (int)$consulta->sexo);
+		}
+		if ((int)$consulta->area != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND formulariocompletado.area = ?  ";
+			array_push($placeholder, (int)$consulta->area);
+		}
+		if ($consulta->iddepartamento != 0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+
+
+
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
+	public function listarFormulariosLlenos($identificador)
+	{
+		//Solo la fecha de la noticia
+
+		$idencuesta = $identificador;
+		//Array de placeholders
+
+		$sql = "SELECT * "
+			."FROM formulariocompletado  "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id   "
+			."LEFT JOIN departamento ON users.rel_iddepartamento = departamento.iddepartamento  "
+			."LEFT JOIN universidad ON users.rel_iduniversidad = universidad.iduniversidad  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?  "
+			." "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, $idencuesta);
+		return $qry->result();
+	}
+
+	public function actualizarRegistro($registro)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'ciudad' => $registro->ciudad ,
+			'zona' => $registro->zona ,
+			'latidud_fc' => $registro->latitud ,
+			'longitud_fc ' => $registro->longitud ,
+		];
+		$this->db->where('idformcomp', $registro->idformcomp);
+		$this->db->update(' formulariocompletado', $data);
+	}
+
 }

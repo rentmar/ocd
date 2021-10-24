@@ -22,6 +22,10 @@
 									<i class="fas fa-eye"></i>
 								</a>
 
+								<a href="<?php echo site_url('encuesta/administrar/'.$e->iduiencuesta);?>" data-toggle="tooltip" title="Administrar encuesta" >
+									<i class="fas fa-pencil-ruler"></i>
+								</a>
+
 								<?php if($e->encuesta_activa): ?>
 									<a href="<?php echo site_url('encuesta/cambiarEstado/'.$e->iduiencuesta);?>" data-toggle="tooltip" title="Activa/Desactiva">
 										<i class="fas fa-toggle-on"></i>

@@ -51,7 +51,7 @@
 					</div>
 					<div class="grafico">
 						<div class="row">
-							<div class="col-sm-2">
+							<div class="col-sm-4">
 								<select class="form-control" id="iduipregunta" name="iduipregunta"  required >
 									<option value="0" selected disabled>Seleccione Pregunta</option>
 									<?php foreach ($preguntas as $e): ?>
