@@ -620,7 +620,7 @@ function sankeyChart()
 			_bodyG.append("text")
 				.attr("class","sx")
 				.attr("font-size","1em")
-				.attr("x",_ancho/2-60)
+				.attr("x",_ancho/2-80)
 				.attr("y",respta+12)
 				.text(_nodos2[k].s);
 			respta=respta+_nodos2[k].v+10;
