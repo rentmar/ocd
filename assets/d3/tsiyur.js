@@ -286,13 +286,14 @@ function renderDistribucionChart(objj)
 function renderSankeyChart(a,b,resp,t)
 {
 	//------------------------- argumentos
-	var a=[[45,55],[75,25],[50,50],[0,0],[30,70],[0,0],[0,0],[0,0],[0,0]],
-		b=[{m:[30,15],h:[40,15]},{m:[25,50],h:[15,10]},{m:[30,20],h:[15,35]},
-		   {m:[0,0],h:[0,0]},{m:[15,15],h:[35,35]},{m:[0,0],h:[0,0]},
-			{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]}];
+	/*var a=[[45,55],[75,25],[50,50],[0,0],[30,70],[0,0],[0,0],[0,0],[0,0]],
+		b=[{m:[20,15,10],h:[20,20,15]},{m:[25,25,25],h:[5,10,10]},{m:[10,20,20],h:[15,12,13]},
+		   {m:[0,0,0],h:[0,0,0]},{m:[10,10,10],h:[25,20,25]},{m:[0,0,0],h:[0,0,0]},
+			{m:[0,0,0],h:[0,0,0]},{m:[0,0,0],h:[0,0,0]},{m:[0,0,0],h:[0,0,0]}];
 	var resp=[{r:"Si",v:0},
+			{r:"No",v:0},
 			{r:"No",v:0}]; 
-	var t="Pregunta uno";
+	var t="Pregunta uno";*/
 	//----------------------------------- 
 	var nds1=[];
 	var n=["La Paz","Cochabamba","Santa Cruz","Chuquisaca","Potosi","Tarija","Oruro","Beni","Pando"];
@@ -412,16 +413,19 @@ function sankeyChart()
 	}
 	function renderSankeyDiagrama() //-------------------- render samkey
 	{
-		/*_enlacea=[[45,55],[75,25],[50,50],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
-		_enlaceb=[{m:[30,15],h:[40,15]},{m:[25,50],h:[15,10]},{m:[30,20],h:[15,35]},
-					 {m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},
-					 {m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]}];*/
+		/*_enlacea=[[45,55],[75,25],[50,50],
+				  [0,100],[30,70],[0,100],
+				  [0,0],[60,40],[0,0]];
+		_enlaceb=[{m:[20,10,15],h:[20,15,20]},{m:[25,25,25],h:[10,5,10]},{m:[15,15,20],h:[28,0,22]},
+		   {m:[0,0,0],h:[25,50,25]},{m:[10,10,10],h:[30,0,40]},{m:[0,0,0],h:[50,0,50]},
+			{m:[0,0,0],h:[0,0,0]},{m:[20,20,20],h:[15,15,10]},{m:[0,0,0],h:[0,0,0]}];//*/
 		//--------------------------------------
 		var enlace=d3.linkHorizontal();
 		var coloresdpto=d3.scaleOrdinal(d3.schemeSet1),
 			coloressx=["#FF00FF","blue"],
 			coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
-		var ea=[],st,eb=[],stb,nivel2=70,nivel3=60,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],valM=0,valH=0,valAnt=0;
+		var ea=[],st,eb=[],stb,nivel2=80,nivel3=100,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],
+		valM=0,valH=0,valAnt=0,valPAm=[],valPAh=[],valP=0,nds3=[];
 		for (var j=0;j<9;j++)
 		{
 			iniNodom.push(0);
@@ -430,46 +434,14 @@ function sankeyChart()
 		{
 			iniNodoh.push(0);
 		}
-		for (var i=0;i<_enlaceb[0].m.length;i++)
+		for (var j=0;j<9;j++)
 		{
-			for (var j=0;j<9;j++)
-			{
-				stb={source:[_ancho/2-nivel2+20,iniNodom[i]+iniNodoY1+_largoNodo(_enlaceb[j].m[i])/2],
-				target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[j].m[i])/2],
-				v:_largoNodo(_enlaceb[j].m[i]),
-				c:coloresdpto(j)};
-				eb.push(stb);
-				for (var k=0;k<_enlaceb[0].m.length;k++)
-				{
-					iniNodoY1=iniNodoY1+_largoNodo(_enlaceb[j].m[k])
-				}
-				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[j].m[i]);
-			}
-			iniNodoY1=iniNodoY1+10
-			for (var j=0;j<9;j++)
-			{
-				stb={source:[_ancho/2-nivel2+20,iniNodoh[i]+iniNodoY1+_largoNodo(_enlaceb[j].h[i])/2],
-				target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[j].h[i])/2],
-				v:_largoNodo(_enlaceb[j].h[i]),
-				c:coloresdpto(j)};
-				eb.push(stb);
-				for (var k=0;k<_enlaceb[0].h.length;k++)
-				{
-					iniNodoY1=iniNodoY1+_largoNodo(_enlaceb[j].h[k])
-				}
-				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[j].h[i]);
-			}
-			for (var j=0;j<9;j++)
-			{
-				iniNodom[j]=iniNodom[j]+_largoNodo(_enlaceb[j].m[i]);
-			}
-			for (var j=0;j<9;j++)
-			{
-				iniNodoh[j]=iniNodoh[j]+_largoNodo(_enlaceb[j].h[i]);
-			}
-			iniNodoY1=0;
-			_nodos3[i].v=iniNodoY2;
-		}//*/
+			valPAm.push(0);
+		}
+		for (var j=0;j<9;j++)
+		{
+			valPAh.push(0);
+		}
 		iniNodoY2=0;
 		for (var i=0;i<_enlacea.length;i++)
 		{
@@ -493,6 +465,57 @@ function sankeyChart()
 		}//*/
 		valH=iniNodoY3-valM;
 		_nodos2=[{s:"Mujer",v:valM},{s:"Hombre",v:valH}];
+		// enlace b
+		for (var k=0;k<9;k++)
+		{
+			for (var j=0;j<_nodos3.length;j++)
+			{
+				iniNodom[k]=iniNodom[k]+_largoNodo(_enlaceb[k].m[j]);
+			}
+		}
+		for (var k=0;k<9;k++)
+		{
+			for (var j=0;j<_nodos3.length;j++)
+			{
+				iniNodoh[k]=iniNodoh[k]+_largoNodo(_enlaceb[k].h[j]);
+			}
+		}
+		iniNodoY1=0;
+		iniNodoY2=0;
+		valAnt=0;
+		for (var j=0;j<_nodos3.length;j++)
+		{
+			for (var i=0;i<9;i++)
+			{
+				valP=iniNodoY1+valPAm[i]+_largoNodo(_enlaceb[i].m[j])/2;
+				stb={source:[_ancho/2-nivel2+20,valP],
+					target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[i].m[j])/2],
+					v:_largoNodo(_enlaceb[i].m[j]),
+					c:coloresdpto(i)};
+				eb.push(stb);
+				valPAm[i]=valPAm[i]+_largoNodo(_enlaceb[i].m[j]);
+				iniNodoY1=iniNodoY1+iniNodom[i];
+				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[i].m[j]);
+			}
+			iniNodoY1=iniNodoY1+10;
+			for (var i=0;i<9;i++)
+			{
+				valP=iniNodoY1+valPAh[i]+_largoNodo(_enlaceb[i].h[j])/2;
+				stb={source:[_ancho/2-nivel2+20,valP],
+					target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[i].h[j])/2],
+					v:_largoNodo(_enlaceb[i].h[j]),
+					c:coloresdpto(i)};
+				eb.push(stb);
+				valPAh[i]=valPAh[i]+_largoNodo(_enlaceb[i].h[j]);
+				iniNodoY1=iniNodoY1+iniNodoh[i];
+				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[i].h[j]);
+			}//*/
+			_nodos3[j].v=iniNodoY2-valAnt-(10*j);
+			valAnt=valAnt+_nodos3[j].v;
+			iniNodoY2=iniNodoY2+10;
+			iniNodoY1=0;
+		}
+		valAnt=0;
 		//---------------- nodos nivel 1
 		_bodyG.selectAll(".nodos1")
 				.data(_nodos1)
@@ -560,24 +583,61 @@ function sankeyChart()
 			_bodyG.append("rect")
 				.attr("class","nodos3")
 				.attr("fill",coloresrespta(i))
-				.attr("x",_ancho-60)
-				.attr("y",_largoNodo(valAnt))
+				.attr("x",_ancho-nivel3)
+				.attr("y",valAnt)
 				.attr("width",20)
 				.attr("height",_nodos3[i].v);
-			valAnt=valAnt+_nodos3[i].v;
+			valAnt=valAnt+_nodos3[i].v+10;
 		}//*/
 		
 		
-		//etiquetar();
+		etiquetar();
 	}
 	function etiquetar()
 	{
+		var respta=0;
 		_bodyG.append("text")
 			.attr("class","titulo")
 			.attr("font-size","1em")
 			.attr("x",0)
-			.attr("y",20)
+			.attr("y",_alto-60)
 			.text(_titulo);
+		_bodyG.selectAll(".departamento")
+			.data(_nodos1)
+			.enter()
+			.append("text")
+			.attr("class","departamento")
+			.attr("font-size","1em")
+			.attr("x",22)
+			.attr("y",function (d,i){
+				return (_largoNodo(100)+2)*i+12;
+			})
+			.text(function (d){
+				return d.nomnodo;
+			});
+		_bodyG.selectAll(".sx")
+			.data(_nodos2)
+			.enter()
+			.append("text")
+			.attr("class","sx")
+			.attr("font-size","1em")
+			.attr("x",_ancho/2-60)
+			.attr("y",function (d,i){
+				return (d.v/2+30)*i+12;
+			})
+			.text(function (d){
+				return d.s;
+			});
+		for (var k=0;k<_nodos3.length;k++)
+		{
+			_bodyG.append("text")
+				.attr("class","respuesta")
+				.attr("font-size","1em")
+				.attr("x",_ancho-80)
+				.attr("y",respta+12)
+				.text(_nodos3[k].r);
+			respta=respta+_nodos3[k].v+10;
+		}
 	}
 	//-------------------- chart
 	return _chart;
