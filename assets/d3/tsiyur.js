@@ -290,9 +290,19 @@ function renderSankeyChart(objjj)
 	var b = hh[1];
 	var resp = hh[2];
 	var t = hh[3];
-console.log(a,b,resp,t);
+	console.log(a,b,resp,t);
+	
 	//------------------------- argumentos
+	a=[[25,75],[25,75],[20,80],
+	   [0,100],[30,70],[0,100],
+	   [0,0],[60,40],[0,0]];
+	b=[{m:[10,10,5],h:[25,25,25]},{m:[25,0,0],h:[50,10,15]},{m:[5,5,10],h:[60,10,10]},
+		   {m:[0,0,0],h:[25,50,25]},{m:[10,10,10],h:[30,0,40]},{m:[0,0,0],h:[50,0,50]},
+			{m:[0,0,0],h:[0,0,0]},{m:[20,20,20],h:[15,15,10]},{m:[0,0,0],h:[0,0,0]}];
+	resp=[{r:"si",v:0},{r:"no",v:0},{r:"Talvez",v:0}];
 	//----------------------------------- 
+	d3.selectAll("svg")
+		.remove();
 	var nds1=[];
 	var n=["La Paz","Cochabamba","Santa Cruz","Chuquisaca","Potosi","Tarija","Oruro","Beni","Pando"];
 	for (var i=0;i<n.length;i++)
@@ -411,18 +421,12 @@ function sankeyChart()
 	}
 	function renderSankeyDiagrama() //-------------------- render samkey
 	{
-		/*_enlacea=[[45,55],[75,25],[50,50],
-				  [0,100],[30,70],[0,100],
-				  [0,0],[60,40],[0,0]];
-		_enlaceb=[{m:[20,10,15],h:[20,15,20]},{m:[25,25,25],h:[10,5,10]},{m:[15,15,20],h:[28,0,22]},
-		   {m:[0,0,0],h:[25,50,25]},{m:[10,10,10],h:[30,0,40]},{m:[0,0,0],h:[50,0,50]},
-			{m:[0,0,0],h:[0,0,0]},{m:[20,20,20],h:[15,15,10]},{m:[0,0,0],h:[0,0,0]}];//*/
 		//--------------------------------------
 		var enlace=d3.linkHorizontal();
 		var coloresdpto=d3.scaleOrdinal(d3.schemeSet1),
 			coloressx=["#FF00FF","blue"],
 			coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
-		var ea=[],st,eb=[],stb,nivel2=80,nivel3=100,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],
+		var ea=[],st,eb=[],stb,nivel2=100,nivel3=120,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],
 		valM=0,valH=0,valAnt=0,valPAm=[],valPAh=[],valP=0,nds3=[];
 		for (var j=0;j<9;j++)
 		{
@@ -587,8 +591,6 @@ function sankeyChart()
 				.attr("height",_nodos3[i].v);
 			valAnt=valAnt+_nodos3[i].v+10;
 		}//*/
-		
-		
 		etiquetar();
 	}
 	function etiquetar()
@@ -613,25 +615,23 @@ function sankeyChart()
 			.text(function (d){
 				return d.nomnodo;
 			});
-		_bodyG.selectAll(".sx")
-			.data(_nodos2)
-			.enter()
-			.append("text")
-			.attr("class","sx")
-			.attr("font-size","1em")
-			.attr("x",_ancho/2-60)
-			.attr("y",function (d,i){
-				return (d.v/2+30)*i+12;
-			})
-			.text(function (d){
-				return d.s;
-			});
+		for (var k=0;k<_nodos2.length;k++)
+		{
+			_bodyG.append("text")
+				.attr("class","sx")
+				.attr("font-size","1em")
+				.attr("x",_ancho/2-60)
+				.attr("y",respta+12)
+				.text(_nodos2[k].s);
+			respta=respta+_nodos2[k].v+10;
+		}
+		respta=0;
 		for (var k=0;k<_nodos3.length;k++)
 		{
 			_bodyG.append("text")
 				.attr("class","respuesta")
 				.attr("font-size","1em")
-				.attr("x",_ancho-80)
+				.attr("x",_ancho-100)
 				.attr("y",respta+12)
 				.text(_nodos3[k].r);
 			respta=respta+_nodos3[k].v+10;
