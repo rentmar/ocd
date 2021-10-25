@@ -978,11 +978,12 @@ class Graficos extends CI_Controller{
 		{
 			$answer1['r']=$posicion->respuesta;
 			$answer1['v']=0;
-			$answer2[] = $answer1;
+			$answer2[] = $answer1;//*********************************************************************************
 		}
 
-		for($depto = 1; $depto < 10; $depto++)
+		for($depto = 1; $depto < 10; $depto++)// 9 Departamentos
 		{
+//		$depto  = 1;
 			$sexo = 'M';
 			for($mf = 1; $mf < 3; $mf++)//para M y F
 			{
@@ -990,7 +991,7 @@ class Graficos extends CI_Controller{
 				foreach($respuestasPosibles as $i)//creamos obj "$paquete0" con valores ceros
 				{
 					$paquete0[$i->iduirespuesta] = '0';
-					$tee = $i->pregunta;
+					$tee = $i->pregunta;//****************************************************************************
 				}
 				foreach($respuestasPosiblesCantidadM1 as $ee)//insertamos valores en "$paquete0"
 				{
@@ -1017,18 +1018,43 @@ class Graficos extends CI_Controller{
 				}
 				$sexo = 'F';
 			}
-			$paquete['m'] = $paquetem;//encierra array entre llaves (obj)
-			$paquete['h'] = $paquetef;//encierra array entre llaves
+//			$paquete['m'] = $paquetem;//encierra array entre llaves (obj)
+//			$paquete['h'] = $paquetef;//encierra array entre llaves
+//			$be[] = $paquete;//encierra obj entre corchetes (array)
 
-			$be[] = $paquete;//encierra obj entre corchetes (array)
+//			$paquetea[]=$paquetemsum;
+//			$paquetea[]=$paquetefsum;
+//			$aa[]=$paquetea;
 
+///////////////////////aumentando porcentajes 210924///////////////////////////////////////////////
+			$sumatotal = $paquetemsum + $paquetefsum;
 			$paquetea[]=$paquetemsum;
 			$paquetea[]=$paquetefsum;
-			$aa[]=$paquetea;
-			$paquetea = array();
+			foreach($paquetea as $cont)
+			{
+				$paqueteaa[]=round(($cont * 100) / ($sumatotal + 0.001));
+			}
+			$aa[]=$paqueteaa;//****************************************************************************************
+			foreach($paquetem as $conta)
+			{
+				$paquetemm[] = round(($conta * 100) / ($sumatotal + 0.001));
+			}
+			foreach($paquetef as $conta)
+			{
+				$paquetehh[] = round(($conta * 100) / ($sumatotal + 0.001)); 
+			}
+			$paquete['m'] = $paquetemm;
+			$paquete['h'] = $paquetehh;
+			$be[] = $paquete;//*****************************************************************************************
+/////////////////////////////////////////////////////////
 
+			$paquetea = array();
 			$paquetem = array();
 			$paquetef = array();
+			$paqueteaa = array();
+			$paquetemm = array();
+			$paquetehh = array();
+
 		}
 		
 		$dt['a0']=$aa;
