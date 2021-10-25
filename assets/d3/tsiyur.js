@@ -293,13 +293,6 @@ function renderSankeyChart(objjj)
 	console.log(a,b,resp,t);
 	
 	//------------------------- argumentos
-	a=[[25,75],[25,75],[20,80],
-	   [0,100],[30,70],[0,100],
-	   [0,0],[60,40],[0,0]];
-	b=[{m:[10,10,5],h:[25,25,25]},{m:[25,0,0],h:[50,10,15]},{m:[5,5,10],h:[60,10,10]},
-		   {m:[0,0,0],h:[25,50,25]},{m:[10,10,10],h:[30,0,40]},{m:[0,0,0],h:[50,0,50]},
-			{m:[0,0,0],h:[0,0,0]},{m:[20,20,20],h:[15,15,10]},{m:[0,0,0],h:[0,0,0]}];
-	resp=[{r:"si",v:0},{r:"no",v:0},{r:"Talvez",v:0}];
 	//----------------------------------- 
 	d3.selectAll("svg")
 		.remove();
@@ -320,7 +313,7 @@ function renderSankeyChart(objjj)
 function sankeyChart()
 {
 	var _chart={};
-	var _ancho=800,_alto=700,
+	var _ancho=800,_alto=850,
 		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
 		_etiquetas,
 		_titulo,
@@ -426,7 +419,7 @@ function sankeyChart()
 		var coloresdpto=d3.scaleOrdinal(d3.schemeSet1),
 			coloressx=["#FF00FF","blue"],
 			coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
-		var ea=[],st,eb=[],stb,nivel2=100,nivel3=120,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],
+		var ea=[],st,eb=[],stb,nivel2=100,nivel3=60,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],
 		valM=0,valH=0,valAnt=0,valPAm=[],valPAh=[],valP=0,nds3=[];
 		for (var j=0;j<9;j++)
 		{
@@ -595,12 +588,13 @@ function sankeyChart()
 	}
 	function etiquetar()
 	{
-		var respta=0;
+		var setexto=200,respta=0;
+		coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
 		_bodyG.append("text")
 			.attr("class","titulo")
 			.attr("font-size","1em")
 			.attr("x",0)
-			.attr("y",_alto-60)
+			.attr("y",_alto-setexto)
 			.text(_titulo);
 		_bodyG.selectAll(".departamento")
 			.data(_nodos1)
@@ -615,6 +609,20 @@ function sankeyChart()
 			.text(function (d){
 				return d.nomnodo;
 			});
+		_bodyG.selectAll(".indicadores")
+			.data(_nodos3)
+			.enter()
+			.append("rect")
+			.attr("class","indicadores")
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return _alto-setexto+20+22*i;
+			})
+			.attr("width",20)
+			.attr("height",20)
+			.style("fill",function (d,i){
+				return coloresrespta(i);
+			})
 		for (var k=0;k<_nodos2.length;k++)
 		{
 			_bodyG.append("text")
@@ -625,17 +633,19 @@ function sankeyChart()
 				.text(_nodos2[k].s);
 			respta=respta+_nodos2[k].v+10;
 		}
-		respta=0;
-		for (var k=0;k<_nodos3.length;k++)
-		{
-			_bodyG.append("text")
-				.attr("class","respuesta")
-				.attr("font-size","1em")
-				.attr("x",_ancho-100)
-				.attr("y",respta+12)
-				.text(_nodos3[k].r);
-			respta=respta+_nodos3[k].v+10;
-		}
+		_bodyG.selectAll(".repuesta")
+			.data(_nodos3)
+			.enter()
+			.append("text")
+			.attr("class","respuesta")
+			.attr("font-size","1em")
+			.attr("x",25)
+			.attr("y",function (d,i){
+				return _alto-setexto+35+22*i;
+			})
+			.text(function (d){
+				return d.r;
+			});
 	}
 	//-------------------- chart
 	return _chart;
