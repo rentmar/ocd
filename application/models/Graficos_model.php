@@ -779,4 +779,51 @@ class Graficos_model extends CI_Model
         return $qry->result();
 	}
 //////////////////////////////////////////////////////////////////////
+	public function leerRespuestasDpreguntaS($encuesta,$pregunta)
+	{
+		$sql = "SELECT iduiencuesta, uinombre_encuesta encuesta, iduipregunta, uipregunta_nombre pregunta, iduirespuesta, uinombre_respuesta respuesta "
+			."FROM uiencuesta "
+			."LEFT JOIN uimodulo ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta "
+			."LEFT JOIN uiseccion ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo "
+			."LEFT JOIN uipregunta ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion "
+			."LEFT JOIN uirespuesta_pregunta ON uirespuesta_pregunta.rel_iduipregunta = uipregunta.iduipregunta "
+			."LEFT JOIN uirespuesta ON uirespuesta.iduirespuesta = uirespuesta_pregunta.rel_iduirespuesta "
+			."WHERE iduiencuesta = ? AND iduipregunta = ? ";
+		$qry = $this->db->query($sql,[$encuesta, $pregunta]);
+		return $qry->result();
+	}
+	public function leerCantidadArespuestasPosibles($encuesta,$pregunta)
+	{
+		$sql = "SELECT iduiencuesta, uinombre_encuesta encuesta, iduipregunta, uipregunta_nombre pregunta, iduirespuesta, uinombre_respuesta respuesta, rel_iddepartamento departamento, sexo, COUNT(*) cantidad "
+			."FROM uiencuesta "
+			."LEFT JOIN uimodulo ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta "
+			."LEFT JOIN uiseccion ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo "
+			."LEFT JOIN uipregunta ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion "
+			."LEFT JOIN formulariocomp_respuestas ON formulariocomp_respuestas.rel_idpregunta = uipregunta.iduipregunta "
+			."LEFT JOIN formulariocompletado ON formulariocompletado.idformcomp = formulariocomp_respuestas.rel_idformcomp "
+			."LEFT JOIN uirespuesta ON uirespuesta.iduirespuesta = formulariocomp_respuestas.rel_idrespuesta "
+			."LEFT JOIN users ON users.id = formulariocompletado.rel_idusuario "
+			."WHERE iduiencuesta = ? AND iduipregunta = ? "
+			."GROUP BY departamento, respuesta "
+			."ORDER BY departamento, iduirespuesta ";
+		$qry = $this->db->query($sql,[$encuesta, $pregunta]);
+		return $qry->result();
+	}
+	public function leerCantidadArespuestasPosiblesM1($encuesta,$pregunta,$sexo,$depto)
+	{
+		$sql = "SELECT iduiencuesta, uinombre_encuesta encuesta, iduipregunta, uipregunta_nombre pregunta, iduirespuesta, uinombre_respuesta respuesta, rel_iddepartamento departamento, sexo, COUNT(*) cantidad "
+			."FROM uiencuesta "
+			."LEFT JOIN uimodulo ON uimodulo.rel_iduiencuesta = uiencuesta.iduiencuesta "
+			."LEFT JOIN uiseccion ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo "
+			."LEFT JOIN uipregunta ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion "
+			."LEFT JOIN formulariocomp_respuestas ON formulariocomp_respuestas.rel_idpregunta = uipregunta.iduipregunta "
+			."LEFT JOIN formulariocompletado ON formulariocompletado.idformcomp = formulariocomp_respuestas.rel_idformcomp "
+			."LEFT JOIN uirespuesta ON uirespuesta.iduirespuesta = formulariocomp_respuestas.rel_idrespuesta "
+			."LEFT JOIN users ON users.id = formulariocompletado.rel_idusuario "
+			."WHERE iduiencuesta = ? AND iduipregunta = ? AND sexo = ? AND rel_iddepartamento = ? "
+			."GROUP BY departamento, respuesta "
+			."ORDER BY departamento, iduirespuesta ";
+		$qry = $this->db->query($sql,[$encuesta, $pregunta, $sexo, $depto]);
+		return $qry->result();
+	}
 }

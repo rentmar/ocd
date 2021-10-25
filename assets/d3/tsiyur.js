@@ -283,17 +283,19 @@ function renderDistribucionChart(objj)
 	//console.log(coloresrespta);
 	distChart.render();
 }
-function renderSankeyChart(a,b,resp,t)
+function renderSankeyChart(objjj)
 {
+	var hh = Object.values(objjj);
+	var a = hh[0];
+	var b = hh[1];
+	var resp = hh[2];
+	var t = hh[3];
+	console.log(a,b,resp,t);
+	
 	//------------------------- argumentos
-	var a=[[45,55],[75,25],[50,50],[0,0],[30,70],[0,0],[0,0],[0,0],[0,0]],
-		b=[{m:[30,15],h:[40,15]},{m:[25,50],h:[15,10]},{m:[30,20],h:[15,35]},
-		   {m:[0,0],h:[0,0]},{m:[15,15],h:[35,35]},{m:[0,0],h:[0,0]},
-			{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]}];
-	var resp=[{r:"Si",v:0},
-			{r:"No",v:0}]; 
-	var t="Pregunta uno";
 	//----------------------------------- 
+	d3.selectAll("svg")
+		.remove();
 	var nds1=[];
 	var n=["La Paz","Cochabamba","Santa Cruz","Chuquisaca","Potosi","Tarija","Oruro","Beni","Pando"];
 	for (var i=0;i<n.length;i++)
@@ -311,7 +313,7 @@ function renderSankeyChart(a,b,resp,t)
 function sankeyChart()
 {
 	var _chart={};
-	var _ancho=800,_alto=700,
+	var _ancho=800,_alto=850,
 		_margenes={arriba:20,derecha:20,abajo:20,izquierda:20},
 		_etiquetas,
 		_titulo,
@@ -412,16 +414,13 @@ function sankeyChart()
 	}
 	function renderSankeyDiagrama() //-------------------- render samkey
 	{
-		/*_enlacea=[[45,55],[75,25],[50,50],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
-		_enlaceb=[{m:[30,15],h:[40,15]},{m:[25,50],h:[15,10]},{m:[30,20],h:[15,35]},
-					 {m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},
-					 {m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]},{m:[0,0],h:[0,0]}];*/
 		//--------------------------------------
 		var enlace=d3.linkHorizontal();
 		var coloresdpto=d3.scaleOrdinal(d3.schemeSet1),
 			coloressx=["#FF00FF","blue"],
 			coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
-		var ea=[],st,eb=[],stb,nivel2=70,nivel3=60,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],valM=0,valH=0,valAnt=0;
+		var ea=[],st,eb=[],stb,nivel2=100,nivel3=60,iniNodoY1=0,iniNodoY2=0,iniNodoY3=0,iniNodom=[],iniNodoh=[],
+		valM=0,valH=0,valAnt=0,valPAm=[],valPAh=[],valP=0,nds3=[];
 		for (var j=0;j<9;j++)
 		{
 			iniNodom.push(0);
@@ -430,46 +429,14 @@ function sankeyChart()
 		{
 			iniNodoh.push(0);
 		}
-		for (var i=0;i<_enlaceb[0].m.length;i++)
+		for (var j=0;j<9;j++)
 		{
-			for (var j=0;j<9;j++)
-			{
-				stb={source:[_ancho/2-nivel2+20,iniNodom[i]+iniNodoY1+_largoNodo(_enlaceb[j].m[i])/2],
-				target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[j].m[i])/2],
-				v:_largoNodo(_enlaceb[j].m[i]),
-				c:coloresdpto(j)};
-				eb.push(stb);
-				for (var k=0;k<_enlaceb[0].m.length;k++)
-				{
-					iniNodoY1=iniNodoY1+_largoNodo(_enlaceb[j].m[k])
-				}
-				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[j].m[i]);
-			}
-			iniNodoY1=iniNodoY1+10
-			for (var j=0;j<9;j++)
-			{
-				stb={source:[_ancho/2-nivel2+20,iniNodoh[i]+iniNodoY1+_largoNodo(_enlaceb[j].h[i])/2],
-				target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[j].h[i])/2],
-				v:_largoNodo(_enlaceb[j].h[i]),
-				c:coloresdpto(j)};
-				eb.push(stb);
-				for (var k=0;k<_enlaceb[0].h.length;k++)
-				{
-					iniNodoY1=iniNodoY1+_largoNodo(_enlaceb[j].h[k])
-				}
-				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[j].h[i]);
-			}
-			for (var j=0;j<9;j++)
-			{
-				iniNodom[j]=iniNodom[j]+_largoNodo(_enlaceb[j].m[i]);
-			}
-			for (var j=0;j<9;j++)
-			{
-				iniNodoh[j]=iniNodoh[j]+_largoNodo(_enlaceb[j].h[i]);
-			}
-			iniNodoY1=0;
-			_nodos3[i].v=iniNodoY2;
-		}//*/
+			valPAm.push(0);
+		}
+		for (var j=0;j<9;j++)
+		{
+			valPAh.push(0);
+		}
 		iniNodoY2=0;
 		for (var i=0;i<_enlacea.length;i++)
 		{
@@ -493,6 +460,57 @@ function sankeyChart()
 		}//*/
 		valH=iniNodoY3-valM;
 		_nodos2=[{s:"Mujer",v:valM},{s:"Hombre",v:valH}];
+		// enlace b
+		for (var k=0;k<9;k++)
+		{
+			for (var j=0;j<_nodos3.length;j++)
+			{
+				iniNodom[k]=iniNodom[k]+_largoNodo(_enlaceb[k].m[j]);
+			}
+		}
+		for (var k=0;k<9;k++)
+		{
+			for (var j=0;j<_nodos3.length;j++)
+			{
+				iniNodoh[k]=iniNodoh[k]+_largoNodo(_enlaceb[k].h[j]);
+			}
+		}
+		iniNodoY1=0;
+		iniNodoY2=0;
+		valAnt=0;
+		for (var j=0;j<_nodos3.length;j++)
+		{
+			for (var i=0;i<9;i++)
+			{
+				valP=iniNodoY1+valPAm[i]+_largoNodo(_enlaceb[i].m[j])/2;
+				stb={source:[_ancho/2-nivel2+20,valP],
+					target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[i].m[j])/2],
+					v:_largoNodo(_enlaceb[i].m[j]),
+					c:coloresdpto(i)};
+				eb.push(stb);
+				valPAm[i]=valPAm[i]+_largoNodo(_enlaceb[i].m[j]);
+				iniNodoY1=iniNodoY1+iniNodom[i];
+				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[i].m[j]);
+			}
+			iniNodoY1=iniNodoY1+10;
+			for (var i=0;i<9;i++)
+			{
+				valP=iniNodoY1+valPAh[i]+_largoNodo(_enlaceb[i].h[j])/2;
+				stb={source:[_ancho/2-nivel2+20,valP],
+					target:[_ancho-nivel3,iniNodoY2+_largoNodo(_enlaceb[i].h[j])/2],
+					v:_largoNodo(_enlaceb[i].h[j]),
+					c:coloresdpto(i)};
+				eb.push(stb);
+				valPAh[i]=valPAh[i]+_largoNodo(_enlaceb[i].h[j]);
+				iniNodoY1=iniNodoY1+iniNodoh[i];
+				iniNodoY2=iniNodoY2+_largoNodo(_enlaceb[i].h[j]);
+			}//*/
+			_nodos3[j].v=iniNodoY2-valAnt-(10*j);
+			valAnt=valAnt+_nodos3[j].v;
+			iniNodoY2=iniNodoY2+10;
+			iniNodoY1=0;
+		}
+		valAnt=0;
 		//---------------- nodos nivel 1
 		_bodyG.selectAll(".nodos1")
 				.data(_nodos1)
@@ -560,24 +578,74 @@ function sankeyChart()
 			_bodyG.append("rect")
 				.attr("class","nodos3")
 				.attr("fill",coloresrespta(i))
-				.attr("x",_ancho-60)
-				.attr("y",_largoNodo(valAnt))
+				.attr("x",_ancho-nivel3)
+				.attr("y",valAnt)
 				.attr("width",20)
 				.attr("height",_nodos3[i].v);
-			valAnt=valAnt+_nodos3[i].v;
+			valAnt=valAnt+_nodos3[i].v+10;
 		}//*/
-		
-		
-		//etiquetar();
+		etiquetar();
 	}
 	function etiquetar()
 	{
+		var setexto=200,respta=0;
+		coloresrespta=d3.scaleOrdinal(d3.schemeCategory10);
 		_bodyG.append("text")
 			.attr("class","titulo")
 			.attr("font-size","1em")
 			.attr("x",0)
-			.attr("y",20)
+			.attr("y",_alto-setexto)
 			.text(_titulo);
+		_bodyG.selectAll(".departamento")
+			.data(_nodos1)
+			.enter()
+			.append("text")
+			.attr("class","departamento")
+			.attr("font-size","1em")
+			.attr("x",22)
+			.attr("y",function (d,i){
+				return (_largoNodo(100)+2)*i+12;
+			})
+			.text(function (d){
+				return d.nomnodo;
+			});
+		_bodyG.selectAll(".indicadores")
+			.data(_nodos3)
+			.enter()
+			.append("rect")
+			.attr("class","indicadores")
+			.attr("x",0)
+			.attr("y",function (d,i){
+				return _alto-setexto+20+22*i;
+			})
+			.attr("width",20)
+			.attr("height",20)
+			.style("fill",function (d,i){
+				return coloresrespta(i);
+			})
+		for (var k=0;k<_nodos2.length;k++)
+		{
+			_bodyG.append("text")
+				.attr("class","sx")
+				.attr("font-size","1em")
+				.attr("x",_ancho/2-80)
+				.attr("y",respta+12)
+				.text(_nodos2[k].s);
+			respta=respta+_nodos2[k].v+10;
+		}
+		_bodyG.selectAll(".repuesta")
+			.data(_nodos3)
+			.enter()
+			.append("text")
+			.attr("class","respuesta")
+			.attr("font-size","1em")
+			.attr("x",25)
+			.attr("y",function (d,i){
+				return _alto-setexto+35+22*i;
+			})
+			.text(function (d){
+				return d.r;
+			});
 	}
 	//-------------------- chart
 	return _chart;
@@ -2074,6 +2142,69 @@ function getRespuestasA(datos) {
 			console.log("Consulta a pregunta, OK");
 //			console.log(json);
             renderDistribucionChart(json);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+//			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+jQuery(function() {
+    jQuery('#iduipreguntasank').change(function() {
+        var pregunta = $("#iduipreguntasank option:selected").val();
+        var enc = $('option:selected', this).data('idencuesta');
+        var encuesta = enc.toString();
+        console.log('Llegamos a js');
+        var datos = {
+                "idencuesta" : encuesta,
+                "idpregunta" : pregunta
+        };
+        getRespuestasSankey(datos);
+    });
+});
+//Funcion para extraer respuestas
+function getRespuestasSankey(datos) {
+    console.log('Consultas sankey',datos);
+	$.ajax({
+		url: baseurl + "/Graficos/getRespuestasHMSank",
+		type: 'post',
+		data: {datos: JSON.stringify(datos) },
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#medio').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Consulta Sankey, OK");
+//			console.log(json);
+            renderSankeyChart(json);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 //			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
