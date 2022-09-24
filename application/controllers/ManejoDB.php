@@ -22,6 +22,9 @@ class ManejoDB extends CI_Controller{
 		$this->load->model('SubTema_model');
 		$this->load->model('Noticia_model');
 		$this->load->model('Formulario_model');
+		$this->load->model('Plenaria_model');
+		$this->load->model('Norma_model');
+		$this->load->model('Instanciaseguimiento_model');
 		//Comprobacion de session
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -1162,5 +1165,200 @@ class ManejoDB extends CI_Controller{
 			redirect('manejoDB/cambiarFormulario/');
 		}
 	}
+
+	public function plenariaAdministrador(){
+
+		$plenarias = $this->Plenaria_model->leerTodasLasPlenarias();
+
+
+		$data['plenarias'] = $plenarias;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_listaplenarias', $data);
+		$this->load->view('html/pie');
+
+
+	}
+
+	public function normativaAdministrador(){
+		$normas = $this->Norma_model->leerNormasRegistradas();
+
+
+		$data['normas'] = $normas;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_listanormas', $data);
+		$this->load->view('html/pie');
+
+	}
+
+	public function cambiarEstadoPlenaria($identificador)
+	{
+		$idplenaria = $identificador;
+		$plenaria = $this->Plenaria_model->leerPlenariaPorId($idplenaria);
+		if($plenaria->activo)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Plenaria_model->cambiarEstado($idplenaria, $estado);
+		redirect('manejoDB/plenariaAdministrador');
+	}
+
+	public function cambiarEstadoNorma($identificador){
+		$idnorma = $identificador;
+		$norma = $this->Norma_model->leerNormaPlurinacionalPorId($idnorma);
+		if($norma->activo)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Norma_model->cambiarEstado($idnorma, $estado);
+		redirect('manejoDB/plenariaAdministrador');
+	}
+
+	public function reportePlenarias(){
+		$usuario = $this->ion_auth->user()->row();
+		$instancia = $this->Instanciaseguimiento_model->leerInstancias();
+		$departamentos = $this->Departamento_model->leerDepartamentos();
+
+		$data['usuario'] = $usuario;
+		$data['instancia'] = $instancia;
+		$data['departamentos'] = $departamentos;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_repplenaria', $data);
+		$this->load->view('html/pie');
+	}
+
+	public function normativaReportes(){
+		$usuario = $this->ion_auth->user()->row();
+		$instancia = $this->Instanciaseguimiento_model->leerInstancias();
+		$departamentos = $this->Departamento_model->leerDepartamentos();
+
+		$data['usuario'] = $usuario;
+		$data['instancia'] = $instancia;
+		$data['departamentos'] = $departamentos;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_repnormativa', $data);
+		$this->load->view('html/pie');
+	}
+
+	public function procesarReportePlenaria()
+	{
+		//Primer validador
+		//$consulta = $this->objetoConsulta();
+		if($this->session->has_userdata('consultaplenaria')){
+			$this->session->unset_userdata('consultaplenaria');
+		}
+
+		$consulta = $this->objetoReporteConsulta();
+		if($consulta->fecha_inicio > $consulta->fecha_fin){
+			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
+			redirect('ManejoDB/reportePlenarias');
+		}else{
+			//var_dump($consulta);
+			//vaciar la variable de session
+			$this->session->set_userdata('consultaplenaria', $consulta);
+			print_r($this->session->userdata());
+			redirect('ManejoDB/downloadreporteplenaria');
+		}
+
+		/*if($consulta->fecha_inicio > $consulta->fecha_fin)
+		{
+			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
+			redirect('ManejoDB/reportePlenarias');
+		}else{
+			//var_dump($consulta);
+			$noticias = $this->Noticia_model->reporteNoticias($consulta);
+			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
+			if(empty($noticias_datos))
+			{
+				//Si la consulta esta vacia no se genera reporte
+				$this->mensaje('No existen resultados', 'info');
+				redirect('ManejoDB/reportesCompuestos');
+			}
+			else{
+				//Cargar los datos a las session
+				$this->session->set_userdata('consulta', []);
+				$this->session->set_userdata('consulta', $consulta);
+
+
+				redirect('ManejoDB/download');
+			}
+		}*/
+	}
+
+	public function objetoReporteConsulta()
+	{
+		$ids = new stdClass();
+		$ids->fecha_inicio = '';
+		$ids->fecha_fin = '';
+
+		$ids->idinstancia = '';
+		$ids->iddepartamento = '';
+		$ids->idmunicipio = '';
+
+		//Capturar datos
+		$ids->fecha_inicio = $this->fecha_unix($this->input->post('fecha_inicio'));
+		$ids->fecha_fin = $this->fecha_unix($this->input->post('fecha_fin')) ;
+		$ids->idinstancia = $this->input->post('idinstanciaple');
+		$ids->iddepartamento = $this->input->post('iddepple');
+		$ids->idmunicipio = $this->input->post('idmunple');
+
+		return $ids;
+	}
+
+	public function downloadreporteplenaria()
+	{
+		$consulta = $this->session->consultaplenaria;
+		$this->session->unset_userdata('consultaplenaria');
+		$plenarias = $this->Plenaria_model->reportePlenaria($consulta);
+
+		if(!empty($consulta)){
+			$filename = "reporte-plenarias.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-reportes-plenarias.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Plenarias');
+
+			$eje_y = 6;
+			foreach ($plenarias as $p){
+				$sheet->setCellValue('A'.$eje_y, $p->idplenaria);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $p->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $p->fecha_plenaria));
+				$sheet->setCellValue('D'.$eje_y, $p->instancia);
+				$sheet->setCellValue('E'.$eje_y, $p->nombre_departamento);
+				$sheet->setCellValue('F'.$eje_y, $p->municipio_nombre );
+				$sheet->setCellValue('G'.$eje_y, '' );
+				$sheet->setCellValue('H'.$eje_y, '' );
+				$sheet->setCellValue('I'.$eje_y, '' );
+				$eje_y++;
+			}
+
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('manejoDB/reportePlenarias');
+		}
+	}
+
 
 }

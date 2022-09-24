@@ -81,4 +81,5 @@ class Departamento_model extends CI_Model
 		);
 		$this->db->insert('users_groups', $dt);
 	}
+
 }

@@ -8,6 +8,7 @@ class Inicio extends CI_Controller
 		$this->load->library('session');
 		$this->load->library('ion_auth');
 		$this->load->model('Encuesta_model');
+		$this->load->model('Instanciaseguimiento_model');
 		
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -40,6 +41,7 @@ class Inicio extends CI_Controller
 		$idusuario = $usuario->id;
 		$datos['encuestas'] = $this->Encuesta_model->leerEncuestasAsignadasUsuario($idusuario);
 		$datos['usuario'] = $usuario;
+		$datos['instancia'] = $this->Instanciaseguimiento_model->leerInstancias();
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');

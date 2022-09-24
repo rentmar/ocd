@@ -78,6 +78,55 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+				<div class="card">
+					<div class="card-header cuest2 ">
+						Produccion<br>Normativa
+					</div>
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/institucionalidad.svg'; ?>" alt="Card image">
+					<div class="card-body">
+						<div class="btn-group ">
+							<button type="button" class="btn  cuest2">Nuevo</button>
+							<button type="button" class="btn dropdown-toggle dropdown-toggle-split cuest2" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<div class="dropdown-menu">
+								<?php foreach ($instancia as $i): ?>
+									<a class="dropdown-item" href="<?php echo site_url('normativa/normativaSeleccion/'.$i->idinsseg); ?>"><?php echo $i->instancia; ?></a>
+								<?php endforeach; ?>
+							</div>
+						</div>
+
+
+
+						<a href="<?php echo site_url('normativa/editar/');?>" class="btn btn-info" role="button" style="background-color:#EF9600; color:black;">
+							Editar
+						</a>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+				<div class="card">
+					<div class="card-header cuest3 ">
+						Seg. Agenda Legislativa
+						<br><br>
+
+					</div>
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.svg'; ?>" alt="Card image">
+					<div class="card-body">
+						<a href="<?php echo site_url('plenaria');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
+							Nuevo
+						</a>
+						<a href="<?php echo site_url('plenaria/editar/');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
+							Editar
+						</a>
+					</div>
+				</div>
+			</div>
 			
 			<?php if($this->ion_auth->in_group(4)): ?>
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
