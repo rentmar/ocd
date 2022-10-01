@@ -78,8 +78,7 @@
 					<h3>Municipio </h3>
 					<div  class="form-row">
 						<select id="idmunple" name="idmunple" class="form-control simple"  >
-
-
+							<option value="0" >Seleccione una opcion</option>
 
 						</select>
 					</div>

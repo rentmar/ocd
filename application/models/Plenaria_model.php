@@ -333,21 +333,21 @@ class Plenaria_model extends CI_Model
 		/** @noinspection PhpLanguageLevelInspection */
 		$placeholder = [];
 
-		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre    "
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre     "
 			."FROM plenaria_plurinacional as p  "
 			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg  "
 			."LEFT JOIN plenaria_departamental ON plenaria_departamental.idplenaria = p.idplenaria  "
 			."LEFT JOIN plenaria_municipal ON plenaria_municipal.idplenaria = p.idplenaria  "
 			."LEFT JOIN departamento ON departamento.iddepartamento = plenaria_departamental.rel_iddepartamento  "
 			."LEFT JOIN municipio ON municipio.idmunicipio = plenaria_municipal.rel_idmunicipio  "
+			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl  "
+			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf  "
 			."  "
 			."  "
 			."  "
 			."  "
 			."  "
-			."  "
-			."  "
-			."WHERE (p.fecha_plenaria BETWEEN ? AND ?)  "
+			."WHERE p.activo = 1 AND (p.fecha_plenaria BETWEEN ? AND ?)  "
 			."  ";
 
 		/** @noinspection PhpLanguageLevelInspection */
@@ -356,14 +356,139 @@ class Plenaria_model extends CI_Model
 		array_push($placeholder, $consulta->fecha_inicio);
 		array_push($placeholder, $consulta->fecha_fin);
 
+
+		$sql .= 'ORDER BY p.fecha_plenaria ASC   ';
 		$qry = $this->db->query($sql, $placeholder);
 		return $qry->result();
 	}
 
+	public function reportePlenariaMunicipal($parametros){
+		$consulta = $parametros;
+		//Array de placeholders
+		/** @noinspection PhpLanguageLevelInspection */
+		$placeholder = [];
+
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre     "
+			."FROM plenaria_plurinacional as p  "
+			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg  "
+			."LEFT JOIN plenaria_municipal ON plenaria_municipal.idplenaria = p.idplenaria  "
+			."LEFT JOIN municipio ON municipio.idmunicipio = plenaria_municipal.rel_idmunicipio  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = municipio.rel_iddepartamento  "
+			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl    "
+			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf    "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."WHERE p.activo = 1 AND (p.fecha_plenaria BETWEEN ? AND ?)  "
+			."AND instancia_seguimiento.idinsseg = ?  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+		array_push($placeholder, $consulta->idinstancia);
+
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+		if($consulta->idmunicipio !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND municipio.idmunicipio  = ?  ";
+			array_push($placeholder, $consulta->idmunicipio);
+		}
+
+		$sql .= 'ORDER BY p.fecha_plenaria ASC   ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+
+	}
+
+	public function reportePlenariaDepartamental($parametros){
+		$consulta = $parametros;
+		//Array de placeholders
+		/** @noinspection PhpLanguageLevelInspection */
+		$placeholder = [];
+
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre     "
+			."FROM plenaria_plurinacional as p  "
+			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg  "
+			."LEFT JOIN plenaria_departamental ON plenaria_departamental.idplenaria = p.idplenaria  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = plenaria_departamental.rel_iddepartamento  "
+			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl    "
+			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf      "
+			."    "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."WHERE p.activo = 1 AND (p.fecha_plenaria BETWEEN ? AND ?)  "
+			."AND instancia_seguimiento.idinsseg = ?  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+		array_push($placeholder, $consulta->idinstancia);
+
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
 
 
+		$sql .= 'ORDER BY p.fecha_plenaria ASC   ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+
+	}
+
+	public function reportePlenariaPlurinacional($parametros){
+		$consulta = $parametros;
+		//Array de placeholders
+		/** @noinspection PhpLanguageLevelInspection */
+		$placeholder = [];
+
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre          "
+			."FROM plenaria_plurinacional as p    "
+			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg    "
+			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl    "
+			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf    "
+			."    "
+			."      "
+			."    "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."WHERE p.activo = 1 AND (p.fecha_plenaria BETWEEN ? AND ?)  "
+			."AND instancia_seguimiento.idinsseg = 1  ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
 
 
+		$sql .= 'ORDER BY p.fecha_plenaria ASC   ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
 
 
 

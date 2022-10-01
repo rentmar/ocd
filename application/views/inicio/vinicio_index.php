@@ -15,6 +15,7 @@
 			</div>
 			<?php //endif; ?>
 
+			<?php if($this->ion_auth->is_admin()): ?>
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest1">
@@ -59,7 +60,7 @@
 
 				</div>
 			</div>
-
+			<?php endif; ?>
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest3 ">
@@ -78,6 +79,7 @@
 					</div>
 				</div>
 			</div>
+
 
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">

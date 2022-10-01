@@ -1333,19 +1333,107 @@ class ManejoDB extends CI_Controller{
 			header('Cache-Control: max-age=0');
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getSheet(0)->setTitle('Plenarias');
+			$sheet->setCellValue('D3', 'INSTANCIA:');
 
 			$eje_y = 6;
-			foreach ($plenarias as $p){
-				$sheet->setCellValue('A'.$eje_y, $p->idplenaria);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $p->fecha_registro));
-				$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $p->fecha_plenaria));
-				$sheet->setCellValue('D'.$eje_y, $p->instancia);
-				$sheet->setCellValue('E'.$eje_y, $p->nombre_departamento);
-				$sheet->setCellValue('F'.$eje_y, $p->municipio_nombre );
-				$sheet->setCellValue('G'.$eje_y, '' );
-				$sheet->setCellValue('H'.$eje_y, '' );
-				$sheet->setCellValue('I'.$eje_y, '' );
-				$eje_y++;
+			if($consulta->idinstancia == 1){
+				//Instancia Plurinacional
+				$sheet->setCellValue('E3', 'Asamblea Legislativa Plurinacional');
+				$plenarias = $this->Plenaria_model->reportePlenariaPlurinacional($consulta);
+				foreach ($plenarias as $p):
+					$sheet->setCellValue('A'.$eje_y, $p->idplenaria);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $p->fecha_registro));
+					$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $p->fecha_plenaria));
+					$sheet->setCellValue('D'.$eje_y, $p->instancia);
+					$sheet->setCellValue('G'.$eje_y, $p->plenaria_puntos_agenda );
+					$sheet->setCellValue('H'.$eje_y, $p->plenaria_agenda_cumplida );
+					$sheet->setCellValue('I'.$eje_y, $p->plenaria_puntos_pendientes );
+					$sheet->setCellValue('J'.$eje_y, $p->plenaria_puntos_varios);
+					$plenaria_ne = $this->Plenaria_model->plenariaNormaExtraordinaria($p->idplenaria);
+					if($plenaria_ne == false){
+						$sheet->setCellValue('K'.$eje_y, '');
+					}else{
+						$sheet->setCellValue('K'.$eje_y, $plenaria_ne->plne_datos);
+					}
+					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
+					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$eje_y++;
+				endforeach;
+
+			}elseif ($consulta->idinstancia == 2){
+				//Departamental
+				$sheet->setCellValue('E3', 'Asamblea Legislativa Departamental');
+				$plenarias = $this->Plenaria_model->reportePlenariaDepartamental($consulta);
+				foreach ($plenarias as $p):
+					$sheet->setCellValue('A'.$eje_y, $p->idplenaria);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $p->fecha_registro));
+					$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $p->fecha_plenaria));
+					$sheet->setCellValue('D'.$eje_y, $p->instancia);
+					$sheet->setCellValue('E'.$eje_y, $p->nombre_departamento);
+					$sheet->setCellValue('G'.$eje_y, $p->plenaria_puntos_agenda );
+					$sheet->setCellValue('H'.$eje_y, $p->plenaria_agenda_cumplida );
+					$sheet->setCellValue('I'.$eje_y, $p->plenaria_puntos_pendientes );
+					$sheet->setCellValue('J'.$eje_y, $p->plenaria_puntos_varios);
+					$plenaria_ne = $this->Plenaria_model->plenariaNormaExtraordinaria($p->idplenaria);
+					if($plenaria_ne == false){
+						$sheet->setCellValue('K'.$eje_y, '');
+					}else{
+						$sheet->setCellValue('K'.$eje_y, $plenaria_ne->plne_datos);
+					}
+					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
+					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$eje_y++;
+				endforeach;
+			}elseif ($consulta->idinstancia == 3){
+				//Municipal
+				$sheet->setCellValue('E3', 'Consejo Municipal');
+				$plenarias = $this->Plenaria_model->reportePlenariaMunicipal($consulta);
+				foreach ($plenarias as $p):
+					$sheet->setCellValue('A'.$eje_y, $p->idplenaria);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $p->fecha_registro));
+					$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $p->fecha_plenaria));
+					$sheet->setCellValue('D'.$eje_y, $p->instancia);
+					$sheet->setCellValue('E'.$eje_y, $p->nombre_departamento);
+					$sheet->setCellValue('F'.$eje_y, $p->municipio_nombre );
+					$sheet->setCellValue('G'.$eje_y, $p->plenaria_puntos_agenda );
+					$sheet->setCellValue('H'.$eje_y, $p->plenaria_agenda_cumplida );
+					$sheet->setCellValue('I'.$eje_y, $p->plenaria_puntos_pendientes );
+					$sheet->setCellValue('J'.$eje_y, $p->plenaria_puntos_varios);
+					$plenaria_ne = $this->Plenaria_model->plenariaNormaExtraordinaria($p->idplenaria);
+					if($plenaria_ne == false){
+						$sheet->setCellValue('K'.$eje_y, '');
+					}else{
+						$sheet->setCellValue('K'.$eje_y, $plenaria_ne->plne_datos);
+					}
+					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
+					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$eje_y++;
+				endforeach;
+			}elseif ($consulta->idinstancia == 0){
+				//Todas las instancias
+				$sheet->setCellValue('E3', 'Todas las instancias');
+				$plenarias = $this->Plenaria_model->reportePlenaria($consulta);
+				foreach ($plenarias as $p):
+					$sheet->setCellValue('A'.$eje_y, $p->idplenaria);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $p->fecha_registro));
+					$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $p->fecha_plenaria));
+					$sheet->setCellValue('D'.$eje_y, $p->instancia);
+					$sheet->setCellValue('E'.$eje_y, $p->nombre_departamento);
+					$sheet->setCellValue('F'.$eje_y, $p->municipio_nombre );
+					$sheet->setCellValue('G'.$eje_y, $p->plenaria_puntos_agenda );
+					$sheet->setCellValue('H'.$eje_y, $p->plenaria_agenda_cumplida );
+					$sheet->setCellValue('I'.$eje_y, $p->plenaria_puntos_pendientes );
+					$sheet->setCellValue('J'.$eje_y, $p->plenaria_puntos_varios);
+					$plenaria_ne = $this->Plenaria_model->plenariaNormaExtraordinaria($p->idplenaria);
+					if($plenaria_ne == false){
+						$sheet->setCellValue('K'.$eje_y, '');
+					}else{
+						$sheet->setCellValue('K'.$eje_y, $plenaria_ne->plne_datos);
+					}
+					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
+					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$eje_y++;
+				endforeach;
 			}
 
 			//Primer libro por defecto
