@@ -146,7 +146,8 @@
 						</div>
 
 
-							<div class="form-row">
+						<!--
+						<div class="form-row">
 							<div class="col-10">
 								<label for="normaremitente" >
 									Quién envía la norma para su tratamiento									:
@@ -155,7 +156,6 @@
 							</div>
 							<div class="col-2"></div>
 							</div>
-
 
 						<div class="form-row">
 							<div class="col-10">
@@ -174,12 +174,17 @@
 								<textarea class="form-control" rows="4" id="normasegundoenvio" name="normasegundoenvio" disabled="true" ><?php echo $norma->norma_segundo_envio; ?></textarea>
 							</div>
 							<div class="col-2"></div>
-						</div>
+						</div>-->
 						<div class="form-row">
 							<div class="col">
 								<hr>
 							</div>
 						</div>
+						
+
+
+
+
 						<div class="form-row">
 							<div class="col-10">
 								<label for="normacodigo">
@@ -226,19 +231,20 @@
 							</div>
 						</div>
 
+						<!--
 						<div class="form-row">
 							<div class="col-10">
 								<div class="form-group">
 									<label for="proponente" >
 										Proponente:
 									</label>
-									<?php $prp = strtolower($norma->proponente); ?>
-									<?php if($prp == 'otros'): ?>
+									<?php // $prp = strtolower($norma->proponente); ?>
+									<?php //if($prp == 'otros'): ?>
 										<input class="form-control" type="text" id="proponente" name="proponente" disabled="true" value="<?php echo $prp;  ?>">
 										<input class="form-control" type="text" id="notaproponente" name="notaproponente" disabled="true" value="<?php echo $otro_proponente->otro_descripcion;  ?>">
-									<?php else: ?>
+									<?php //else: ?>
 										<input class="form-control" type="text" id="proponente" name="proponente" disabled="true" value="<?php echo $prp;  ?>">
-									<?php endif; ?>
+									<?php //endif; ?>
 
 								</div>
 							</div>
@@ -254,6 +260,7 @@
 								<hr>
 							</div>
 						</div>
+									-->
 
 						<div class="form-row">
 							<div class="col-10">
@@ -341,6 +348,7 @@
 						   value="<?php echo mdate('%Y-%m-%d', $norma->fecha_norma); ?>" >
 				</div>
 
+				<!--
 				<div class="form-group">
 					<label for="remitentenorma">Quién envía la norma para su tratamiento:</label>
 					<textarea class="form-control" rows="4" id="remitentenorma" name="remitentenorma"><?php echo $norma->norma_remitente; ?> </textarea>
@@ -353,6 +361,7 @@
 					<label for="segundoenvionorma" >¿Existe un segundo envío/solicitud de la norma? En caso de ser así, registre quién y cuándo:</label>
 					<textarea class="form-control" rows="4" id="segundoenvionorma" name="segundoenvionorma"  ><?php echo $norma->norma_segundo_envio; ?></textarea>
 				</div>
+				-->
 
 			</div>
 			<div class="modal-footer">
