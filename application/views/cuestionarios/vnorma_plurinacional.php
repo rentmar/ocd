@@ -156,8 +156,8 @@
 			<div class="card-body">
 				<div class="contenedores">
 					<label for="proponente">Normativa propuesta por:</label><br>
-					<select id="proponente" name="proponente" class="form-control" required>
-						<option value="" >Seleccione el proponente</option>
+					<select id="proponente" name="proponente" class="form-control">
+						<option value="ninguno" >Seleccione el proponente</option>
 						<option value="0">oficialismo</option>
 						<option value="1">oposicion</option>
 						<option value="2">otros</option>
@@ -189,7 +189,7 @@
 				</div>
 				<div class="form-group">
 					<label for="fecha_norma_plu" >Fecha de presentacion:</label>
-					<input class="form-control" type="date" id="fecha_norma_plu" name="fecha_norma_plu" required>
+					<input class="form-control" type="date" id="fecha_norma_plu" name="fecha_norma_plu" >
 				</div>
 
 			</div>

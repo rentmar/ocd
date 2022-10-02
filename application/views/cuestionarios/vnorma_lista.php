@@ -25,7 +25,7 @@
 						<?php foreach ($normas as $n): ?>
 						<tr>
 							<td> <?php echo mdate('%m-%d-%Y', $n->fecha_registro); ?> </td>
-							<td> <?php echo mdate('%m-%d-%Y', $n->fecha_norma); ?> </td>
+							<td> <?php if($n->fecha_norma != '0'){echo mdate('%m-%d-%Y', $n->fecha_norma);}  ?> </td>
 							<td> <?php echo $n->instancia; ?> </td>
 							<td> <?php echo $n->estado_norma; ?> </td>
 							<td> <?php echo $n->norma_codigo; ?> </td>

@@ -166,10 +166,15 @@
 								</label>
 								<input type="date" id="fecha_norma_primer_envio" name="fecha_norma_primer_envio" class="form-control" readonly
 									   value="<?php
-									   if(isset($norma->fecha_norma)){
-										   echo mdate('%Y-%m-%d', $norma->fecha_norma);
-									   }
-									   ?>" >
+									    	if(isset($norma->fecha_norma)){
+												if($norma->fecha_norma!=0){
+													echo mdate('%Y-%m-%d', $norma->fecha_norma);
+												}else{
+													echo '';
+												}
+												
+											}
+										?>" >
 							</div>
 							<div class="col-2">
 								<button type="submit" data-toggle="modal" data-target="#normamodalpresentacion" class="btn btn-primary" style="background-color:#474142; color:#ffffff">
@@ -335,10 +340,15 @@
 					<label for="fechapresentacion">Fecha de presentacion:</label>
 					<input type="date" class="form-control" id="fechapresentacion" name="fechapresentacion"
 						   value="<?php
-						   if(isset($norma->fecha_norma)){
-							   echo mdate('%Y-%m-%d', $norma->fecha_norma);
-						   }
-						   ?>">
+									    	if(isset($norma->fecha_norma)){
+												if($norma->fecha_norma!=0){
+													echo mdate('%Y-%m-%d', $norma->fecha_norma);
+												}else{
+													echo '';
+												}
+												
+											}
+										?>">
 				</div>
 				<div class="form-group">
 					<label for="normaremitente">Quien presenta el proyecto de ley:</label>
