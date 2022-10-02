@@ -210,7 +210,25 @@
 								<label for="fechasol" >
 									Fecha de solicitud de reposicion:
 								</label>
-								<input class="form-control" id="fechasol" type="date" name="fechasol" value="<?php if(isset($norma->fecha_sol_repo)){echo mdate('%Y-%m-%d', $norma->fecha_sol_repo);} ?>" readonly>
+								<input class="form-control" id="fechasol" type="date" name="fechasol" 
+								value="
+								<?php
+									    	if(isset($norma->fecha_sol_repo)){
+												if($norma->fecha_sol_repo != 0){
+													echo mdate('%Y-%m-%d', $norma->fecha_sol_repo);
+												}else{
+													echo '';
+												}
+												
+											}
+										?>
+
+
+								<?php 
+								//if(isset($norma->fecha_sol_repo))
+								//{echo mdate('%Y-%m-%d', $norma->fecha_sol_repo);} ?>
+								
+								" readonly>
 
 							</div>
 							<div class="col-2">
@@ -383,8 +401,19 @@
 					<input type="date" class="form-control" id="fechareposicion" name="fechareposicion"
 						   value="<?php
 						   if(isset($norma->fecha_sol_repo)){
+							if($norma->fecha_sol_repo != 0){
+								echo mdate('%Y-%m-%d', $norma->fecha_sol_repo);
+							}else{
+								echo '';
+							}
+							
+						}
+
+
+
+						   /*if(isset($norma->fecha_sol_repo)){
 							   echo mdate('%Y-%m-%d', $norma->fecha_sol_repo);
-						   }
+						   }*/
 						   ?>">
 				</div>
 				<div class="form-group">
@@ -745,6 +774,48 @@
 							   }
 							   ?>">
 					</div>
+				<?php elseif ($proponente == ''): ?>	
+					<div class="form-group">
+						<div class="custom-control custom-radio">
+							<input id="proponente_norma_1" name="proponente_norma" type="radio" value="1" class="custom-control-input">
+							<label class="custom-control-label" for="proponente_norma_1">
+								Oficialismo
+							</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input id="proponente_norma_2" name="proponente_norma" type="radio" value="2" class="custom-control-input" >
+							<label class="custom-control-label" for="proponente_norma_2" >
+								Oposición
+							</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input id="proponente_norma_3" name="proponente_norma" type="radio" value="3" class="custom-control-input">
+							<label class="custom-control-label" for="proponente_norma_3" >
+								Otros
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="otroproponente">Otro proponente:</label>
+						<input type="text" id="otroproponente" name="otroproponente"
+							   class="form-control"
+							   value="<?php
+							   if($otro_proponente != false){
+								   echo $otro_proponente->otro_descripcion;
+							   }
+							   ?>" >
+						<input type="hidden" id="idotroproponente" name="idotroproponente" class="form-control"
+							   value="<?php
+							   if($otro_proponente != false){
+								   echo $otro_proponente->idpropotro;
+							   }
+							   else{
+								   echo '0';
+							   }
+							   ?> ">
+
+					</div>
+
 				<?php else: ?>
 					<div class="form-group">
 						<div class="custom-control custom-radio">
