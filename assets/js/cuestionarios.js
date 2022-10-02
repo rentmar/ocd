@@ -1178,13 +1178,17 @@ $('#formulario_norma').submit(function (e) {
 	norma.fecha = fechas;
 
 	//Remitente
-	norma.remitente = $('#norma_remitente').val();
+	//norma.remitente = $('#norma_remitente').val();
+	norma.remitente = '';
 	//Destinatario
-	norma.destinatario = $('#norma_destinatario').val();
+	//norma.destinatario = $('#norma_destinatario').val();
+	norma.destinatario = '';
 
 	//Segundo remitente
-	segundoRemitente.existe = $('input:radio[name=norma_segundo]:checked').val();
-	segundoRemitente.nombre = $('#norma_segundo_datos').val() ;
+	//segundoRemitente.existe = $('input:radio[name=norma_segundo]:checked').val();
+	//segundoRemitente.nombre = $('#norma_segundo_datos').val() ;
+	segundoRemitente.existe = 0;
+	segundoRemitente.nombre = '';
 
 	norma.segundoremitente = segundoRemitente;
 
@@ -1206,9 +1210,12 @@ $('#formulario_norma').submit(function (e) {
 	norma.tema2 = tema2;
 
 	//Capturar el proponente
-	proponente.idproponente = $('#proponente').val().toLocaleLowerCase();
+	/*proponente.idproponente = $('#proponente').val().toLocaleLowerCase();
 	proponente.nombre = $("#proponente option:selected").text();
-	proponente.otro = $('#proponente_otro').val();
+	proponente.otro = $('#proponente_otro').val();*/
+	proponente.idproponente = 0;
+	proponente.nombre = '';
+	proponente.otro = '';
 	norma.proponente = proponente;
 
 	//Observaciones
@@ -1230,8 +1237,8 @@ $('#formulario_norma').submit(function (e) {
 	if(norma.estado['idestado'] == 2){
 		var inputfechaprimer = '';
 		inputfechaprimer += '<label for="fecha_primer_envio_pre">Fecha del primer envio:</label>';
-		inputfechaprimer += '<input type="text" class="form-control" id="fecha_primer_envio_pre" name="fecha_primer_envio_pre" value="'+ norma.fecha_primer_envio['fecha'] +'" required>';
-		inputfechaprimer += '<input type="text" class="form-control" id="fecha_primer_envio_pre_unix" name="fecha_primer_envio_pre_unix" value="'+ norma.fecha_primer_envio['fecha_unix'] +'" >';
+		inputfechaprimer += '<input readonly type="text" class="form-control" id="fecha_primer_envio_pre" name="fecha_primer_envio_pre" value="'+ norma.fecha_primer_envio['fecha'] +'" required>';
+		inputfechaprimer += '<input type="hidden" class="form-control" id="fecha_primer_envio_pre_unix" name="fecha_primer_envio_pre_unix" value="'+ norma.fecha_primer_envio['fecha_unix'] +'" >';
 		inputfechaprimer += '';
 		$('#fechaprimerenviopre').html(inputfechaprimer);
 	}else if(norma.estado['idestado'] == 1){
@@ -1250,7 +1257,7 @@ $('#formulario_norma').submit(function (e) {
 	}else if(norma.instanciaSeguimiento['identificador'] == 2){
 		//Instancia secundaria departamental
 		instanciaSec += '<label for="puntos_agenda_pre">Departamento:</label>';
-		instanciaSec += '<input type="text" class="form-control" id="depnorma_pre" name="depnorma_pre" required value="'+ norma.departamento['departamento'] +'">';
+		instanciaSec += '<input readonly type="text" class="form-control" id="depnorma_pre" name="depnorma_pre" required value="'+ norma.departamento['departamento'] +'">';
 		instanciaSec += '<input type="hidden" class="form-control" id="iddepnorma_pre" name="iddepnorma_pre" value="'+ norma.departamento['iddepartamento']+'" >';
 		instanciaSec += '';
 		$('#instancia_secundaria').addClass('form-group');
@@ -1260,7 +1267,7 @@ $('#formulario_norma').submit(function (e) {
 	} else if(norma.instanciaSeguimiento['identificador'] == 3){
 		//Instancia secundaria municipal
 		instanciaSec += '<label for="puntos_agenda_pre">Municipio:</label>';
-		instanciaSec += '<input type="text" class="form-control" id="munnorma_pre" name="munnorma_pre" required value="'+ norma.municipio['municipio'] +'" >';
+		instanciaSec += '<input readonly type="text" class="form-control" id="munnorma_pre" name="munnorma_pre" required value="'+ norma.municipio['municipio'] +'" >';
 		instanciaSec += '<input type="hidden" class="form-control" id="idmunnorma_pre" name="idmunnorma_pre" value="'+ norma.municipio['idmunicipio'] +'" >';
 		instanciaSec += '';
 		$('#instancia_secundaria').addClass('form-group');
@@ -1296,7 +1303,7 @@ $('#formulario_norma').submit(function (e) {
 		console.log('Otro tema seleccionado: ' + norma.tema1['otrotema']);
 		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
 		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ norma.tema1['otrotema'] +'">';
-		tema1_pre += '<input type="text" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ norma.tema1['idtema'] +'" >';
+		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ norma.tema1['idtema'] +'" >';
 		tema1_pre += '';
 		$('#tema1desp').html(tema1_pre);
 	}else{
@@ -1304,8 +1311,8 @@ $('#formulario_norma').submit(function (e) {
 		console.log(temadb);
 		norma.tema1['tema'] = temadb['nombre_tema'];
 		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
-		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ norma.tema1['tema'] +'">';;
-		tema1_pre += '<input type="text" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ norma.tema1['idtema'] +'" >';;
+		tema1_pre += '<input readonly type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ norma.tema1['tema'] +'">';;
+		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ norma.tema1['idtema'] +'" >';;
 		tema1_pre += '';
 		$('#tema1desp').html(tema1_pre);
 	}
@@ -1315,7 +1322,7 @@ $('#formulario_norma').submit(function (e) {
 		console.log('Otro tema seleccionado: '+ norma.tema2['otrotema']);
 		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
 		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ norma.tema2['otrotema'] +'">';
-		tema2_pre += '<input type="text" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ norma.tema2['idtema'] +'" >';
+		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ norma.tema2['idtema'] +'" >';
 		tema2_pre += '';
 		$('#tema2desp').html(tema2_pre);
 
@@ -1324,8 +1331,8 @@ $('#formulario_norma').submit(function (e) {
 		console.log(tema2db);
 		norma.tema2['tema'] = tema2db['nombre_tema'];
 		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
-		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ norma.tema2['tema'] +'">';
-		tema2_pre += '<input type="text" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ norma.tema2['idtema'] +'" >';
+		tema2_pre += '<input readonly type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ norma.tema2['tema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ norma.tema2['idtema'] +'" >';
 		tema2_pre += '';
 		$('#tema2desp').html(tema2_pre);
 	}
@@ -1333,16 +1340,18 @@ $('#formulario_norma').submit(function (e) {
 	//Proponente
 	var prop_dis = '';
 	if(norma.proponente['idproponente'] == 2){
-		prop_dis += '<label for="proponente_pre" >Proponente:</label>';
+		/*prop_dis += '<label for="proponente_pre" >Proponente:</label>';
 		prop_dis += '<input type="text" class="form-control" id="proponente_pre" name="proponente_pre" required value="'+ norma.proponente['nombre']  +'">';
 		prop_dis += '<input type="text" class="form-control" id="proponentedes_pre" name="proponentedes_pre" required value="'+ norma.proponente['otro']  +'">';;
 		prop_dis += '<input type="text" class="form-control" id="idproponente_pre" name="idproponente_pre" value="'+ norma.proponente['idproponente'] +'" >';
+		*/
 		prop_dis += '';
 		$('#propdesp').html(prop_dis);
 	}else{
-		prop_dis += '<label for="proponente_pre" >Proponente:</label>';
+		/*prop_dis += '<label for="proponente_pre" >Proponente:</label>';
 		prop_dis += '<input type="text" class="form-control" id="proponente_pre" name="proponente_pre" required value="'+ norma.proponente['nombre']  +'">';
 		prop_dis += '<input type="text" class="form-control" id="idproponente_pre" name="idproponente_pre" value="'+ norma.proponente['idproponente'] +'" >';
+		*/
 		prop_dis += '';
 		$('#propdesp').html(prop_dis);
 	}

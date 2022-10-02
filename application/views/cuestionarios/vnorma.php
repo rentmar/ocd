@@ -60,22 +60,25 @@
 	</div>
 	<br>
 
+	<!--
 	<div class="contenedores">
 		<label for="titular">Quién envía la norma para su tratamiento:</label><br>
 		<input type="text" id="norma_remitente" name="norma_remitente" required class="form-control"
 			   value=""
 		>
 	</div>
-	<br>
+	<br>-->
 
+	<!--
 	<div class="contenedores">
 		<label for="titular">A quién le llega la norma para su tratamiento:</label><br>
 		<input type="text" id="norma_destinatario" name="norma_destinatario" required class="form-control"
 			   value=""
 		>
 	</div>
-	<br>
+	<br>-->
 
+	<!--
 	<div class="contenedores">
 		<label for="titular">¿Existe un segundo envío/solicitud de la norma??</label><br>
 		<div class="custom-control custom-radio custom-control-inline">
@@ -93,7 +96,7 @@
 		<input type="text" id="norma_segundo_datos" name="norma_segundo_datos" required class="form-control"
 			   value="" placeholder="Si, Dip. xxxx">
 	</div>
-	<br>
+	<br> -->
 
 	<div class="contenedores">
 		<label for="titular">Codigo de la norma:</label><br>
@@ -115,10 +118,10 @@
 
 
 	<div class="contenedores">
-		<label for="titular">OBJETO DEL PROYECTO DE NORMA (COPIAR TEXTUALMENTE DEL PROYECTO):</label><br>
-		<input type="text" id="norma_objeto" name="norma_objeto" required class="form-control"
-			   value=""
-		>
+		<label for="norma_objeto">OBJETO DEL PROYECTO DE NORMA (COPIAR TEXTUALMENTE DEL PROYECTO):</label><br>
+		<!--<input type="text" id="norma_objeto" name="norma_objeto" required class="form-control"
+			   value=""> -->
+		<textarea class="form-control" rows="5" id="norma_objeto" name="norma_objeto" required></textarea>	   
 	</div>
 	<br>
 
@@ -210,6 +213,7 @@
 
 
 
+	<!--
 	<div class="contenedores">
 		<label for="proponente">Normativa propuesta por:</label><br>
 		<select id="proponente" name="proponente" class="form-control" required>
@@ -224,13 +228,13 @@
 	<div id="otroproponentedatos" >
 
 	</div>
-	<br>
+	<br>-->
 
 	<div  class="contenedores">
 		<label for="norma_obs">Observaciones:</label><br>
-		<input type="text" id="norma_obs" name="norma_obs" required class="form-control"
-			   value=""
-		>
+		<!--<input type="text" id="norma_obs" name="norma_obs" required class="form-control"
+			   value="">-->
+		<textarea class="form-control" rows="5" id="norma_obs" name="norma_obs" required></textarea>
 	</div>
 	<br>
 
@@ -275,12 +279,12 @@
 					</div>
 					<div class="form-group">
 						<label for="fecha_norma_pre">Fecha de la norma:</label>
-						<input type="text" class="form-control" id="fecha_norma_pre" name="fecha_norma_pre">
+						<input type="text" class="form-control" id="fecha_norma_pre" name="fecha_norma_pre" readonly>
 						<input type="hidden" id="fecha_norma_unix_pre" name="fecha_norma_unix_pre">
 					</div>
 					<div class="form-group">
 						<label for="instancia_seguimiento_pre">Instancia de seguimiento:</label>
-						<input type="text" class="form-control" id="instancia_seguimiento_pre" name="instancia_seguimiento_pre" required>
+						<input type="text" class="form-control" id="instancia_seguimiento_pre" name="instancia_seguimiento_pre" readonly required>
 						<input type="hidden" class="form-control" id="idinstancia_seg_pre" name="idinstancia_seg_pre" >
 					</div>
 
@@ -290,12 +294,14 @@
 
 					<div class="form-group">
 						<label for="estado_norma_pre">Estado actual de la norma:</label>
-						<input type="text" class="form-control" id="estado_norma_pre" name="estado_norma_pre" required>
-						<input type="text" class="form-control" id="idestado_norma_pre" name="idestado_norma_pre">
+						<input type="text" class="form-control" id="estado_norma_pre" name="estado_norma_pre" required readonly>
+						<input type="hidden" class="form-control" id="idestado_norma_pre" name="idestado_norma_pre">
 					</div>
 					<div id="fechaprimerenviopre" class="form-group">
 
 					</div>
+					
+					<!--
 					<div class="form-group">
 						<label for="remitente_pre">Quién envía la norma para su tratamiento:</label>
 						<input type="text" class="form-control" id="remitente_pre" name="remitente_pre" required >
@@ -307,6 +313,9 @@
 					<div id="segundoenvio" class="form-group" >
 
 					</div>
+					-->
+
+
 					<div  class="form-group">
 						<label for="cod_norma_pre">Codigo de la norma:</label>
 						<input type="text" class="form-control" id="cod_norma_pre" name="cod_norma_pre" required>
