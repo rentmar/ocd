@@ -469,7 +469,6 @@ class Normativa extends CI_Controller{
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
-		var_dump($norma);
 
 		
 
