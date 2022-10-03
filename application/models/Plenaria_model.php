@@ -333,7 +333,7 @@ class Plenaria_model extends CI_Model
 		/** @noinspection PhpLanguageLevelInspection */
 		$placeholder = [];
 
-		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre     "
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre, users.username as monitor     "
 			."FROM plenaria_plurinacional as p  "
 			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg  "
 			."LEFT JOIN plenaria_departamental ON plenaria_departamental.idplenaria = p.idplenaria  "
@@ -342,7 +342,7 @@ class Plenaria_model extends CI_Model
 			."LEFT JOIN municipio ON municipio.idmunicipio = plenaria_municipal.rel_idmunicipio  "
 			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl  "
 			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf  "
-			."  "
+			."LEFT JOIN users ON users.id = p.rel_id  "
 			."  "
 			."  "
 			."  "
@@ -368,7 +368,7 @@ class Plenaria_model extends CI_Model
 		/** @noinspection PhpLanguageLevelInspection */
 		$placeholder = [];
 
-		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre     "
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre, users.username as monitor     "
 			."FROM plenaria_plurinacional as p  "
 			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg  "
 			."LEFT JOIN plenaria_municipal ON plenaria_municipal.idplenaria = p.idplenaria  "
@@ -376,7 +376,7 @@ class Plenaria_model extends CI_Model
 			."LEFT JOIN departamento ON departamento.iddepartamento = municipio.rel_iddepartamento  "
 			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl    "
 			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf    "
-			."  "
+			."LEFT JOIN users ON users.id = p.rel_id  "
 			."  "
 			."  "
 			."  "
@@ -417,14 +417,14 @@ class Plenaria_model extends CI_Model
 		/** @noinspection PhpLanguageLevelInspection */
 		$placeholder = [];
 
-		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre     "
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, departamento.nombre_departamento, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre, users.username     "
 			."FROM plenaria_plurinacional as p  "
 			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg  "
 			."LEFT JOIN plenaria_departamental ON plenaria_departamental.idplenaria = p.idplenaria  "
 			."LEFT JOIN departamento ON departamento.iddepartamento = plenaria_departamental.rel_iddepartamento  "
 			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl    "
 			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf      "
-			."    "
+			."LEFT JOIN users ON users.id = p.rel_id    "
 			."  "
 			."  "
 			."  "
@@ -461,12 +461,12 @@ class Plenaria_model extends CI_Model
 		/** @noinspection PhpLanguageLevelInspection */
 		$placeholder = [];
 
-		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre          "
+		$sql = "SELECT p.idplenaria, p.fecha_registro, p.fecha_plenaria, instancia_seguimiento.instancia, p.plenaria_puntos_agenda, p.plenaria_agenda_cumplida, p.plenaria_puntos_pendientes, p.plenaria_puntos_varios, p.monitores_seguimiento, tipo_plenaria_informacion.tipo_plenaria_nombre, users.username as monitor          "
 			."FROM plenaria_plurinacional as p    "
 			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = p.rel_idinsseg    "
 			."LEFT JOIN tipoplenaria ON tipoplenaria.idtpl = p.rel_idtpl    "
 			."LEFT JOIN tipo_plenaria_informacion ON tipo_plenaria_informacion.idtpinf = tipoplenaria.rel_idtpinf    "
-			."    "
+			."LEFT JOIN users ON users.id = p.rel_id    "
 			."      "
 			."    "
 			."  "

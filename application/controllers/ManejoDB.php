@@ -1269,33 +1269,10 @@ class ManejoDB extends CI_Controller{
 			//var_dump($consulta);
 			//vaciar la variable de session
 			$this->session->set_userdata('consultaplenaria', $consulta);
-			print_r($this->session->userdata());
+			//print_r($this->session->userdata());
 			redirect('ManejoDB/downloadreporteplenaria');
 		}
 
-		/*if($consulta->fecha_inicio > $consulta->fecha_fin)
-		{
-			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
-			redirect('ManejoDB/reportePlenarias');
-		}else{
-			//var_dump($consulta);
-			$noticias = $this->Noticia_model->reporteNoticias($consulta);
-			$noticias_datos = $this->Noticia_model->reportesNoticiasDatos($consulta);
-			if(empty($noticias_datos))
-			{
-				//Si la consulta esta vacia no se genera reporte
-				$this->mensaje('No existen resultados', 'info');
-				redirect('ManejoDB/reportesCompuestos');
-			}
-			else{
-				//Cargar los datos a las session
-				$this->session->set_userdata('consulta', []);
-				$this->session->set_userdata('consulta', $consulta);
-
-
-				redirect('ManejoDB/download');
-			}
-		}*/
 	}
 
 	public function objetoReporteConsulta()
@@ -1357,6 +1334,8 @@ class ManejoDB extends CI_Controller{
 					}
 					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
 					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$sheet->setCellValue('N'.$eje_y, $p->monitor);
+
 					$eje_y++;
 				endforeach;
 
@@ -1382,6 +1361,8 @@ class ManejoDB extends CI_Controller{
 					}
 					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
 					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$sheet->setCellValue('N'.$eje_y, $p->username);
+
 					$eje_y++;
 				endforeach;
 			}elseif ($consulta->idinstancia == 3){
@@ -1407,6 +1388,8 @@ class ManejoDB extends CI_Controller{
 					}
 					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
 					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$sheet->setCellValue('N'.$eje_y, $p->monitor);
+
 					$eje_y++;
 				endforeach;
 			}elseif ($consulta->idinstancia == 0){
@@ -1432,6 +1415,8 @@ class ManejoDB extends CI_Controller{
 					}
 					$sheet->setCellValue('L'.$eje_y, $p->tipo_plenaria_nombre);
 					$sheet->setCellValue('M'.$eje_y, $p->monitores_seguimiento);
+					$sheet->setCellValue('N'.$eje_y, $p->monitor);
+
 					$eje_y++;
 				endforeach;
 			}
