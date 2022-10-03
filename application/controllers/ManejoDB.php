@@ -1274,6 +1274,23 @@ class ManejoDB extends CI_Controller{
 		}
 
 	}
+	public function procesarReporteNormativa(){
+		if($this->session->has_userdata('consultanormativa')){
+			$this->session->unset_userdata('consultanormativa');
+		}
+		$consulta = $this->objetoReporteConsulta();
+		$consulta = $this->objetoReporteConsulta();
+		if($consulta->fecha_inicio > $consulta->fecha_fin){
+			$this->mensaje('Intervalo de fechas incorrecto', 'warning');
+			redirect('ManejoDB/normativaReportes');
+		}else{
+			//var_dump($consulta);
+			//vaciar la variable de session
+			$this->session->set_userdata('consultanormativa', $consulta);
+			//print_r($this->session->userdata());
+			redirect('ManejoDB/downloadreportenormativa');
+		}
+	}
 
 	public function objetoReporteConsulta()
 	{
@@ -1294,6 +1311,81 @@ class ManejoDB extends CI_Controller{
 
 		return $ids;
 	}
+
+	public function downloadreportenormativa(){
+		$consulta = $this->session->consultanormativa;
+		$this->session->unset_userdata('consultanormativa');
+		$normativas = '';
+		if(!empty($consulta)){
+			$filename = "reporte-normativas.xlsx";
+			$ruta = 'assets/info/';
+			if($consulta->idinstancia == 1){
+				$plantilla = $ruta.'plantilla-reportes-normativa-plurinacional.xlsx';
+				header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+				header('Content-Disposition: attachment; filename="' . $filename. '"');
+				header('Cache-Control: max-age=0');
+				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+				$sheet = $spreadsheet->getSheet(0)->setTitle('Normativas');
+				$sheet->setCellValue('D3', 'INSTANCIA:');
+				//Instancia Plurinacional
+				$sheet->setCellValue('E3', 'Asamblea Legislativa Plurinacional');
+
+				$eje_y = 6;
+
+			}
+			elseif ($consulta->idinstancia == 2){
+				$plantilla = $ruta.'plantilla-reportes-normativa.xlsx';
+				header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+				header('Content-Disposition: attachment; filename="' . $filename. '"');
+				header('Cache-Control: max-age=0');
+				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+				$sheet = $spreadsheet->getSheet(0)->setTitle('Normativas');
+				$sheet->setCellValue('D3', 'INSTANCIA:');
+				//Departamental
+				$sheet->setCellValue('E3', 'Asamblea Legislativa Departamental');
+
+				$eje_y = 6;
+
+			}
+			elseif ($consulta->idinstancia == 3){
+				$plantilla = $ruta.'plantilla-reportes-normativa.xlsx';
+				header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+				header('Content-Disposition: attachment; filename="' . $filename. '"');
+				header('Cache-Control: max-age=0');
+				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+				$sheet = $spreadsheet->getSheet(0)->setTitle('Normativas');
+				$sheet->setCellValue('D3', 'INSTANCIA:');
+				//Municipal
+				$sheet->setCellValue('E3', 'Consejo Municipal');
+
+				$eje_y = 6;
+
+			}
+			elseif ($consulta->idinstancia == 0){
+				$plantilla = $ruta.'plantilla-reportes-normativa.xlsx';
+				header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+				header('Content-Disposition: attachment; filename="' . $filename. '"');
+				header('Cache-Control: max-age=0');
+				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+				$sheet = $spreadsheet->getSheet(0)->setTitle('Normativas');
+				$sheet->setCellValue('D3', 'INSTANCIA:');
+
+				$eje_y = 6;
+
+			}
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+
+		}else{
+			$this->mensaje('No existen datos', 'warning');
+			redirect('manejoDB/normativaReportes');
+		}
+	}
+
 
 	public function downloadreporteplenaria()
 	{
@@ -1432,6 +1524,9 @@ class ManejoDB extends CI_Controller{
 			redirect('manejoDB/reportePlenarias');
 		}
 	}
+
+
+
 
 
 }

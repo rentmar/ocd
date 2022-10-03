@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<?php echo form_open('manejoDB/procesarConsulta', ['id'=>'repoplenaria',]); ?>
+				<?php echo form_open('manejoDB/procesarReporteNormativa', ['id'=>'repoplenaria',]); ?>
 				<div class="contenedor_filtros">
 				</div>
 				<div class="contenedor">
