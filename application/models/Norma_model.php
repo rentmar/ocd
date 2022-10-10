@@ -1030,6 +1030,45 @@ class Norma_model extends CI_Model
 		return $qry->result();
 	}
 
+	//Reporte Norma Plurinacional
+	public function reporteNormaPlurinacional($parametros){
+		$consulta = $parametros;
+		//Array de placeholders
+		/** @noinspection PhpLanguageLevelInspection */
+		$placeholder = [];
+
+		$sql = "SELECT ng.idnormag, ng.fecha_registro, users.username, norma_plurinacional.obs_metodologicas, ng.norma_codigo, ng.norma_nombre, ng.norma_objeto, ng.proponente, ng.norma_remitente, ng.norma_destinatario, ng.fecha_norma, norma_plurinacional.proponente_solrepo, norma_plurinacional.destinatario_solrepo, norma_plurinacional.fecha_sol_repo, ng.norma_observaciones, norma_plurinacional.enlace   "
+			."FROM norma_general AS ng  "
+			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = ng.rel_idinsseg  "
+			."LEFT JOIN norma_plurinacional ON norma_plurinacional.idnormg = ng.idnormag  "
+			."  "
+			."  "
+			."   "
+			."   "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."LEFT JOIN users ON users.id = ng.rel_id  "
+			."WHERE ng.activo = 1 AND (ng.fecha_registro BETWEEN ? AND ?)  "
+			."AND instancia_seguimiento.idinsseg = 1   ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+
+		$sql .= 'ORDER BY ng.fecha_registro ASC   ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
 
 
 

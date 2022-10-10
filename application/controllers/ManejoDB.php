@@ -1329,8 +1329,69 @@ class ManejoDB extends CI_Controller{
 				$sheet->setCellValue('D3', 'INSTANCIA:');
 				//Instancia Plurinacional
 				$sheet->setCellValue('E3', 'Asamblea Legislativa Plurinacional');
+				$normas = $this->Norma_model->reporteNormaPlurinacional($consulta);
+				$eje_y = 7;
+				foreach ($normas as $n):
+					$sheet->setCellValue('A'.$eje_y, $n->idnormag);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+					$sheet->setCellValue('C'.$eje_y, $n->username);
+					$sheet->setCellValue('D'.$eje_y, $n->obs_metodologicas );
+					$sheet->setCellValue('E'.$eje_y, $n->norma_codigo );
+					$sheet->setCellValue('F'.$eje_y, $n->norma_nombre );
+					$sheet->setCellValue('G'.$eje_y, $n->norma_objeto );
+					$tema1 = $this->Norma_model->leerTemaNorma($n->idnormag, 1);
+					if( $tema1 == false){
+						//Es otro tema 1
+						$otrotema1 = $this->Norma_model->otroTemaNorma($n->idnormag, 1);
+						if(isset($otrotema1)){
+							$sheet->setCellValue('H'.$eje_y, $otrotema1->descripcion_otrotema );
+						}
+					}else{
+						//Tema 1
+						$sheet->setCellValue('H'.$eje_y, $tema1->nombre_tema );
+					}
+					$tema2 = $this->Norma_model->leerTemaNorma($n->idnormag, 2);
+					if($tema2 == false){
+						//Es otro tema 2
+						$otrotema2 = $this->Norma_model->otroTemaNorma($n->idnormag, 2);
+						if(isset($otrotema2)){
+							$sheet->setCellValue('I'.$eje_y, $otrotema2->descripcion_otrotema);
+						}
+					}else{
+						//Tema 2
+						$sheet->setCellValue('I'.$eje_y, $tema2->nombre_tema );
+					}
+					$otroProponente = $this->Norma_model->leerNormaOtroPropID($n->idnormag);
+					if($n->proponente == 'Otros'){
+						if($otroProponente != false){
+							$sheet->setCellValue('J'.$eje_y, 'Otros - '.$otroProponente->otro_descripcion );
+						}
+					}else{
+						$sheet->setCellValue('J'.$eje_y, $n->proponente );
+					}
+					$sheet->setCellValue('K'.$eje_y, $n->norma_remitente);
+					$sheet->setCellValue('L'.$eje_y, $n->norma_destinatario);
+					if( isset($n->fecha_norma)){
+						if($n->fecha_norma != 0){
+							$sheet->setCellValue('M'.$eje_y, mdate('%m-%d-%Y', $n->fecha_norma));
+						}
+					}else{
+						$sheet->setCellValue('M'.$eje_y, '');
+					}
+					$sheet->setCellValue('N'.$eje_y, $n->proponente_solrepo);
+					$sheet->setCellValue('O'.$eje_y, $n->destinatario_solrepo);
+					if( isset($n->fecha_sol_repo)){
+						if($n->fecha_sol_repo != 0){
+							$sheet->setCellValue('P'.$eje_y, mdate('%m-%d-%Y', $n->fecha_sol_repo));
+						}
+					}else{
+						$sheet->setCellValue('P'.$eje_y, '');
+					}
+					$sheet->setCellValue('Q'.$eje_y, $n->norma_observaciones);
+					$sheet->setCellValue('R'.$eje_y, $n->enlace);
 
-				$eje_y = 6;
+					$eje_y++;
+				endforeach;
 
 			}
 			elseif ($consulta->idinstancia == 2){
