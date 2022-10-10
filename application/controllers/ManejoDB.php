@@ -1343,8 +1343,52 @@ class ManejoDB extends CI_Controller{
 				$sheet->setCellValue('D3', 'INSTANCIA:');
 				//Departamental
 				$sheet->setCellValue('E3', 'Asamblea Legislativa Departamental');
-
+				$normas = $this->Norma_model->reporteNormaDepartamental($consulta);
 				$eje_y = 6;
+
+				foreach ($normas as $n):
+					$sheet->setCellValue('A'.$eje_y, $n->idnormag);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+					if($n->fecha_norma != 0){
+						$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_norma));
+					}else{
+						$sheet->setCellValue('C'.$eje_y, 'Sin Fecha');
+					}
+					$sheet->setCellValue('D'.$eje_y, $n->instancia);
+					$sheet->setCellValue('E'.$eje_y, $n->nombre_departamento);
+					$sheet->setCellValue('F'.$eje_y, $n->municipio_nombre.' - '.$n->departamento_municipio );
+					$sheet->setCellValue('G'.$eje_y, $n->estado_norma);
+					$sheet->setCellValue('H'.$eje_y, $n->norma_codigo );
+					$sheet->setCellValue('I'.$eje_y, $n->norma_nombre );
+					$sheet->setCellValue('J'.$eje_y, $n->norma_objeto );
+					$tema1 = $this->Norma_model->leerTemaNorma($n->idnormag, 1);
+					if( $tema1 == false){
+						//Es otro tema 1
+						$otrotema1 = $this->Norma_model->otroTemaNorma($n->idnormag, 1);
+						if(isset($otrotema1)){
+							$sheet->setCellValue('K'.$eje_y, $otrotema1->descripcion_otrotema );
+						}
+
+					}else{
+						//Tema 1
+						$sheet->setCellValue('K'.$eje_y, $tema1->nombre_tema );
+					}
+
+					$tema2 = $this->Norma_model->leerTemaNorma($n->idnormag, 2);
+					if($tema2 == false){
+						//Es otro tema 2
+						$otrotema2 = $this->Norma_model->otroTemaNorma($n->idnormag, 2);
+						if(isset($otrotema2)){
+							$sheet->setCellValue('L'.$eje_y, $otrotema2->descripcion_otrotema);
+						}
+					}else{
+						//Tema 2
+						$sheet->setCellValue('L'.$eje_y, $tema2->nombre_tema );
+					}
+					$sheet->setCellValue('M'.$eje_y, $n->norma_observaciones );
+					$sheet->setCellValue('N'.$eje_y, $n->username );
+					$eje_y++;
+				endforeach;
 
 			}
 			elseif ($consulta->idinstancia == 3){
@@ -1357,8 +1401,52 @@ class ManejoDB extends CI_Controller{
 				$sheet->setCellValue('D3', 'INSTANCIA:');
 				//Municipal
 				$sheet->setCellValue('E3', 'Consejo Municipal');
-
 				$eje_y = 6;
+				$normas = $this->Norma_model->reporteNormaMunicipal($consulta);
+				foreach ($normas as $n):
+					$sheet->setCellValue('A'.$eje_y, $n->idnormag);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+					if($n->fecha_norma != 0){
+						$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_norma));
+					}else{
+						$sheet->setCellValue('C'.$eje_y, 'Sin Fecha');
+					}
+					$sheet->setCellValue('D'.$eje_y, $n->instancia);
+					$sheet->setCellValue('E'.$eje_y, $n->nombre_departamento);
+					$sheet->setCellValue('F'.$eje_y, $n->municipio_nombre.' - '.$n->departamento_municipio );
+					$sheet->setCellValue('G'.$eje_y, $n->estado_norma);
+					$sheet->setCellValue('H'.$eje_y, $n->norma_codigo );
+					$sheet->setCellValue('I'.$eje_y, $n->norma_nombre );
+					$sheet->setCellValue('J'.$eje_y, $n->norma_objeto );
+					$tema1 = $this->Norma_model->leerTemaNorma($n->idnormag, 1);
+					if( $tema1 == false){
+						//Es otro tema 1
+						$otrotema1 = $this->Norma_model->otroTemaNorma($n->idnormag, 1);
+						if(isset($otrotema1)){
+							$sheet->setCellValue('K'.$eje_y, $otrotema1->descripcion_otrotema );
+						}
+
+					}else{
+						//Tema 1
+						$sheet->setCellValue('K'.$eje_y, $tema1->nombre_tema );
+					}
+
+					$tema2 = $this->Norma_model->leerTemaNorma($n->idnormag, 2);
+					if($tema2 == false){
+						//Es otro tema 2
+						$otrotema2 = $this->Norma_model->otroTemaNorma($n->idnormag, 2);
+						if(isset($otrotema2)){
+							$sheet->setCellValue('L'.$eje_y, $otrotema2->descripcion_otrotema);
+						}
+					}else{
+						//Tema 2
+						$sheet->setCellValue('L'.$eje_y, $tema2->nombre_tema );
+					}
+					$sheet->setCellValue('M'.$eje_y, $n->norma_observaciones );
+					$sheet->setCellValue('N'.$eje_y, $n->username );
+					$eje_y++;
+				endforeach;
+
 
 			}
 			elseif ($consulta->idinstancia == 0){

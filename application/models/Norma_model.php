@@ -935,6 +935,101 @@ class Norma_model extends CI_Model
 		return $qry->result();
 	}
 
+	//Reporte Municipal
+	public function reporteNormaMunicipal($parametros){
+		$consulta = $parametros;
+		//Array de placeholders
+		/** @noinspection PhpLanguageLevelInspection */
+		$placeholder = [];
+
+		$sql = "SELECT ng.idnormag, ng.fecha_registro, ng.fecha_norma, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, mundep.nombre_departamento AS departamento_municipio, ng.estado_norma, ng.norma_codigo, ng.norma_nombre, ng.norma_objeto, ng.norma_observaciones, users.username     "
+			."FROM norma_general as ng  "
+			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = ng.rel_idinsseg  "
+			."LEFT JOIN norma_plurinacional ON norma_plurinacional.idnormg = ng.idnormag  "
+			."LEFT JOIN norma_departamental ON norma_departamental.idnormg = ng.idnormag  "
+			."LEFT JOIN norma_municipal ON norma_municipal.idnormg = ng.idnormag  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = norma_departamental.rel_iddepartamento   "
+			."LEFT JOIN municipio ON municipio.idmunicipio = norma_municipal.rel_idmunicipio   "
+			."LEFT JOIN departamento AS mundep ON mundep.iddepartamento = municipio.rel_iddepartamento  "
+			."LEFT JOIN users ON users.id = ng.rel_id  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."WHERE ng.activo = 1 AND (ng.fecha_registro BETWEEN ? AND ?)  "
+			."AND instancia_seguimiento.idinsseg = 3    ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?  OR mundep.iddepartamento = ?  ";
+			array_push($placeholder, $consulta->iddepartamento);
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+		if($consulta->idmunicipio !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND municipio.idmunicipio  = ?  ";
+			array_push($placeholder, $consulta->idmunicipio);
+		}
+
+		$sql .= 'ORDER BY ng.fecha_registro ASC   ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
+	//Reporte Municipal
+	public function reporteNormaDepartamental($parametros){
+		$consulta = $parametros;
+		//Array de placeholders
+		/** @noinspection PhpLanguageLevelInspection */
+		$placeholder = [];
+
+		$sql = "SELECT ng.idnormag, ng.fecha_registro, ng.fecha_norma, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, mundep.nombre_departamento AS departamento_municipio, ng.estado_norma, ng.norma_codigo, ng.norma_nombre, ng.norma_objeto, ng.norma_observaciones, users.username     "
+			."FROM norma_general as ng  "
+			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = ng.rel_idinsseg  "
+			."LEFT JOIN norma_plurinacional ON norma_plurinacional.idnormg = ng.idnormag  "
+			."LEFT JOIN norma_departamental ON norma_departamental.idnormg = ng.idnormag  "
+			."LEFT JOIN norma_municipal ON norma_municipal.idnormg = ng.idnormag  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = norma_departamental.rel_iddepartamento   "
+			."LEFT JOIN municipio ON municipio.idmunicipio = norma_municipal.rel_idmunicipio   "
+			."LEFT JOIN departamento AS mundep ON mundep.iddepartamento = municipio.rel_iddepartamento  "
+			."LEFT JOIN users ON users.id = ng.rel_id  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."WHERE ng.activo = 1 AND (ng.fecha_registro BETWEEN ? AND ?)  "
+			."AND instancia_seguimiento.idinsseg = 2    ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+		if($consulta->iddepartamento !=0)
+		{
+			//Agregar el discriminante a la sentencia SQL
+			$sql .= "AND departamento.iddepartamento  = ?    ";
+			array_push($placeholder, $consulta->iddepartamento);
+		}
+
+		$sql .= 'ORDER BY ng.fecha_registro ASC   ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
 
 
 
