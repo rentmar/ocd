@@ -6,11 +6,19 @@
 				<div class="contenedor">
 					<div id="caja_boton">
 						<div id="contenedor-submit">
-							<a href="<?php echo site_url('encuesta/exportarExcel') ?>"><input type="" class="BOTON" value="Excel">
+							<a href="<?php echo site_url('encuesta/exportarExcel'); ?>">
+								<input type="" class="BOTON" value="Excel">
 							</a>
-						</div><br>
+						</div>
 						<div id="contenedor-submit">
-							<a href="<?php echo site_url('encuesta/encuestaInicio');?>"><input type="" class="BOTONROJO" value="CANCELAR"></a>
+							<a href="<?php echo site_url('encuesta/exportarExcelCodificado');?>">
+								<input type="" class="BOTON" value="Excel/Cod" style="padding: 12px;" >
+							</a>
+						</div>
+						<div id="contenedor-submit">
+							<a href="<?php echo site_url('encuesta/encuestaInicio');?>">
+								<input type="" class="BOTONROJO" value="CANCELAR" >
+							</a>
 						</div>
 					</div>
 				</div>

@@ -937,4 +937,18 @@ class  Encuesta_model extends CI_Model
 		$this->db->update(' formulariocompletado', $data);
 	}
 
+	//Leer todas las encuestas, activas e inactivas
+	public function leerEncuestas()
+	{
+		//$this->db->where('encuesta_activa', 1);
+		$q=$this->db->get('uiencuesta');
+		return $q->result();
+	}
+
+	//Leer las preguntas de una encuesta
+	public function leerEncuestaPreguntas()
+	{
+
+	}
+
 }

@@ -370,7 +370,7 @@ class Encuesta extends CI_Controller
 	//Vista de los formularios
 	public function formulariosEncuesta()
 	{
-		$datos['encuestas'] = $this->Encuesta_model->leerTodasLasEncuestas();
+		$datos['encuestas'] = $this->Encuesta_model->leerEncuestas();
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -662,6 +662,11 @@ class Encuesta extends CI_Controller
 
 	public function reportesEncuesta()
 	{
+		if(isset($this->session->consulta_encuesta)){
+			//Existe una consulta almacenada;
+//			echo "datos consulta_encuesta en la session";
+			$this->session->unset_userdata("consulta_encuesta");
+		}
 		$encuesta = $this->Encuesta_model->leerTodasLasEncuestas();
 		$departamento = $this->Departamento_model->leerDepartamentos();
 
@@ -678,18 +683,17 @@ class Encuesta extends CI_Controller
 	public function procesarConsulta()
 	{
 		$consulta = $this->consulta();
-		//Almacenar la consulta en la session
-		$this->session->set_userdata('consulta_encuesta', []);
-		$this->session->set_userdata('consulta_encuesta', $consulta);
-
-
-
-		if($consulta->edad_inicial > $consulta->edad_final )
-		{
+		if(!isset($this->session->consulta_encuesta)){
+			//La consulta no esta almacenada en la session
+			$this->session->set_userdata('consulta_encuesta', []);
+			$this->session->set_userdata('consulta_encuesta', $consulta);
+		}
+		//Validador de la fecha
+		if($consulta->edad_inicial > $consulta->edad_final ){
 			$this->mensaje('Intervalo de edad incorrecto', 'warning');
 			redirect('encuesta/reportesEncuesta');
-		}
-		else{
+		}else{
+			//Intervalo de edad correcto
 			$nombre_encuesta = $this->Encuesta_model->leerEncuestaPorID($consulta->iduiencuesta);
 			$edad_inicial =  $consulta->edad_inicial;
 			$edad_final = $consulta->edad_final;
@@ -715,7 +719,6 @@ class Encuesta extends CI_Controller
 			{
 				$area = 'Rural';
 			}
-
 			//$encuesta_resultado = $this->Encuesta_model->resultadosEncuesta($consulta);
 			$encuesta_datos_generales = $this->Encuesta_model->resultadosEncuestaDatosGeneralesActivos($consulta);
 			$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
@@ -736,11 +739,6 @@ class Encuesta extends CI_Controller
 			$this->load->view('encuesta/vencuesta_resultado', $datos);
 			$this->load->view('html/pie');
 		}
-
-
-
-
-
 	}
 
 	private function consulta()
@@ -764,8 +762,6 @@ class Encuesta extends CI_Controller
 			redirect('encuesta/reportesEncuesta');
 		}
 		$consulta = $this->session->consulta_encuesta;
-		$this->session->unset_userdata("consulta_encuesta");
-
 		$nombre_encuesta = $this->Encuesta_model->leerEncuestaPorID($consulta->iduiencuesta);
 		$edad_inicial =  $consulta->edad_inicial;
 		$edad_final = $consulta->edad_final;
@@ -796,15 +792,13 @@ class Encuesta extends CI_Controller
 		$encuesta_resultado_general = $this->Encuesta_model->resultadosEncuestaDatosGeneralesActivos($consulta);
 		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
 
-		if(!empty($consulta))
-		{
+		if(!empty($consulta)){
 			$filename = "reporte-encuestas.xlsx";
 			$ruta = 'assets/info/';
 			$plantilla = $ruta.'plantilla-encuesta.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
-
 			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
 			$sheet = $spreadsheet->getSheet(0)->setTitle('Encuestas');
 			$worksheet = $spreadsheet->getActiveSheet();
@@ -841,6 +835,9 @@ class Encuesta extends CI_Controller
 				$eje_y++;
 			endforeach;
 
+
+
+
 			$sheet = $spreadsheet->getSheet(1)->setTitle('Respuestas');
 			$worksheet = $spreadsheet->getActiveSheet();
 			$eje_y = 11;
@@ -858,33 +855,13 @@ class Encuesta extends CI_Controller
 			if($consulta->iddepartamento){
 				$sheet->setCellValue('C8', $departamento->nombre_departamento);
 			}
-			foreach ($encuesta_resultado as $n):
-				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
-				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
-				$sheet->setCellValue('D'.$eje_y, number_format($n->latidud_fc,3, ",",""));
-				$sheet->setCellValue('E'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
-				$sheet->setCellValue('F'.$eje_y, $n->edad);
-				$sheet->setCellValue('G'.$eje_y, $n->sexo);
-				$sheet->setCellValue('H'.$eje_y, $n->area);
-				$sheet->setCellValue('I'.$eje_y, $n->ciudad);
-				$sheet->setCellValue('J'.$eje_y, $n->zona);
-				$sheet->setCellValue('K'.$eje_y, $n->tiempo);
-				$sheet->setCellValue('L'.$eje_y, $n->username);
-				$sheet->setCellValue('M'.$eje_y, $n->uinombre_modulo);
-				$sheet->setCellValue('N'.$eje_y, $n->etiqueta_seccion );
-				$sheet->setCellValue('O'.$eje_y, $n->uipregunta_nombre );
-				$sheet->setCellValue('P'.$eje_y, $n->uinombre_respuesta );
 
-				$eje_y++;
-			endforeach;
+
 
 
 			$sheet = $spreadsheet->setActiveSheetIndex(0);
-
 			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
 			$writer->save("php://output");
-
 
 		}else{
 			$this->mensaje('Generar otro reporte', 'info');
@@ -1032,6 +1009,142 @@ class Encuesta extends CI_Controller
 		$registro->area = $this->input->post('nombrearea');
 
 		return $registro;
+	}
+
+	public function exportarExcelCodificado()
+	{
+		if(!isset($this->session->consulta_encuesta)){
+			redirect('encuesta/reportesEncuesta');
+		}
+		$consulta = $this->session->consulta_encuesta;
+		$this->session->unset_userdata("consulta_encuesta");
+
+		$nombre_encuesta = $this->Encuesta_model->leerEncuestaPorID($consulta->iduiencuesta);
+		$edad_inicial =  $consulta->edad_inicial;
+		$edad_final = $consulta->edad_final;
+
+		if((int)$consulta->sexo==0)
+		{
+			$sexo = 0;
+		}elseif((int)$consulta->sexo==1)
+		{
+			$sexo = 'Masculino';
+		}elseif ((int)$consulta->sexo==2)
+		{
+			$sexo = 'Femenino';
+		}
+
+		if((int)$consulta->area==0)
+		{
+			$area = 0;
+		}elseif((int)$consulta->area==1)
+		{
+			$area = 'Urbana';
+		}elseif ((int)$consulta->area==2)
+		{
+			$area = 'Rural';
+		}
+
+		$encuesta_resultado = $this->Encuesta_model->resultadosEncuesta($consulta);
+		$encuesta_resultado_general = $this->Encuesta_model->resultadosEncuestaDatosGeneralesActivos($consulta);
+		$departamento = $this->Departamento_model->leerDepartamento($consulta->iddepartamento);
+
+		if(!empty($consulta))
+		{
+			$filename = "reporte-encuestas.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-encuesta.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Encuestas');
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 11;
+			$sheet->setCellValue('E3', $nombre_encuesta->uinombre_encuesta);
+			if($edad_inicial!=0 && $edad_final !=0){
+				$sheet->setCellValue('C5', $consulta->edad_inicial);
+				$sheet->setCellValue('D5', $consulta->edad_final);
+			}
+			if($consulta->sexo) {
+				$sheet->setCellValue('C6', $sexo);
+			}
+			if($consulta->area){
+				$sheet->setCellValue('C7', $area);
+			}
+			if($consulta->iddepartamento){
+				$sheet->setCellValue('C8', $departamento->nombre_departamento);
+			}
+
+			foreach ($encuesta_resultado_general as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
+				$sheet->setCellValue('D'.$eje_y, $n->username);
+				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
+				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
+				$sheet->setCellValue('G'.$eje_y, $n->edad);
+				$sheet->setCellValue('H'.$eje_y, $n->sexo);
+				$sheet->setCellValue('I'.$eje_y, $n->area);
+				$sheet->setCellValue('J'.$eje_y, $n->ciudad);
+				$sheet->setCellValue('K'.$eje_y, $n->zona);
+				$sheet->setCellValue('L'.$eje_y, $n->tiempo);
+
+				$eje_y++;
+			endforeach;
+
+			$sheet = $spreadsheet->getSheet(1)->setTitle('Respuestas');
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 11;
+			$sheet->setCellValue('E3', $nombre_encuesta->uinombre_encuesta);
+			if($edad_inicial!=0 && $edad_final !=0){
+				$sheet->setCellValue('C5', $consulta->edad_inicial);
+				$sheet->setCellValue('D5', $consulta->edad_final);
+			}
+			if($consulta->sexo) {
+				$sheet->setCellValue('C6', $sexo);
+			}
+			if($consulta->area){
+				$sheet->setCellValue('C7', $area);
+			}
+			if($consulta->iddepartamento){
+				$sheet->setCellValue('C8', $departamento->nombre_departamento);
+			}
+			foreach ($encuesta_resultado as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
+				$sheet->setCellValue('D'.$eje_y, number_format($n->latidud_fc,3, ",",""));
+				$sheet->setCellValue('E'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
+				$sheet->setCellValue('F'.$eje_y, $n->edad);
+				$sheet->setCellValue('G'.$eje_y, $n->sexo);
+				$sheet->setCellValue('H'.$eje_y, $n->area);
+				$sheet->setCellValue('I'.$eje_y, $n->ciudad);
+				$sheet->setCellValue('J'.$eje_y, $n->zona);
+				$sheet->setCellValue('K'.$eje_y, $n->tiempo);
+				$sheet->setCellValue('L'.$eje_y, $n->username);
+				$sheet->setCellValue('M'.$eje_y, $n->uinombre_modulo);
+				$sheet->setCellValue('N'.$eje_y, $n->etiqueta_seccion );
+				$sheet->setCellValue('O'.$eje_y, $n->uipregunta_nombre );
+				$sheet->setCellValue('P'.$eje_y, $n->uinombre_respuesta );
+
+				$eje_y++;
+			endforeach;
+
+
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+
+		}else{
+			$this->mensaje('Generar otro reporte', 'info');
+			redirect('encuesta/reportesEncuesta');
+		}
+
+
 	}
 
 
