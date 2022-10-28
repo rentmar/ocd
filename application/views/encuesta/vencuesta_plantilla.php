@@ -54,18 +54,27 @@
 			</div>
 			<div class="form-check-inline">
 				<label class="form-check-label">
-					<input id="area" name="area" type="radio" class="form-check-input" value="rural">
+					<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="rural">
 					Rural
 				</label>
 			</div>
+
 			<div>
 				<hr>
 			</div>
 
-
 			<div class="form-group">
+				<!--
 				<label for="edad">Ciudad/Poblacion:</label>
 				<input type="text" name="ciudad" class="form-control" id="ciudad" required >
+				-->
+				<select name="ciudad" id="ciudad" class="custom-select">
+					<option selected>Ciudad/Poblacion</option>
+					<option value="La Paz">La Paz</option>
+					<option value="El Alto">El Alto</option>
+					<option value="Santa Cruz">Santa Cruz</option>
+					<option value="Cochabamba">Cochabamba</option>
+				</select>
 			</div>
 
 			<div class="form-group">
@@ -73,11 +82,73 @@
 				<input type="text" name="zona" class="form-control" id="zona" required >
 			</div>
 
+			<div>
+				<hr>
+			</div>
+
+			<div class="form-group">
+				<label for="sit_laboral">Situacion Laboral:</label>
+			</div>
+
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input checked id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="empleado">
+					Empleado
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="desempleado">
+					Desempleado
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="independiente">
+					Independiente
+				</label>
+			</div>
+
+			<div>
+				<hr>
+			</div>
+
+			<div class="form-group">
+				<label for="sit_educativa">Situacion Educativa:</label>
+			</div>
+
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input checked id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="estudia">
+					Estudia
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="no_estudia">
+					No estudia
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="no_corresponde">
+					No corresponde
+				</label>
+			</div>
+
 
 
 			<div>
 				<hr>
 			</div>
+
+
+
+
+
+
+
+
 
 			<!-- Seleccion de Modulos -->
 			<?php echo $sel_modulos; ?>
