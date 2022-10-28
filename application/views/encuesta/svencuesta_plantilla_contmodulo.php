@@ -27,6 +27,13 @@
 											<?php $this->load->view('encuesta/svencuesta_plantilla_resp_selsimple', $datos_pregunta ); ?>
 										<?php elseif ($p->iduitipopregunta == 2):  ?>
 											<?php $this->load->view('encuesta/svencuesta_plantilla_resp_selmultiple', $datos_pregunta); ?>
+										<?php elseif ($p->iduitipopregunta == 3):  ?>
+											<?php $this->load->view('encuesta/svencuesta_plantilla_resp_abiertasimple', $datos_pregunta); ?>
+										<?php elseif ($p->iduitipopregunta == 4):  ?>
+											<?php $this->load->view('encuesta/svencuesta_plantilla_resp_selmultiple_otro_abierta', $datos_pregunta); ?>
+										<?php elseif ($p->iduitipopregunta == 5):  ?>
+											<?php $this->load->view('encuesta/svencuesta_plantilla_resp_multiple_cuantificada', $datos_pregunta); ?>
+
 										<?php else: ?>
 											Sin definicion
 										<?php endif; ?>

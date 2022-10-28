@@ -236,7 +236,7 @@ class  Encuesta_model extends CI_Model
 		}
 	}
 
-	//
+	//Datos de una encuesta por identificador
 	public function leerEncuestaPorID($idencuesta)
 	{
 		$this->db->where('iduiencuesta',$idencuesta);
@@ -414,7 +414,7 @@ class  Encuesta_model extends CI_Model
 	//Leer las respuestas de una encuesta
 	public function leerRespuestasDeUnaEncuesta($idencuesta)
 	{
-		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta, uirespuesta.iduirespuesta, uirespuesta.uinombre_respuesta   "
+		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta, uirespuesta.iduirespuesta, uirespuesta.uinombre_respuesta, uirespuesta_pregunta.uiorden_respuesta, uirespuesta_pregunta.codigo_respuesta  "
 			."FROM uipregunta   "
 			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion   "
 			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
@@ -422,7 +422,7 @@ class  Encuesta_model extends CI_Model
 			."LEFT JOIN uirespuesta_pregunta ON uirespuesta_pregunta.rel_iduipregunta = uipregunta.iduipregunta  "
 			."LEFT JOIN uirespuesta ON uirespuesta_pregunta.rel_iduirespuesta = uirespuesta.iduirespuesta   "
 			."WHERE uiencuesta.iduiencuesta = ?   "
-			."   "
+			."ORDER BY uipregunta.iduipregunta, uirespuesta_pregunta.uiorden_respuesta   "
 			."   "
 			."   ";
 		$qry = $this->db->query($sql, [$idencuesta,  ]);

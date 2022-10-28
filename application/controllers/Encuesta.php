@@ -385,6 +385,7 @@ class Encuesta extends CI_Controller
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
 
+
 		//Array de orden
 		$orden_modulos = [];
 		foreach ($modulos as $m)
@@ -397,10 +398,12 @@ class Encuesta extends CI_Controller
 		//Extraer las secciones de una encuesta
 		$secciones = $this->Encuesta_model->leerSeccionesDeUnaEncuesta($iduiencuesta);
 
+
 		//Extraer las preguntas de una encuesta
 		$preguntas = $this->Encuesta_model->leerPreguntasDeUnaEncuesta($iduiencuesta);
 		//Extraer las respuestas de una encuesta
 		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
+
 
 		//Subvista para la Seleccion de modulos
 		$datos_modulo['modulos'] = $modulos;
@@ -427,9 +430,8 @@ class Encuesta extends CI_Controller
 		$datos['cont_modulo'] = $cont_modulos;
 		$datos['no_es_vista_previa'] = false;
 
-
-
 		$this->load->view('encuesta/vencuesta_plantilla', $datos);
+
 
 	}
 

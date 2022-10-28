@@ -43,11 +43,13 @@ class Read extends CI_Controller
 		$datos_generales = $encuesta;
 		$iduiencuesta = $encuesta->rel_iduiencuesta;
 
+
 		//Temporizador
 		$fecha = new DateTime();
 
 		$encuesta = $this->Encuesta_model->leerEncuestaPorID($iduiencuesta);
 		$modulos = $this->Encuesta_model->leerModulosPorIdEncuesta($iduiencuesta);
+
 
 		//Array de orden
 		$orden_modulos = [];
@@ -105,6 +107,8 @@ class Read extends CI_Controller
 		$datos['preguntas_validar'] = $preguntas_validar;
 
 		$this->load->view('encuesta/vencuesta_plantilla', $datos);
+
+
 
 	}
 
