@@ -1,3 +1,11 @@
+$('#formencuesta').submit(function (e) {
+	e.preventDefault();
+	console.log("Enviar formulario");
+	console.log(preguntas);
+	console.log(iduiencuesta);
+	//console.log("Enviar formulario");
+});
+
 /*$('#formencuesta').submit(function (e) {
 	var pregunta_seleccionada;
 	var formulario_correcto;

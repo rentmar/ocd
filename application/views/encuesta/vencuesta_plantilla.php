@@ -178,6 +178,11 @@
 	</div>
 </div>
 
+<script>
+	var iduiencuesta = <?php echo $datos_generales->rel_iduiencuesta;?>;
+    var preguntas = <?php echo json_encode($preguntas_validar); ?>;
+</script>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
