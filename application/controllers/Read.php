@@ -119,7 +119,8 @@ class Read extends CI_Controller
 
 	public function capturar()
 	{
-		$info_general = $this->datos();
+		echo "Capturar datos";
+		/*$info_general = $this->datos();
 		//Extraer las preguntas de una encuesta
 		$preguntas = $this->Encuesta_model->leerPreguntasDeUnaEncuesta($info_general->iduiencuesta);
 		//Extraer las respuestas de una encuesta
@@ -146,7 +147,7 @@ class Read extends CI_Controller
 		}else{
 			//Informacion no guardada
 			$this->failure();
-		}
+		}*/
 	}
 
 	private function datos()

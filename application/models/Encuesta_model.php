@@ -414,7 +414,7 @@ class  Encuesta_model extends CI_Model
 	//Leer las respuestas de una encuesta
 	public function leerRespuestasDeUnaEncuesta($idencuesta)
 	{
-		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta, uirespuesta.iduirespuesta, uirespuesta.uinombre_respuesta, uirespuesta_pregunta.uiorden_respuesta, uirespuesta_pregunta.codigo_respuesta  "
+		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta, uirespuesta.iduirespuesta, uirespuesta.uinombre_respuesta, uirespuesta_pregunta.uiorden_respuesta, uirespuesta_pregunta.codigo_respuesta, uirespuesta_pregunta.pregunta_datos      "
 			."FROM uipregunta   "
 			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion   "
 			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo   "
