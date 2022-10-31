@@ -53,7 +53,7 @@
 			</div>
 			<div class="form-check-inline">
 				<label class="form-check-label">
-					<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="rural">
+					<input id="area" name="area" type="radio" class="form-check-input" value="rural">
 					Rural
 				</label>
 			</div>
@@ -67,7 +67,7 @@
 				<label for="edad">Ciudad/Poblacion:</label>
 				<input type="text" name="ciudad" class="form-control" id="ciudad" required >
 				-->
-				<select name="ciudad" id="ciudad" class="custom-select">
+				<select name="ciudad" id="ciudad" class="custom-select" required>
 					<option selected>Ciudad/Poblacion</option>
 					<option value="La Paz">La Paz</option>
 					<option value="El Alto">El Alto</option>
