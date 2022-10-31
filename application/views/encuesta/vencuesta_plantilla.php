@@ -150,14 +150,14 @@
 
 			<?php if($no_es_vista_previa): ?>
 				<div>
-					<input type="text" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
-					<input type="text" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
-					<input type="text" name="idusuario" id="idusuario" value="<?php echo $datos_generales->rel_idusuario;?>">
-					<input type="text" name="idencuesta_asignada" id="idencuesta_asignada" value="<?php echo $datos_generales->idencuesta?>"  >
-					<input type="text" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
-					<input type="text" name="latitud_f" id="latitud_f">
-					<input type="text" name="longitud_f" id="longitud_f" >
-					<input type="text" id="tiempoinicio" name="tiempoinicio" value="<?php echo $tiempo;?>">
+					<input type="hidden" name="iduiencuesta" id="iduiencuesta" value="<?php echo $datos_generales->rel_iduiencuesta; ?>" >
+					<input type="hidden" name="numero_formh" id="numero_formh" value="<?php echo $datos_generales->hash_text; ?>" >
+					<input type="hidden" name="idusuario" id="idusuario" value="<?php echo $datos_generales->rel_idusuario;?>">
+					<input type="hidden" name="idencuesta_asignada" id="idencuesta_asignada" value="<?php echo $datos_generales->idencuesta?>"  >
+					<input type="hidden" name="idgeolocal" id="idgeolocal" value="<?php echo $datos_generales->rel_idgeolocal;?>"  >
+					<input type="hidden" name="latitud_f" id="latitud_f">
+					<input type="hidden" name="longitud_f" id="longitud_f" >
+					<input type="hidden" id="tiempoinicio" name="tiempoinicio" value="<?php echo $tiempo;?>">
 				</div>
 			<?php endif; ?>
 			<div>
