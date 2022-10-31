@@ -180,7 +180,6 @@
 
 <script>
 	var iduiencuesta = <?php echo $datos_generales->rel_iduiencuesta;?>;
-    var preguntas = <?php echo json_encode($preguntas_validar); ?>;
 </script>
 
 

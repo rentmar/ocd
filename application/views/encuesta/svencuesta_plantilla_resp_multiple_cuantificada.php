@@ -7,13 +7,15 @@
 					<div class="input-group-text">
 						<input type="checkbox"
 							   id="pregunta<?php echo $p->iduipregunta; ?>"
-							   name="pregunta<?php echo $p->iduipregunta; ?>[]">
+							   name="pregunta<?php echo $p->iduipregunta; ?>[]"
+							   value="<?php echo $rp->idopcion;?>"
+						>
 						<?php echo $rp->literal;?>
 					</div>
 				</div>
 				<input type="number"
-					   id="pregunta<?php echo $p->iduipregunta; ?>text"
-					   name="pregunta<?php echo $p->iduipregunta; ?>text"
+					   id="opcion<?php echo $rp->idopcion; ?>text"
+					   name="opcion<?php echo $rp->idopcion; ?>text"
 					   min="1" max="5" class="form-control"
 					    >
 			</div>

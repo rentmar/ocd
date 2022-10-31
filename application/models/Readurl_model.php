@@ -29,7 +29,7 @@ class Readurl_model extends CI_Model
 		}
 	}
 
-	//Recolectar la informacion del cuestionario
+	//Recolectar la informacion del cuestionario - compatibilidad
 	public function guardarDatos($informacion, $preguntas, $respuestas)
 	{
 		$info_general = $informacion;
@@ -105,6 +105,63 @@ class Readurl_model extends CI_Model
 			return true;
 		}else{
 			return false;
+		}
+	}
+
+	//Recolectar la informacion del cuestionario
+	public function guardarDatosEncuesta($informacion, $respuestas)
+	{
+		$info_general = $informacion;
+		$respuestas_form = json_encode($respuestas);
+
+		//Iniciar la transaccion
+		$this->db->trans_begin();
+		//Crear la entrada del formulario completado
+		/** @noinspection PhpLanguageLevelInspection */
+		$form_comp_datos = [
+			'fecha_fc' => $info_general->fecha,
+			'hash_fc' => $info_general->hash,
+			'latidud_fc' => $info_general->latitud,
+			'longitud_fc' => $info_general->longitud,
+			'edad'=> $info_general->edad,
+			'sexo'=>$info_general->sexo,
+			'area '=>$info_general->area,
+			'ciudad'=>$info_general->ciudad,
+			'zona'=>$info_general->zona,
+			'sit_laboral' => $info_general->situacion_laboral,
+			'sit_educativa' => $info_general->situacion_educativa,
+			'tiempo' => $info_general->tiempo,
+			'rel_idusuario' => $info_general->idusuario,
+			'rel_iduiencuesta' => $info_general->iduiencuesta,
+		];
+		$this->db->insert('formulariocompletado', $form_comp_datos);
+		$idformcomp = $this->db->insert_id();
+		//Insertar el identificador del formulario completado
+		/** @noinspection PhpLanguageLevelInspection */
+		$form_comp_json = [
+			'formcj' => $respuestas_form,
+			'rel_idform' => $idformcomp,
+		];
+		$this->db->insert('formulariocomp_json', $form_comp_json);
+
+		//Inhabilitar el formulario asignado al usuario
+		/** @noinspection PhpLanguageLevelInspection */
+		$actualizar_form_asignado = [
+			'usado' => 1,
+		];
+		$this->db->where('idencuesta', $info_general->idencuesta);
+		$this->db->update('encuesta ', $actualizar_form_asignado);
+
+		if ($this->db->trans_status() === FALSE)
+		{
+			$this->db->trans_rollback();
+			return false;
+
+		}
+		else
+		{
+			$this->db->trans_commit();
+			return true;
 		}
 	}
 

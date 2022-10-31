@@ -945,10 +945,127 @@ class  Encuesta_model extends CI_Model
 		return $q->result();
 	}
 
-	//Leer las preguntas de una encuesta
-	public function leerEncuestaPreguntas()
+	public function leerModulosEncuesta($identificador)
 	{
+		$idencuesta = $identificador;
+		$sql = "SELECT * "
+			."FROM uimodulo  "
+			."WHERE uimodulo.rel_iduiencuesta = ?   "
+			."ORDER BY uimodulo.uiorden_modulo  "
+			."  "
+			."  "
+			." "
+			." "
+			." ";
 
+		$qry = $this->db->query($sql, $idencuesta);
+		return $qry->result();
 	}
+
+	public function leerSeccionesModulo($identificador)
+	{
+		$idmodulo = $identificador;
+		$sql = "SELECT * "
+			."FROM uiseccion  "
+			."LEFT JOIN uimodulo ON uiseccion.rel_iduimodulo = uimodulo.iduimodulo    "
+			."WHERE uimodulo.iduimodulo = ?  "
+			."ORDER BY uiseccion.uiorden_seccion  "
+			."  "
+			." "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, $idmodulo);
+		return $qry->result();
+	}
+
+	public function leerPreguntaSeccion($identificador)
+	{
+		$idseccion = $identificador;
+		$sql = "SELECT * "
+			."FROM uipregunta  "
+			."LEFT JOIN uitipopregunta ON uipregunta.rel_iduitipopregunta = uitipopregunta.iduitipopregunta    "
+			."WHERE uipregunta.rel_iduiseccion = ?  "
+			."  "
+			."  "
+			." "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, $idseccion);
+		return $qry->row();
+	}
+
+	public function leerRespuestaTipo1($idpregunta, $idrespuesta)
+	{
+		$sql = "SELECT * "
+			."FROM uirespuesta_pregunta  "
+			."LEFT JOIN uirespuesta ON uirespuesta_pregunta.rel_iduirespuesta = uirespuesta.iduirespuesta   "
+			."WHERE uirespuesta_pregunta.rel_iduipregunta = ? AND uirespuesta_pregunta.rel_iduirespuesta = ?    "
+			."ORDER BY uirespuesta_pregunta.uiorden_respuesta  "
+			."  "
+			."  "
+			." "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idpregunta, $idrespuesta]);
+		return $qry->row();
+	}
+
+	public function leerRespuestaTipo3($idpregunta)
+	{
+		$sql = "SELECT * "
+			."FROM uirespuesta_pregunta  "
+			."LEFT JOIN uirespuesta ON uirespuesta_pregunta.rel_iduirespuesta = uirespuesta.iduirespuesta   "
+			."WHERE uirespuesta_pregunta.rel_iduipregunta = ?    "
+			."  "
+			."  "
+			."  "
+			." "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idpregunta,]);
+		return $qry->row();
+	}
+
+	public function leerRespuestaTipo4($idpregunta)
+	{
+		$sql = "SELECT * "
+			."FROM uirespuesta_pregunta  "
+			."LEFT JOIN uirespuesta ON uirespuesta_pregunta.rel_iduirespuesta = uirespuesta.iduirespuesta   "
+			."LEFT JOIN uipregunta ON uirespuesta_pregunta.rel_iduipregunta = uipregunta.iduipregunta    "
+			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion  "
+			."WHERE uirespuesta_pregunta.rel_iduipregunta = ?  "
+			." "
+			." "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idpregunta,]);
+		return $qry->row();
+	}
+
+	public function leerRespuestaTipo5($idpregunta)
+	{
+		$sql = "SELECT * "
+			."FROM uirespuesta_pregunta  "
+			."LEFT JOIN uirespuesta ON uirespuesta_pregunta.rel_iduirespuesta = uirespuesta.iduirespuesta   "
+			."LEFT JOIN uipregunta ON uirespuesta_pregunta.rel_iduipregunta = uipregunta.iduipregunta    "
+			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion  "
+			."WHERE uirespuesta_pregunta.rel_iduipregunta = ?  "
+			." "
+			." "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idpregunta,]);
+		return $qry->row();
+	}
+
+
+
+
 
 }

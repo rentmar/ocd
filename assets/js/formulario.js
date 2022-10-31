@@ -1,10 +1,12 @@
-$('#formencuesta').submit(function (e) {
+/*$('#formencuesta').submit(function (e) {
 	e.preventDefault();
 	console.log("Enviar formulario");
-	console.log(preguntas);
 	console.log(iduiencuesta);
-	//console.log("Enviar formulario");
-});
+	idencuesta = iduiencuesta;
+
+});*/
+
+
 
 /*$('#formencuesta').submit(function (e) {
 	var pregunta_seleccionada;
