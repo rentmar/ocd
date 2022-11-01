@@ -1,6 +1,13 @@
 <?php if($r->iduipregunta==$p->iduipregunta): ?>
 	<?php $sel_multiple_cuantificada = json_decode($r->pregunta_datos) ; ?>
 	<div class="form-group">
+		<div class="form-group">
+			<p class="bg-success text-white">
+				Nota: Si la persona No sabe / No responde tiquea la casilla cuadrada pequeña.
+			</p>
+		</div>
+	</div>
+	<div class="form-group">
 		<?php foreach ($sel_multiple_cuantificada as $rp): ?>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">

@@ -16,6 +16,14 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<?php if(isset($encuesta->uiencuesta_nota)): ?>
+			<div class="form-group">
+				<div class="alert alert-success">
+					<strong>Introduccion</strong>
+					<?php echo $encuesta->uiencuesta_nota; ?>
+				</div>
+			</div>
+			<?php endif; ?>
 			<?php
 			/** @noinspection PhpLanguageLevelInspection */
 			$form_enc = [
@@ -177,6 +185,38 @@
 		</div>
 	</div>
 </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="salirencuesta">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-danger text-white">
+				<h4 class="modal-title">Salir de la encuesta?</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<?php if($no_es_vista_previa):?>
+					<?php echo form_open('inicio/');?>
+				<?php else: ?>
+					<?php echo form_open('encuesta/formulariosEncuesta/');?>
+				<?php endif; ?>
+				Esta Seguro?. Toda la informacion se perdera.
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-secondary" >Si</button>
+				<?php echo form_close();?>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script>
 	var iduiencuesta = <?php echo $datos_generales->rel_iduiencuesta;?>;

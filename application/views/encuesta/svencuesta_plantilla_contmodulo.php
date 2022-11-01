@@ -14,6 +14,13 @@
 						<div class="card-header">
 							<a class="card-link" data-toggle="collapse" href="#pregunta<?php echo $s->iduiseccion;?>" >
 								<?php echo "(".$s->etiqueta_seccion.") "; ?><?php echo $p->uipregunta_nombre; ?>
+								<?php if(isset($p->uipregunta_nota)): ?>
+								<div>
+									<p class="bg-success text-white">
+										<?php echo $p->uipregunta_nota; ?>
+									</p>
+								</div>
+								<?php endif; ?>
 							</a>
 						</div>
 						<div id="pregunta<?php echo $s->iduiseccion;?>" class="collapse"  >

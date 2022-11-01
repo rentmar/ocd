@@ -432,7 +432,7 @@ class  Encuesta_model extends CI_Model
 	//Leer las respuestas de una pregunta
 	public function leerPreguntasDeUnaEncuesta($idencuesta)
 	{
-		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uimodulo.uiorden_modulo, uiseccion.iduiseccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uiorden_pregunta, uipregunta.rel_iduitipopregunta, uitipopregunta.iduitipopregunta, uitipopregunta.nombre_tipopregunta   "
+		$sql = "SELECT uiencuesta.iduiencuesta, uimodulo.iduimodulo, uimodulo.uiorden_modulo, uiseccion.iduiseccion, uiseccion.etiqueta_seccion, uiseccion.uiorden_seccion, uipregunta.iduipregunta, uipregunta.uipregunta_nombre, uipregunta.uipregunta_nota,  uipregunta.uiorden_pregunta, uipregunta.rel_iduitipopregunta, uitipopregunta.iduitipopregunta, uitipopregunta.nombre_tipopregunta   "
 			."FROM uipregunta     "
 			."LEFT JOIN uitipopregunta ON uipregunta.rel_iduitipopregunta = uitipopregunta.iduitipopregunta   "
 			."LEFT JOIN uiseccion ON uipregunta.rel_iduiseccion = uiseccion.iduiseccion      "
@@ -1063,6 +1063,79 @@ class  Encuesta_model extends CI_Model
 		$qry = $this->db->query($sql, [$idpregunta,]);
 		return $qry->row();
 	}
+
+	public function leerLasEncuestasCompletadas($consulta){
+		$idencuesta = $consulta->iduiencuesta;
+		$sql = "SELECT *   "
+			."FROM formulariocompletado  "
+			."LEFT JOIN formulariocomp_json ON formulariocompletado.idformcomp = formulariocomp_json.rel_idform   "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?    "
+			."AND formulariocompletado.es_valida = 1  "
+			."   "
+			."  "
+			."  "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idencuesta,]);
+		return $qry->result();
+	}
+
+	public function leerSeccionesPreguntasModulo($identificador)
+	{
+		$idmodulo = $identificador;
+		$sql = " "
+			."  "
+			."LEFT JOIN formulariocomp_json ON formulariocompletado.idformcomp = formulariocomp_json.rel_idform   "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?    "
+			."  "
+			."   "
+			."  "
+			."  "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idencuesta,]);
+		return $qry->result();
+	}
+
+	public function leerLosDatosPregunta($idpregunta)
+	{
+		$sql = "SELECT * "
+			."FROM uirespuesta_pregunta  "
+			."WHERE uirespuesta_pregunta.rel_iduipregunta = ?   "
+			."    "
+			."  "
+			."   "
+			."  "
+			."  "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idpregunta, ]);
+		return $qry->row();
+	}
+
+	public function leerUnaEncuestaPorID()
+	{
+		$sql = "SELECT *   "
+			."FROM formulariocompletado  "
+			."LEFT JOIN formulariocomp_json ON formulariocompletado.idformcomp = formulariocomp_json.rel_idform   "
+			."WHERE formulariocompletado.rel_iduiencuesta = 2 AND formulariocompletado.idformcomp= 1585    "
+			."  "
+			."   "
+			."  "
+			."  "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql);
+		return $qry->row();
+	}
+
+
 
 
 
