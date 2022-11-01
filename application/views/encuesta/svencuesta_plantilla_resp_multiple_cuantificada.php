@@ -9,6 +9,7 @@
 	</div>
 	<div class="form-group">
 		<?php foreach ($sel_multiple_cuantificada as $rp): ?>
+			<?php if($rp->idopcion != 8): ?>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<div class="input-group-text">
@@ -26,6 +27,7 @@
 					   min="1" max="5" class="form-control"
 					    >
 			</div>
+			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
 
