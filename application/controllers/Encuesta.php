@@ -796,7 +796,7 @@ class Encuesta extends CI_Controller
 		if(!empty($consulta)){
 			$filename = "reporte-encuestas.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-encuesta-json.xlsx';
+			$plantilla = $ruta.'plantilla-encuesta-json-vr.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -856,11 +856,14 @@ class Encuesta extends CI_Controller
 			$eje_X = 'O';
 			$eje_y = 12;
 			foreach ($secciones as $s):
-				$eje_auxiliar = $eje_y+1;
-				$sheet->setCellValue($eje_X.$eje_y, $s->etiqueta_seccion);
-				$sheet->setCellValue($eje_X.$eje_auxiliar, $s->uipregunta_nombre);
-				$eje_X++;
+				if($s->iduiseccion != 59):
+					$eje_auxiliar = $eje_y+1;
+					$sheet->setCellValue($eje_X.$eje_y, $s->etiqueta_seccion);
+					$sheet->setCellValue($eje_X.$eje_auxiliar, $s->uipregunta_nombre);
+					$eje_X++;
+				endif;
 			endforeach;
+			$eje_x_offset = $eje_X;
 
 			$eje_y = 14;
 			$eje_X = 'O';
@@ -916,11 +919,19 @@ class Encuesta extends CI_Controller
 						$sheet->setCellValue($eje_X.$eje_y, $literal_respuesta);
 						$eje_X++;
 					}elseif ($r->idtipopregunta==5){
+						$eje_x_des = $eje_x_offset;
 						//Seleccion multiple cuantificada
 						$respuesta = $r->respuestas;
 						$literal_respuesta = ' ';
 						$rptmp = '';
 						foreach ($respuesta as $rp){
+							if($rp->idopcion != 8):
+							$sheet->setCellValue($eje_x_des.$eje_y, $rp->valor);
+							$eje_x_des++;
+							endif;
+						}
+
+						/*foreach ($respuesta as $rp){
 							if($rp->idopcion == 1){
 								$rptmp = "Presidente: "."(".$rp->valor.")";
 							}elseif ($rp->idopcion == 2){
@@ -964,7 +975,7 @@ class Encuesta extends CI_Controller
 						}
 
 						$sheet->setCellValue($eje_X.$eje_y, $literal_respuesta);
-						$eje_X++;
+						$eje_X++;*/
 					}elseif ($r->idtipopregunta==6){
 						$sheet->setCellValue($eje_X.$eje_y, $r->tipopregunta);
 						$eje_X++;
@@ -1161,7 +1172,7 @@ class Encuesta extends CI_Controller
 		if(!empty($consulta)){
 			$filename = "reporte-encuestas-cod.xlsx";
 			$ruta = 'assets/info/';
-			$plantilla = $ruta.'plantilla-encuesta-json.xlsx';
+			$plantilla = $ruta.'plantilla-encuesta-json-vr.xlsx';
 			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 			header('Content-Disposition: attachment; filename="' . $filename. '"');
 			header('Cache-Control: max-age=0');
@@ -1221,11 +1232,14 @@ class Encuesta extends CI_Controller
 			$eje_X = 'O';
 			$eje_y = 12;
 			foreach ($secciones as $s):
-				$eje_auxiliar = $eje_y+1;
-				$sheet->setCellValue($eje_X.$eje_y, $s->etiqueta_seccion);
-				$sheet->setCellValue($eje_X.$eje_auxiliar, $s->uipregunta_nombre);
-				$eje_X++;
+				if($s->iduiseccion != 59):
+					$eje_auxiliar = $eje_y+1;
+					$sheet->setCellValue($eje_X.$eje_y, $s->etiqueta_seccion);
+					$sheet->setCellValue($eje_X.$eje_auxiliar, $s->uipregunta_nombre);
+					$eje_X++;
+				endif;
 			endforeach;
+			$eje_x_offset = $eje_X;
 
 			$eje_y = 14;
 			$eje_X = 'O';
@@ -1282,7 +1296,18 @@ class Encuesta extends CI_Controller
 						$eje_X++;
 					}elseif ($r->idtipopregunta==5){
 						//Seleccion multiple cuantificada
+						$eje_x_des = $eje_x_offset;
+						//Seleccion multiple cuantificada
 						$respuesta = $r->respuestas;
+						$literal_respuesta = ' ';
+						$rptmp = '';
+						foreach ($respuesta as $rp){
+							if($rp->idopcion != 8):
+								$sheet->setCellValue($eje_x_des.$eje_y, $rp->codigo);
+								$eje_x_des++;
+							endif;
+						}
+						/*$respuesta = $r->respuestas;
 						$literal_respuesta = ' ';
 						$rptmp = '';
 						foreach ($respuesta as $rp){
@@ -1329,7 +1354,7 @@ class Encuesta extends CI_Controller
 						}
 
 						$sheet->setCellValue($eje_X.$eje_y, $literal_respuesta);
-						$eje_X++;
+						$eje_X++;*/
 					}elseif ($r->idtipopregunta==6){
 						$sheet->setCellValue($eje_X.$eje_y, $r->tipopregunta);
 						$eje_X++;
