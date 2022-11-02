@@ -25,6 +25,7 @@
 					   id="opcion<?php echo $rp->idopcion; ?>text"
 					   name="opcion<?php echo $rp->idopcion; ?>text"
 					   min="1" max="5" class="form-control"
+					   value="1" required
 					    >
 			</div>
 			<?php endif; ?>

@@ -882,6 +882,7 @@ class Encuesta extends CI_Controller
 				$sheet->setCellValue('N'.$eje_y, $n->tiempo);
 				$eje_X = 'O';
 				$registro = json_decode($n->formcj) ;
+				if(isset($registro)):
 				foreach ($registro as $r){
 					if($r->idtipopregunta==1){
 						$respuesta = $r->respuestas;
@@ -969,6 +970,7 @@ class Encuesta extends CI_Controller
 						$eje_X++;
 					}
 				}
+				endif;
 				$eje_y++;
 			}
 
@@ -1245,6 +1247,7 @@ class Encuesta extends CI_Controller
 				$sheet->setCellValue('N'.$eje_y, $n->tiempo);
 				$eje_X = 'O';
 				$registro = json_decode($n->formcj) ;
+				if(isset($registro)):
 				foreach ($registro as $r){
 					if($r->idtipopregunta==1){
 						$respuesta = $r->respuestas;
@@ -1332,7 +1335,9 @@ class Encuesta extends CI_Controller
 						$eje_X++;
 					}
 				}
+				endif;
 				$eje_y++;
+
 			}
 
 			$sheet = $spreadsheet->setActiveSheetIndex(0);
@@ -1414,6 +1419,16 @@ class Encuesta extends CI_Controller
 
 
 
+	}
+
+	//Datos json Tipos de plenaria nacional
+	public function getSeccionesPreguntas()
+	{
+		$json = array();
+		$idencuesta = $this->input->post('identificador');
+		$json = $this->Encuesta_model->leerPreguntasDeUnaEncuesta($idencuesta);
+		header('Content-Type: application/json');
+		echo json_encode($json);
 	}
 
 

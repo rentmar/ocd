@@ -4,6 +4,6 @@
 		<input type="text" class="form-control"
 			   id="pregunta<?php echo $p->iduipregunta; ?>"
 			   name="pregunta<?php echo $p->iduipregunta; ?>"
-			   placeholder="Escriba su respuesta">
+			   placeholder="Escriba su respuesta" >
 	</div>
 <?php endif; ?>

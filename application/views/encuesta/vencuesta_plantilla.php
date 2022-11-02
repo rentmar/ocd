@@ -76,11 +76,18 @@
 				<input type="text" name="ciudad" class="form-control" id="ciudad" required >
 				-->
 				<select name="ciudad" id="ciudad" class="custom-select" required>
-					<option selected>Ciudad/Poblacion</option>
+					<option value="" selected>Ciudad/Poblacion</option>
 					<option value="La Paz">La Paz</option>
 					<option value="El Alto">El Alto</option>
 					<option value="Santa Cruz">Santa Cruz</option>
 					<option value="Cochabamba">Cochabamba</option>
+					<option value="Oruro">Oruro</option>
+					<option value="Chuquisaca">Chuquisaca</option>
+					<option value="Tarija">Tarija</option>
+					<option value="Beni">Beni</option>
+					<option value="Pando">Pando</option>
+					<option value="Potosi">Potosi</option>
+
 				</select>
 			</div>
 
@@ -221,6 +228,31 @@
 <script>
 	var iduiencuesta = <?php echo $datos_generales->rel_iduiencuesta;?>;
 </script>
+<script>var baseurl = "<?php echo site_url(); ?>";</script>
+<!-- The Modal de alerta TEMAS SIN SELECCIONAR -->
+<div class="modal fade" id="cuestionarioincompleto">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-warning">
+				<h4 class="modal-title text-white ">Alerta</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				Formulario incompleto, existen preguntas por llenar.
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 
 
 

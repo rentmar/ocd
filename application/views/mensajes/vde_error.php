@@ -110,7 +110,8 @@
 						  <a class="navbar-brand" href="#">OCD</a>
 						</div>
 						<div class="visible-xs">
-							<a href="">	</a>
+							<a href="">
+							</a>
 						</div>
 					</div>
 				</nav>
@@ -123,7 +124,10 @@
 				</div>
 				<nav class="menu">
 					<ul>
-						<li><a href=""></a></li>
+						<li><a href="<?php echo site_url('inicio');?>">
+								Regresar al Inicio
+							</a>
+						</li>
 					</ul>
 				</nav>
 				<br>

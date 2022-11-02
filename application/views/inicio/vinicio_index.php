@@ -192,7 +192,7 @@
 							<td><?php echo $e->idencuesta;?></td>
 							<td><?php echo $e->uinombre_encuesta; ?></td>
 							<td>
-								<a href="<?php echo site_url('read/url/'.$e->hash_text); ?>" target="_blank" >
+								<a href="<?php echo site_url('read/url/'.$e->hash_text); ?>"  >
 									<?php echo site_url('read/url/'.$e->hash_text); ?>
 								</a>
 							</td>
@@ -221,10 +221,10 @@
 	<br>
 
 	<script type="text/javascript">
-		function actualizar() {
+		/*function actualizar() {
 			location.reload(true);
-        }
-        setInterval("actualizar()", 10000);
+        }*/
+        //setInterval("actualizar()", 10000);
 	</script>
 <?php endif; ?>
 </main>
