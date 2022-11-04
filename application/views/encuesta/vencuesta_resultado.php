@@ -75,7 +75,7 @@
 							<?php foreach ($encuesta_datos_generales as $n): ?>
 								<tr>
 									<td><?php echo $n->idformcomp; ?></td>
-									<td><?php echo mdate('%m-%d-%Y', $n->fecha_fc); ?></td>
+									<td><?php echo mdate('%m-%d-%Y - %h:%i %a', $n->fecha_fc); ?></td>
 									<td><?php echo $n->hash_fc; ?></td>
 									<td><?php echo $n->username; ?></td>
 									<td><?php echo number_format($n->latidud_fc,3, ",",""); ?></td>

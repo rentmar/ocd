@@ -821,7 +821,7 @@ class Encuesta extends CI_Controller
 			foreach ($encuestas_resultados as $n)
 			{
 				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y - %h:%i %a', $n->fecha_fc));
 				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
 				$sheet->setCellValue('D'.$eje_y, $n->username);
 				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
@@ -870,7 +870,7 @@ class Encuesta extends CI_Controller
 			foreach ($encuestas_resultados as $n)
 			{
 				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y - %h:%i %a', $n->fecha_fc));
 				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
 				$sheet->setCellValue('D'.$eje_y, $n->username);
 				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
@@ -1197,7 +1197,7 @@ class Encuesta extends CI_Controller
 			foreach ($encuestas_resultados as $n)
 			{
 				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y - %h:%i %a', $n->fecha_fc));
 				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
 				$sheet->setCellValue('D'.$eje_y, $n->username);
 				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
@@ -1246,7 +1246,7 @@ class Encuesta extends CI_Controller
 			foreach ($encuestas_resultados as $n)
 			{
 				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
-				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y - %h:%i %a', $n->fecha_fc));
 				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
 				$sheet->setCellValue('D'.$eje_y, $n->username);
 				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
