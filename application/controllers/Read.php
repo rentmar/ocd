@@ -452,6 +452,7 @@ class Read extends CI_Controller
 		//Respuesta
 		$i = 0;
 		foreach ($opciones as $op){
+			if($op->idopcion != 8):
 			if(in_array($op->idopcion, $respuesta_nsnr)){
 				$rp_tmp = $this->objetoTipo5($respuesta_db->iduirespuesta, $op->idopcion, "No Sabe/No Responde", $respuesta_db->etiqueta_seccion."NSNR") ;
 			}else{
@@ -462,6 +463,7 @@ class Read extends CI_Controller
 			}
 			$objRespuestas->{$i} = $rp_tmp;
 			$i++;
+			endif;
 		}
 		return $objRespuestas;
 	}
