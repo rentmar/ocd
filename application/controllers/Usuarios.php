@@ -262,6 +262,9 @@ class Usuarios extends CI_Controller
 		{
 			$data['titulo'] = 'Encuestadores';
 		}
+		elseif ($g==7){
+			$data['titulo'] = 'Empadronadores';
+		}
 
 		$data['grupo']=$g;
 		//Solo administradores

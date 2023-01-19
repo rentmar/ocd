@@ -39,6 +39,7 @@
 					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/2');?>">Docentes</a>
 					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/3');?>">Monitores</a>
 					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/5');?>">Encuestadores</a>
+					<a class="dropdown-item" href="<?php echo site_url('usuarios/listar/7');?>">Empadronadores</a>
 				</div>
 			</li>
 			<?php endif; ?>

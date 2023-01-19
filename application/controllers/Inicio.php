@@ -9,6 +9,9 @@ class Inicio extends CI_Controller
 		$this->load->library('ion_auth');
 		$this->load->model('Encuesta_model');
 		$this->load->model('Instanciaseguimiento_model');
+		$this->load->helper("html");
+		$this->load->helper('url');
+		$this->load->helper('form');
 		
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();

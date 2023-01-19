@@ -1633,4 +1633,48 @@ function getMunicipiosPlenariaReporte(iddepartamento){
  *
  * ********************/
 
+/****************
+ *
+ * Padron - recoleccion de informacion
+ *
+ *****************/
+$('#formcomp_ci').submit(function (e) {
+	e.preventDefault();
+	var numerocarnet = $('#carnet_identidad').val();
+	var cuentaci = numeroci(numerocarnet);
+	console.log("Comprobar el CI");
+	console.log(numerocarnet);
+	console.log(cuentaci);
+	if(cuentaci == 0)
+	{
+		console.log('No esta registrado');
+		$('#personanoregistrada').modal("show");
+	}else {
+		console.log('Ya esta registrado');
+		$('#personaregistrada').modal("show");
+		$('#carnet_identidad').val('');
+	}
+});
+
+function numeroci(numeroci){
+	var ret_val = {};
+	$.ajax({
+		url: baseurl + "/padron/getnumeroci/",
+		type: 'post',
+		data: {'numeroci': numeroci},
+		async: false,
+		dataType: 'json'
+	}).done(function (response) {
+		ret_val = response;
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		ret_val = null;
+	});
+	return ret_val;
+}
+
+/****************
+ *
+ * Fin Padron - recoleccion de informacion
+ *
+ *****************/
 

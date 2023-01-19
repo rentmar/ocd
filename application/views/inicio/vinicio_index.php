@@ -227,5 +227,90 @@
         //setInterval("actualizar()", 10000);
 	</script>
 <?php endif; ?>
+<?php if($this->ion_auth->in_group(7)): ?>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-md-8 col-lg-8 col-xl-8" >
+				<iframe style="width: 100%; height: 800px;" title="yoparticipo" src="https://yoparticipo.oep.org.bo/"></iframe>
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4" >
+				<div id="esquinas_redondeadas">
+					<div id="Caja_de_datos" class="Caja_de_datos">
+						<?php
+						/** @noinspection PhpLanguageLevelInspection */
+						$att_ci = [
+							'id' => 'formcomp_ci',
+							'name' => 'formcomp_ci',
+						]; ?>
+						<?php echo form_open('', $att_ci); ?>
+						<div class="form-group">
+							<label for="carnet_identidad">COMPROBAR CI:</label>
+							<input type="text" class="form-control" id="carnet_identidad" name="carnet_identidad" pattern="[0-9]+" placeholder="Numero de Carnet de identidad" required>
+						</div>
+						<div class="form-group">
+							<input type="submit" id="BOTON" value="Comprobar">
+						</div>
+						<?php echo form_close(); ?>
+					</div>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
 </main>
+
+<!-- The Modal de alerta PERSONA YA REGISTRADA -->
+<div class="modal fade" id="personaregistrada">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-warning">
+				<h4 class="modal-title text-white ">Alerta</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				El numero de carnet ya se encuentra registrado.
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- The Modal de alerta PERSONA NO REGISTRADA -->
+<div class="modal fade" id="personanoregistrada">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-info">
+				<h4 class="modal-title text-white ">Registrar?</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				El numero de carnet no se encuentra registrado.
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<a href="<?php echo site_url('padron/crearPartida') ?>" id="BOTON" role="button">
+					Proceda
+				</a>
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">
+					Cerrar
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 
