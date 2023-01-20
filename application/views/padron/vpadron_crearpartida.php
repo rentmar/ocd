@@ -88,7 +88,7 @@
 								<label for = "complemento_ci">Complemento:</label>
 								<input type = "text" class = "form-control"
 									   id = "complemento_ci" name="complemento_ci"
-									   placeholder = ""  required>
+									   placeholder = "" >
 							</div>
 							<div class = "form-group col-4">
 								<label for = "fecha_nacimiento">Fecha de Nacimiento:</label>
@@ -184,7 +184,7 @@
 								<label for = "localidad_otr">Otra Localidad:</label>
 								<input type = "text" class = "form-control"
 									   id = "localidad_otr" name="localidad_otr"
-									   placeholder = ""  required>
+									   placeholder = ""  >
 							</div>
 						</div>
 						<div class="form-row">
@@ -213,10 +213,13 @@
 									   placeholder = ""  required>
 							</div>
 						</div>
-
-
-
-
+						<div class="form-row">
+							<div class="form-group col-12">
+								<input id="idusuario" name="idusuario" type="hidden"
+									   class="form-control"
+									   value="<?php echo $usuario->id; ?>">
+							</div>
+						</div>
 					</div>
 					<div class="card-footer">
 						<button type = "submit" class = "btn btn-primary">Enviar</button>
