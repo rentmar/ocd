@@ -55,6 +55,10 @@ class Partida_model extends CI_Model
 		}
 	}
 
+	public function insertarNumeroCarnet(){
+
+	}
+
 	//Plenaria tipo plenaria
 	public function registroId($identificador)
 	{

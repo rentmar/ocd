@@ -1648,7 +1648,8 @@ $('#formcomp_ci').submit(function (e) {
 	if(cuentaci == 0)
 	{
 		console.log('No esta registrado');
-		$('#personanoregistrada').modal("show");
+		$('#num_docid').val(numerocarnet);
+		$('#personanoregistradaci').modal("show");
 	}else {
 		console.log('Ya esta registrado');
 		$('#personaregistrada').modal("show");
@@ -1656,10 +1657,71 @@ $('#formcomp_ci').submit(function (e) {
 	}
 });
 
+//Insercion de la CI
+$('#formregistrar_ci').submit(function (e) {
+	e.preventDefault();
+	var numerocarnet = $('#carnet_identidad').val();
+	console.log('InsertarCI');
+	console.log(numerocarnet);
+	//Llamada Rutina de insercion json
+	var flaginsert = insertarCI(numerocarnet);
+	console.log(flaginsert);
+
+	if(flaginsert['bandera'] == false){
+		$('#carnet_identidad').val('');
+		$('#personanoregistradaci').hide();
+		$('#inserterror').modal("show");
+	}else {
+		$('#carnet_identidad').val('');
+		$('#personanoregistradaci').hide();
+		$('#insertcorrecto').modal("show");
+	}
+
+	location.reload();
+
+
+
+
+
+	/*
+	var numerocarnet = $('#carnet_identidad').val();
+	var cuentaci = numeroci(numerocarnet);
+	console.log("Comprobar el CI");
+	console.log(numerocarnet);
+	console.log(cuentaci);
+	if(cuentaci == 0)
+	{
+		console.log('No esta registrado');
+		$('#num_docid').val(numerocarnet);
+		$('#personanoregistradaci').modal("show");
+	}else {
+		console.log('Ya esta registrado');
+		$('#personaregistrada').modal("show");
+		$('#carnet_identidad').val('');
+	}*/
+});
+
+
 function numeroci(numeroci){
 	var ret_val = {};
 	$.ajax({
 		url: baseurl + "/padron/getnumeroci/",
+		type: 'post',
+		data: {'numeroci': numeroci},
+		async: false,
+		dataType: 'json'
+	}).done(function (response) {
+		ret_val = response;
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		ret_val = null;
+	});
+	return ret_val;
+}
+
+function insertarCI(numeroci){
+	var ret_val = {};
+	$.ajax({
+		url: baseurl + "/padron/insertarci/",
 		type: 'post',
 		data: {'numeroci': numeroci},
 		async: false,

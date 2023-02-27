@@ -32,6 +32,26 @@ class Padron extends CI_Controller{
 		echo json_encode($json);
 	}
 
+	//Insercion de datos json
+	public function insertarci(){
+		$json = array();
+
+		$usuario = $this->ion_auth->user()->row();
+		$numeroci = $this->input->post('numeroci');
+		$datos = $this->partida();
+		$datos->numero_documento = $numeroci;
+		$datos->departamento = 1;
+		$datos->usuario = $usuario->id;
+		$bandera = $this->Partida_model->crearPartida($datos);
+
+		/** @noinspection PhpLanguageLevelInspection */
+		$json = [
+			'bandera' => $bandera,
+		];
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	}
+
 	//Crear partida
 	public function crearPartida(){
 		$usuario = $this->ion_auth->user()->row();

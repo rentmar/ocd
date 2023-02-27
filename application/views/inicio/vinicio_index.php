@@ -302,12 +302,100 @@
 
 			<!-- Modal footer -->
 			<div class="modal-footer">
-				<a href="<?php echo site_url('padron/crearPartida') ?>" id="BOTON" role="button">
+				<a  href="<?php echo site_url('padron/crearPartida') ?>" id="BOTON" role="button" >
 					Proceda
 				</a>
 				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">
 					Cerrar
 				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<!-- The Modal de alerta PERSONA NO REGISTRADA -->
+<div class="modal fade" id="personanoregistradaci">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<?php
+			/** @noinspection PhpLanguageLevelInspection */
+			$att_ci = [
+				'id' => 'formregistrar_ci',
+				'name' => 'formregistrar_ci',
+			]; ?>
+			<?php echo form_open('', $att_ci); ?>
+			<!-- Modal Header -->
+			<div class="modal-header bg-info">
+				<h4 class="modal-title text-white ">Registrar?</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="num_docid">Registrar el documento?</label>
+					<input type="text" class="form-control" id="num_docid" name="num_docid">
+				</div>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-secondary" id="BOTON">Registrar</button>
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">
+					Cerrar
+				</button>
+			</div>
+			<?php echo form_close(); ?>
+		</div>
+	</div>
+</div>
+
+<!-- The Modal de alerta Insercion exitosa -->
+<div class="modal fade" id="insertcorrecto">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-succcess">
+				<h4 class="modal-title text-white ">Exito</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				El numero de carnet se ha registrado.
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- The Modal de alerta Insercion fallida -->
+<div class="modal fade" id="inserterror">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-danger">
+				<h4 class="modal-title text-white ">Error</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				El numero de carnet no se pudo registrar.
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button id="BOTON" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 			</div>
 
 		</div>
