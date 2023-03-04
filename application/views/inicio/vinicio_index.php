@@ -317,7 +317,7 @@
 
 <!-- The Modal de alerta PERSONA NO REGISTRADA -->
 <div class="modal fade" id="personanoregistradaci">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<?php
 			/** @noinspection PhpLanguageLevelInspection */
@@ -334,11 +334,82 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="form-group">
-					<label for="num_docid">Registrar el documento?</label>
-					<input type="text" class="form-control" id="num_docid" name="num_docid">
+
+				<div class = "form-row">
+					<div class = "form-group col-4">
+						<label for = "num_libro">Libro:</label>
+						<input type = "number" class =" form-control"
+							   id = "num_libro" name="num_libro"
+							   placeholder = "Numero de Libro" pattern="[0-9]+" required>
+					</div>
+					<div class = "form-group col-4">
+						<label for = "num_folio">Folio:</label>
+						<input type = "number" class = "form-control"
+							   id = "num_folio" name="num_folio"
+							   placeholder = "Numero de Folio" pattern="[0-9]+" required>
+					</div>
+					<div class = "form-group col-4">
+						<label for = "num_partida">Partida:</label>
+						<input type = "number" class = "form-control"
+							   id = "num_partida" name="num_partida"
+							   placeholder = "Numero de Partida" pattern="[0-9]+" required>
+					</div>
 				</div>
+
+				<div class="form-row">
+					<div class="col">
+						<hr>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class = "form-group col-6">
+						<label for = "num_docid">Numero de CI:</label>
+						<input type = "text" class = "form-control"
+							   id = "num_docid" name="num_docid"
+							   placeholder = "Numero de documento de identidad" required>
+					</div>
+					<div class = "form-group col-6">
+						<label for = "fecha_nac" >Fecha de nacimiento:</label>
+						<input type = "date" class = "form-control"
+							   id = "fecha_nacimiento" name="fecha_nacimiento" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col">
+						<hr>
+					</div>
+				</div>
+
+				<div class = "form-row">
+					<div class = "form-group col-4">
+						<label for = "nombres" >Nombres:</label>
+						<input type = "text" class =" form-control"
+							   id = "nombres" name="nombres"
+							   placeholder = "Nombres"  required>
+					</div>
+					<div class = "form-group col-4">
+						<label for = "primer_apellido">Primer Apellido:</label>
+						<input type = "text" class = "form-control"
+							   id = "primer_apellido" name="primer_apellido"
+							   placeholder = "Primer apellido"  required>
+					</div>
+					<div class = "form-group col-4">
+						<label for = "segundo_apellido">Segundo Apellido:</label>
+						<input type = "text" class = "form-control"
+							   id = "segundo_apellido" name="segundo_apellido"
+							   placeholder = "Segundo apellido"  required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="col">
+						<hr>
+					</div>
+				</div>
+
+
 			</div>
+
 
 			<!-- Modal footer -->
 			<div class="modal-footer">

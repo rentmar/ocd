@@ -74,4 +74,26 @@ class Partida_model extends CI_Model
 		$qry = $this->db->query($sql, [$idpartida, ]);
 		return $qry->row();
 	}
+
+	//Contar el numero de CIs registrados
+	public function contarCIs(){
+		$this->db->select('numero_ci');
+		$this->db->from('partida');
+		return $this->db->count_all_results();
+	}
+
+	//Extraer los CIs registrados y quien los registro
+	public function leerCIsRegistrados(){
+		$sql = "SELECT partida.idpartida, partida.numero_ci, partida.rel_idusuario, users.id, users.username   "
+			."FROM partida      "
+			."LEFT JOIN users ON users.id = partida.rel_idusuario   "
+			."   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+
+	}
 }

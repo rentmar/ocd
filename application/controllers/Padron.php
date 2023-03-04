@@ -124,4 +124,56 @@ class Padron extends CI_Controller{
 
 		return $partida;
 	}
+
+	public function reporteReformaJudicial(){
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('padron/vpadron_reportefirmas');
+		$this->load->view('html/pie');
+
+	}
+
+	public function procesarConsultaCI(){
+
+		$numero_cis = $this->Partida_model->contarCIs();
+		$documentos_datos = $this->Partida_model->leerCIsRegistrados();
+
+		//echo $numero_cis;
+
+		if($numero_cis > 0){
+			$filename = "reporte-rjudicial.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-reportes-reforma.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('CIs');
+
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			foreach ($documentos_datos as $n):
+				$sheet->setCellValue('A'.$eje_y, $n->idpartida);
+				$sheet->setCellValue('B'.$eje_y, $n->numero_ci);
+				$sheet->setCellValue('C'.$eje_y, $n->username);
+				$eje_y++;
+			endforeach;
+
+
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+		}else{
+			//Si la consulta esta vacia no se genera reporte
+			$this->mensaje('No existen documentos de identidad registrados', 'info');
+			redirect('padron/reporteReformaJudicial');
+		}
+
+
+	}
 }
