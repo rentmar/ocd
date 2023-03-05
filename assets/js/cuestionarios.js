@@ -1667,7 +1667,7 @@ $('#formregistrar_ci').submit(function (e) {
 	var flaginsert = insertarCI(numerocarnet);
 	console.log(flaginsert);
 
-	if(flaginsert['bandera'] == false){
+	/*if(flaginsert['bandera'] == false){
 		$('#carnet_identidad').val('');
 		$('#personanoregistradaci').hide();
 		$('#inserterror').modal("show");
@@ -1677,7 +1677,7 @@ $('#formregistrar_ci').submit(function (e) {
 		$('#insertcorrecto').modal("show");
 	}
 
-	location.reload();
+	location.reload();*/
 
 
 

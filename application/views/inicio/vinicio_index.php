@@ -336,21 +336,16 @@
 			<div class="modal-body">
 
 				<div class = "form-row">
-					<div class = "form-group col-4">
+					<div class = "form-group col-6">
 						<label for = "num_libro">Libro:</label>
 						<input type = "number" class =" form-control"
 							   id = "num_libro" name="num_libro"
 							   placeholder = "Numero de Libro" pattern="[0-9]+" required>
 					</div>
-					<div class = "form-group col-4">
-						<label for = "num_folio">Folio:</label>
-						<input type = "number" class = "form-control"
-							   id = "num_folio" name="num_folio"
-							   placeholder = "Numero de Folio" pattern="[0-9]+" required>
-					</div>
-					<div class = "form-group col-4">
+
+					<div class = "form-group col-6">
 						<label for = "num_partida">Partida:</label>
-						<input type = "number" class = "form-control"
+						<input type = "number" class = "form-control" min="1" max="100"
 							   id = "num_partida" name="num_partida"
 							   placeholder = "Numero de Partida" pattern="[0-9]+" required>
 					</div>

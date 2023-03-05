@@ -49,7 +49,8 @@ class Padron extends CI_Controller{
 			'bandera' => $bandera,
 		];
 		header('Content-Type: application/json');
-		echo json_encode($json);
+		//echo json_encode($json);
+		echo $json($datos);
 	}
 
 	//Crear partida
@@ -72,6 +73,8 @@ class Padron extends CI_Controller{
 		//echo "<br><br><br>";
 		//$inf_json = json_encode($partida);
 		//var_dump($inf_json);
+
+
 		$idregistro = $this->Partida_model->crearPartida($partida);
 		if($idregistro !== false){
 			redirect('padron/registroPartida/'.$idregistro);
