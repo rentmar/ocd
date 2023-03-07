@@ -1658,14 +1658,14 @@ $('#formcomp_ci').submit(function (e) {
 });
 
 //Insercion de la CI
-$('#formregistrar_ci').submit(function (e) {
-	e.preventDefault();
+//$('#formregistrar_ci').submit(function (e) {
+	/*e.preventDefault();
 	var numerocarnet = $('#carnet_identidad').val();
 	console.log('InsertarCI');
 	console.log(numerocarnet);
 	//Llamada Rutina de insercion json
 	var flaginsert = insertarCI(numerocarnet);
-	console.log(flaginsert);
+	console.log(flaginsert);*/
 
 	/*if(flaginsert['bandera'] == false){
 		$('#carnet_identidad').val('');
@@ -1699,7 +1699,7 @@ $('#formregistrar_ci').submit(function (e) {
 		$('#personaregistrada').modal("show");
 		$('#carnet_identidad').val('');
 	}*/
-});
+//});
 
 
 function numeroci(numeroci){

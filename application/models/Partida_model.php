@@ -84,7 +84,7 @@ class Partida_model extends CI_Model
 
 	//Extraer los CIs registrados y quien los registro
 	public function leerCIsRegistrados(){
-		$sql = "SELECT partida.idpartida, partida.numero_ci, partida.rel_idusuario, users.id, users.username   "
+		$sql = "SELECT partida.idpartida, partida.numero_ci, partida.rel_idusuario, users.id, users.username, partida.datos_partida  "
 			."FROM partida      "
 			."LEFT JOIN users ON users.id = partida.rel_idusuario   "
 			."   "

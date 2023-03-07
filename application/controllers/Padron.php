@@ -158,9 +158,14 @@ class Padron extends CI_Controller{
 			$eje_y = 6;
 
 			foreach ($documentos_datos as $n):
+				$inf_extra = json_decode($n->datos_partida);
 				$sheet->setCellValue('A'.$eje_y, $n->idpartida);
-				$sheet->setCellValue('B'.$eje_y, $n->numero_ci);
-				$sheet->setCellValue('C'.$eje_y, $n->username);
+				$sheet->setCellValue('B'.$eje_y, $inf_extra->nombres.' '.$inf_extra->primer_apellido.' '.$inf_extra->segundo_apellido);
+				$sheet->setCellValue('C'.$eje_y, $n->numero_ci);
+				$sheet->setCellValue('D'.$eje_y, $inf_extra->fecha_nacimiento);
+				$sheet->setCellValue('E'.$eje_y, $inf_extra->libro);
+				$sheet->setCellValue('F'.$eje_y, $inf_extra->partida);
+				$sheet->setCellValue('G'.$eje_y, $n->username);
 				$eje_y++;
 			endforeach;
 
@@ -177,6 +182,20 @@ class Padron extends CI_Controller{
 			redirect('padron/reporteReformaJudicial');
 		}
 
+
+	}
+
+	//Funcion para creacion de partidas
+	public function crearRegistro(){
+		$usuario = $this->ion_auth->user()->row();
+		$partida = $this->partida();
+		$doc_ci = $this->input->post("num_docid");
+		$partida->numero_documento = $doc_ci;
+		$partida->departamento = 1;
+		$partida->usuario = $usuario->id;
+		//var_dump($partida);
+		$idregistro = $this->Partida_model->crearPartida($partida);
+		redirect("inicio/");
 
 	}
 }

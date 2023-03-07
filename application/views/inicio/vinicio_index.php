@@ -325,7 +325,7 @@
 				'id' => 'formregistrar_ci',
 				'name' => 'formregistrar_ci',
 			]; ?>
-			<?php echo form_open('', $att_ci); ?>
+			<?php echo form_open(site_url('padron/crearRegistro/'), $att_ci); ?>
 			<!-- Modal Header -->
 			<div class="modal-header bg-info">
 				<h4 class="modal-title text-white ">Registrar?</h4>
