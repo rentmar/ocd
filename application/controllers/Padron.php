@@ -161,11 +161,12 @@ class Padron extends CI_Controller{
 				$inf_extra = json_decode($n->datos_partida);
 				$sheet->setCellValue('A'.$eje_y, $n->idpartida);
 				$sheet->setCellValue('B'.$eje_y, $inf_extra->nombres.' '.$inf_extra->primer_apellido.' '.$inf_extra->segundo_apellido);
-				$sheet->setCellValue('C'.$eje_y, ' '.$n->numero_ci);
-				$sheet->setCellValue('D'.$eje_y, $inf_extra->fecha_nacimiento);
-				$sheet->setCellValue('E'.$eje_y, $inf_extra->libro);
-				$sheet->setCellValue('F'.$eje_y, $inf_extra->partida);
-				$sheet->setCellValue('G'.$eje_y, $n->username);
+				$sheet->setCellValue('C'.$eje_y, ' '.$inf_extra->apellido_esposo);
+				$sheet->setCellValue('D'.$eje_y, ' '.$n->numero_ci);
+				$sheet->setCellValue('E'.$eje_y, $inf_extra->fecha_nacimiento);
+				$sheet->setCellValue('F'.$eje_y, $inf_extra->libro);
+				$sheet->setCellValue('G'.$eje_y, $inf_extra->partida);
+				$sheet->setCellValue('H'.$eje_y, $n->username);
 				$eje_y++;
 			endforeach;
 

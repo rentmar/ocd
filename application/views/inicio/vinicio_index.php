@@ -246,7 +246,7 @@
 						<?php echo form_open('', $att_ci); ?>
 						<div class="form-group">
 							<label for="carnet_identidad">COMPROBAR CI:</label>
-							<input type="text" class="form-control" id="carnet_identidad" name="carnet_identidad" pattern="[0-9]+" placeholder="Numero de Carnet de identidad" required>
+							<input type="text" class="form-control" id="carnet_identidad" name="carnet_identidad"  placeholder="Numero de Carnet de identidad" required>
 						</div>
 						<div class="form-group">
 							<input type="submit" id="BOTON" value="Comprobar">
@@ -340,14 +340,14 @@
 						<label for = "num_libro">Libro:</label>
 						<input type = "number" class =" form-control"
 							   id = "num_libro" name="num_libro"
-							   placeholder = "Numero de Libro" pattern="[0-9]+" required>
+							   placeholder = "Numero de Libro"  required>
 					</div>
 
 					<div class = "form-group col-6">
 						<label for = "num_partida">Partida:</label>
 						<input type = "number" class = "form-control" min="1" max="100"
 							   id = "num_partida" name="num_partida"
-							   placeholder = "Numero de Partida" pattern="[0-9]+" required>
+							   placeholder = "Numero de Partida"  required>
 					</div>
 				</div>
 
@@ -377,23 +377,29 @@
 				</div>
 
 				<div class = "form-row">
-					<div class = "form-group col-4">
+					<div class = "form-group col-3">
 						<label for = "nombres" >Nombres:</label>
 						<input type = "text" class =" form-control"
 							   id = "nombres" name="nombres"
 							   placeholder = "Nombres"  required>
 					</div>
-					<div class = "form-group col-4">
-						<label for = "primer_apellido">Primer Apellido:</label>
+					<div class = "form-group col-3">
+						<label for = "primer_apellido">Apellido Paterno:</label>
 						<input type = "text" class = "form-control"
 							   id = "primer_apellido" name="primer_apellido"
-							   placeholder = "Primer apellido"  required>
+							   placeholder = "Primer apellido" >
 					</div>
-					<div class = "form-group col-4">
-						<label for = "segundo_apellido">Segundo Apellido:</label>
+					<div class = "form-group col-3">
+						<label for = "segundo_apellido">Apellido Materno:</label>
 						<input type = "text" class = "form-control"
 							   id = "segundo_apellido" name="segundo_apellido"
-							   placeholder = "Segundo apellido"  required>
+							   placeholder = "Segundo apellido"  >
+					</div>
+					<div class = "form-group col-3">
+						<label for = "apellido_esposo">Apellido del Esposo:</label>
+						<input type = "text" class = "form-control"
+							   id = "apellido_esposo" name="apellido_esposo"
+							   placeholder = "Apellido Esposo"  >
 					</div>
 				</div>
 				<div class="form-row">
