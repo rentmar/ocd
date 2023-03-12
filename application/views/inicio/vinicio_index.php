@@ -250,6 +250,9 @@
 						</div>
 						<div class="form-group">
 							<input type="submit" id="BOTON" value="Comprobar">
+							<a  href="<?php echo site_url('padron/listarRegistros') ?>" id="BOTON" role="button" >
+								Editar
+							</a>
 						</div>
 						<?php echo form_close(); ?>
 					</div>

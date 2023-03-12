@@ -199,4 +199,42 @@ class Padron extends CI_Controller{
 		redirect("inicio/");
 
 	}
+
+	//Listar los registros del usuario actual
+	public function listarRegistros(){
+		$usuario = $this->ion_auth->user()->row();
+		$registros = $this->Partida_model->leerRegistros($usuario->id);
+		$datos['registros'] = $registros;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('padron/vpadron_listarregistros', $datos);
+		$this->load->view('html/pie');
+	}
+
+	//Ventana de edicion de registro
+	public function editarRegistro($idregistro){
+
+		$registro = $this->Partida_model->registroId($idregistro);
+		$info = json_decode($registro->datos_partida);
+		//var_dump($registro);
+
+		$datos['registro'] = $registro;
+		$datos['datos'] = $info;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('padron/vpadron_editarregistro', $datos);
+		$this->load->view('html/pie');
+
+	}
+
+	//Rutina para actualizar el registro
+	public function actualizarRegistro(){
+		$idpartida = $this->input->post('idpartida');
+		$idusuario = $this->input->post('idusuario');
+		$nuevos_datos_partida = $this->partida();
+		$nuevos_datos_partida->numero_documento = $this->input->post('num_docid');
+		$this->Partida_model->actualizarPartida($idpartida, $nuevos_datos_partida);
+		redirect('padron/listarRegistros');
+	}
 }

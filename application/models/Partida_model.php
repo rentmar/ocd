@@ -59,7 +59,7 @@ class Partida_model extends CI_Model
 
 	}
 
-	//Plenaria tipo plenaria
+	//Leer Registro por ID
 	public function registroId($identificador)
 	{
 		$idpartida = $identificador;
@@ -96,4 +96,30 @@ class Partida_model extends CI_Model
 		return $qry->result();
 
 	}
+
+	//Leer los registros de un usuario
+	public function leerRegistros($identificador){
+		$sql = "SELECT partida.idpartida, partida.datos_partida  "
+			."FROM partida      "
+			."WHERE partida.rel_idusuario = ?   "
+			."   "
+			."   "
+			."   "
+			."   "
+			."   ";
+		$qry = $this->db->query($sql, [$identificador, ]);
+		return $qry->result();
+	}
+
+	public function actualizarPartida($idpartida, $datos_partida){
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_actualizar = [
+			'datos_partida' =>json_encode($datos_partida),
+		];
+
+		$this->db->where('idpartida', $idpartida);
+		$this->db->update('partida', $datos_actualizar);
+	}
+
+
 }
