@@ -64,6 +64,32 @@
 							</div>
 						</div>
 
+						<div class = "form-row">
+							<div class = "form-group col-6">
+								<label for = "ciudad_apertura">Ciudad de Apertura:</label>
+								<input type = "text" class =" form-control"
+									   id = "ciudad_apertura" name="ciudad_apertura"
+									   placeholder="Ciudad de apertura del libro"
+									   value="<?php echo $libro_info->ciudad_apertura; ?>"
+								>
+							</div>
+							<div class = "form-group col-6">
+								<label for = "ciudad_cierre">Ciudad de Cierre:</label>
+								<input type = "text" class = "form-control"
+									   id = "ciudad_cierre" name="ciudad_cierre"
+									   placeholder="Ciudad de cierre del libro"
+									   value="<?php echo $libro_info->ciudad_cierre; ?>"
+								>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="col">
+								<hr>
+							</div>
+						</div>
+
+
 						<div class="form-row">
 
 							<div class="form-group col-6">

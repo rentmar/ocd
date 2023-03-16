@@ -99,6 +99,8 @@ class Libro extends CI_Controller{
 		$libro->numero_libro = $this->input->post('num_libro');
 		$libro->fecha_apertura = $this->input->post('fecha_apertura');
 		$libro->fecha_cierre = $this->input->post('fecha_cierre');
+		$libro->ciudad_apertura = $this->input->post('ciudad_apertura');
+		$libro->ciudad_cierre = $this->input->post('ciudad_cierre');
 		$libro->iddepartamento = $this->input->post('departamento');
 		$libro->nombre_departamento = $departamento->nombre_departamento;
 		$libro->municipio = $this->input->post('municipio');
