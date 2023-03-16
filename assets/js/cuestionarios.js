@@ -575,6 +575,21 @@ $(document).ready(function() {
 			}
 		}
 	});
+	$('#libros-tabla').DataTable({
+		lengthMenu: [[100, 500, -1], [100, 500, "Todo"]],
+		language: {
+			"zeroRecords": "No se encontró ningun Libro registrado",
+			"lengthMenu":     "Mostrar _MENU_ registros",
+			'search': 'Buscar:',
+			"info": "Mostrando la página _PAGE_ de _PAGES_",
+			"infoEmpty": "No hay registros disponibles",
+			"infoFiltered": "(filtrado de _MAX_ registros totales)",
+			'paginate':{
+				'next': 'Siguiente',
+				'previous': 'Anterior'
+			}
+		}
+	});
 
 	$('[data-toggle="tooltip"]').tooltip();
 

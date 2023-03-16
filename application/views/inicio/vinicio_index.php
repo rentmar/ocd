@@ -256,7 +256,17 @@
 						</div>
 						<?php echo form_close(); ?>
 					</div>
+					<div id="Caja_de_datos" class="Caja_de_datos">
+						<div class="form-group">
+							<a  href="<?php echo site_url('libro') ?>" id="BOTON" role="button" >
+								Registro de Libros
+							</a>
+						</div>
+					</div>
+
+				</div>
 			</div>
+
 		</div>
 	</div>
 <?php endif; ?>
