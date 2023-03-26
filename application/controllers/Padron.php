@@ -12,6 +12,7 @@ class Padron extends CI_Controller{
 		$this->load->helper('date');
 		$this->load->model('Partida_model');
 		$this->load->model('Departamento_model');
+		$this->load->model('Libro_model');
 	}
 
 	public function index(){
@@ -182,7 +183,57 @@ class Padron extends CI_Controller{
 			$this->mensaje('No existen documentos de identidad registrados', 'info');
 			redirect('padron/reporteReformaJudicial');
 		}
+	}
 
+	//Reporte excel de libros
+	public function procesarConsultaLibros(){
+		$numero_libros = $this->Libro_model->contarLibros();
+		$libros = $this->Libro_model->leerLibrosRegistrado();
+
+		if($numero_libros>0){
+			$filename = "reporte-libros.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-reportes-libros.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('CIs');
+
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			foreach ($libros as $n):
+				$inf_libro = json_decode($n->libro_informacion);
+				$sheet->setCellValue('A'.$eje_y, $n->idlibro);
+				$sheet->setCellValue('B'.$eje_y, $inf_libro->numero_libro);
+				$sheet->setCellValue('C'.$eje_y, $inf_libro->fecha_apertura);
+				$sheet->setCellValue('D'.$eje_y, $inf_libro->fecha_cierre);
+				$sheet->setCellValue('E'.$eje_y, $inf_libro->nombre_departamento);
+				$sheet->setCellValue('F'.$eje_y, $inf_libro->municipio);
+				$sheet->setCellValue('G'.$eje_y, $inf_libro->partidas_validas);
+				$sheet->setCellValue('H'.$eje_y, $inf_libro->partidas_nulas);
+				$sheet->setCellValue('I'.$eje_y, $inf_libro->partidas_blancas);
+				$sheet->setCellValue('J'.$eje_y, $inf_libro->observaciones);
+				$sheet->setCellValue('K'.$eje_y, $n->username);
+
+				$eje_y++;
+			endforeach;
+
+
+
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+
+		}else{
+			//Si la consulta esta vacia no se genera reporte
+			$this->mensaje('No existen libros registrados', 'info');
+			redirect('padron/reporteReformaJudicial');
+		}
 
 	}
 

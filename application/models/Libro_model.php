@@ -84,4 +84,22 @@ class Libro_model extends CI_Model{
 		$this->db->where('idlibro', $idlibro);
 		$this->db->update('libros_registro', $datos_actualizar);
 	}
+	//Contar los libros registrados
+	public function contarLibros(){
+		$this->db->select('libro_informacion');
+		$this->db->from('libros_registro');
+		return $this->db->count_all_results();
+	}
+
+	//Leer un libro por identificador
+	public function leerLibrosRegistrado(){
+		$sql = "SELECT libros_registro.idlibro, libros_registro.libro_informacion, users.username   "
+			."FROM libros_registro "
+			."LEFT JOIN users ON libros_registro.rel_idusr = users.id  "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
 }

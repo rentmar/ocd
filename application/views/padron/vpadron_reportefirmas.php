@@ -44,11 +44,25 @@
 						<input type="submit" class="BOTON" value="GENERAR" name="tema">
 					</div>
 				</div>
+				<?php echo form_close(); ?>
+
+				<br>
+				<div class="contenedor">
+
+					<?php echo form_open('padron/procesarConsultaLibros'); ?>
+					<h3>Libros Registrados</h3>
+					<br>
+					<div class="form-row">
+						<input type="submit" class="BOTON" value="GENERAR" name="tema">
+					</div>
+					<?php echo form_close(); ?>
+
+				</div>
 
 
 			</div>
 		</div>
 	</div>
 	<br>
-	<?php echo form_close(); ?>
+
 </main>
