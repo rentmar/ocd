@@ -63,12 +63,15 @@ class Normativa extends CI_Controller{
 		{
 			redirect('normativa/nuevaNormaAsambleaLegislativa');
 
+		}elseif ($idinstancia == 4){
+			redirect('normativa/nuevaNormaAsambleaLegislativaLp');
 		}else{
 			redirect('normativa/');
 		}
 	}
 
 	//Formulario para normas de instancia de Asamblea legislativa plurinacional
+	//PL(Proyecto de ley)
 	public function nuevaNormaAsambleaLegislativa()
 	{
 		$idinstancia = 1;
@@ -86,6 +89,27 @@ class Normativa extends CI_Controller{
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vnorma_plurinacional', $data);
+		$this->load->view('html/pie');
+	}
+	//Formulario para normas de instancia de Asamblea legislativa plurinacional
+	//LP(Ley Promulgada)
+	public function nuevaNormaAsambleaLegislativaLp()
+	{
+		$idinstancia = 4;
+		$usuario = $this->ion_auth->user()->row();
+
+		$instancia = $this->Instanciaseguimiento_model->leerInstancia($idinstancia);
+		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+		$tema = $this->Cuestionario_model->leerTema();
+
+		$data['instancia'] = $instancia;
+		$data['idformulario'] = $this->_idformulario;
+		$data['usuario'] = $usuario;
+		$data['tema'] = $tema;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vnorma_plurinacional_lp', $data);
 		$this->load->view('html/pie');
 	}
 

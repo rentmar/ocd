@@ -88,17 +88,40 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/institucionalidad.svg'; ?>" alt="Card image">
 					<div class="card-body">
-						<div class="btn-group ">
+						<!--<div class="btn-group ">
 							<button type="button" class="btn  cuest2">Nuevo</button>
 							<button type="button" class="btn dropdown-toggle dropdown-toggle-split cuest2" data-toggle="dropdown">
 								<span class="caret"></span>
 							</button>
 							<div class="dropdown-menu">
-								<?php foreach ($instancia as $i): ?>
-									<a class="dropdown-item" href="<?php echo site_url('normativa/normativaSeleccion/'.$i->idinsseg); ?>"><?php echo $i->instancia; ?></a>
-								<?php endforeach; ?>
+								<?php /*foreach ($instancia as $i): */?>
+									<a class="dropdown-item" href="<?php /*echo site_url('normativa/normativaSeleccion/'.$i->idinsseg); */?>"><?php /*echo $i->instancia; */?></a>
+								<?php /*endforeach; */?>
+							</div>
+						</div>-->
+
+						<div class="btn-group">
+							<button type="button" class="btn  cuest2">Nuevo</button>
+							<button type="button" class="btn dropdown-toggle dropdown-toggle-split cuest2" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="<?php echo site_url('normativa/normativaSeleccion/1'); ?>">
+									Asamblea Legislativa Plurinacional PL
+								</a>
+								<a class="dropdown-item" href="<?php echo site_url('normativa/normativaSeleccion/4'); ?>">
+									Asamblea Legislativa Plurinacional LP
+								</a>
+								<a class="dropdown-item" href="<?php echo site_url('normativa/normativaSeleccion/2'); ?>">
+									Asamblea Legislativa Departamental
+								</a>
+								<a class="dropdown-item" href="<?php echo site_url('normativa/normativaSeleccion/3'); ?>">
+									Consejo Municipal
+								</a>
 							</div>
 						</div>
+
+
 
 
 

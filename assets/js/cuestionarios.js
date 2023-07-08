@@ -800,7 +800,7 @@ $('#formulario_plenaria').submit(function (e) {
 function Fecha(literalFecha){
 	this.fecha = literalFecha;
 	fecha = new Date(literalFecha);
-	this.fecha_unix = Math.floor(fecha.getTime()/1000)
+	this.fecha_unix = Math.floor(fecha.getTime()/1000);
 }
 
 
@@ -1535,6 +1535,185 @@ $('#formulario_norma_plurinacional').submit(function (e) {
 	$('#preenvionormaplurinacional').modal("show");
 });
 
+$('#formulario_norma_plurinacional_lp').submit(function (e) {
+	e.preventDefault();
+	var normaPlurinacionalLP = new Normalp();
+	var instacia = new InstanciaSeguimiento();
+	var tema1 = new Tema();
+	var tema2 = new Tema();
+	var instancia = new InstanciaSeguimiento();
+
+	//Usuario y cuestionario
+	normaPlurinacionalLP.idcuestionario = $('#idcuestionario').val();
+	normaPlurinacionalLP.usuario = $('#idusuario').val();
+
+	//Instancia de seguimiento
+	instancia.identificador = $('#idinstancia_plu_lp').val();
+	instancia.literal = $('#instancia_plu_lp').val();
+	normaPlurinacionalLP.instanciaSeguimiento = instancia;
+
+	//Codigo y nombre de la norma
+	normaPlurinacionalLP.codigo = $('#codigo_plu_lp').val();
+	normaPlurinacionalLP.nombre = $('#nombre_plu_lp').val();
+	//Objeto de la norma
+	normaPlurinacionalLP.objeto = $('#objeto_plu_lp').val();
+
+	//Temas de la norma
+	tema1.idtema = $('input:radio[name=idtema]:checked').val();
+	tema1.otrotema = $('#otrotema1norma').val();
+
+	tema2.idtema = $('input:radio[name=idtema2]:checked').val();
+	tema2.otrotema = $('#otrotema2norma').val();
+
+	normaPlurinacionalLP.tema1 = tema1;
+	normaPlurinacionalLP.tema2 = tema2;
+
+	//Antecedentes de ley
+	normaPlurinacionalLP.codigo_proyecto_ley = $('#codigo_plu_lp').val();
+	normaPlurinacionalLP.comentarios = $('#comentarios_plu_lp').val();
+
+
+
+	/*	var normaPlurinacional = new Norma();
+		var instancia = new InstanciaSeguimiento();
+		var tema1 = new Tema();
+		var tema2 = new Tema();
+		var proponente = new Proponente();
+		var fecha_norma = new Fecha($('#fecha_norma_plu').val());
+		var fecha_repo = new Fecha($('#fecha_norma_solrep_plu').val());
+
+		//Usuario y cuestionario
+		normaPlurinacional.idcuestionario = $('#idcuestionario').val();
+		normaPlurinacional.usuario = $('#idusuario').val();
+
+		//Instancia de seguimiento
+		instancia.identificador = $('#idinstancia_plu').val();
+		instancia.literal = $('#instancia_plu').val();
+		normaPlurinacional.instanciaSeguimiento = instancia;
+
+		//Codigo y nombre de la norma
+		normaPlurinacional.codigo = $('#codigo_plu').val();
+		normaPlurinacional.nombre = $('#nombre_plu').val();
+		normaPlurinacional.fecha = fecha_norma;
+
+		//Objeto de la norma
+		normaPlurinacional.objeto = $('#objeto_plu').val();
+
+		//Temas de la norma
+		tema1.idtema = $('input:radio[name=idtema]:checked').val();
+		tema1.otrotema = $('#otrotema1norma').val();
+
+		tema2.idtema = $('input:radio[name=idtema2]:checked').val();
+		tema2.otrotema = $('#otrotema2norma').val();
+
+		normaPlurinacional.tema1 = tema1;
+		normaPlurinacional.tema2 = tema2;
+
+		//Capturar el proponente
+		proponente.idproponente = $('#proponente').val().toLocaleLowerCase();
+		proponente.nombre = $("#proponente option:selected").text();
+		proponente.otro = $('#proponente_otro').val();
+		normaPlurinacional.proponente = proponente;
+
+		//remitente
+		normaPlurinacional.remitente = $('#remitente_plu').val();
+		normaPlurinacional.destinatario = $('#destinatario_plu').val();
+
+		//Datos reposicion
+		normaPlurinacional.remitente_reposicion = $('#remitente_solrep_plu').val();
+		normaPlurinacional.destinatario_reposicion = $('#destinatario_solrep_plu').val();
+		normaPlurinacional.fecha_reposicion = fecha_repo;
+
+		normaPlurinacional.observaciones = $('#observaciones_plu').val();
+		normaPlurinacional.enlace = $('#enlace_plu').val();
+
+		normaPlurinacional.obs_metodologicas = $('#observaciones_met_plu').val();
+
+		//Rellenado del preenvio
+		$('#codigo_plu_pre').val(normaPlurinacional.codigo);
+		$('#nombre_plu_pre').val(normaPlurinacional.nombre);
+		$('#objeto_plu_pre').val(normaPlurinacional.objeto);
+
+		//Desplegar los temmas capturados
+		//Tema1
+		var tema1_pre = '';
+		if(normaPlurinacional.tema1['idtema'] == 0){
+			console.log('Otro tema seleccionado: ' + normaPlurinacional.tema1['otrotema']);
+			tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
+			tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacional.tema1['otrotema'] +'">';
+			tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacional.tema1['idtema'] +'" >';
+			tema1_pre += '';
+			$('#tema1desp').html(tema1_pre);
+		}else{
+			var temadb = gettema(normaPlurinacional.tema1['idtema']);
+			console.log(temadb);
+			normaPlurinacional.tema1['tema'] = temadb['nombre_tema'];
+			tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
+			tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacional.tema1['tema'] +'">';;
+			tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacional.tema1['idtema'] +'" >';;
+			tema1_pre += '';
+			$('#tema1desp').html(tema1_pre);
+		}
+		//Tema2
+		var tema2_pre = '';
+		if(normaPlurinacional.tema2['idtema'] == 0){
+			console.log('Otro tema seleccionado: '+ normaPlurinacional.tema2['otrotema']);
+			tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
+			tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacional.tema2['otrotema'] +'">';
+			tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacional.tema2['idtema'] +'" >';
+			tema2_pre += '';
+			$('#tema2desp').html(tema2_pre);
+
+		}else{
+			var tema2db = gettema(normaPlurinacional.tema2['idtema']);
+			console.log(tema2db);
+			normaPlurinacional.tema2['tema'] = tema2db['nombre_tema'];
+			tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
+			tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacional.tema2['tema'] +'">';
+			tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacional.tema2['idtema'] +'" >';
+			tema2_pre += '';
+			$('#tema2desp').html(tema2_pre);
+		}
+
+		var prop_dis = '';
+		if(normaPlurinacional.proponente['idproponente'] == 2){
+			prop_dis += '<label for="proponente_pre" >Proponente:</label>';
+			prop_dis += '<input type="text" class="form-control" id="proponente_pre" name="proponente_pre" required value="'+ normaPlurinacional.proponente['nombre']  +'">';
+			prop_dis += '<input type="text" class="form-control" id="proponentedes_pre" name="proponentedes_pre" required value="'+ normaPlurinacional.proponente['otro']  +'">';;
+			prop_dis += '<input type="hidden" class="form-control" id="idproponente_pre" name="idproponente_pre" value="'+ normaPlurinacional.proponente['idproponente'] +'" >';
+			prop_dis += '';
+			$('#propdesp').html(prop_dis);
+		}else{
+			prop_dis += '<label for="proponente_pre" >Proponente:</label>';
+			prop_dis += '<input type="text" class="form-control" id="proponente_pre" name="proponente_pre" required value="'+ normaPlurinacional.proponente['nombre']  +'">';
+			prop_dis += '<input type="hidden" class="form-control" id="idproponente_pre" name="idproponente_pre" value="'+ normaPlurinacional.proponente['idproponente'] +'" >';
+			prop_dis += '';
+			$('#propdesp').html(prop_dis);
+		}
+
+		$('#remitente_plu_pre').val(normaPlurinacional.remitente);
+		$('#destinatario_plu_pre').val(normaPlurinacional.destinatario);
+		$('#fecha_norma_plu_pre').val(normaPlurinacional.fecha['fecha']);
+		$('#unixfecha_norma_plu_pre').val(normaPlurinacional.fecha['fecha_unix']);
+
+
+		$('#remitente_solrep_plu_pre').val(normaPlurinacional.remitente_reposicion);
+		$('#destinatario_solrep_plu_pre').val(normaPlurinacional.destinatario_reposicion);
+		$('#fecha_norma_solrep_plu_pre').val(normaPlurinacional.fecha_reposicion['fecha']);
+		$('#unixfecha_norma_solrep_plu_pre').val(normaPlurinacional.fecha_reposicion['fecha_unix']);
+
+		$('#observaciones_plu_pre').val(normaPlurinacional.observaciones);
+		$('#enlace_plu_pre').val(normaPlurinacional.enlace);
+		$('#observaciones_met_plu_pre').val(normaPlurinacional.obs_metodologicas);
+
+
+	*/
+
+	console.log("normaPlurinacionallp");
+	console.log(normaPlurinacionalLP);
+	$('#preenvionormaplurinacionallp').modal("show");
+});
+
 function Norma() {
 	this.idcuestionario = '';
 	this.usuario = '';
@@ -1560,6 +1739,34 @@ function Norma() {
 	this.enlace = '';
 	this.obs_metodologicas = '';
 }
+function Normalp() {
+	this.idcuestionario = '';
+	this.usuario = '';
+	this.instanciaSeguimiento = '';
+	this.departamento = '';
+	this.municipio = '';
+	this.fecha = '';
+	this.fecha_primer_envio = '';
+	this.remitente = '';
+	this.destinatario = '';
+	this.segundoremitente = '';
+	this.codigo = '';
+	this.nombre = '';
+	this.objeto = '';
+	this.tema1 = '';
+	this.tema2 = ''
+	this.proponente = '';
+	this.observaciones = '';
+	this.estado = '';
+	this.remitente_reposicion = '';
+	this.destinatario_reposicion = '';
+	this.fecha_reposicion = '';
+	this.enlace = '';
+	this.obs_metodologicas = '';
+	this.codigo_proyecto_ley = '';
+	this.comentarios = '';
+}
+
 function Departamento() {
 	this.iddepartamento = '';
 	this.departamento = '';

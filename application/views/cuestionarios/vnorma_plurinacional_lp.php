@@ -4,7 +4,7 @@
 	<?php
 	/** @noinspection PhpLanguageLevelInspection */
 	$atr_form =[
-		'id' => 'formulario_norma_plurinacional' ,
+		'id' => 'formulario_norma_plurinacional_lp' ,
 	]
 	;?>
 	<?php echo form_open('normativa/capturaDatos', $atr_form);?>
@@ -13,7 +13,7 @@
 		<div class="contenedor_superior2" id="contenedor_pequeño">
 		</div>
 		<div class="contenedor_inferior">
-			<h3 id="Título_formulario"> Produccion Normativa - Proyecto de Ley (PL) </h3>
+			<h3 id="Título_formulario"> Produccion Normativa - Ley Promulgada (LP) </h3>
 		</div>
 	</div>
 	<br>
@@ -21,44 +21,35 @@
 
 	<div class="contenedores">
 		<label for="instanciaseguimientonorma">Instancia de seguimiento:</label><br>
-		<input type="text" id="instancia_plu" name="instancia_plu" class="form-control" readonly="readonly"
-		value="<?php echo $instancia->instancia;?>">
-		<input type="hidden" id="idinstancia_plu" name="idinstancia_plu" class="form-control"
+		<input type="text" id="instancia_plu_lp" name="instancia_plu_lp" class="form-control" readonly="readonly"
+			   value="<?php echo $instancia->instancia;?>">
+		<input type="hidden" id="idinstancia_plu_lp" name="idinstancia_plu_lp" class="form-control"
 			   value="<?php echo $instancia->idinsseg; ?>" >
 
 	</div>
 	<br>
 
 
-	<!--<div class="contenedores">
-		<label for="estado_norma">Estado actual de la norma:</label><br>
-		<select id="estado_norma" name="estado_norma" class="form-control" required>
-			<option value="" >Seleccione el estado</option>
-			<option value="1">Ley en Tratamiento</option>
-			<option value="2">Ley Promulgada</option>
-		</select>
-	</div>
-	<br>-->
 
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
 				<h4>
-					Datos Generales del Proyecto de ley
+					Datos Generales
 				</h4>
 			</div>
 			<div class="card-body">
 				<div class="form-group">
-					<label for="codigo_plu">Codigo:</label>
-					<input class="form-control" type="text" id="codigo_plu" name="codigo_plu">
+					<label for="codigo_plu_lp">Codigo:</label>
+					<input class="form-control" type="text" id="codigo_plu_lp" name="codigo_plu_lp">
 				</div>
 				<div class="form-group">
-					<label for="nombre_plu">Nombre de la norma:</label>
-					<textarea rows="3" class="form-control" id="nombre_plu" name="nombre_plu"></textarea>
+					<label for="nombre_plu_lp">Nombre de la norma:</label>
+					<textarea rows="3" class="form-control" id="nombre_plu_lp" name="nombre_plu_lp"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="objeto_plu">Objeto de la norma:</label>
-					<textarea rows="5" class="form-control" id="objeto_plu" name="objeto_plu"></textarea>
+					<label for="objeto_plu_lp">Objeto de la norma:</label>
+					<textarea rows="5" class="form-control" id="objeto_plu_lp" name="objeto_plu_lp"></textarea>
 				</div>
 			</div>
 		</div>
@@ -146,81 +137,29 @@
 		</div>
 	</div>
 	<br>
+
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
 				<h4>
-					Propuesta por:
-				</h4>
-			</div>
-			<div class="card-body">
-				<div class="contenedores">
-					<label for="proponente">Normativa propuesta por:</label><br>
-					<select id="proponente" name="proponente" class="form-control">
-						<option value="ninguno" >Seleccione el proponente</option>
-						<option value="0">oficialismo</option>
-						<option value="1">oposicion</option>
-						<option value="2">otros</option>
-					</select>
-				</div>
-				<div id="otroproponentedatos" >
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<br>
-	<div class="contenedores">
-		<div class="card">
-			<div class="card-header cuest2">
-				<h4>
-					Presentacion del proyecto de ley:
+					Antecedentes de Ley:
 				</h4>
 			</div>
 			<div class="card-body">
 				<div class="form-group">
-					<label for="remitente_plu" >Quien presenta el proyecto de ley:</label>
-					<textarea class="form-control" rows="3" id="remitente_plu" name="remitente_plu"></textarea>
+					<label for="">Introduzca codigo de proyecto de ley:</label>
+					<input class="form-control"  type="text" id="codigo_plu_lp" name="codigo_plu_lp">
 				</div>
 				<div class="form-group">
-					<label for="destinatario_plu" >A quien se presenta el proyecto de ley:</label>
-					<textarea class="form-control" rows="3" id="destinatario_plu" name="destinatario_plu"></textarea>
+					<label for="observaciones_plu">Comentarios:</label>
+					<textarea class="form-control" rows="2" id="comentarios_plu" name="comentarios_plu"></textarea>
 				</div>
-				<div class="form-group">
-					<label for="fecha_norma_plu" >Fecha de presentacion:</label>
-					<input class="form-control" type="date" id="fecha_norma_plu" name="fecha_norma_plu" >
-				</div>
-
 			</div>
 		</div>
 	</div>
 	<br>
-	<div class="contenedores">
-		<div class="card">
-			<div class="card-header cuest2">
-				<h4>
-					Ultima reposicion del proyecto de ley:
-				</h4>
-			</div>
-			<div class="card-body">
-				<div class="form-group">
-					<label for="remitente_solrep_plu" >Quien presenta solicitud de reposicion:</label>
-					<textarea class="form-control" rows="3" id="remitente_solrep_plu" name="remitente_solrep_plu"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="destinatario_solrep_plu" >A quien se presenta solicitud de reposicion:</label>
-					<textarea class="form-control" rows="3" id="destinatario_solrep_plu" name="destinatario_solrep_plu"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="fecha_norma_solrep_plu" >Fecha de solicitud de reposicion:</label>
-					<input class="form-control" type="date" id="fecha_norma_solrep_plu" name="fecha_norma_solrep_plu">
-				</div>
 
-			</div>
-		</div>
-	</div>
-	<br>
+
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
@@ -278,13 +217,13 @@
 
 
 <!-- The Modal Preenvio de Normas -->
-<div class="modal fade" id="preenvionormaplurinacional">
+<div class="modal fade" id="preenvionormaplurinacionallp">
 	<div class="modal-dialog modal-xl modal-dialog-scrollable ">
 		<div class="modal-content">
 
 			<!-- Modal Header -->
 			<div class="modal-header bg-info text-white ">
-				<h4 class="modal-title">Norma a Registrar - Proyecto de Ley</h4>
+				<h4 class="modal-title">Norma a Registrar - Ley Promulgada</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<!-- Modal body -->
@@ -295,7 +234,7 @@
 					<div class="card">
 						<div class="card-header bg-info">
 							<h4>
-								Datos Generales del Proyecto de ley
+								Datos Generales
 							</h4>
 						</div>
 						<div class="card-body">
@@ -320,49 +259,24 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="card">
 						<div class="card-header bg-info">
 							<h4>
-								Presentacion del proyecto de ley:
+								Antecedentes de ley:
 							</h4>
 						</div>
 						<div class="card-body">
+
 							<div class="form-group">
-								<label for="remitente_plu_pre" >Quien presenta el proyecto de ley:</label>
-								<textarea class="form-control" rows="3" id="remitente_plu_pre" name="remitente_plu_pre"></textarea>
+								<label for="">Introduzca codigo de proyecto de ley:</label>
+								<input class="form-control"  type="text" id="codigo_plu_lp_pre" name="codigo_plu_lp_pre">
 							</div>
 							<div class="form-group">
-								<label for="destinatario_plu_pre" >A quien se presenta el proyecto de ley:</label>
-								<textarea class="form-control" rows="3" id="destinatario_plu_pre" name="destinatario_plu_pre"></textarea>
-							</div>
-							<div class="form-group">
-								<label for="fecha_norma_plu_pre" >Fecha de presentacion:</label>
-								<input class="form-control" type="text" id="fecha_norma_plu_pre" name="fecha_norma_plu_pre" readonly>
-								<input class="form-control" type="hidden" id="unixfecha_norma_plu_pre" name="unixfecha_norma_plu_pre" >
+								<label for="observaciones_plu">Comentarios:</label>
+								<textarea class="form-control" rows="2" id="comentarios_plu_pre" name="comentarios_plu_pre"></textarea>
 							</div>
 
-						</div>
-					</div>
-					<div class="card">
-						<div class="card-header bg-info">
-							<h4>
-								Ultima reposicion del proyecto de ley:
-							</h4>
-						</div>
-						<div class="card-body">
-							<div class="form-group">
-								<label for="remitente_solrep_plu_pre" >Quien presenta solicitud de reposicion:</label>
-								<textarea class="form-control" rows="3" id="remitente_solrep_plu_pre" name="remitente_solrep_plu_pre"></textarea>
-							</div>
-							<div class="form-group">
-								<label for="destinatario_solrep_plu_pre" >A quien se presenta solicitud de reposicion:</label>
-								<textarea class="form-control" rows="3" id="destinatario_solrep_plu_pre" name="destinatario_solrep_plu_pre"></textarea>
-							</div>
-							<div class="form-group">
-								<label for="fecha_norma_solrep_plu_pre" >Fecha de solicitud de reposicion:</label>
-								<input class="form-control" type="text" id="fecha_norma_solrep_plu_pre" name="fecha_norma_solrep_plu_pre" readonly>
-								<input class="form-control" type="hidden" id="unixfecha_norma_solrep_plu_pre" name="fecha_norma_solrep_plu_pre">
-							</div>
 						</div>
 					</div>
 					<div class="card">
