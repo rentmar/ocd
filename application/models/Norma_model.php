@@ -139,6 +139,101 @@ class Norma_model extends CI_Model
 	}
 
 	//Crear nuevo registro para la norma
+	public function crearNormaLeyPromulgada($norma_nueva){
+		//Objeto norma
+		$norma = $norma_nueva;
+		/*
+		 * INICIAR LA TRANSACCION
+		 */
+		$this->db->trans_begin();
+		/** @noinspection PhpLanguageLevelInspection */
+		$data_norma = [
+			'fecha_registro' => $norma->fecha_registro,
+			'fecha_norma' => $norma->fecha_norma,
+			'fecha_norma_lit' => $norma->fecha_norma_literal,
+			'fecha_primer_envio' => '',
+			'estado_norma' => 1,
+			'norma_remitente' => '',
+			'norma_destinatario' => '',
+			'norma_segundo_envio' => '',
+			'norma_nombre ' => $norma->nombre,
+			'norma_codigo' => $norma->codigo,
+			'norma_objeto' => $norma->objeto,
+			'norma_observaciones' => $norma->observaciones,
+			'proponente' => '',
+			'rel_id' => $norma->idusuario,
+			'rel_idinsseg' => $norma->instancia_seguimiento,
+			'rel_idcuestionario' => $norma->idcuestionario ,
+		];
+		$this->db->insert('norma_general', $data_norma );
+		$norma_identificador = $this->db->insert_id();
+
+		//Almacenar tema 1
+		if($norma->tema1['idtema'] == 0){
+			//Es otro tema ()normaotrotema
+			/** @noinspection PhpLanguageLevelInspection */
+			$datos_otro_tema = [
+				'descripcion_otrotema' => $norma->tema1['tema'],
+				'rel_idnormg' => $norma_identificador,
+				'tema_ordinal' => 1,
+			];
+			$this->db->insert('normaotrotema', $datos_otro_tema);
+		}else{
+			//Tema del listado (norma_tema)
+			/** @noinspection PhpLanguageLevelInspection */
+			$datos_tema = [
+				'rel_idnormg' => $norma_identificador,
+				'rel_idtema' => $norma->tema1['idtema'],
+				'tema_ordinal' => 1,
+			];
+			$this->db->insert('norma_tema', $datos_tema);
+		}
+
+		//Almacenar tema 2
+		if($norma->tema2['idtema'] == 0){
+			//Es otro tema ()normaotrotema
+			/** @noinspection PhpLanguageLevelInspection */
+			$datos_otro_tema = [
+				'descripcion_otrotema' => $norma->tema2['tema'],
+				'rel_idnormg' => $norma_identificador,
+				'tema_ordinal' => 2,
+			];
+			$this->db->insert('normaotrotema', $datos_otro_tema);
+		}else{
+			//Tema del listado (norma_tema)
+			/** @noinspection PhpLanguageLevelInspection */
+			$datos_tema = [
+				'rel_idnormg' => $norma_identificador,
+				'rel_idtema' => $norma->tema2['idtema'],
+				'tema_ordinal' => 2,
+			];
+			$this->db->insert('norma_tema', $datos_tema);
+		}
+
+
+		//Llenado adicional de la norma plurinacional
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_addnorma = [
+			'idnormg' => $norma_identificador,
+			'cod_proyecto_ley' => $norma->codigo_proy_ley,
+			'comentario' => $norma->comentarios,
+			'enlace' => $norma->enlace,
+			'obs_metodologicas' => $norma->obs_metodologicas,
+		];
+		$this->db->insert('norma_plurinacional_lp', $datos_addnorma);
+
+		if($this->db->trans_status() === FALSE ){
+			//Error, cancela la transaccion
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			//Todas las consultas se realizaron correctamente
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
+	//Crear nuevo registro para la norma
 	public function crearNormaDepartamental($norma_nueva){
 		//Objeto norma
 		$norma = $norma_nueva;

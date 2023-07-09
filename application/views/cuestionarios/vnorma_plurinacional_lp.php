@@ -51,6 +51,10 @@
 					<label for="objeto_plu_lp">Objeto de la norma:</label>
 					<textarea rows="5" class="form-control" id="objeto_plu_lp" name="objeto_plu_lp"></textarea>
 				</div>
+				<div class="form-group">
+					<label for="fecha_plu_lp">Fecha de la norma</label>
+					<input class="form-control" type="date" id="fecha_plu_lp" name="fecha_plu_lp">
+				</div>
 			</div>
 		</div>
 		<div class="contenedores">
@@ -147,12 +151,12 @@
 			</div>
 			<div class="card-body">
 				<div class="form-group">
-					<label for="">Introduzca codigo de proyecto de ley:</label>
-					<input class="form-control"  type="text" id="codigo_plu_lp" name="codigo_plu_lp">
+					<label for="codigo_previo_plu_lp">Introduzca codigo de proyecto de ley:</label>
+					<input class="form-control"  type="text" id="codigo_previo_plu_lp" name="codigo_previo_plu_lp">
 				</div>
 				<div class="form-group">
 					<label for="observaciones_plu">Comentarios:</label>
-					<textarea class="form-control" rows="2" id="comentarios_plu" name="comentarios_plu"></textarea>
+					<textarea class="form-control" rows="2" id="comentarios_plu_lp" name="comentarios_plu_lp"></textarea>
 				</div>
 			</div>
 		</div>
@@ -239,20 +243,29 @@
 						</div>
 						<div class="card-body">
 							<div class="form-group">
-								<label for="codigo_plu_pre">Codigo:</label>
-								<input class="form-control" type="text" id="codigo_plu_pre" name="codigo_plu_pre">
+								<label for="codigo_plu_lp_pre">Codigo:</label>
+								<input class="form-control" type="text" id="codigo_plu_lp_pre" name="codigo_plu_lp_pre">
 							</div>
 							<div class="form-group">
-								<label for="nombre_plu_pre">Nombre de la norma:</label>
-								<textarea rows="3" class="form-control" id="nombre_plu_pre" name="nombre_plu_pre"></textarea>
+								<label for="nombre_plu_lp_pre">Nombre de la norma:</label>
+								<textarea rows="3" class="form-control" id="nombre_plu_lp_pre" name="nombre_plu_lp_pre"></textarea>
 							</div>
 							<div class="form-group">
-								<label for="objeto_plu_pre">Objeto de la norma:</label>
-								<textarea rows="5" class="form-control" id="objeto_plu_pre" name="objeto_plu_pre"></textarea>
+								<label for="objeto_plu_lp_pre">Objeto de la norma:</label>
+								<textarea rows="5" class="form-control" id="objeto_plu_lp_pre" name="objeto_plu_lp_pre"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="fecha_plu_lp_pre">Fecha de la norma:</label>
+								<input class="form-control" type="date" id="fecha_plu_lp_pre" name="fecha_plu_lp_pre" readonly>
+								<input class="form-control" type="text" id="unixfecha_plu_lp_pre" name="unixfecha_plu_lp_pre">
 							</div>
 							<div id="tema1desp" class="form-group">
 							</div>
+							<div id="subtema1desp" class="form-group">
+							</div>
 							<div id="tema2desp" class="form-group">
+							</div>
+							<div id="subtema2desp" class="form-group">
 							</div>
 							<div id="propdesp" class="form-group">
 
@@ -269,12 +282,12 @@
 						<div class="card-body">
 
 							<div class="form-group">
-								<label for="">Introduzca codigo de proyecto de ley:</label>
-								<input class="form-control"  type="text" id="codigo_plu_lp_pre" name="codigo_plu_lp_pre">
+								<label for="codigo_previo_plu_lp_pre">Introduzca codigo de proyecto de ley:</label>
+								<input class="form-control"  type="text" id="codigo_previo_plu_lp_pre" name="codigo_previo_plu_lp_pre">
 							</div>
 							<div class="form-group">
 								<label for="observaciones_plu">Comentarios:</label>
-								<textarea class="form-control" rows="2" id="comentarios_plu_pre" name="comentarios_plu_pre"></textarea>
+								<textarea class="form-control" rows="2" id="comentarios_plu_lp_pre" name="comentarios_plu_lp_pre"></textarea>
 							</div>
 
 						</div>
@@ -287,12 +300,12 @@
 						</div>
 						<div class="card-body">
 							<div class="form-group">
-								<label for="observaciones_plu_pre">Observaciones:</label>
-								<textarea class="form-control" rows="2" id="observaciones_plu_pre" name="observaciones_plu_pre"></textarea>
+								<label for="observaciones_plu_lp_pre">Observaciones:</label>
+								<textarea class="form-control" rows="2" id="observaciones_plu_lp_pre" name="observaciones_plu_lp_pre"></textarea>
 							</div>
 							<div class="form-group">
-								<label for="enlace_plu_pre">Enlace/URL:</label>
-								<textarea class="form-control" rows="2" id="enlace_plu_pre" name="enlace_plu_pre"></textarea>
+								<label for="enlace_plu_lp_pre">Enlace/URL:</label>
+								<textarea class="form-control" rows="2" id="enlace_plu_lp_pre" name="enlace_plu_lp_pre"></textarea>
 							</div>
 						</div>
 					</div>
@@ -304,13 +317,13 @@
 						</div>
 						<div class="card-body">
 							<div class="form-group">
-								<label for="observaciones_met_plu_pre">Observaciones metodologicas:</label>
-								<textarea class="form-control" rows="2" id="observaciones_met_plu_pre" name="observaciones_met_plu_pre"></textarea>
+								<label for="observaciones_met_plu_lp_pre">Observaciones metodologicas:</label>
+								<textarea class="form-control" rows="2" id="observaciones_met_plu_lp_pre" name="observaciones_met_plu_lp_pre"></textarea>
 							</div>
 							<div class="form-group">
-								<input class="form-control" type="hidden" id="idcuestionario_pre" name="idcuestionario_pre" value="<?php echo $idformulario; ?>">
-								<input class="form-control" type="hidden" id="idusuario_pre" name="idusuario_pre" value="<?php echo $usuario->id; ?>">
-								<input class="form-control" type="hidden" id="idinstancia_seg_pre" name="idinstancia_seg_pre" value="1">
+								<input class="form-control" type="text" id="idcuestionario_plu_lp_pre" name="idcuestionario_plu_lp_pre" value="<?php echo $idformulario; ?>">
+								<input class="form-control" type="text" id="idusuario_plu_lp_pre" name="idusuario_plu_lp_pre" value="<?php echo $usuario->id; ?>">
+								<input class="form-control" type="text" id="idinstancia_seg_pre" name="idinstancia_seg_pre" value="4">
 
 							</div>
 						</div>

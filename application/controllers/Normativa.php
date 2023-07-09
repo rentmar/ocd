@@ -25,6 +25,8 @@ class Normativa extends CI_Controller{
 		//Identificador del formulario - Ajustar
 		$this->_idformulario = 5;
 
+		date_default_timezone_set("America/La_Paz");
+
 
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -143,6 +145,7 @@ class Normativa extends CI_Controller{
 	public function crearNorma()
 	{
 		$instancia = $this->input->post('idinstancia_seg_pre');
+
 		if($instancia == 1){
 			//Nacional
 			$norma = $this->normaGeneral();
@@ -156,6 +159,14 @@ class Normativa extends CI_Controller{
 			//Municipal
 			$norma = $this->normaMunicipal();
 			$this->Norma_model->crearNormaMunicipal($norma);
+		}
+		elseif ($instancia == 4){
+			//Nacional LP (Ley Promulgada)
+			$norma = $this->normaGeneralLeyPromulgada();
+			$this->Norma_model->crearNormaLeyPromulgada($norma);
+		}
+		else{
+			echo "Sin instancia de seguimiento";
 		}
 		redirect('inicio/');
 	}
@@ -206,6 +217,49 @@ class Normativa extends CI_Controller{
 
 		$norma->idusuario = $this->input->post('idusuario_pre');
 		$norma->idcuestionario = $this->input->post('idcuestionario_pre');
+
+		return $norma;
+	}
+
+	//Objeto Norma general Ley promulgada
+	private function normaGeneralLeyPromulgada()
+	{
+		$norma = new stdClass();
+		$norma->instancia_seguimiento = $this->input->post('idinstancia_seg_pre');
+		$norma->estado = 1;
+		$norma->fecha_registro = time();
+		$norma->fecha_norma = $this->input->post('unixfecha_plu_lp_pre'); //unix
+		$norma->fecha_norma_literal = $this->input->post('fecha_plu_lp_pre'); //literal
+		$norma->fecha_primer_envio = 0;
+		$norma->remitente = '';
+		$norma->destinatario = '';
+
+		$norma->codigo = $this->input->post('codigo_plu_lp_pre');
+		$norma->nombre = $this->input->post('nombre_plu_lp_pre');
+		$norma->objeto = $this->input->post('objeto_plu_lp_pre');
+
+		/** @noinspection PhpLanguageLevelInspection */
+		$norma->tema1 = [
+			'idtema' => $this->input->post('idtema1_pre') ,
+			'tema' => $this->input->post('tema1_pre'),
+		];
+		/** @noinspection PhpLanguageLevelInspection */
+		$norma->tema2 = [
+			'idtema' => $this->input->post('idtema2_pre'),
+			'tema' => $this->input->post('tema2_pre'),
+		];
+
+		$norma->codigo_proy_ley = $this->input->post('codigo_previo_plu_lp_pre');
+		$norma->comentarios = $this->input->post('comentarios_plu_lp_pre');
+
+		$norma->observaciones = $this->input->post('observaciones_plu_lp_pre');
+		$norma->obs_metodologicas = $this->input->post('observaciones_met_plu_lp_pre');
+
+		//Reposicion del proyecto de ley
+		$norma->enlace = $this->input->post('enlace_plu_lp_pre');
+
+		$norma->idusuario = $this->input->post('idusuario_plu_lp_pre');
+		$norma->idcuestionario = $this->input->post('idcuestionario_plu_lp_pre');
 
 		return $norma;
 	}
