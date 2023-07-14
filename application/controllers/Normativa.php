@@ -17,6 +17,7 @@ class Normativa extends CI_Controller{
 		$this->load->model('Norma_model');
 		$this->load->model('Municipio_model');
 		$this->load->model('Tema_model');
+		$this->load->model('SubTema_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -641,6 +642,17 @@ class Normativa extends CI_Controller{
 		list($anio, $mes, $dia) = explode('-', $fecha);
 		$fecha_unix = mktime(0, 0, 0, $mes, $dia, $anio);
 		return $fecha_unix;
+	}
+
+	//JSON - SubTema
+	public function getSubtema()
+	{
+		$json = array();
+		$idtema = $this->input->post('identificador');
+		$json = $this->SubTema_model->leerSubtemasdeTemasActivos($idtema);
+		//$json = $this->Tema_model->leerTemaPorId($idtema);
+		header('Content-Type: application/json');
+		echo  json_encode($json);
 	}
 
 

@@ -90,7 +90,8 @@ class Cuestionario_model extends CI_Model
 	{
 		$sql = "SELECT tema.idtema, tema.nombre_tema "
 			."FROM tema "
-			."WHERE tema.rel_idcuestionario = ?  ";
+			."WHERE tema.rel_idcuestionario = ?  "
+			."AND tema.activo = 1  ";
 		/*$sql = "SELECT tema.idtema, tema.nombre_tema "
 			."FROM groups AS g "
 			."LEFT JOIN users_groups ON users_groups.group_id = g.id  "
@@ -129,6 +130,7 @@ class Cuestionario_model extends CI_Model
 		$sql = "SELECT s.idsubtema AS stema_id, s.nombre_subtema AS stema_name "
 			."FROM subtema as s "
 			."WHERE s.rel_idtema = ?  ";
+
 		$qry = $this->db->query($sql, [$this->_temaID,  ]);
 		return $qry->result_array();
 		/*$this->db->select(array('s.idsubtema as stema_id', 's.rel_idtema', 's.nombre_subtema as stema_name'));
@@ -309,6 +311,8 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
+
+
 
 
 

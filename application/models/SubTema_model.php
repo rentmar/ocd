@@ -122,6 +122,17 @@ class SubTema_model extends CI_Model
 		return $qry->row();
 	}
 
+	public function leerSubtemasdeTemasActivos($idtema){
+		$sql = "SELECT * "
+			."FROM subtema  "
+			."WHERE subtema.rel_idtema = ?  "
+			."  "
+			."  "
+			."  ";
+		$qry = $this->db->query($sql, [$idtema, ]);
+		return $qry->result();
+	}
+
 
 
 

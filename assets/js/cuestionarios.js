@@ -2047,4 +2047,86 @@ function insertarCI(numeroci){
  * Fin Padron - recoleccion de informacion
  *
  *****************/
+jQuery(document).on('change', 'select#tema1', function (e) {
+	e.preventDefault();
+	console.log('Tema 1 Seleccionado');
+	var idtema = jQuery(this).val();
+	console.log(idtema);
+	getSubtemas1(idtema);
+});
+jQuery(document).on('change', 'select#tema2', function (e) {
+	e.preventDefault();
+	console.log('Tema 2 Seleccionado');
+	//var iddep = jQuery(this).val();
+	//getMunicipiosPlenariaReporte(iddep);
+});
+function getSubtemas1(idtema){
+	$.ajax({
+		url: baseurl + "/normativa/getSubtema/",
+		type: 'post',
+		data: {identificador: idtema},
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#subtema1').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Exito subtemas1");
+			console.log(json);
 
+			var opciones = '';
+
+			opciones += '';
+			opciones += '	';
+			opciones += '		<option value="" >Seleccione un subtema 1</option>';
+			for (var i = 0; i<json.length; i++) {
+				opciones += '	<option value="'+ json[i].idsubtema +'">'+ json[i].nombre_subtema +'</option>';
+			}
+			opciones += '	';
+			jQuery("select#subtema1").html(opciones);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+function getSubtemas2(idtema){
+	$.ajax({
+		url: baseurl + "/normativa/getSubtema/",
+		type: 'post',
+		data: {identificador: idtema},
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#subtema1').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log("Exito subtemas2");
+			console.log(json);
+
+			var opciones = '';
+
+			opciones += '';
+			opciones += '	';
+			opciones += '		<option value="" >Seleccione un subtema 2</option>';
+			for (var i = 0; i<json.length; i++) {
+				opciones += '	<option value="'+ json[i].idsubtema +'">'+ json[i].nombre_subtema +'</option>';
+			}
+			opciones += '	';
+			jQuery("select#subtema1").html(opciones);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+/*******************
+ *
+ * subtemas
+ *
+ * *****************/

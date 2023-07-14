@@ -51,6 +51,7 @@ $(document).ready(function() {
 		}
 	});
 	$('.simple').select2();
+	$('.selsimplesubtema').select2();
 	$('#noticias-tabla').DataTable({
 		responsive: true,
 		language: {
