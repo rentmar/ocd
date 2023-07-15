@@ -70,34 +70,40 @@
 					</h4>
 				</div>
 				<div class="card-body">
-					<label>Escoge el tema:</label><br>
-					<?php $contador = 0; ?>
-					<?php foreach ($tema as $a): ?>
-						<?php if($contador == 0): ?>
-							<div class="custom-control custom-radio">
-								<input id="checktema1norma<?php echo $a['idtema']; ?>" name="idtema" type="radio" value="<?php echo $a['idtema']; ?>" class="custom-control-input" checked>
-								<label class="custom-control-label" for="checktema1norma<?php echo $a['idtema']; ?>" >
-									<?php echo $a['nombre_tema']; ?>
-								</label>
-							</div>
-							<?php $contador++; ?>
-						<?php else: ?>
-							<div class="custom-control custom-radio">
-								<input id="checktema1norma<?php echo $a['idtema']; ?>" name="idtema" type="radio" value="<?php echo $a['idtema']; ?>" class="custom-control-input">
-								<label class="custom-control-label" for="checktema1norma<?php echo $a['idtema']; ?>" >
-									<?php echo $a['nombre_tema']; ?>
-								</label>
-							</div>
-						<?php endif; ?>
-					<?php endforeach; ?>
-					<div class="custom-control custom-radio">
-						<input id="checktema1norma0" name="idtema" type="radio" value="0" class="custom-control-input">
-						<label class="custom-control-label" for="checktema1norma0" >
-							Otro
-						</label>
+					<div id="tema1-contenido">
+						<label>Escoja el Tema1:</label><br>
+						<select id="tema1" name="tema1" class="simple" style="width: 100%" >
+							<option value="n" selected >Sin seleccion</option>
+							<?php if(isset($tema)):?>
+								<?php foreach ($tema as $a): ?>
+									<option value="<?php echo $a['idtema']; ?>"><?php echo $a['nombre_tema']; ?></option>
+								<?php endforeach; ?>
+							<?php endif;?>
+							<option value="0">Otro</option>
+						</select>
 					</div>
 					<div id="otrotema1normadatos">
 
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="contenedores">
+			<div class="card">
+				<div class="card-header cuest2">
+					<div id="subtema1-titulo">
+						<h4>
+							SUBTEMA 1
+						</h4>
+					</div>
+				</div>
+				<div class="card-body">
+					<div id="subtema1-contenido">
+						<label>Escoja el subtema:</label><br>
+						<select id="subtema1" name="subtema1" class="simple" style="width: 100%" required >
+							<!--							<option value="" selected >Seleccione el subtema1</option>-->
+						</select>
 					</div>
 				</div>
 			</div>
@@ -111,31 +117,17 @@
 					</h4>
 				</div>
 				<div class="card-body">
-					<label>Escoge el tema:</label><br>
-					<?php $contador2 = 0; ?>
-					<?php foreach ($tema as $a): ?>
-						<?php if($contador2 == 0): ?>
-							<div class="custom-control custom-radio">
-								<input id="checktema2norma<?php echo $a['idtema']; ?>" name="idtema2" type="radio" value="<?php echo $a['idtema']; ?>" class="custom-control-input" checked>
-								<label class="custom-control-label" for="checktema2norma<?php echo $a['idtema']; ?>" >
-									<?php echo $a['nombre_tema']; ?>
-								</label>
-							</div>
-							<?php $contador2++; ?>
-						<?php else: ?>
-							<div class="custom-control custom-radio">
-								<input id="checktema2norma<?php echo $a['idtema']; ?>" name="idtema2" type="radio" value="<?php echo $a['idtema']; ?>" class="custom-control-input">
-								<label class="custom-control-label" for="checktema2norma<?php echo $a['idtema']; ?>" >
-									<?php echo $a['nombre_tema']; ?>
-								</label>
-							</div>
-						<?php endif; ?>
-					<?php endforeach; ?>
-					<div class="custom-control custom-radio">
-						<input id="checktema2norma0" name="idtema2" type="radio" value="0" class="custom-control-input">
-						<label class="custom-control-label" for="checktema2norma0" >
-							Otro
-						</label>
+					<div id="tema2-contenido">
+						<label>Escoja el Tema 2:</label><br>
+						<select id="tema2" name="tema2" class="simple" style="width: 100%"  >
+							<option value="n" selected >Sin seleccion</option>
+							<?php if(isset($tema)):?>
+								<?php foreach ($tema as $a): ?>
+									<option value="<?php echo $a['idtema']; ?>"><?php echo $a['nombre_tema']; ?></option>
+								<?php endforeach; ?>
+							<?php endif;?>
+							<option value="0">Otro</option>
+						</select>
 					</div>
 					<!-- Informacion Otro tema 2 -->
 					<div id="otrotema2normadatos">
@@ -144,6 +136,26 @@
 				</div>
 			</div>
 		</div>
+		<div class="contenedores">
+			<div class="card">
+				<div class="card-header cuest2">
+					<div id="subtema2-titulo">
+						<h4>
+							SUBTEMA 2
+						</h4>
+					</div>
+				</div>
+				<div class="card-body">
+					<div id="subtema2-contenido">
+						<label>Escoja el subtema:</label><br>
+						<select id="subtema2" name="subtema2" class="simple" style="width: 100%" required >
+							<!--							<option value="" selected >Seleccione el subtema1</option>-->
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<br>
 	<div class="contenedores">

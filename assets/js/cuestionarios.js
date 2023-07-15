@@ -2052,13 +2052,51 @@ jQuery(document).on('change', 'select#tema1', function (e) {
 	console.log('Tema 1 Seleccionado');
 	var idtema = jQuery(this).val();
 	console.log(idtema);
-	getSubtemas1(idtema);
+	//getSubtemas1(idtema);
+	if(idtema == 0){
+		console.log("Seleccion Otro tema");
+		var opcion = '';
+		opcion += '<label for="otrotema1norma">Otro tema:</label><br>';
+		opcion += '<input type="text" id="otrotema1norma" name="otrotema1norma" required class="form-control" value="">';
+		$('#otrotema1normadatos').html(opcion);
+		$("select#subtema1").empty();
+
+	}else if(idtema == 'n'){
+		console.log("Sin seleccion");
+		var opciones = ' ';
+		$('#otrotema1normadatos').empty();
+		$("select#subtema1").empty();
+	}else {
+		console.log('Seleccion con subtemas');
+		getSubtemas1(idtema);
+		$('#otrotema1normadatos').empty();
+	}
 });
 jQuery(document).on('change', 'select#tema2', function (e) {
 	e.preventDefault();
-	console.log('Tema 2 Seleccionado');
-	//var iddep = jQuery(this).val();
-	//getMunicipiosPlenariaReporte(iddep);
+	console.log('Tema 1 Seleccionado');
+	var idtema = jQuery(this).val();
+	console.log(idtema);
+	//getSubtemas1(idtema);
+	if(idtema == 0){
+		console.log("Seleccion Otro tema");
+		var opcion = '';
+		opcion += '<label for="otrotema2norma">Otro tema:</label><br>';
+		opcion += '<input type="text" id="otrotema2norma" name="otrotema2norma" required class="form-control" value="">';
+		$('#otrotema2normadatos').html(opcion);
+		$("select#subtema2").empty();
+	}else if(idtema == 'n'){
+		console.log("Sin seleccion");
+		var opciones = ' ';
+		$('#otrotema2normadatos').empty();
+		$("select#subtema2").empty();
+	}else {
+		console.log('Seleccion con subtemas');
+		getSubtemas2(idtema);
+		$('#otrotema2normadatos').empty();
+	}
+
+
 });
 function getSubtemas1(idtema){
 	$.ajax({
@@ -2080,7 +2118,7 @@ function getSubtemas1(idtema){
 
 			opciones += '';
 			opciones += '	';
-			opciones += '		<option value="" >Seleccione un subtema 1</option>';
+			opciones += '		<option value="n" >Sin Seleccion</option>';
 			for (var i = 0; i<json.length; i++) {
 				opciones += '	<option value="'+ json[i].idsubtema +'">'+ json[i].nombre_subtema +'</option>';
 			}
@@ -2099,7 +2137,7 @@ function getSubtemas2(idtema){
 		data: {identificador: idtema},
 		dataType: 'json',
 		beforeSend: function () {
-			jQuery('select#subtema1').find("option:eq(0)").html("Please wait..");
+			jQuery('select#subtema2').find("option:eq(0)").html("Please wait..");
 		},
 		complete: function () {
 			// code
@@ -2112,12 +2150,12 @@ function getSubtemas2(idtema){
 
 			opciones += '';
 			opciones += '	';
-			opciones += '		<option value="" >Seleccione un subtema 2</option>';
+			opciones += '		<option value="n" >Sin seleccion</option>';
 			for (var i = 0; i<json.length; i++) {
 				opciones += '	<option value="'+ json[i].idsubtema +'">'+ json[i].nombre_subtema +'</option>';
 			}
 			opciones += '	';
-			jQuery("select#subtema1").html(opciones);
+			jQuery("select#subtema2").html(opciones);
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

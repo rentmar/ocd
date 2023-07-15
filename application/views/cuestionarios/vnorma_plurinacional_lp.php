@@ -68,12 +68,13 @@
 					<div id="tema1-contenido">
 						<label>Escoja el Tema1:</label><br>
 						<select id="tema1" name="tema1" class="simple" style="width: 100%" >
-							<option value="" selected >Seleccione el tema1</option>
+							<option value="n" selected >Sin seleccion</option>
 							<?php if(isset($tema)):?>
 							<?php foreach ($tema as $a): ?>
 								<option value="<?php echo $a['idtema']; ?>"><?php echo $a['nombre_tema']; ?></option>
 							<?php endforeach; ?>
 							<?php endif;?>
+							<option value="0">Otro</option>
 						</select>
 					</div>
 					<div id="otrotema1normadatos">
@@ -114,7 +115,13 @@
 					<div id="tema2-contenido">
 						<label>Escoja el Tema 2:</label><br>
 						<select id="tema2" name="tema2" class="simple" style="width: 100%"  >
-							<option value="" selected >Seleccione el tema2</option>
+							<option value="n" selected >Sin seleccion</option>
+							<?php if(isset($tema)):?>
+								<?php foreach ($tema as $a): ?>
+									<option value="<?php echo $a['idtema']; ?>"><?php echo $a['nombre_tema']; ?></option>
+								<?php endforeach; ?>
+							<?php endif;?>
+							<option value="0">Otro</option>
 						</select>
 					</div>
 					<!-- Informacion Otro tema 2 -->
