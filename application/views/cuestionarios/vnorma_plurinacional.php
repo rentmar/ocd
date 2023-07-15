@@ -101,8 +101,8 @@
 				<div class="card-body">
 					<div id="subtema1-contenido">
 						<label>Escoja el subtema:</label><br>
-						<select id="subtema1" name="subtema1" class="simple" style="width: 100%" required >
-							<!--							<option value="" selected >Seleccione el subtema1</option>-->
+						<select id="subtema1" name="subtema1" class="simple" style="width: 100%" >
+							<option value="n" selected >Sin Seleccion</option>
 						</select>
 					</div>
 				</div>
@@ -148,8 +148,8 @@
 				<div class="card-body">
 					<div id="subtema2-contenido">
 						<label>Escoja el subtema:</label><br>
-						<select id="subtema2" name="subtema2" class="simple" style="width: 100%" required >
-							<!--							<option value="" selected >Seleccione el subtema1</option>-->
+						<select id="subtema2" name="subtema2" class="simple" style="width: 100%"  >
+							<option value="n" selected >Sin seleccion</option>
 						</select>
 					</div>
 				</div>
@@ -327,6 +327,11 @@
 							</div>
 							<div id="tema2desp" class="form-group">
 							</div>
+							<div id="subtema1desp" class="form-group">
+							</div>
+							<div id="subtema2desp" class="form-group">
+							</div>
+
 							<div id="propdesp" class="form-group">
 
 							</div>

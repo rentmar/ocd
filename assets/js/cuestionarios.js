@@ -1401,6 +1401,8 @@ $('#formulario_norma_plurinacional').submit(function (e) {
 	var instancia = new InstanciaSeguimiento();
 	var tema1 = new Tema();
 	var tema2 = new Tema();
+	var subtema1 = new Subtema();
+	var subtema2 = new Subtema();
 	var proponente = new Proponente();
 	var fecha_norma = new Fecha($('#fecha_norma_plu').val());
 	var fecha_repo = new Fecha($('#fecha_norma_solrep_plu').val());
@@ -1423,14 +1425,29 @@ $('#formulario_norma_plurinacional').submit(function (e) {
 	normaPlurinacional.objeto = $('#objeto_plu').val();
 
 	//Temas de la norma
-	tema1.idtema = $('input:radio[name=idtema]:checked').val();
+	//tema1.idtema = $('input:radio[name=idtema]:checked').val();
+	tema1.idtema = $('#tema1').find("option:selected").val();
+	tema1.tema = $('#tema1').find("option:selected").html();
 	tema1.otrotema = $('#otrotema1norma').val();
+	subtema1.idsubtema = $('#subtema1').find("option:selected").val();
+	subtema1.subtema = $('#subtema1').find("option:selected").html();
+	subtema1.idtema = tema1.idtema;
 
-	tema2.idtema = $('input:radio[name=idtema2]:checked').val();
+	//tema2.idtema = $('input:radio[name=idtema2]:checked').val();
+	tema2.idtema = $('#tema2').find("option:selected").val();
+	tema2.tema = $('#tema2').find("option:selected").html();
 	tema2.otrotema = $('#otrotema2norma').val();
+	subtema2.idsubtema = $('#subtema2').find("option:selected").val();
+	subtema2.subtema = $('#subtema2').find("option:selected").html();
+	subtema2.idtema = tema2.idtema;
+
+
+	//Subtemas de la norma
 
 	normaPlurinacional.tema1 = tema1;
 	normaPlurinacional.tema2 = tema2;
+	normaPlurinacional.subtema1 = subtema1;
+	normaPlurinacional.subtema2 = subtema2;
 
 	//Capturar el proponente
 	proponente.idproponente = $('#proponente').val().toLocaleLowerCase();
@@ -1457,46 +1474,79 @@ $('#formulario_norma_plurinacional').submit(function (e) {
 	$('#nombre_plu_pre').val(normaPlurinacional.nombre);
 	$('#objeto_plu_pre').val(normaPlurinacional.objeto);
 
-	//Desplegar los temmas capturados
 	//Tema1
 	var tema1_pre = '';
 	if(normaPlurinacional.tema1['idtema'] == 0){
+		//Otro tema
 		console.log('Otro tema seleccionado: ' + normaPlurinacional.tema1['otrotema']);
 		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
 		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacional.tema1['otrotema'] +'">';
 		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacional.tema1['idtema'] +'" >';
+		tema1_pre += '<label for="subtema1_pre" >Subtema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="subtema1_pre" name="subtema1_pre" required value="'+ normaPlurinacional.subtema1['subtema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idsubtema1_pre" name="idsubtema1_pre" value="'+ normaPlurinacional.subtema1['idsubtema'] +'" >';
+		tema1_pre += '';
+		$('#tema1desp').html(tema1_pre);
+	}else if(normaPlurinacional.tema1['idtema'] == 'n'){
+		//Tema sin seleccionar
+		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacional.tema1['tema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacional.tema1['idtema'] +'" >';
+		tema1_pre += '<label for="subtema1_pre" >Subtema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="subtema1_pre" name="subtema1_pre" required value="'+ normaPlurinacional.subtema1['subtema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idsubtema1_pre" name="idtsubema1_pre" value="'+ normaPlurinacional.subtema1['idsubtema'] +'" >';
+
 		tema1_pre += '';
 		$('#tema1desp').html(tema1_pre);
 	}else{
-		var temadb = gettema(normaPlurinacional.tema1['idtema']);
-		console.log(temadb);
-		normaPlurinacional.tema1['tema'] = temadb['nombre_tema'];
+		//Tema seleccionado
 		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
 		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacional.tema1['tema'] +'">';;
 		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacional.tema1['idtema'] +'" >';;
+		tema1_pre += '<label for="subtema1_pre" >Subtema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="subtema1_pre" name="subtema1_pre" required value="'+ normaPlurinacional.subtema1['subtema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idsubtema1_pre" name="idsubtema1_pre" value="'+ normaPlurinacional.subtema1['idsubtema'] +'" >';
+
 		tema1_pre += '';
 		$('#tema1desp').html(tema1_pre);
 	}
 	//Tema2
 	var tema2_pre = '';
 	if(normaPlurinacional.tema2['idtema'] == 0){
-		console.log('Otro tema seleccionado: '+ normaPlurinacional.tema2['otrotema']);
+		//Otro tema
+		console.log('Otro tema seleccionado: ' + normaPlurinacional.tema2['otrotema']);
 		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
 		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacional.tema2['otrotema'] +'">';
 		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacional.tema2['idtema'] +'" >';
+		tema2_pre += '<label for="subtema2_pre" >Subtema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="subtema2_pre" name="subtema2_pre" required value="'+ normaPlurinacional.subtema2['subtema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idsubtema2_pre" name="idsubtema2_pre" value="'+ normaPlurinacional.subtema2['idsubtema'] +'" >';
 		tema2_pre += '';
 		$('#tema2desp').html(tema2_pre);
-
-	}else{
-		var tema2db = gettema(normaPlurinacional.tema2['idtema']);
-		console.log(tema2db);
-		normaPlurinacional.tema2['tema'] = tema2db['nombre_tema'];
+	}else if(normaPlurinacional.tema2['idtema'] == 'n'){
+		//Tema sin seleccionar
 		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
 		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacional.tema2['tema'] +'">';
 		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacional.tema2['idtema'] +'" >';
+		tema2_pre += '<label for="subtema2_pre" >Subtema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="subtema2_pre" name="subtema2_pre" required value="'+ normaPlurinacional.subtema2['subtema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idsubtema2_pre" name="idtsubema2_pre" value="'+ normaPlurinacional.subtema2['idsubtema'] +'" >';
+
+		tema2_pre += '';
+		$('#tema2desp').html(tema2_pre);
+	}else{
+		//Tema seleccionado
+		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacional.tema2['tema'] +'">';;
+		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacional.tema2['idtema'] +'" >';;
+		tema2_pre += '<label for="subtema1_pre" >Subtema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="subtema2_pre" name="subtema2_pre" required value="'+ normaPlurinacional.subtema2['subtema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idsubtema2_pre" name="idsubtema2_pre" value="'+ normaPlurinacional.subtema2['idsubtema'] +'" >';
+
 		tema2_pre += '';
 		$('#tema2desp').html(tema2_pre);
 	}
+
 
 	var prop_dis = '';
 	if(normaPlurinacional.proponente['idproponente'] == 2){
@@ -1542,6 +1592,8 @@ $('#formulario_norma_plurinacional_lp').submit(function (e) {
 	var instacia = new InstanciaSeguimiento();
 	var tema1 = new Tema();
 	var tema2 = new Tema();
+	var subtema1 = new Subtema();
+	var subtema2 = new Subtema();
 	var instancia = new InstanciaSeguimiento();
 
 	//Usuario y cuestionario
@@ -1563,14 +1615,29 @@ $('#formulario_norma_plurinacional_lp').submit(function (e) {
 	normaPlurinacionalLP.fecha = new Fecha($('#fecha_plu_lp').val());
 
 	//Temas de la norma
-	tema1.idtema = $('input:radio[name=idtema]:checked').val();
+	//tema1.idtema = $('input:radio[name=idtema]:checked').val();
+	tema1.idtema = $('#tema1').find("option:selected").val();
+	tema1.tema = $('#tema1').find("option:selected").html();
 	tema1.otrotema = $('#otrotema1norma').val();
+	subtema1.idsubtema = $('#subtema1').find("option:selected").val();
+	subtema1.subtema = $('#subtema1').find("option:selected").html();
+	subtema1.idtema = tema1.idtema;
 
-	tema2.idtema = $('input:radio[name=idtema2]:checked').val();
+	//tema2.idtema = $('input:radio[name=idtema2]:checked').val();
+	tema2.idtema = $('#tema2').find("option:selected").val();
+	tema2.tema = $('#tema2').find("option:selected").html();
 	tema2.otrotema = $('#otrotema2norma').val();
+	subtema2.idsubtema = $('#subtema2').find("option:selected").val();
+	subtema2.subtema = $('#subtema2').find("option:selected").html();
+	subtema2.idtema = tema2.idtema;
+
+
 
 	normaPlurinacionalLP.tema1 = tema1;
 	normaPlurinacionalLP.tema2 = tema2;
+	normaPlurinacionalLP.subtema1 = subtema1;
+	normaPlurinacionalLP.subtema2 = subtema2;
+
 
 	//Antecedentes de ley
 	normaPlurinacionalLP.codigo_proyecto_ley = $('#codigo_previo_plu_lp').val();
@@ -1585,7 +1652,7 @@ $('#formulario_norma_plurinacional_lp').submit(function (e) {
 
 
 	/*********************************/
-	/*  RELLENADO DEL PREEVNCIO      */
+	/*  RELLENADO DEL PREEnVIO      */
 	/*********************************/
 
 	//Datos generales
@@ -1596,44 +1663,6 @@ $('#formulario_norma_plurinacional_lp').submit(function (e) {
 	$('#unixfecha_plu_lp_pre').val(normaPlurinacionalLP.fecha['fecha_unix']);
 
 
-	var tema1_pre = '';
-	if(normaPlurinacionalLP.tema1['idtema'] == 0){
-		console.log('Otro tema seleccionado: ' + normaPlurinacionalLP.tema1['otrotema']);
-		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
-		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required readonly value="'+ normaPlurinacionalLP.tema1['otrotema'] +'">';
-		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacionalLP.tema1['idtema'] +'" >';
-		tema1_pre += '';
-		$('#tema1desp').html(tema1_pre);
-	}else{
-		var temadb = gettema(normaPlurinacionalLP.tema1['idtema']);
-		console.log(temadb);
-		normaPlurinacionalLP.tema1['tema'] = temadb['nombre_tema'];
-		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
-		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required readonly value="'+ normaPlurinacionalLP.tema1['tema'] +'">';;
-		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacionalLP.tema1['idtema'] +'" >';;
-		tema1_pre += '';
-		$('#tema1desp').html(tema1_pre);
-	}
-	//Tema2
-	var tema2_pre = '';
-	if(normaPlurinacionalLP.tema2['idtema'] == 0){
-		console.log('Otro tema seleccionado: '+ normaPlurinacionalLP.tema2['otrotema']);
-		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
-		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required readonly value="'+ normaPlurinacionalLP.tema2['otrotema'] +'">';
-		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacionalLP.tema2['idtema'] +'" >';
-		tema2_pre += '';
-		$('#tema2desp').html(tema2_pre);
-
-	}else{
-		var tema2db = gettema(normaPlurinacionalLP.tema2['idtema']);
-		console.log(tema2db);
-		normaPlurinacionalLP.tema2['tema'] = tema2db['nombre_tema'];
-		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
-		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required readonly value="'+ normaPlurinacionalLP.tema2['tema'] +'">';
-		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacionalLP.tema2['idtema'] +'" >';
-		tema2_pre += '';
-		$('#tema2desp').html(tema2_pre);
-	}
 
 	//Antecedentes de ley
 	$('#codigo_previo_plu_lp_pre').val(normaPlurinacionalLP.codigo_proyecto_ley);
@@ -1645,6 +1674,79 @@ $('#formulario_norma_plurinacional_lp').submit(function (e) {
 
 	//Datos del registro
 	$('#observaciones_met_plu_lp_pre').val(normaPlurinacionalLP.obs_metodologicas);
+
+
+	var tema1_pre = '';
+	if(normaPlurinacionalLP.tema1['idtema'] == 0){
+		//Otro tema
+		console.log('Otro tema seleccionado: ' + normaPlurinacionalLP.tema1['otrotema']);
+		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacionalLP.tema1['otrotema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacionalLP.tema1['idtema'] +'" >';
+		tema1_pre += '<label for="subtema1_pre" >Subtema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="subtema1_pre" name="subtema1_pre" required value="'+ normaPlurinacionalLP.subtema1['subtema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idsubtema1_pre" name="idsubtema1_pre" value="'+ normaPlurinacionalLP.subtema1['idsubtema'] +'" >';
+		tema1_pre += '';
+		$('#tema1desp').html(tema1_pre);
+	}else if(normaPlurinacionalLP.tema1['idtema'] == 'n'){
+		//Tema sin seleccionar
+		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacionalLP.tema1['tema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacionalLP.tema1['idtema'] +'" >';
+		tema1_pre += '<label for="subtema1_pre" >Subtema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="subtema1_pre" name="subtema1_pre" required value="'+ normaPlurinacionalLP.subtema1['subtema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idsubtema1_pre" name="idtsubema1_pre" value="'+ normaPlurinacionalLP.subtema1['idsubtema'] +'" >';
+
+		tema1_pre += '';
+		$('#tema1desp').html(tema1_pre);
+	}else{
+		//Tema seleccionado
+		tema1_pre += '<label for="tema1_pre" >Tema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="tema1_pre" name="tema1_pre" required value="'+ normaPlurinacionalLP.tema1['tema'] +'">';;
+		tema1_pre += '<input type="hidden" class="form-control" id="idtema1_pre" name="idtema1_pre" value="'+ normaPlurinacionalLP.tema1['idtema'] +'" >';;
+		tema1_pre += '<label for="subtema1_pre" >Subtema1:</label>';
+		tema1_pre += '<input type="text" class="form-control" id="subtema1_pre" name="subtema1_pre" required value="'+ normaPlurinacionalLP.subtema1['subtema'] +'">';
+		tema1_pre += '<input type="hidden" class="form-control" id="idsubtema1_pre" name="idsubtema1_pre" value="'+ normaPlurinacionalLP.subtema1['idsubtema'] +'" >';
+
+		tema1_pre += '';
+		$('#tema1desp').html(tema1_pre);
+	}
+	//Tema2
+	var tema2_pre = '';
+	if(normaPlurinacionalLP.tema2['idtema'] == 0){
+		//Otro tema
+		console.log('Otro tema seleccionado: ' + normaPlurinacionalLP.tema2['otrotema']);
+		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacionalLP.tema2['otrotema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacionalLP.tema2['idtema'] +'" >';
+		tema2_pre += '<label for="subtema2_pre" >Subtema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="subtema2_pre" name="subtema2_pre" required value="'+ normaPlurinacionalLP.subtema2['subtema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idsubtema2_pre" name="idsubtema2_pre" value="'+ normaPlurinacionalLP.subtema2['idsubtema'] +'" >';
+		tema2_pre += '';
+		$('#tema2desp').html(tema2_pre);
+	}else if(normaPlurinacionalLP.tema2['idtema'] == 'n'){
+		//Tema sin seleccionar
+		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacionalLP.tema2['tema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacionalLP.tema2['idtema'] +'" >';
+		tema2_pre += '<label for="subtema2_pre" >Subtema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="subtema2_pre" name="subtema2_pre" required value="'+ normaPlurinacionalLP.subtema2['subtema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idsubtema2_pre" name="idtsubema2_pre" value="'+ normaPlurinacionalLP.subtema2['idsubtema'] +'" >';
+
+		tema2_pre += '';
+		$('#tema2desp').html(tema2_pre);
+	}else{
+		//Tema seleccionado
+		tema2_pre += '<label for="tema2_pre" >Tema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="tema2_pre" name="tema2_pre" required value="'+ normaPlurinacionalLP.tema2['tema'] +'">';;
+		tema2_pre += '<input type="hidden" class="form-control" id="idtema2_pre" name="idtema2_pre" value="'+ normaPlurinacionalLP.tema2['idtema'] +'" >';;
+		tema2_pre += '<label for="subtema1_pre" >Subtema2:</label>';
+		tema2_pre += '<input type="text" class="form-control" id="subtema2_pre" name="subtema2_pre" required value="'+ normaPlurinacionalLP.subtema2['subtema'] +'">';
+		tema2_pre += '<input type="hidden" class="form-control" id="idsubtema2_pre" name="idsubtema2_pre" value="'+ normaPlurinacionalLP.subtema2['idsubtema'] +'" >';
+
+		tema2_pre += '';
+		$('#tema2desp').html(tema2_pre);
+	}
 
 	/*	var normaPlurinacional = new Norma();
 		var instancia = new InstanciaSeguimiento();
@@ -1780,7 +1882,6 @@ $('#formulario_norma_plurinacional_lp').submit(function (e) {
 
 
 	*/
-
 	console.log(normaPlurinacionalLP);
 	$('#preenvionormaplurinacionallp').modal("show");
 });
@@ -1800,7 +1901,9 @@ function Norma() {
 	this.nombre = '';
 	this.objeto = '';
 	this.tema1 = '';
-	this.tema2 = ''
+	this.tema2 = '';
+	this.subtema1 = '';
+	this.subtema2 = '';
 	this.proponente = '';
 	this.observaciones = '';
 	this.estado = '';
@@ -1825,7 +1928,9 @@ function Normalp() {
 	this.nombre = '';
 	this.objeto = '';
 	this.tema1 = '';
-	this.tema2 = ''
+	this.tema2 = '';
+	this.subtema1 = '';
+	this.subtema2 = '';
 	this.proponente = '';
 	this.observaciones = '';
 	this.estado = '';
@@ -1856,6 +1961,12 @@ function Tema(){
 	this.idtema = '';
 	this.tema = '';
 	this.otrotema = '';
+}
+
+function Subtema(){
+	this.idsubtema = '';
+	this.subtema = '';
+	this.idtema = '';
 }
 function Proponente() {
 	this.idproponente = '';
@@ -2055,19 +2166,25 @@ jQuery(document).on('change', 'select#tema1', function (e) {
 	//getSubtemas1(idtema);
 	if(idtema == 0){
 		console.log("Seleccion Otro tema");
+		var opciones = '		<option value="n" >Sin Seleccion</option>';
 		var opcion = '';
 		opcion += '<label for="otrotema1norma">Otro tema:</label><br>';
 		opcion += '<input type="text" id="otrotema1norma" name="otrotema1norma" required class="form-control" value="">';
 		$('#otrotema1normadatos').html(opcion);
 		$("select#subtema1").empty();
+		$("select#subtema1").html(opciones);
 
 	}else if(idtema == 'n'){
 		console.log("Sin seleccion");
+		var opciones = '		<option value="n" >Sin Seleccion</option>';
 		var opciones = ' ';
 		$('#otrotema1normadatos').empty();
 		$("select#subtema1").empty();
+		$("select#subtema1").html(opciones);
+
 	}else {
 		console.log('Seleccion con subtemas');
+		$("select#subtema1").empty();
 		getSubtemas1(idtema);
 		$('#otrotema1normadatos').empty();
 	}
@@ -2080,11 +2197,13 @@ jQuery(document).on('change', 'select#tema2', function (e) {
 	//getSubtemas1(idtema);
 	if(idtema == 0){
 		console.log("Seleccion Otro tema");
+		var opciones = '		<option value="n" >Sin Seleccion</option>';
 		var opcion = '';
 		opcion += '<label for="otrotema2norma">Otro tema:</label><br>';
 		opcion += '<input type="text" id="otrotema2norma" name="otrotema2norma" required class="form-control" value="">';
 		$('#otrotema2normadatos').html(opcion);
 		$("select#subtema2").empty();
+		$("select#subtema2").html(opciones);
 	}else if(idtema == 'n'){
 		console.log("Sin seleccion");
 		var opciones = ' ';

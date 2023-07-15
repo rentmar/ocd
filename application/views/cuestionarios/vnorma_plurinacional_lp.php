@@ -97,7 +97,7 @@
 					<div id="subtema1-contenido">
 						<label>Escoja el subtema:</label><br>
 						<select id="subtema1" name="subtema1" class="simple" style="width: 100%" required >
-<!--							<option value="" selected >Seleccione el subtema1</option>-->
+							<option value="n" selected >Sin seleccion</option>
 						</select>
 					</div>
 				</div>
@@ -144,7 +144,7 @@
 					<div id="subtema2-contenido">
 						<label>Escoja el subtema:</label><br>
 						<select id="subtema2" name="subtema2" class="simple" style="width: 100%" required >
-<!--							<option value="" selected >Seleccione el subtema1</option>-->
+							<option value="n" selected >Sin Seleccion</option>
 						</select>
 					</div>
 				</div>
