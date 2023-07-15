@@ -38,6 +38,7 @@ class Norma_model extends CI_Model
 	public function crearNorma($norma_nueva){
 		//Objeto norma
 		$norma = $norma_nueva;
+		$norma_json = json_encode($norma);
 		/*
 		 * INICIAR LA TRANSACCION
 		 */
@@ -59,6 +60,7 @@ class Norma_model extends CI_Model
 			'rel_id' => $norma->idusuario,
 			'rel_idinsseg' => $norma->instancia_seguimiento,
 			'rel_idcuestionario' => $norma->idcuestionario ,
+			'datos_adicionales' => $norma_json,
 		];
 		$this->db->insert('norma_general', $data_norma );
 		$norma_identificador = $this->db->insert_id();
@@ -142,6 +144,7 @@ class Norma_model extends CI_Model
 	public function crearNormaLeyPromulgada($norma_nueva){
 		//Objeto norma
 		$norma = $norma_nueva;
+		$norma_json = json_encode($norma);
 		/*
 		 * INICIAR LA TRANSACCION
 		 */
@@ -164,6 +167,7 @@ class Norma_model extends CI_Model
 			'rel_id' => $norma->idusuario,
 			'rel_idinsseg' => $norma->instancia_seguimiento,
 			'rel_idcuestionario' => $norma->idcuestionario ,
+			'datos_adicionales' =>  $norma_json,
 		];
 		$this->db->insert('norma_general', $data_norma );
 		$norma_identificador = $this->db->insert_id();

@@ -152,7 +152,10 @@ class Normativa extends CI_Controller{
 		if($instancia == 1){
 			//Nacional
 			$norma = $this->normaGeneral();
+
+			var_dump($norma);
 			$this->Norma_model->crearNorma($norma);
+
 		}elseif($instancia == 2){
 			//Departamental
 			$norma = $this->normaDepartamental();
@@ -209,6 +212,16 @@ class Normativa extends CI_Controller{
 			'idtema' => $this->input->post('idtema2_pre'),
 			'tema' => $this->input->post('tema2_pre'),
 		];
+		/** @noinspection PhpLanguageLevelInspection */
+		$norma->subtema1 = [
+			'idsubtema' => $this->input->post('idsubtema1_pre') ,
+			'subtema' => $this->input->post('subtema1_pre'),
+		];
+		/** @noinspection PhpLanguageLevelInspection */
+		$norma->subtema2 = [
+			'idsubtema' => $this->input->post('idsubtema2_pre'),
+			'subtema' => $this->input->post('subtema2_pre'),
+		];
 		$norma->observaciones = $this->input->post('observaciones_plu_pre');
 		$norma->obs_metodologicas = $this->input->post('observaciones_met_plu_pre');
 
@@ -250,6 +263,16 @@ class Normativa extends CI_Controller{
 		$norma->tema2 = [
 			'idtema' => $this->input->post('idtema2_pre'),
 			'tema' => $this->input->post('tema2_pre'),
+		];
+		/** @noinspection PhpLanguageLevelInspection */
+		$norma->subtema1 = [
+			'idsubtema' => $this->input->post('idsubtema1_pre') ,
+			'subtema' => $this->input->post('subtema1_pre'),
+		];
+		/** @noinspection PhpLanguageLevelInspection */
+		$norma->subtema2 = [
+			'idsubtema' => $this->input->post('idsubtema2_pre'),
+			'subtema' => $this->input->post('subtema2_pre'),
 		];
 
 		$norma->codigo_proy_ley = $this->input->post('codigo_previo_plu_lp_pre');
