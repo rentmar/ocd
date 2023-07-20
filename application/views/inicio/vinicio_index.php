@@ -152,6 +152,40 @@
 					</div>
 				</div>
 			</div>
+
+
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+				<div class="card">
+					<div class="card-header cuest1 ">
+						Veeduria
+						<br><br>
+
+					</div>
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.svg'; ?>" alt="Card image">
+					<div class="card-body">
+						<div class="btn-group">
+							<button type="button" class="btn  cuest1">Nuevo</button>
+							<button type="button" class="btn dropdown-toggle dropdown-toggle-split cuest1" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="<?php echo site_url('veeduria/seleccion/1'); ?>">
+									Encuestadores y supervisores
+								</a>
+								<a class="dropdown-item" href="<?php echo site_url('veeduria/seleccion/2'); ?>">
+									Ciudadania
+								</a>
+								<a class="dropdown-item" href="<?php echo site_url('veeduria/seleccion/3'); ?>">
+									Veedores
+								</a>
+							</div>
+						</div>
+						<a href="<?php echo site_url('');?>" class="btn btn-info text-body cuest1 " role="button" style="background-color:#93C90F;color:black;">
+							Editar
+						</a>
+					</div>
+				</div>
+			</div>
 			
 			<?php if($this->ion_auth->in_group(4)): ?>
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
