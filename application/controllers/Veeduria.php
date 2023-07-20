@@ -49,15 +49,9 @@ class Veeduria extends CI_Controller{
 
 		//Informacion del formulario
 		$formulario = $this->Veeduria_model->formEncuestadoresSupervisores();
-		$secciones = $this->Veeduria_model->formSecciones($formulario->idfves);
-		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($formulario->idfves);
+		$secciones = $this->Veeduria_model->formSecciones($formulario->idfv);
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($formulario->idfv);
 
-		var_dump($formulario);
-		echo "<br><br>";
-		var_dump($secciones);
-		echo "<br><br>";
-		var_dump($preguntas);
-		echo "<br><br>";
 
 
 
@@ -77,16 +71,24 @@ class Veeduria extends CI_Controller{
 		$usuario = $this->ion_auth->user()->row();
 
 		//Informacion del formulario
-		$formulario = $this->Veeduria_model->formEncuestadoresSupervisores();
-		$secciones = $this->Veeduria_model->formSecciones($formulario->idfves);
+		$formulario = $this->Veeduria_model->formCiudadania();
+		$secciones = $this->Veeduria_model->formSecciones($formulario->idfv);
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($formulario->idfv);
 
-		var_dump($formulario);
+		/*var_dump($formulario);
+		echo "<br><br>";
 		var_dump($secciones);
-
+		echo "<br><br>";
+		var_dump($preguntas);
+		echo "<br><br>";*/
 
 
 		$datos['formulario'] = $formulario;
 		$datos['secciones'] = $secciones;
+		$datos['preguntas'] = $preguntas;
+
+
+
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vveed_ciudadania', $datos);
@@ -99,14 +101,22 @@ class Veeduria extends CI_Controller{
 		$usuario = $this->ion_auth->user()->row();
 
 		//Informacion del formulario
-		$formulario = $this->Veeduria_model->formEncuestadoresSupervisores();
-		$secciones = $this->Veeduria_model->formSecciones($formulario->idfves);
+		$formulario = $this->Veeduria_model->formVeedores();
+		$secciones = $this->Veeduria_model->formSecciones($formulario->idfv);
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($formulario->idfv);
 
-		var_dump($formulario);
+		/*var_dump($formulario);
+		echo "<br><br>";
 		var_dump($secciones);
+		echo "<br><br>";
+		var_dump($preguntas);
+		echo "<br><br>";*/
+
 
 		$datos['formulario'] = $formulario;
 		$datos['secciones'] = $secciones;
+		$datos['preguntas'] = $preguntas;
+
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');

@@ -25,7 +25,20 @@
 				</h4>
 			</div>
 			<div class="card-body">
-				Area URBANA RURAL
+				<div class="form-group">
+					<label for="">Area:</label>
+					<div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="<?php echo 'opcionareag1'; ?>" name="areageneral">
+							<label class="custom-control-label" for="<?php echo 'opcionareag1'; ?>">Urbana</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="<?php echo 'opcionarea2g'; ?>" name="areageneral">
+							<label class="custom-control-label" for="<?php echo 'opcionarea2g'; ?>">Rural</label>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -41,30 +54,30 @@
 			</div>
 			<div class="card-body">
 				<?php foreach ($preguntas as $p): ?>
+					<?php $datos['pregunta'] = $p; ?>
 					<?php if($s->idfvsec == $p->idseccion ):?>
 						<?php if($p->tipo_pregunta == 1): ?>
-							<?php echo $p->pregunta; ?>
-							<?php //$this->load->view('encuesta/svencuesta_plantilla_resp_selsimple', $datos_pregunta ); ?>
-						<?php elseif ($p->tipo_pregunta == 2):  ?>
-							<?php echo $p->pregunta; ?>
-							<?php //$this->load->view('encuesta/svencuesta_plantilla_resp_selmultiple', $datos_pregunta); ?>
-						<?php elseif ($p->tipo_pregunta == 3):  ?>
-							<?php //$this->load->view('encuesta/svencuesta_plantilla_resp_abiertasimple', $datos_pregunta); ?>
-						<?php elseif ($p->tipo_pregunta == 4):  ?>
-							<?php //$this->load->view('encuesta/svencuesta_plantilla_resp_selmultiple_otro_abierta', $datos_pregunta); ?>
-						<?php elseif ($p->tipo_pregunta == 5):  ?>
-							<?php //$this->load->view('encuesta/svencuesta_plantilla_resp_multiple_cuantificada', $datos_pregunta); ?>
-						<?php elseif ($p->tipo_pregunta == 6):  ?>
-
-						<?php elseif ($p->tipo_pregunta == 7):  ?>
-
-						<?php elseif ($p->tipo_pregunta == 8):  ?>
-
-						<?php elseif ($p->tipo_pregunta == 9):  ?>
-
+							<?php $this->load->view('cuestionarios/svpregunta_tipo1', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 2): ?>
+							<?php $this->load->view('cuestionarios/svpregunta_tipo2', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 3): ?>
+							<?php $this->load->view('cuestionarios/svpregunta_tipo3', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 4): ?>
+							<?php $this->load->view('cuestionarios/svpregunta_tipo4', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 5): ?>
+							<?php $this->load->view('cuestionarios/svpregunta_tipo5', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 6): ?>
+							<?php $this->load->view('cuestionarios/svpregunta_tipo6', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 7): ?>
+							<?php $this->load->view('cuestionarios/svpregunta_tipo7', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 8): ?>
+							<?php //$this->load->view('cuestionarios/svpregunta_tipo4', $datos); ?>
+						<?php elseif($p->tipo_pregunta == 9): ?>
+							<?php //$this->load->view('cuestionarios/svpregunta_tipo4', $datos); ?>
 						<?php else: ?>
-							Sin definicion
+							<?php ?>
 						<?php endif; ?>
+
 					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
