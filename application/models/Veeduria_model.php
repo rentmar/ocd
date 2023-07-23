@@ -90,4 +90,86 @@ class Veeduria_model extends CI_Model{
 		$qry = $this->db->query($sql, [$idformulario, ]);
 		return $qry->result();
 	}
+
+
+	//Insertar form1
+	public function registrarForm($formulario){
+		//Matriz de datos
+		$form1 = $formulario;
+		date_default_timezone_set('America/La_Paz');
+		$fecha = time();
+
+		//Iniciar la transaccion
+		$this->db->trans_begin();
+
+		//Insertar la respuesta en la tabla
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_formulario_respuesta = [
+			'fecha_registro' => $fecha,
+			'form_respuesta ' => json_encode($form1),
+			'rel_idfv' => $form1->idformulario,
+			'rel_idusr' => $form1->idusuario,
+		];
+		$this->db->insert('form_veeduria_respuesta', $datos_formulario_respuesta);
+
+		if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			$this->db->trans_commit();
+			return true;
+		}
+
+	}
+
+	public function registrarForm2($formulario){
+		//Matriz de datos
+		$form = $formulario;
+		date_default_timezone_set('America/La_Paz');
+		$fecha = time();
+
+		//Iniciar la transaccion
+		$this->db->trans_begin();
+
+		//Insertar la respuesta en la tabla
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_formulario_respuesta = [
+			'fecha_registro' => $fecha,
+			'form_respuesta ' => json_encode($form),
+			'rel_idfv' => $form->idformulario,
+			'rel_idusr' => $form->idusuario,
+		];
+		//$this->db->insert('form_veeduria_respuesta', $datos_formulario_respuesta);
+
+		if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
+	/***
+	 *
+	 * EDICION
+	 *
+	**/
+
+	public function leerFormUsuario($idusuario){
+		$sql = "SELECT *    "
+			."FROM form_veeduria_respuesta      "
+			."LEFT JOIN form_veeduria ON form_veeduria.idfv = form_veeduria_respuesta.rel_idfv   "
+			."WHERE form_veeduria_respuesta.rel_idusr = ?    "
+			."   "
+			."  "
+			." "
+			."  ";
+		$qry = $this->db->query($sql, [$idusuario, ]);
+		return $qry->result();
+	}
+
+
 }

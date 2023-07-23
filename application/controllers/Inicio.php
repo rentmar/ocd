@@ -9,6 +9,7 @@ class Inicio extends CI_Controller
 		$this->load->library('ion_auth');
 		$this->load->model('Encuesta_model');
 		$this->load->model('Instanciaseguimiento_model');
+		$this->load->model('Veeduria_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -45,6 +46,7 @@ class Inicio extends CI_Controller
 		$datos['encuestas'] = $this->Encuesta_model->leerEncuestasAsignadasUsuario($idusuario);
 		$datos['usuario'] = $usuario;
 		$datos['instancia'] = $this->Instanciaseguimiento_model->leerInstancias();
+		$datos['veeduria'] = $this->Veeduria_model->leerFormularios();
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');

@@ -169,18 +169,14 @@
 								<span class="caret"></span>
 							</button>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="<?php echo site_url('veeduria/seleccion/1'); ?>">
-									Encuestadores y supervisores
-								</a>
-								<a class="dropdown-item" href="<?php echo site_url('veeduria/seleccion/2'); ?>">
-									Ciudadania
-								</a>
-								<a class="dropdown-item" href="<?php echo site_url('veeduria/seleccion/3'); ?>">
-									Veedores
-								</a>
+								<?php foreach ($veeduria as $f): ?>
+									<a class="dropdown-item" href="<?php echo site_url('veeduria/seleccion/'.$f->idfv); ?>">
+										<?php echo $f->nombre;?>
+									</a>
+								<?php endforeach; ?>
 							</div>
 						</div>
-						<a href="<?php echo site_url('');?>" class="btn btn-info text-body cuest1 " role="button" style="background-color:#93C90F;color:black;">
+						<a href="<?php echo site_url('veeduria/editarFormularios/');?>" class="btn btn-info text-body cuest1 " role="button" style="background-color:#93C90F;color:black;">
 							Editar
 						</a>
 					</div>

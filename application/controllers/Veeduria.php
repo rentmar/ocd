@@ -53,11 +53,17 @@ class Veeduria extends CI_Controller{
 		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($formulario->idfv);
 
 
+		/*var_dump($formulario);
+		echo "<br><br>";
+		var_dump($usuario);
+		echo "<br><br>";*/
+
 
 
 		$datos['formulario'] = $formulario;
 		$datos['secciones'] = $secciones;
 		$datos['preguntas'] = $preguntas;
+		$datos['usuario'] = $usuario;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -86,6 +92,8 @@ class Veeduria extends CI_Controller{
 		$datos['formulario'] = $formulario;
 		$datos['secciones'] = $secciones;
 		$datos['preguntas'] = $preguntas;
+		$datos['usuario'] = $usuario;
+
 
 
 
@@ -116,6 +124,8 @@ class Veeduria extends CI_Controller{
 		$datos['formulario'] = $formulario;
 		$datos['secciones'] = $secciones;
 		$datos['preguntas'] = $preguntas;
+		$datos['usuario'] = $usuario;
+
 
 
 		$this->load->view('html/encabezado');
@@ -124,6 +134,289 @@ class Veeduria extends CI_Controller{
 		$this->load->view('html/pie');
 	}
 
+
+	//Capturar informacion
+	public function capturarDatos(){
+		$idformulario = $this->input->post('idformulario');
+		if($idformulario ==1):
+			$form1 = $this->datosForm1();
+			$this->Veeduria_model->registrarForm($form1);
+		elseif ($idformulario == 2):
+			$form2 = $this->datosForm2();
+			$preguntas = $this->Veeduria_model->leerPreguntasFormularios($idformulario);
+			$this->Veeduria_model->registrarForm($form2);
+		elseif ($idformulario == 3):
+			$form3 = $this->datosForm3();
+			$this->Veeduria_model->registrarForm($form3);
+		else:
+		endif;
+		redirect('/');
+	}
+
+	//Captura de datos para el formulario31
+	private function datosForm1(){
+		$form1 = new stdClass();
+		$idusuario = $this->input->post('idusuario');
+		$idformulario = $this->input->post('idformulario');
+
+		//Captura de los datos escondidos
+		$form1->idusuario = $idusuario;
+		$form1->idformulario = $idformulario;
+
+		//Captura de los datos generales
+		$form1->area = $this->input->post('areageneral');
+		$form1->direccion = $this->input->post('direccion');
+		$form1->grupo = $this->input->post('grupo');
+
+		//Genera la matriz de preguntas
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($idformulario);
+
+		//Genera la matriz de respuestas
+		/** @noinspection PhpLanguageLevelInspection */
+		$respuestas = [];
+		foreach ($preguntas as $p):
+			$llave = $p->codigo_pregunta;
+			if($p->tipo_pregunta == 1):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo1($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 2):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo2($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 3):
+				$respuestas[$llave] = "tipo 3";
+			elseif ($p->tipo_pregunta == 4):
+				$respuestas[$llave] = "tipo 4";
+			elseif ($p->tipo_pregunta == 5):
+				$respuestas[$llave] = "tipo 5";
+			elseif ($p->tipo_pregunta == 6):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo6($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 7):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo7($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 8):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo8($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 9):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo9($nombre, $p->codigo_pregunta);
+			else:
+			endif;
+		endforeach;
+		$form1->preguntas = $preguntas;
+		$form1->respuestas = $respuestas;
+
+		return $form1;
+	}
+
+	//Captura de datos para el formulario 2
+	private function datosForm2(){
+		$form2 = new stdClass();
+		$idusuario = $this->input->post('idusuario');
+		$idformulario = $this->input->post('idformulario');
+
+		//Captura de los datos escondidos
+		$form2->idusuario = $idusuario;
+		$form2->idformulario = $idformulario;
+
+		//Captura de los datos generales
+		$form2->area = $this->input->post('areageneral');
+		$form2->grupo = $this->input->post('grupo');
+
+		//Genera la matriz de preguntas
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($idformulario);
+
+		//Genera la matriz de respuestas
+		/** @noinspection PhpLanguageLevelInspection */
+		$respuestas = [];
+		foreach ($preguntas as $p):
+			$llave = $p->codigo_pregunta;
+			if($p->tipo_pregunta == 1):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo1($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 2):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo2($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 3):
+				$respuestas[$llave] = "tipo 3";
+			elseif ($p->tipo_pregunta == 4):
+				$respuestas[$llave] = "tipo 4";
+			elseif ($p->tipo_pregunta == 5):
+				$respuestas[$llave] = "tipo 5";
+			elseif ($p->tipo_pregunta == 6):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo6($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 7):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo7($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 8):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo8($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 9):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo9($nombre, $p->codigo_pregunta);
+			else:
+			endif;
+		endforeach;
+		$form2->preguntas = $preguntas;
+		$form2->respuestas = $respuestas;
+
+		return $form2;
+	}
+
+	//Captura de datos para el formulario 3
+	private function datosForm3(){
+		$form1 = new stdClass();
+		$idusuario = $this->input->post('idusuario');
+		$idformulario = $this->input->post('idformulario');
+
+		//Captura de los datos escondidos
+		$form1->idusuario = $idusuario;
+		$form1->idformulario = $idformulario;
+		$form1->direccion = $this->input->post('direccion');
+
+
+		//Captura de los datos generales
+		$form1->area = $this->input->post('areageneral');
+		$form1->grupo = $this->input->post('grupo');
+
+		//Genera la matriz de preguntas
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($idformulario);
+
+		//Genera la matriz de respuestas
+		/** @noinspection PhpLanguageLevelInspection */
+		$respuestas = [];
+		foreach ($preguntas as $p):
+			$llave = $p->codigo_pregunta;
+			if($p->tipo_pregunta == 1):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo1($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 2):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo2($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 3):
+				$respuestas[$llave] = "tipo 3";
+			elseif ($p->tipo_pregunta == 4):
+				$respuestas[$llave] = "tipo 4";
+			elseif ($p->tipo_pregunta == 5):
+				$respuestas[$llave] = "tipo 5";
+			elseif ($p->tipo_pregunta == 6):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo6($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 7):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo7($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 8):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo8($nombre, $p->codigo_pregunta);
+			elseif ($p->tipo_pregunta == 9):
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo9($nombre, $p->codigo_pregunta);
+			else:
+			endif;
+		endforeach;
+		$form1->preguntas = $preguntas;
+		$form1->respuestas = $respuestas;
+
+		return $form1;
+	}
+
+
+	//Respuesta tipo 1 - comentario
+	//
+	private function rtipo1($nombre, $codigo){
+		$tipo_respuesta = 1;
+		$respuesta = $this->input->post($nombre);
+		$r = new stdClass();
+		$r->tipo = $tipo_respuesta;
+		$r->comentario = $respuesta;
+		$r->codigo = $codigo;
+		return $r;
+	}
+	//Respuesta tipo 2 - seleccion simple SI/NO
+	private function rtipo2($nombre, $codigo){
+		$tipo_respuesta = 2;
+		$respuesta = $this->input->post($nombre);
+		$r = new stdClass();
+		$r->tipo = $tipo_respuesta;
+		$r->respuesta = $respuesta;
+		$r->codigo = $codigo;
+		return $r;
+	}
+	//Respuesta tipo 3 - seleccion multiple
+	private function rtipo3($nombre){
+
+	}
+	//Respuesta tipo 4 - Seleccion variada
+	private function rtipo4($nombre){
+
+	}
+	//Respuesta tipo 5 - input numerico tiempo
+	private function rtipo5($nombre){
+
+	}
+	//Respuesta tipo 6 - input text
+	private function rtipo6($nombre, $codigo){
+		$tipo_respuesta = 6;
+		$respuesta = $this->input->post($nombre);
+		$r = new stdClass();
+		$r->tipo = $tipo_respuesta;
+		$r->respuesta = $respuesta;
+		$r->codigo = $codigo;
+		return $r;
+	}
+	//Respuesta tipo 7 - input numerico
+	private function rtipo7($nombre, $codigo){
+		$tipo_respuesta = 7;
+		$respuesta = $this->input->post($nombre);
+		$r = new stdClass();
+		$r->tipo = $tipo_respuesta;
+		$r->respuesta = $respuesta;
+		$r->codigo = $codigo;
+		return $r;
+	}
+	//Respuesta tipo 8 - input seleccion text
+	private function rtipo8($nombre, $codigo){
+		$tipo_respuesta = 8;
+		$respuesta = $this->input->post($nombre);
+		$r = new stdClass();
+		$r->tipo = $tipo_respuesta;
+		$r->respuesta = $respuesta;
+		$r->codigo = $codigo;
+		return $r;
+	}
+	//Respuesta tipo 9 - textarea
+	private function rtipo9($nombre, $codigo){
+		$tipo_respuesta = 9;
+		$respuesta = $this->input->post($nombre);
+		$r = new stdClass();
+		$r->tipo = $tipo_respuesta;
+		$r->respuesta = $respuesta;
+		$r->codigo = $codigo;
+		return $r;
+	}
+
+	/*****
+		EDICION DE FORMULARIOS
+	 *******/
+
+	public function editarFormularios(){
+		//Usuario
+		$usuario = $this->ion_auth->user()->row();
+		$idusuario = $usuario->id;
+
+		//Extraer todos los formularios llenados por el usuario
+		$formularios = $this->Veeduria_model->leerFormUsuario($idusuario);
+
+		$datos['formularios'] = $formularios;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vveduria_lista', $datos);
+		$this->load->view('html/pie');
+
+
+	}
 
 
 
