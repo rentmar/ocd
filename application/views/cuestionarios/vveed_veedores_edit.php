@@ -4,10 +4,10 @@
 	<?php
 	/** @noinspection PhpLanguageLevelInspection */
 	$atr_form =[
-		'id' => 'formulario_veedores' ,
+		'id' => 'formulario_veedores_edit' ,
 	]
 	;?>
-	<?php echo form_open('veeduria/capturarDatos/', $atr_form);?>
+	<?php echo form_open('veeduria/capturarEditDatos/', $atr_form);?>
 	<div class="contenedores_divididos">
 		<div class="contenedor_superior1" id="contenedor_pequeño">
 		</div>
@@ -76,9 +76,9 @@
 					<input id="grupo" name="grupo" class="form-control" type="text" value="<?php echo $respuestas->grupo;?>">
 				</div>
 				<div class="form-group">
-					<input id="idusuario" name="idusuario" class="form-control" type="text" placeholder="idusuario" value="<?php echo $usuario->id; ?>">
-					<input id="idformulario" name="idformulario" class="form-control" type="text" value="<?php echo $formulario->idfv ?>">
-					<input id="idformresp" name="idformresp" class="form-control" type="text" value="<?php echo $formulario->idfvresp; ?>">
+					<input id="idusuario" name="idusuario" class="form-control" type="hidden" placeholder="idusuario" value="<?php echo $usuario->id; ?>">
+					<input id="idformulario" name="idformulario" class="form-control" type="hidden" value="<?php echo $formulario->idfv ?>">
+					<input id="idformresp" name="idformresp" class="form-control" type="hidden" value="<?php echo $formulario->idfvresp; ?>">
 <!--					<input id="" name="" class="form-control" type="text">-->
 				</div>
 

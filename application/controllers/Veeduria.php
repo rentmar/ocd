@@ -527,7 +527,7 @@ class Veeduria extends CI_Controller{
 		//var_dump($respuestas_encuesta);
 		//echo "<br><br>";
 		$respuestas_encuesta_array = (array)$respuestas_encuesta;
-		var_dump($respuestas_encuesta_array);
+		//var_dump($respuestas_encuesta_array);
 		//echo "<br><br>";
 		//$respuesta = $respuestas_encuesta_array["p1"];
 		//var_dump($respuesta);
@@ -550,6 +550,37 @@ class Veeduria extends CI_Controller{
 		$this->load->view('cuestionarios/vveed_veedores_edit', $datos);
 		$this->load->view('html/pie');
 
+	}
+
+
+	//Capturar informacion editada
+	public function capturarEditDatos(){
+		$idformulario = $this->input->post('idformulario');
+		if($idformulario ==1):
+			$form1 = $this->datosForm1();
+			$idfresp = $this->input->post('idformresp');
+			//var_dump($form1);
+			//echo '<br>';
+			//echo $idfresp;
+			$this->Veeduria_model->registrarFormEdicion($form1, $idfresp);
+		elseif ($idformulario == 2):
+			$form2 = $this->datosForm2();
+			$idfresp = $this->input->post('idformresp');
+			//var_dump($form2);
+			//echo '<br>';
+			//echo $idfresp;
+			$this->Veeduria_model->registrarFormEdicion($form2, $idfresp);
+		elseif ($idformulario == 3):
+			$form3 = $this->datosForm3();
+			$idfresp = $this->input->post('idformresp');
+			/*var_dump($form3);
+			echo '<br>';
+			echo $idfresp;*/
+			$this->Veeduria_model->registrarFormEdicion($form3, $idfresp);
+		else:
+		endif;
+		//redirect('veeduria/editarFormularios/');
+		redirect('/');
 	}
 
 

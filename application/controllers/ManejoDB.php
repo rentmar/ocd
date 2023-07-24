@@ -25,6 +25,7 @@ class ManejoDB extends CI_Controller{
 		$this->load->model('Plenaria_model');
 		$this->load->model('Norma_model');
 		$this->load->model('Instanciaseguimiento_model');
+		$this->load->model('Veeduria_model');
 		//Comprobacion de session
 		if($this->session->sesion_activa ===  null){
 			$this->session->sess_destroy();
@@ -1713,6 +1714,37 @@ class ManejoDB extends CI_Controller{
 			$this->mensaje('No existen datos', 'warning');
 			redirect('manejoDB/reportePlenarias');
 		}
+	}
+
+
+	public function veeduriaAdministrador(){
+		$veedurias = $this->Veeduria_model->leerFormResp();
+
+		//var_dump($veedurias);
+
+		$data['veedurias'] = $veedurias;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_listaveeduria', $data);
+		//$this->load->view('manejodb/vmanejodb_listanormas', $data);
+		$this->load->view('html/pie');
+	}
+
+	public function cambiarEstadoVeeduria($identificador)
+	{
+		$idfresp = $identificador;
+		$fv = $this->Veeduria_model->leerFormulario($idfresp);
+		if($fv->es_valido)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Veeduria_model->cambiarEstado($idfresp, $estado);
+		redirect('manejoDB/veeduriaAdministrador');
 	}
 
 

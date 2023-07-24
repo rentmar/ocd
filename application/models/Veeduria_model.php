@@ -186,5 +186,65 @@ class Veeduria_model extends CI_Model{
 		return $qry->row();
 	}
 
+	//Insertar form1
+	public function registrarFormEdicion($formulario, $idfr)
+	{
+		//Matriz de datos
+		$form1 = $formulario;
+		date_default_timezone_set('America/La_Paz');
+		$fecha = time();
+
+		//Iniciar la transaccion
+		$this->db->trans_begin();
+
+		//Insertar la respuesta en la tabla
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_formulario_respuesta = [
+			'form_respuesta ' => json_encode($form1),
+			'rel_idfv' => $form1->idformulario,
+			//'rel_idusr' => $form1->idusuario,
+		];
+
+		/** @noinspection PhpLanguageLevelInspection */
+		$identificador = [
+			'idfvresp' => $idfr,
+		];
+
+		//$this->db->insert('form_veeduria_respuesta', $datos_formulario_respuesta);
+		$this->db->update('form_veeduria_respuesta', $datos_formulario_respuesta, $identificador);
+
+		if ($this->db->trans_status() === FALSE) {
+			$this->db->trans_rollback();
+			return false;
+		} else {
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
+	public function leerFormResp(){
+		$sql = "SELECT *    "
+			."FROM form_veeduria_respuesta      "
+			."LEFT JOIN form_veeduria ON form_veeduria.idfv = form_veeduria_respuesta.rel_idfv   "
+			."LEFT JOIN users ON users.id = form_veeduria_respuesta.rel_idusr    "
+			."   "
+			."  "
+			." "
+			."  ";
+		$qry = $this->db->query($sql, [ ]);
+		return $qry->result();
+	}
+
+	public function cambiarEstado($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'es_valido' => $estado,
+		];
+		$this->db->where('idfvresp', $identificador);
+		$this->db->update('form_veeduria_respuesta', $data);
+	}
+
 
 }
