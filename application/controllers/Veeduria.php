@@ -414,7 +414,141 @@ class Veeduria extends CI_Controller{
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vveduria_lista', $datos);
 		$this->load->view('html/pie');
+	}
 
+	public function editar($idformulario){
+		$idformulario = $idformulario;
+		$form = $this->Veeduria_model->leerFormulario($idformulario);
+		if($form->rel_idfv == 1):
+			redirect('veeduria/editForm1/'.$idformulario);
+		elseif ($form->rel_idfv == 2):
+			redirect('veeduria/editForm2/'.$idformulario);
+		elseif ($form->rel_idfv == 3):
+			redirect('veeduria/editForm3/'.$idformulario);
+		else:
+		endif;
+	}
+
+	//Editar el formulario tipo 1
+	public function editForm1($idformulario){
+		//echo $idformulario.' tipo 1';
+		$form = $this->Veeduria_model->leerFormulario($idformulario);
+		//var_dump($form);
+		//echo "<br><br>";
+		$respuestas_json = $form->form_respuesta;
+		//var_dump($respuestas_json);
+		//echo "<br><br>";
+		$respuestas = json_decode($respuestas_json);
+		//var_dump($respuestas);
+		//echo "<br><br>";
+		$respuestas_encuesta = $respuestas->respuestas;
+		//var_dump($respuestas_encuesta);
+		//echo "<br><br>";
+		$respuestas_encuesta_array = (array)$respuestas_encuesta;
+		//var_dump($respuestas_encuesta_array);
+		//echo "<br><br>";
+		//$respuesta = $respuestas_encuesta_array["p1"];
+		//var_dump($respuesta);
+
+		//Informacion del usuario logueado
+		$usuario = $this->ion_auth->user()->row();
+		$secciones = $this->Veeduria_model->formSecciones($form->idfv);
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($form->idfv);
+
+		//Informacion del formulario
+		$datos['usuario'] = $usuario;
+		$datos['formulario'] = $form;
+		$datos['secciones'] = $secciones;
+		$datos['preguntas'] = $preguntas;
+		$datos['respuestas'] = $respuestas;
+		$datos['respuestas_encuesta'] = $respuestas_encuesta_array;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vveed_enc_sup_edit', $datos);
+		$this->load->view('html/pie');
+
+	}
+	//Editar el formulario tipo 2
+	public function editForm2($idformulario){
+		//echo $idformulario.' tipo 2';
+		$form = $this->Veeduria_model->leerFormulario($idformulario);
+		//var_dump($form);
+		//echo "<br><br>";
+		$respuestas_json = $form->form_respuesta;
+		//var_dump($respuestas_json);
+		//echo "<br><br>";
+		$respuestas = json_decode($respuestas_json);
+		//var_dump($respuestas);
+		//echo "<br><br>";
+		$respuestas_encuesta = $respuestas->respuestas;
+		//var_dump($respuestas_encuesta);
+		//echo "<br><br>";
+		$respuestas_encuesta_array = (array)$respuestas_encuesta;
+		//var_dump($respuestas_encuesta_array);
+		//echo "<br><br>";
+		//$respuesta = $respuestas_encuesta_array["p1"];
+		//var_dump($respuesta);
+
+		//Informacion del usuario logueado
+		$usuario = $this->ion_auth->user()->row();
+		$secciones = $this->Veeduria_model->formSecciones($form->idfv);
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($form->idfv);
+
+		//Informacion del formulario
+		$datos['usuario'] = $usuario;
+		$datos['formulario'] = $form;
+		$datos['secciones'] = $secciones;
+		$datos['preguntas'] = $preguntas;
+		$datos['respuestas'] = $respuestas;
+		$datos['respuestas_encuesta'] = $respuestas_encuesta_array;
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vveed_ciudadania_edit', $datos);
+		$this->load->view('html/pie');
+
+
+	}
+	//Editar el formulario tipo 3
+	public function editForm3($idformulario){
+		//echo $idformulario.' tipo 2';
+		$form = $this->Veeduria_model->leerFormulario($idformulario);
+		//var_dump($form);
+		//echo "<br><br>";
+		$respuestas_json = $form->form_respuesta;
+		//var_dump($respuestas_json);
+		//echo "<br><br>";
+		$respuestas = json_decode($respuestas_json);
+		//var_dump($respuestas);
+		//echo "<br><br>";
+		$respuestas_encuesta = $respuestas->respuestas;
+		//var_dump($respuestas_encuesta);
+		//echo "<br><br>";
+		$respuestas_encuesta_array = (array)$respuestas_encuesta;
+		var_dump($respuestas_encuesta_array);
+		//echo "<br><br>";
+		//$respuesta = $respuestas_encuesta_array["p1"];
+		//var_dump($respuesta);
+
+		//Informacion del usuario logueado
+		$usuario = $this->ion_auth->user()->row();
+		$secciones = $this->Veeduria_model->formSecciones($form->idfv);
+		$preguntas = $this->Veeduria_model->leerPreguntasFormularios($form->idfv);
+
+		//Informacion del formulario
+		$datos['usuario'] = $usuario;
+		$datos['formulario'] = $form;
+		$datos['secciones'] = $secciones;
+		$datos['preguntas'] = $preguntas;
+		$datos['respuestas'] = $respuestas;
+		$datos['respuestas_encuesta'] = $respuestas_encuesta_array;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vveed_veedores_edit', $datos);
+		$this->load->view('html/pie');
 
 	}
 

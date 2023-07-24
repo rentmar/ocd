@@ -37,18 +37,17 @@
 							<label class="custom-control-label" for="<?php echo 'opcionarea2g'; ?>">Rural</label>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="grupo">Grupo:</label>
-						<input id="grupo" name="grupo" class="form-control" type="text">
-					</div>
-					<div class="form-group">
-						<input id="idusuario" name="idusuario" class="form-control" type="hidden" placeholder="idusuario" value="<?php echo $usuario->id; ?>">
-						<input id="idformulario" name="idformulario" class="form-control" type="hidden" value="<?php echo $formulario->idfv ?>">
-						<input id="" name="" class="form-control" type="hidden">
-						<input id="" name="" class="form-control" type="hidden">
-					</div>
 				</div>
-
+				<div class="form-group">
+					<label for="grupo">Grupo:</label>
+					<input id="grupo" name="grupo" class="form-control" type="text">
+				</div>
+				<div class="form-group">
+					<input id="idusuario" name="idusuario" class="form-control" type="hidden" placeholder="idusuario" value="<?php echo $usuario->id; ?>">
+					<input id="idformulario" name="idformulario" class="form-control" type="hidden" value="<?php echo $formulario->idfv ?>">
+					<input id="" name="" class="form-control" type="hidden">
+					<input id="" name="" class="form-control" type="hidden">
+				</div>
 			</div>
 		</div>
 	</div>

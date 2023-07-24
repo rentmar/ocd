@@ -163,12 +163,27 @@ class Veeduria_model extends CI_Model{
 			."FROM form_veeduria_respuesta      "
 			."LEFT JOIN form_veeduria ON form_veeduria.idfv = form_veeduria_respuesta.rel_idfv   "
 			."WHERE form_veeduria_respuesta.rel_idusr = ?    "
-			."   "
+			."AND form_veeduria_respuesta.es_valido = 1   "
 			."  "
 			." "
 			."  ";
 		$qry = $this->db->query($sql, [$idusuario, ]);
 		return $qry->result();
+	}
+
+	//Leer formulario
+	public function leerFormulario($idformulario){
+		$sql = "SELECT *    "
+			."FROM form_veeduria_respuesta      "
+			."LEFT JOIN form_veeduria ON form_veeduria.idfv = form_veeduria_respuesta.rel_idfv  "
+			."WHERE form_veeduria_respuesta.idfvresp =  ?    "
+			."    "
+			."    "
+			."   "
+			."  "
+			."  ";
+		$qry = $this->db->query($sql, [$idformulario, ]);
+		return $qry->row();
 	}
 
 
