@@ -183,7 +183,8 @@ class Veeduria extends CI_Controller{
 				$nombre = 'pregunta'.$p->codigo_pregunta;
 				$respuestas[$llave] = $this->rtipo2($nombre, $p->codigo_pregunta);
 			elseif ($p->tipo_pregunta == 3):
-				$respuestas[$llave] = "tipo 3";
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo3($nombre, $p->codigo_pregunta);
 			elseif ($p->tipo_pregunta == 4):
 				$respuestas[$llave] = "tipo 4";
 			elseif ($p->tipo_pregunta == 5):
@@ -238,7 +239,8 @@ class Veeduria extends CI_Controller{
 				$nombre = 'pregunta'.$p->codigo_pregunta;
 				$respuestas[$llave] = $this->rtipo2($nombre, $p->codigo_pregunta);
 			elseif ($p->tipo_pregunta == 3):
-				$respuestas[$llave] = "tipo 3";
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo3($nombre, $p->codigo_pregunta);
 			elseif ($p->tipo_pregunta == 4):
 				$respuestas[$llave] = "tipo 4";
 			elseif ($p->tipo_pregunta == 5):
@@ -352,6 +354,7 @@ class Veeduria extends CI_Controller{
 		$r->tipo = $tipo_respuesta;
 		$r->respuesta = $respuesta;
 		$r->codigo = $codigo;
+		return $r;
 	}
 	//Respuesta tipo 4 - Seleccion variada
 	private function rtipo4($nombre){
@@ -585,8 +588,16 @@ class Veeduria extends CI_Controller{
 			$this->Veeduria_model->registrarFormEdicion($form3, $idfresp);
 		else:
 		endif;
+
+		if($this->ion_auth->is_admin()):
+			redirect('manejoDB/veeduriaAdministrador');
+		else:
+			redirect('veeduria/editarFormularios/');
+		endif;
+
+
 		//redirect('veeduria/editarFormularios/');
-		redirect('/');
+		//redirect('/');
 	}
 
 	public function reporteVeeduria(){
