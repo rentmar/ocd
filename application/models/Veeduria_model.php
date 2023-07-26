@@ -246,5 +246,33 @@ class Veeduria_model extends CI_Model{
 		$this->db->update('form_veeduria_respuesta', $data);
 	}
 
+	//Reporte: todos los formularios
+	public function reporteFormularios(){
+		$sql = "SELECT *   "
+			."FROM form_veeduria_respuesta      "
+			."LEFT JOIN form_veeduria ON form_veeduria.idfv = form_veeduria_respuesta.rel_idfv   "
+			."LEFT JOIN users ON users.id = form_veeduria_respuesta.rel_idusr    "
+			."WHERE form_veeduria_respuesta.es_valido = 1   "
+			."  "
+			." "
+			."  ";
+		$qry = $this->db->query($sql, [ ]);
+		return $qry->result();
+	}
+
+	//Reporte: formularios de un tipo
+	public function reporteTipoFormularios($tipo_formulario){
+		$sql = "SELECT *  "
+			."FROM form_veeduria_respuesta      "
+			."LEFT JOIN form_veeduria ON form_veeduria.idfv = form_veeduria_respuesta.rel_idfv   "
+			."LEFT JOIN users ON users.id = form_veeduria_respuesta.rel_idusr    "
+			."WHERE form_veeduria_respuesta.rel_idfv = ?   "
+			."AND form_veeduria_respuesta.es_valido = 1  "
+			." "
+			."  ";
+		$qry = $this->db->query($sql, [$tipo_formulario, ]);
+		return $qry->result();
+	}
+
 
 }

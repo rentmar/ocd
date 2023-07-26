@@ -97,8 +97,6 @@ class Padron extends CI_Controller{
 		$this->load->view('html/navbar');
 		$this->load->view('padron/vpadron_partida', $datos);
 		$this->load->view('html/pie');
-
-
 	}
 
 	private function partida(){

@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<?php echo form_open('padron/procesarConsultaCI'); ?>
+				<?php echo form_open('veeduria/procesarConsulta'); ?>
 				<div class="contenedor_filtros">
 				</div>
 				<div class="contenedor">
@@ -22,11 +22,12 @@
 
 
 					<div>
-						<h3>Reporte Reforma Judicial </h3>
+						<h3> Reporte Formularios Veeduria </h3>
 
 					</div>
 					<br>
 					<div>
+
 						<div class="form-group">
 							<a href="<?php echo site_url('manejoDB');?>"><input type="" class="BOTONROJO" value="SALIR"></a>
 						</div>
@@ -37,9 +38,19 @@
 
 				<br>
 				<div class="contenedor">
-					<h3>Reporte</h3>
+					<h3>Reporte formulario veeduria </h3>
 
 					<br>
+					<div class="form-group">
+						<!--<select id="veeduriaform" name="veeduriaform" class="form-control simple"  >
+							<option value="0" >Seleccione una opcion</option>
+							<?php /*foreach ($forms_veeduria as $fm): */?>
+								<option value="<?php /*echo $fm->idfv; */?>" >
+									<?php /*echo $fm->nombre; */?>
+								</option>
+							<?php /*endforeach;  */?>
+						</select>-->
+					</div>
 					<div class="form-row">
 						<input type="submit" class="BOTON" value="GENERAR" name="tema">
 					</div>
@@ -47,17 +58,6 @@
 				<?php echo form_close(); ?>
 
 				<br>
-				<div class="contenedor">
-
-					<?php echo form_open('padron/procesarConsultaLibros'); ?>
-					<h3>Libros Registrados</h3>
-					<br>
-					<div class="form-row">
-						<input type="submit" class="BOTON" value="GENERAR" name="tema">
-					</div>
-					<?php echo form_close(); ?>
-
-				</div>
 
 
 			</div>

@@ -9,3 +9,4 @@
 		<label class="custom-control-label" for="<?php echo 'opcion2'.$pregunta->idpregunta; ?>">No</label>
 	</div>
 </div>
+

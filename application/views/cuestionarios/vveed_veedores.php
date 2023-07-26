@@ -48,10 +48,9 @@
 					<input id="grupo" name="grupo" class="form-control" type="text">
 				</div>
 				<div class="form-group">
-					<input id="idusuario" name="idusuario" class="form-control" type="text" placeholder="idusuario" value="<?php echo $usuario->id; ?>">
-					<input id="idformulario" name="idformulario" class="form-control" type="text" value="<?php echo $formulario->idfv ?>">
-					<input id="" name="" class="form-control" type="text">
-					<input id="" name="" class="form-control" type="text">
+					<input id="idusuario" name="idusuario" class="form-control" type="hidden" placeholder="idusuario" value="<?php echo $usuario->id; ?>">
+					<input id="idformulario" name="idformulario" class="form-control" type="hidden" value="<?php echo $formulario->idfv ?>">
+
 				</div>
 
 			</div>

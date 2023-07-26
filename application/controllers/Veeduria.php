@@ -295,7 +295,8 @@ class Veeduria extends CI_Controller{
 				$nombre = 'pregunta'.$p->codigo_pregunta;
 				$respuestas[$llave] = $this->rtipo2($nombre, $p->codigo_pregunta);
 			elseif ($p->tipo_pregunta == 3):
-				$respuestas[$llave] = "tipo 3";
+				$nombre = 'pregunta'.$p->codigo_pregunta;
+				$respuestas[$llave] = $this->rtipo3($nombre, $p->codigo_pregunta);
 			elseif ($p->tipo_pregunta == 4):
 				$respuestas[$llave] = "tipo 4";
 			elseif ($p->tipo_pregunta == 5):
@@ -344,8 +345,13 @@ class Veeduria extends CI_Controller{
 		return $r;
 	}
 	//Respuesta tipo 3 - seleccion multiple
-	private function rtipo3($nombre){
-
+	private function rtipo3($nombre, $codigo){
+		$tipo_respuesta = 3;
+		$respuesta = $this->input->post($nombre);
+		$r = new stdClass();
+		$r->tipo = $tipo_respuesta;
+		$r->respuesta = $respuesta;
+		$r->codigo = $codigo;
 	}
 	//Respuesta tipo 4 - Seleccion variada
 	private function rtipo4($nombre){
@@ -583,8 +589,248 @@ class Veeduria extends CI_Controller{
 		redirect('/');
 	}
 
+	public function reporteVeeduria(){
+		//$form_veeduria = $this->Veeduria_model->leerFormularios();
+		$form_veeduria = 1;
+
+		$datos['forms_veeduria'] = $form_veeduria;
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('veeduria/vpadron_reportes', $datos);
+		$this->load->view('html/pie');
+
+	}
+
+	public function procesarConsulta(){
+		$tipo_formulario = $this->input->post('veeduriaform');
+		$forms = $this->Veeduria_model->reporteFormularios();
+		$form1 = $this->Veeduria_model->reporteTipoFormularios(1);
+		$form2 = $this->Veeduria_model->reporteTipoFormularios(2);
+		$form3 = $this->Veeduria_model->reporteTipoFormularios(3);
+		$secc1 = $this->Veeduria_model->formSecciones(1);
+		$secc2 = $this->Veeduria_model->formSecciones(2);
+		$secc3 = $this->Veeduria_model->formSecciones(3);
+		$preg1 = $this->Veeduria_model->leerPreguntasFormularios(1);
+		$preg2 = $this->Veeduria_model->leerPreguntasFormularios(2);
+		$preg3 = $this->Veeduria_model->leerPreguntasFormularios(3);
+		//var_dump($forms);
+
+		if($tipo_formulario == 0):
+			$filename = "reporte-veeduria.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-veeduria.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Formularios');
+
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			foreach ($forms as $n):
+				$datos = json_decode($n->form_respuesta);
+				$sheet->setCellValue('A'.$eje_y, $n->idfvresp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $datos->area);
+				if(isset($datos->direccion)):
+				$sheet->setCellValue('D'.$eje_y, $datos->direccion);
+				$sheet->setCellValue('E'.$eje_y, $datos->grupo);
+				endif;
+				$sheet->setCellValue('F'.$eje_y, $n->nombre);
+				$sheet->setCellValue('G'.$eje_y, $n->username);
+				$eje_y++;
+			endforeach;
+
+			$sheet = $spreadsheet->getSheet(1)->setTitle('Form1');
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			foreach ($form1 as $n):
+				$datos = json_decode($n->form_respuesta);
+				$datos_encuesta = $datos->respuestas;
+				$datos_encuesta_array = (array)$datos_encuesta;
+				$sheet->setCellValue('A'.$eje_y, $n->idfvresp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $datos->area);
+				if(isset($datos->direccion)):
+					$sheet->setCellValue('D'.$eje_y, $datos->direccion);
+					$sheet->setCellValue('E'.$eje_y, $datos->grupo);
+				endif;
+				$sheet->setCellValue('F'.$eje_y, $n->nombre);
+				$sheet->setCellValue('G'.$eje_y, $n->username);
+				$literl_eje_y = 'H';
+				foreach ($preg1 as $p):
+					$respuesta = $datos_encuesta_array[$p->codigo_pregunta];
+					$sheet->setCellValue($literl_eje_y.$eje_y, $respuesta->respuesta);
+					$literl_eje_y++;
+				endforeach;
+				$eje_y++;
+			endforeach;
+
+			$sheet = $spreadsheet->getSheet(2)->setTitle('Form2');
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			foreach ($form2 as $n):
+				$datos = json_decode($n->form_respuesta);
+				$datos_encuesta = $datos->respuestas;
+				$datos_encuesta_array = (array)$datos_encuesta;
+				$sheet->setCellValue('A'.$eje_y, $n->idfvresp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $datos->area);
+				if(isset($datos->direccion)):
+					$sheet->setCellValue('D'.$eje_y, $datos->direccion);
+					$sheet->setCellValue('E'.$eje_y, $datos->grupo);
+				endif;
+				$sheet->setCellValue('F'.$eje_y, $n->nombre);
+				$sheet->setCellValue('G'.$eje_y, $n->username);
+				$literl_eje_y = 'H';
+				foreach ($preg2 as $p):
+					$respuesta = $datos_encuesta_array[$p->codigo_pregunta];
+					$sheet->setCellValue($literl_eje_y.$eje_y, $respuesta->respuesta);
+					$literl_eje_y++;
+				endforeach;
+				$eje_y++;
+			endforeach;
+
+			$sheet = $spreadsheet->getSheet(3)->setTitle('Form3');
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+			foreach ($form3 as $n):
+				$datos = json_decode($n->form_respuesta);
+				$datos_encuesta = $datos->respuestas;
+				$datos_encuesta_array = (array)$datos_encuesta;
+				$sheet->setCellValue('A'.$eje_y, $n->idfvresp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+				$sheet->setCellValue('C'.$eje_y, $datos->area);
+				if(isset($datos->direccion)):
+					$sheet->setCellValue('D'.$eje_y, $datos->direccion);
+					$sheet->setCellValue('E'.$eje_y, $datos->grupo);
+				endif;
+				$sheet->setCellValue('F'.$eje_y, $n->nombre);
+				$sheet->setCellValue('G'.$eje_y, $n->username);
+				$literl_eje_y = 'H';
+				foreach ($preg3 as $p):
+					$respuesta = $datos_encuesta_array[$p->codigo_pregunta];
+					$sheet->setCellValue($literl_eje_y.$eje_y, $respuesta->respuesta);
+					$literl_eje_y++;
+				endforeach;
+				$eje_y++;
+			endforeach;
+
+
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+		elseif ($tipo_formulario == 1):
+			//echo "formulario 1";
+			//var_dump($form_tipo);
+		elseif ($tipo_formulario == 2):
+			//echo "formulario 2";
+			//var_dump($form_tipo);
+		elseif ($tipo_formulario == 3):
+			//echo "formulario 3";
+			//var_dump($form_tipo);
+		else:
+
+		endif;
+
+
+		/*
+		if($numero_cis > 0){
+			$filename = "reporte-rjudicial.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-reportes-reforma.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('CIs');
+
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			foreach ($documentos_datos as $n):
+				$inf_extra = json_decode($n->datos_partida);
+				$sheet->setCellValue('A'.$eje_y, $n->idpartida);
+				$sheet->setCellValue('B'.$eje_y, $inf_extra->nombres.' '.$inf_extra->primer_apellido.' '.$inf_extra->segundo_apellido);
+				$sheet->setCellValue('C'.$eje_y, ' '.$inf_extra->apellido_esposo);
+				$sheet->setCellValue('D'.$eje_y, ' '.$n->numero_ci);
+				$sheet->setCellValue('E'.$eje_y, $inf_extra->fecha_nacimiento);
+				$sheet->setCellValue('F'.$eje_y, $inf_extra->libro);
+				$sheet->setCellValue('G'.$eje_y, $inf_extra->partida);
+				$sheet->setCellValue('H'.$eje_y, $n->username);
+				$eje_y++;
+			endforeach;
+
+
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+		}else{
+			//Si la consulta esta vacia no se genera reporte
+			$this->mensaje('No existen documentos de identidad registrados', 'info');
+			redirect('padron/reporteReformaJudicial');
+		}*/
+	}
+
+	//Reporte excel de libros
+	public function procesarConsultaLibros(){
+		$numero_libros = $this->Libro_model->contarLibros();
+		$libros = $this->Libro_model->leerLibrosRegistrado();
+
+		if($numero_libros>0){
+			$filename = "reporte-libros.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-reportes-libros.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('CIs');
+
+			$worksheet = $spreadsheet->getActiveSheet();
+			$eje_y = 6;
+
+			foreach ($libros as $n):
+				$inf_libro = json_decode($n->libro_informacion);
+				$sheet->setCellValue('A'.$eje_y, $n->idlibro);
+				$sheet->setCellValue('B'.$eje_y, $inf_libro->numero_libro);
+				$sheet->setCellValue('C'.$eje_y, $inf_libro->fecha_apertura);
+				$sheet->setCellValue('D'.$eje_y, $inf_libro->fecha_cierre);
+				$sheet->setCellValue('E'.$eje_y, $inf_libro->nombre_departamento);
+				$sheet->setCellValue('F'.$eje_y, $inf_libro->municipio);
+				$sheet->setCellValue('G'.$eje_y, $inf_libro->partidas_validas);
+				$sheet->setCellValue('H'.$eje_y, $inf_libro->partidas_nulas);
+				$sheet->setCellValue('I'.$eje_y, $inf_libro->partidas_blancas);
+				$sheet->setCellValue('J'.$eje_y, $inf_libro->observaciones);
+				$sheet->setCellValue('K'.$eje_y, $n->username);
+
+				$eje_y++;
+			endforeach;
 
 
 
+			//Primer libro por defecto
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+
+
+		}else{
+			//Si la consulta esta vacia no se genera reporte
+			$this->mensaje('No existen libros registrados', 'info');
+			redirect('padron/reporteReformaJudicial');
+		}
+
+	}
 
 }
