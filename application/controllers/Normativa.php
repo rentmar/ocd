@@ -421,6 +421,8 @@ class Normativa extends CI_Controller{
 		if($instancia->idinsseg == 1)
 		{
 			redirect('normativa/editarNormaAsambleaPlurinacional/'.$idnorma);
+		}elseif($instancia->idinsseg == 4){
+			redirect('normativa/editarNormaAsambleaPlurinacionalLp/'.$idnorma);
 		}
 		//Extraer la norma
 		$norma = $this->Norma_model->leerNormaPorId($idnorma);
@@ -556,6 +558,69 @@ class Normativa extends CI_Controller{
 	//Edicion de la Asamblea Plurinacional
 	public function editarNormaAsambleaPlurinacional($identificador)
 	{
+		echo "Editar Norma Asamblea Plurinacional";
+		//Extraer el usuario
+		$usuario = $this->ion_auth->user()->row();
+		//Identificador de la norma
+		$idnorma = $identificador;
+		//Identificar la instancia de la norma
+		$instancia = $this->Norma_model->instanciaNorma($idnorma);
+		//Extraer la norma por el identificador
+		$norma_plurinacional = $this->Norma_model->leerNormaPlurinacionalPorId($idnorma);
+		//Datos de la norma
+		$norma_plurinacional_datos = json_decode($norma_plurinacional->datos_adicionales);
+		//codigo
+		$codigo = $norma_plurinacional_datos->codigo;
+		$nombre_norma = $norma_plurinacional_datos->nombre;
+		$objeto_norma = $norma_plurinacional_datos->objeto;
+
+		$proponente = $norma_plurinacional_datos->proponente;
+
+
+
+
+		echo "<br><br>";
+		echo "Usuario: "."<br>";
+		var_dump($usuario);
+		echo "<br><br>";
+		echo "Norma: "."<br>";
+		var_dump($idnorma);
+		echo "<br><br>";
+		echo "Instancia: "."<br>";
+		var_dump($instancia);
+		echo "<br><br>";
+		echo "Norma: "."<br>";
+		var_dump($norma_plurinacional);
+		echo "<br><br>";
+		echo "Norma datos: "."<br>";
+		var_dump($norma_plurinacional_datos);
+		echo "<br><br>";
+		var_dump($codigo);
+		echo "<br><br>";
+		var_dump($proponente);
+
+
+
+
+		$datos['idformulario'] = $this->_idformulario;
+		$datos['usuario'] = $usuario;
+		$datos['instancia'] = $instancia;
+		$datos['codigo'] = $codigo;
+		$datos['nombre_norma'] = $nombre_norma;
+		$datos['objeto_norma'] = $objeto_norma;
+		$datos['proponente'] = $proponente;
+
+		$datos['remitente'] = $norma_plurinacional_datos->remitente;
+		$datos['destinatario'] = $norma_plurinacional_datos->destinatario;
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vnorma_plurinacional_edit', $datos);
+		$this->load->view('html/pie');
+
+
+		/*
 		$usuario = $this->ion_auth->user()->row();
 		$idnorma = $identificador;
 		//Identificar la instacia de la norma
@@ -573,9 +638,43 @@ class Normativa extends CI_Controller{
 		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
 		$tema = $this->Cuestionario_model->leerTema();
 
+		$datos['norma'] = $norma;
+		$datos['tema'] = $tema;
+		$datos['otro_proponente'] = $otro_proponente;
+		$datos['tema1'] = $tema1;
+		$datos['tema2'] = $tema2;
+		$datos['otro_tema1'] = $otro_tema1;
+		$datos['otro_tema2'] = $otro_tema2;
 
-		
 
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('cuestionarios/vnorma_asamblea_editar', $datos);
+		$this->load->view('html/pie');*/
+	}
+
+	public function editarNormaAsambleaPlurinacionalLp($identificador)
+	{
+		echo "Editar Norma Asamblea Plurinacional LP";
+		//Extraer el usuario actual
+		$usuario = $this->ion_auth->user()->row();
+
+		/*$usuario = $this->ion_auth->user()->row();
+		$idnorma = $identificador;
+		//Identificar la instacia de la norma
+		$instancia = $this->Norma_model->instanciaNorma($idnorma);
+
+		//Extraer la norma
+		$norma = $this->Norma_model->leerNormaPlurinacionalPorId($idnorma);
+		$otro_proponente = $this->Norma_model->leerNormaOtroPropID($idnorma);
+		$tema1 = $this->Norma_model->leerTemaNorma($idnorma, 1);
+		$tema2 = $this->Norma_model->leerTemaNorma($idnorma, 2);
+		$otro_tema1 = $this->Norma_model->otroTemaNorma($idnorma, 1);
+		$otro_tema2 = $this->Norma_model->otroTemaNorma($idnorma, 2);
+
+		//Temas del cuestionario
+		$this->Cuestionario_model->setCuestionarioID($this->_idformulario);
+		$tema = $this->Cuestionario_model->leerTema();
 
 		$datos['norma'] = $norma;
 		$datos['tema'] = $tema;
@@ -589,7 +688,7 @@ class Normativa extends CI_Controller{
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vnorma_asamblea_editar', $datos);
-		$this->load->view('html/pie');
+		$this->load->view('html/pie');*/
 	}
 
 

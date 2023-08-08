@@ -1530,6 +1530,7 @@ class ManejoDB extends CI_Controller{
 					}else{
 						$sheet->setCellValue('C'.$eje_y, 'Sin Fecha');
 					}
+					$sheet->setCellValue('A'.$eje_y, $n->idnormag);
 					$sheet->setCellValue('D'.$eje_y, $n->instancia);
 					$sheet->setCellValue('E'.$eje_y, $n->nombre_departamento);
 					$sheet->setCellValue('F'.$eje_y, $n->municipio_nombre.' - '.$n->departamento_municipio );
@@ -1537,32 +1538,56 @@ class ManejoDB extends CI_Controller{
 					$sheet->setCellValue('H'.$eje_y, $n->norma_codigo );
 					$sheet->setCellValue('I'.$eje_y, $n->norma_nombre );
 					$sheet->setCellValue('J'.$eje_y, $n->norma_objeto );
-					$tema1 = $this->Norma_model->leerTemaNorma($n->idnormag, 1);
-					if( $tema1 == false){
-						//Es otro tema 1
-						$otrotema1 = $this->Norma_model->otroTemaNorma($n->idnormag, 1);
-						if(isset($otrotema1)){
-							$sheet->setCellValue('K'.$eje_y, $otrotema1->descripcion_otrotema );
+					$datos =json_decode($n->datos_adicionales) ;
+					//Si la instancia de segumiento es 1 o 4
+					if($n->idinsseg == 1):
+						$tema1 = $datos->tema1;
+						$subtema1 = $datos->subtema1;
+						$tema2 = $datos->tema2;
+						$subtema2 = $datos->subtema2;
+						$sheet->setCellValue('K'.$eje_y, $tema1->tema );
+						$sheet->setCellValue('L'.$eje_y, $subtema1->subtema );
+						$sheet->setCellValue('M'.$eje_y, $tema2->tema );
+						$sheet->setCellValue('N'.$eje_y, $subtema2->subtema );
+
+					elseif ($n->idinsseg == 4):
+						$tema1 = $datos->tema1;
+						$subtema1 = $datos->subtema1;
+						$tema2 = $datos->tema2;
+						$subtema2 = $datos->subtema2;
+						$sheet->setCellValue('K'.$eje_y, $tema1->tema );
+						$sheet->setCellValue('L'.$eje_y, $subtema1->subtema );
+						$sheet->setCellValue('M'.$eje_y, $tema2->tema );
+						$sheet->setCellValue('N'.$eje_y, $subtema2->subtema );
+
+					else:
+						$tema1 = $this->Norma_model->leerTemaNorma($n->idnormag, 1);
+						if( $tema1 == false){
+							//Es otro tema 1
+							$otrotema1 = $this->Norma_model->otroTemaNorma($n->idnormag, 1);
+							if(isset($otrotema1)){
+								$sheet->setCellValue('K'.$eje_y, $otrotema1->descripcion_otrotema );
+							}
+
+						}else{
+							//Tema 1
+							$sheet->setCellValue('K'.$eje_y, $tema1->nombre_tema );
 						}
 
-					}else{
-						//Tema 1
-						$sheet->setCellValue('K'.$eje_y, $tema1->nombre_tema );
-					}
-
-					$tema2 = $this->Norma_model->leerTemaNorma($n->idnormag, 2);
-					if($tema2 == false){
-						//Es otro tema 2
-						$otrotema2 = $this->Norma_model->otroTemaNorma($n->idnormag, 2);
-						if(isset($otrotema2)){
-							$sheet->setCellValue('L'.$eje_y, $otrotema2->descripcion_otrotema);
+						$tema2 = $this->Norma_model->leerTemaNorma($n->idnormag, 2);
+						if($tema2 == false){
+							//Es otro tema 2
+							$otrotema2 = $this->Norma_model->otroTemaNorma($n->idnormag, 2);
+							if(isset($otrotema2)){
+								$sheet->setCellValue('M'.$eje_y, $otrotema2->descripcion_otrotema);
+							}
+						}else{
+							//Tema 2
+							$sheet->setCellValue('M'.$eje_y, $tema2->nombre_tema );
 						}
-					}else{
-						//Tema 2
-						$sheet->setCellValue('L'.$eje_y, $tema2->nombre_tema );
-					}
-					$sheet->setCellValue('M'.$eje_y, $n->norma_observaciones );
-					$sheet->setCellValue('N'.$eje_y, $n->username );
+					endif;
+					$sheet->setCellValue('O'.$eje_y, $n->norma_observaciones );
+					$sheet->setCellValue('P'.$eje_y, $n->username );
 					$eje_y++;
 				endforeach;
 			}

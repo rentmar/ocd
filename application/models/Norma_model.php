@@ -990,7 +990,7 @@ class Norma_model extends CI_Model
 		/** @noinspection PhpLanguageLevelInspection */
 		$placeholder = [];
 
-		$sql = "SELECT ng.idnormag, ng.fecha_registro, ng.fecha_norma, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, mundep.nombre_departamento AS departamento_municipio, ng.estado_norma, ng.norma_codigo, ng.norma_nombre, ng.norma_objeto, ng.norma_observaciones, users.username     "
+		$sql = "SELECT ng.idnormag, ng.fecha_registro, ng.fecha_norma, instancia_seguimiento.instancia, departamento.nombre_departamento, municipio.municipio_nombre, mundep.nombre_departamento AS departamento_municipio, ng.estado_norma, ng.norma_codigo, ng.norma_nombre, ng.norma_objeto, ng.norma_observaciones, ng.datos_adicionales, users.username, instancia_seguimiento.idinsseg     "
 			."FROM norma_general as ng  "
 			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = ng.rel_idinsseg  "
 			."LEFT JOIN norma_plurinacional ON norma_plurinacional.idnormg = ng.idnormag  "

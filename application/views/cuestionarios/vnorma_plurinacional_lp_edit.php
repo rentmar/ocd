@@ -70,9 +70,9 @@
 						<select id="tema1" name="tema1" class="simple" style="width: 100%" >
 							<option value="n" selected >Sin seleccion</option>
 							<?php if(isset($tema)):?>
-							<?php foreach ($tema as $a): ?>
-								<option value="<?php echo $a['idtema']; ?>"><?php echo $a['nombre_tema']; ?></option>
-							<?php endforeach; ?>
+								<?php foreach ($tema as $a): ?>
+									<option value="<?php echo $a['idtema']; ?>"><?php echo $a['nombre_tema']; ?></option>
+								<?php endforeach; ?>
 							<?php endif;?>
 							<option value="0">Otro</option>
 						</select>
