@@ -1526,7 +1526,13 @@ class ManejoDB extends CI_Controller{
 					$sheet->setCellValue('A'.$eje_y, $n->idnormag);
 					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
 					if($n->fecha_norma != 0){
-						$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_norma));
+						if($n->idinsseg == 1):
+							$sheet->setCellValue('C'.$eje_y, $n->fecha_norma_lit);
+						elseif ($n->idinsseg == 4):
+							$sheet->setCellValue('C'.$eje_y, $n->fecha_norma_lit);
+						else:
+							$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_norma));
+						endif;
 					}else{
 						$sheet->setCellValue('C'.$eje_y, 'Sin Fecha');
 					}
