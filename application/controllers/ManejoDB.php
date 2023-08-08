@@ -1597,6 +1597,100 @@ class ManejoDB extends CI_Controller{
 					$eje_y++;
 				endforeach;
 			}
+			elseif ($consulta->idinstancia == 4){
+				$plantilla = $ruta.'plantilla-reportes-normativa-lp.xlsx';
+				header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+				header('Content-Disposition: attachment; filename="' . $filename. '"');
+				header('Cache-Control: max-age=0');
+				$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+				$sheet = $spreadsheet->getSheet(0)->setTitle('Normativas');
+				$sheet->setCellValue('D3', 'INSTANCIA:');
+				$eje_y = 6;
+				$normas = $this->Norma_model->reporteNormaPlurinacionalLP($consulta);
+				foreach ($normas as $n):
+					$sheet->setCellValue('A'.$eje_y, $n->idnormag);
+					$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_registro));
+					$sheet->setCellValue('C'.$eje_y, $n->fecha_norma_lit);
+					/*if($n->fecha_norma != 0){
+						if($n->idinsseg == 1):
+							$sheet->setCellValue('C'.$eje_y, $n->fecha_norma_lit);
+						elseif ($n->idinsseg == 4):
+							$sheet->setCellValue('C'.$eje_y, $n->fecha_norma_lit);
+						else:
+							$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_norma));
+						endif;
+					}else{
+						$sheet->setCellValue('C'.$eje_y, 'Sin Fecha');
+					}*/
+					//$sheet->setCellValue('A'.$eje_y, $n->idnormag);
+					$sheet->setCellValue('D'.$eje_y, $n->instancia);
+					//$sheet->setCellValue('E'.$eje_y, $n->estado_norma);
+					$sheet->setCellValue('E'.$eje_y, $n->norma_codigo );
+					$sheet->setCellValue('F'.$eje_y, $n->norma_nombre );
+					//$sheet->setCellValue('G'.$eje_y, $n->norma_objeto );
+					$datos =json_decode($n->datos_adicionales) ;
+					//Si la instancia de segumiento es 1 o 4
+					if($n->idinsseg == 1):
+						$tema1 = $datos->tema1;
+						$subtema1 = $datos->subtema1;
+						$tema2 = $datos->tema2;
+						$subtema2 = $datos->subtema2;
+						$sheet->setCellValue('K'.$eje_y, $tema1->tema );
+						$sheet->setCellValue('L'.$eje_y, $subtema1->subtema );
+						$sheet->setCellValue('M'.$eje_y, $tema2->tema );
+						$sheet->setCellValue('N'.$eje_y, $subtema2->subtema );
+
+					elseif ($n->idinsseg == 4):
+						$tema1 = $datos->tema1;
+						$subtema1 = $datos->subtema1;
+						$tema2 = $datos->tema2;
+						$subtema2 = $datos->subtema2;
+						$codigo_proyecto_ley = $datos->codigo_proy_ley;
+						$sheet->setCellValue('G'.$eje_y, $tema1->tema );
+						$sheet->setCellValue('H'.$eje_y, $subtema1->subtema );
+						$sheet->setCellValue('I'.$eje_y, $tema2->tema );
+						$sheet->setCellValue('J'.$eje_y, $subtema2->subtema );
+						$sheet->setCellValue('K'.$eje_y, $codigo_proyecto_ley );
+						$sheet->setCellValue('L'.$eje_y, $datos->comentarios );
+						$sheet->setCellValue('M'.$eje_y, $datos->observaciones );
+						$sheet->setCellValue('N'.$eje_y, $datos->enlace );
+						$sheet->setCellValue('O'.$eje_y, $datos->obs_metodologicas );
+
+
+
+
+					else:
+						$tema1 = $this->Norma_model->leerTemaNorma($n->idnormag, 1);
+						if( $tema1 == false){
+							//Es otro tema 1
+							$otrotema1 = $this->Norma_model->otroTemaNorma($n->idnormag, 1);
+							if(isset($otrotema1)){
+								$sheet->setCellValue('K'.$eje_y, $otrotema1->descripcion_otrotema );
+							}
+
+						}else{
+							//Tema 1
+							$sheet->setCellValue('K'.$eje_y, $tema1->nombre_tema );
+						}
+
+						$tema2 = $this->Norma_model->leerTemaNorma($n->idnormag, 2);
+						if($tema2 == false){
+							//Es otro tema 2
+							$otrotema2 = $this->Norma_model->otroTemaNorma($n->idnormag, 2);
+							if(isset($otrotema2)){
+								$sheet->setCellValue('M'.$eje_y, $otrotema2->descripcion_otrotema);
+							}
+						}else{
+							//Tema 2
+							$sheet->setCellValue('M'.$eje_y, $tema2->nombre_tema );
+						}
+					endif;
+					$sheet->setCellValue('O'.$eje_y, $n->norma_observaciones );
+					$sheet->setCellValue('P'.$eje_y, $n->username );
+					$eje_y++;
+				endforeach;
+
+			}
 			//Primer libro por defecto
 			$sheet = $spreadsheet->setActiveSheetIndex(0);
 

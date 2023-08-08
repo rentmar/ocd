@@ -1168,6 +1168,45 @@ class Norma_model extends CI_Model
 		return $qry->result();
 	}
 
+	//Reporte Norma Plurinacional
+	public function reporteNormaPlurinacionalLP($parametros){
+		$consulta = $parametros;
+		//Array de placeholders
+		/** @noinspection PhpLanguageLevelInspection */
+		$placeholder = [];
+
+		$sql = "SELECT *   "
+			."FROM norma_general AS ng  "
+			."LEFT JOIN instancia_seguimiento ON instancia_seguimiento.idinsseg = ng.rel_idinsseg  "
+			."LEFT JOIN norma_plurinacional_lp ON norma_plurinacional_lp.idnormg = ng.idnormag  "
+			."  "
+			."  "
+			."   "
+			."   "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."  "
+			."LEFT JOIN users ON users.id = ng.rel_id  "
+			."WHERE ng.activo = 1 AND (ng.fecha_registro BETWEEN ? AND ?)  "
+			."AND instancia_seguimiento.idinsseg = 4   ";
+
+		/** @noinspection PhpLanguageLevelInspection */
+
+		//Añadir el intervalo de fechas al placeholder
+		array_push($placeholder, $consulta->fecha_inicio);
+		array_push($placeholder, $consulta->fecha_fin);
+
+
+		$sql .= 'ORDER BY ng.fecha_registro ASC   ';
+		$qry = $this->db->query($sql, $placeholder);
+		return $qry->result();
+	}
+
 
 
 
