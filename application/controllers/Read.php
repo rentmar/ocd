@@ -95,6 +95,7 @@ class Read extends CI_Controller
 		$datos['respuestas'] = $respuestas;
 		$datos['orden_mod_min'] = $orden_modulos_min;
 		$datos['orden_mod_max'] = $orden_modulos_max;
+		$datos['idencuesta'] = $iduiencuesta;
 
 		//Datos del formulario
 		$datos['sel_modulos'] = $sel_modulos;
@@ -124,7 +125,7 @@ class Read extends CI_Controller
 		$seccion_actual = new stdClass();
 		$info_general = $this->datoGenerales();
 		$idencuesta = $info_general->iduiencuesta;
-		if($idencuesta != 1){
+		if($idencuesta == 2){
 			$cont_secciones = new stdClass();
 			/*var_dump($info_general);
 			echo "<br>";
@@ -204,7 +205,88 @@ class Read extends CI_Controller
 				$this->failure();
 			}
 
-		}else{
+		}
+		elseif ($idencuesta == 3){
+			$cont_secciones = new stdClass();
+			/*var_dump($info_general);
+			echo "<br>";
+			echo "<br>";
+			echo "Encuesta identificador;"."<br>";
+			echo $idencuesta;
+			echo "<br>";
+			echo "<br>";*/
+			//Extraer los modulos de la encuesta.
+			$modulos = $this->Encuesta_model->leerModulosEncuesta($idencuesta);
+			foreach ($modulos as $m):
+				$secciones_modulo = $this->Encuesta_model->leerSeccionesModulo($m->iduimodulo);
+				$i = 0;
+				foreach ($secciones_modulo as $sec){
+//				echo "IDseccion: ".$sec->iduiseccion." Etiqueta_seccion: ".$sec->etiqueta_seccion." ";
+//				echo "<br>";
+					//Extraer las preguntas de una seccion
+					$pregunta = $this->Encuesta_model->leerPreguntaSeccion($sec->iduiseccion);
+					if(isset($pregunta)){
+						//var_dump($pregunta);
+//					echo "IDpregunta: ".$pregunta->iduipregunta." Pregunta: ".$pregunta->uipregunta_nombre." IDtipopregunta: ".$pregunta->iduitipopregunta." Tipo pregunta: ".$pregunta->nombre_tipopregunta;
+//					echo "<br>";
+
+						if($pregunta->iduitipopregunta == 1):
+//						echo "Respuesta Simple - Radio button<br>";
+							$respuesta = $this->respuestaTipo1($pregunta->iduipregunta);
+//						echo "Respuesta:  ";
+							$respuesta_tmp = $respuesta;
+//						var_dump($respuesta_tmp);
+
+						elseif ($pregunta->iduitipopregunta == 2):
+//						echo "Respuesta Multiple - checkbox<br>";
+						elseif ($pregunta->iduitipopregunta == 3):
+//						echo "Pregunta Abierta simple - input<br>";
+							$respuesta_tmp = $this->respuestaTipo3($pregunta->iduipregunta);
+//						echo "Respuesta: ";
+						//var_dump($respuesta_tmp);
+						elseif ($pregunta->iduitipopregunta == 4):
+							//echo "Seleccion multiple, resp abierta - checkbox input<br>";
+							$respuesta_tmp = $this->respuestaTipo4($pregunta->iduipregunta);
+						//echo "Respuesta: ";
+						//var_dump($respuesta_tmp);
+						elseif ($pregunta->iduitipopregunta == 5):
+							//echo "Seleccion multiple cuantificada - checkbox input<br>";
+							$respuesta_tmp = $this->respuestaTipo5($pregunta->iduipregunta);
+							//echo "Respuesta: ";
+							//var_dump($respuesta_tmp);
+						endif;
+						//echo "<br>";
+						//echo "<br>";
+						//echo "Seccion actual: ";
+						$seccion_actual = $this->objetoSeccion($sec->iduiseccion, $sec->etiqueta_seccion, $pregunta->iduipregunta, $pregunta->uipregunta_nombre, $pregunta->iduitipopregunta, $pregunta->nombre_tipopregunta, $respuesta_tmp, $m->iduimodulo, $m->uinombre_modulo);
+						//var_dump($seccion_actual);
+						$formulario->{$i} = $seccion_actual;
+						$i++;
+						//echo "<br>";
+					}
+
+				}
+			endforeach;
+
+			//echo "<br>";
+			//echo "<br>";
+			//echo "OBJETO:<br>";
+			//var_dump($formulario);
+			$info_general->fecha = now('America/La_Paz');
+			//echo "<br>";
+			//echo "<br>";
+			//var_dump($info_general);
+			if($this->Readurl_model->guardarDatosEncuesta($info_general, $formulario))
+			{
+				//Informacion guardada con exito
+				$this->success();
+
+			}else{
+				//Informacion no guardada
+				$this->failure();
+			}
+		}
+		else{
 			//Rutinas anteriores para la captura de datos
 			$info_general = $this->datos();
 			//Extraer las preguntas de una encuesta
@@ -314,6 +396,7 @@ class Read extends CI_Controller
 		$datos->zona = $this->input->post('zona');
 		$tiempo_calculado = ($fecha->getTimestamp()-$this->input->post('tiempoinicio'))/60;
 		$datos->tiempo = round($tiempo_calculado, 0, PHP_ROUND_HALF_UP);
+		$datos->otra_ocupacion = $this->input->post('sit_laboral_otro');
 		return $datos;
 	}
 
@@ -349,6 +432,8 @@ class Read extends CI_Controller
 		$datos->tiempo = round($tiempo_calculado, 0, PHP_ROUND_HALF_UP);
 		$datos->situacion_laboral = $this->input->post('sit_laboral');
 		$datos->situacion_educativa = $this->input->post('sit_educativa');
+		$datos->otra_ocupacion = $this->input->post('sit_laboral_otro');
+
 		return $datos;
 	}
 

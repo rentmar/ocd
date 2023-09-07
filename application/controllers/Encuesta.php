@@ -405,6 +405,23 @@ class Encuesta extends CI_Controller
 		$respuestas = $this->Encuesta_model->leerRespuestasDeUnaEncuesta($iduiencuesta);
 
 
+		/*echo "secciones:";
+		echo "<br>";
+		var_dump($secciones);
+		echo "<br><br>";
+
+		echo "preguntas:";
+		echo "<br>";
+		var_dump($secciones);
+		echo "<br><br>";
+
+		echo "respuestas:";
+		echo "<br>";
+		var_dump($respuestas);
+		echo "<br><br>";*/
+
+
+
 		//Subvista para la Seleccion de modulos
 		$datos_modulo['modulos'] = $modulos;
 		$datos_modulo['orden_mod_min'] = $orden_modulos_min;
@@ -429,6 +446,7 @@ class Encuesta extends CI_Controller
 		$datos['sel_modulos'] = $sel_modulos;
 		$datos['cont_modulo'] = $cont_modulos;
 		$datos['no_es_vista_previa'] = false;
+		$datos['idencuesta'] = $iduiencuesta;
 
 		$this->load->view('encuesta/vencuesta_plantilla', $datos);
 

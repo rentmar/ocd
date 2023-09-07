@@ -33,11 +33,19 @@
 			<?php echo form_open('read/capturar', $form_enc); ?>
 
 			<h3>Informacion General</h3>
+			<?php if($idencuesta == 3): ?>
+			<div class="form-group">
+				<label for="ciudad">Ciudad</label>
+				<input type="text" name="ciudad" class="form-control" id="ciudad" required >
+			</div>
+			<?php endif; ?>
 			<div class="form-group">
 				<label for="edad">Edad:</label>
 				<input type="number" name="edad" class="form-control" id="edad" min="0" max="100" required>
 			</div>
+
 			<div><hr></div>
+
 			<div class="form-check-inline">
 				<label class="form-check-label">
 					<input checked id="sexo" name="sexo" type="radio" class="form-check-input" value="F">
@@ -50,9 +58,13 @@
 					Masculino
 				</label>
 			</div>
+
 			<div>
 				<hr>
 			</div>
+			<br>
+
+			<?php if($idencuesta != 3):?>
 			<div class="form-check-inline">
 				<label class="form-check-label">
 					<input checked id="area" name="area" type="radio" class="form-check-input" value="urbana">
@@ -152,6 +164,148 @@
 			<div>
 				<hr>
 			</div>
+			<?php endif; ?>
+
+			<?php if($idencuesta == 3): ?>
+			<div class="form-group">
+				<label for="sit_educativa">¿Cuál fue el último NIVEL EDUCATIVO que aprobó?</label>
+			</div>
+
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input checked id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="ninguno">
+					Ninguno
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="primaria">
+					Primaria
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="secundaria">
+					Secundaria
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="bachiller">
+					Bachiller
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="tecnico">
+					Técnico
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="universitario">
+					Universitario
+				</label>
+			</div>
+			<div class="form-check-inline">
+				<label class="form-check-label">
+					<input id="sit_educativa" name="sit_educativa" type="radio" class="form-check-input" value="profesional">
+					Profesional
+				</label>
+			</div>
+			<div>
+				<hr>
+			</div>
+
+				<div class="form-group">
+					<label for="sit_laboral">¿Qué OCUPACIÓN tiene?</label>
+				</div>
+
+				<div class="form-check">
+					<label class="form-check-label">
+						<input checked id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="ama_de_casa">
+						Ama de Casa
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="estudiante">
+						Estudiante
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="jubilado">
+						Jubilado
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="desocupado">
+						Desocupado
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="empleado_privado">
+						Empleado Privado
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="empleado_publico">
+						Empleado Público
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="profesional_independiente">
+						Profesional Independiente
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="obrero">
+						Obrero
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="artesano">
+						Artesano
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="comerciante">
+						Comerciante
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="agricultor">
+						Agricultor
+					</label>
+				</div>
+				<div class="form-check">
+					<label class="form-check-label">
+						<input id="sit_laboral" name="sit_laboral" type="radio" class="form-check-input" value="otro">
+						Otro
+					</label>
+				</div>
+				<div class="form-group">
+					<input id="sit_laboral_otro" name="sit_laboral_otro" type="text" class="form-control" placeholder="Escriba otro">
+				</div>
+				<div>
+					<hr>
+				</div>
+
+
+			<?php endif; ?>
+
+
+
+
 
 			<!-- Seleccion de Modulos -->
 			<?php echo $sel_modulos; ?>
