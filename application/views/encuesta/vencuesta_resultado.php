@@ -16,6 +16,11 @@
 							</a>
 						</div>
 						<div id="contenedor-submit">
+							<a href="<?php echo site_url('encuesta/exportarExcelDepartamentos');?>">
+								<input type="" class="BOTON" value="Excel/Dep" style="padding: 12px;" >
+							</a>
+						</div>
+						<div id="contenedor-submit">
 							<a href="<?php echo site_url('encuesta/encuestaInicio');?>">
 								<input type="" class="BOTONROJO" value="CANCELAR" >
 							</a>

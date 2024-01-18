@@ -1082,6 +1082,42 @@ class  Encuesta_model extends CI_Model
 		return $qry->result();
 	}
 
+	public function leerLasEncuestasCompletadasDepartamento($consulta){
+		$idencuesta = $consulta->iduiencuesta;
+		$sql = "SELECT *   "
+			."FROM formulariocompletado  "
+			."LEFT JOIN formulariocomp_json ON formulariocompletado.idformcomp = formulariocomp_json.rel_idform   "
+			."LEFT JOIN users ON formulariocompletado.rel_idusuario = users.id  "
+			."WHERE formulariocompletado.rel_iduiencuesta = ?    "
+			."AND formulariocompletado.es_valida = 1  "
+			."   "
+			."  "
+			."  "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idencuesta,]);
+		return $qry->result();
+	}
+
+	public function contarEncuestasPorCiudad($consulta){
+		$idencuesta = $consulta->iduiencuesta;
+		$sql = "SELECT formulariocompletado.idformcomp, formulariocompletado.ciudad, COUNT(*) AS numero    "
+			."FROM formulariocompletado  "
+			."WHERE formulariocompletado.es_valida = 1   "
+			."AND formulariocompletado.rel_iduiencuesta = ?  "
+			."GROUP by formulariocompletado.ciudad    "
+			."  "
+			."   "
+			."  "
+			."  "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$idencuesta,]);
+		return $qry->result();
+	}
+
 	public function leerSeccionesPreguntasModulo($identificador)
 	{
 		$idmodulo = $identificador;

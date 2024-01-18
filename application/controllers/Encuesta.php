@@ -846,8 +846,13 @@ class Encuesta extends CI_Controller
 				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
 				$sheet->setCellValue('G'.$eje_y, $n->edad);
 				$sheet->setCellValue('H'.$eje_y, $n->sexo);
-				$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
-				$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				if($consulta->iduiencuesta == 3):
+					$sheet->setCellValue('I'.$eje_y, $n->sit_lab);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_edu);
+				else:
+					$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				endif;
 				$sheet->setCellValue('K'.$eje_y, $n->area);
 				$sheet->setCellValue('L'.$eje_y, $n->ciudad);
 				$sheet->setCellValue('M'.$eje_y, $n->zona);
@@ -895,8 +900,13 @@ class Encuesta extends CI_Controller
 				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
 				$sheet->setCellValue('G'.$eje_y, $n->edad);
 				$sheet->setCellValue('H'.$eje_y, $n->sexo);
-				$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
-				$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				if($consulta->iduiencuesta == 3):
+					$sheet->setCellValue('I'.$eje_y, $n->sit_lab);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_edu);
+				else:
+					$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				endif;
 				$sheet->setCellValue('K'.$eje_y, $n->area);
 				$sheet->setCellValue('L'.$eje_y, $n->ciudad);
 				$sheet->setCellValue('M'.$eje_y, $n->zona);
@@ -1222,8 +1232,13 @@ class Encuesta extends CI_Controller
 				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
 				$sheet->setCellValue('G'.$eje_y, $n->edad);
 				$sheet->setCellValue('H'.$eje_y, $n->sexo);
-				$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
-				$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				if($consulta->iduiencuesta == 3):
+					$sheet->setCellValue('I'.$eje_y, $n->sit_lab);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_edu);
+				else:
+					$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				endif;
 				$sheet->setCellValue('K'.$eje_y, $n->area);
 				$sheet->setCellValue('L'.$eje_y, $n->ciudad);
 				$sheet->setCellValue('M'.$eje_y, $n->zona);
@@ -1271,8 +1286,13 @@ class Encuesta extends CI_Controller
 				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
 				$sheet->setCellValue('G'.$eje_y, $n->edad);
 				$sheet->setCellValue('H'.$eje_y, $n->sexo);
-				$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
-				$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				if($consulta->iduiencuesta == 3):
+					$sheet->setCellValue('I'.$eje_y, $n->sit_lab);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_edu);
+				else:
+					$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				endif;
 				$sheet->setCellValue('K'.$eje_y, $n->area);
 				$sheet->setCellValue('L'.$eje_y, $n->ciudad);
 				$sheet->setCellValue('M'.$eje_y, $n->zona);
@@ -1394,6 +1414,197 @@ class Encuesta extends CI_Controller
 
 	}
 
+	public function exportarExcelDepartamentos()
+	{
+		if(!isset($this->session->consulta_encuesta)){
+			redirect('encuesta/reportesEncuesta');
+		}
+		$consulta = $this->session->consulta_encuesta;
+		$nombre_encuesta = $this->Encuesta_model->leerEncuestaPorID($consulta->iduiencuesta);
+		$edad_inicial =  $consulta->edad_inicial;
+		$edad_final = $consulta->edad_final;
+		if((int)$consulta->sexo==0)
+		{
+			$sexo = 0;
+		}elseif((int)$consulta->sexo==1)
+		{
+			$sexo = 'Masculino';
+		}elseif ((int)$consulta->sexo==2)
+		{
+			$sexo = 'Femenino';
+		}
+
+		if((int)$consulta->area==0)
+		{
+			$area = 0;
+		}elseif((int)$consulta->area==1)
+		{
+			$area = 'Urbana';
+		}elseif ((int)$consulta->area==2)
+		{
+			$area = 'Rural';
+		}
+
+
+		$encuestas_resultados = $this->Encuesta_model->leerLasEncuestasCompletadas($consulta);
+		$secciones = $this->Encuesta_model->leerPreguntasDeUnaEncuesta($consulta->iduiencuesta);
+		$contador = $this->Encuesta_model->contarEncuestasPorCiudad($consulta);
+
+		if(!empty($consulta)){
+			$filename = "reporte-encuestas-dep.xlsx";
+			$ruta = 'assets/info/';
+			$plantilla = $ruta.'plantilla-encuesta-json.xlsx';
+			header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+			header('Content-Disposition: attachment; filename="' . $filename. '"');
+			header('Cache-Control: max-age=0');
+			$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+			$sheet = $spreadsheet->getSheet(0)->setTitle('Encuestas');
+			$worksheet = $spreadsheet->getActiveSheet();
+
+			$eje_y = 13;
+			foreach ($encuestas_resultados as $n)
+			{
+				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
+				$sheet->setCellValue('D'.$eje_y, $n->username);
+				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
+				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
+				$sheet->setCellValue('G'.$eje_y, $n->edad);
+				$sheet->setCellValue('H'.$eje_y, $n->sexo);
+				if($consulta->iduiencuesta == 3):
+					$sheet->setCellValue('I'.$eje_y, $n->sit_lab);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_edu);
+				else:
+					$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				endif;
+				$sheet->setCellValue('K'.$eje_y, $n->area);
+				$sheet->setCellValue('L'.$eje_y, $n->ciudad);
+				$sheet->setCellValue('M'.$eje_y, $n->zona);
+				$sheet->setCellValue('N'.$eje_y, $n->tiempo);
+				$eje_y++;
+			}
+
+			$sheet = $spreadsheet->getSheet(1)->setTitle('Respuestas');
+			$worksheet = $spreadsheet->getActiveSheet();
+			$sheet->setCellValue('E3', $nombre_encuesta->uinombre_encuesta." - CODIFICADO");
+			if($edad_inicial!=0 && $edad_final !=0){
+				$sheet->setCellValue('C5', $consulta->edad_inicial);
+				$sheet->setCellValue('D5', $consulta->edad_final);
+			}
+			if($consulta->sexo) {
+				$sheet->setCellValue('C6', $sexo);
+			}
+			if($consulta->area){
+				$sheet->setCellValue('C7', $area);
+			}
+
+			//Imprimir Preguntas
+			//Preguntas
+			$eje_X = 'O';
+			$eje_y = 12;
+			foreach ($secciones as $s):
+				if($s->iduiseccion != 59):
+					$eje_auxiliar = $eje_y+1;
+					$sheet->setCellValue($eje_X.$eje_y, $s->etiqueta_seccion);
+					$sheet->setCellValue($eje_X.$eje_auxiliar, $s->uipregunta_nombre);
+					$eje_X++;
+				endif;
+			endforeach;
+			$eje_x_offset = $eje_X;
+
+			$eje_y = 14;
+			$eje_X = 'O';
+			foreach ($encuestas_resultados as $n)
+			{
+				$sheet->setCellValue('A'.$eje_y, $n->idformcomp);
+				$sheet->setCellValue('B'.$eje_y, mdate('%m-%d-%Y', $n->fecha_fc));
+				$sheet->setCellValue('C'.$eje_y, $n->hash_fc);
+				$sheet->setCellValue('D'.$eje_y, $n->username);
+				$sheet->setCellValue('E'.$eje_y, number_format($n->latidud_fc,3, ",",""));
+				$sheet->setCellValue('F'.$eje_y, number_format($n->longitud_fc, 3, ",", ""));
+				$sheet->setCellValue('G'.$eje_y, $n->edad);
+				$sheet->setCellValue('H'.$eje_y, $n->sexo);
+				if($consulta->iduiencuesta == 3):
+					$sheet->setCellValue('I'.$eje_y, $n->sit_lab);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_edu);
+				else:
+					$sheet->setCellValue('I'.$eje_y, $n->sit_laboral);
+					$sheet->setCellValue('J'.$eje_y, $n->sit_educativa);
+				endif;
+				$sheet->setCellValue('K'.$eje_y, $n->area);
+				$sheet->setCellValue('L'.$eje_y, $n->ciudad);
+				$sheet->setCellValue('M'.$eje_y, $n->zona);
+				$sheet->setCellValue('N'.$eje_y, $n->tiempo);
+				$eje_X = 'O';
+				$registro = json_decode($n->formcj) ;
+				if(isset($registro)):
+					foreach ($registro as $r){
+						if($r->idtipopregunta==1){
+							$respuesta = $r->respuestas;
+							$sheet->setCellValue($eje_X.$eje_y, $respuesta->codigo);
+							$eje_X++;
+						}
+						elseif ($r->idtipopregunta==2){
+							$sheet->setCellValue($eje_X.$eje_y, $r->tipopregunta);
+							$eje_X++;
+
+						}
+						elseif ($r->idtipopregunta==3){
+							//Pregunta abierta simple
+							$respuesta = $r->respuestas;
+							$sheet->setCellValue($eje_X.$eje_y, $respuesta->codigo);
+							$eje_X++;
+						}
+						elseif ($r->idtipopregunta==4){
+							//Seleccion multiple, mas una respuesta abierta (otro)
+							$respuesta = $r->respuestas;
+							$literal_respuesta = ' ';
+							$rptmp = '';
+							foreach ($respuesta as $rp){
+								if(!$rp->es_otro){
+									$rptmp = $rp->codigo;
+								}else{
+									$rptmp = $rp->codigo."(".$rp->otro_txt.")";
+								}
+								$literal_respuesta .= $rptmp."/";
+							}
+							$sheet->setCellValue($eje_X.$eje_y, $literal_respuesta);
+							$eje_X++;
+						}elseif ($r->idtipopregunta==5){
+							//Seleccion multiple cuantificada
+							$eje_x_des = $eje_x_offset;
+							//Seleccion multiple cuantificada
+							$respuesta = $r->respuestas;
+							$literal_respuesta = ' ';
+							$rptmp = '';
+							foreach ($respuesta as $rp){
+								if($rp->idopcion != 8):
+									$sheet->setCellValue($eje_x_des.$eje_y, $rp->codigo);
+									$eje_x_des++;
+								endif;
+							}
+
+						}elseif ($r->idtipopregunta==6){
+							$sheet->setCellValue($eje_X.$eje_y, $r->tipopregunta);
+							$eje_X++;
+						}
+					}
+				endif;
+				$eje_y++;
+
+			}
+
+			$sheet = $spreadsheet->setActiveSheetIndex(0);
+			$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$writer->save("php://output");
+		}else{
+			$this->mensaje('Generar otro reporte', 'info');
+			redirect('encuesta/reportesEncuesta');
+		}
+	}
+
 	public function pruebasReportes(){
 		$encuesta = $this->Encuesta_model->leerUnaEncuestaPorID();
 
@@ -1473,6 +1684,8 @@ class Encuesta extends CI_Controller
 		header('Content-Type: application/json');
 		echo json_encode($json);
 	}
+
+
 
 
 }

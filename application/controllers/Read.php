@@ -208,46 +208,26 @@ class Read extends CI_Controller
 		}
 		elseif ($idencuesta == 3){
 			$cont_secciones = new stdClass();
-			/*var_dump($info_general);
-			echo "<br>";
-			echo "<br>";
-			echo "Encuesta identificador;"."<br>";
-			echo $idencuesta;
-			echo "<br>";
-			echo "<br>";*/
+
 			//Extraer los modulos de la encuesta.
 			$modulos = $this->Encuesta_model->leerModulosEncuesta($idencuesta);
+			$i=0;
 			foreach ($modulos as $m):
+				//echo $m->iduimodulo."  ";
+				//echo $m->uinombre_modulo;
+				//echo "<br><br>";
 				$secciones_modulo = $this->Encuesta_model->leerSeccionesModulo($m->iduimodulo);
-				$i = 0;
-				foreach ($secciones_modulo as $sec){
-//				echo "IDseccion: ".$sec->iduiseccion." Etiqueta_seccion: ".$sec->etiqueta_seccion." ";
-//				echo "<br>";
-					//Extraer las preguntas de una seccion
+				foreach ($secciones_modulo as $sec):
 					$pregunta = $this->Encuesta_model->leerPreguntaSeccion($sec->iduiseccion);
-					if(isset($pregunta)){
-						//var_dump($pregunta);
-//					echo "IDpregunta: ".$pregunta->iduipregunta." Pregunta: ".$pregunta->uipregunta_nombre." IDtipopregunta: ".$pregunta->iduitipopregunta." Tipo pregunta: ".$pregunta->nombre_tipopregunta;
-//					echo "<br>";
-
+					if(isset($pregunta)):
 						if($pregunta->iduitipopregunta == 1):
-//						echo "Respuesta Simple - Radio button<br>";
 							$respuesta = $this->respuestaTipo1($pregunta->iduipregunta);
-//						echo "Respuesta:  ";
 							$respuesta_tmp = $respuesta;
-//						var_dump($respuesta_tmp);
-
 						elseif ($pregunta->iduitipopregunta == 2):
-//						echo "Respuesta Multiple - checkbox<br>";
 						elseif ($pregunta->iduitipopregunta == 3):
-//						echo "Pregunta Abierta simple - input<br>";
 							$respuesta_tmp = $this->respuestaTipo3($pregunta->iduipregunta);
-//						echo "Respuesta: ";
-						//var_dump($respuesta_tmp);
 						elseif ($pregunta->iduitipopregunta == 4):
-							//echo "Seleccion multiple, resp abierta - checkbox input<br>";
 							$respuesta_tmp = $this->respuestaTipo4($pregunta->iduipregunta);
-						//echo "Respuesta: ";
 						//var_dump($respuesta_tmp);
 						elseif ($pregunta->iduitipopregunta == 5):
 							//echo "Seleccion multiple cuantificada - checkbox input<br>";
@@ -255,28 +235,35 @@ class Read extends CI_Controller
 							//echo "Respuesta: ";
 							//var_dump($respuesta_tmp);
 						endif;
-						//echo "<br>";
-						//echo "<br>";
-						//echo "Seccion actual: ";
 						$seccion_actual = $this->objetoSeccion($sec->iduiseccion, $sec->etiqueta_seccion, $pregunta->iduipregunta, $pregunta->uipregunta_nombre, $pregunta->iduitipopregunta, $pregunta->nombre_tipopregunta, $respuesta_tmp, $m->iduimodulo, $m->uinombre_modulo);
 						//var_dump($seccion_actual);
 						$formulario->{$i} = $seccion_actual;
 						$i++;
-						//echo "<br>";
-					}
+					endif;
+				endforeach;
 
-				}
 			endforeach;
 
-			//echo "<br>";
-			//echo "<br>";
-			//echo "OBJETO:<br>";
-			//var_dump($formulario);
+
 			$info_general->fecha = now('America/La_Paz');
-			//echo "<br>";
-			//echo "<br>";
 			//var_dump($info_general);
-			if($this->Readurl_model->guardarDatosEncuesta($info_general, $formulario))
+			//echo "<br><br><br>";
+			//var_dump($formulario);
+			//echo "<br><br><br>";
+			//echo "<br><br><br>";
+			//echo $info_general->situacion_laboral."-".$info_general->otra_ocupacion;
+
+
+
+			//Almacenar informacion
+			if($this->Readurl_model->guardarDatEnc($info_general, $formulario)){
+				//Informacion guardada con exito
+				$this->success();
+			}else{
+				//Informacion no guardada
+				$this->failure();
+			}
+			/*if($this->Readurl_model->guardarDatosEncuesta($info_general, $formulario))
 			{
 				//Informacion guardada con exito
 				$this->success();
@@ -284,7 +271,9 @@ class Read extends CI_Controller
 			}else{
 				//Informacion no guardada
 				$this->failure();
-			}
+			}*/
+
+
 		}
 		else{
 			//Rutinas anteriores para la captura de datos
@@ -318,13 +307,6 @@ class Read extends CI_Controller
 			}
 
 		}
-
-
-
-
-
-
-
 
 		/*
 		//Rutinas anteriores para la captura de datos
