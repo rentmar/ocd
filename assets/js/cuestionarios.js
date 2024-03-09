@@ -797,11 +797,172 @@ $('#formulario_plenaria').submit(function (e) {
 	}
 });
 
+$('#formulario_controlcensal').submit(function (e) {
+	e.preventDefault();
+	var formulario_correcto = true;
+
+	let respuestas = new Array();
+	var departamento;
+	console.log("Evitar el envio");
+
+	for(var i=1; i<28;i++)
+	{
+		pregunta_seleccionada = $('input[name="pregunta_cjs' + i + '"]').is(':checked');
+		console.log(i);
+		console.log(pregunta_seleccionada);
+		console.log();
+		if(!pregunta_seleccionada){
+			$('#preguntassinseleccionar').modal("show");
+			formulario_correcto = false;
+			break
+		}
+	}
+	if(formulario_correcto)
+	{
+		//$("#enviarencuesta").html("Encuesta Enviada");
+		//$("#enviarencuesta").attr("disabled", true);
+		iddepartamento = $('#departamento_csjc :selected').val();
+		departamento = $('#departamento_csjc :selected').text();
+		console.log("Depa: "+ departamento);
+		console.log("idDepa: "+ iddepartamento);
+
+
+
+		console.log(respuestas);
+		var pregunta1 = new Pregunta(1, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs1]:checked').val(), 'p1');
+		var pregunta2 = new Pregunta(2, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs2]:checked').val(), 'p2');
+		var pregunta3 = new Pregunta(3, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs3]:checked').val(), 'p3');
+		var pregunta4 = new Pregunta(4, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs4]:checked').val(), 'p4');
+		var pregunta5 = new Pregunta(5, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs5]:checked').val(), 'p5');
+		var pregunta6 = new Pregunta(6, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs6]:checked').val(), 'p6');
+		var pregunta7 = new Pregunta(7, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs7]:checked').val(), 'p7');
+		var pregunta8 = new Pregunta(8, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs8]:checked').val(), 'p8');
+		var pregunta9 = new Pregunta(9, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs9]:checked').val(), 'p9');
+		var pregunta10 = new Pregunta(10, 'A', 1, 'radius', $('input:radio[name=pregunta_cjs10]:checked').val(), 'p10');
+
+		var pregunta11 = new Pregunta(11, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs11]:checked').val(), 'p11');
+		var pregunta12 = new Pregunta(12, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs12]:checked').val(), 'p12');
+		var pregunta13 = new Pregunta(13, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs13]:checked').val(), 'p13');
+		var pregunta14 = new Pregunta(14, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs14]:checked').val(), 'p14');
+		var pregunta15 = new Pregunta(15, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs15]:checked').val(), 'p15');
+		var pregunta16 = new Pregunta(16, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs16]:checked').val(), 'p16');
+		var pregunta17 = new Pregunta(17, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs17]:checked').val(), 'p17');
+		var pregunta18 = new Pregunta(18, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs18]:checked').val(), 'p18');
+		var pregunta19 = new Pregunta(19, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs19]:checked').val(), 'p19');
+		var pregunta20 = new Pregunta(20, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs20]:checked').val(), 'p20');
+		var pregunta21 = new Pregunta(21, 'B', 1, 'radius', $('input:radio[name=pregunta_cjs21]:checked').val(), 'p21');
+
+		var pregunta22 = new Pregunta(22, 'C', 1, 'radius', $('input:radio[name=pregunta_cjs22]:checked').val(), 'p22');
+		var pregunta23 = new Pregunta(23, 'C', 1, 'radius', $('input:radio[name=pregunta_cjs23]:checked').val(), 'p23');
+		var pregunta24 = new Pregunta(24, 'C', 1, 'radius', $('input:radio[name=pregunta_cjs24]:checked').val(), 'p24');
+
+		var pregunta25 = new Pregunta(25, 'D', 1, 'radius', $('input:radio[name=pregunta_cjs25]:checked').val(), 'p25');
+		var pregunta26 = new Pregunta(26, 'D', 1, 'radius', $('input:radio[name=pregunta_cjs26]:checked').val(), 'p26');
+		var pregunta27 = new Pregunta(27, 'D', 1, 'radius', $('input:radio[name=pregunta_cjs27]:checked').val(), 'p27');
+		var pregunta28 = new Pregunta(28, 'D', 1, 'radius', $('input:radio[name=pregunta_cjs28]:checked').val(), 'p28');
+		var pregunta29 = new Pregunta(29, 'D', 1, 'radius', $('input:radio[name=pregunta_cjs29]:checked').val(), 'p29');
+		var pregunta30 = new Pregunta(30, 'D', 1, 'radius', $('input:radio[name=pregunta_cjs30]:checked').val(), 'p30');
+		var pregunta31 = new Pregunta(31, 'D', 2, 'textarea', $("#pregunta_cjs31").val(), 'p31');
+
+		var pregunta32 = new Pregunta(32, 'E', 1, 'radius', $('input:radio[name=pregunta_cjs32]:checked').val(), 'p32');
+
+
+		console.log();
+		console.log(respuestas);
+		respuestas.push(pregunta1);
+		respuestas.push(pregunta2);
+		respuestas.push(pregunta3);
+		respuestas.push(pregunta4);
+		respuestas.push(pregunta5);
+		respuestas.push(pregunta6);
+		respuestas.push(pregunta7);
+		respuestas.push(pregunta8);
+		respuestas.push(pregunta9);
+		respuestas.push(pregunta10);
+
+		respuestas.push(pregunta11);
+		respuestas.push(pregunta12);
+		respuestas.push(pregunta13);
+		respuestas.push(pregunta14);
+		respuestas.push(pregunta15);
+		respuestas.push(pregunta16);
+		respuestas.push(pregunta17);
+		respuestas.push(pregunta18);
+		respuestas.push(pregunta19);
+		respuestas.push(pregunta20);
+		respuestas.push(pregunta21);
+
+		respuestas.push(pregunta22);
+		respuestas.push(pregunta23);
+		respuestas.push(pregunta24);
+
+		respuestas.push(pregunta25);
+		respuestas.push(pregunta26);
+		respuestas.push(pregunta27);
+		respuestas.push(pregunta28);
+		respuestas.push(pregunta29);
+		respuestas.push(pregunta30);
+		respuestas.push(pregunta31);
+
+		respuestas.push(pregunta32);
+
+
+		var preguntas = preguntasCSJC();
+
+		console.log(preguntas);
+
+
+		/*for ( h = 0; h < preguntas.length; h++) {
+			console.log(preguntas[h].pregunta);
+		}*/
+		//Desplegar los valores capturados
+		$("#iddep_pre").val(iddepartamento);
+		$("#desplegar_dep").html('Departamento: ' + departamento);
+
+		for (j=0; j< respuestas.length; j++){
+			console.log(respuestas[j].numero);
+			console.log(respuestas[j].tipo);
+			console.log(respuestas[j].respuesta);
+			if(respuestas[j].tipo == 1){
+				console.log('radius');
+				if(respuestas[j].respuesta == 1){
+					$('input[name=pregunta_cjs'+ respuestas[j].numero +'_pre][value=1]').prop('checked', 'checked');
+				}else if(respuestas[j].respuesta == 0){
+					$('input[name=pregunta_cjs'+ respuestas[j].numero +'_pre][value=0]').prop('checked', 'checked');
+				}else{
+
+				}
+			}
+			else if(respuestas[j].tipo == 2)
+			{
+				console.log('Text Area');
+				$("#pregunta_cjs"+ respuestas[j].numero +"_pre").val(respuestas[j].respuesta);
+			}
+			console.log();
+		}
+
+
+
+
+
+		$('#preenviocontrolcensal').modal("show");
+	}
+});
+
 function Fecha(literalFecha){
 	var fecha_capturada = literalFecha;
 	this.fecha = fecha_capturada;
 	fecha = new Date(literalFecha);
 	this.fecha_unix = Math.floor(fecha.getTime()/1000);
+}
+
+function Pregunta(numero, seccion, tipo, tipoLiteral, respuesta, codigo ) {
+	this.numero = numero;
+	this.seccion = seccion;
+	this.tipo = tipo;
+	this.tipoliteral = tipoLiteral;
+	this.respuesta = respuesta;
+	this.codigo = codigo;
 }
 
 
@@ -839,6 +1000,22 @@ function tipoPlenaria(identificador){
 		url: baseurl + "/plenaria/getTipoPlenaria/",
 		type: 'post',
 		data: {'identificador': identificador},
+		async: false,
+		dataType: 'json'
+	}).done(function (response) {
+		ret_val = response;
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		ret_val = null;
+	});
+	return ret_val;
+}
+
+function preguntasCSJC(){
+	var ret_val = {};
+	$.ajax({
+		url: baseurl + "/controlCensal/getPreguntas/",
+		type: 'post',
+		data: {'identificador': ''},
 		async: false,
 		dataType: 'json'
 	}).done(function (response) {

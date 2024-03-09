@@ -313,6 +313,46 @@ class Cuestionario_model extends CI_Model
 	}
 
 
+	public function leerPreguntasCSJC()
+	{
+		$sql = "SELECT * "
+			."FROM form_csjc_preguntas "
+			."ORDER BY form_csjc_preguntas.ordinal ASC";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	public function registrarFormCSJC($info, $respuestas){
+		//Matriz de datos
+		$form_infogeneral = $info;
+		$form_respuestas = $respuestas;
+		//Iniciar la transaccion
+		$this->db->trans_begin();
+
+		//Insertar la respuesta en la tabla
+		/** @noinspection PhpUnusedLocalVariableInspection */
+		/** @noinspection PhpLanguageLevelInspection */
+		$datos_formulario_respuesta = [
+			'fecha_reg' => $form_infogeneral->fecha_registro,
+			'fecha_reg_lit' => $form_infogeneral->fecha_registro_literal,
+			'activo' => 1,
+			'repuestas_csjc' => json_encode($form_respuestas),
+			'rel_iddepartamento' => $form_infogeneral->iddepartamento,
+			'rel_id' => $form_infogeneral->idusuario,
+			'rel_idcuestionario' => $form_infogeneral->idformulario,
+		];
+		$this->db->insert('form_csjc_respuestas', $datos_formulario_respuesta);
+
+		if($this->db->trans_status() === FALSE){
+			$this->db->trans_rollback();
+			return false;
+		}else{
+			$this->db->trans_commit();
+			return true;
+		}
+	}
+
+
 
 
 

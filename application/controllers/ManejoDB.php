@@ -1856,6 +1856,21 @@ class ManejoDB extends CI_Controller{
 		$this->load->view('html/pie');
 	}
 
+	public function jornadaCensalAdministrador(){
+		$veedurias = $this->Veeduria_model->leerFormResp();
+
+		//var_dump($veedurias);
+
+		$data['veedurias'] = $veedurias;
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodb_listajornadacensal', $data);
+		//$this->load->view('manejodb/vmanejodb_listaveeduria', $data);
+		//$this->load->view('manejodb/vmanejodb_listanormas', $data);
+		$this->load->view('html/pie');
+	}
+
 	public function cambiarEstadoVeeduria($identificador)
 	{
 		$idfresp = $identificador;
