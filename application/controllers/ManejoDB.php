@@ -1904,16 +1904,7 @@ class ManejoDB extends CI_Controller{
 		redirect('manejoDB/jornadaCensalAdministrador');
 	}
 
-	//Actualizar el estado de un formulario
-	public function cambiarEstadoJC($identificador, $estado)
-	{
-		/** @noinspection PhpLanguageLevelInspection */
-		$data = [
-			'activo' => $estado,
-		];
-		$this->db->where('idfcsjc', $identificador);
-		$this->db->update(' form_csjc_respuestas ', $data);
-	}
+	
 
 
 

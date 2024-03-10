@@ -188,6 +188,49 @@ class ControlCensal extends CI_Controller
 		return $objetoResp;
 	}
 
+	//Reporte General
+	public function reporteGeneral()
+	{
+		$filename = "reporte-general-jornada-censal.xlsx";
+		$ruta = 'assets/info/';
+		$plantilla = $ruta.'plantilla-veeduria.xlsx';
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+		header('Content-Disposition: attachment; filename="' . $filename. '"');
+		header('Cache-Control: max-age=0');
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+		$sheet = $spreadsheet->getSheet(0)->setTitle('Formularios');
+
+		$worksheet = $spreadsheet->getActiveSheet();
+		$eje_y = 6;
+
+
+
+		//Primer libro por defecto
+		$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+		$writer->save("php://output");
+
+	}
+
+	//Reporte Grafico
+	public function reporteGrafico(){
+		$filename = "reporte-grafico-jornada-censal.xlsx";
+		$ruta = 'assets/info/';
+		$plantilla = $ruta.'plantilla-reporte-jornada-censal-graficas.xlsx';
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+		header('Content-Disposition: attachment; filename="' . $filename. '"');
+		header('Cache-Control: max-age=0');
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+		
+
+
+		
+		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+		$writer->save("php://output");
+
+	}
+
 
 
 

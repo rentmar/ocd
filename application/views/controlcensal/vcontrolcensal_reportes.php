@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<?php echo form_open('veeduria/procesarConsulta'); ?>
+				<?php echo form_open('veeduria/procesarConsulta'); ?><?php echo form_close(); ?>
 				<div class="contenedor_filtros">
 				</div>
 				<div class="contenedor">
@@ -37,20 +37,21 @@
 
 
 				<br>
+				<?php echo form_open('controlCensal/reporteGeneral'); ?>
 				<div class="contenedor">
 					<h3>Reporte General </h3>
 
-					<br>
-					<div class="form-group">
-						<!--<select id="veeduriaform" name="veeduriaform" class="form-control simple"  >
-							<option value="0" >Seleccione una opcion</option>
-							<?php /*foreach ($forms_veeduria as $fm): */?>
-								<option value="<?php /*echo $fm->idfv; */?>" >
-									<?php /*echo $fm->nombre; */?>
-								</option>
-							<?php /*endforeach;  */?>
-						</select>-->
+					<div class="form-row">
+						<input type="submit" class="BOTON" value="GENERAR" name="tema">
 					</div>
+				</div>
+				<?php echo form_close(); ?>
+
+				<br>
+				
+				<?php echo form_open('controlCensal/reporteGrafico'); ?>
+				<div class="contenedor">
+					<h3>Reporte Grafico </h3>
 					<div class="form-row">
 						<input type="submit" class="BOTON" value="GENERAR" name="tema">
 					</div>
