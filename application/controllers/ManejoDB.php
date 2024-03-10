@@ -1857,11 +1857,11 @@ class ManejoDB extends CI_Controller{
 	}
 
 	public function jornadaCensalAdministrador(){
-		$veedurias = $this->Veeduria_model->leerFormResp();
+		$jornadaCensal = $this->Cuestionario_model->leerTodosFormulariosCSJC();
 
 		//var_dump($veedurias);
 
-		$data['veedurias'] = $veedurias;
+		$data['jornadaCensal'] = $jornadaCensal;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -1886,6 +1886,35 @@ class ManejoDB extends CI_Controller{
 		$this->Veeduria_model->cambiarEstado($idfresp, $estado);
 		redirect('manejoDB/veeduriaAdministrador');
 	}
+
+	//Cambiar el estado del Control Social de la Jorna Censal
+	public function cambiarEstadoControlJornada($identificador)
+	{
+		$idfcsjc = $identificador;
+		$f = $this->Cuestionario_model->leerFormularioJC($idfcsjc);
+		if($f->activo)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Cuestionario_model->cambiarEstadoJC($idfcsjc, $estado);
+		redirect('manejoDB/jornadaCensalAdministrador');
+	}
+
+	//Actualizar el estado de un formulario
+	public function cambiarEstadoJC($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'activo' => $estado,
+		];
+		$this->db->where('idfcsjc', $identificador);
+		$this->db->update(' form_csjc_respuestas ', $data);
+	}
+
 
 
 

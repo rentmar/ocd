@@ -22,6 +22,33 @@
 						</tr>
 						</thead>
 						<tbody>
+							<?php if(isset($jornadaCensal)): ?>
+								<?php foreach($jornadaCensal as $jc): ?>
+									<tr>
+										<td><?php echo $jc->idfcsjc; ?></td>
+										<td><?php echo $jc->fecha_reg_lit; ?></td>
+										<td><?php echo $jc->nombre_cuestionario; ?></td>
+										<td><?php echo $jc->username; ?></td>
+										<?php if($jc->activo): ?>
+											<td class="table-info" >Activa</td>
+										<?php else: ?>
+											<td class="table-danger" >Inactiva</td>
+										<?php endif; ?>
+										<td>
+											<?php if($jc->activo): ?>
+												<a href="<?php echo site_url('manejoDB/cambiarEstadoControlJornada/'.$jc->idfcsjc);?>" data-toggle="tooltip" title="Activa/Desactiva">
+													<i class="fas fa-toggle-on"></i>
+												</a>
+											<?php else: ?>
+												<a href="<?php echo site_url('manejoDB/cambiarEstadoControlJornada/'.$jc->idfcsjc);?>" data-toggle="tooltip" title="Activa/Desactiva" >
+													<i class="fas fa-toggle-off"></i>
+												</a>
+											<?php endif; ?>											
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							<?php endif; ?>
+
 
 						</tbody>
 					</table>

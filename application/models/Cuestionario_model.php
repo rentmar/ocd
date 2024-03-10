@@ -352,6 +352,45 @@ class Cuestionario_model extends CI_Model
 		}
 	}
 
+	public function leerTodosFormulariosCSJC()
+	{
+		$sql = "SELECT * "
+			."FROM form_csjc_respuestas "
+			."LEFT JOIN departamento ON departamento.iddepartamento = form_csjc_respuestas.rel_iddepartamento "
+			."LEFT JOIN users ON users.id = form_csjc_respuestas.rel_id "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = form_csjc_respuestas.rel_idcuestionario "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	//Extraer un formulario por identificador
+	public function leerFormularioJC($idfcsjc)
+	{
+		$sql = "SELECT * "
+			."FROM form_csjc_respuestas "
+			."WHERE form_csjc_respuestas.idfcsjc = ? "
+			." "
+			." "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql, [$idfcsjc]);
+		return $qry->row();
+	}
+	//Actualizar el estado de un formulario
+	public function cambiarEstadoJC($identificador, $estado)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'activo' => $estado,
+		];
+		$this->db->where('idfcsjc', $identificador);
+		$this->db->update(' form_csjc_respuestas ', $data);
+	}
+
 
 
 
