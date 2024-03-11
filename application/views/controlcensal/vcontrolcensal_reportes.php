@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<?php echo form_open('veeduria/procesarConsulta'); ?><?php echo form_close(); ?>
+				<?php echo form_open(''); ?><?php echo form_close(); ?>
 				<div class="contenedor_filtros">
 				</div>
 				<div class="contenedor">

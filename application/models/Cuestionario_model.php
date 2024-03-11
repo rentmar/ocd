@@ -391,6 +391,20 @@ class Cuestionario_model extends CI_Model
 		$this->db->update(' form_csjc_respuestas ', $data);
 	}
 
+	//Extraer todos lod formularios validos para un reporte general
+	public function leerFormulariosValidos()
+	{
+		$sql = "SELECT * "
+			."FROM form_csjc_respuestas "
+			."LEFT JOIN departamento ON departamento.iddepartamento = form_csjc_respuestas.rel_iddepartamento "
+			."LEFT JOIN users ON users.id = form_csjc_respuestas.rel_id "
+			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = form_csjc_respuestas.rel_idcuestionario "
+			."WHERE form_csjc_respuestas.activo = 1  "
+			." "
+			." ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
 
 
 

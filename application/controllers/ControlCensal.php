@@ -191,17 +191,66 @@ class ControlCensal extends CI_Controller
 	//Reporte General
 	public function reporteGeneral()
 	{
-		$filename = "reporte-general-jornada-censal.xlsx";
+		$filename = "reporte-general-csjc.xlsx";
 		$ruta = 'assets/info/';
-		$plantilla = $ruta.'plantilla-veeduria.xlsx';
+		$plantilla = $ruta.'plantilla-reporte-csjc.xlsx';
 		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
 		header('Content-Disposition: attachment; filename="' . $filename. '"');
 		header('Cache-Control: max-age=0');
-		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
-		$sheet = $spreadsheet->getSheet(0)->setTitle('Formularios');
 
+		$forms = $this->Cuestionario_model->leerFormulariosValidos();
+
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+		$sheet = $spreadsheet->getSheet(0)->setTitle('Forms');
+		
 		$worksheet = $spreadsheet->getActiveSheet();
-		$eje_y = 6;
+		$eje_y = 10;
+
+		foreach ($forms as $n):
+			$sheet->setCellValue('A'.$eje_y, $n->idfcsjc);
+			$sheet->setCellValue('B'.$eje_y, $n->fecha_reg_lit);
+			$sheet->setCellValue('C'.$eje_y, $n->username);
+			$sheet->setCellValue('D'.$eje_y, $n->nombre_cuestionario);
+			$sheet->setCellValue('E'.$eje_y, $n->nombre_departamento);
+			$eje_y++;
+		endforeach;
+
+		$sheet = $spreadsheet->getSheet(1)->setTitle('Respuestas');
+		$worksheet = $spreadsheet->getActiveSheet();
+		$eje_y = 10;
+
+		foreach ($forms as $n):
+			$sheet->setCellValue('A'.$eje_y, $n->idfcsjc);
+			$sheet->setCellValue('B'.$eje_y, $n->fecha_reg_lit);
+			$sheet->setCellValue('C'.$eje_y, $n->username);
+			$sheet->setCellValue('D'.$eje_y, $n->nombre_cuestionario);
+			$sheet->setCellValue('E'.$eje_y, $n->nombre_departamento);
+			$respuesta = json_decode($n->repuestas_csjc);
+			$eje_x = 'F';
+			foreach($respuesta as $r)
+			{
+				if($r->tipo == 1){ //Radius
+					if(isset($r->respuesta))
+					{
+						if($r->respuesta == 1){
+							$sheet->setCellValue($eje_x.$eje_y, 'Si');
+						}elseif($r->respuesta == 0){
+							$sheet->setCellValue($eje_x.$eje_y, 'No');
+						}
+					}else{
+						$sheet->setCellValue($eje_x.$eje_y, 's/r');
+					}
+				}elseif($r->tipo == 2){ //TextArea
+					$sheet->setCellValue($eje_x.$eje_y, $r->respuesta);
+				}
+				$eje_x++;
+			}
+			$eje_y++;
+		endforeach;
+
+		
+
+
 
 
 
@@ -228,6 +277,33 @@ class ControlCensal extends CI_Controller
 		
 		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
 		$writer->save("php://output");
+
+	}
+
+	public function tests()
+	{
+		$forms = $this->Cuestionario_model->leerFormulariosValidos();
+		var_dump($forms);
+		echo "<br><br><br>";
+		foreach($forms as $n)
+		{
+			echo $n->idfcsjc.' ';
+			echo $n->fecha_reg_lit.' ';
+			echo $n->username.' ';
+			echo $n->nombre_cuestionario.' ';
+			echo $n->nombre_departamento.' ';
+			$respuesta = json_decode($n->repuestas_csjc);
+			var_dump($respuesta);
+			$eje_x = 'F';
+			foreach($respuesta as $r)
+			{
+
+
+			}
+
+			echo "<br><br><br>";
+		}
+
 
 	}
 
