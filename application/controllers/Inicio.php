@@ -10,6 +10,7 @@ class Inicio extends CI_Controller
 		$this->load->model('Encuesta_model');
 		$this->load->model('Instanciaseguimiento_model');
 		$this->load->model('Veeduria_model');
+		$this->load->model('Cuestionario_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -43,10 +44,24 @@ class Inicio extends CI_Controller
 		//var_dump($this->session->userdata());
 		$usuario = $this->ion_auth->user()->row();
 		$idusuario = $usuario->id;
+
+		//Flag de control de la jornada censal
+		// 1: Modo de prueba habilitado
+		// 0: Modo produccion habilitado
+		$flag_test_csjc = 1;
+
+		//Discriminante para el formulario
+		$cantidad_fcsjc = $this->Cuestionario_model->contarFormulariosUsuario($usuario->id);
+
+
+
+
 		$datos['encuestas'] = $this->Encuesta_model->leerEncuestasAsignadasUsuario($idusuario);
 		$datos['usuario'] = $usuario;
 		$datos['instancia'] = $this->Instanciaseguimiento_model->leerInstancias();
 		$datos['veeduria'] = $this->Veeduria_model->leerFormularios();
+		$datos['flag_test_csjc'] = $flag_test_csjc;
+		$datos['cantidad_fcsjc'] = $cantidad_fcsjc;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');

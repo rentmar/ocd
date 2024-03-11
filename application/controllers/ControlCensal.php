@@ -53,12 +53,24 @@ class ControlCensal extends CI_Controller
 		//Datos para el formulario
 		$usuario = $this->ion_auth->user()->row();
 
+		//Comprobar el numero de formularios
+		$formulario = $this->Cuestionario_model->leerFormularioUsuario($usuario->id);
+
+		var_dump($formulario);
+
 		$datos['usuario'] = $usuario;
+		$datos['formulario'] = $formulario;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('cuestionarios/vcontrolcensal_edit', $datos);
 		$this->load->view('html/pie');
+	}
+
+	//Resetear los formularios de los usuarios
+	public function reset()
+	{
+		$usuario = $this->ion_auth->user()->row();
 	}
 
 	private function infoGeneral()
@@ -282,27 +294,10 @@ class ControlCensal extends CI_Controller
 
 	public function tests()
 	{
-		$forms = $this->Cuestionario_model->leerFormulariosValidos();
-		var_dump($forms);
-		echo "<br><br><br>";
-		foreach($forms as $n)
-		{
-			echo $n->idfcsjc.' ';
-			echo $n->fecha_reg_lit.' ';
-			echo $n->username.' ';
-			echo $n->nombre_cuestionario.' ';
-			echo $n->nombre_departamento.' ';
-			$respuesta = json_decode($n->repuestas_csjc);
-			var_dump($respuesta);
-			$eje_x = 'F';
-			foreach($respuesta as $r)
-			{
-
-
-			}
-
-			echo "<br><br><br>";
-		}
+		
+		$usuario = $this->ion_auth->user()->row();	
+		$cant = $this->Cuestionario_model->contarFormulariosUsuario($usuario->id);
+		echo $cant;
 
 
 	}

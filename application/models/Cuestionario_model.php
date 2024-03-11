@@ -377,7 +377,7 @@ class Cuestionario_model extends CI_Model
 			." "
 			." "
 			." ";
-		$qry = $this->db->query($sql, [$idfcsjc]);
+		$qry = $this->db->query($sql, [$idfcsjc,]);
 		return $qry->row();
 	}
 	//Actualizar el estado de un formulario
@@ -404,6 +404,29 @@ class Cuestionario_model extends CI_Model
 			." ";
 		$qry = $this->db->query($sql);
 		return $qry->result();
+	}
+
+	//Contar el numero de formularios de un usario
+	public function contarFormulariosUsuario($idusuario)
+	{
+		$this->db->where('rel_id', $idusuario);
+		$this->db->from('form_csjc_respuestas ');
+		return $this->db->count_all_results();
+	}
+
+	//Extraer el formulario del usuario
+	public function leerFormularioUsuario($idusuario)
+	{
+		$sql = "SELECT * "
+			."FROM form_csjc_respuestas "
+			."WHERE form_csjc_respuestas.rel_id = ? "
+			." "
+			." "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql, [$idusuario,]);
+		return $qry->row();		
 	}
 
 

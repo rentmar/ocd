@@ -213,12 +213,33 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.svg'; ?>" alt="Card image">
 					<div class="card-body">
-						<a href="<?php echo site_url('controlCensal/nuevo');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
-							Nuevo
-						</a>
-						<a href="<?php echo site_url('controlCensal/editar');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
-							Editar
-						</a>
+						<?php if($flag_test_csjc): ?>
+							<!-- Modo Prueba -->
+							<?php if($cantidad_fcsjc == 0): ?>
+								<a href="<?php echo site_url('controlCensal/nuevo');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
+									Nuevo
+								</a>
+							<?php else: ?>
+								<a href="<?php echo site_url('controlCensal/reset');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
+									Reset
+								</a>
+								<a href="<?php echo site_url('controlCensal/editar');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
+									Editar
+								</a>
+
+							<?php endif; ?>
+						<?php elseif(!$flag_test_csjc): ?>
+							<!-- Modo Produccion -->
+							<?php if($cantidad_fcsjc == 0): ?>
+								<a href="<?php echo site_url('controlCensal/nuevo');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
+									Nuevo
+								</a>
+							<?php else: ?>
+								<a href="<?php echo site_url('controlCensal/editar');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
+									Editar
+								</a>
+							<?php endif; ?>
+						<?php endif; ?>						
 					</div>
 				</div>
 			</div>

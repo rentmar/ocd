@@ -25,15 +25,19 @@
 			</div>
 			<div class="card-body">
 				<div class="form-group">
+					<input class="form-control" type="text" id="idformulario_edit" name="idformulario_edit" value="<?php echo $formulario->idfcsjc; ?>" >
+					<input class="form-control" type="text" id="idusuario_edit" name="idusuario_edit" value="<?php echo $usuario->id; ?>" >
+				</div>
+				<div class="form-group">
 					<label for="pregunta_cjs32">
 						32. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32a" name="pregunta_cjs32" value="1">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs32a" name="pregunta_cjs32_edit" value="1">
 						<label class="custom-control-label" for="pregunta_cjs32a">Si</label>
 					</div>
 					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32" value="0">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32_edit" value="0">
 						<label class="custom-control-label" for="pregunta_cjs32">No</label>
 					</div>
 				</div>
