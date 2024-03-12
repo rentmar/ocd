@@ -26,20 +26,47 @@
 				</h4>
 			</div>
 			<div class="card-body">
-				<div id="departamento">
-					<label>Escoja el Departamento:</label><br>
-					<select id="departamento_csjc" name="departamento_csjc" class="simple" style="width: 100%"  required>
-						<option value="" selected >Sin seleccion</option>
-						<?php if(isset($departamentos)):?>
-							<?php foreach ($departamentos as $a): ?>
-								<option value="<?php echo $a->iddepartamento; ?>"><?php echo $a->nombre_departamento; ?></option>
-							<?php endforeach; ?>
-						<?php endif;?>
-					</select>
+				<div class="form-group">
+					<label for="Sexo">
+						Escoja el Genero:
+					</label><br>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="sexoa" name="sexo" value="M" checked>
+						<label class="custom-control-label" for="sexob">Masculino</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="sexob" name="sexo" value="F">
+						<label class="custom-control-label" for="sexob">Femenino</label>
+					</div>
 				</div>
-				<div id="otrotema1normadatos">
-
+				<div class="form-group">
+					<label for="Sexo">
+						Edad:
+					</label>
+					<input class="form-control" id="edad" name="edad" type="number" min="0" max="100" step="1" required>					
 				</div>
+				<div class="form-group">
+					<label for="municipio">
+					Municipio:
+					</label>
+					<input class="form-control" id="municipio" name="municipio" type="text" placeholder="Escriba el Municipio" required>										
+				</div>
+				<div class="form-group">
+					<div id="departamento">
+						<label>Escoja el Departamento:</label><br>
+						<select id="departamento_csjc" name="departamento_csjc" class="simple" style="width: 100%"  required>
+							<option value="" selected >Sin seleccion</option>
+							<?php if(isset($departamentos)):?>
+								<?php foreach ($departamentos as $a): ?>
+									<option value="<?php echo $a->iddepartamento; ?>"><?php echo $a->nombre_departamento; ?></option>
+								<?php endforeach; ?>
+							<?php endif;?>
+						</select>
+					</div>
+				</div>	
+				
+				
+				
 			</div>
 		</div>
 
@@ -502,12 +529,12 @@
 					<label for="pregunta_cjs32">
 						32. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
 					</label><br>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32a" name="pregunta_cjs32" value="1">
+					<div class="custom-control custom-radio custom-control-inline" >
+						<input type="radio" class="custom-control-input" id="pregunta_cjs32a" name="pregunta_cjs32" value="1" disabled >
 						<label class="custom-control-label" for="pregunta_cjs32a">Si</label>
 					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32" value="0">
+					<div class="custom-control custom-radio custom-control-inline" >
+						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32" value="0" disabled >
 						<label class="custom-control-label" for="pregunta_cjs32b">No</label>
 					</div>
 				</div>
@@ -549,7 +576,10 @@
 						<input class="form-control" type="hidden" id="idcuestionario_pre" name="idcuestionario_pre" value="<?php echo $idformulario;?>">
 						<input class="form-control" type="hidden" id="idusuario_pre" name="idusuario_pre" value="<?php echo $usuario->id; ?>" >
 						<input class="form-control" type="hidden" id="iddep_pre" name="iddep_pre">
-					</div>
+						<input class="form-control" type="hidden" id="sexo_pre" name="sexo_pre">
+						<input class="form-control" type="hidden" id="edad_pre" name="edad_pre">
+						<input class="form-control" type="hidden" id="municipio_pre" name="municipio_pre">
+ 					</div>
 
 					<div class="card">
 						<div class="card-header cuest3">
@@ -557,6 +587,9 @@
 						</div>
 						<div class="card-body" id="info_general">
 							<ul class="list-group">
+								<li id="desplegar_sexo" class="list-group-item">Sexo: </li>
+								<li id="desplegar_edad" class="list-group-item">Edad: </li>								
+								<li id="desplegar_municipio" class="list-group-item">Municipio: </li>
 								<li id="desplegar_dep" class="list-group-item">Departamento: </li>
 							</ul>
 						</div>
@@ -1004,11 +1037,11 @@
 									32. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
 								</label><br>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs32a_pre" name="pregunta_cjs32_pre" value="1">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs32a_pre" name="pregunta_cjs32_pre" value="1" disabled>
 									<label class="custom-control-label" for="pregunta_cjs32a_pre">Si</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs32b_pre" name="pregunta_cjs32_pre" value="0">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs32b_pre" name="pregunta_cjs32_pre" value="0" disabled>
 									<label class="custom-control-label" for="pregunta_cjs32b_pre">No</label>
 								</div>
 							</div>

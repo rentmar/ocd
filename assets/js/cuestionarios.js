@@ -821,8 +821,14 @@ $('#formulario_controlcensal').submit(function (e) {
 	{
 		//$("#enviarencuesta").html("Encuesta Enviada");
 		//$("#enviarencuesta").attr("disabled", true);
-		iddepartamento = $('#departamento_csjc :selected').val();
+		var iddepartamento = $('#departamento_csjc :selected').val();
 		departamento = $('#departamento_csjc :selected').text();
+		var sexo =  $('input:radio[name=sexo]:checked').val();
+		var edad = $("#edad").val();
+		var municipio = $("#municipio").val()
+		console.log("Genero: " + sexo);
+		console.log("Edad;" + edad);
+		console.log("Municipio: " + municipio);
 		console.log("Depa: "+ departamento);
 		console.log("idDepa: "+ iddepartamento);
 
@@ -918,6 +924,15 @@ $('#formulario_controlcensal').submit(function (e) {
 		//Desplegar los valores capturados
 		$("#iddep_pre").val(iddepartamento);
 		$("#desplegar_dep").html('Departamento: ' + departamento);
+
+		$("#sexo_pre").val(sexo);
+		$("#desplegar_sexo").html('Genero: ' + sexo);
+
+		$("#edad_pre").val(edad);
+		$("#desplegar_edad").html('Edad: ' + edad);
+
+		$("#municipio_pre").val(municipio);
+		$("#desplegar_municipio").html('Municipio: ' + municipio);
 
 		for (j=0; j< respuestas.length; j++){
 			console.log(respuestas[j].numero);

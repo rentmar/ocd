@@ -335,6 +335,9 @@ class Cuestionario_model extends CI_Model
 		$datos_formulario_respuesta = [
 			'fecha_reg' => $form_infogeneral->fecha_registro,
 			'fecha_reg_lit' => $form_infogeneral->fecha_registro_literal,
+			'sexo' => $form_infogeneral->sexo,
+			'edad' => $form_infogeneral->edad,
+			'municipio' => $form_infogeneral->municipio,
 			'activo' => 1,
 			'repuestas_csjc' => json_encode($form_respuestas),
 			'rel_iddepartamento' => $form_infogeneral->iddepartamento,
@@ -428,6 +431,44 @@ class Cuestionario_model extends CI_Model
 		$qry = $this->db->query($sql, [$idusuario,]);
 		return $qry->row();		
 	}
+
+	//Eliminar un formulario
+	public function eliminarFormulario($idformulario)
+	{
+		$this->db->where('idfcsjc', $idformulario);
+		$this->db->delete('form_csjc_respuestas');		
+	}
+
+
+	//Leer el estado del modo test del formulario
+	public function modosCuestionario($idformulario)
+	{
+		$sql = "SELECT * "
+			."FROM cuestionario_opciones "
+			."WHERE cuestionario_opciones.rel_idcuestionario = ? "
+			." "
+			." "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql, [$idformulario,]);
+		return $qry->row();
+	}
+
+	//Actualizar la ultima pregunta
+	public function actualizarCuestionario($idformulario, $respuestas_json){
+		$data = [
+			"repuestas_csjc" => $respuestas_json,
+			"esta_incompleto" => 0,
+		];
+		$this->db->where('idfcsjc', $idformulario);
+		$this->db->update(' form_csjc_respuestas', $data);
+	}
+
+
+
+
+
 
 
 

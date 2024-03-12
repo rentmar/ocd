@@ -4,10 +4,10 @@
 	<?php
 	/** @noinspection PhpLanguageLevelInspection */
 	$atr_form =[
-		'id' => 'formulario_controlcensal' ,
+		'id' => 'formulario_controlcensal_editar' ,
 	]
 	;?>
-	<?php echo form_open('', $atr_form);?>
+	<?php echo form_open('controlCensal/actualizarPregunta', $atr_form);?>
 
 	<div class="contenedores_divididos">
 		<div class="contenedor_superior3" id="contenedor_pequeño">
@@ -25,8 +25,8 @@
 			</div>
 			<div class="card-body">
 				<div class="form-group">
-					<input class="form-control" type="text" id="idformulario_edit" name="idformulario_edit" value="<?php echo $formulario->idfcsjc; ?>" >
-					<input class="form-control" type="text" id="idusuario_edit" name="idusuario_edit" value="<?php echo $usuario->id; ?>" >
+					<input class="form-control" type="hidden" id="idformulario_edit" name="idformulario_edit" value="<?php echo $formulario->idfcsjc; ?>" >
+					<input class="form-control" type="hidden" id="idusuario_edit" name="idusuario_edit" value="<?php echo $usuario->id; ?>" >
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs32">
@@ -38,7 +38,7 @@
 					</div>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32_edit" value="0">
-						<label class="custom-control-label" for="pregunta_cjs32">No</label>
+						<label class="custom-control-label" for="pregunta_cjs32b">No</label>
 					</div>
 				</div>
 			</div>

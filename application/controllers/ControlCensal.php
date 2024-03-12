@@ -56,21 +56,88 @@ class ControlCensal extends CI_Controller
 		//Comprobar el numero de formularios
 		$formulario = $this->Cuestionario_model->leerFormularioUsuario($usuario->id);
 
-		var_dump($formulario);
+		//var_dump($formulario);
 
-		$datos['usuario'] = $usuario;
-		$datos['formulario'] = $formulario;
+		if($formulario->esta_incompleto == 0){
+			$mensaje = "Formulario completado";
+			$this->mensaje($mensaje, 'info');
+			redirect('inicio/');
+		}else{
+				
+			$datos['usuario'] = $usuario;
+			$datos['formulario'] = $formulario;
 
-		$this->load->view('html/encabezado');
-		$this->load->view('html/navbar');
-		$this->load->view('cuestionarios/vcontrolcensal_edit', $datos);
-		$this->load->view('html/pie');
+			$this->load->view('html/encabezado');
+			$this->load->view('html/navbar');
+			$this->load->view('cuestionarios/vcontrolcensal_edit', $datos);
+			$this->load->view('html/pie');
+		}
+
+	}
+
+	//Actualizar la pregunta 32
+	public function actualizarPregunta()
+	{
+		$respuesta = $this->pregunta();
+		//var_dump($respuesta);
+		//echo "<br><br><br>";
+
+		//Extraer el formulario
+		$form = $this->Cuestionario_model->leerFormularioJC($respuesta->idrespuesta);
+
+		
+		//var_dump($form);
+
+		//echo "<br><br><br>";
+		$respuestas_json = $form->repuestas_csjc;
+		//var_dump($respuestas_json);
+		//echo "<br><br><br>";
+		$respuestas = json_decode($respuestas_json);
+		//var_dump($respuestas);
+		//echo "<br><br><br>";
+		foreach($respuestas as $key=>$value)
+		{
+			if($value->id == 32){
+				//echo $value->codigo;
+				$value->respuesta = $respuesta->respuesta;
+			}
+		}
+
+		//echo "<br><br><br>";
+		//var_dump($respuestas);
+
+		$form->repuestas_csjc = json_encode($respuestas);
+		//echo "<br><br><br>";
+		//echo "Final:<br>";
+		//var_dump($form);
+		$this->Cuestionario_model->actualizarCuestionario($respuesta->idrespuesta, json_encode($respuestas));
+		redirect('inicio/');
+	}
+
+	//Datos pregunta
+	private function pregunta()
+	{
+		$pr = new stdClass();
+		$pr->idusuario = $this->input->post('idusuario_edit'); //Identificador del usuario
+		$pr->idrespuesta = $this->input->post('idformulario_edit'); //Identificador del formulario de respuestas
+		$pr->respuesta = $this->input->post('pregunta_cjs32_edit'); //Respuesta de la pregunta
+
+		return $pr;
 	}
 
 	//Resetear los formularios de los usuarios
 	public function reset()
 	{
 		$usuario = $this->ion_auth->user()->row();
+		$formulario = $this->Cuestionario_model->leerFormularioUsuario($usuario->id);
+		//var_dump($formulario);
+		//echo "<br><br>";
+		//echo $formulario->idfcsjc;
+		//Eliminar el formulario
+		$this->Cuestionario_model->eliminarFormulario($formulario->idfcsjc);
+		$mensaje = "Formulario Reseteado";
+		$this->mensaje($mensaje, 'info');
+		redirect('inicio/');
 	}
 
 	private function infoGeneral()
@@ -152,6 +219,8 @@ class ControlCensal extends CI_Controller
 		var_dump($f);*/
 		if($this->Cuestionario_model->registrarFormCSJC($informaciongeneral, $formulario_respuestas))
 		{
+			$mensaje = "Formulario Registrado";
+			$this->mensaje($mensaje, 'info');
 			//Informacion guardada con exito
 			redirect('inicio/');
 		}
@@ -166,6 +235,9 @@ class ControlCensal extends CI_Controller
 		$fecha_actual = new DateTime();
 		$controlcensal->fecha_registro = now('America/La_Paz');
 		$controlcensal->fecha_registro_literal = $fecha_actual->format("d/m/Y");
+		$controlcensal->sexo = $this->input->post('sexo_pre');
+		$controlcensal->edad = $this->input->post('edad_pre');
+		$controlcensal->municipio = $this->input->post('municipio_pre');
 		$controlcensal->iddepartamento = $this->input->post('iddep_pre');
 		$controlcensal->idusuario = $this->input->post('idusuario_pre');
 		$controlcensal->idformulario = $this->input->post('idcuestionario_pre');
@@ -302,7 +374,14 @@ class ControlCensal extends CI_Controller
 
 	}
 
-
+	//Despliegue de mensaje
+	public function mensaje($mensaje, $clase){
+		/** @noinspection PhpLanguageLevelInspection */
+		$this->session->set_flashdata([
+			'mensaje' => $mensaje,
+			'clase' => $clase,
+		]);
+	}
 
 
 

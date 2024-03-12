@@ -48,7 +48,11 @@ class Inicio extends CI_Controller
 		//Flag de control de la jornada censal
 		// 1: Modo de prueba habilitado
 		// 0: Modo produccion habilitado
-		$flag_test_csjc = 1;
+		$modos_formcsjc = $this->Cuestionario_model->modosCuestionario(8);
+		//var_dump($modos_formcsjc);
+
+
+		$flag_test_csjc = $modos_formcsjc->modo_test;
 
 		//Discriminante para el formulario
 		$cantidad_fcsjc = $this->Cuestionario_model->contarFormulariosUsuario($usuario->id);
