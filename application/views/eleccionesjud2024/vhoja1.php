@@ -4,45 +4,105 @@
 	<?php
 	/** @noinspection PhpLanguageLevelInspection */
 	$atr_form =[
-		'id' => 'formulario_controlcensal_editar' ,
+		'id' => 'formulario_plenaria' ,
 	]
 	;?>
-	<?php echo form_open('controlCensal/actualizarPregunta', $atr_form);?>
+	<?php echo form_open('plenaria/capturaDatos', $atr_form);?>
 
 	<div class="contenedores_divididos">
-		<div class="contenedor_superior3" id="contenedor_pequeño">
+		<div class="contenedor_superior2" id="contenedor_pequeño">
 		</div>
 		<div class="contenedor_inferior">
-			<h3 id="Título_formulario"> CONTROL SOCIAL EN LA JORNADA CENSAL</h3>
+			<h3 id="Título_formulario"> Apertura y Funcionamiento de Recintos </h3>
 		</div>
 	</div>
 	<br>
 
 	<div class="contenedores">
-		<div class="card">
-			<div class="card-header cuest3">
-				E. Verificación del adhesivo “CENSADA” en las viviendas del manzano (pregunta del día siguiente)
-			</div>
-			<div class="card-body">
-				<div class="form-group">
-					<input class="form-control" type="hidden" id="idformulario_edit" name="idformulario_edit" value="<?php echo $formulario->idfcsjc; ?>" >
-					<input class="form-control" type="hidden" id="idusuario_edit" name="idusuario_edit" value="<?php echo $usuario->id; ?>" >
-				</div>
-				<div class="form-group">
-					<label for="pregunta_cjs32">
-						32. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
-					</label><br>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32a" name="pregunta_cjs32_edit" value="1">
-						<label class="custom-control-label" for="pregunta_cjs32a">Si</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32_edit" value="0">
-						<label class="custom-control-label" for="pregunta_cjs32b">No</label>
-					</div>
-				</div>
-			</div>
+		<label for="iddepartamento_ej">Departamento:</label><br>
+		<select id="iddepartamento_ej" name="iddepartamento_ej" class="form-control" required>
+			<option value="" >Seleccione un departamento</option>
+			<?php foreach ($departamentos as $d): ?>
+				<option value="<?php echo $d->iddepartamento; ?>"><?php echo $d->nombre_departamento; ?></option>
+			<?php endforeach; ?>
+		</select>
+	</div>
+	<br>
+
+	<div id="instancia_seguimiento_secundaria" >
+
+	</div>
+	<br>
+
+	<div class="contenedores">
+		<label for="fecha">Introduzca la fecha de la plenaria:</label><br>
+		<input type="date" id="fecha_plenaria" name="fecha_plenaria" value="" required >
+		<input type="hidden" id="idcuestionario" name="idcuestionario" value="<?php echo $idformulario; ?>" >
+		<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id;?>" >
+	</div>
+	<br>
+
+	<div class="contenedores">
+		<label for="titular">Puntos de la agenda:</label><br>
+		<input type="text" id="puntos_agenda" name="puntos_agenda" required class="form-control"
+			   value=""
+		>
+	</div>
+	<br>
+
+	<div class="contenedores">
+		<label for="titular">Cumplimiento de la agenda(%):</label><br>
+		<input type="number" id="agenda_cumplida" name="agenda_cumplida" required class="form-control"
+			   min="0" max="100" step="1" value="0">
+	</div>
+	<br>
+
+	<div class="contenedores">
+		<label for="titular">Descripcion del asunto sin tratamiento:</label><br>
+		<input type="text" id="puntos_pendientes" name="puntos_pendientes" required class="form-control"
+			   value=""
+		>
+	</div>
+	<br>
+
+	<div class="contenedores">
+		<label for="titular">Describa puntos varios (maximo 30 palabras):</label><br>
+		<input type="text" id="puntos_varios" name="puntos_varios" required class="form-control"
+			   value=""
+		>
+	</div>
+	<br>
+
+	<div class="contenedores">
+		<label for="titular">Se incluyó el tratamiento de una norma en varios?</label><br>
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" class="custom-control-input" id="tratamiento1" name="tratamiento" value="1" checked >
+			<label class="custom-control-label" for="tratamiento1">Si</label>
 		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" class="custom-control-input" id="tratamiento2" name="tratamiento" value="0">
+			<label class="custom-control-label" for="tratamiento2">No</label>
+		</div>
+
+	</div>
+	<div id="norma" class="contenedores">
+		<label for="titular">Número y nombre de la norma que ingresó sin estar en la agenda:</label><br>
+		<input type="text" id="norma_extraordinaria" name="norma_extraordinaria" required class="form-control" value="">
+	</div>
+	<br>
+
+	<div class="contenedores" >
+		<label for="titular">Especificacion del tipo de plenaria:</label><br>
+		<div id="tipos_de_plenaria">
+
+		</div>
+
+	</div>
+	<br>
+
+	<div class="contenedores">
+		<label for="monitores">Observaciones:</label><br>
+		<textarea class="form-control" rows="4" id="monitores" name="monitores"></textarea>
 	</div>
 	<br>
 
@@ -160,7 +220,6 @@
 		</div>
 	</div>
 </div>
-
 
 
 

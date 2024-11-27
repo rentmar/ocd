@@ -17,19 +17,6 @@
 		</div>
 	</div>
 	<br>
-	
-	<div class="contenedores">
-		<div class="card">
-			<div class="card-body">
-				<div class="alert alert-info">
-					Este proceso es meramente de <strong>CONTROL SOCIAL</strong> desde nuestras viviendas.
-					No interrumpas al cencista mientras hace la entrevista y llena este formulario <strong>DESPUES</strong> de
-					concluir la entrevista.
-				</div>
-			</div>
-		</div>
-	</div>
-	<br>
 
 	<div class="contenedores">
 		<div class="card">
@@ -58,12 +45,12 @@
 					</label>
 					<input class="form-control" id="edad" name="edad" type="number" min="0" max="100" step="1" required>					
 				</div>
-				<!--<div class="form-group">
+				<div class="form-group">
 					<label for="municipio">
 					Municipio:
 					</label>
 					<input class="form-control" id="municipio" name="municipio" type="text" placeholder="Escriba el Municipio" required>										
-				</div>-->
+				</div>
 				<div class="form-group">
 					<div id="departamento">
 						<label>Escoja el Departamento:</label><br>
@@ -77,14 +64,6 @@
 						</select>
 					</div>
 				</div>	
-				<div class="form-group">
-					<div id="departamento">
-						<label>Escoja el Municipio:</label><br>
-						<select id="municipio_csjc" name="municipio_csjc"  class="simple" style="width: 100%"  required>
-							<option value="">Sin seleccion</option>
-						</select>
-					</div>
-				</div>
 				
 				
 				
@@ -167,7 +146,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs6">
-						6. ¿El censista inició la entrevista cuando todas las personas que pasaron la noche anterior en la vivienda estuvieron presentes?
+						6. ¿El censista no inició la entrevista hasta que todas las personas que pasaron la noche anterior en la vivienda estuvieron presentes?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs6a" name="pregunta_cjs6" value="1">
@@ -348,7 +327,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs19">
-						19. En la pregunta 18, ¿el censista leyó las 10 opciones de la pregunta para responder sí o no a cada una?
+						19. En la pregunta 10, ¿El censista leyó las 10 opciones de la pregunta para responder sí o no a cada una?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs19a" name="pregunta_cjs19" value="1">
@@ -361,7 +340,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs20">
-						20. En la pregunta 25, ¿El censista respondió con seguridad a dudas planteadas por alguna persona que vive en la vivienda?*
+						20. En la pregunta 25, ¿El censista respondió con seguridad a dudas planteadas por alguna persona que vive en la vivienda?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs20a" name="pregunta_cjs20" value="1">
@@ -385,9 +364,6 @@
 						<label class="custom-control-label" for="pregunta_cjs21b">No</label>
 					</div>
 				</div>
-			</div>
-			<div class="card-footer">
-				<p class="small">* Preguntas no obligatorias</p>
 			</div>
 		</div>
 	</div>
@@ -438,7 +414,32 @@
 						<label class="custom-control-label" for="pregunta_cjs24b">No</label>
 					</div>
 				</div>
-
+				<div class="form-group">
+					<label for="pregunta_cjs25">
+						25. Tiempo de llenado de la boleta por persona.
+					</label><br>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs25a" name="pregunta_cjs25" value="H8">
+						<label class="custom-control-label" for="pregunta_cjs25a">Hasta 8 minutos con 45 segundos</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs25b" name="pregunta_cjs25" value="M8">
+						<label class="custom-control-label" for="pregunta_cjs25b">Más de 8 minutos con 45 segundos</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="pregunta_cjs26">
+						26. Tiempo de llenado de la boleta por familia de hasta 8 personas
+					</label><br>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs26a" name="pregunta_cjs26" value="DE3040">
+						<label class="custom-control-label" for="pregunta_cjs26a">De 30 a 40 minutos</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs26b" name="pregunta_cjs26" value="MAS40">
+						<label class="custom-control-label" for="pregunta_cjs26b">Más de 40 minutos</label>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -451,34 +452,8 @@
 			</div>
 			<div class="card-body">
 				<div class="form-group">
-					<label for="pregunta_cjs25">
-						25. ¿El censista respondió a las preguntas realizadas durante la entrevista, aclarando todas tus dudas?
-					</label><br>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs25a" name="pregunta_cjs25" value="1">
-						<label class="custom-control-label" for="pregunta_cjs25a">Si</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs25b" name="pregunta_cjs25" value="0">
-						<label class="custom-control-label" for="pregunta_cjs25b">No</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="pregunta_cjs26">
-						26. ¿El censista volvió a la vivienda con su supervisor para corregir o completar el cuestionario?
-					</label><br>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs26a" name="pregunta_cjs26" value="1">
-						<label class="custom-control-label" for="pregunta_cjs26a">Si</label>
-					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_cjs26b" name="pregunta_cjs26" value="0">
-						<label class="custom-control-label" for="pregunta_cjs26b">No</label>
-					</div>
-				</div>
-				<div class="form-group">
 					<label for="pregunta_cjs27">
-						27. ¿El censista utilizó el lápiz proporcionado por el INE y no bolígrafo?
+						27. ¿El censista respondió a las preguntas realizadas durante la entrevista, aclarando todas tus dudas?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs27a" name="pregunta_cjs27" value="1">
@@ -491,7 +466,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs28">
-						28. En caso de que en la vivienda alguien hable un idioma originario ¿El censista pudo comunicarse en ese idioma?*
+						28. ¿El censista volvió a la vivienda con su supervisor para corregir o completar el cuestionario?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs28a" name="pregunta_cjs28" value="1">
@@ -504,7 +479,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs29">
-						29. ¿Si el censista no habla ese idioma, solicitó que alguien del hogar sea interlocutor?*
+						29. ¿El censista utilizó el lápiz proporcionado por el INE y no bolígrafo?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs29a" name="pregunta_cjs29" value="1">
@@ -517,7 +492,7 @@
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs30">
-						30. ¿Si el censista no habla ese idioma y nadie en el hogar puede ser interlocutor, coordinó con su supervisora/or para recurrir a un vecino o vecina?*
+						30. En caso de que en la vivienda alguien hable un idioma originario ¿El censista pudo comunicarse en ese idioma?*
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
 						<input type="radio" class="custom-control-input" id="pregunta_cjs30a" name="pregunta_cjs30" value="1">
@@ -530,9 +505,35 @@
 				</div>
 				<div class="form-group">
 					<label for="pregunta_cjs31">
-						31. Otros aspectos no abordados en las preguntas del cuestionario, indicar el tiempo de llenado de la boleta censal de toda la familia (pregunta abierta)
+						31. ¿Si el censista no habla ese idioma, solicitó que alguien del hogar sea interlocutor?*
 					</label><br>
-					<textarea class="form-control" rows="5" id="pregunta_cjs31" name="pregunta_cjs31" required></textarea>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs31a" name="pregunta_cjs31" value="1">
+						<label class="custom-control-label" for="pregunta_cjs31a">Si</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs31b" name="pregunta_cjs31" value="0">
+						<label class="custom-control-label" for="pregunta_cjs31b">No</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="pregunta_cjs32">
+						32. ¿Si el censista no habla ese idioma y nadie en el hogar puede ser interlocutor, coordinó con su supervisora/or para recurrir a un vecino o vecina?*
+					</label><br>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs32a" name="pregunta_cjs32" value="1">
+						<label class="custom-control-label" for="pregunta_cjs32a">Si</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32" value="0">
+						<label class="custom-control-label" for="pregunta_cjs32b">No</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="pregunta_cjs33">
+						33. Otros aspectos no abordados en las preguntas del cuestionario, indicar el tiempo de llenado de la boleta censal de toda la familia (pregunta abierta)
+					</label><br>
+					<textarea class="form-control" rows="5" id="pregunta_cjs33" name="pregunta_cjs33" required></textarea>
 				</div>
 
 			</div>
@@ -550,23 +551,17 @@
 			</div>
 			<div class="card-body">
 				<div class="form-group">
-					<label for="pregunta_cjs32">
-						32. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
+					<label for="pregunta_cjs34">
+						34. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
 					</label><br>
 					<div class="custom-control custom-radio custom-control-inline" >
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32a" name="pregunta_cjs32" value="1"  >
-						<label class="custom-control-label" for="pregunta_cjs32a">Si</label>
+						<input type="radio" class="custom-control-input" id="pregunta_cjs34a" name="pregunta_cjs34" value="1" disabled >
+						<label class="custom-control-label" for="pregunta_cjs34a">Si</label>
 					</div>
 					<div class="custom-control custom-radio custom-control-inline" >
-						<input type="radio" class="custom-control-input" id="pregunta_cjs32b" name="pregunta_cjs32" value="0"  >
-						<label class="custom-control-label" for="pregunta_cjs32b">No</label>
+						<input type="radio" class="custom-control-input" id="pregunta_cjs34b" name="pregunta_cjs34" value="0" disabled >
+						<label class="custom-control-label" for="pregunta_cjs34b">No</label>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="pregunta_cjs32obs">
-						Si tienes alguna observación importante, anótala a continuación:
-					</label><br>
-					<textarea class="form-control" rows="5" id="pregunta_cjs32obs" name="pregunta_cjs32obs"></textarea>
 				</div>
 			</div>
 		</div>
@@ -912,7 +907,6 @@
 									<label class="custom-control-label" for="pregunta_cjs21b_pre">No</label>
 								</div>
 							</div>
-
 						</div>
 					</div>
 					<br>
@@ -920,7 +914,7 @@
 						<div class="card-header cuest3">
 							<h4>C. Cierre de la Entrevista</h4>
 						</div>
-						<div class="card-body" id="seccion-c">
+						<div class="card-body">
 							<div class="form-group">
 								<label for="pregunta_cjs22_pre">
 									22. ¿El censista verificó que la información del formulario está completa antes de retirarse?
@@ -960,45 +954,42 @@
 									<label class="custom-control-label" for="pregunta_cjs24b_pre">No</label>
 								</div>
 							</div>
-
-
+							<div class="form-group">
+								<label for="pregunta_cjs25_pre">
+									25. Tiempo de llenado de la boleta por persona.
+								</label><br>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs25a_pre" name="pregunta_cjs25_pre" value="H8">
+									<label class="custom-control-label" for="pregunta_cjs25a_pre">Hasta 8 minutos con 45 segundos</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs25b_pre" name="pregunta_cjs25_pre" value="M8">
+									<label class="custom-control-label" for="pregunta_cjs25b_pre">Más de 8 minutos con 45 segundos</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pregunta_cjs26_pre">
+									26. Tiempo de llenado de la boleta por familia de hasta 8 personas
+								</label><br>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs26a_pre" name="pregunta_cjs26_pre" value="DE3040">
+									<label class="custom-control-label" for="pregunta_cjs26a_pre">De 30 a 40 minutos</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs26b_pre" name="pregunta_cjs26_pre" value="MAS40">
+									<label class="custom-control-label" for="pregunta_cjs26b_pre">Más de 40 minutos</label>
+								</div>
+							</div>
 						</div>
-					</div>
-					<br>
+		
 					<div class="card">
 						<div class="card-header cuest3">
 							<h4>D. Aspectos Posteriores a la Entrevista y Valoración Personal </h4>
 						</div>
 						<div class="card-body" id="seccion-d">
 							<div class="form-group">
-								<label for="pregunta_cjs25_pre">
-									25. ¿El censista respondió a las preguntas realizadas durante la entrevista, aclarando todas tus dudas?
-								</label><br>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs25a_pre" name="pregunta_cjs25_pre" value="1">
-									<label class="custom-control-label" for="pregunta_cjs25a_pre">Si</label>
-								</div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs25b_pre" name="pregunta_cjs25_pre" value="0">
-									<label class="custom-control-label" for="pregunta_cjs25b_pre">No</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="pregunta_cjs26_pre">
-									26. ¿El censista volvió a la vivienda con su supervisor para corregir o completar el cuestionario?
-								</label><br>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs26a_pre" name="pregunta_cjs26_pre" value="1">
-									<label class="custom-control-label" for="pregunta_cjs26a_pre">Si</label>
-								</div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs26b_pre" name="pregunta_cjs26_pre" value="0">
-									<label class="custom-control-label" for="pregunta_cjs26b_pre">No</label>
-								</div>
-							</div>
-							<div class="form-group">
 								<label for="pregunta_cjs27_pre">
-									27. ¿El censista utilizó el lápiz proporcionado por el INE y no bolígrafo?
+								27. ¿El censista respondió a las preguntas realizadas durante la entrevista, aclarando todas tus dudas?
 								</label><br>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input" id="pregunta_cjs27a_pre" name="pregunta_cjs27_pre" value="1">
@@ -1011,7 +1002,7 @@
 							</div>
 							<div class="form-group">
 								<label for="pregunta_cjs28_pre">
-									28. En caso de que en la vivienda alguien hable un idioma originario ¿El censista pudo comunicarse en ese idioma?*
+									28. ¿El censista volvió a la vivienda con su supervisor para corregir o completar el cuestionario?
 								</label><br>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input" id="pregunta_cjs28a_pre" name="pregunta_cjs28_pre" value="1">
@@ -1024,7 +1015,7 @@
 							</div>
 							<div class="form-group">
 								<label for="pregunta_cjs29_pre">
-									29. ¿Si el censista no habla ese idioma, solicitó que alguien del hogar sea interlocutor?*
+									29. ¿El censista utilizó el lápiz proporcionado por el INE y no bolígrafo?
 								</label><br>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input" id="pregunta_cjs29a_pre" name="pregunta_cjs29_pre" value="1">
@@ -1037,7 +1028,7 @@
 							</div>
 							<div class="form-group">
 								<label for="pregunta_cjs30_pre">
-									30. ¿Si el censista no habla ese idioma y nadie en el hogar puede ser interlocutor, coordinó con su supervisora/or para recurrir a un vecino o vecina?*
+									30. En caso de que en la vivienda alguien hable un idioma originario ¿El censista pudo comunicarse en ese idioma?*
 								</label><br>
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input" id="pregunta_cjs30a_pre" name="pregunta_cjs30_pre" value="1">
@@ -1050,9 +1041,35 @@
 							</div>
 							<div class="form-group">
 								<label for="pregunta_cjs31_pre">
-									31. Otros aspectos no abordados en las preguntas del cuestionario, indicar el tiempo de llenado de la boleta censal de toda la familia (pregunta abierta)
+									31. ¿Si el censista no habla ese idioma, solicitó que alguien del hogar sea interlocutor?*
 								</label><br>
-								<textarea class="form-control" rows="5" id="pregunta_cjs31_pre" name="pregunta_cjs31_pre" required></textarea>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs31a_pre" name="pregunta_cjs31_pre" value="1">
+									<label class="custom-control-label" for="pregunta_cjs31a_pre">Si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs31b_pre" name="pregunta_cjs31_pre" value="0">
+									<label class="custom-control-label" for="pregunta_cjs31b_pre">No</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pregunta_cjs32_pre">
+									32. ¿Si el censista no habla ese idioma y nadie en el hogar puede ser interlocutor, coordinó con su supervisora/or para recurrir a un vecino o vecina?*
+								</label><br>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs32a_pre" name="pregunta_cjs32_pre" value="1">
+									<label class="custom-control-label" for="pregunta_cjs32a_pre">Si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="pregunta_cjs32b_pre" name="pregunta_cjs32_pre" value="0">
+									<label class="custom-control-label" for="pregunta_cjs32b_pre">No</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="pregunta_cjs33_pre">
+									33. Otros aspectos no abordados en las preguntas del cuestionario, indicar el tiempo de llenado de la boleta censal de toda la familia (pregunta abierta)
+								</label><br>
+								<textarea class="form-control" rows="5" id="pregunta_cjs33_pre" name="pregunta_cjs33_pre" required></textarea>
 							</div>
 						</div>
 					</div>
@@ -1063,24 +1080,18 @@
 						</div>
 						<div class="card-body" id="seccion-e">
 							<div class="form-group">
-								<label for="pregunta_cjs32_pre">
-									32. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
+								<label for="pregunta_cjs34_pre">
+									34. ¿Todas las puertas de las viviendas de tu manzano tienen el adhesivo “CENSADA”?
 								</label><br>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs32a_pre" name="pregunta_cjs32_pre" value="1" >
-									<label class="custom-control-label" for="pregunta_cjs32a_pre">Si</label>
+									<input type="radio" class="custom-control-input" id="pregunta_cjs34a_pre" name="pregunta_cjs34_pre" value="1" disabled>
+									<label class="custom-control-label" for="pregunta_cjs34a_pre">Si</label>
 								</div>
 								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" class="custom-control-input" id="pregunta_cjs32b_pre" name="pregunta_cjs32_pre" value="0" >
-									<label class="custom-control-label" for="pregunta_cjs32b_pre">No</label>
+									<input type="radio" class="custom-control-input" id="pregunta_cjs34b_pre" name="pregunta_cjs34_pre" value="0" disabled>
+									<label class="custom-control-label" for="pregunta_cjs34b_pre">No</label>
 								</div>
 							</div>
-							<div class="form-group">
-            					<label for="pregunta_cjs32obs_pre">
-            						Si tienes alguna observación importante, anótala a continuación:
-            					</label><br>
-					            <textarea class="form-control" rows="5" id="pregunta_cjs32obs_pre" name="pregunta_cjs32obs_pre"></textarea>
-				            </div>
 						</div>
 					</div>
 					<br>
