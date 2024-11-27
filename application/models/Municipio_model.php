@@ -65,5 +65,25 @@ class Municipio_model extends CI_Model{
 		$sql = $this->db->update('municipio', $municipio );
 		return $sql;
 	}
+	
+	//Muncipios de un departamento
+	public function getMunPorDepartamento($iddepartamento)
+	{
+		$sql = "SELECT *    "
+			."FROM municipios   "
+			."LEFT JOIN provincia ON provincia.idprov = municipios.rel_idprovincia    "
+			."LEFT JOIN departamento ON departamento.iddepartamento = provincia.rel_iddepartamento   "
+			."WHERE departamento.iddepartamento = ?     "
+			."    "
+			."   "
+			."  "
+			."  "
+			." "
+			." ";
+
+		$qry = $this->db->query($sql, [$iddepartamento,]);
+		return $qry->result();
+
+	}
 
 }

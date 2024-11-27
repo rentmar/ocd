@@ -1858,10 +1858,14 @@ class ManejoDB extends CI_Controller{
 
 	public function jornadaCensalAdministrador(){
 		$jornadaCensal = $this->Cuestionario_model->leerTodosFormulariosCSJC();
+		$modos = $this->Cuestionario_model->modosCuestionario(8);
+
+		//var_dump($modos);
 
 		//var_dump($veedurias);
 
 		$data['jornadaCensal'] = $jornadaCensal;
+		$data['modos'] = $modos;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -1901,6 +1905,23 @@ class ManejoDB extends CI_Controller{
 			$estado = 1;
 		}
 		$this->Cuestionario_model->cambiarEstadoJC($idfcsjc, $estado);
+		redirect('manejoDB/jornadaCensalAdministrador');
+	}
+
+	//Activar/Desactivar el modo Test del formulario
+	public function cambiarModoTest($identificador)
+	{
+		$modos = $this->Cuestionario_model->modosCuestionario(8);
+		
+		if($modos->modo_test)
+		{
+			//Esta activa, funcion complementaria
+			$estado = 0;
+		}else{
+			//No esta activa, funcion complementaria
+			$estado = 1;
+		}
+		$this->Cuestionario_model->cambiarModoTest($modos->idcopt, $estado);
 		redirect('manejoDB/jornadaCensalAdministrador');
 	}
 

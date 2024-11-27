@@ -22,6 +22,13 @@ jQuery(document).on('change', 'select#idtema', function (e) {
 	getSubtemaReport(temaID)
 });
 
+/*Funcion para la carga de medios de comunicacion segun al tipo de medio seleccionado*/
+jQuery(document).on('change', 'select#departamento_csjc', function (e) {
+	e.preventDefault();
+	var departamentoID = jQuery(this).val();
+	//alert('lista de muncipios');
+	getMunicipiosList(departamentoID)
+});
 
 //Funcion para desplegar
 jQuery(document).on('click', '#checktema', function (e) {
@@ -470,7 +477,34 @@ function getSubtemaList(temaID, temaTitulo, color) {
 	});
 }
 
+function getMunicipiosList(departamentoID) {
+	//alert(tipomedioID + ' ' + baseurl);
+	$.ajax({
+		url: baseurl + "/controlCensal/getmuncipios",
+		type: 'post',
+		data: {departamentoID: departamentoID},
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#municipio_csjc').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log(json);
+			var options = '';
+			options +='<option value="" selected >Seleccionar Municipio</option>';
+			for (var i = 0; i < json.length; i++) {
+				options += '<option value="' + json[i].idmun + '">' + json[i].nombre_muncipio + '</option>';
+			}
+			jQuery("select#municipio_csjc").html(options);
 
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
 
 
 $(document).ready(function() {
@@ -807,14 +841,17 @@ $('#formulario_controlcensal').submit(function (e) {
 
 	for(var i=1; i<28;i++)
 	{
-		pregunta_seleccionada = $('input[name="pregunta_cjs' + i + '"]').is(':checked');
-		console.log(i);
-		console.log(pregunta_seleccionada);
-		console.log();
-		if(!pregunta_seleccionada){
-			$('#preguntassinseleccionar').modal("show");
-			formulario_correcto = false;
-			break
+		if(i != 20)
+		{
+			pregunta_seleccionada = $('input[name="pregunta_cjs' + i + '"]').is(':checked');
+			console.log(i);
+			console.log(pregunta_seleccionada);
+			console.log();
+			if(!pregunta_seleccionada){
+				$('#preguntassinseleccionar').modal("show");
+				formulario_correcto = false;
+				break
+			}
 		}
 	}
 	if(formulario_correcto)
@@ -825,7 +862,8 @@ $('#formulario_controlcensal').submit(function (e) {
 		departamento = $('#departamento_csjc :selected').text();
 		var sexo =  $('input:radio[name=sexo]:checked').val();
 		var edad = $("#edad").val();
-		var municipio = $("#municipio").val()
+		//var municipio = $("#municipio").val()
+		var municipio = $('#municipio_csjc option:selected').text();
 		console.log("Genero: " + sexo);
 		console.log("Edad;" + edad);
 		console.log("Municipio: " + municipio);

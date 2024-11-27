@@ -11,6 +11,7 @@ class ControlCensal extends CI_Controller
 		$this->load->model('Instanciaseguimiento_model');
 		$this->load->model('Cuestionario_model');
 		$this->load->model('Departamento_model');
+		$this->load->model('Municipio_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -100,6 +101,7 @@ class ControlCensal extends CI_Controller
 			if($value->id == 32){
 				//echo $value->codigo;
 				$value->respuesta = $respuesta->respuesta;
+				$value->observacion = $respuesta->respuestaobs;
 			}
 		}
 
@@ -121,6 +123,7 @@ class ControlCensal extends CI_Controller
 		$pr->idusuario = $this->input->post('idusuario_edit'); //Identificador del usuario
 		$pr->idrespuesta = $this->input->post('idformulario_edit'); //Identificador del formulario de respuestas
 		$pr->respuesta = $this->input->post('pregunta_cjs32_edit'); //Respuesta de la pregunta
+		$pr->respuestaobs = $this->input->post('pregunta_cjs32obs_edit'); //rpt secundaria
 
 		return $pr;
 	}
@@ -205,6 +208,11 @@ class ControlCensal extends CI_Controller
 				$preg_lit = 'pregunta_cjs'.$p->ordinal.'_pre';
 				$resp_tmp = $this->respuestaTipo2($p->idfcsjcp, $p->codigo, $p->ordinal, $preg_lit);
 			}
+			elseif ($p->tipo == 3){
+				$preg_lit = 'pregunta_cjs'.$p->ordinal.'_pre';
+				$preg_lit_seg = 'pregunta_cjs'.$p->ordinal.'obs_pre';
+				$resp_tmp = $this->respuestaTipo3($p->idfcsjcp, $p->codigo, $p->ordinal, $preg_lit, $preg_lit_seg);
+			}
 			$formulario_respuestas->{$i} = $resp_tmp;
 			$i++;
 		}
@@ -272,6 +280,18 @@ class ControlCensal extends CI_Controller
 		return $objetoResp;
 	}
 
+	//Pregunta tipo 3 - option con textarea
+	private function respuestaTipo3($idpregunta, $codigo, $ordinal, $respuesta, $respuestaSeg){
+		$objetoResp = new stdClass();
+		$objetoResp->id = $idpregunta;
+		$objetoResp->tipo = 3;
+		$objetoResp->codigo = $codigo;
+		$objetoResp->ordinal = $ordinal;
+		$objetoResp->respuesta = $this->input->post($respuesta);
+		$objetoResp->observacion = $this->input->post($respuestaSeg);
+		return $objetoResp;
+	}
+
 	//Reporte General
 	public function reporteGeneral()
 	{
@@ -295,7 +315,10 @@ class ControlCensal extends CI_Controller
 			$sheet->setCellValue('B'.$eje_y, $n->fecha_reg_lit);
 			$sheet->setCellValue('C'.$eje_y, $n->username);
 			$sheet->setCellValue('D'.$eje_y, $n->nombre_cuestionario);
-			$sheet->setCellValue('E'.$eje_y, $n->nombre_departamento);
+			$sheet->setCellValue('E'.$eje_y, $n->sexo);
+			$sheet->setCellValue('F'.$eje_y, $n->edad);
+			$sheet->setCellValue('G'.$eje_y, $n->municipio);
+			$sheet->setCellValue('H'.$eje_y, $n->nombre_departamento);
 			$eje_y++;
 		endforeach;
 
@@ -308,26 +331,118 @@ class ControlCensal extends CI_Controller
 			$sheet->setCellValue('B'.$eje_y, $n->fecha_reg_lit);
 			$sheet->setCellValue('C'.$eje_y, $n->username);
 			$sheet->setCellValue('D'.$eje_y, $n->nombre_cuestionario);
-			$sheet->setCellValue('E'.$eje_y, $n->nombre_departamento);
+			$sheet->setCellValue('E'.$eje_y, $n->sexo);
+			$sheet->setCellValue('F'.$eje_y, $n->edad);
+			$sheet->setCellValue('G'.$eje_y, $n->municipio);
+			$sheet->setCellValue('H'.$eje_y, $n->nombre_departamento);
 			$respuesta = json_decode($n->repuestas_csjc);
-			$eje_x = 'F';
+			$eje_x = 'I';
 			foreach($respuesta as $r)
 			{
-				if($r->tipo == 1){ //Radius
-					if(isset($r->respuesta))
-					{
-						if($r->respuesta == 1){
-							$sheet->setCellValue($eje_x.$eje_y, 'Si');
-						}elseif($r->respuesta == 0){
-							$sheet->setCellValue($eje_x.$eje_y, 'No');
+				if($r->id == 24)
+				{
+					if($r->tipo == 1){ //Radius
+						if(isset($r->respuesta))
+						{
+							if($r->respuesta == 1){
+								$eje_x_aux1 = $eje_x;
+								$eje_x_aux2 = $eje_x;
+								$eje_x_aux1++;
+								$eje_x_aux2++;
+								$eje_x_aux2++;
+
+								$sheet->setCellValue($eje_x.$eje_y, 'Si');
+								$sheet->setCellValue($eje_x_aux1.$eje_y, 0);
+								$sheet->setCellValue($eje_x_aux2.$eje_y, 0);
+							}elseif($r->respuesta == 0){
+								$eje_x_aux1 = $eje_x;
+								$eje_x_aux2 = $eje_x;
+								$eje_x_aux1++;
+								$eje_x_aux2++;
+								$eje_x_aux2++;
+								$sheet->setCellValue($eje_x.$eje_y, 'No');
+								$sheet->setCellValue($eje_x_aux1.$eje_y, 0);
+								$sheet->setCellValue($eje_x_aux2.$eje_y, 0);
+							}
+						}else{
+							$sheet->setCellValue($eje_x.$eje_y, 's/r');
 						}
-					}else{
-						$sheet->setCellValue($eje_x.$eje_y, 's/r');
+					}elseif($r->tipo == 2){ //TextArea
+						$sheet->setCellValue($eje_x.$eje_y, $r->respuesta);
 					}
-				}elseif($r->tipo == 2){ //TextArea
-					$sheet->setCellValue($eje_x.$eje_y, $r->respuesta);
+					elseif ($r->tipo == 3){
+
+					}
+					$eje_x++;
+					$eje_x++;
+					$eje_x++;
+
 				}
-				$eje_x++;
+				else{
+					if($r->tipo == 1){ //Radius
+						if(isset($r->respuesta))
+						{
+							if($r->respuesta == 1){
+								$sheet->setCellValue($eje_x.$eje_y, 'Si');
+								/*$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}*/
+							}elseif($r->respuesta == 0){
+								$sheet->setCellValue($eje_x.$eje_y, 'No');
+								/*$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}*/
+							}
+						}else{
+							$sheet->setCellValue($eje_x.$eje_y, 's/r');
+						}
+					}elseif($r->tipo == 2){ //TextArea
+						$sheet->setCellValue($eje_x.$eje_y, $r->respuesta);
+					}
+					elseif ($r->tipo == 3){
+						if(isset($r->respuesta))
+						{
+							if($r->respuesta == 1){
+								$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								$sheet->setCellValue($eje_x.$eje_y, 'Si');
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}
+
+							}elseif($r->respuesta == 0){
+								$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								$sheet->setCellValue($eje_x.$eje_y, 'No');
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}
+							}
+						}else{
+							$eje_x_auxobs = $eje_x;
+							$eje_x_auxobs++;
+							$sheet->setCellValue($eje_x.$eje_y, 's/r');
+							if(isset($r->observacion)){
+								$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+							}else{
+								$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+							}
+						}
+					}
+					$eje_x++;
+				}
 			}
 			$eje_y++;
 		endforeach;
@@ -363,6 +478,175 @@ class ControlCensal extends CI_Controller
 		$writer->save("php://output");
 
 	}
+	
+	//Reporte Grafico
+	public function reportegeneralcompletos(){
+		$filename = "reporte-form-completados-csjc.xlsx";
+		$ruta = 'assets/info/';
+		$plantilla = $ruta.'plantilla-reporte-csjc.xlsx';
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+		header('Content-Disposition: attachment; filename="' . $filename. '"');
+		header('Cache-Control: max-age=0');
+
+		$forms = $this->Cuestionario_model-> leerFormulariosCompletados();
+
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+		$sheet = $spreadsheet->getSheet(0)->setTitle('Forms');
+
+		$worksheet = $spreadsheet->getActiveSheet();
+		$eje_y = 10;
+
+		foreach ($forms as $n):
+			$sheet->setCellValue('A'.$eje_y, $n->idfcsjc);
+			$sheet->setCellValue('B'.$eje_y, $n->fecha_reg_lit);
+			$sheet->setCellValue('C'.$eje_y, $n->username);
+			$sheet->setCellValue('D'.$eje_y, $n->nombre_cuestionario);
+			$sheet->setCellValue('E'.$eje_y, $n->sexo);
+			$sheet->setCellValue('F'.$eje_y, $n->edad);
+			$sheet->setCellValue('G'.$eje_y, $n->municipio);
+			$sheet->setCellValue('H'.$eje_y, $n->nombre_departamento);
+			$eje_y++;
+		endforeach;
+
+		$sheet = $spreadsheet->getSheet(1)->setTitle('Respuestas');
+		$worksheet = $spreadsheet->getActiveSheet();
+		$eje_y = 10;
+
+		foreach ($forms as $n):
+			$sheet->setCellValue('A'.$eje_y, $n->idfcsjc);
+			$sheet->setCellValue('B'.$eje_y, $n->fecha_reg_lit);
+			$sheet->setCellValue('C'.$eje_y, $n->username);
+			$sheet->setCellValue('D'.$eje_y, $n->nombre_cuestionario);
+			$sheet->setCellValue('E'.$eje_y, $n->sexo);
+			$sheet->setCellValue('F'.$eje_y, $n->edad);
+			$sheet->setCellValue('G'.$eje_y, $n->municipio);
+			$sheet->setCellValue('H'.$eje_y, $n->nombre_departamento);
+			$respuesta = json_decode($n->repuestas_csjc);
+			$eje_x = 'I';
+			foreach($respuesta as $r)
+			{
+				if($r->id == 24)
+				{
+					if($r->tipo == 1){ //Radius
+						if(isset($r->respuesta))
+						{
+							if($r->respuesta == 1){
+								$eje_x_aux1 = $eje_x;
+								$eje_x_aux2 = $eje_x;
+								$eje_x_aux1++;
+								$eje_x_aux2++;
+								$eje_x_aux2++;
+
+								$sheet->setCellValue($eje_x.$eje_y, 'Si');
+								$sheet->setCellValue($eje_x_aux1.$eje_y, 0);
+								$sheet->setCellValue($eje_x_aux2.$eje_y, 0);
+							}elseif($r->respuesta == 0){
+								$eje_x_aux1 = $eje_x;
+								$eje_x_aux2 = $eje_x;
+								$eje_x_aux1++;
+								$eje_x_aux2++;
+								$eje_x_aux2++;
+								$sheet->setCellValue($eje_x.$eje_y, 'No');
+								$sheet->setCellValue($eje_x_aux1.$eje_y, 0);
+								$sheet->setCellValue($eje_x_aux2.$eje_y, 0);
+							}
+						}else{
+							$sheet->setCellValue($eje_x.$eje_y, 's/r');
+						}
+					}elseif($r->tipo == 2){ //TextArea
+						$sheet->setCellValue($eje_x.$eje_y, $r->respuesta);
+					}
+					elseif ($r->tipo == 3){
+
+					}
+					$eje_x++;
+					$eje_x++;
+					$eje_x++;
+
+				}
+				else{
+					if($r->tipo == 1){ //Radius
+						if(isset($r->respuesta))
+						{
+							if($r->respuesta == 1){
+								$sheet->setCellValue($eje_x.$eje_y, 'Si');
+								/*$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}*/
+							}elseif($r->respuesta == 0){
+								$sheet->setCellValue($eje_x.$eje_y, 'No');
+								/*$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}*/
+							}
+						}else{
+							$sheet->setCellValue($eje_x.$eje_y, 's/r');
+						}
+					}elseif($r->tipo == 2){ //TextArea
+						$sheet->setCellValue($eje_x.$eje_y, $r->respuesta);
+					}
+					elseif ($r->tipo == 3){
+						if(isset($r->respuesta))
+						{
+							if($r->respuesta == 1){
+								$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								$sheet->setCellValue($eje_x.$eje_y, 'Si');
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}
+
+							}elseif($r->respuesta == 0){
+								$eje_x_auxobs = $eje_x;
+								$eje_x_auxobs++;
+								$sheet->setCellValue($eje_x.$eje_y, 'No');
+								if(isset($r->observacion)){
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+								}else{
+									$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+								}
+							}
+						}else{
+							$eje_x_auxobs = $eje_x;
+							$eje_x_auxobs++;
+							$sheet->setCellValue($eje_x.$eje_y, 's/r');
+							if(isset($r->observacion)){
+								$sheet->setCellValue($eje_x_auxobs.$eje_y, $r->observacion);
+							}else{
+								$sheet->setCellValue($eje_x_auxobs.$eje_y, 'sin obs');
+							}
+						}
+					}
+					$eje_x++;
+				}
+			}
+			$eje_y++;
+		endforeach;
+
+
+
+
+
+
+
+		//Primer libro por defecto
+		$sheet = $spreadsheet->setActiveSheetIndex(0);
+
+		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+		$writer->save("php://output");
+
+
+	}
 
 	public function tests()
 	{
@@ -381,6 +665,17 @@ class ControlCensal extends CI_Controller
 			'mensaje' => $mensaje,
 			'clase' => $clase,
 		]);
+	}
+
+
+	//Respuesta AjaX Munucipios
+	public function getmuncipios()
+	{
+		$json = array();
+		$iddepartamento = $this->input->post('departamentoID');
+		$json = $this->Municipio_model->getMunPorDepartamento($iddepartamento);
+		header('Content-Type: application/json');
+		echo json_encode($json);
 	}
 
 

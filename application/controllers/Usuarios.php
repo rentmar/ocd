@@ -7,6 +7,7 @@ class Usuarios extends CI_Controller
 		parent::__construct();
 		$this->load->library('ion_auth');
 		$this->load->model('Departamento_model');
+		$this->load->model('Batch_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -310,4 +311,10 @@ class Usuarios extends CI_Controller
 			'clase' => $clase,
 		]);
 	}
+	
+	
+	
+	
+	
+	
 }

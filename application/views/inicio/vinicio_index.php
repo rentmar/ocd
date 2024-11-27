@@ -64,7 +64,7 @@
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest3 ">
-						Censo
+						Prueba Experimental
 						<br><br>
 
 					</div>
@@ -207,8 +207,8 @@
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header cuest3 ">
-						Control Social Jornada Censal
-						<br><br>
+						Día del Censo
+						<br>
 
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/censo.svg'; ?>" alt="Card image">

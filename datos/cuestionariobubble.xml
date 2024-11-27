@@ -2,44 +2,31 @@
 	<element>
 		<iddepartamento1>1</iddepartamento1>
 		<nombre_departamento1>La Paz</nombre_departamento1>
-<<<<<<< HEAD
-		<cantidad1>28</cantidad1>
-		<radio1>5</radio1>
-=======
-		<cantidad1>4</cantidad1>
+		<cantidad1>33</cantidad1>
 		<radio1>4</radio1>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
 	</element>
 	<element>
 		<iddepartamento1>2</iddepartamento1>
 		<nombre_departamento1>Santa Cruz</nombre_departamento1>
-		<cantidad1>4</cantidad1>
-		<radio1>4</radio1>
+		<cantidad1>38</cantidad1>
+		<radio1>5</radio1>
 	</element>
 	<element>
 		<iddepartamento1>3</iddepartamento1>
 		<nombre_departamento1>Oruro</nombre_departamento1>
-		<cantidad1>1</cantidad1>
+		<cantidad1>9</cantidad1>
 		<radio1>1</radio1>
 	</element>
 	<element>
 		<iddepartamento1>4</iddepartamento1>
 		<nombre_departamento1>Cochabamba</nombre_departamento1>
-<<<<<<< HEAD
-		<cantidad1>35</cantidad1>
-=======
-		<cantidad1>7</cantidad1>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
-		<radio1>7</radio1>
+		<cantidad1>60</cantidad1>
+		<radio1>8</radio1>
 	</element>
 	<element>
 		<iddepartamento1>5</iddepartamento1>
 		<nombre_departamento1>Chuquisaca</nombre_departamento1>
-<<<<<<< HEAD
-		<cantidad1>52</cantidad1>
-=======
-		<cantidad1>10</cantidad1>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
+		<cantidad1>76</cantidad1>
 		<radio1>10</radio1>
 	</element>
 	<element>
@@ -57,13 +44,8 @@
 	<element>
 		<iddepartamento1>8</iddepartamento1>
 		<nombre_departamento1>Pando</nombre_departamento1>
-<<<<<<< HEAD
-		<cantidad1>49</cantidad1>
-		<radio1>9</radio1>
-=======
-		<cantidad1>7</cantidad1>
-		<radio1>7</radio1>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
+		<cantidad1>21</cantidad1>
+		<radio1>3</radio1>
 	</element>
 	<element>
 		<iddepartamento1>9</iddepartamento1>
@@ -74,55 +56,32 @@
 	<element>
 		<iddepartamento2>1</iddepartamento2>
 		<nombre_departamento2>La Paz</nombre_departamento2>
-<<<<<<< HEAD
-		<cantidad2>597</cantidad2>
-=======
-		<cantidad2>90</cantidad2>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
+		<cantidad2>1454</cantidad2>
 		<radio2>10</radio2>
 	</element>
 	<element>
 		<iddepartamento2>2</iddepartamento2>
 		<nombre_departamento2>Santa Cruz</nombre_departamento2>
-<<<<<<< HEAD
-		<cantidad2>396</cantidad2>
-		<radio2>6</radio2>
-=======
-		<cantidad2>47</cantidad2>
+		<cantidad2>756</cantidad2>
 		<radio2>5</radio2>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
 	</element>
 	<element>
 		<iddepartamento2>3</iddepartamento2>
 		<nombre_departamento2>Oruro</nombre_departamento2>
-<<<<<<< HEAD
-		<cantidad2>121</cantidad2>
+		<cantidad2>279</cantidad2>
 		<radio2>2</radio2>
-=======
-		<cantidad2>11</cantidad2>
-		<radio2>1</radio2>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
 	</element>
 	<element>
 		<iddepartamento2>4</iddepartamento2>
 		<nombre_departamento2>Cochabamba</nombre_departamento2>
-<<<<<<< HEAD
-		<cantidad2>628</cantidad2>
-		<radio2>10</radio2>
-=======
-		<cantidad2>84</cantidad2>
+		<cantidad2>1345</cantidad2>
 		<radio2>9</radio2>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
 	</element>
 	<element>
 		<iddepartamento2>5</iddepartamento2>
 		<nombre_departamento2>Chuquisaca</nombre_departamento2>
-<<<<<<< HEAD
-		<cantidad2>251</cantidad2>
-=======
-		<cantidad2>38</cantidad2>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
-		<radio2>4</radio2>
+		<cantidad2>656</cantidad2>
+		<radio2>5</radio2>
 	</element>
 	<element>
 		<iddepartamento2>6</iddepartamento2>
@@ -139,12 +98,8 @@
 	<element>
 		<iddepartamento2>8</iddepartamento2>
 		<nombre_departamento2>Pando</nombre_departamento2>
-<<<<<<< HEAD
-		<cantidad2>118</cantidad2>
-=======
-		<cantidad2>19</cantidad2>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
-		<radio2>2</radio2>
+		<cantidad2>207</cantidad2>
+		<radio2>1</radio2>
 	</element>
 	<element>
 		<iddepartamento2>9</iddepartamento2>
@@ -155,52 +110,32 @@
 	<element>
 		<iddepartamento3>1</iddepartamento3>
 		<nombre_departamento3>La Paz</nombre_departamento3>
-<<<<<<< HEAD
-		<cantidad3>7</cantidad3>
+		<cantidad3>15</cantidad3>
 		<radio3>10</radio3>
-=======
-		<cantidad3>0</cantidad3>
-		<radio3>0</radio3>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
 	</element>
 	<element>
 		<iddepartamento3>2</iddepartamento3>
 		<nombre_departamento3>Santa Cruz</nombre_departamento3>
-		<cantidad3>0</cantidad3>
-		<radio3>0</radio3>
+		<cantidad3>8</cantidad3>
+		<radio3>5</radio3>
 	</element>
 	<element>
 		<iddepartamento3>3</iddepartamento3>
 		<nombre_departamento3>Oruro</nombre_departamento3>
-<<<<<<< HEAD
-		<cantidad3>6</cantidad3>
-		<radio3>9</radio3>
-=======
-		<cantidad3>0</cantidad3>
-		<radio3>0</radio3>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
+		<cantidad3>4</cantidad3>
+		<radio3>3</radio3>
 	</element>
 	<element>
 		<iddepartamento3>4</iddepartamento3>
 		<nombre_departamento3>Cochabamba</nombre_departamento3>
-<<<<<<< HEAD
-		<cantidad3>1</cantidad3>
-		<radio3>1</radio3>
-=======
-		<cantidad3>0</cantidad3>
-		<radio3>0</radio3>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
+		<cantidad3>9</cantidad3>
+		<radio3>6</radio3>
 	</element>
 	<element>
 		<iddepartamento3>5</iddepartamento3>
 		<nombre_departamento3>Chuquisaca</nombre_departamento3>
-<<<<<<< HEAD
 		<cantidad3>4</cantidad3>
-		<radio3>6</radio3>
-=======
-		<cantidad3>1</cantidad3>
-		<radio3>10</radio3>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
+		<radio3>3</radio3>
 	</element>
 	<element>
 		<iddepartamento3>6</iddepartamento3>
@@ -218,11 +153,7 @@
 		<iddepartamento3>8</iddepartamento3>
 		<nombre_departamento3>Pando</nombre_departamento3>
 		<cantidad3>1</cantidad3>
-<<<<<<< HEAD
 		<radio3>1</radio3>
-=======
-		<radio3>10</radio3>
->>>>>>> 168fe43ac7ab5dc70fe5cb02d9d32238b99ba03f
 	</element>
 	<element>
 		<iddepartamento3>9</iddepartamento3>
@@ -233,7 +164,7 @@
 	<element>
 		<iddepartamento4>1</iddepartamento4>
 		<nombre_departamento4>La Paz</nombre_departamento4>
-		<cantidad4>18</cantidad4>
+		<cantidad4>191</cantidad4>
 		<radio4>10</radio4>
 	</element>
 	<element>
@@ -251,13 +182,13 @@
 	<element>
 		<iddepartamento4>4</iddepartamento4>
 		<nombre_departamento4>Cochabamba</nombre_departamento4>
-		<cantidad4>11</cantidad4>
-		<radio4>6</radio4>
+		<cantidad4>13</cantidad4>
+		<radio4>1</radio4>
 	</element>
 	<element>
 		<iddepartamento4>5</iddepartamento4>
 		<nombre_departamento4>Chuquisaca</nombre_departamento4>
-		<cantidad4>0</cantidad4>
+		<cantidad4>1</cantidad4>
 		<radio4>0</radio4>
 	</element>
 	<element>
@@ -270,7 +201,7 @@
 		<iddepartamento4>7</iddepartamento4>
 		<nombre_departamento4>Beni</nombre_departamento4>
 		<cantidad4>2</cantidad4>
-		<radio4>1</radio4>
+		<radio4>0</radio4>
 	</element>
 	<element>
 		<iddepartamento4>8</iddepartamento4>
@@ -283,5 +214,113 @@
 		<nombre_departamento4>Potosi</nombre_departamento4>
 		<cantidad4>0</cantidad4>
 		<radio4>0</radio4>
+	</element>
+	<element>
+		<iddepartamento5>1</iddepartamento5>
+		<nombre_departamento5>La Paz</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>2</iddepartamento5>
+		<nombre_departamento5>Santa Cruz</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>3</iddepartamento5>
+		<nombre_departamento5>Oruro</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>4</iddepartamento5>
+		<nombre_departamento5>Cochabamba</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>5</iddepartamento5>
+		<nombre_departamento5>Chuquisaca</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>6</iddepartamento5>
+		<nombre_departamento5>Tarija</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>7</iddepartamento5>
+		<nombre_departamento5>Beni</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>8</iddepartamento5>
+		<nombre_departamento5>Pando</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento5>9</iddepartamento5>
+		<nombre_departamento5>Potosi</nombre_departamento5>
+		<cantidad5>0</cantidad5>
+		<radio5>0</radio5>
+	</element>
+	<element>
+		<iddepartamento6>1</iddepartamento6>
+		<nombre_departamento6>La Paz</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>2</iddepartamento6>
+		<nombre_departamento6>Santa Cruz</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>3</iddepartamento6>
+		<nombre_departamento6>Oruro</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>4</iddepartamento6>
+		<nombre_departamento6>Cochabamba</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>5</iddepartamento6>
+		<nombre_departamento6>Chuquisaca</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>6</iddepartamento6>
+		<nombre_departamento6>Tarija</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>7</iddepartamento6>
+		<nombre_departamento6>Beni</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>8</iddepartamento6>
+		<nombre_departamento6>Pando</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
+	</element>
+	<element>
+		<iddepartamento6>9</iddepartamento6>
+		<nombre_departamento6>Potosi</nombre_departamento6>
+		<cantidad6>0</cantidad6>
+		<radio6>0</radio6>
 	</element>
 </root>

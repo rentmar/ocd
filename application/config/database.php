@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'mysql',
-	'database' => 'ocdmonitor2',
+	'username' => 'ocdboliv_umonit',
+	'password' => 'tl*=3wC9FtR[',
+	'database' => 'ocdboliv_monitoreo',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

@@ -7,7 +7,28 @@
 					Formularios Control Social en la Jornada Censal
 				</h3>
 			</div>
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores" >
+				<?php if($modos->modo_test): ?>
+					<h4 class="text-danger"  >
+						Modo de Pruebas: Activo
+						<a href="<?php echo site_url('manejoDB/cambiarModoTest/'.$modos->idcopt);?>" data-toggle="tooltip" title="Activa/Desactiva">
+							<i class="fas fa-toggle-on"></i>
+						</a>
 
+					</h4>
+				<?php elseif (!$modos->modo_test): ?>
+					<h4 class="text-info" >
+						Modo de Pruebas: Inactivo
+						<a href="<?php echo site_url('manejoDB/cambiarModoTest/'.$modos->idcopt);?>" data-toggle="tooltip" title="Activa/Desactiva" >
+							<i class="fas fa-toggle-off"></i>
+						</a>
+
+					</h4>
+				<?php endif; ?>
+
+
+
+			</div>
 			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 color-contenedores ">
 				<div>
 					<table id="normas-tabla" class="table table-striped table-hoover">
@@ -17,6 +38,7 @@
 							<th>Fecha</th>
 							<th>Formulario</th>
 							<th>Usuario</th>
+							<th>Completo</th>
 							<th>Estado</th>
 							<th>Accion</th>
 						</tr>
@@ -29,6 +51,14 @@
 										<td><?php echo $jc->fecha_reg_lit; ?></td>
 										<td><?php echo $jc->nombre_cuestionario; ?></td>
 										<td><?php echo $jc->username; ?></td>
+										
+										<?php if($jc->esta_incompleto): ?>
+											<td class="table-danger" >Incompleto</td>
+										<?php else: ?>
+											<td class="table-info" >Completo</td>
+										<?php endif; ?>
+										
+										
 										<?php if($jc->activo): ?>
 											<td class="table-info" >Activa</td>
 										<?php else: ?>
