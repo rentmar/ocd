@@ -4,10 +4,10 @@
 	<?php
 	/** @noinspection PhpLanguageLevelInspection */
 	$atr_form =[
-		'id' => 'formulario_ej2024' ,
+		'id' => 'formulario_ej2024_h1' ,
 	]
 	;?>
-	<?php echo form_open('EleccionesJudiciales2024/capturaDatos', $atr_form);?>
+	<?php echo form_open('EleccionesJudiciales2024/procesarHoja1', $atr_form);?>
 
 	<div class="contenedores_divididos">
 		<div class="contenedor_superior2" id="contenedor_pequeño">
@@ -17,6 +17,10 @@
 		</div>
 	</div>
 	<br>
+
+	<div>
+		<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
+	</div>
 
 	<div class="contenedores">
 		<div class="form-group">

@@ -257,7 +257,7 @@
 							<!-- Modo Prueba -->
 							<?php if(!$comprobar_formcsej2024): ?>
 								<a href="<?php echo site_url('eleccionesJudiciales2024/nuevo');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
-									Nuevo
+									Iniciar
 								</a>
 							<?php else: ?>
 								<a href="<?php echo site_url('eleccionesJudiciales2024/reset');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
@@ -276,7 +276,7 @@
 								</a>
 							<?php else: ?>
 								<a href="<?php echo site_url('eleccionesJudiciales2024/nuevo');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
-									Nuevo
+									Iniciar
 								</a>
 							<?php endif; ?>
 						<?php endif; ?>						

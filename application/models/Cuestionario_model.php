@@ -485,6 +485,95 @@ class Cuestionario_model extends CI_Model
 		return $bandera;
 	}
 
+	//Comprobar registro de hoja 1
+	public function existeHoja1($idusuario)
+	{
+		$this->db->where('rel_id', $idusuario);
+		$this->db->from('form_elecc_jud_2024_resp_hoja1');
+		$hoja1 = $this->db->count_all_results();
+
+		if($hoja1 == 1 ){
+			$bandera = true;
+		}else{
+			$bandera = false;
+		}
+		return $bandera;
+	}
+	//Comprobar registro de hoja 2
+	public function existeHoja2($idusuario)
+	{
+		$this->db->where('rel_id', $idusuario);
+		$this->db->from('form_elecc_jud_2024_resp_hoja2');
+		$hoja2 = $this->db->count_all_results();
+
+		if($hoja2 == 1){
+			$bandera = true;
+		}else{
+			$bandera = false;
+		}
+		return $bandera;
+	}
+
+	//Leer el estado del modo test del formulario
+	public function hoja1($idusr)
+	{
+		$sql = "SELECT * "
+			."FROM form_elecc_jud_2024_resp_hoja1 "
+			."WHERE form_elecc_jud_2024_resp_hoja1.rel_id = ? "
+			." "
+			." "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql, [$idusr,]);
+		return $qry->row();
+	}
+
+	public function hoja2($idusr)
+	{
+		$sql = "SELECT * "
+			."FROM form_elecc_jud_2024_resp_hoja2 "
+			."WHERE form_elecc_jud_2024_resp_hoja2.rel_id = ? "
+			." "
+			." "
+			." "
+			." "
+			." ";
+		$qry = $this->db->query($sql, [$idusr,]);
+		return $qry->row();
+	}
+
+	//Insertar hojas
+	public function insertarHoja1($datos){
+		$data = array(
+			'rel_id' => $datos->idusuario,
+		);
+
+		$this->db->insert('form_elecc_jud_2024_resp_hoja1', $data);
+	}
+	public function insertarHoja2($datos){
+		$data = array(
+			'rel_id' => $datos->idusuario,
+		);
+
+		$this->db->insert('form_elecc_jud_2024_resp_hoja2', $data);
+	}
+
+	//Eliminar hojas
+	public function eliminarHoja1($idhoja1){
+		$this->db->where('idfrhoja1', $idhoja1);
+		$this->db->delete('form_elecc_jud_2024_resp_hoja1');
+
+	}
+	public function eliminarHoja2($idhoja2){
+		$this->db->where('idfrhoja2', $idhoja2);
+		$this->db->delete('form_elecc_jud_2024_resp_hoja2');
+
+	}
+
+
+
+
 
 
 
