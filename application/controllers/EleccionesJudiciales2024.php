@@ -36,7 +36,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$usuario = $this->ion_auth->user()->row();
 		$departamentos = $this->Departamento_model->leerDepartamentos();
 
-		var_dump($departamentos);
+		//var_dump($departamentos);
 
 		$datos['usuario'] = $usuario;
 		$datos['departamentos'] = $departamentos;

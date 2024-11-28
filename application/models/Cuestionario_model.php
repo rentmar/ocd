@@ -409,23 +409,6 @@ class Cuestionario_model extends CI_Model
 		return $qry->result();
 	}
 
-
-	//Extraer todos lod formularios validos para un reporte general
-	public function leerFormulariosCompletados()
-	{
-		$sql = "SELECT * "
-			."FROM form_csjc_respuestas "
-			."LEFT JOIN departamento ON departamento.iddepartamento = form_csjc_respuestas.rel_iddepartamento "
-			."LEFT JOIN users ON users.id = form_csjc_respuestas.rel_id "
-			."LEFT JOIN cuestionario ON cuestionario.idcuestionario = form_csjc_respuestas.rel_idcuestionario "
-			."WHERE form_csjc_respuestas.activo = 1  "
-			."AND form_csjc_respuestas.esta_incompleto = 0  "
-			." ";
-		$qry = $this->db->query($sql);
-		return $qry->result();
-	}
-
-
 	//Contar el numero de formularios de un usario
 	public function contarFormulariosUsuario($idusuario)
 	{
@@ -474,6 +457,7 @@ class Cuestionario_model extends CI_Model
 
 	//Actualizar la ultima pregunta
 	public function actualizarCuestionario($idformulario, $respuestas_json){
+		/** @noinspection PhpLanguageLevelInspection */
 		$data = [
 			"repuestas_csjc" => $respuestas_json,
 			"esta_incompleto" => 0,
@@ -482,15 +466,23 @@ class Cuestionario_model extends CI_Model
 		$this->db->update(' form_csjc_respuestas', $data);
 	}
 
-	//Actualizar el estado de un formulario
-	public function cambiarModoTest($identificador, $estado)
+	//Comprobar si hay formularios
+	public function existenRegistrosEJ2024($idusuario)
 	{
-		/** @noinspection PhpLanguageLevelInspection */
-		$data = [
-			'modo_test' => $estado,
-		];
-		$this->db->where('idcopt', $identificador);
-		$this->db->update('cuestionario_opciones', $data);
+		$this->db->where('rel_id', $idusuario);
+		$this->db->from('form_elecc_jud_2024_resp_hoja1');
+		$hoja1 = $this->db->count_all_results();
+
+		$this->db->where('rel_id', $idusuario);
+		$this->db->from('form_elecc_jud_2024_resp_hoja2');
+		$hoja2 = $this->db->count_all_results();
+
+		if($hoja1 == 1 and $hoja2 == 1){
+			$bandera = true;
+		}else{
+			$bandera = false;
+		}
+		return $bandera;
 	}
 
 

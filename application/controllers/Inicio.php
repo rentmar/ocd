@@ -45,6 +45,7 @@ class Inicio extends CI_Controller
 		$usuario = $this->ion_auth->user()->row();
 		$idusuario = $usuario->id;
 
+
 		//Flag de control de la jornada censal
 		// 1: Modo de prueba habilitado
 		// 0: Modo produccion habilitado
@@ -58,6 +59,18 @@ class Inicio extends CI_Controller
 		$cantidad_fcsjc = $this->Cuestionario_model->contarFormulariosUsuario($usuario->id);
 
 
+		//Flag de control para Elecciones Judiciales 2024
+		//1: Modo de prueba habilitado
+		//2: Modo produccion habilitado
+		$modos_formcsej2024 = $this->Cuestionario_model->modosCuestionario(9);
+		//var_dump($modos_formcsej2024);
+		//echo "<br>";
+		$flag_test_csej2024 = $modos_formcsej2024->modo_test;
+		//Discriminante para el formulario, true == existen ambos registro false == no hay registros
+		$comprobar_formcsej2024 = $this->Cuestionario_model->existenRegistrosEJ2024($idusuario);
+		//var_dump($comprobar_formcsej2024);
+
+
 
 
 		$datos['encuestas'] = $this->Encuesta_model->leerEncuestasAsignadasUsuario($idusuario);
@@ -66,6 +79,8 @@ class Inicio extends CI_Controller
 		$datos['veeduria'] = $this->Veeduria_model->leerFormularios();
 		$datos['flag_test_csjc'] = $flag_test_csjc;
 		$datos['cantidad_fcsjc'] = $cantidad_fcsjc;
+		$datos['flag_test_csej2024'] = $flag_test_csej2024;
+		$datos['comprobar_formcsej2024'] = $comprobar_formcsej2024;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');

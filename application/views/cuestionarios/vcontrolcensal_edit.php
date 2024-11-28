@@ -41,6 +41,12 @@
 						<label class="custom-control-label" for="pregunta_cjs32b">No</label>
 					</div>
 				</div>
+				<div class="form-group">
+					<label for="pregunta_cjs32obs">
+						Si tienes alguna observación importante, anótala a continuación:
+					</label><br>
+					<textarea class="form-control" rows="5" id="pregunta_cjs32obs_edit" name="pregunta_cjs32obs_edit"></textarea>
+				</div>
 			</div>
 		</div>
 	</div>

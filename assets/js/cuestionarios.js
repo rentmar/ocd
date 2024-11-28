@@ -2517,3 +2517,40 @@ function getSubtemas2(idtema){
  * subtemas
  *
  * *****************/
+
+
+/*Funcion para la carga de medios de comunicacion segun al tipo de medio seleccionado*/
+jQuery(document).on('change', 'select#departamento_csej', function (e) {
+	e.preventDefault();
+	var departamentoID = jQuery(this).val();
+	//alert('lista de muncipios');
+	getMunicipiosList1(departamentoID)
+});
+function getMunicipiosList1(departamentoID) {
+	//alert(tipomedioID + ' ' + baseurl);
+	$.ajax({
+		url: baseurl + "/controlCensal/getmuncipios",
+		type: 'post',
+		data: {departamentoID: departamentoID},
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#municipio_csjc').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log(json);
+			var options = '';
+			options +='<option value="" selected >Seleccionar Municipio</option>';
+			for (var i = 0; i < json.length; i++) {
+				options += '<option value="' + json[i].idmun + '">' + json[i].nombre_muncipio + '</option>';
+			}
+			jQuery("select#municipio_csej").html(options);
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}

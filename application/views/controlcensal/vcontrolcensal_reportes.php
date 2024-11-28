@@ -46,12 +46,14 @@
 					</div>
 				</div>
 				<?php echo form_close(); ?>
-
-				<br>
 				
-				<?php echo form_open('controlCensal/reporteGrafico'); ?>
+				
+				
+				<br>
+				<?php echo form_open('controlCensal/reportegeneralcompletos'); ?>
 				<div class="contenedor">
-					<h3>Reporte Grafico </h3>
+					<h3>Reporte Solo Formularios Completos </h3>
+
 					<div class="form-row">
 						<input type="submit" class="BOTON" value="GENERAR" name="tema">
 					</div>
@@ -59,6 +61,22 @@
 				<?php echo form_close(); ?>
 
 				<br>
+				
+				<br>
+				<div class="contenedor">
+					<h3>Reporte Grafico General </h3>
+					<div class="form-row">
+						<a href="<?php echo base_url('assets/info/reporte-grafico-csjc.xlsx'); ?>" class="BOTON" role="button">Descargar</a>
+					</div>
+				</div>
+
+				<br>
+				<div class="contenedor">
+					<h3>Reporte Grafico Formularios Completos </h3>
+					<div class="form-row">
+						<a href="<?php echo base_url('assets/info/reporte-grafico-cmp-csjc.xlsx'); ?>" class="BOTON" role="button">Descargar</a>
+					</div>
+				</div>
 
 
 			</div>
