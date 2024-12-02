@@ -58,7 +58,7 @@
 						<td>3</td>
 						<td>Repositorio de imagenes </td>
 						<td>
-							<a href="<?php echo site_url(''); ?>">
+							<a href="http://localhost/api-google-drive/">
 								Ingresar
 							</a>
 						</td>
