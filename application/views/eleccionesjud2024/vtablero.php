@@ -22,36 +22,25 @@
 						<td>1</td>
 						<td>Cuestionario 1 - Apertura y funcionamiento de recintos</td>
 						<td>
-							<?php if(!$banderaHoja1): ?>
-								<a href="<?php echo site_url('EleccionesJudiciales2024/hoja1/'); ?>">
-									Nuevo
+								<a href="<?php echo site_url('eleccionesJudiciales2024/hoja1/'.$hoja1->idfrhoja1); ?>">
+									<i class="far fa-edit fa-lg"></i>
 								</a>
-							<?php else: ?>
-								<a href="">
-									Editar
-								</a>
-								<a href="<?php echo site_url('EleccionesJudiciales2024/reset1/'.$hoja1->idfrhoja1); ?>">
+								<!--<a href="<?php /*echo site_url('EleccionesJudiciales2024/reset1/'.$hoja1->idfrhoja1); */?>">
 									Reset
-								</a>
-							<?php endif; ?>
+								</a>-->
 						</td>
 					</tr>
 					<tr>
 						<td>2</td>
 						<td>Cuestionario 2 - Cierre, computo y escrutinio</td>
 						<td>
-							<?php if(!$banderaHoja2): ?>
-								<a href="<?php echo site_url('EleccionesJudiciales2024/hoja2/'); ?>">
-									Nuevo
+								<a href="<?php echo site_url('eleccionesJudiciales2024/hoja2/'.$hoja2->idfrhoja2); ?>">
+									<i class="far fa-edit fa-lg"></i>
 								</a>
-							<?php else: ?>
-								<a href="?>">
-									Editar
-								</a>
-								<a href="<?php echo site_url('EleccionesJudiciales2024/reset2/'.$hoja2->idfrhoja2); ?>">
+								<!--<a href="<?php /*echo site_url('EleccionesJudiciales2024/reset2/'.$hoja2->idfrhoja2); */?>">
 									Reset
-								</a>
-							<?php endif; ?>
+								</a>-->
+
 						</td>
 					</tr>
 					<tr>
@@ -59,7 +48,7 @@
 						<td>Repositorio de imagenes </td>
 						<td>
 							<a href="http://localhost/api-google-drive/">
-								Ingresar
+								<i class="far fa-file-image fa-lg"></i>
 							</a>
 						</td>
 					</tr>

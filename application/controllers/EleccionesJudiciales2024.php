@@ -34,14 +34,35 @@ class EleccionesJudiciales2024 extends CI_Controller{
 	public function nuevo(){
 		$usuario = $this->ion_auth->user()->row();
 
+
 		//Comproba si existe registro Hoja 1
 		$banderaHoja1 = $this->Cuestionario_model->existeHoja1($usuario->id);
 
 		//Comprobar si existe registro Hoja 2
 		$banderaHoja2 = $this->Cuestionario_model->existeHoja2($usuario->id);
 
+		//Crea los formularios en caso de que no existasn
+		//Cuestionario 1
+		if(!$banderaHoja1){
+			//echo "No existe formulario 1, crear <br>";
+			//Crear el formulario 1
+			$this->Cuestionario_model->crearHoja1($usuario->id);
+		}elseif ($banderaHoja1){
+			//echo "Existe formulario 1 <br>";
+		}
+
+		//Cuestionario 2
+		if(!$banderaHoja2){
+			//echo "No existe formulario 1, crear <br>";
+			$this->Cuestionario_model->crearHoja2($usuario->id);
+		}elseif ($banderaHoja2){
+			//echo "Existe formulario 1 <br>";
+		}
+
+
 		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
 		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
+
 
 
 		$datos['usuario'] = $usuario;
@@ -49,9 +70,6 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$datos['banderaHoja2'] = $banderaHoja2;
 		$datos['hoja1'] = $hoja1;
 		$datos['hoja2'] = $hoja2;
-		//var_dump($hoja1);
-		//echo "<br><br>";
-		//var_dump($hoja2);
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -59,7 +77,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$this->load->view('html/pie');
 
 	}
-	public function hoja1(){
+	public function hoja1($idhoja1){
 		//Datos para el formulario
 		$usuario = $this->ion_auth->user()->row();
 		$departamentos = $this->Departamento_model->leerDepartamentos();
@@ -77,7 +95,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 	}
 
 	//Metodo: Crear los registros que le corresponden
-	public function hoja2(){
+	public function hoja2($idhoja2){
 		//Datos para el formulario
 		$usuario = $this->ion_auth->user()->row();
 		$departamentos = $this->Departamento_model->leerDepartamentos();

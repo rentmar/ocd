@@ -253,33 +253,9 @@
 					</div>
 					<img class="card-img-top" src="<?php echo base_url().'assets/img/reforma.svg'; ?>" alt="Card image">
 					<div class="card-body">
-						<?php if($flag_test_csej2024): ?>
-							<!-- Modo Prueba -->
-							<?php if(!$comprobar_formcsej2024): ?>
 								<a href="<?php echo site_url('eleccionesJudiciales2024/nuevo');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
 									Iniciar
 								</a>
-							<?php else: ?>
-								<a href="<?php echo site_url('eleccionesJudiciales2024/reset');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
-									Reset
-								</a>
-								<a href="<?php echo site_url('eleccionesJudiciales2024/editar');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
-									Editar
-								</a>
-
-							<?php endif; ?>
-						<?php elseif(!$flag_test_csej2024): ?>
-							<!-- Modo Produccion -->
-							<?php if($comprobar_formcsej2024): ?>
-								<a href="<?php echo site_url('eleccionesJudiciales2024/editar');?>" class="btn btn-info text-body" role="button" style="background-color:#00A3E1;">
-									Editar
-								</a>
-							<?php else: ?>
-								<a href="<?php echo site_url('eleccionesJudiciales2024/nuevo');?>" class="btn btn-info text-body " role="button" style="background-color:#00A3E1;">
-									Iniciar
-								</a>
-							<?php endif; ?>
-						<?php endif; ?>						
 					</div>
 				</div>
 			</div>

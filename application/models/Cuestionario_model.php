@@ -571,6 +571,32 @@ class Cuestionario_model extends CI_Model
 
 	}
 
+	//Crear el formulario 1
+	public function crearHoja1($idusuario){
+		$data = array(
+			'esta_iniciado' => false,
+			'rel_id' => $idusuario
+		);
+		if($this->db->insert('form_elecc_jud_2024_resp_hoja1', $data)){
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}
+	}
+
+	//Crear el formulario 2
+	public function crearHoja2($idusuario){
+		$data = array(
+			'rel_id' => $idusuario
+		);
+		if($this->db->insert('form_elecc_jud_2024_resp_hoja2 ', $data)){
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}
+	}
+
+
 
 
 
