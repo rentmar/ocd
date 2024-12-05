@@ -2554,3 +2554,40 @@ function getMunicipiosList1(departamentoID) {
 		}
 	});
 }
+
+jQuery(document).on('change', 'select#municipio_csej', function (e) {
+	e.preventDefault();
+	var municipioID = jQuery(this).val();
+	//alert('lista de recintos');
+	getRecintosList(municipioID);
+});
+
+function getRecintosList(municipioID) {
+	//alert(tipomedioID + ' ' + baseurl);
+	$.ajax({
+		url: baseurl + "/controlCensal/getrecintos",
+		type: 'post',
+		data: {municipioID: municipioID},
+		dataType: 'json',
+		beforeSend: function () {
+			jQuery('select#recinto_csej').find("option:eq(0)").html("Please wait..");
+		},
+		complete: function () {
+			// code
+		},
+		success: function (json) {
+			console.log(json);
+			var options = '';
+			options +='<option value="" selected >Seleccionar Recinto Electoral</option>';
+			for (var i = 0; i < json.length; i++) {
+				options += '<option value="' + json[i].idre + '">' + json[i].nombre_re + '</option>';
+			}
+			jQuery("select#recinto_csej").html(options);
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+

@@ -86,4 +86,18 @@ class Municipio_model extends CI_Model{
 
 	}
 
+	//Lee un municipio por ID
+	public function leerRecintoPorID($idrecinto){
+		$this->db->where('idre', $idrecinto);
+		$q= $this->db->get('recinto_electoral');
+		return $q->row();
+	}
+	//Lee un municipio por ID
+	public function leerMunicipioID($idmunicipio){
+		$this->db->where('idmun', $idmunicipio);
+		$q= $this->db->get('municipios');
+		return $q->row();
+	}
+
+
 }

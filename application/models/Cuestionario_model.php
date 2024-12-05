@@ -596,6 +596,57 @@ class Cuestionario_model extends CI_Model
 		}
 	}
 
+	//Extraer recintos electorales por municipio
+	public function recintoPorMunicipio($idmunicipio){
+		$sql = "SELECT * "
+			."FROM recinto_electoral  "
+			."WHERE recinto_electoral.rel_idmun = ? "
+			." "
+			." "
+			."  "
+			." "
+			." ";
+		$qry = $this->db->query($sql, [$idmunicipio, ]);
+		return $qry->result();
+	}
+
+	//Actualizar los datos de la hoja1
+	public function actualizarSgralH1($hoja)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'esta_iniciado' => $hoja->esta_iniciado,
+			'rel_id' => $hoja->rel_id,
+			'mesas' => $hoja->mesas,
+			'rel_idrecinto' => $hoja->rel_idrecinto,
+			'rel_idmunicipio' => $hoja->rel_idmunicipio,
+			'rel_iddepartamento' => $hoja->rel_iddepartamento,
+		];
+		$this->db->where('idfrhoja1', $hoja->idfrhoja1 );
+		$this->db->update('form_elecc_jud_2024_resp_hoja1', $data);
+
+	}
+
+	//Actualizar los datos de la hoja1
+	public function actualizarSgralH2($hoja)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'esta_iniciado' => $hoja->esta_iniciado,
+			'rel_id' => $hoja->rel_id,
+			'mesas' => $hoja->mesas,
+			'rel_idrecinto' => $hoja->rel_idrecinto,
+			'rel_idmunicipio' => $hoja->rel_idmunicipio,
+			'rel_iddepartamento' => $hoja->rel_iddepartamento,
+		];
+		$this->db->where('idfrhoja2', $hoja->idfrhoja2 );
+		$this->db->update('form_elecc_jud_2024_resp_hoja2', $data);
+
+	}
+
+
+
+
 
 
 

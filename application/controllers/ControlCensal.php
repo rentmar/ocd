@@ -678,6 +678,16 @@ class ControlCensal extends CI_Controller
 		echo json_encode($json);
 	}
 
+	//Respuesta AjaX Recintos electorales
+	public function getrecintos()
+	{
+		$json = array();
+		$idmunicipio = $this->input->post('municipioID');
+		$json = $this->Cuestionario_model->recintoPorMunicipio($idmunicipio);
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	}
+
 
 
 

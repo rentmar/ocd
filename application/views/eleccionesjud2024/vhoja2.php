@@ -31,17 +31,19 @@
 				<form id="ej-c1-secc1" name="ej-c1-secc1">
 					<div class="form-group">
 						<label for="departamento">Departamento:</label><br>
-						<input type="text" id="" name="" class="form-control" value="" readonly required>
+						<input type="text" id="" name="" class="form-control"
+							   value="<?php if(isset($departamento->nombre_departamento)){ echo $departamento->nombre_departamento;} ?>" readonly required>
 					</div>
 					<div class="form-group">
 						<label for="municipio">Municipio:</label><br>
-						<input type="text" id="" name="" class="form-control" value="" readonly required>
+						<input type="text" id="" name="" class="form-control"
+							   value="<?php if(isset($municipio->nombre_muncipio)){ echo $municipio->nombre_muncipio;  } ?>" readonly required>
 					</div>
 
 					<div class="form-group">
 						<label for="recinto">Recinto Electoral:</label><br>
 						<input type="text" id="recinto" name="recinto" required class="form-control"
-							   value="" readonly >
+							   value="<?php if(isset($recinto->nombre_re)){ echo $recinto->nombre_re;} ?>" readonly >
 					</div>
 
 					<div>
@@ -53,15 +55,14 @@
 							<div class="col-3 border border-primary ">
 								<label class="text-primary" for="">Mesa 1</label>
 							</div>
-
 						</div>
 						<div class="d-flex w-100">
 							<div class="col-3 border">
-								<input class="form-control" type="text" id="" name="" placeholder="No de mesa" readonly>
+								<input class="form-control" type="text" id="" name=""
+									   value="<?php if(isset($mesas->m1)){ echo $mesas->m1;} ?>" placeholder="No de mesa" readonly>
 							</div>
-
 						</div>
-
+						<br>
 					</div>
 
 			</div>
@@ -74,6 +75,8 @@
 	</div>
 	</div>
 	<br>
+
+<?php if($hoja2->esta_iniciado == 1): ?>
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
@@ -180,8 +183,9 @@
 
 	</div>
 	<br>
+<?php endif;?>
 
-
+<?php if($hoja2->esta_iniciado == 1): ?>
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
@@ -194,10 +198,10 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -215,10 +219,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -236,10 +241,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -265,10 +271,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -302,10 +309,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -339,10 +347,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -383,10 +392,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -404,10 +414,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -425,10 +436,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -452,10 +464,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -473,10 +486,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -494,10 +508,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -524,7 +539,8 @@
 
 	</div>
 	<br>
-
+<?php endif;?>
+<?php if($hoja2->esta_iniciado == 1): ?>
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
@@ -537,10 +553,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -574,10 +591,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -611,10 +629,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -655,10 +674,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -692,10 +712,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -729,10 +750,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -773,10 +795,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -810,10 +833,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -847,10 +871,11 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
@@ -3740,6 +3765,8 @@
 
 	</div>
 	<br>
+<?php endif; ?>
+<?php if($hoja2->esta_iniciado == 1): ?>
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
@@ -3885,7 +3912,8 @@
 		</div>
 	</div>
 <br>
-
+<?php endif;?>
+<?php if($hoja2->esta_iniciado == 1): ?>
 	<div id="contenedor-submit">
 		<button id="BOTON" type="submit" name="action" value="1" >
 			ENVIAR
@@ -3894,12 +3922,13 @@
 			<input type="button" class="BOTON" value="CERRAR">
 		</a>
 	</div>
-
+<?php endif;?>
 	<br>
 	<?php echo form_close(); ?>
 
 </main>
 
+<!-- The Modal -->
 <!-- The Modal -->
 <div class="modal fade" id="modal-c2-secgeneral">
 	<div class="modal-dialog modal-lg">
@@ -3912,55 +3941,60 @@
 			</div>
 
 			<!-- Modal body -->
-			<form>
-				<div class="modal-body">
-
-					<div class="form-group">
-						<div id="departamento">
-							<label>Escoja el Departamento:</label><br>
-							<select id="departamento_csej" name="departamento_csej" class="simple" style="width: 100%"  required>
-								<option value="" selected >Sin seleccion</option>
-								<?php if(isset($departamentos)):?>
-									<?php foreach ($departamentos as $a): ?>
-										<option value="<?php echo $a->iddepartamento; ?>"><?php echo $a->nombre_departamento; ?></option>
-									<?php endforeach; ?>
-								<?php endif;?>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<div id="departamento">
-							<label>Escoja el Municipio:</label><br>
-							<select id="municipio_csej" name="municipio_csej"  class="simple" style="width: 100%"  required>
-								<option value="">Sin seleccion</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<div id="departamento">
-							<label>Recinto Electoral:</label><br>
-							<select id="recinto_csej" name="recinto_csej"  class="simple" style="width: 100%"  required>
-								<option value="">Sin seleccion</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="form-row">
-						<div class="form-group col-md-3">
-							<label for="c1-mesa">Mesa 1:</label>
-							<input type="text" class="form-control" id="c1-mesa" name="c1-mesa" placeholder="No de mesa" required>
-						</div>
-					</div>
-
-
+			<?php echo form_open('eleccionesJudiciales2024/procesarSeccionGeneralH2',['id'=>'seccgral_h2',]);?>
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="text" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
+					<input type="text" id="idhoja2" name="idhoja2" value="<?php echo $hoja2->idfrhoja2; ?>">
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<div class="form-group">
+					<div id="departamento">
+						<label>Escoja el Departamento:</label><br>
+						<select id="departamento_csej" name="departamento_csej" class="simple" style="width: 100%"  required>
+							<option value="" selected >Sin seleccion</option>
+							<?php if(isset($departamentos)):?>
+								<?php foreach ($departamentos as $a): ?>
+									<option value="<?php echo $a->iddepartamento; ?>"><?php echo $a->nombre_departamento; ?></option>
+								<?php endforeach; ?>
+							<?php endif;?>
+						</select>
+					</div>
 				</div>
+				<div class="form-group">
+					<div id="departamento">
+						<label>Escoja el Municipio:</label><br>
+						<select id="municipio_csej" name="municipio_csej"  class="simple" style="width: 100%"  required>
+							<option value="">Sin seleccion</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div id="departamento">
+						<label>Recinto Electoral:</label><br>
+						<select id="recinto_csej" name="recinto_csej"  class="simple" style="width: 100%"  required>
+							<option value="">Sin seleccion</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 1:</label>
+						<input type="text" class="form-control" id="c1-mesa1" name="c1-mesa1" placeholder="No de mesa" required>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">
+					Enviar
+				</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					Cancelar
+				</button>
+			</div>
 			</form>
 		</div>
 	</div>
 </div>
-
 
 
