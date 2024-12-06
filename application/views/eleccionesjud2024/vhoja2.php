@@ -275,36 +275,51 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
@@ -313,36 +328,52 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
 						</div>
 					</div>
 					<br>
@@ -351,44 +382,60 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
 						</div>
 					</div>
+
 
 				</div>
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						3. ¿Cuántos ciudadanos estaban habilitados para votar? (Ver padrón de la mesa)
+						3. ¿Cuántos ciudadanos estaban habilitados para votar? (Ver la lista de persona habilitadas)
 					</div>
 					<br>
 					<div class="d-flex w-100">
@@ -460,7 +507,7 @@
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						4. ¿Cuántos ciudadanos emitieron su voto? (Ver padrón de la mesa)
+						4. ¿Cuántos ciudadanos emitieron su voto? (Ver la lista de persona habilitadas)
 					</div>
 					<br>
 					<div class="d-flex w-100">
@@ -544,12 +591,12 @@
 	<div class="contenedores">
 		<div class="card">
 			<div class="card-header cuest2">
-				<h4 class="text-white">Cómputo y Escrutinio</h4>
+				<h4 class="text-white">Escrutinio</h4>
 			</div>
 			<div class="card-body font-weight-normal">
 				<div class="form-group">
 					<div class="container mt-3">
-						5. ¿El número de papeletas en ánfora de cada franja coincidió con el número de ciudadanos cuya votación se registró?
+						5. ¿Se anularon las papeletas de sufragio no utilizadas escribiendo en ellas la palabra “ANULADO”?
 					</div>
 					<br>
 					<div class="d-flex w-100">
@@ -557,36 +604,51 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
@@ -595,36 +657,52 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
 						</div>
 					</div>
 					<br>
@@ -633,36 +711,51 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
 						</div>
 					</div>
 
@@ -670,7 +763,7 @@
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						6. ¿La suma de votos nulos, blancos y válidos de cada franja coincidió con el total de ciudadanos que votaron?
+						6. ¿Se anularon los certificados de sufragio no entregados con el sello “NO VOTÓ”?
 					</div>
 					<br>
 					<div class="d-flex w-100">
@@ -678,36 +771,51 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
@@ -716,36 +824,52 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
 						</div>
 					</div>
 					<br>
@@ -754,44 +878,63 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
 						</div>
 					</div>
 
+
+
+
 				</div>
 				<br><br>
+
 				<div class="form-group">
 					<div class="container mt-3">
-						7. ¿La suma de votos nulos, blancos y válidos coincidió con el número de papeletas de cada franja?
+						7. ¿El presidente de la mesa vació el ánfora DEPARTAMENTAL y contó las papeletas (con ayuda del secretario) sin desdoblarlas?
 					</div>
 					<br>
 					<div class="d-flex w-100">
@@ -799,36 +942,51 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
@@ -837,36 +995,52 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
-
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
 						</div>
 					</div>
 					<br>
@@ -875,2886 +1049,1262 @@
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
 						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
 
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
 
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						8. ¿Se realizó el conteo separado e independiente y en el orden que corresponde de las papeletas del Consejo de la Magistratura?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
 						</div>
 					</div>
 
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						9. ¿Se realizó el conteo separado e independiente y en el orden que corresponde de las papeletas del Tribunal Agroambiental?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
 
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						10. ¿Se realizó el conteo separado e independiente y en el orden que corresponde de las papeletas del Tribunal Constitucional?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						11. ¿Se realizó el conteo separado e independiente y en el orden que corresponde de las papeletas del Tribunal Supremo de Justicia?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						12. ¿El secretario de mesa llenó los datos en el Acta?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						13. ¿Hubo problemas en el llenado del Acta?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						14. ¿Se utilizó la casilla de observaciones por causa de error en datos en el acta?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						15. Si no hubo observaciones, ¿se anuló esta casilla con una línea transversal?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						16. ¿Se llenaron con X en los lugares vacíos en el Acta electoral?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						17. ¿Firmaron los jurados y pusieron su huella dactilar en el Acta?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						18. ¿El notario corrigió el acta electoral? (explicación de la corrección directa)
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						19. ¿El Notario encontró fallas?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
 
 
 				</div>
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						20. ¿Solicitó la corrección al jurado?
+						8. ¿El presidente de la mesa enumeró las papeletas DEPARTAMENTALES en el espacio en blanco del reverso?
+
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
 						</div>
 					</div>
 
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						21. ¿El secretario o presidente colocó el adhesivo de seguridad que se coloca encima de los resultados?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
 
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						22. ¿El Sobre A fue correctamente llenado y sellado? (Acta original, lista de habilitados de la mesa y hojas de trabajo)
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						23. ¿El Sobre B fue correctamente llenado y cerrado? (papeletas de sufragio utilizadas)
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						24. ¿El Sobre C fue correctamente llenado y cerrado? (Papeletas de sufragio y certificados no utilizados)
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						25. ¿Se entregó la primera copia del Acta al Notario Electoral?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
 
 
 				</div>
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						26. ¿Se entregó la segunda copia del Acta al presidente de mesa?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+						9. ¿El número de papeletas en el ánfora DEPARTAMENTAL coincidió con el número de ciudadanos que votaron?
+
+						<div class="alert alert-info">
+							<strong>Info!</strong> En caso de respuesta negativa explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
 						</div>
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
 						</div>
 					</div>
 
-				</div>
-				<br><br>
-				<div class="form-group">
-					<div class="container mt-3">
-						27. ¿El presidente entregó el sobre A y la maleta al notario?
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
+
 
 
 				</div>
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						28. ¿El notario llevó el sobre A y la maleta con un custodio?
+						10. ¿El presidente de la mesa vació el ánfora NACIONAL y contó las papeletas (con ayuda del secretario) sin desdoblarlas?
+
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
 						</div>
 					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
+						</div>
+					</div>
+
+
+
 
 				</div>
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						29. ¿Alguien impugnó el acta?
+						11. ¿El presidente de la mesa enumeró las papeletas NACIONAL en el espacio en blanco del reverso?
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
 						</div>
 					</div>
 
-				</div>
-				<br><br>
 
-				<div class="form-group">
-					<div class="container mt-3">
-						30. Indique la hora en que terminó el conteo de votos.
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="time" id="" name="" placeholder="">
-						</div>
-					</div>
+
 
 				</div>
 				<br><br>
 				<div class="form-group">
 					<div class="container mt-3">
-						31. ¿El Notario o jurados permitieron sacar foto del Acta?
+						12. ¿El número de papeletas en el ánfora NACIONAL coincidió con el número de ciudadanos que votaron?
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4</label></div>
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8</label></div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
-						</div>
-						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
 						</div>
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11</label></div>
-						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12</label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
 						</div>
 						<div class="col-3 border">
-							<select class="form-control" id="" name="">
-								<option value = "0">S/N</option>
-								<option value = "1">Si</option>
-								<option value = "0">No</option>
-							</select>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
 						</div>
 					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
+						</div>
+					</div>
+
+
 
 
 				</div>
-				<br>
+				<br><br>
 				<div class="form-group">
-					<label for="pregunta_csej32">
-						32. ¿Hubo observadores (nacionales o internacionales) durante el escrutinio y conteo de votos?
-					</label><br>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_csej32a" name="pregunta_csej32" value="1">
-						<label class="custom-control-label" for="pregunta_csej32a">Si</label>
+					<div class="container mt-3">
+						13. ¿El número de papeletas en el ánfora NACIONAL coincidió con el número de ciudadanos que votaron?
+						<div class="alert alert-info">
+							<strong>Info!</strong> En caso de respuesta negativa explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
+						</div>
 					</div>
-					<div class="custom-control custom-radio custom-control-inline">
-						<input type="radio" class="custom-control-input" id="pregunta_csej32b" name="pregunta_csej32" value="0">
-						<label class="custom-control-label" for="pregunta_csej32b">No</label>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
 					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
+						</div>
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
+						</div>
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
+						</div>
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
+						</div>
+					</div>
+
+
+
 
 				</div>
-				<br>
+				<br><br>
+				<div class="form-group">
+					<div class="container mt-3">
+						14. ¿Se encontraron papeletas en el ánfora que no correspondía?
+						<div class="alert alert-info">
+							<strong>Info!</strong> En caso de respuesta positiva explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+								<label class="custom-control-label" for="customRadio2">no</label>
+							</div>
+						</div>
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio3">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+								<label class="custom-control-label" for="customRadio24">no</label>
+							</div>
+						</div>
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio5">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+								<label class="custom-control-label" for="customRadio26">no</label>
+							</div>
+						</div>
+						<div class="col-3 border">
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio7">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+								<label class="custom-control-label" for="customRadio28">no</label>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio9">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+								<label class="custom-control-label" for="customRadio210">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio11">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+								<label class="custom-control-label" for="customRadio212">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio13">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+								<label class="custom-control-label" for="customRadio214">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio15">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+								<label class="custom-control-label" for="customRadio216">no</label>
+							</div>
+
+
+						</div>
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+						<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio17">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+								<label class="custom-control-label" for="customRadio218">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio19">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+								<label class="custom-control-label" for="customRadio220">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio21">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+								<label class="custom-control-label" for="customRadio222">no</label>
+							</div>
+
+						</div>
+						<div class="col-3 border">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio23">si</label>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+								<label class="custom-control-label" for="customRadio224">no</label>
+							</div>
+
+						</div>
+					</div>
 
 
 
+
+
+				</div>
+				<br><br>
 			</div>
 			<div class="card-footer">
 				<button type="submit" class="btn btn-success">
@@ -3766,6 +2316,1784 @@
 	</div>
 	<br>
 <?php endif; ?>
+	<?php if($hoja2->esta_iniciado == 1): ?>
+		<div class="contenedores">
+			<div class="card">
+				<div class="card-header cuest2">
+					<h4 class="text-white">Escrutinio</h4>
+				</div>
+				<div class="card-body font-weight-normal">
+					<div class="form-group">
+						<div class="container mt-3">
+							15. ¿Se inició el conteo de votos por el Tribunal Supremo de Justicia, leyendo primero los votos en la franja de candidatas mujeres, a continuación la franja de candidatos varones y se concluyó con la lectura de los votos para el Tribunal Constitucional Plurinacional?
+							<div class="alert alert-info">
+								<strong>Info!</strong>En caso de respuesta negativa explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							16. Una vez concluido el conteo de los votos de circunscripción departamental ¿Se contaron los votos del Tribunal Agroambiental y a continuación los votos del Consejo de la Magistratura?
+							<div class="alert alert-info">
+								<strong>Info!</strong> En caso de respuesta negativa explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							17. Una vez concluido el conteo de votos para las instancias departamental y/o nacional:
+							(En caso de respuesta negativa explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
+							)
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="container mt-3">
+							17-a).¿El secretario anunció en voz alta los resultados señalando el número de electores habilitados en la mesa de sufragio?
+						</div>
+
+					</div>
+					<div class="form-group">
+						<div class="container mt-3">
+							17-b). ¿El secretario anunció en voz alta el número de ciudadanos que emitieron su voto?
+						</div>
+
+					</div>
+					<div class="form-group">
+						<div class="container mt-3">
+							17-c).¿El secretario anunció en voz alta el número de votos en blanco en cada una de las instancias?
+						</div>
+
+					</div>
+					<div class="form-group">
+						<div class="container mt-3">
+							17-d).¿El secretario anunció en voz alta el número de votos nulos en cada una de las instancias?
+						</div>
+
+					</div>
+					<div class="form-group">
+						<div class="container mt-3">
+							17-e).¿El secretario anunció en voz alta la cantidad de votos válidos por cada candidato en cada una de las instancias?
+						</div>
+
+					</div>
+
+
+					<div class="form-group">
+						<div class="container mt-3">
+							17-f) ¿El secretario anunció en voz alta los resultados señalando el número de electores habilitados en la mesa de sufragio?
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							18. ¿La suma de votos nulos, blancos y válidos de cada instancia coincidió con el total de ciudadanos que votaron en la mesa?
+							(En caso de respuesta negativa explicar en la casilla de observaciones indicando el número de mesa)
+
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							19. ¿Se llenó una hoja de trabajo por cada instancia y dos en el caso del Tribunal Supremos de Justicia, sumando un total de 5 hojas de trabajo?
+
+							<div class="alert alert-info">
+								<strong>Info!</strong> 														En caso de respuesta negativa explicar en la casilla de observaciones indicando el número de mesa
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							10. ¿El presidente de la mesa vació el ánfora NACIONAL y contó las papeletas (con ayuda del secretario) sin desdoblarlas?
+
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							11. ¿El presidente de la mesa enumeró las papeletas NACIONAL en el espacio en blanco del reverso?
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							12. ¿El número de papeletas en el ánfora NACIONAL coincidió con el número de ciudadanos que votaron?
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							13. ¿El número de papeletas en el ánfora NACIONAL coincidió con el número de ciudadanos que votaron?
+							<div class="alert alert-info">
+								<strong>Info!</strong> En caso de respuesta negativa explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+					<br><br>
+					<div class="form-group">
+						<div class="container mt-3">
+							14. ¿Se encontraron papeletas en el ánfora que no correspondía?
+							<div class="alert alert-info">
+								<strong>Info!</strong> En caso de respuesta positiva explicar cómo se procedió en la casilla de observaciones indicando el número de mesa
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary "><label class="text-primary" for="">Mesa 1: <?php if(isset($mesas->m1)){ echo $mesas->m1;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 2: <?php if(isset($mesas->m2)){ echo $mesas->m2;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 3: <?php if(isset($mesas->m3)){ echo $mesas->m3;} ?> </label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 4: <?php if(isset($mesas->m4)){ echo $mesas->m4;} ?> </label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio2" name="" value="customEx">
+									<label class="custom-control-label" for="customRadio2">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio3" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio3">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio24" name="example1" value="customEx">
+									<label class="custom-control-label" for="customRadio24">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio5" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio5">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio26" name="example20" value="customEx">
+									<label class="custom-control-label" for="customRadio26">no</label>
+								</div>
+							</div>
+							<div class="col-3 border">
+
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio7" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio7">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio28" name="example355" value="customEx">
+									<label class="custom-control-label" for="customRadio28">no</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 5: <?php if(isset($mesas->m5)){ echo $mesas->m5;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 6: <?php if(isset($mesas->m6)){ echo $mesas->m6;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 7: <?php if(isset($mesas->m7)){ echo $mesas->m7;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 8: <?php if(isset($mesas->m8)){ echo $mesas->m8;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio9" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio9">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio210" name="example47" value="customEx">
+									<label class="custom-control-label" for="customRadio210">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio11" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio11">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio212" name="example15" value="customEx">
+									<label class="custom-control-label" for="customRadio212">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio13" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio13">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio214" name="example2" value="customEx">
+									<label class="custom-control-label" for="customRadio214">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio15" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio15">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio216" name="example3" value="customEx">
+									<label class="custom-control-label" for="customRadio216">no</label>
+								</div>
+
+
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 9: <?php if(isset($mesas->m9)){ echo $mesas->m9;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 10: <?php if(isset($mesas->m10)){ echo $mesas->m10;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 11: <?php if(isset($mesas->m11)){ echo $mesas->m11;} ?></label></div>
+							<div class="col-3 border border-primary"><label class="text-primary" for="">Mesa 12: <?php if(isset($mesas->m12)){ echo $mesas->m12;} ?></label></div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio17" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio17">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio218" name="example4" value="customEx">
+									<label class="custom-control-label" for="customRadio218">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio19" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio19">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio220" name="example5" value="customEx">
+									<label class="custom-control-label" for="customRadio220">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio21" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio21">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio222" name="example6" value="customEx">
+									<label class="custom-control-label" for="customRadio222">no</label>
+								</div>
+
+							</div>
+							<div class="col-3 border">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio23" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio23">si</label>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="customRadio224" name="example7" value="customEx">
+									<label class="custom-control-label" for="customRadio224">no</label>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+
+					</div>
+					<br><br>
+				</div>
+				<div class="card-footer">
+					<button type="submit" class="btn btn-success">
+						<i class="fas fa-save"></i>
+					</button>
+				</div>
+			</div>
+
+		</div>
+		<br>
+	<?php endif; ?>
+
+
+
 <?php if($hoja2->esta_iniciado == 1): ?>
 	<div class="contenedores">
 		<div class="card">
