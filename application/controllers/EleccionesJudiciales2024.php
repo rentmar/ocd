@@ -9,6 +9,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$this->load->model('Cuestionario_model');
 		$this->load->model('Departamento_model');
 		$this->load->model('Municipio_model');
+		$this->load->model('Interfaz_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -34,7 +35,6 @@ class EleccionesJudiciales2024 extends CI_Controller{
 	//Metodo: Crear los registros que le corresponden
 	public function nuevo(){
 		$usuario = $this->ion_auth->user()->row();
-
 
 		//Comproba si existe registro Hoja 1
 		$banderaHoja1 = $this->Cuestionario_model->existeHoja1($usuario->id);
@@ -83,30 +83,65 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$usuario = $this->ion_auth->user()->row();
 		$departamentos = $this->Departamento_model->leerDepartamentos();
 
+		//Respuestas
 		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+		//echo "Respuestas: ";
+		//var_dump($hoja1);
 
-		/*var_dump($hoja1);
-		echo "<br><br>";*/
+		$secciones = $this->Interfaz_model->leerSeccionesHoja(1);
+		echo "Secciones: <br>";
+		var_dump($secciones);
+		echo "<br><br>";
+
+		$seccionesUI = [];
+		$preguntasUI = [];
+
+		echo "Secciones UI: "."<br>";
+		var_dump($seccionesUI);
+		echo "<br><br>";
+
+		//Crear el array de secciones
+		foreach ($secciones as $se):
+			$seccionesUI[$se->codigo_seccion] = '';
+		endforeach;
+
+		echo "Secciones UI creadas: "."<br>";
+		var_dump($seccionesUI);
+		echo "<br><br>";
+
+		//Crear el array de preguntas
+		echo "Preguntas UI: "."<br>";
+		$preguntasUI = $seccionesUI;
+		var_dump($preguntasUI);
+		echo "<br><br>";
+
+
+		//Clasificacion de las preguntas
+		foreach ($secciones as $ss):
+			echo $ss->idseccion;
+			echo "<br>";
+			$preguntasSeccion = $this->Interfaz_model->preguntasPorSeccion($ss->idseccion);
+			var_dump($preguntasSeccion);
+			echo "<br><br>";
+			foreach ($preguntasSeccion  as $sp){
+				echo $sp->idpregunta.' - '.$sp->codigo_pregunta.' - '.$sp->etiqueta_pregunta.' - '.$sp->nombre_pregunta.' - '.$sp->rel_tipo_pregunta.' - '.$sp->info_pregunta;
+				echo "<br>";
+			}
+			echo "<br><br>";
+		endforeach;
+
+
+
+
+
 
 		$mesas_json = $hoja1->mesas;
 		$mesas = json_decode($mesas_json);
-		//var_dump($mesas);
 
 		//var_dump($departamentos);
 		$departamento = $this->Departamento_model->leerDepartamento($hoja1->rel_iddepartamento);
-		/*echo "<br><br>";
-		echo "Departamento: ";
-		var_dump($departamento);*/
-
 		$municipio = $this->Municipio_model->leerMunicipioID($hoja1->rel_idmunicipio);
-		/*echo "<br><br>";
-		echo "Municipio: ";
-		var_dump($municipio);*/
-
 		$recinto = $this->Municipio_model->leerRecintoPorID($hoja1->rel_idrecinto);
-		//echo "<br><br>";
-		//echo "Recinto: ";
-		//var_dump($recinto);
 
 
 		$datos['usuario'] = $usuario;
@@ -117,6 +152,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$datos['municipio'] = $municipio;
 		$datos['recinto'] = $recinto;
 		$datos['mesas'] = $mesas;
+		$datos['secciones'] = $seccionesUI;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
