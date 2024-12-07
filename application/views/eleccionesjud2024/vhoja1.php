@@ -193,8 +193,10 @@
 
 <!-- Secciones de la hoja del cuestionario -->
 <?php if($hoja1->esta_iniciado == 1): ?>
-	<?php foreach ($secciones as $s): ?>
-	<?php endforeach; ?>
+
+	<?php echo $seccionesUI; ?>
+
+
 <?php endif; ?><!-- Secciones de la hoja del cuestionario -->
 
 <?php if($hoja1->esta_iniciado == 1): ?>

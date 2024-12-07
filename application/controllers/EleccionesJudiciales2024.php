@@ -85,58 +85,22 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 		//Respuestas
 		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
-		//echo "Respuestas: ";
-		//var_dump($hoja1);
 
 		$secciones = $this->Interfaz_model->leerSeccionesHoja(1);
-		echo "Secciones: <br>";
-		var_dump($secciones);
-		echo "<br><br>";
-
-		$seccionesUI = [];
-		$preguntasUI = [];
-
-		echo "Secciones UI: "."<br>";
-		var_dump($seccionesUI);
-		echo "<br><br>";
-
-		//Crear el array de secciones
-		foreach ($secciones as $se):
-			$seccionesUI[$se->codigo_seccion] = '';
-		endforeach;
-
-		echo "Secciones UI creadas: "."<br>";
-		var_dump($seccionesUI);
-		echo "<br><br>";
-
-		//Crear el array de preguntas
-		echo "Preguntas UI: "."<br>";
-		$preguntasUI = $seccionesUI;
-		var_dump($preguntasUI);
-		echo "<br><br>";
-
-
-		//Clasificacion de las preguntas
-		foreach ($secciones as $ss):
-			echo $ss->idseccion;
-			echo "<br>";
-			$preguntasSeccion = $this->Interfaz_model->preguntasPorSeccion($ss->idseccion);
-			var_dump($preguntasSeccion);
-			echo "<br><br>";
-			foreach ($preguntasSeccion  as $sp){
-				echo $sp->idpregunta.' - '.$sp->codigo_pregunta.' - '.$sp->etiqueta_pregunta.' - '.$sp->nombre_pregunta.' - '.$sp->rel_tipo_pregunta.' - '.$sp->info_pregunta;
-				echo "<br>";
-			}
-			echo "<br><br>";
-		endforeach;
 
 
 
-
-
-
+		//Mesas
 		$mesas_json = $hoja1->mesas;
 		$mesas = json_decode($mesas_json);
+
+		//Crear las Secciones
+		$datos_secciones['secciones'] = $secciones;
+		$datos_secciones['color_encabezado'] = 'cuest2';
+		$datos_secciones['mesas'] = $mesas;
+
+		$seccionesUI = $this->load->view('interfaz/secciones/vsecciones', $datos_secciones, TRUE);
+
 
 		//var_dump($departamentos);
 		$departamento = $this->Departamento_model->leerDepartamento($hoja1->rel_iddepartamento);
@@ -152,7 +116,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$datos['municipio'] = $municipio;
 		$datos['recinto'] = $recinto;
 		$datos['mesas'] = $mesas;
-		$datos['secciones'] = $seccionesUI;
+		$datos['seccionesUI'] = $seccionesUI;
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
@@ -167,8 +131,19 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$departamentos = $this->Departamento_model->leerDepartamentos();
 		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
 
+		$secciones = $this->Interfaz_model->leerSeccionesHoja(2);
+
+		//mesas
 		$mesas_json = $hoja2->mesas;
 		$mesas = json_decode($mesas_json);
+
+		//Crear las Secciones
+		$datos_secciones['secciones'] = $secciones;
+		$datos_secciones['color_encabezado'] = 'cuest2';
+		$datos_secciones['mesas'] = $mesas;
+
+		$seccionesUI = $this->load->view('interfaz/secciones/vsecciones', $datos_secciones, TRUE);
+
 
 		$departamento = $this->Departamento_model->leerDepartamento($hoja2->rel_iddepartamento);
 		$municipio = $this->Municipio_model->leerMunicipioID($hoja2->rel_idmunicipio);
@@ -182,6 +157,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$datos['municipio'] = $municipio;
 		$datos['recinto'] = $recinto;
 		$datos['mesas'] = $mesas;
+		$datos['seccionesUI'] = $seccionesUI;
 
 
 		$this->load->view('html/encabezado');
