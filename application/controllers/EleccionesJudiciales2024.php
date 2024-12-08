@@ -10,6 +10,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$this->load->model('Departamento_model');
 		$this->load->model('Municipio_model');
 		$this->load->model('Interfaz_model');
+		$this->load->model('Elecciones_model');
 		$this->load->helper("html");
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -107,6 +108,9 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$municipio = $this->Municipio_model->leerMunicipioID($hoja1->rel_idmunicipio);
 		$recinto = $this->Municipio_model->leerRecintoPorID($hoja1->rel_idrecinto);
 
+
+		//Rutina para la comprobacion y despliegue de restricciones por departamento
+		//Preguntas por seccion
 
 		$datos['usuario'] = $usuario;
 		$datos['departamentos'] = $departamentos;
@@ -214,20 +218,9 @@ class EleccionesJudiciales2024 extends CI_Controller{
 	//Almacenar la informacion de la seccion general Hoja 1
 	public function procesarSeccionGeneralH1(){
 		$sg = $this->seccionGralH1();
-		//var_dump($sg);
-		//echo "<br><br>";
 		$hoja1 = $this->Cuestionario_model->hoja1($sg->idusuario);
-		//var_dump($hoja1);
-		/*echo "<br><br>";
-		echo "Mesas json: ";*/
-		//Extraer las mesas
-		$mesas_json = $hoja1->mesas;
-		//var_dump($mesas_json);
-		//echo "<br><br>";
-		//echo "Mesas: ";
 		//Convertir el dato a objetos
 		$mesas = json_decode($hoja1->mesas) ;
-		//var_dump($mesas);
 
 		//Actualizar los valores de las mesas
 		$mesas->m1 = $sg->m1;
@@ -235,28 +228,78 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$mesas->m3 = $sg->m3;
 		$mesas->m4 = $sg->m4;
 		$mesas->m5 = $sg->m5;
-		//echo "<br><br>";
-		//echo "Mesas actualizadas";
-		//var_dump($mesas);
-		//echo "<br><br>";
-		//echo "Hoja con mesas actualizadas: ";
+
 		$hoja1->mesas = json_encode($mesas);
-		//var_dump($hoja1);
-		//echo "<br><br>";
-		//echo "Resto de las variables actualizadas, hoja1 inicializada: ";
+
 		$hoja1->esta_iniciado = 1;
 		$hoja1->rel_idrecinto = $sg->recinto_csej;
 		$hoja1->rel_idmunicipio = $sg->municipio_csej;
 		$hoja1->rel_iddepartamento = $sg->departamento_csej;
-		//var_dump($hoja1);
 
 		$this->Cuestionario_model->actualizarSgralH1($hoja1);
 		redirect('eleccionesJudiciales2024/hoja1/'.$hoja1->idfrhoja1);
+	}
+	//Agregar mesas al formulario
+	public function updateMesasAdicionalesH1(){
+
+		//Mesas enviadas
+		$mesas_adicionales_json = $this->input->post('mesas');
+		$mesas_adicionales = json_decode($mesas_adicionales_json);
+
+		//Extraer mesas adicionales
+		$hoja1 = $this->Cuestionario_model->hoja1($mesas_adicionales->idusuario);
+
+		$mesas_actuales = json_decode($hoja1->mesas);
+
+		//Adicionar las mesas adicionales a las mesas actuales
+		$mesas_actuales->m6 = $mesas_adicionales->c1mesa6;
+		$mesas_actuales->m7 = $mesas_adicionales->c1mesa7;
+		$mesas_actuales->m8 = $mesas_adicionales->c1mesa8;
+		$mesas_actuales->m9 = $mesas_adicionales->c1mesa9;
+		$mesas_actuales->m10 = $mesas_adicionales->c1mesa10;
+		$mesas_actuales->m11 = $mesas_adicionales->c1mesa11;
+		$mesas_actuales->m12 = $mesas_adicionales->c1mesa12;
+
+		$mesas_actuales_json = json_encode($mesas_actuales);
+
+		//Actualizar informacion
+		$this->Elecciones_model->actualizarMesasAdicionales($hoja1->idfrhoja1, $mesas_actuales_json);
+	}
+	//Agregar mesas al formulario
+	public function updateMesasAdicionalesH2(){
+
+		//Mesas enviadas
+		$mesas_adicionales_json = $this->input->post('mesas');
+		$mesas_adicionales = json_decode($mesas_adicionales_json);
 
 
+		//Extraer mesas adicionales
+		$hoja2 = $this->Cuestionario_model->hoja2($mesas_adicionales->idusuario);
+
+		$mesas_actuales = json_decode($hoja2->mesas);
+
+		//Adicionar las mesas adicionales a las mesas actuales
+		$mesas_actuales->m2 = $mesas_adicionales->c2mesa2;
+		$mesas_actuales->m3 = $mesas_adicionales->c2mesa3;
+		$mesas_actuales->m4 = $mesas_adicionales->c2mesa4;
+		$mesas_actuales->m5 = $mesas_adicionales->c2mesa5;
+		$mesas_actuales->m6 = $mesas_adicionales->c2mesa6;
+		$mesas_actuales->m7 = $mesas_adicionales->c2mesa7;
+		$mesas_actuales->m8 = $mesas_adicionales->c2mesa8;
+		$mesas_actuales->m9 = $mesas_adicionales->c2mesa9;
+		$mesas_actuales->m10 = $mesas_adicionales->c2mesa10;
+		$mesas_actuales->m11 = $mesas_adicionales->c2mesa11;
+		$mesas_actuales->m12 = $mesas_adicionales->c2mesa12;
+
+		$mesas_actuales_json = json_encode($mesas_actuales);
+
+		//Actualizar informacion
+		$this->Elecciones_model->actualizarMesasAdicionalesH2($hoja2->idfrhoja2, $mesas_actuales_json);
 	}
 
-	private function seccionGralH1()
+
+
+private function seccionGralH1()
 	{
 		date_default_timezone_set('America/La_Paz');
 		$hoja1 = new stdClass();

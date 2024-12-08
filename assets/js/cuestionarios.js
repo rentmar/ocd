@@ -2591,3 +2591,71 @@ function getRecintosList(municipioID) {
 	});
 }
 
+/********************************** ELECCIONES JUDICIALES ********************************************/
+
+//Actualizacion de las mesas adicionales Hoja 1
+$('#mesas_h1').on('submit', function (e) {
+	e.preventDefault(); // Evita la recarga de la página
+	// Crear objeto FormData a partir del formulario
+	const formData = new FormData(this);
+	console.log(formData);
+	var formData_json = JSON.stringify(Object.fromEntries(formData));
+	console.log("JSON: ");
+	console.log(formData_json);
+
+	$.ajax({
+		url: baseurl + "/eleccionesJudiciales2024/updateMesasAdicionalesH1",
+		type: 'post',
+		data: {mesas: formData_json},
+		//dataType: 'json',
+		beforeSend: function () {
+			//alert('Antes del envio');
+		},
+		complete: function () {
+			console.log('Operacion completada complete');
+			location.reload();
+		},
+		success: function () {
+			console.log("operacion completada success");
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+
+//Actualizacion de las mesas adicionales Hoja 2
+$('#mesas_h2').on('submit', function (e) {
+	e.preventDefault(); // Evita la recarga de la página
+	// Crear objeto FormData a partir del formulario
+	const formData = new FormData(this);
+	console.log(formData);
+	var formData_json = JSON.stringify(Object.fromEntries(formData));
+	console.log("JSON: ");
+	console.log(formData_json);
+
+	$.ajax({
+		url: baseurl + "/eleccionesJudiciales2024/updateMesasAdicionalesH2",
+		type: 'post',
+		data: {mesas: formData_json},
+		//dataType: 'json',
+		beforeSend: function () {
+			//alert('Antes del envio mesas c2');
+		},
+		complete: function () {
+			console.log('Operacion completada complete');
+			location.reload();
+		},
+		success: function () {
+			console.log("operacion completada success");
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+/********************************** FIN DE ELECCCIONES JUDICIALES ***********************************/

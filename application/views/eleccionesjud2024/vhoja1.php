@@ -69,19 +69,19 @@
 						<div class="d-flex w-100">
 							<div class="col-3 border">
 								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m1)){ echo $mesas->m1;} ?>" placeholder="No de mesa" readonly>
+									   value="<?php if(isset($mesas->m1)){ echo $mesas->m1;} ?>" placeholder="" readonly>
 							</div>
 							<div class="col-3 border">
 								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m2)){ echo $mesas->m2;} ?>" placeholder="No de mesa" readonly>
+									   value="<?php if(isset($mesas->m2)){ echo $mesas->m2;} ?>" placeholder="" readonly>
 							</div>
 							<div class="col-3 border">
 								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m3)){ echo $mesas->m3;} ?>" placeholder="No de mesa" readonly>
+									   value="<?php if(isset($mesas->m3)){ echo $mesas->m3;} ?>" placeholder="" readonly>
 							</div>
 							<div class="col-3 border">
 								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m4)){ echo $mesas->m4;} ?>" placeholder="No de mesa" readonly>
+									   value="<?php if(isset($mesas->m4)){ echo $mesas->m4;} ?>" placeholder="" readonly>
 							</div>
 						</div>
 						<br>
@@ -93,16 +93,23 @@
 						<div class="d-flex w-100">
 							<div class="col-3 border">
 								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="No de mesa" readonly>
+									   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="" readonly>
 							</div>
 						</div>
 					</div>
 
 			</div>
 			<div class="card-footer">
+				<?php if($hoja1->esta_iniciado == 0): ?>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-c1-secgeneral">
-					<i class="fas fa-save"></i>
+					<i class="fas fa-power-off"></i>
+					Iniciar
 				</button>
+				<?php else:?>
+					<div class="alert alert-success">
+						Formulario Iniciado
+					</div>
+				<?php endif; ?>
 			</div>
 				</form>
 		</div>
@@ -138,16 +145,32 @@
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name="" placeholder="No de mesa" >
+							<input class="form-control" type="text"
+								   id=""  name="" placeholder=""
+								   value="<?php if (isset($mesas->m6)) { echo $mesas->m6; } ?>"
+								   readonly
+							>
 						</div>
 						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name="" placeholder="No de mesa" >
+							<input class="form-control" type="text"
+								   id="" name="" placeholder=""
+								   value="<?php if (isset($mesas->m7)) { echo $mesas->m7; } ?>"
+								   readonly
+							>
 						</div>
 						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name="" placeholder="No de mesa" >
+							<input class="form-control" type="text"
+								   id="" name="" placeholder=""
+								   value="<?php if (isset($mesas->m8)) { echo $mesas->m8; } ?>"
+								   readonly
+							>
 						</div>
 						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name="" placeholder="No de mesa" >
+							<input class="form-control" type="text"
+								   id="" name="" placeholder=""
+								   value="<?php if (isset($mesas->m9)) { echo $mesas->m9; } ?>"
+								   readonly
+							>
 						</div>
 					</div>
 					<br>
@@ -164,28 +187,36 @@
 					</div>
 					<div class="d-flex w-100">
 						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name="" placeholder="No de mesa">
+							<input class="form-control" type="text"
+								   id="" name="" placeholder=""
+								   value="<?php if (isset($mesas->m10)) { echo $mesas->m10; } ?>"
+								   readonly
+							>
 						</div>
 						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name="" placeholder="No de mesa">
+							<input class="form-control" type="text"
+								   id="" name="" placeholder=""
+								   value="<?php if (isset($mesas->m11)) { echo $mesas->m11; } ?>"
+								   readonly
+							>
 						</div>
 						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name="" placeholder="No de mesa">
+							<input class="form-control" type="text"
+								   id="" name="" placeholder=""
+								   value="<?php if (isset($mesas->m12)) { echo $mesas->m12; } ?>"
+								   readonly
+							>
 						</div>
 					</div>
 				</div>
 
 			</div>
 			<div class="card-footer">
-				<button type="submit" class="btn btn-success">
+				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#editmesas">
 					<i class="fas fa-save"></i>
 				</button>
 			</div>
-
-
 		</div>
-
-
 	</div>
 	<br>
 <?php endif; ?><!-- Fin Seccion Mesas adicionales -->
@@ -230,8 +261,14 @@
 			<?php echo form_open('eleccionesJudiciales2024/procesarSeccionGeneralH1',['id'=>'seccgral_h1',]);?>
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="text" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
-					<input type="text" id="idhoja1" name="idhoja1" value="<?php echo $hoja1->idfrhoja1; ?>">
+					<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
+					<input type="hidden" id="idhoja1" name="idhoja1" value="<?php echo $hoja1->idfrhoja1; ?>">
+				</div>
+				<div class="form-group">
+					<div class="alert alert-warning">
+						<strong>Atencion! </strong>
+						Una vez enviados los datos, no se podran cambiar.
+					</div>
 				</div>
 				<div class="form-group">
 					<div id="departamento">
@@ -301,5 +338,123 @@
 		</div>
 	</div>
 </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="editmesas">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">Mesas Adicionales</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<?php echo form_open('eleccionesJudiciales2024/procesarSeccionGeneralH1',['id'=>'mesas_h1',]);?>
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
+					<input type="hidden" id="idhoja1" name="idhoja1" value="<?php echo $hoja1->idfrhoja1; ?>">
+				</div>
+
+
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="c1mesa6">Mesa 6:</label>
+						<input type="text" class="form-control" id="c1mesa6"
+							   name="c1mesa6" placeholder=""
+							   value = "<?php if (isset($mesas->m6)) { echo $mesas->m6; } ?>"
+						>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1mesa7">Mesa 7:</label>
+						<input type="text" class="form-control" id="c1mesa7"
+							   name="c1mesa7" placeholder=""
+							   value = "<?php if (isset($mesas->m7)) { echo $mesas->m7; } ?>"
+						>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1mesa8">Mesa 8:</label>
+						<input type="text" class="form-control" id="c1mesa8"
+							   name="c1mesa8" placeholder=""
+							   value = "<?php if (isset($mesas->m8)) { echo $mesas->m8; } ?>"
+						>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1mesa9">Mesa 9:</label>
+						<input type="text" class="form-control" id="c1mesa9"
+							   name="c1mesa9" placeholder=""
+							   value = "<?php if (isset($mesas->m9)) { echo $mesas->m9; } ?>"
+						>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="c1mesa10">Mesa 10:</label>
+						<input type="text" class="form-control" id="c1mesa10"
+							   name="c1mesa10" placeholder=""
+							   value = "<?php if (isset($mesas->m10)) { echo $mesas->m10; } ?>"
+						>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1mesa11">Mesa 11:</label>
+						<input type="text" class="form-control" id="c1mesa11"
+							   name="c1mesa11" placeholder=""
+							   value = "<?php if (isset($mesas->m11)) { echo $mesas->m11; } ?>"
+						>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1mesa12">Mesa 12:</label>
+						<input type="text" class="form-control" id="c1mesa12"
+							   name="c1mesa12" placeholder=""
+							   value = "<?php if (isset($mesas->m12)) { echo $mesas->m12; } ?>"
+						>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button id="mesas-adicionales" type="submit" class="btn btn-primary">
+					Enviar
+				</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">
+					Cancelar
+				</button>
+			</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Exito -->
+<div class="modal fade" id="mesasadicionales">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-success">
+				<h4 class="modal-title">Mesas</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				Mesas Adicionadas
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
 
 
