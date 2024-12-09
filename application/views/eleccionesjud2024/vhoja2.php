@@ -346,11 +346,11 @@
 			<?php echo form_open('eleccionesJudiciales2024/procesarSeccionGeneralH1',['id'=>'mesas_h2',]);?>
 			<div class="modal-body">
 				<div class="form-group">
-					<input type="text" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
-					<input type="text" id="idhoja2" name="idhoja2" value="<?php echo $hoja2->idfrhoja2; ?>">
+					<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
+					<input type="hidden" id="idhoja2" name="idhoja2" value="<?php echo $hoja2->idfrhoja2; ?>">
 				</div>
 				<div class="form-group">
-					<?php var_dump($mesas);?>
+					<?php //var_dump($mesas);?>
 				</div>
 
 

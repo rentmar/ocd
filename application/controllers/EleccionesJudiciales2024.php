@@ -87,6 +87,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		//Respuestas
 		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
 
+
 		$secciones = $this->Interfaz_model->leerSeccionesHoja(1);
 
 
@@ -99,6 +100,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$datos_secciones['secciones'] = $secciones;
 		$datos_secciones['color_encabezado'] = 'cuest2';
 		$datos_secciones['mesas'] = $mesas;
+		$datos_secciones['hoja1'] = $hoja1;
 
 		$seccionesUI = $this->load->view('interfaz/secciones/vsecciones', $datos_secciones, TRUE);
 
@@ -145,6 +147,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$datos_secciones['secciones'] = $secciones;
 		$datos_secciones['color_encabezado'] = 'cuest2';
 		$datos_secciones['mesas'] = $mesas;
+		$datos_secciones['hoja2'] = $hoja2;
 
 		$seccionesUI = $this->load->view('interfaz/secciones/vsecciones', $datos_secciones, TRUE);
 
@@ -367,6 +370,84 @@ private function seccionGralH1()
 
 	//Metodo:
 	public function editar(){
+	}
+
+	//Seccion para la captura de datos
+	public function seccion1(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion2(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion3(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion4(){
+		$usuario = $this->ion_auth->user()->row();
+
+		echo "<br><br>";
+		echo "Hoja1"."<br>";
+		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+		var_dump($hoja1);
+
+		echo "<br><br>";
+		echo "Seccion json recivida"."<br>";
+		$datos_seccion_recibido = $this->input->post('mesas');
+		var_dump($datos_seccion_recibido);
+
+
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion5(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion6(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion7(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion8(){
+
+	}
+	//Seccion para la captura de datos
+	public function seccion9(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion10(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion11(){
+
+	}
+
+	//Seccion para la captura de datos
+	public function seccion12(){
+		//Capturar los datos de la seccion
+
+		//Extraer la seccion de la base de datos
+
+		//Extraer la hoja
+
+
 	}
 
 

@@ -577,7 +577,10 @@ class Cuestionario_model extends CI_Model
 			'esta_iniciado' => false,
 			'rel_id' => $idusuario,
 			'mesas' => '{"m1":"","m2":"","m3":"","m4":"","m5":"","m6":"","m7":"","m8":"","m9":"","m10":"","m11":"","m12":""}',
-
+			's1' =>'{"idfrhoja1":"14","idseccion":"4","p28":""}',
+			's2' => '{"idfrhoja1":"14","idseccion":"4","p28":""}',
+			's3' => '{"idfrhoja1":"14","idseccion":"4","p28":""}',
+			's4' => '{"idfrhoja1":"14","idseccion":"4","p28":""}',
 		);
 		if($this->db->insert('form_elecc_jud_2024_resp_hoja1', $data)){
 			return $this->db->insert_id();

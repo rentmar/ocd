@@ -1,9 +1,20 @@
+
 <?php foreach ($secciones as $s): ?>
 	<?php
 		$datos_seccion['nombre_seccion'] = $s->nombre_seccion;
 		$datos_seccion['color_encabezado'] = $color_encabezado;
 		$datos_seccion['preguntasSeccion'] = $this->Interfaz_model->preguntasPorSeccion($s->idseccion);
 		$datos_seccion['mesas'] = $mesas;
+		$datos_seccion['codigo_seccion'] = $s->codigo_seccion;
+		$datos_seccion['idsecccion'] = $s->idseccion;
+		$datos_seccion['rel_idhoja'] = $s->rel_idhoja;
+		if(isset($hoja1)){
+			$datos_seccion['hoja1'] = $hoja1;
+		}
+		if(isset($hoja2)){
+			$datos_seccion['hoja2'] = $hoja2;
+		}
+
 	?>
 	<?php if($s->rel_tipo_seccion == 1): ?>
 		<?php $this->load->view('interfaz/secciones/svsecctipo1', $datos_seccion ); ?>

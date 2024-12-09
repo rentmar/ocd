@@ -2658,4 +2658,41 @@ $('#mesas_h2').on('submit', function (e) {
 	});
 });
 
+
+
+
+
+//Actualizacion de las mesas adicionales Hoja 2
+$('#formulario_s4').on('submit', function (e) {
+	e.preventDefault(); // Evita la recarga de la página
+	// Crear objeto FormData a partir del formulario
+	const formData = new FormData(this);
+	console.log(formData);
+	var datosSeccion = JSON.stringify(Object.fromEntries(formData));
+
+	console.log("JSON: ");
+	console.log(datosSeccion);
+
+	$.ajax({
+		url: baseurl + "/eleccionesJudiciales2024/seccion4",
+		type: 'post',
+		data: {mesas: datosSeccion},
+		//dataType: 'json',
+		beforeSend: function () {
+			alert('Envio de datos Seccion 2:');
+		},
+		complete: function () {
+			console.log('Operacion completada complete');
+			//location.reload();
+		},
+		success: function () {
+			console.log("operacion completada success");
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
 /********************************** FIN DE ELECCCIONES JUDICIALES ***********************************/

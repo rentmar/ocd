@@ -20,6 +20,7 @@
 	<div>
 		<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
 		<input type="hidden" id="idhoja1" name="idhoja1" value="<?php echo $hoja1->idfrhoja1; ?>">
+		<input type="hidden" id="idhoja1_valorjs" name="idhoja1_valorjs" value="<?php echo $hoja1->idfrhoja1; ?>">
 
 	</div>
 
