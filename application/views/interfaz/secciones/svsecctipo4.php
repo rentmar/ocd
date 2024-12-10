@@ -4,31 +4,14 @@
 		<?php echo form_open('', [ 'id' =>'formulario_'.$codigo_seccion,])?>
 		<div class="card-body font-weight-normal">
 			<div class="form-group">
-				<?php if($rel_idhoja ==1): ?>
-					<?php echo "hoja1 respuestas"."<br>"; ?>
-					<?php  var_dump($hoja1)?>
-				<?php elseif ($rel_idhoja ==2): ?>
-					<?php echo "hoja2 respuestas"."<br>"; ?>
-					<?php  var_dump($hoja2)?>
-				<?php endif;?>
-			</div>
-			<br>
-			<div class="form-group">
-				<?php if($rel_idhoja ==1): ?>
-					<h6>idhoja1</h6>
-					<input type="text" id="idfrhoja1" name="idfrhoja1" class="form-control"
-						   value="<?php echo $hoja1->idfrhoja1; ?>"
-					>
-				<?php elseif ($rel_idhoja ==2): ?>
-					<h6>idhoja2</h6>
-					<input type="text" id="idfrhoja2" name="idfrhoja2" class="form-control"
-						   value="<?php echo $hoja2->idfrhoja2; ?>"
-					>
-				<?php endif;?>
-			</div>
-			<div class="form-group">
 				<input type="text" id="idseccion" name="idseccion" class="form-control"
 					   value="<?php echo $idsecccion; ?>"
+				>
+			</div>
+			<div class="form-group">
+				<labe>Codigo de seccion</labe>
+				<input type="text" id="codigo_secion" name="codigo_seccion" class="form-control"
+					   value="<?php echo $codigo_seccion; ?>"
 				>
 			</div>
 			<?php foreach ($preguntasSeccion as $p ): ?>
@@ -102,4 +85,5 @@
 		</div></form>
 	</div>
 </div>
+<br>
 <br>

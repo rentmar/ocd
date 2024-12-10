@@ -84,23 +84,28 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$usuario = $this->ion_auth->user()->row();
 		$departamentos = $this->Departamento_model->leerDepartamentos();
 
-		//Respuestas
+		//Preguntas layout
 		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
-
-
 		$secciones = $this->Interfaz_model->leerSeccionesHoja(1);
+		$preguntas_hoja = $this->Elecciones_model->listaPreguntasPorHoja1(1);
 
+		//Extraer las respuestas
 
+		$respuestas = json_decode($hoja1->respuestas);
 
 		//Mesas
 		$mesas_json = $hoja1->mesas;
 		$mesas = json_decode($mesas_json);
+
+
 
 		//Crear las Secciones
 		$datos_secciones['secciones'] = $secciones;
 		$datos_secciones['color_encabezado'] = 'cuest2';
 		$datos_secciones['mesas'] = $mesas;
 		$datos_secciones['hoja1'] = $hoja1;
+		$datos_secciones['respuestas'] = $respuestas;
+		$datos_secciones['idhoja_preguntas'] = 1;
 
 		$seccionesUI = $this->load->view('interfaz/secciones/vsecciones', $datos_secciones, TRUE);
 
@@ -379,7 +384,20 @@ private function seccionGralH1()
 
 	//Seccion para la captura de datos
 	public function seccion2(){
+		$usuario = $this->ion_auth->user()->row();
+		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+		$datos_json = $this->input->post('respuesta');
+		$datos = json_decode($datos_json);
 
+		//Extraer las preguntas
+		$respuestas_json = $hoja1->respuestas;
+		$respuestas = json_decode($respuestas_json);
+		$codigopregunta = $datos->codigopregunta;
+		$r = $respuestas->$codigopregunta;
+		$r->respuesta = $datos->$codigopregunta;
+		$respuestas->$codigopregunta = $r;
+		$respuestas_json_actualizada = json_encode($respuestas);
+		$this->Elecciones_model->actualizarRespuestasHoja1($hoja1->idfrhoja1, $respuestas_json_actualizada);
 	}
 
 	//Seccion para la captura de datos
@@ -389,7 +407,7 @@ private function seccionGralH1()
 
 	//Seccion para la captura de datos
 	public function seccion4(){
-		$usuario = $this->ion_auth->user()->row();
+		/*$usuario = $this->ion_auth->user()->row();
 
 		echo "<br><br>";
 		echo "Hoja1"."<br>";
@@ -399,7 +417,7 @@ private function seccionGralH1()
 		echo "<br><br>";
 		echo "Seccion json recivida"."<br>";
 		$datos_seccion_recibido = $this->input->post('mesas');
-		var_dump($datos_seccion_recibido);
+		var_dump($datos_seccion_recibido);*/
 
 
 

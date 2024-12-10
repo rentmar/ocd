@@ -25,96 +25,93 @@
 	</div>
 
 	<div class="contenedores">
-		<form class="card">
+		<div class="card">
 			<div class="card-header cuest2">
 				<h4 class="text-white">Informacion General</h4>
 			</div>
 			<div class="card-body font-weight-normal">
-				<form id="ej-c1-secc1" name="ej-c1-secc1">
-					<div class="form-group">
-						<label for="departamento">Departamento:</label><br>
-						<input type="text" id="" name="" class="form-control"
-							   value="<?php if(isset($departamento->nombre_departamento)){ echo $departamento->nombre_departamento;} ?>" readonly required>
+				<div class="form-group">
+					<label for="departamento">Departamento:</label><br>
+					<input type="text" id="" name="" class="form-control"
+						   value="<?php if(isset($departamento->nombre_departamento)){ echo $departamento->nombre_departamento;} ?>" readonly required>
+				</div>
+				<div class="form-group">
+					<label for="municipio">Municipio:</label><br>
+					<input type="text" id="" name="" class="form-control"
+						   value="<?php if(isset($municipio->nombre_muncipio)){ echo $municipio->nombre_muncipio;  } ?>" readonly required>
+				</div>
+				<div class="form-group">
+					<label for="recinto">Recinto Electoral:</label><br>
+					<input type="text" id="recinto" name="recinto" required class="form-control"
+						   value="<?php if(isset($recinto->nombre_re)){ echo $recinto->nombre_re;} ?>" readonly >
+				</div>
+				<div id="mesas">
+					<div class="container mt-3">
+						Identifique los números de mesas con las que trabajará durante el día.
 					</div>
-					<div class="form-group">
-						<label for="municipio">Municipio:</label><br>
-						<input type="text" id="" name="" class="form-control"
-							   value="<?php if(isset($municipio->nombre_muncipio)){ echo $municipio->nombre_muncipio;  } ?>" readonly required>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary ">
+							<label class="text-primary" for="">Mesa 1</label>
+						</div>
+						<div class="col-3 border border-primary">
+							<label class="text-primary" for="">Mesa 2</label>
+						</div>
+						<div class="col-3 border border-primary">
+							<label class="text-primary" for="">Mesa 3</label>
+						</div>
+						<div class="col-3 border border-primary">
+							<label class="text-primary" for="">Mesa 4</label>
+						</div>
 					</div>
-
-					<div class="form-group">
-						<label for="recinto">Recinto Electoral:</label><br>
-						<input type="text" id="recinto" name="recinto" required class="form-control"
-							   value="<?php if(isset($recinto->nombre_re)){ echo $recinto->nombre_re;} ?>" readonly >
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m1)){ echo $mesas->m1;} ?>" placeholder="" readonly>
+						</div>
+						<div class="col-3 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m2)){ echo $mesas->m2;} ?>" placeholder="" readonly>
+						</div>
+						<div class="col-3 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m3)){ echo $mesas->m3;} ?>" placeholder="" readonly>
+						</div>
+						<div class="col-3 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m4)){ echo $mesas->m4;} ?>" placeholder="" readonly>
+						</div>
 					</div>
-
-					<div>
-						<div class="container mt-3">
-							Identifique los números de mesas con las que trabajará durante el día.
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-3 border border-primary">
+							<label class="text-primary" for="">Mesa 5</label>
 						</div>
-						<br>
-						<div class="d-flex w-100">
-							<div class="col-3 border border-primary ">
-								<label class="text-primary" for="">Mesa 1</label>
-							</div>
-							<div class="col-3 border border-primary">
-								<label class="text-primary" for="">Mesa 2</label>
-							</div>
-							<div class="col-3 border border-primary">
-								<label class="text-primary" for="">Mesa 3</label>
-							</div>
-							<div class="col-3 border border-primary">
-								<label class="text-primary" for="">Mesa 4</label>
-							</div>
-						</div>
-						<div class="d-flex w-100">
-							<div class="col-3 border">
-								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m1)){ echo $mesas->m1;} ?>" placeholder="" readonly>
-							</div>
-							<div class="col-3 border">
-								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m2)){ echo $mesas->m2;} ?>" placeholder="" readonly>
-							</div>
-							<div class="col-3 border">
-								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m3)){ echo $mesas->m3;} ?>" placeholder="" readonly>
-							</div>
-							<div class="col-3 border">
-								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m4)){ echo $mesas->m4;} ?>" placeholder="" readonly>
-							</div>
-						</div>
-						<br>
-						<div class="d-flex w-100">
-							<div class="col-3 border border-primary">
-								<label class="text-primary" for="">Mesa 5</label>
-							</div>
-						</div>
-						<div class="d-flex w-100">
-							<div class="col-3 border">
-								<input class="form-control" type="text" id="" name=""
-									   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="" readonly>
-							</div>
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-3 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="" readonly>
 						</div>
 					</div>
 
+				</div>
 			</div>
 			<div class="card-footer">
 				<?php if($hoja1->esta_iniciado == 0): ?>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-c1-secgeneral">
-					<i class="fas fa-power-off"></i>
-					Iniciar
-				</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-c1-secgeneral">
+						<i class="fas fa-power-off"></i>
+						Iniciar
+					</button>
 				<?php else:?>
 					<div class="alert alert-success">
 						Formulario Iniciado
 					</div>
 				<?php endif; ?>
 			</div>
-				</form>
 		</div>
 	</div>
+
 	<br>
 
 <!-- Seccion Mesas adicionales -->
