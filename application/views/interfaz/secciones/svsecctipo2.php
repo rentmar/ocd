@@ -11,13 +11,13 @@
 		<div class="card-body font-weight-normal">
 
 			<div class="form-group">
-				<input type="text" id="idseccion" name="idseccion" class="form-control"
+				<input type="hidden" id="idseccion" name="idseccion" class="form-control"
 					   value="<?php echo $idsecccion; ?>"
 				>
 			</div>
 			<div class="form-group">
-				<labe>Codigo de seccion</labe>
-				<input type="text" id="codigo_seccion" name="codigo_seccion" class="form-control"
+<!--				<labe>Codigo de seccion</labe>-->
+				<input type="hidden" id="codigo_seccion" name="codigo_seccion" class="form-control"
 					   value="<?php echo $codigo_seccion; ?>"
 				>
 			</div>

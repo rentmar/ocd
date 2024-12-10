@@ -11,6 +11,7 @@
 			$datos_seccion['idsecccion'] = $s->idseccion;
 			$datos_seccion['idhoja_preguntas'] = $idhoja_preguntas;
 			$datos_seccion['respuestas'] = $respuestas;
+			$datos_seccion['iddepartamento'] = $hoja1->rel_iddepartamento;
 
 		?>
 		<?php if($s->rel_tipo_seccion == 1): ?>

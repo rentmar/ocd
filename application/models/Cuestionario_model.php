@@ -630,7 +630,6 @@ class Cuestionario_model extends CI_Model
 		];
 		$this->db->where('idfrhoja1', $hoja->idfrhoja1 );
 		$this->db->update('form_elecc_jud_2024_resp_hoja1', $data);
-
 	}
 
 	//Actualizar los datos de la hoja1

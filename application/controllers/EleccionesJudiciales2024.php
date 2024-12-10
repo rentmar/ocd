@@ -228,7 +228,8 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$sg = $this->seccionGralH1();
 		$hoja1 = $this->Cuestionario_model->hoja1($sg->idusuario);
 		//Convertir el dato a objetos
-		$mesas = json_decode($hoja1->mesas) ;
+		$mesas = json_decode($hoja1->mesas);
+		var_dump($mesas);
 
 		//Actualizar los valores de las mesas
 		$mesas->m1 = $sg->m1;
@@ -236,6 +237,13 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$mesas->m3 = $sg->m3;
 		$mesas->m4 = $sg->m4;
 		$mesas->m5 = $sg->m5;
+		$mesas->m6 = $sg->m6;
+		$mesas->m7 = $sg->m7;
+		$mesas->m8 = $sg->m8;
+		$mesas->m9 = $sg->m9;
+		$mesas->m10 = $sg->m10;
+		$mesas->m11 = $sg->m11;
+		$mesas->m12 = $sg->m12;
 
 		$hoja1->mesas = json_encode($mesas);
 
@@ -247,6 +255,34 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$this->Cuestionario_model->actualizarSgralH1($hoja1);
 		redirect('eleccionesJudiciales2024/hoja1/'.$hoja1->idfrhoja1);
 	}
+
+	private function seccionGralH1()
+	{
+		date_default_timezone_set('America/La_Paz');
+		$hoja1 = new stdClass();
+		$hoja1->idusuario = $this->input->post('idusuario');
+		$hoja1->idhoja1 = $this->input->post('idhoja1');
+		$hoja1->departamento_csej = $this->input->post('departamento_csej');
+		$hoja1->municipio_csej = $this->input->post('municipio_csej');
+		$hoja1->recinto_csej = $this->input->post('recinto_csej');
+		$hoja1->m1 = $this->input->post('c1-mesa1');
+		$hoja1->m2 = $this->input->post('c1-mesa2');
+		$hoja1->m3 = $this->input->post('c1-mesa3');
+		$hoja1->m4 = $this->input->post('c1-mesa4');
+		$hoja1->m5 = $this->input->post('c1-mesa5');
+		$hoja1->m6 = $this->input->post('c1-mesa6');
+		$hoja1->m7 = $this->input->post('c1-mesa7');
+		$hoja1->m8 = $this->input->post('c1-mesa8');
+		$hoja1->m9 = $this->input->post('c1-mesa9');
+		$hoja1->m10 = $this->input->post('c1-mesa10');
+		$hoja1->m11 = $this->input->post('c1-mesa11');
+		$hoja1->m12 = $this->input->post('c1-mesa12');
+
+		return $hoja1;
+	}
+
+
+
 	//Agregar mesas al formulario
 	public function updateMesasAdicionalesH1(){
 
@@ -307,23 +343,6 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 
 
-private function seccionGralH1()
-	{
-		date_default_timezone_set('America/La_Paz');
-		$hoja1 = new stdClass();
-		$hoja1->idusuario = $this->input->post('idusuario');
-		$hoja1->idhoja1 = $this->input->post('idhoja1');
-		$hoja1->departamento_csej = $this->input->post('departamento_csej');
-		$hoja1->municipio_csej = $this->input->post('municipio_csej');
-		$hoja1->recinto_csej = $this->input->post('recinto_csej');
-		$hoja1->m1 = $this->input->post('c1-mesa1');
-		$hoja1->m2 = $this->input->post('c1-mesa2');
-		$hoja1->m3 = $this->input->post('c1-mesa3');
-		$hoja1->m4 = $this->input->post('c1-mesa4');
-		$hoja1->m5 = $this->input->post('c1-mesa5');
-
-		return $hoja1;
-	}
 
 
 	public function procesarSeccionGeneralH2(){
@@ -370,15 +389,55 @@ private function seccionGralH1()
 	}
 
 
-
-
-
 	//Metodo:
 	public function editar(){
 	}
 
 	//Seccion para la captura de datos
 	public function seccion1(){
+		$usuario = $this->ion_auth->user()->row();
+		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+		$mesas = json_decode($hoja1->mesas) ;
+		$datos_json = $this->input->post('respuesta');
+		$datos = json_decode($datos_json);
+		$datos_array = (array)$datos;
+		$preguntas = $this->Interfaz_model->preguntasPorSeccion(1);
+
+		$respuestas_json = $hoja1->respuestas;
+		$respuestas = json_decode($respuestas_json);
+
+
+		//Transformar a string
+		var_dump($respuestas);
+		echo "<br><br>";
+
+		//Cantidad de las mesas
+		$mesas_filtradas = array_filter((array)$mesas, function($val) {
+			return !is_null($val) && $val !== "";
+		});
+
+		$cantidad_mesas = count($mesas_filtradas);
+		var_dump($mesas_filtradas);
+
+		//matriz de resultados
+
+		for($i=1; $i <= $cantidad_mesas; $i++){
+			foreach ($preguntas as $p){
+				$clave = 'mesa'.$i.'-'.$p->codigo_pregunta;
+				echo $clave;
+				echo "<br><br>";
+				echo $datos_array[$clave];
+				echo "<br><br>";
+			}
+		}
+
+
+
+
+
+
+
+
 
 	}
 

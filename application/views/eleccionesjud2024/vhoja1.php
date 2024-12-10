@@ -51,45 +51,59 @@
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary ">
+						<div class="col-6 border border-primary ">
 							<label class="text-primary" for="">Mesa 1</label>
 						</div>
-						<div class="col-3 border border-primary">
+						<div class="col-6 border border-primary">
 							<label class="text-primary" for="">Mesa 2</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 3</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 4</label>
 						</div>
 					</div>
 					<div class="d-flex w-100">
-						<div class="col-3 border">
+						<div class="col-6 border">
 							<input class="form-control" type="text" id="" name=""
 								   value="<?php if(isset($mesas->m1)){ echo $mesas->m1;} ?>" placeholder="" readonly>
 						</div>
-						<div class="col-3 border">
+						<div class="col-6 border">
 							<input class="form-control" type="text" id="" name=""
 								   value="<?php if(isset($mesas->m2)){ echo $mesas->m2;} ?>" placeholder="" readonly>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name=""
-								   value="<?php if(isset($mesas->m3)){ echo $mesas->m3;} ?>" placeholder="" readonly>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text" id="" name=""
-								   value="<?php if(isset($mesas->m4)){ echo $mesas->m4;} ?>" placeholder="" readonly>
 						</div>
 					</div>
 					<br>
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 5</label>
+						<div class="col-6 border border-primary">
+							<label class="text-primary" for="">Mesa 3</label>
 						</div>
+						<div class="col-6 border border-primary">
+							<label class="text-primary" for="">Mesa 4</label>
+						</div>
+
 					</div>
 					<div class="d-flex w-100">
-						<div class="col-3 border">
+						<div class="col-6 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m3)){ echo $mesas->m3;} ?>" placeholder="" readonly>
+						</div>
+						<div class="col-6 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m4)){ echo $mesas->m4;} ?>" placeholder="" readonly>
+						</div>
+
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-6 border border-primary">
+							<label class="text-primary" for="">Mesa 5</label>
+						</div>
+						<div class="col-6 border border-primary">
+							<label class="text-primary" for="">Mesa 6</label>
+						</div>
+
+					</div>
+					<div class="d-flex w-100">
+						<div class="col-6 border">
+							<input class="form-control" type="text" id="" name=""
+								   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="" readonly>
+						</div>
+						<div class="col-6 border">
 							<input class="form-control" type="text" id="" name=""
 								   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="" readonly>
 						</div>
@@ -97,6 +111,120 @@
 
 				</div>
 			</div>
+		</div>
+			<br><br>
+			<div class="card">
+				<div class="card-header cuest2">
+					<h4 class="text-white" >Mesas Adicionales</h4>
+				</div>
+				<div class="card-body font-weight-normal">
+					<div>
+						<div class="d-flex w-100">
+							<div class="col-6 border border-primary ">
+								<label class="text-primary" for="">Mesa 6</label>
+							</div>
+							<div class="col-6 border border-primary">
+								<label class="text-primary" for="">Mesa 7</label>
+							</div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-6 border">
+								<input class="form-control" type="text"
+									   id=""  name="" placeholder=""
+									   value="<?php if (isset($mesas->m6)) { echo $mesas->m6; } ?>"
+									   readonly
+								>
+							</div>
+							<div class="col-6 border">
+								<input class="form-control" type="text"
+									   id="" name="" placeholder=""
+									   value="<?php if (isset($mesas->m7)) { echo $mesas->m7; } ?>"
+									   readonly
+								>
+							</div>
+
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-6 border border-primary">
+								<label class="text-primary" for="">Mesa 8</label>
+							</div>
+							<div class="col-6 border border-primary">
+								<label class="text-primary" for="">Mesa 9</label>
+							</div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-6 border">
+								<input class="form-control" type="text"
+									   id="" name="" placeholder=""
+									   value="<?php if (isset($mesas->m8)) { echo $mesas->m8; } ?>"
+									   readonly
+								>
+							</div>
+							<div class="col-6 border">
+								<input class="form-control" type="text"
+									   id="" name="" placeholder=""
+									   value="<?php if (isset($mesas->m9)) { echo $mesas->m9; } ?>"
+									   readonly
+								>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-6 border border-primary">
+								<label class="text-primary" for="">Mesa 10</label>
+							</div>
+							<div class="col-6 border border-primary">
+								<label class="text-primary" for="">Mesa 11</label>
+							</div>
+						</div>
+						<div class="d-flex w-100">
+
+							<div class="col-6 border">
+								<input class="form-control" type="text"
+									   id="" name="" placeholder=""
+									   value="<?php if (isset($mesas->m10)) { echo $mesas->m10; } ?>"
+									   readonly
+								>
+							</div>
+							<div class="col-6 border">
+								<input class="form-control" type="text"
+									   id="" name="" placeholder=""
+									   value="<?php if (isset($mesas->m11)) { echo $mesas->m11; } ?>"
+									   readonly
+								>
+							</div>
+						</div>
+						<br>
+						<div class="d-flex w-100">
+							<div class="col-6 border border-primary">
+								<label class="text-primary" for="">Mesa 12</label>
+							</div>
+						</div>
+						<div class="d-flex w-100">
+							<div class="col-6 border">
+								<input class="form-control" type="text"
+									   id="" name="" placeholder=""
+									   value="<?php if (isset($mesas->m12)) { echo $mesas->m12; } ?>"
+									   readonly
+								>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!----
+				<div class="card-footer">
+
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#editmesas">
+						<i class="fas fa-save"></i>
+					</button>
+
+				</div>---->
+			</div>
+
+
+
 			<div class="card-footer">
 				<?php if($hoja1->esta_iniciado == 0): ?>
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-c1-secgeneral">
@@ -116,107 +244,7 @@
 
 <!-- Seccion Mesas adicionales -->
 <?php if($hoja1->esta_iniciado == 1): ?>
-	<div class="contenedores">
-		<div class="card">
-			<div class="card-header cuest2">
-				<h4 class="text-white" >Mesas Adicionales</h4>
-			</div>
-			<div class="card-body font-weight-normal">
-				<div>
-					<div class="container mt-3">
-						Registre las mesas adicionales
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary ">
-							<label class="text-primary" for="">Mesa 6</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 7</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 8</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 9</label>
-						</div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id=""  name="" placeholder=""
-								   value="<?php if (isset($mesas->m6)) { echo $mesas->m6; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m7)) { echo $mesas->m7; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m8)) { echo $mesas->m8; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m9)) { echo $mesas->m9; } ?>"
-								   readonly
-							>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 10</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 11</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 12</label>
-						</div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m10)) { echo $mesas->m10; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m11)) { echo $mesas->m11; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m12)) { echo $mesas->m12; } ?>"
-								   readonly
-							>
-						</div>
-					</div>
-				</div>
 
-			</div>
-			<div class="card-footer">
-				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#editmesas">
-					<i class="fas fa-save"></i>
-				</button>
-			</div>
-		</div>
-	</div>
-	<br>
 <?php endif; ?><!-- Fin Seccion Mesas adicionales -->
 
 
@@ -320,6 +348,52 @@
 					<div class="form-group col-md-3">
 						<label for="c1-mesa">Mesa 5:</label>
 						<input type="text" class="form-control" id="c1-mesa5" name="c1-mesa5" placeholder="No de mesa" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<hr>
+					</div>
+					<div class="form-group col-md-12">
+						<h5 class="text-dark">MESAS OPCIONALES</h5>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 6:</label>
+						<input type="text" class="form-control" id="c1-mesa6" name="c1-mesa6"
+							   placeholder="No de mesa" >
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 7:</label>
+						<input type="text" class="form-control" id="c1-mesa7" name="c1-mesa7"
+							   placeholder="No de mesa" >
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 8:</label>
+						<input type="text" class="form-control" id="c1-mesa8" name="c1-mesa8"
+							   placeholder="No de mesa" >
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 9:</label>
+						<input type="text" class="form-control" id="c1-mesa9" name="c1-mesa9"
+							   placeholder="No de mesa" >
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 10:</label>
+						<input type="text" class="form-control" id="c1-mesa10" name="c1-mesa10"
+							   placeholder="No de mesa" >
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 11:</label>
+						<input type="text" class="form-control" id="c1-mesa11" name="c1-mesa11"
+							   placeholder="No de mesa" >
+					</div><div class="form-group col-md-3">
+						<label for="c1-mesa">Mesa 12:</label>
+						<input type="text" class="form-control" id="c1-mesa12" name="c1-mesa12"
+							   placeholder="No de mesa" >
 					</div>
 				</div>
 

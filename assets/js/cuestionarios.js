@@ -2670,14 +2670,14 @@ $('#formulario_s1').on('submit', function (e) {
 
 	console.log("JSON: ");
 	console.log(datosSeccion);
-	/*
+
 	$.ajax({
 		url: baseurl + "/eleccionesJudiciales2024/seccion1",
 		type: 'post',
-		data: {mesas: datosSeccion},
+		data: {respuesta: datosSeccion},
 		//dataType: 'json',
 		beforeSend: function () {
-			alert('Envio de datos Seccion 1:');
+			alert('Envio de datos APERTURA');
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
@@ -2690,7 +2690,7 @@ $('#formulario_s1').on('submit', function (e) {
 		error: function (xhr, ajaxOptions, thrownError) {
 			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
-	});*/
+	});
 });
 
 //Seccion 2
@@ -2710,7 +2710,7 @@ $('#formulario_s2').on('submit', function (e) {
 		data: {respuesta: datosSeccion},
 		//dataType: 'json',
 		beforeSend: function () {
-			alert('Envio de datos Seccion 2:');
+			alert('Envio de datos OBSERVACIONES:');
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
