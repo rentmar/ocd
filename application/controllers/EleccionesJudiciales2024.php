@@ -95,6 +95,8 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 
 
+
+
 		//Mesas
 		$mesas_json = $hoja1->mesas;
 		$mesas = json_decode($mesas_json);
@@ -147,10 +149,6 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 		//Extraer las respuestas
 		$respuestas = json_decode($hoja2->respuestas);
-
-		//var_dump($secciones);
-		//echo "<br><br>";
-		//var_dump($preguntas_hoja);
 
 
 
@@ -411,41 +409,140 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 	//Seccion para la captura de datos
 	public function seccion1(){
+		//Leer el cuestionario 1 y a quien pertenece
 		$usuario = $this->ion_auth->user()->row();
 		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+
+		//Extraer las mesas registradas
 		$mesas = json_decode($hoja1->mesas) ;
-		$datos_json = $this->input->post('respuesta');
-		$datos = json_decode($datos_json);
-		$datos_array = (array)$datos;
-		$preguntas = $this->Interfaz_model->preguntasPorSeccion(1);
 
-		$respuestas_json = $hoja1->respuestas;
-		$respuestas = json_decode($respuestas_json);
+		//Extraer la info a llenar
+		$respuestas = json_decode($hoja1->respuestas);
+
+		//Capturar los datos enviados
+		$datos_json = $this->input->post('formulario');
+		$datos = json_decode($datos_json); //Datos enviados por el formulario
+
+		//Bandera de validacion
+		$formulario_correcto = 1;
 
 
-		//Transformar a string
-		var_dump($respuestas);
+		//Las mesas q se consideraran las respuestas
+		echo "Mesas: "."<br>";
+		$mesas = json_decode($hoja1->mesas);
+		$mesas = (array)$mesas;
+		var_dump($mesas);
 		echo "<br><br>";
 
-		//Cantidad de las mesas
-		$mesas_filtradas = array_filter((array)$mesas, function($val) {
-			return !is_null($val) && $val !== "";
-		});
-
-		$cantidad_mesas = count($mesas_filtradas);
-		var_dump($mesas_filtradas);
-
-		//matriz de resultados
-
-		for($i=1; $i <= $cantidad_mesas; $i++){
-			foreach ($preguntas as $p){
-				$clave = 'mesa'.$i.'-'.$p->codigo_pregunta;
-				echo $clave;
-				echo "<br><br>";
-				echo $datos_array[$clave];
-				echo "<br><br>";
-			}
+		//Eliminar las mesas vacias
+		function filtro($var){
+			return ($var !== NULL && $var != false && $var !=='');
 		}
+		$mesas_registradas = array_filter($mesas, "filtro");
+
+		echo "Mesas Registradas: <br>";
+		var_dump($mesas_registradas);
+		echo "<br><br>";
+
+		$mesas_claves = array_keys($mesas_registradas);
+
+		echo "Mesas Registradas claves: <br>";
+		var_dump($mesas_claves);
+		echo "<br><br>";
+
+		$mesas_indice = array();
+		foreach ($mesas_claves as $mk){
+			if($mk == 'm1'){
+				
+			}
+			elseif ($mk == 'm2'){
+
+			}
+			elseif ($mk == 'm3'){
+
+			}elseif ($mk == 'm4'){
+
+			}elseif ($mk == 'm5'){
+
+			}elseif ($mk == 'm6'){
+
+			}elseif ($mk == 'm7'){
+
+			}elseif ($mk == 'm8'){
+
+			}
+			elseif ($mk == 'm9'){
+
+			}elseif ($mk == 'm10'){
+
+			}
+			elseif ($mk == 'm11'){
+
+			}
+			elseif ($mk == 'm12'){
+
+			}
+
+		}
+
+
+
+
+
+		echo "Datos recibidos"."<br>";
+		var_dump($datos);
+		echo "<br><br>";
+
+
+		echo "Respuestas a llenar"."<br>";
+		var_dump($respuestas);
+		echo "<br><br><br>";
+
+		//Rutina para guardar la informacion recibida
+		echo "INICIO"."<br>";
+		foreach ($respuestas as $rp):
+			echo "CP: ".$rp->codigo_pregunta.' '.'Tipo: '.$rp->tipo;
+			echo "<br>";
+
+			//Comprobar el tipo de respuesta
+
+			if($rp->tipo == 6){
+				echo "tipo 6";
+				echo "<br>";
+				//Buscar las respuestas de las mesas
+
+
+
+
+			}
+			elseif ($rp->tipo == 10){
+				echo "tipo 10";
+				echo "<br>";
+
+			}
+			elseif ($rp->tipo == 9){
+				echo "tipo 9";
+				echo "<br>";
+
+			}
+			elseif ($rp->tipo == 11){
+				echo "tipo 11";
+				echo "<br>";
+
+			}
+			elseif ($rp->tipo == 5){
+				echo "tipo 5";
+				echo "<br>";
+
+			}
+			else{};
+
+			echo "<br><br>";
+
+		endforeach;
+
+
+
 
 
 
@@ -467,11 +564,13 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		//Extraer las preguntas
 		$respuestas_json = $hoja1->respuestas;
 		$respuestas = json_decode($respuestas_json);
+
 		$codigopregunta = $datos->codigopregunta;
 		$r = $respuestas->$codigopregunta;
 		$r->respuesta = $datos->$codigopregunta;
 		$respuestas->$codigopregunta = $r;
 		$respuestas_json_actualizada = json_encode($respuestas);
+		//var_dump($respuestas_json_actualizada);
 		$this->Elecciones_model->actualizarRespuestasHoja1($hoja1->idfrhoja1, $respuestas_json_actualizada);
 	}
 
@@ -563,6 +662,15 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		//Extraer las preguntas
 		$mesas = json_decode($hoja1->mesas);
 		$mesas = (array)$mesas;
+
+		function filtro($var){
+			return ($var !== NULL && $var != false && $var !=='');
+		}
+
+		$mesas = array_filter($mesas, "filtro");
+
+		//Filtrar las mesas vacias
+
 		//var_dump($mesas);
 		$i=1;
 		$mesas_obligatorias = array();
@@ -580,6 +688,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 			$mesa['valor'] = $mesas[$key];
 			array_push($mesas_obligatorias, $mesa);
 		}
+		//var_dump($mesas_obligatorias);
 		header('Content-Type: application/json');
 		echo json_encode($mesas_obligatorias);
 	}
@@ -608,7 +717,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 			$key = 'm'.$i;
 			$mesa['numero'] = $i;
 			$mesa['valor'] = $mesas[$key];
-			array_push($mesas_obligatorias, $mesa);
+			array_push($mesas_opcionales, $mesa);
 		}
 
 
@@ -616,9 +725,23 @@ class EleccionesJudiciales2024 extends CI_Controller{
 			return ($var !== NULL && $var != false && $var !=='');
 		}
 
-		$mesasOpcionales = array_filter($mesas, "myFilter");
+		$mesasOpcionales = array_filter($mesas, "filtro");
 		var_dump($mesasOpcionales);
 
+	}
+
+	//Extraer la mesas de la hoja 1
+	public function getmesashoja1(){
+		$json = array();
+
+		$usuario = $this->ion_auth->user()->row();
+		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+
+		//Extraer las preguntas
+		$mesas = $hoja1->mesas;
+
+		header('Content-Type: application/json');
+		echo json_encode($mesas);
 	}
 
 
