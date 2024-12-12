@@ -31,5 +31,20 @@ class Interfaz_model extends CI_Model
 		$q = $this->db->query($sql, [$idseccion,]);
 		return $q->result();
 	}
+
+	//Extraer la alternativa a una pregunta
+	public function preguntaAlternativa($idpregunta, $iddepartamento){
+		$sql = "SELECT *  "
+			. "FROM uux_pregunta_alternativa  "
+			. "WHERE uux_pregunta_alternativa.rel_idpregunta = ?  "
+			. "AND uux_pregunta_alternativa.rel_iddepartamento = ?  "
+			. "  ";
+		$q = $this->db->query($sql, [$idpregunta, $iddepartamento,]);
+		return $q->row();
+	}
+
+
+
+
 }
 

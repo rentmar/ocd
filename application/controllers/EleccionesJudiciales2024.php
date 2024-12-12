@@ -90,14 +90,14 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$preguntas_hoja = $this->Elecciones_model->listaPreguntasPorHoja1(1);
 
 		//Extraer las respuestas
-
 		$respuestas = json_decode($hoja1->respuestas);
+
+
+
 
 		//Mesas
 		$mesas_json = $hoja1->mesas;
 		$mesas = json_decode($mesas_json);
-
-
 
 		//Crear las Secciones
 		$datos_secciones['secciones'] = $secciones;
@@ -140,9 +140,19 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		//Datos para el formulario
 		$usuario = $this->ion_auth->user()->row();
 		$departamentos = $this->Departamento_model->leerDepartamentos();
+		//Preguntas layout
 		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
-
 		$secciones = $this->Interfaz_model->leerSeccionesHoja(2);
+		$preguntas_hoja = $this->Elecciones_model->listaPreguntasPorHoja1(2);
+
+		//Extraer las respuestas
+		$respuestas = json_decode($hoja2->respuestas);
+
+		//var_dump($secciones);
+		//echo "<br><br>";
+		//var_dump($preguntas_hoja);
+
+
 
 		//mesas
 		$mesas_json = $hoja2->mesas;
@@ -153,6 +163,8 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$datos_secciones['color_encabezado'] = 'cuest2';
 		$datos_secciones['mesas'] = $mesas;
 		$datos_secciones['hoja2'] = $hoja2;
+		$datos_secciones['respuestas'] = $respuestas;
+		$datos_secciones['idhoja_preguntas'] = 2;
 
 		$seccionesUI = $this->load->view('interfaz/secciones/vsecciones', $datos_secciones, TRUE);
 
@@ -229,7 +241,6 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$hoja1 = $this->Cuestionario_model->hoja1($sg->idusuario);
 		//Convertir el dato a objetos
 		$mesas = json_decode($hoja1->mesas);
-		var_dump($mesas);
 
 		//Actualizar los valores de las mesas
 		$mesas->m1 = $sg->m1;
@@ -357,6 +368,11 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 		//Actualizar los valores de las mesas
 		$mesas->m1 = $sg->m1;
+		$mesas->m2 = $sg->m2;
+		$mesas->m3 = $sg->m3;
+		$mesas->m4 = $sg->m4;
+
+
 
 		$hoja2->mesas = json_encode($mesas);
 
@@ -383,7 +399,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$hoja2->m2 = $this->input->post('c1-mesa2');
 		$hoja2->m3 = $this->input->post('c1-mesa3');
 		$hoja2->m4 = $this->input->post('c1-mesa4');
-		$hoja2->m5 = $this->input->post('c1-mesa5');
+		//$hoja2->m5 = $this->input->post('c1-mesa5');
 
 		return $hoja2;
 	}
@@ -524,6 +540,84 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 		//Extraer la hoja
 
+
+	}
+
+
+	//Extraer las preguntas de una seccion
+	public function getpreguntasseccion(){
+		$json = array();
+		$idseccion = $this->input->post('idseccion');
+		$json = $this->Interfaz_model->preguntasPorSeccion($idseccion);
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	}
+
+	//Extraer las mesas obligatorias del cuestionario 1
+	public function getmesasoblc1(){
+		$json = array();
+
+		$usuario = $this->ion_auth->user()->row();
+		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+
+		//Extraer las preguntas
+		$mesas = json_decode($hoja1->mesas);
+		$mesas = (array)$mesas;
+		//var_dump($mesas);
+		$i=1;
+		$mesas_obligatorias = array();
+		$mesas_opcionales = array();
+		/** @noinspection PhpLanguageLevelInspection */
+		$mesa = [
+			'numero' => '',
+			'valor' => '',
+		];
+
+		for($i; $i<6; $i++ ){
+			$mstr = 'mesa'.$i;
+			$key = 'm'.$i;
+			$mesa['numero'] = $i;
+			$mesa['valor'] = $mesas[$key];
+			array_push($mesas_obligatorias, $mesa);
+		}
+		header('Content-Type: application/json');
+		echo json_encode($mesas_obligatorias);
+	}
+
+	//Extraer las mesas opcionales
+	public function getmesasopc1(){
+		$json = array();
+
+		$usuario = $this->ion_auth->user()->row();
+		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+
+		//Extraer las preguntas
+		$mesas = json_decode($hoja1->mesas);
+		$mesas = (array)$mesas;
+		var_dump($mesas);
+
+		$mesas_opcionales = array();
+		/** @noinspection PhpLanguageLevelInspection */
+		$mesa = [
+			'numero' => '',
+			'valor' => '',
+		];
+		$i= 6;
+		for($i; $i<13; $i++ ){
+			$mstr = 'mesa'.$i;
+			$key = 'm'.$i;
+			$mesa['numero'] = $i;
+			$mesa['valor'] = $mesas[$key];
+			array_push($mesas_obligatorias, $mesa);
+		}
+
+
+		function filtro($var){
+			return ($var !== NULL && $var != false && $var !=='');
+		}
+
+		$mesasOpcionales = array_filter($mesas, "myFilter");
+		var_dump($mesasOpcionales);
 
 	}
 

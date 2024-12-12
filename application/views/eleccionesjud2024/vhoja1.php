@@ -93,9 +93,7 @@
 						<div class="col-6 border border-primary">
 							<label class="text-primary" for="">Mesa 5</label>
 						</div>
-						<div class="col-6 border border-primary">
-							<label class="text-primary" for="">Mesa 6</label>
-						</div>
+
 
 					</div>
 					<div class="d-flex w-100">
@@ -103,16 +101,14 @@
 							<input class="form-control" type="text" id="" name=""
 								   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="" readonly>
 						</div>
-						<div class="col-6 border">
-							<input class="form-control" type="text" id="" name=""
-								   value="<?php if(isset($mesas->m5)){ echo $mesas->m5;} ?>" placeholder="" readonly>
-						</div>
+
 					</div>
 
 				</div>
 			</div>
 		</div>
 			<br><br>
+			<?php if($hoja1->esta_iniciado == 1): ?>
 			<div class="card">
 				<div class="card-header cuest2">
 					<h4 class="text-white" >Mesas Adicionales</h4>
@@ -222,7 +218,7 @@
 
 				</div>---->
 			</div>
-
+			<?php endif;?>
 
 
 			<div class="card-footer">

@@ -2663,34 +2663,53 @@ $('#mesas_h2').on('submit', function (e) {
 //Seccion2
 $('#formulario_s1').on('submit', function (e) {
 	e.preventDefault(); // Evita la recarga de la página
-	// Crear objeto FormData a partir del formulario
-	const formData = new FormData(this);
-	console.log(formData);
-	var datosSeccion = JSON.stringify(Object.fromEntries(formData));
+	alert('INicio');
+	//Mesas obligatorias
+	$mesas = mesasObligatoriasHoja1();
+	console.log($mesas);
+	$mesasOp = mesasOpcionalesHoja1();
+	console.log($mesasOp);
 
-	console.log("JSON: ");
-	console.log(datosSeccion);
 
-	$.ajax({
-		url: baseurl + "/eleccionesJudiciales2024/seccion1",
-		type: 'post',
-		data: {respuesta: datosSeccion},
-		//dataType: 'json',
-		beforeSend: function () {
-			alert('Envio de datos APERTURA');
-		},
-		complete: function () {
-			console.log('Operacion completada complete');
-			//location.reload();
-		},
-		success: function () {
-			console.log("operacion completada success");
+	//Rutina de validacion
+	//Preguntas de la seccion
+	preguntas = preguntasSeccion(1);
+	//Todas las preguntas
+	//console.log(preguntas);
+	var formulario_correcto = true;
+	//Recorrer todas las preguntas para validacion
+	for(var i=0; i<preguntas.length;i++){
+		//console.log('Codigo pregunta: ');
+		//console.log(preguntas[i].codigo_pregunta);
+		//console.log(preguntas[i].rel_tipo_pregunta);
 
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		if(preguntas[i].rel_tipo_pregunta == 5){
+			//console.log('text con label');
+
 		}
-	});
+		else if(preguntas[i].rel_tipo_pregunta == 6){
+			//Opcion simple si/no matricial
+			//console.log('Opcion simple');
+
+		}
+		else if(preguntas[i].rel_tipo_pregunta == 9){
+			//Input numerico matricial con limite inferior
+			//console.log('input numerico matricial con limite inferior');
+
+		}
+		else if(preguntas[i].rel_tipo_pregunta == 10){
+			//Etiqueta matricial
+			//console.log('Etiqueta, rotulo superior matricial');
+
+		}
+		else if(preguntas[i].rel_tipo_pregunta == 11){
+			//input hora matricial
+			//console.log('input hora matricial');
+
+		}
+
+	}
+
 });
 
 //Seccion 2
@@ -2793,5 +2812,56 @@ $('#formulario_s4').on('submit', function (e) {
 		}
 	});*/
 });
+
+//Funcion con return Funcion preguntas por seccion
+function preguntasSeccion(idseccion){
+	var ret_val = {};
+	$.ajax({
+		url: baseurl + "/eleccionesJudiciales2024/getpreguntasseccion/",
+		type: 'post',
+		data: {'idseccion': idseccion},
+		async: false,
+		dataType: 'json'
+	}).done(function (response) {
+		ret_val = response;
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		ret_val = null;
+	});
+	return ret_val;
+}
+
+//Func con return. Obtener las mesas obligatorias
+function mesasObligatoriasHoja1(){
+	var ret_val = {};
+	$.ajax({
+		url: baseurl + "/eleccionesJudiciales2024/getmesasoblc1/",
+		type: 'post',
+		data: {'idseccion': 'mesas'},
+		async: false,
+		dataType: 'json'
+	}).done(function (response) {
+		ret_val = response;
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		ret_val = null;
+	});
+	return ret_val;
+}
+
+//Func con return. Obtener las mesas opcionales
+function mesasOpcionalesHoja1(){
+	var ret_val = {};
+	$.ajax({
+		url: baseurl + "/eleccionesJudiciales2024/getmesasopc1/",
+		type: 'post',
+		data: {'idseccion': 'mesas'},
+		async: false,
+		dataType: 'json'
+	}).done(function (response) {
+		ret_val = response;
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		ret_val = null;
+	});
+	return ret_val;
+}
 
 /********************************** FIN DE ELECCCIONES JUDICIALES ***********************************/

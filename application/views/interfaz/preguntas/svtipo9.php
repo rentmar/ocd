@@ -27,7 +27,10 @@
 			<div class="d-flex w-100"> <!-- Si/no -->
 				<?php for($i=1; $i<5; $i++): ?>
 					<div class="col-3 border">
-						<input class="form-control" type="number" id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"  min="1" max="6" placeholder="">
+						<input class="form-control" type="number"
+							   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+							   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+							   min="1" max="6" placeholder="">
 					</div>
 				<?php endfor; ?>
 			</div>
@@ -41,7 +44,10 @@
 			<div class="d-flex w-100"><!-- Si/No -->
 				<?php for($i=5; $i<9; $i++): ?>
 					<div class="col-3 border">
-						<input class="form-control" type="number" id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"  min="1" max="6" placeholder="">
+						<input class="form-control" type="number"
+							   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+							   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+							   min="1" max="6" placeholder="">
 					</div>
 				<?php endfor; ?>
 			</div>
@@ -55,7 +61,10 @@
 			<div class="d-flex w-100"><!-- Si/No -->
 				<?php for($i=9; $i<13; $i++): ?>
 					<div class="col-3 border">
-						<input class="form-control" type="number" id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"  min="1" max="6" placeholder="">
+						<input class="form-control" type="number"
+							   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+							   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+							   min="1" max="6" placeholder="">
 					</div>
 				<?php endfor; ?>
 			</div>
@@ -92,18 +101,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -117,18 +118,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -142,18 +135,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -188,18 +173,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -213,18 +190,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -238,18 +207,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -287,18 +248,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -312,18 +265,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -337,18 +282,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -385,18 +322,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -410,18 +339,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -435,18 +356,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -481,18 +394,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -506,18 +411,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -531,18 +428,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -579,18 +468,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -604,18 +485,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -629,18 +502,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -677,18 +542,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -702,18 +559,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -727,18 +576,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -775,18 +616,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -800,18 +633,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -825,18 +650,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -873,18 +690,10 @@
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -898,18 +707,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=5; $i<9; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 				</div>
@@ -923,18 +724,10 @@
 				<div class="d-flex w-100"><!-- Si/No -->
 					<?php for($i=9; $i<13; $i++): ?>
 						<div class="col-3 border">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'1' ?>">
-								<label class="custom-control-label" for="<?php  echo "mesa".$i."-".$pregunta->codigo_pregunta.'s'; ?>">si</label>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input type="radio" class="custom-control-input"
-									   id="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>" name="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta; ?>"
-									   value="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'-'.'2' ?>">
-								<label class="custom-control-label" for="<?php echo "mesa".$i."-".$pregunta->codigo_pregunta.'n'; ?>">no</label>
-							</div>
+							<input class="form-control" type="number"
+								   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
+								   min="1" max="6" placeholder="">
 						</div>
 					<?php endfor; ?>
 
@@ -943,12 +736,7 @@
 
 			</div>
 		<?php endif; ?>
-
-
 	<?php endif;?>
-
-
-
 <?php elseif ($idhoja_preguntas == 2): //Hoja 2?>
 
 

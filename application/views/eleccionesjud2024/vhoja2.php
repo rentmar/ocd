@@ -7,7 +7,7 @@
 		'id' => 'formulario_ej2024_h2' ,
 	]
 	;?>
-	<?php echo form_open('EleccionesJudiciales2024/procesarHoja2', $atr_form);?>
+	<?php //echo form_open('EleccionesJudiciales2024/procesarHoja2', $atr_form);?>
 
 	<div class="contenedores_divididos">
 		<div class="contenedor_superior2" id="contenedor_pequeño">
@@ -23,12 +23,12 @@
 	<br>
 
 	<div class="contenedores">
-		<form class="card">
+		<div class="card">
 			<div class="card-header cuest2">
 				<h4 class="text-white">Informacion General</h4>
 			</div>
 			<div class="card-body font-weight-normal">
-				<form id="ej-c1-secc1" name="ej-c1-secc1">
+				<!--<form id="ej-c1-secc1" name="ej-c1-secc1">-->
 					<div class="form-group">
 						<label for="departamento">Departamento:</label><br>
 						<input type="text" id="" name="" class="form-control"
@@ -52,12 +52,12 @@
 						</div>
 						<br>
 						<div class="d-flex w-100">
-							<div class="col-3 border border-primary ">
+							<div class="col-6 border border-primary ">
 								<label class="text-primary" for="">Mesa 1</label>
 							</div>
 						</div>
 						<div class="d-flex w-100">
-							<div class="col-3 border">
+							<div class="col-6 border">
 								<input class="form-control" type="text" id="" name=""
 									   value="<?php if(isset($mesas->m1)){ echo $mesas->m1;} ?>" placeholder="No de mesa" readonly>
 							</div>
@@ -78,162 +78,77 @@
 					</div>
 				<?php endif; ?>
 			</div>
-		</form>
-	</div>
-	</div>
-	<br>
+		</div>
+		<br>
+		<br>
 
-<?php if($hoja2->esta_iniciado == 1): ?>
-	<div class="contenedores">
+		<?php if($hoja2->esta_iniciado == 1): ?>
+
 		<div class="card">
 			<div class="card-header cuest2">
 				<h4 class="text-white" >Mesas Adicionales</h4>
 			</div>
 			<div class="card-body font-weight-normal">
 				<div>
-					<div class="container mt-3">
-						Registre las mesas adicionales
-					</div>
-					<br>
+
 					<div class="d-flex w-100">
-						<div class="col-3 border border-primary ">
+						<div class="col-6 border border-primary ">
 							<label class="text-primary" for="">Mesa 2</label>
 						</div>
-						<div class="col-3 border border-primary">
+						<div class="col-6 border border-primary">
 							<label class="text-primary" for="">Mesa 3</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 4</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 5</label>
 						</div>
 					</div>
 					<div class="d-flex w-100">
-						<div class="col-3 border">
+						<div class="col-6 border">
 							<input class="form-control" type="text"
 								   id="" name="" placeholder=""
 								   value="<?php if (isset($mesas->m2)) { echo $mesas->m2; } ?>"
 								   readonly
 							>
 						</div>
-						<div class="col-3 border">
+						<div class="col-6 border">
 							<input class="form-control" type="text"
 								   id="" name="" placeholder=""
 								   value="<?php if (isset($mesas->m3)) { echo $mesas->m3; } ?>"
 								   readonly
 							>
 						</div>
-						<div class="col-3 border">
+					</div>
+					<br>
+					<div class="d-flex w-100">
+						<div class="col-6 border border-primary">
+							<label class="text-primary" for="">Mesa 4</label>
+						</div>
+					</div>
+					<div class="d-flex w-100">
+
+						<div class="col-6 border">
 							<input class="form-control" type="text"
 								   id="" name="" placeholder=""
 								   value="<?php if (isset($mesas->m4)) { echo $mesas->m4; } ?>"
 								   readonly
 							>
 						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m5)) { echo $mesas->m5; } ?>"
-								   readonly
-							>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 6</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 7</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 8</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 9</label>
-						</div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m6)) { echo $mesas->m6; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m7)) { echo $mesas->m7; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m8)) { echo $mesas->m8; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m9)) { echo $mesas->m9; } ?>"
-								   readonly
-							>
-						</div>
-					</div>
-					<br>
-					<div class="d-flex w-100">
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 10</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 11</label>
-						</div>
-						<div class="col-3 border border-primary">
-							<label class="text-primary" for="">Mesa 12</label>
-						</div>
-					</div>
-					<div class="d-flex w-100">
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m10)) { echo $mesas->m10; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m11)) { echo $mesas->m11; } ?>"
-								   readonly
-							>
-						</div>
-						<div class="col-3 border">
-							<input class="form-control" type="text"
-								   id="" name="" placeholder=""
-								   value="<?php if (isset($mesas->m12)) { echo $mesas->m12; } ?>"
-								   readonly
-							>
-						</div>
-					</div>
-				</div>
 
+					</div>
+					<br>
+				</div>
 			</div>
 			<div class="card-footer">
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#editmesasc2">
 					<i class="fas fa-save"></i>
 				</button>
 			</div>
-
-
 		</div>
+	<?php endif;?>
 
 
 	</div>
 	<br>
+
+<?php if($hoja2->esta_iniciado == 1): ?>
+
 <?php endif;?>
 
 <?php if($hoja2->esta_iniciado == 1): ?>
@@ -312,7 +227,33 @@
 				<div class="form-row">
 					<div class="form-group col-md-3">
 						<label for="c1-mesa">Mesa 1:</label>
-						<input type="text" class="form-control" id="c1-mesa1" name="c1-mesa1" placeholder="No de mesa" required>
+						<input type="text" class="form-control"
+							   id="c1-mesa1" name="c1-mesa1" placeholder="No de mesa" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<hr>
+					</div>
+					<div class="form-group col-md-12">
+						<h5 class="text-dark">MESAS OPCIONALES</h5>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-3">
+						<label for="c1-mesa2">Mesa 2:</label>
+						<input type="text" class="form-control" id="c1-mesa2" name="c1-mesa2"
+							   placeholder="No de mesa" >
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1-mesa3">Mesa 3:</label>
+						<input type="text" class="form-control" id="c1-mesa3" name="c1-mesa3"
+							   placeholder="No de mesa" >
+					</div>
+					<div class="form-group col-md-3">
+						<label for="c1-mesa4">Mesa 4:</label>
+						<input type="text" class="form-control" id="c1-mesa4" name="c1-mesa4"
+							   placeholder="No de mesa" >
 					</div>
 				</div>
 			</div>
@@ -324,7 +265,7 @@
 					Cancelar
 				</button>
 			</div>
-			</form>
+		</form>
 		</div>
 	</div>
 </div>
@@ -374,66 +315,6 @@
 						<input type="text" class="form-control" id="c2mesa4"
 							   name="c2mesa4" placeholder=""
 							   value = "<?php if (isset($mesas->m4)) { echo $mesas->m4; } ?>"
-						>
-					</div>
-					<div class="form-group col-md-3">
-						<label for="c2mesa5">Mesa 5:</label>
-						<input type="text" class="form-control" id="c2mesa5"
-							   name="c2mesa5" placeholder=""
-							   value = "<?php if (isset($mesas->m5)) { echo $mesas->m5; } ?>"
-						>
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-3">
-						<label for="c2mesa6">Mesa 6:</label>
-						<input type="text" class="form-control" id="c2mesa6"
-							   name="c2mesa6" placeholder=""
-							   value = "<?php if (isset($mesas->m6)) { echo $mesas->m6; } ?>"
-						>
-					</div>
-					<div class="form-group col-md-3">
-						<label for="c2mesa7">Mesa 7:</label>
-						<input type="text" class="form-control" id="c2mesa7"
-							   name="c2mesa7" placeholder=""
-							   value = "<?php if (isset($mesas->m7)) { echo $mesas->m7; } ?>"
-						>
-					</div>
-					<div class="form-group col-md-3">
-						<label for="c2mesa8">Mesa 8:</label>
-						<input type="text" class="form-control" id="c2mesa8"
-							   name="c2mesa8" placeholder=""
-							   value = "<?php if (isset($mesas->m8)) { echo $mesas->m8; } ?>"
-						>
-					</div>
-					<div class="form-group col-md-3">
-						<label for="c2mesa9">Mesa 9:</label>
-						<input type="text" class="form-control" id="c2mesa9"
-							   name="c2mesa9" placeholder=""
-							   value = "<?php if (isset($mesas->m9)) { echo $mesas->m9; } ?>"
-						>
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-3">
-						<label for="c2mesa10">Mesa 10:</label>
-						<input type="text" class="form-control" id="c2mesa10"
-							   name="c2mesa10" placeholder=""
-							   value = "<?php if (isset($mesas->m10)) { echo $mesas->m10; } ?>"
-						>
-					</div>
-					<div class="form-group col-md-3">
-						<label for="c2mesa11">Mesa 11:</label>
-						<input type="text" class="form-control" id="c2mesa11"
-							   name="c2mesa11" placeholder=""
-							   value = "<?php if (isset($mesas->m11)) { echo $mesas->m11; } ?>"
-						>
-					</div>
-					<div class="form-group col-md-3">
-						<label for="c2mesa12">Mesa 12:</label>
-						<input type="text" class="form-control" id="c2mesa12"
-							   name="c2mesa12" placeholder=""
-							   value = "<?php if (isset($mesas->m12)) { echo $mesas->m12; } ?>"
 						>
 					</div>
 				</div>
