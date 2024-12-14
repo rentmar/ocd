@@ -1,4 +1,7 @@
 <!-- Seccion matricial mesas --->
+
+
+
 <?php $datos_pregunta['iddepartamento'] = $iddepartamento;?>
 <?php if($idhoja_preguntas == 1):  ?>
 	<div class="contenedores">
@@ -166,7 +169,7 @@
 						<?php $datos_pregunta['respuestas'] = $respuestas; ?>
 						<?php $datos_pregunta['pregunta']= $p ;?>
 						<?php $datos_pregunta['idhoja_preguntas'] = $idhoja_preguntas; ?>
-						<?php $this->load->view('interfaz/preguntas/svtipo6', $datos_pregunta ); ?>
+						<?php $this->load->view('interfaz/preguntas/svtipo14', $datos_pregunta ); ?>
 					<?php elseif ($p->rel_tipo_pregunta == 7): ?>
 						<?php $datos_pregunta['mesas'] = $mesas;  ?>
 						<?php $datos_pregunta['respuestas'] = $respuestas; ?>

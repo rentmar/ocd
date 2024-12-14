@@ -2,6 +2,22 @@
 	<br>
 	<div class="container">
 		<div class="row">
+
+			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+				<div class="card">
+					<div class="card-header" style="background-color:#7f182b;color:white">
+						<h4>Administrar Elecciones Judiciales 2024</h4>
+					</div>
+					<img class="card-img-top" src="<?php echo base_url().'assets/img/reforma.svg'; ?>" alt="Card image">
+					<div class="card-body">
+						<a href="<?php echo site_url('eleccionesJudiciales2024/reportes');?>" class="BOTON" role="button">
+							Ir
+						</a>
+					</div>
+				</div>
+			</div>
+
+
 			<div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
 				<div class="card">
 					<div class="card-header" style="background-color:#7f182b;color:white">

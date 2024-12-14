@@ -2675,16 +2675,19 @@ $('#formulario_s1').on('submit', function (e) {
 		url: baseurl + "/eleccionesJudiciales2024/seccion1",
 		type: 'post',
 		data: {formulario: datosSeccion},
-		//dataType: 'json',
+		dataType: 'json',
 		beforeSend: function () {
 			alert('Envio de datos Seccion 1:');
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
-			//location.reload();
+			location.reload();
 		},
-		success: function () {
+		success: function (json) {
 			console.log("operacion completada success");
+			console.log(json);
+			banderas = JSON.parse(json);
+			alert(banderas.mensaje);
 
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
@@ -2716,7 +2719,7 @@ $('#formulario_s2').on('submit', function (e) {
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
-			//location.reload();
+			location.reload();
 		},
 		success: function () {
 			console.log("operacion completada success");

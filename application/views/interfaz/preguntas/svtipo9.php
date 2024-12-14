@@ -1,3 +1,11 @@
+<?php
+
+$rpm = (array)$respuestas;
+//var_dump($rpm);
+
+?>
+
+
 <?php if($idhoja_preguntas == 1): //Hoja 1?>
 
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>
@@ -26,11 +34,25 @@
 			</div>
 			<div class="d-flex w-100"> <!-- Si/no -->
 				<?php for($i=1; $i<5; $i++): ?>
+					<?php
+					$prg = (array) $rpm[$pregunta->codigo_pregunta];
+					$valmesa = $prg['m'.$i];
+					if(mb_strlen($valmesa) === 0){
+						$valor = '';
+					}
+					else{
+						$valor = $valmesa;
+					}
+					?>
+
+
 					<div class="col-3 border">
 						<input class="form-control" type="number"
 							   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
 							   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
-							   min="1" max="6" placeholder="">
+							   min="1" max="6" placeholder=""
+							   value="<?php echo $valor;?>"
+						>
 					</div>
 				<?php endfor; ?>
 			</div>
@@ -43,11 +65,25 @@
 			</div>
 			<div class="d-flex w-100"><!-- Si/No -->
 				<?php for($i=5; $i<9; $i++): ?>
+					<?php
+					$prg = (array) $rpm[$pregunta->codigo_pregunta];
+					$valmesa = $prg['m'.$i];
+					if(mb_strlen($valmesa) === 0){
+						$valor = '';
+					}
+					else{
+						$valor = $valmesa;
+					}
+					?>
+
+
 					<div class="col-3 border">
 						<input class="form-control" type="number"
 							   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
 							   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
-							   min="1" max="6" placeholder="">
+							   min="1" max="6" placeholder=""
+							   value="<?php echo $valor;?>"
+						>
 					</div>
 				<?php endfor; ?>
 			</div>
@@ -60,11 +96,25 @@
 			</div>
 			<div class="d-flex w-100"><!-- Si/No -->
 				<?php for($i=9; $i<13; $i++): ?>
+					<?php
+					$prg = (array) $rpm[$pregunta->codigo_pregunta];
+					$valmesa = $prg['m'.$i];
+					if(mb_strlen($valmesa) === 0){
+						$valor = '';
+					}
+					else{
+						$valor = $valmesa;
+					}
+					?>
+
+
 					<div class="col-3 border">
 						<input class="form-control" type="number"
 							   id="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
 							   name="<?php echo $pregunta->codigo_pregunta."-mesa".$i; ?>"
-							   min="1" max="6" placeholder="">
+							   min="1" max="6" placeholder=""
+							   value="<?php echo $valor;?>"
+						>
 					</div>
 				<?php endfor; ?>
 			</div>

@@ -92,6 +92,12 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		//Extraer las respuestas
 		$respuestas = json_decode($hoja1->respuestas);
 
+		function limpiar($var)
+		{
+			return ($var !== NULL && $var != false && $var !== '');
+		}
+
+
 
 
 
@@ -428,130 +434,239 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 
 		//Las mesas q se consideraran las respuestas
-		echo "Mesas: "."<br>";
 		$mesas = json_decode($hoja1->mesas);
 		$mesas = (array)$mesas;
-		var_dump($mesas);
-		echo "<br><br>";
 
 		//Eliminar las mesas vacias
 		function filtro($var){
 			return ($var !== NULL && $var != false && $var !=='');
 		}
 		$mesas_registradas = array_filter($mesas, "filtro");
-
-		echo "Mesas Registradas: <br>";
-		var_dump($mesas_registradas);
-		echo "<br><br>";
-
 		$mesas_claves = array_keys($mesas_registradas);
-
-		echo "Mesas Registradas claves: <br>";
-		var_dump($mesas_claves);
-		echo "<br><br>";
-
 		$mesas_indice = array();
 		foreach ($mesas_claves as $mk){
 			if($mk == 'm1'){
-				
+				$mesas_indice['m1'] = 'mesa1';
 			}
 			elseif ($mk == 'm2'){
-
+				$mesas_indice['m2'] = 'mesa2';
 			}
 			elseif ($mk == 'm3'){
+				$mesas_indice['m3'] = 'mesa3';
 
 			}elseif ($mk == 'm4'){
+				$mesas_indice['m4'] = 'mesa4';
 
 			}elseif ($mk == 'm5'){
+				$mesas_indice['m5'] = 'mesa5';
 
 			}elseif ($mk == 'm6'){
+				$mesas_indice['m6'] = 'mesa6';
 
 			}elseif ($mk == 'm7'){
+				$mesas_indice['m7'] = 'mesa7';
 
 			}elseif ($mk == 'm8'){
-
+				$mesas_indice['m8'] = 'mesa8';
 			}
 			elseif ($mk == 'm9'){
-
+				$mesas_indice['m9'] = 'mesa9';
 			}elseif ($mk == 'm10'){
-
+				$mesas_indice['m10'] = 'mesa10';
 			}
 			elseif ($mk == 'm11'){
-
+				$mesas_indice['m11'] = 'mesa11';
 			}
 			elseif ($mk == 'm12'){
-
+				$mesas_indice['m12'] = 'mesa12';
 			}
-
 		}
+		$datos_array = (array)$datos;
 
-
-
-
-
-		echo "Datos recibidos"."<br>";
-		var_dump($datos);
-		echo "<br><br>";
-
-
-		echo "Respuestas a llenar"."<br>";
-		var_dump($respuestas);
-		echo "<br><br><br>";
+		//Matriz de respuestas
+		$respuestas_capturadas_matriz = array();
+		//Repuesta pivote
+		/** @noinspection PhpLanguageLevelInspection */
+		$resp_pivote =[
+			'mesa1' => '',
+			'mesa2' => '',
+			'mesa3' => '',
+			'mesa4' => '',
+			'mesa5' => '',
+			'mesa6' => '',
+			'mesa7' => '',
+			'mesa8' => '',
+			'mesa9' => '',
+			'mesa10' => '',
+			'mesa11' => '',
+			'mesa12' => '',
+			'valor' => '',
+		];
 
 		//Rutina para guardar la informacion recibida
-		echo "INICIO"."<br>";
+		//echo "INICIO"."<br>";
 		foreach ($respuestas as $rp):
-			echo "CP: ".$rp->codigo_pregunta.' '.'Tipo: '.$rp->tipo;
-			echo "<br>";
-
 			//Comprobar el tipo de respuesta
-
 			if($rp->tipo == 6){
-				echo "tipo 6";
-				echo "<br>";
 				//Buscar las respuestas de las mesas
-
-
-
-
+				foreach($mesas_indice as $mi){
+					$key = $rp->codigo_pregunta.'-'.$mi;
+					//Comprobar si existe la respuesta
+					if(isset($datos_array[$key])){
+						//Almacenar la respuesta
+						$resp_pivote[$mi] = $datos_array[$key];
+						$respuestas_capturadas_matriz[$rp->codigo_pregunta] = $resp_pivote;
+					}else{
+						//Faltan datos
+						$formulario_correcto = 0;
+						break;
+					}
+				}
 			}
 			elseif ($rp->tipo == 10){
-				echo "tipo 10";
-				echo "<br>";
-
+				//Etiqueta sin respuesta
 			}
 			elseif ($rp->tipo == 9){
-				echo "tipo 9";
-				echo "<br>";
-
+				//Buscar las respuestas de las mesas
+				foreach($mesas_indice as $mi){
+					$key = $rp->codigo_pregunta.'-'.$mi;
+					//Comprobar si existe la respuesta
+					if(isset($datos_array[$key])){
+						//Almacenar la respuesta
+						$resp_pivote[$mi] = $datos_array[$key];
+						$respuestas_capturadas_matriz[$rp->codigo_pregunta] = $resp_pivote;
+					}else{
+						//Faltan datos
+						$formulario_correcto = 0;
+						break;
+					}
+				}
 			}
 			elseif ($rp->tipo == 11){
-				echo "tipo 11";
-				echo "<br>";
-
+				//Comprobar si existe la respuesta
+				//Buscar las respuestas de las mesas
+				foreach($mesas_indice as $mi){
+					$key = $rp->codigo_pregunta.'-'.$mi;
+					//Comprobar si existe la respuesta
+					if(isset($datos_array[$key])){
+						//Almacenar la respuesta
+						$resp_pivote[$mi] = $datos_array[$key];
+						$respuestas_capturadas_matriz[$rp->codigo_pregunta] = $resp_pivote;
+					}else{
+						//Faltan datos
+						$formulario_correcto = 0;
+						break;
+					}
+				}
 			}
 			elseif ($rp->tipo == 5){
-				echo "tipo 5";
-				echo "<br>";
-
+				//Sin validacion
 			}
 			else{};
-
-			echo "<br><br>";
-
 		endforeach;
 
+//		echo $formulario_correcto;
+		//echo "<br><br>";
 
+		if($formulario_correcto == 1){
+			//Guardar la informacion
+			foreach ($respuestas as $sp){
+				//echo "Codigo pregunta: ".$sp->codigo_pregunta.' ';
+				//echo "<br>";
+				if($sp->tipo == 6){
+					//echo "tipo 6";
+					//echo "<br>";
+					//Iterar respuesta
+					$resp_cap = $respuestas_capturadas_matriz[$sp->codigo_pregunta];
+					//var_dump($resp_cap);
+					$sp->m1 = $resp_cap['mesa1'];
+					$sp->m2 = $resp_cap['mesa2'];
+					$sp->m3 = $resp_cap['mesa3'];
+					$sp->m4 = $resp_cap['mesa4'];
+					$sp->m5 = $resp_cap['mesa5'];
+					$sp->m6 = $resp_cap['mesa6'];
+					$sp->m7 = $resp_cap['mesa7'];
+					$sp->m8 = $resp_cap['mesa8'];
+					$sp->m9 = $resp_cap['mesa9'];
+					$sp->m10 = $resp_cap['mesa10'];
+					$sp->m11 = $resp_cap['mesa11'];
+					$sp->m12 = $resp_cap['mesa12'];
+					//echo "<br>";
+				}elseif ($sp->tipo == 10){
+					//Respuesta etiqueta matricial s/r
 
+				}elseif ($sp->tipo == 9){
+					//Input numerico matricial con limite inferior
+					//echo "Codigo pregunta: ".$sp->codigo_pregunta.' ';
+					//echo "<br>";
+					//echo "tipo 6";
+					//echo "<br>";
+					//Iterar respuesta
+					$resp_cap = $respuestas_capturadas_matriz[$sp->codigo_pregunta];
+					//var_dump($resp_cap);
+					$sp->m1 = $resp_cap['mesa1'];
+					$sp->m2 = $resp_cap['mesa2'];
+					$sp->m3 = $resp_cap['mesa3'];
+					$sp->m4 = $resp_cap['mesa4'];
+					$sp->m5 = $resp_cap['mesa5'];
+					$sp->m6 = $resp_cap['mesa6'];
+					$sp->m7 = $resp_cap['mesa7'];
+					$sp->m8 = $resp_cap['mesa8'];
+					$sp->m9 = $resp_cap['mesa9'];
+					$sp->m10 = $resp_cap['mesa10'];
+					$sp->m11 = $resp_cap['mesa11'];
+					$sp->m12 = $resp_cap['mesa12'];
+					//echo "<br>";
+				}elseif ($sp->tipo == 11){
+					//Input hora matricial
+					//echo "tipo 6";
+					//echo "<br>";
+					//Iterar respuesta
+					$resp_cap = $respuestas_capturadas_matriz[$sp->codigo_pregunta];
+					//var_dump($resp_cap);
+					$sp->m1 = $resp_cap['mesa1'];
+					$sp->m2 = $resp_cap['mesa2'];
+					$sp->m3 = $resp_cap['mesa3'];
+					$sp->m4 = $resp_cap['mesa4'];
+					$sp->m5 = $resp_cap['mesa5'];
+					$sp->m6 = $resp_cap['mesa6'];
+					$sp->m7 = $resp_cap['mesa7'];
+					$sp->m8 = $resp_cap['mesa8'];
+					$sp->m9 = $resp_cap['mesa9'];
+					$sp->m10 = $resp_cap['mesa10'];
+					$sp->m11 = $resp_cap['mesa11'];
+					$sp->m12 = $resp_cap['mesa12'];
+					//echo "<br>";
 
+				}elseif ($sp->tipo == 5){
+					//Text con label
 
+				}
 
+			}
 
+			//Actualizar la base de datos
+			$respuestas_json_actualizada = json_encode($respuestas);
+			$this->Elecciones_model->actualizarRespuestasHoja1($hoja1->idfrhoja1, $respuestas_json_actualizada);
+			/** @noinspection PhpLanguageLevelInspection */
+			$banderas =[
+				'validado' => $formulario_correcto,
+				'mensaje' => 'Informacion Almacenada'
+			];
+		}else{
 
+			/** @noinspection PhpLanguageLevelInspection */
+			$banderas =[
+				'validado' => $formulario_correcto,
+				'mensaje' => 'Informacion incompleta, revise las respuestas',
+			];
 
-
-
-
+		}
+		$bandera = (object)$banderas;
+		$json = array();
+		$json = json_encode($banderas) ;
+		header('Content-Type: application/json');
+		echo json_encode($json);
 	}
 
 	//Seccion para la captura de datos
@@ -743,6 +858,25 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		header('Content-Type: application/json');
 		echo json_encode($mesas);
 	}
+
+
+	public function reportes(){
+
+
+
+
+
+
+
+
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('manejodb/vmanejodbeljud');
+		//$this->load->view('manejodb/vmanejodb_listanot', $dt);
+		$this->load->view('html/pie');
+	}
+
+
 
 
 
