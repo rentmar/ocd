@@ -92,16 +92,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		//Extraer las respuestas
 		$respuestas = json_decode($hoja1->respuestas);
 
-		function limpiar($var)
-		{
-			return ($var !== NULL && $var != false && $var !== '');
-		}
-
-
-
-
-
-
+		//var_dump($hoja1);
 
 		//Mesas
 		$mesas_json = $hoja1->mesas;
@@ -424,6 +415,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 		//Extraer la info a llenar
 		$respuestas = json_decode($hoja1->respuestas);
+		//var_dump($respuestas);
 
 		//Capturar los datos enviados
 		$datos_json = $this->input->post('formulario');
@@ -433,9 +425,13 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$formulario_correcto = 1;
 
 
+
+
 		//Las mesas q se consideraran las respuestas
 		$mesas = json_decode($hoja1->mesas);
 		$mesas = (array)$mesas;
+
+		//var_dump($mesas);
 
 		//Eliminar las mesas vacias
 		function filtro($var){
@@ -481,8 +477,9 @@ class EleccionesJudiciales2024 extends CI_Controller{
 				$mesas_indice['m12'] = 'mesa12';
 			}
 		}
+		//var_dump($mesas_indice);
 		$datos_array = (array)$datos;
-
+		//var_dump($datos_array);
 		//Matriz de respuestas
 		$respuestas_capturadas_matriz = array();
 		//Repuesta pivote
@@ -862,13 +859,6 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 	public function reportes(){
 
-
-
-
-
-
-
-
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
 		$this->load->view('manejodb/vmanejodbeljud');
@@ -876,9 +866,14 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$this->load->view('html/pie');
 	}
 
+	public function cerrarHoja1(){
 
-
-
+		$usuario = $this->ion_auth->user()->row();
+		$hoja1 = $this->Cuestionario_model->hoja1($usuario->id);
+		//echo $hoja1->idfrhoja1;
+		$this->Cuestionario_model->cerrarHoja1($hoja1->idfrhoja1);
+		redirect('eleccionesJudiciales2024/nuevo');
+	}
 
 
 }

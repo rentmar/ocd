@@ -2613,7 +2613,7 @@ $('#mesas_h1').on('submit', function (e) {
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
-			location.reload();
+			//location.reload();
 		},
 		success: function () {
 			console.log("operacion completada success");
@@ -2646,7 +2646,7 @@ $('#mesas_h2').on('submit', function (e) {
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
-			location.reload();
+			//location.reload();
 		},
 		success: function () {
 			console.log("operacion completada success");
@@ -2681,7 +2681,6 @@ $('#formulario_s1').on('submit', function (e) {
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
-			location.reload();
 		},
 		success: function (json) {
 			console.log("operacion completada success");
@@ -2719,7 +2718,6 @@ $('#formulario_s2').on('submit', function (e) {
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
-			location.reload();
 		},
 		success: function () {
 			console.log("operacion completada success");
@@ -2866,6 +2864,18 @@ function mesasHoja1(){
 	});
 	return ret_val;
 }
+
+$('#formulario_cerrar').on('submit', function (e) {
+	e.preventDefault(); // Evita la recarga de la página
+	// Crear objeto FormData a partir del formulario
+	//const formData = new FormData(this);
+	//console.log(formData);
+	//var datosSeccion = JSON.stringify(Object.fromEntries(formData));
+	console.log("Cerrar el formulario 1: ");
+	$("#cerrarhoja1").modal();
+
+});
+
 
 
 /********************************** FIN DE ELECCCIONES JUDICIALES ***********************************/

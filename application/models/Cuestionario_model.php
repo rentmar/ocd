@@ -574,6 +574,7 @@ class Cuestionario_model extends CI_Model
 	//Crear el formulario 1
 	public function crearHoja1($idusuario){
 		$data = array(
+			'esta_abierto' => true,
 			'esta_iniciado' => false,
 			'rel_id' => $idusuario,
 			'mesas' => '{"m1":"","m2":"","m3":"","m4":"","m5":"","m6":"","m7":"","m8":"","m9":"","m10":"","m11":"","m12":""}',
@@ -589,6 +590,7 @@ class Cuestionario_model extends CI_Model
 	//Crear el formulario 2
 	public function crearHoja2($idusuario){
 		$data = array(
+			'esta_abierto' => true,
 			'esta_iniciado' => false,
 			'rel_id' => $idusuario,
 			'mesas' => '{"m1":"","m2":"","m3":"","m4":"","m5":"","m6":"","m7":"","m8":"","m9":"","m10":"","m11":"","m12":""}',
@@ -647,6 +649,17 @@ class Cuestionario_model extends CI_Model
 		$this->db->where('idfrhoja2', $hoja->idfrhoja2 );
 		$this->db->update('form_elecc_jud_2024_resp_hoja2', $data);
 
+	}
+
+	//Actualizar los datos de la hoja1
+	public function cerrarHoja1($idhoja1)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'esta_abierto' => false,
+		];
+		$this->db->where('idfrhoja1', $idhoja1 );
+		$this->db->update('form_elecc_jud_2024_resp_hoja1', $data);
 	}
 
 

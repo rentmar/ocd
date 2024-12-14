@@ -1,6 +1,6 @@
-
+<?php //echo "Respuesta tipo 6"; ?>
 <?php //var_dump($pregunta);?>
-<?php  //var_dump($respuestas); ?>
+<?php //var_dump($respuestas); ?>
 <?php
 $respuestas_array = (array) $respuestas;
 $rpt = $respuestas_array[$pregunta->codigo_pregunta];
@@ -13,11 +13,13 @@ $rpm = (array)$respuestas;
 <?php $datos_pregunta['idhoja_preguntas'] = $idhoja_preguntas; ?>
 
 <?php if($idhoja_preguntas == 1): //Hoja 1?>
+	<?php //echo "Hoja1"; ?>
 
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>
 		<!--<div class="form-group">
 			<?php //var_dump($pregunta);?>
 			<?php  //var_dump($respuesta); ?>
+			<?php echo "sin restriccion";?>
 		</div>-->
 		<!--- Insertar la plantilla de radio buttons --->
 		<?php $this->load->view('interfaz/opciones/radio-2', $datos_pregunta ); ?>
@@ -598,6 +600,7 @@ $rpm = (array)$respuestas;
 		<?php elseif ($iddepartamento == 4): //CBBA ?>
 			<?php $pregunta_alt = $this->Interfaz_model->preguntaAlternativa($pregunta->idpregunta, $iddepartamento); ?>
 			<div class="form-group">
+				<?php echo "cochabamba"; ?>
 				<input type="hidden" id="<?php echo $pregunta->codigo_pregunta;?>" name="<?php echo $pregunta->codigo_pregunta; ?>"
 					   class="form-control" value="<?php echo $pregunta->codigo_pregunta; ?>"
 				>

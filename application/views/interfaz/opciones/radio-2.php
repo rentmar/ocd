@@ -2,6 +2,8 @@
 
 	$rpm = (array)$respuestas;
 	//var_dump($rpm);
+	//echo "RADIO 2";
+	//var_dump($respuestas);
 
 ?>
 

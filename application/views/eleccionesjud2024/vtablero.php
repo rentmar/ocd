@@ -22,24 +22,25 @@
 						<td>1</td>
 						<td>Cuestionario 1 - Apertura y funcionamiento de recintos</td>
 						<td>
+								<?php if($hoja1->esta_abierto): ?>
 								<a href="<?php echo site_url('eleccionesJudiciales2024/hoja1/'.$hoja1->idfrhoja1); ?>">
 									<i class="far fa-edit fa-lg"></i>
 								</a>
-								<!--<a href="<?php /*echo site_url('EleccionesJudiciales2024/reset1/'.$hoja1->idfrhoja1); */?>">
-									Reset
-								</a>-->
+								<?php endif;?>
+
 						</td>
 					</tr>
 					<tr>
 						<td>2</td>
 						<td>Cuestionario 2 - Cierre, computo y escrutinio</td>
 						<td>
-								<a href="<?php echo site_url('eleccionesJudiciales2024/hoja2/'.$hoja2->idfrhoja2); ?>">
+							<?php if($hoja2->esta_abierto): ?>
+							<a href="<?php echo site_url('eleccionesJudiciales2024/hoja2/'.$hoja2->idfrhoja2); ?>">
 									<i class="far fa-edit fa-lg"></i>
 								</a>
-								<!--<a href="<?php /*echo site_url('EleccionesJudiciales2024/reset2/'.$hoja2->idfrhoja2); */?>">
-									Reset
-								</a>-->
+							<?php endif;?>
+
+
 
 						</td>
 					</tr>
