@@ -92,10 +92,10 @@
 <br>
 <?php elseif($idhoja_preguntas == 2):  ?>
 
-
+	<?php ///var_dump($respuestas);?>
 	<div class="contenedores">
 		<div class="card">
-			<?php echo form_open('', [ 'id' =>'formulario_'.$codigo_seccion,])?>
+			<?php echo form_open('', [ 'id' =>'formulario2_'.$codigo_seccion,])?>
 			<div class="card-body font-weight-normal">
 				<div class="form-group">
 					<input type="hidden" id="idseccion" name="idseccion" class="form-control"

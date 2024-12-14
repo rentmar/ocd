@@ -1,12 +1,12 @@
-<?php
-
-$rpm = (array)$respuestas;
-//var_dump($rpm);
-
-?>
 
 
 <?php if($idhoja_preguntas == 1): //Hoja 1?>
+	<?php
+
+	$rpm = (array)$respuestas;
+//var_dump($rpm);
+
+	?>
 
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>
 		<div class="form-group">

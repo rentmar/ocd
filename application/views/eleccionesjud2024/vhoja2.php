@@ -137,7 +137,7 @@
 			</div>
 			<div class="card-footer">
 				<button type="button" class="btn btn-success" data-toggle="modal" data-target="#editmesasc2">
-					<i class="fas fa-save"></i>
+					<i class="fas fa-save"></i> Agregar Mesas
 				</button>
 			</div>
 		</div>
@@ -228,7 +228,7 @@
 					<div class="form-group col-md-3">
 						<label for="c1-mesa">Mesa 1:</label>
 						<input type="text" class="form-control"
-							   id="c1-mesa1" name="c1-mesa1" placeholder="No de mesa" required>
+							   id="c2-mesa1" name="c2-mesa1" placeholder="No de mesa" required>
 					</div>
 				</div>
 				<div class="form-row">
@@ -241,18 +241,18 @@
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="c1-mesa2">Mesa 2:</label>
-						<input type="text" class="form-control" id="c1-mesa2" name="c1-mesa2"
+						<label for="c2-mesa2">Mesa 2:</label>
+						<input type="text" class="form-control" id="c2-mesa2" name="c2-mesa2"
 							   placeholder="No de mesa" >
 					</div>
 					<div class="form-group col-md-3">
-						<label for="c1-mesa3">Mesa 3:</label>
-						<input type="text" class="form-control" id="c1-mesa3" name="c1-mesa3"
+						<label for="c2-mesa3">Mesa 3:</label>
+						<input type="text" class="form-control" id="c2-mesa3" name="c2-mesa3"
 							   placeholder="No de mesa" >
 					</div>
 					<div class="form-group col-md-3">
-						<label for="c1-mesa4">Mesa 4:</label>
-						<input type="text" class="form-control" id="c1-mesa4" name="c1-mesa4"
+						<label for="c2-mesa4">Mesa 4:</label>
+						<input type="text" class="form-control" id="c2-mesa4" name="c2-mesa4"
 							   placeholder="No de mesa" >
 					</div>
 				</div>
@@ -284,7 +284,7 @@
 			</div>
 
 			<!-- Modal body -->
-			<?php echo form_open('eleccionesJudiciales2024/procesarSeccionGeneralH1',['id'=>'mesas_h2',]);?>
+			<?php echo form_open('eleccionesJudiciales2024/updateMesasAdicionalesH2',['id'=>'mesas_h2',]);?>
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" id="idusuario" name="idusuario" value="<?php echo $usuario->id; ?>">
@@ -297,23 +297,23 @@
 
 				<div class="form-row">
 					<div class="form-group col-md-3">
-						<label for="c2mesa2">Mesa 2:</label>
-						<input type="text" class="form-control" id="c2mesa2"
-							   name="c2mesa2" placeholder=""
+						<label for="c2-mesa2">Mesa 2:</label>
+						<input type="text" class="form-control" id="c2-mesa2"
+							   name="c2-mesa2" placeholder=""
 							   value = "<?php if (isset($mesas->m2)) { echo $mesas->m2; } ?>"
 						>
 					</div>
 					<div class="form-group col-md-3">
-						<label for="c2mesa3">Mesa 3:</label>
-						<input type="text" class="form-control" id="c2mesa3"
-							   name="c2mesa3" placeholder=""
+						<label for="c2-mesa3">Mesa 3:</label>
+						<input type="text" class="form-control" id="c2-mesa3"
+							   name="c2-mesa3" placeholder=""
 							   value = "<?php if (isset($mesas->m3)) { echo $mesas->m3; } ?>"
 						>
 					</div>
 					<div class="form-group col-md-3">
-						<label for="c2mesa4">Mesa 4:</label>
-						<input type="text" class="form-control" id="c2mesa4"
-							   name="c2mesa4" placeholder=""
+						<label for="c2-mesa4">Mesa 4:</label>
+						<input type="text" class="form-control" id="c2-mesa4"
+							   name="c2-mesa4" placeholder=""
 							   value = "<?php if (isset($mesas->m4)) { echo $mesas->m4; } ?>"
 						>
 					</div>

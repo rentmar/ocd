@@ -115,7 +115,7 @@
 			<div class="card-header  <?php echo $color_encabezado; ?> ">
 				<h4 class="text-white" ><?php echo $nombre_seccion; ?></h4>
 			</div>
-			<?php echo form_open('', [ 'id' =>'formulario_'.$codigo_seccion,])?>
+			<?php echo form_open('', [ 'id' =>'formulario2_'.$codigo_seccion,])?>
 			<div class="card-body font-weight-normal">
 
 				<div class="form-group">

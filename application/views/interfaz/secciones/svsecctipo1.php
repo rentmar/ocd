@@ -118,7 +118,7 @@
 			<div class="card-header  <?php echo $color_encabezado; ?> ">
 				<h4 class="text-white" ><?php echo $nombre_seccion; ?></h4>
 			</div>
-			<?php echo form_open('', [ 'id' =>'formulario_'.$codigo_seccion,])?>
+			<?php echo form_open('', [ 'id' =>'formulario2_'.$codigo_seccion,])?>
 			<div class="card-body font-weight-normal">
 
 				<div class="form-group">
@@ -169,7 +169,7 @@
 						<?php $datos_pregunta['respuestas'] = $respuestas; ?>
 						<?php $datos_pregunta['pregunta']= $p ;?>
 						<?php $datos_pregunta['idhoja_preguntas'] = $idhoja_preguntas; ?>
-						<?php $this->load->view('interfaz/preguntas/svtipo14', $datos_pregunta ); ?>
+						<?php $this->load->view('interfaz/preguntas/svtipo6', $datos_pregunta ); ?>
 					<?php elseif ($p->rel_tipo_pregunta == 7): ?>
 						<?php $datos_pregunta['mesas'] = $mesas;  ?>
 						<?php $datos_pregunta['respuestas'] = $respuestas; ?>

@@ -2627,7 +2627,7 @@ $('#mesas_h1').on('submit', function (e) {
 
 
 //Actualizacion de las mesas adicionales Hoja 2
-$('#mesas_h2').on('submit', function (e) {
+$('#mesas_h2333').on('submit', function (e) {
 	e.preventDefault(); // Evita la recarga de la página
 	// Crear objeto FormData a partir del formulario
 	const formData = new FormData(this);
@@ -2729,9 +2729,9 @@ $('#formulario_s2').on('submit', function (e) {
 	});
 });
 
-
+/********************************** HOJA 2**********************************************************/
 //Seccion3
-$('#formulario_s3').on('submit', function (e) {
+$('#formulario2_s1').on('submit', function (e) {
 	e.preventDefault(); // Evita la recarga de la página
 	// Crear objeto FormData a partir del formulario
 	const formData = new FormData(this);
@@ -2740,17 +2740,18 @@ $('#formulario_s3').on('submit', function (e) {
 
 	console.log("JSON: ");
 	console.log(datosSeccion);
-	/*
+	//alert('CIerre');
 	$.ajax({
-		url: baseurl + "/eleccionesJudiciales2024/seccion3",
+		url: baseurl + "/eleccionesJudiciales2024/h2seccion1",
 		type: 'post',
-		data: {mesas: datosSeccion},
+		data: {formulario: datosSeccion},
 		//dataType: 'json',
 		beforeSend: function () {
-			alert('Envio de datos Seccion 3:');
+			alert('Envio de datos:');
 		},
 		complete: function () {
 			console.log('Operacion completada complete');
+			alert('Informacion almacenada');
 			//location.reload();
 		},
 		success: function () {
@@ -2760,7 +2761,7 @@ $('#formulario_s3').on('submit', function (e) {
 		error: function (xhr, ajaxOptions, thrownError) {
 			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 		}
-	});*/
+	});
 });
 
 
@@ -2796,6 +2797,79 @@ $('#formulario_s4').on('submit', function (e) {
 		}
 	});*/
 });
+
+
+$('#formulario2_s7').on('submit', function (e) {
+	e.preventDefault(); // Evita la recarga de la página
+	// Crear objeto FormData a partir del formulario
+	const formData = new FormData(this);
+	console.log(formData);
+	var datosSeccion = JSON.stringify(Object.fromEntries(formData));
+
+	console.log("JSON: ");
+	console.log(datosSeccion);
+
+	$.ajax({
+		url: baseurl + "/eleccionesJudiciales2024/formulario2_s7",
+		type: 'post',
+		data: {formulario: datosSeccion},
+		//dataType: 'json',
+		beforeSend: function () {
+			alert('Envio de datos Seccion 7');
+		},
+		complete: function () {
+			console.log('Operacion completada complete');
+		},
+		success: function () {
+			console.log("operacion completada success");
+			alert('Informacion almacenada');
+
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+
+
+
+$('#formulario2_s8').on('submit', function (e) {
+	e.preventDefault(); // Evita la recarga de la página
+	// Crear objeto FormData a partir del formulario
+	const formData = new FormData(this);
+	console.log(formData);
+	var datosSeccion = JSON.stringify(Object.fromEntries(formData));
+
+	console.log("JSON: ");
+	console.log(datosSeccion);
+
+		$.ajax({
+			url: baseurl + "/eleccionesJudiciales2024/formulario2_s8",
+			type: 'post',
+			data: {formulario: datosSeccion},
+			//dataType: 'json',
+			beforeSend: function () {
+				alert('Envio de datos Observaciones');
+			},
+			complete: function () {
+				console.log('Operacion completada complete');
+			},
+			success: function () {
+				console.log("operacion completada success");
+				alert('Informacion almacenada');
+
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+});
+
+
+
+
+
 
 //Funcion con return Funcion preguntas por seccion
 function preguntasSeccion(idseccion){

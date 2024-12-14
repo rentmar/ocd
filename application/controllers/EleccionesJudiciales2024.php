@@ -146,6 +146,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 		//Extraer las respuestas
 		$respuestas = json_decode($hoja2->respuestas);
+		//var_dump($respuestas);
 
 
 
@@ -291,7 +292,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 	//Agregar mesas al formulario
 	public function updateMesasAdicionalesH1(){
-
+		/*
 		//Mesas enviadas
 		$mesas_adicionales_json = $this->input->post('mesas');
 		$mesas_adicionales = json_decode($mesas_adicionales_json);
@@ -313,38 +314,31 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$mesas_actuales_json = json_encode($mesas_actuales);
 
 		//Actualizar informacion
-		$this->Elecciones_model->actualizarMesasAdicionales($hoja1->idfrhoja1, $mesas_actuales_json);
+		$this->Elecciones_model->actualizarMesasAdicionales($hoja1->idfrhoja1, $mesas_actuales_json);*/
 	}
 	//Agregar mesas al formulario
 	public function updateMesasAdicionalesH2(){
+		$sg2 = $this->seccionGralH2();
+		//Datos para el formulario
+		$usuario = $this->ion_auth->user()->row();
+		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
 
-		//Mesas enviadas
-		$mesas_adicionales_json = $this->input->post('mesas');
-		$mesas_adicionales = json_decode($mesas_adicionales_json);
+		//mesas
+		$mesas_json = $hoja2->mesas;
+		$mesas = json_decode($mesas_json);
+
+		$mesas->m2 = $sg2->m2;
+		$mesas->m3 = $sg2->m3;
+		$mesas->m4 = $sg2->m4;
 
 
-		//Extraer mesas adicionales
-		$hoja2 = $this->Cuestionario_model->hoja2($mesas_adicionales->idusuario);
+		$mesas_actuales_json = json_encode($mesas);
 
-		$mesas_actuales = json_decode($hoja2->mesas);
 
-		//Adicionar las mesas adicionales a las mesas actuales
-		$mesas_actuales->m2 = $mesas_adicionales->c2mesa2;
-		$mesas_actuales->m3 = $mesas_adicionales->c2mesa3;
-		$mesas_actuales->m4 = $mesas_adicionales->c2mesa4;
-		$mesas_actuales->m5 = $mesas_adicionales->c2mesa5;
-		$mesas_actuales->m6 = $mesas_adicionales->c2mesa6;
-		$mesas_actuales->m7 = $mesas_adicionales->c2mesa7;
-		$mesas_actuales->m8 = $mesas_adicionales->c2mesa8;
-		$mesas_actuales->m9 = $mesas_adicionales->c2mesa9;
-		$mesas_actuales->m10 = $mesas_adicionales->c2mesa10;
-		$mesas_actuales->m11 = $mesas_adicionales->c2mesa11;
-		$mesas_actuales->m12 = $mesas_adicionales->c2mesa12;
-
-		$mesas_actuales_json = json_encode($mesas_actuales);
 
 		//Actualizar informacion
 		$this->Elecciones_model->actualizarMesasAdicionalesH2($hoja2->idfrhoja2, $mesas_actuales_json);
+		redirect('eleccionesJudiciales2024/hoja2/'.$hoja2->idfrhoja2);
 	}
 
 
@@ -354,7 +348,7 @@ class EleccionesJudiciales2024 extends CI_Controller{
 	public function procesarSeccionGeneralH2(){
 		$sg = $this->seccionGralH2();
 		$hoja2 = $this->Cuestionario_model->hoja2($sg->idusuario);
-
+		var_dump($sg);
 		//Extraer las mesas
 		$mesas_json = $hoja2->mesas;
 
@@ -390,10 +384,10 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$hoja2->departamento_csej = $this->input->post('departamento_csej');
 		$hoja2->municipio_csej = $this->input->post('municipio_csej');
 		$hoja2->recinto_csej = $this->input->post('recinto_csej');
-		$hoja2->m1 = $this->input->post('c1-mesa1');
-		$hoja2->m2 = $this->input->post('c1-mesa2');
-		$hoja2->m3 = $this->input->post('c1-mesa3');
-		$hoja2->m4 = $this->input->post('c1-mesa4');
+		$hoja2->m1 = $this->input->post('c2-mesa1');
+		$hoja2->m2 = $this->input->post('c2-mesa2');
+		$hoja2->m3 = $this->input->post('c2-mesa3');
+		$hoja2->m4 = $this->input->post('c2-mesa4');
 		//$hoja2->m5 = $this->input->post('c1-mesa5');
 
 		return $hoja2;
@@ -686,8 +680,243 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		$this->Elecciones_model->actualizarRespuestasHoja1($hoja1->idfrhoja1, $respuestas_json_actualizada);
 	}
 
+/*********************************  Hoja 2  *****************************************************************/
+
 	//Seccion para la captura de datos
-	public function seccion3(){
+	public function h2seccion1(){
+
+		//Leer el cuestionario 1 y a quien pertenece
+		$usuario = $this->ion_auth->user()->row();
+		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
+
+		//Extraer las mesas registradas
+		$mesas = json_decode($hoja2->mesas) ;
+
+		//Extraer la info a llenar
+		$respuestas = json_decode($hoja2->respuestas);
+		//var_dump($respuestas);
+
+		//Capturar los datos enviados
+		$datos_json = $this->input->post('formulario');
+		$datos = json_decode($datos_json); //Datos enviados por el formulario
+
+		//Bandera de validacion
+		$formulario_correcto = 1;
+
+
+
+
+		//Las mesas q se consideraran las respuestas
+		$mesas = json_decode($hoja2->mesas);
+		$mesas = (array)$mesas;
+
+		//var_dump($mesas);
+
+		//Eliminar las mesas vacias
+		function filtro($var){
+			return ($var !== NULL && $var != false && $var !=='');
+		}
+		$mesas_registradas = array_filter($mesas, "filtro");
+		$mesas_claves = array_keys($mesas_registradas);
+		$mesas_indice = array();
+		foreach ($mesas_claves as $mk){
+			if($mk == 'm1'){
+				$mesas_indice['m1'] = 'mesa1';
+			}
+			elseif ($mk == 'm2'){
+				$mesas_indice['m2'] = 'mesa2';
+			}
+			elseif ($mk == 'm3'){
+				$mesas_indice['m3'] = 'mesa3';
+
+			}elseif ($mk == 'm4'){
+				$mesas_indice['m4'] = 'mesa4';
+
+			}elseif ($mk == 'm5'){
+				$mesas_indice['m5'] = 'mesa5';
+
+			}elseif ($mk == 'm6'){
+				$mesas_indice['m6'] = 'mesa6';
+
+			}elseif ($mk == 'm7'){
+				$mesas_indice['m7'] = 'mesa7';
+
+			}elseif ($mk == 'm8'){
+				$mesas_indice['m8'] = 'mesa8';
+			}
+			elseif ($mk == 'm9'){
+				$mesas_indice['m9'] = 'mesa9';
+			}elseif ($mk == 'm10'){
+				$mesas_indice['m10'] = 'mesa10';
+			}
+			elseif ($mk == 'm11'){
+				$mesas_indice['m11'] = 'mesa11';
+			}
+			elseif ($mk == 'm12'){
+				$mesas_indice['m12'] = 'mesa12';
+			}
+		}
+		//var_dump($mesas_indice);
+		$datos_array = (array)$datos;
+		//var_dump($datos_array);
+		//Matriz de respuestas
+		$respuestas_capturadas_matriz = array();
+		//Repuesta pivote
+		/** @noinspection PhpLanguageLevelInspection */
+		$resp_pivote =[
+			'mesa1' => '',
+			'mesa2' => '',
+			'mesa3' => '',
+			'mesa4' => '',
+			'valor' => '',
+		];
+
+		//Rutina para guardar la informacion recibida
+		//echo "INICIO"."<br>";
+		foreach ($respuestas as $rp):
+			//Comprobar el tipo de respuesta
+			if($rp->tipo == 6){
+				//Buscar las respuestas de las mesas
+				foreach($mesas_indice as $mi){
+					$key = $rp->codigo_pregunta.'-'.$mi;
+					//Comprobar si existe la respuesta
+					if(isset($datos_array[$key])){
+						//Almacenar la respuesta
+						$resp_pivote[$mi] = $datos_array[$key];
+						$respuestas_capturadas_matriz[$rp->codigo_pregunta] = $resp_pivote;
+					}else{
+						//Faltan datos
+						//$formulario_correcto = 0;
+						break;
+					}
+				}
+			}
+			elseif ($rp->tipo == 10){
+				//Etiqueta sin respuesta
+			}
+			elseif ($rp->tipo == 9){
+				//Buscar las respuestas de las mesas
+				foreach($mesas_indice as $mi){
+					$key = $rp->codigo_pregunta.'-'.$mi;
+					//Comprobar si existe la respuesta
+					if(isset($datos_array[$key])){
+						//Almacenar la respuesta
+						$resp_pivote[$mi] = $datos_array[$key];
+						$respuestas_capturadas_matriz[$rp->codigo_pregunta] = $resp_pivote;
+					}else{
+						//Faltan datos
+						//$formulario_correcto = 0;
+						break;
+					}
+				}
+			}
+			elseif ($rp->tipo == 11){
+				//Comprobar si existe la respuesta
+				//Buscar las respuestas de las mesas
+				foreach($mesas_indice as $mi){
+					$key = $rp->codigo_pregunta.'-'.$mi;
+					//Comprobar si existe la respuesta
+					if(isset($datos_array[$key])){
+						//Almacenar la respuesta
+						$resp_pivote[$mi] = $datos_array[$key];
+						$respuestas_capturadas_matriz[$rp->codigo_pregunta] = $resp_pivote;
+					}else{
+						//Faltan datos
+						//$formulario_correcto = 0;
+						break;
+					}
+				}
+			}
+			elseif ($rp->tipo == 5){
+				//Sin validacion
+			}
+			else{};
+		endforeach;
+
+//		echo $formulario_correcto;
+		//echo "<br><br>";
+
+		if($formulario_correcto == 1){
+			//Guardar la informacion
+			foreach ($respuestas as $sp){
+				//echo "Codigo pregunta: ".$sp->codigo_pregunta.' ';
+				//echo "<br>";
+				if($sp->tipo == 6){
+					//echo "tipo 6";
+					//echo "<br>";
+					//Iterar respuesta
+					$resp_cap = $respuestas_capturadas_matriz[$sp->codigo_pregunta];
+					var_dump($resp_cap);
+					$sp->m1 = $resp_cap['mesa1'];
+					$sp->m2 = $resp_cap['mesa2'];
+					$sp->m3 = $resp_cap['mesa3'];
+					$sp->m4 = $resp_cap['mesa4'];
+
+					//echo "<br>";
+				}elseif ($sp->tipo == 10){
+					//Respuesta etiqueta matricial s/r
+
+				}elseif ($sp->tipo == 9){
+					//Input numerico matricial con limite inferior
+					//echo "Codigo pregunta: ".$sp->codigo_pregunta.' ';
+					//echo "<br>";
+					//echo "tipo 6";
+					//echo "<br>";
+					//Iterar respuesta
+					$resp_cap = $respuestas_capturadas_matriz[$sp->codigo_pregunta];
+					//var_dump($resp_cap);
+					$sp->m1 = $resp_cap['mesa1'];
+					$sp->m2 = $resp_cap['mesa2'];
+					$sp->m3 = $resp_cap['mesa3'];
+					$sp->m4 = $resp_cap['mesa4'];
+
+					//echo "<br>";
+				}elseif ($sp->tipo == 11){
+					//Input hora matricial
+					//echo "tipo 6";
+					//echo "<br>";
+					//Iterar respuesta
+					$resp_cap = $respuestas_capturadas_matriz[$sp->codigo_pregunta];
+					//var_dump($resp_cap);
+					$sp->m1 = $resp_cap['mesa1'];
+					$sp->m2 = $resp_cap['mesa2'];
+					$sp->m3 = $resp_cap['mesa3'];
+					$sp->m4 = $resp_cap['mesa4'];
+
+					//echo "<br>";
+
+				}elseif ($sp->tipo == 5){
+					//Text con label
+
+				}
+
+			}
+
+			//Actualizar la base de datos
+			$respuestas_json_actualizada = json_encode($respuestas);
+			var_dump($respuestas);
+			//$this->Elecciones_model->actualizarRespuestasHoja1($hoja2->idfrhoja2, $respuestas_json_actualizada);
+			/** @noinspection PhpLanguageLevelInspection */
+			$banderas =[
+				'validado' => $formulario_correcto,
+				'mensaje' => 'Informacion Almacenada'
+			];
+		}else{
+
+			/** @noinspection PhpLanguageLevelInspection */
+			$banderas =[
+				'validado' => $formulario_correcto,
+				'mensaje' => 'Informacion incompleta, revise las respuestas',
+			];
+
+		}
+		$bandera = (object)$banderas;
+		$json = array();
+		$json = json_encode($banderas) ;
+		header('Content-Type: application/json');
+		echo json_encode($json);
+
+
 
 	}
 
@@ -739,20 +968,72 @@ class EleccionesJudiciales2024 extends CI_Controller{
 	}
 
 	//Seccion para la captura de datos
-	public function seccion11(){
+	public function formulario2_s7(){
+		$usuario = $this->ion_auth->user()->row();
+		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
+		$datos_json = $this->input->post('formulario');
+		$datos = json_decode($datos_json);
+		$datos_array = (array) $datos;
+
+
+		var_dump($datos_array);
+		echo "<br><br><br>";
+
+		$respuestas_json = $hoja2->respuestas;
+		$respuestas = json_decode($respuestas_json);
+		$respuestas_array = (array)$respuestas;
+		var_dump($respuestas_array);
+		echo "<br><br><br>";
+
+
+		$idseccion = $datos->idseccion;
+
+		$preguntas_seccion = $this->Interfaz_model->preguntasPorSeccion($idseccion);
+		var_dump($preguntas_seccion);
+		echo "<br><br><br>";
+
+		foreach ($preguntas_seccion as $ps){
+			echo "CP: ".$ps->codigo_pregunta.'  Tipo: '.$ps->rel_tipo_pregunta;
+			echo "<br>";
+			if( isset($datos_array[$ps->codigo_pregunta])){
+				$respuestas_array[$ps->codigo_pregunta]->respuesta = $datos_array[$ps->codigo_pregunta];
+			}
+			echo "<br>";
+
+
+		}
+		echo "<br><br><br>";
+		echo "Matriz resultado: <br>";
+		var_dump($respuestas_array);
+		$respuestas_json_actualizada = json_encode($respuestas_array);
+		$this->Elecciones_model->actualizarRespuestasHoja2($hoja2->idfrhoja2, $respuestas_json_actualizada);
+
+
+
+
 
 	}
 
-	//Seccion para la captura de datos
-	public function seccion12(){
-		//Capturar los datos de la seccion
+	//Seccion observaciones
+	public function formulario2_s8(){
+		$usuario = $this->ion_auth->user()->row();
+		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
+		$datos_json = $this->input->post('formulario');
+		$datos = json_decode($datos_json);
 
-		//Extraer la seccion de la base de datos
+		//Extraer las preguntas
+		$respuestas_json = $hoja2->respuestas;
+		$respuestas = json_decode($respuestas_json);
 
-		//Extraer la hoja
-
-
+		$codigopregunta = $datos->codigopregunta;
+		$r = $respuestas->$codigopregunta;
+		$r->respuesta = $datos->$codigopregunta;
+		$respuestas->$codigopregunta = $r;
+		$respuestas_json_actualizada = json_encode($respuestas);
+		//var_dump($respuestas_json_actualizada);
+		$this->Elecciones_model->actualizarRespuestasHoja2($hoja2->idfrhoja2, $respuestas_json_actualizada);
 	}
+
 
 
 	//Extraer las preguntas de una seccion

@@ -1,3 +1,4 @@
+
 <?php
 
 $rpm = (array)$respuestas;
@@ -6,7 +7,6 @@ $rpm = (array)$respuestas;
 ?>
 <?php if($idhoja_preguntas == 1): //Hoja 1?>
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>
-
 
 		<div class="form-group">
 			<input type="hidden" id="<?php echo $pregunta->codigo_pregunta;?>" name="<?php echo $pregunta->codigo_pregunta; ?>"

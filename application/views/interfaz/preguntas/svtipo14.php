@@ -3,7 +3,7 @@
 <?php elseif ($idhoja_preguntas == 2): //Hoja 2?>
 
 
-	<?php echo "BASE";?>
+	<?php //echo "BASE";?>
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>
 		<!--<div class="form-group">
 			<?php /*var_dump($pregunta);*/?>
@@ -34,18 +34,19 @@
 			<div class="d-flex w-100"> <!-- Si/no -->
 				<?php for($i=1; $i<5; $i++): ?>
 					<div class="col-3 border">
-						<div class="custom-control custom-radio custom-control-inline">
+
+						<div class="custom-control custom-checkbox custom-control-inline">
 							<input type="checkbox" class="custom-control-input"
 								   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-								   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 								   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 							<label class="custom-control-label"
 								   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 						</div>
-						<div class="custom-control custom-radio custom-control-inline">
+						<div class="custom-control custom-checkbox custom-control-inline">
 							<input type="checkbox" class="custom-control-input"
 								   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-								   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+								   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 								   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 							<label class="custom-control-label"
 								   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -95,7 +96,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -103,7 +104,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -146,7 +147,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -154,7 +155,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -197,7 +198,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -205,7 +206,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -250,7 +251,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -258,7 +259,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -300,7 +301,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -308,7 +309,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -352,7 +353,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -360,7 +361,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -408,7 +409,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -416,7 +417,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -463,7 +464,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -471,7 +472,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -546,7 +547,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -554,7 +555,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -601,7 +602,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -609,7 +610,7 @@
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="checkbox" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
@@ -678,7 +679,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
@@ -686,7 +687,7 @@
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="checkbox" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
-									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
+									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>[]"
 									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>

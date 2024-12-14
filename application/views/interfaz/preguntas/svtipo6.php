@@ -1,18 +1,20 @@
 <?php //echo "Respuesta tipo 6"; ?>
 <?php //var_dump($pregunta);?>
 <?php //var_dump($respuestas); ?>
-<?php
-$respuestas_array = (array) $respuestas;
-$rpt = $respuestas_array[$pregunta->codigo_pregunta];
-$rpm = (array)$respuestas;
-//var_dump($rpt);
-?>
-<?php $datos_pregunta['mesas'] = $mesas;  ?>
-<?php $datos_pregunta['respuestas'] = $respuestas; ?>
-<?php $datos_pregunta['pregunta']= $pregunta ;?>
-<?php $datos_pregunta['idhoja_preguntas'] = $idhoja_preguntas; ?>
 
 <?php if($idhoja_preguntas == 1): //Hoja 1?>
+
+	<?php
+	$respuestas_array = (array) $respuestas;
+	$rpt = $respuestas_array[$pregunta->codigo_pregunta];
+	$rpm = (array)$respuestas;
+//var_dump($rpt);
+	?>
+	<?php $datos_pregunta['mesas'] = $mesas;  ?>
+	<?php $datos_pregunta['respuestas'] = $respuestas; ?>
+	<?php $datos_pregunta['pregunta']= $pregunta ;?>
+	<?php $datos_pregunta['idhoja_preguntas'] = $idhoja_preguntas; ?>
+
 	<?php //echo "Hoja1"; ?>
 
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>
