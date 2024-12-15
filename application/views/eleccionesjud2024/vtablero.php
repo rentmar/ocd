@@ -48,7 +48,7 @@
 						<td>3</td>
 						<td>Repositorio de imagenes </td>
 						<td>
-							<a href="http://localhost/api-google-drive/">
+							<a href="https://repositorio.rtechelectronica.com/">
 								<i class="far fa-file-image fa-lg"></i>
 							</a>
 						</td>

@@ -92,7 +92,7 @@
 <br>
 <?php elseif($idhoja_preguntas == 2):  ?>
 
-	<?php ///var_dump($respuestas);?>
+	<?php //var_dump($respuestas);?>
 	<div class="contenedores">
 		<div class="card">
 			<?php echo form_open('', [ 'id' =>'formulario2_'.$codigo_seccion,])?>

@@ -1735,7 +1735,14 @@
 
 <?php elseif ($idhoja_preguntas == 2): //Hoja 2?>
 
+	<?php
 
+
+	$respuestas_array = (array) $respuestas;
+	$rpt = $respuestas_array[$pregunta->codigo_pregunta];
+	$rpm = (array)$respuestas;
+var_dump($rpt);
+	?>
 
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>
 		<!--<div class="form-group">
@@ -1766,12 +1773,36 @@
 			</div>
 			<div class="d-flex w-100"> <!-- Si/no -->
 				<?php for($i=1; $i<5; $i++): ?>
+					<?php
+					$prg = (array) $rpm[$pregunta->codigo_pregunta];
+					//echo "<br>";
+					//var_dump($prg);
+					$valmesa = $prg['m'.$i];
+					if(mb_strlen($valmesa) === 0){
+						$acheck = '';
+						$bcheck = '';
+					}
+					else{
+
+						//echo $valmesa;
+						if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+						{
+							$acheck = 'checked';
+							$bcheck ='';
+						}else {
+							$acheck = '';
+							$bcheck ='checked';
+						}
+					}
+					?>
 					<div class="col-3 border">
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input"
 								   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 								   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-								   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+								   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+							>
 							<label class="custom-control-label"
 								   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 						</div>
@@ -1779,7 +1810,9 @@
 							<input type="radio" class="custom-control-input"
 								   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 								   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-								   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+								   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+								<?php echo $bcheck;?>
+							>
 							<label class="custom-control-label"
 								   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 						</div>
@@ -1823,12 +1856,36 @@
 				</div>
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
+						<?php
+						$prg = (array) $rpm[$pregunta->codigo_pregunta];
+						//echo "<br>";
+						//var_dump($prg);
+						$valmesa = $prg['m'.$i];
+						if(mb_strlen($valmesa) === 0){
+							$acheck = '';
+							$bcheck = '';
+						}
+						else{
+
+							//echo $valmesa;
+							if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+							{
+								$acheck = 'checked';
+								$bcheck ='';
+							}else {
+								$acheck = '';
+								$bcheck ='checked';
+							}
+						}
+						?>
 						<div class="col-3 border">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 							</div>
@@ -1836,7 +1893,9 @@
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+									<?php echo $bcheck;?>
+								>
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 							</div>
@@ -1874,12 +1933,36 @@
 				</div>
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
+						<?php
+						$prg = (array) $rpm[$pregunta->codigo_pregunta];
+						//echo "<br>";
+						//var_dump($prg);
+						$valmesa = $prg['m'.$i];
+						if(mb_strlen($valmesa) === 0){
+							$acheck = '';
+							$bcheck = '';
+						}
+						else{
+
+							//echo $valmesa;
+							if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+							{
+								$acheck = 'checked';
+								$bcheck ='';
+							}else {
+								$acheck = '';
+								$bcheck ='checked';
+							}
+						}
+						?>
 						<div class="col-3 border">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 							</div>
@@ -1887,7 +1970,9 @@
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+										<?php echo $bcheck;?>
+								>
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 							</div>
@@ -1925,12 +2010,36 @@
 				</div>
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
+						<?php
+						$prg = (array) $rpm[$pregunta->codigo_pregunta];
+						//echo "<br>";
+						//var_dump($prg);
+						$valmesa = $prg['m'.$i];
+						if(mb_strlen($valmesa) === 0){
+							$acheck = '';
+							$bcheck = '';
+						}
+						else{
+
+							//echo $valmesa;
+							if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+							{
+								$acheck = 'checked';
+								$bcheck ='';
+							}else {
+								$acheck = '';
+								$bcheck ='checked';
+							}
+						}
+						?>
 						<div class="col-3 border">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 							</div>
@@ -1938,7 +2047,9 @@
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+									<?php echo $bcheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 							</div>
@@ -1978,12 +2089,36 @@
 				</div>
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
+						<?php
+						$prg = (array) $rpm[$pregunta->codigo_pregunta];
+						//echo "<br>";
+						//var_dump($prg);
+						$valmesa = $prg['m'.$i];
+						if(mb_strlen($valmesa) === 0){
+							$acheck = '';
+							$bcheck = '';
+						}
+						else{
+
+							//echo $valmesa;
+							if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+							{
+								$acheck = 'checked';
+								$bcheck ='';
+							}else {
+								$acheck = '';
+								$bcheck ='checked';
+							}
+						}
+						?>
 						<div class="col-3 border">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 							</div>
@@ -1991,7 +2126,9 @@
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+										<?php echo $bcheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 							</div>
@@ -2028,12 +2165,36 @@
 				</div>
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
+						<?php
+						$prg = (array) $rpm[$pregunta->codigo_pregunta];
+						//echo "<br>";
+						//var_dump($prg);
+						$valmesa = $prg['m'.$i];
+						if(mb_strlen($valmesa) === 0){
+							$acheck = '';
+							$bcheck = '';
+						}
+						else{
+
+							//echo $valmesa;
+							if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+							{
+								$acheck = 'checked';
+								$bcheck ='';
+							}else {
+								$acheck = '';
+								$bcheck ='checked';
+							}
+						}
+						?>
 						<div class="col-3 border">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 							</div>
@@ -2041,7 +2202,9 @@
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+										<?php echo $bcheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 							</div>
@@ -2080,12 +2243,36 @@
 				</div>
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
+						<?php
+						$prg = (array) $rpm[$pregunta->codigo_pregunta];
+						//echo "<br>";
+						//var_dump($prg);
+						$valmesa = $prg['m'.$i];
+						if(mb_strlen($valmesa) === 0){
+							$acheck = '';
+							$bcheck = '';
+						}
+						else{
+
+							//echo $valmesa;
+							if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+							{
+								$acheck = 'checked';
+								$bcheck ='';
+							}else {
+								$acheck = '';
+								$bcheck ='checked';
+							}
+						}
+						?>
 						<div class="col-3 border">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 							</div>
@@ -2093,7 +2280,9 @@
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+									<?php echo $bcheck;?>
+								>
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 							</div>
@@ -2136,12 +2325,36 @@
 					</div>
 					<div class="d-flex w-100"> <!-- Si/no -->
 						<?php for($i=1; $i<5; $i++): ?>
+							<?php
+							$prg = (array) $rpm[$pregunta->codigo_pregunta];
+							//echo "<br>";
+							//var_dump($prg);
+							$valmesa = $prg['m'.$i];
+							if(mb_strlen($valmesa) === 0){
+								$acheck = '';
+								$bcheck = '';
+							}
+							else{
+
+								//echo $valmesa;
+								if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+								{
+									$acheck = 'checked';
+									$bcheck ='';
+								}else {
+									$acheck = '';
+									$bcheck ='checked';
+								}
+							}
+							?>
 							<div class="col-3 border">
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+										<?php echo $acheck; ?>
+									>
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 								</div>
@@ -2149,7 +2362,9 @@
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+										<?php echo $bcheck;?>
+									>
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 								</div>
@@ -2191,12 +2406,36 @@
 					</div>
 					<div class="d-flex w-100"> <!-- Si/no -->
 						<?php for($i=1; $i<5; $i++): ?>
+							<?php
+							$prg = (array) $rpm[$pregunta->codigo_pregunta];
+							//echo "<br>";
+							//var_dump($prg);
+							$valmesa = $prg['m'.$i];
+							if(mb_strlen($valmesa) === 0){
+								$acheck = '';
+								$bcheck = '';
+							}
+							else{
+
+								//echo $valmesa;
+								if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+								{
+									$acheck = 'checked';
+									$bcheck ='';
+								}else {
+									$acheck = '';
+									$bcheck ='checked';
+								}
+							}
+							?>
 							<div class="col-3 border">
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+										<?php echo $acheck; ?>
+									>
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 								</div>
@@ -2204,7 +2443,9 @@
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+										<?php echo $bcheck;?>
+									>
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 								</div>
@@ -2274,12 +2515,36 @@
 					</div>
 					<div class="d-flex w-100"> <!-- Si/no -->
 						<?php for($i=1; $i<5; $i++): ?>
+							<?php
+							$prg = (array) $rpm[$pregunta->codigo_pregunta];
+							//echo "<br>";
+							//var_dump($prg);
+							$valmesa = $prg['m'.$i];
+							if(mb_strlen($valmesa) === 0){
+								$acheck = '';
+								$bcheck = '';
+							}
+							else{
+
+								//echo $valmesa;
+								if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+								{
+									$acheck = 'checked';
+									$bcheck ='';
+								}else {
+									$acheck = '';
+									$bcheck ='checked';
+								}
+							}
+							?>
 							<div class="col-3 border">
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+										<?php echo $acheck; ?>
+									>
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 								</div>
@@ -2287,7 +2552,9 @@
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+										<?php echo $bcheck;?>
+									>
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 								</div>
@@ -2329,12 +2596,36 @@
 					</div>
 					<div class="d-flex w-100"> <!-- Si/no -->
 						<?php for($i=1; $i<5; $i++): ?>
+							<?php
+							$prg = (array) $rpm[$pregunta->codigo_pregunta];
+							//echo "<br>";
+							//var_dump($prg);
+							$valmesa = $prg['m'.$i];
+							if(mb_strlen($valmesa) === 0){
+								$acheck = '';
+								$bcheck = '';
+							}
+							else{
+
+								//echo $valmesa;
+								if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+								{
+									$acheck = 'checked';
+									$bcheck ='';
+								}else {
+									$acheck = '';
+									$bcheck ='checked';
+								}
+							}
+							?>
 							<div class="col-3 border">
 								<div class="custom-control custom-radio custom-control-inline">
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+										<?php echo $acheck; ?>
+									>
 									<label class="custom-control-label"
 										   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 								</div>
@@ -2342,7 +2633,9 @@
 									<input type="radio" class="custom-control-input"
 										   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 										   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+										   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+											<?php echo $bcheck;?>
+									>
 									<label class="custom-control-label"
 										   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 								</div>
@@ -2406,12 +2699,36 @@
 				</div>
 				<div class="d-flex w-100"> <!-- Si/no -->
 					<?php for($i=1; $i<5; $i++): ?>
+						<?php
+						$prg = (array) $rpm[$pregunta->codigo_pregunta];
+						//echo "<br>";
+						//var_dump($prg);
+						$valmesa = $prg['m'.$i];
+						if(mb_strlen($valmesa) === 0){
+							$acheck = '';
+							$bcheck = '';
+						}
+						else{
+
+							//echo $valmesa;
+							if($valmesa == $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1')
+							{
+								$acheck = 'checked';
+								$bcheck ='';
+							}else {
+								$acheck = '';
+								$bcheck ='checked';
+							}
+						}
+						?>
 						<div class="col-3 border">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'1'; ?>"
+									<?php echo $acheck; ?>
+								>
 								<label class="custom-control-label"
 									   for="<?php  echo $pregunta->codigo_pregunta.'-'."mesa".$i.'s'; ?>">si</label>
 							</div>
@@ -2419,7 +2736,9 @@
 								<input type="radio" class="custom-control-input"
 									   id="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>"
 									   name="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i; ?>"
-									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>">
+									   value="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'-'.'2'; ?>"
+									<?php echo $bcheck;?>
+								>
 								<label class="custom-control-label"
 									   for="<?php echo $pregunta->codigo_pregunta.'-'."mesa".$i.'n'; ?>">no</label>
 							</div>
