@@ -1925,6 +1925,48 @@ class ManejoDB extends CI_Controller{
 		redirect('manejoDB/jornadaCensalAdministrador');
 	}
 
+	public function downloadCuestionario1(){
+		$filename = "eleccion-cuestionario1.xlsx";
+		$ruta = 'assets/info/';
+		$plantilla = $ruta.'eleccion-cuestionario1.xlsx';
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheet‌​ml.sheet");
+		header('Content-Disposition: attachment; filename="' . $filename. '"');
+		header('Cache-Control: max-age=0');
+
+		$cuestionario1 = $this->Cuestionario_model->cuestionario1Todo();
+
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($plantilla);
+		$sheet = $spreadsheet->getActiveSheet();
+		$worksheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('E3', '3' );
+		$eje_y = 6;
+		$eje_x = 'C';
+		foreach ($cuestionario1 as $n):
+			$sheet->setCellValue('A'.$eje_y, $n->idfrhoja1);
+			$sheet->setCellValue('B'.$eje_y, $n->username);
+
+			
+
+
+				/*$sheet->setCellValue('C'.$eje_y, mdate('%m-%d-%Y', $n->fecha_noticia));
+				$sheet->setCellValue('D'.$eje_y, $n->titular);
+				$sheet->setCellValue('E'.$eje_y, $n->resumen);
+				$sheet->setCellValue('F'.$eje_y, $n->url_noticia);
+				$sheet->setCellValue('G'.$eje_y, $n->nombre_medio );
+				$sheet->setCellValue('H'.$eje_y, $n->nombre_tipo );
+				$sheet->setCellValue('I'.$eje_y, $n->nombre_cuestionario );
+				$sheet->setCellValue('J'.$eje_y, $n->username);
+				$sheet->setCellValue('K'.$eje_y, $n->nombre_universidad);
+				$sheet->setCellValue('L'.$eje_y, $n->nombre_departamento);*/
+
+			$eje_y++;
+		endforeach;
+
+		$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+		$writer->save("php://output");
+
+	}
+
 	
 
 

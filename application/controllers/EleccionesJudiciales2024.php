@@ -1724,7 +1724,9 @@ class EleccionesJudiciales2024 extends CI_Controller{
 
 		$this->load->view('html/encabezado');
 		$this->load->view('html/navbar');
-		$this->load->view('manejodb/vmanejodbeljud');
+		$this->load->view('eleccionesjud2024/vtableroreportes');
+
+		//$this->load->view('manejodb/vmanejodbeljud');
 		//$this->load->view('manejodb/vmanejodb_listanot', $dt);
 		$this->load->view('html/pie');
 	}
@@ -1745,6 +1747,30 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		//echo $hoja1->idfrhoja1;
 		$this->Cuestionario_model->cerrarHoja2($hoja2->idfrhoja2);
 		redirect('eleccionesJudiciales2024/nuevo');
+	}
+
+
+	public function reportehoja1(){
+
+		$formularios = $this->Cuestionario_model->cuestionario1Todo();
+
+		$datos['datos'] = $formularios;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('eleccionesjud2024/Vtabla1.php', $datos);
+		$this->load->view('html/pie');
+
+	}
+	public function reportehoja2(){
+
+		$formularios = $this->Cuestionario_model->cuestionario2Todo();
+
+		$datos['datos'] = $formularios;
+		$this->load->view('html/encabezado');
+		$this->load->view('html/navbar');
+		$this->load->view('eleccionesjud2024/table2.php', $datos);
+		$this->load->view('html/pie');
+
 	}
 
 

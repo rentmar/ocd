@@ -429,14 +429,14 @@ class Cuestionario_model extends CI_Model
 			." "
 			." ";
 		$qry = $this->db->query($sql, [$idusuario,]);
-		return $qry->row();		
+		return $qry->row();
 	}
 
 	//Eliminar un formulario
 	public function eliminarFormulario($idformulario)
 	{
 		$this->db->where('idfcsjc', $idformulario);
-		$this->db->delete('form_csjc_respuestas');		
+		$this->db->delete('form_csjc_respuestas');
 	}
 
 
@@ -672,6 +672,38 @@ class Cuestionario_model extends CI_Model
 		$this->db->where('idfrhoja2', $idhoja2 );
 		$this->db->update('form_elecc_jud_2024_resp_hoja2', $data);
 	}
+
+	public function cuestionario1Todo(){
+
+		$sql = "SELECT * "
+			."FROM form_elecc_jud_2024_resp_hoja1  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = form_elecc_jud_2024_resp_hoja1.rel_iddepartamento  "
+			."LEFT JOIN municipios ON municipios.idmun = form_elecc_jud_2024_resp_hoja1.rel_idmunicipio "
+			."LEFT JOIN recinto_electoral ON recinto_electoral.idre = form_elecc_jud_2024_resp_hoja1.rel_idrecinto    "
+			."LEFT JOIN users ON users.id = form_elecc_jud_2024_resp_hoja1.rel_id "
+			."  "
+			." "
+			." ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+
+	public function cuestionario2Todo(){
+
+		$sql = "SELECT * "
+			."FROM form_elecc_jud_2024_resp_hoja2  "
+			."LEFT JOIN departamento ON departamento.iddepartamento = form_elecc_jud_2024_resp_hoja2.rel_iddepartamento  "
+			."LEFT JOIN municipios ON municipios.idmun = form_elecc_jud_2024_resp_hoja2.rel_idmunicipio  "
+			."LEFT JOIN recinto_electoral ON recinto_electoral.idre = form_elecc_jud_2024_resp_hoja2.rel_idrecinto     "
+			."LEFT JOIN users ON users.id = form_elecc_jud_2024_resp_hoja2.rel_id "
+			."  "
+			." "
+			." ";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
 
 
 

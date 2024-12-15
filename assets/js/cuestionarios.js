@@ -533,6 +533,9 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+
+
 	$('#leyes-tabla').DataTable({
 		responsive: true,
 		language: {
