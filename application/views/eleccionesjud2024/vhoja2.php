@@ -156,12 +156,17 @@
 <?php endif;?>
 <?php if($hoja2->esta_iniciado == 1): ?>
 	<div id="contenedor-submit">
-		<button id="BOTON" type="submit" name="action" value="1" >
-			ENVIAR
+
+
+		<button type="button" class="btn btn-secondary btn-lg " data-toggle="modal" data-target="#cerrarhoja2">
+			ENVIAR FORMULARIO
 		</button>
-		<a href="<?php echo site_url('eleccionesJudiciales2024/nuevo');?>">
-			<input type="button" class="BOTON" value="CERRAR">
+		<a href="<?php echo site_url('eleccionesJudiciales2024/nuevo'); ?>" class="btn btn-info btn-lg" role="button">
+			VOLVER INICIO
 		</a>
+
+
+
 	</div>
 <?php endif;?>
 	<br>
@@ -332,5 +337,40 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade" id="cerrarhoja2">
+	<div class="modal-dialog modal-sm">
+		<form class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-warning">
+				<h4 class="modal-title">Cerrar Formulario</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="alert alert-danger">
+						<strong>Advertencia!</strong>
+						Una vez enviado el formulario, no se podra acceder a el nuevamente.
+						Esta seguro?
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<a href="<?php echo site_url('eleccionesJudiciales2024/cerrarHoja2'); ?>" class="btn btn-info " role="button">
+					SI
+				</a>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+			</div>
+	</div>
+</div>
+</div>
+
+
 
 

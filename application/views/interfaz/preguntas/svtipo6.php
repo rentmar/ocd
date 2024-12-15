@@ -1741,7 +1741,7 @@
 	$respuestas_array = (array) $respuestas;
 	$rpt = $respuestas_array[$pregunta->codigo_pregunta];
 	$rpm = (array)$respuestas;
-var_dump($rpt);
+//var_dump($rpt);
 	?>
 
 	<?php if($pregunta->restriccion_departamento == 0): //Sin restriccionn a departamento ?>

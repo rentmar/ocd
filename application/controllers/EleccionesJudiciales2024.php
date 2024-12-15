@@ -1738,5 +1738,14 @@ class EleccionesJudiciales2024 extends CI_Controller{
 		redirect('eleccionesJudiciales2024/nuevo');
 	}
 
+	public function cerrarHoja2(){
+
+		$usuario = $this->ion_auth->user()->row();
+		$hoja2 = $this->Cuestionario_model->hoja2($usuario->id);
+		//echo $hoja1->idfrhoja1;
+		$this->Cuestionario_model->cerrarHoja2($hoja2->idfrhoja2);
+		redirect('eleccionesJudiciales2024/nuevo');
+	}
+
 
 }

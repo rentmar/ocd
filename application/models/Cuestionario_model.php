@@ -662,6 +662,16 @@ class Cuestionario_model extends CI_Model
 		$this->db->update('form_elecc_jud_2024_resp_hoja1', $data);
 	}
 
+	//Actualizar los datos de la hoja1
+	public function cerrarHoja2($idhoja2)
+	{
+		/** @noinspection PhpLanguageLevelInspection */
+		$data = [
+			'esta_abierto' => false,
+		];
+		$this->db->where('idfrhoja2', $idhoja2 );
+		$this->db->update('form_elecc_jud_2024_resp_hoja2', $data);
+	}
 
 
 
